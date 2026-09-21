@@ -97,7 +97,7 @@ Top row: original particles at strengths **1, 3, 5**. Bottom row: the distilled 
     yaml='''---
 license: other
 license_name: circlestone-labs-non-commercial-license
-license_link: ANIMA-LICENSE.md
+license_link: https://huggingface.co/ntc-ai/anima-concept-sliders/blob/main/ANIMA-LICENSE.md
 base_model: circlestone-labs/Anima
 base_model_relation: adapter
 pipeline_tag: text-to-image
