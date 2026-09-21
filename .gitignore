@@ -1,0 +1,13 @@
+.venv*/
+artifacts/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.cache/
+*.log
+.env
+.env.*
+*.safetensors
+*.pt
+*.pth
+*.sqlite3*

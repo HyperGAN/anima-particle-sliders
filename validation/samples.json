@@ -1,0 +1,327 @@
+{
+  "passed": true,
+  "particle_samples": 48,
+  "distilled_samples": 24,
+  "strengths": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "distilled_strengths": [
+    1,
+    3,
+    5
+  ],
+  "matched_prompts_and_seeds": true,
+  "zero_replay": [
+    {
+      "case": 0,
+      "max_pixel_error": 0
+    },
+    {
+      "case": 1,
+      "max_pixel_error": 0
+    },
+    {
+      "case": 2,
+      "max_pixel_error": 0
+    },
+    {
+      "case": 3,
+      "max_pixel_error": 0
+    }
+  ],
+  "files": [
+    {
+      "path": "samples/candlelit/case0/str0.png",
+      "sha256": "d59860a424ae82f3139b28b17d44178f4cd0472f70b0494db633fb9774461b73"
+    },
+    {
+      "path": "samples/candlelit/case0/str1.png",
+      "sha256": "165946045cfdf720fb4f47626da00a13c2a38b1df984de4fa72120448a07a67e"
+    },
+    {
+      "path": "distilled/samples/candlelit-case0-str1.png",
+      "sha256": "354167cd9f4c78521892eb0330b8de4ac5ec22580e0349e179d874e714fc1322"
+    },
+    {
+      "path": "samples/candlelit/case0/str2.png",
+      "sha256": "7ddc1cbf8750e2e8970d2882fe43bafbdfe5bb85695370bc5239117c5902e190"
+    },
+    {
+      "path": "samples/candlelit/case0/str3.png",
+      "sha256": "57df87fea4d59768341060ea92c8a77513ae35fd9115b763d61f9e179a0c1c8a"
+    },
+    {
+      "path": "distilled/samples/candlelit-case0-str3.png",
+      "sha256": "aa53de35786544c4f1f5ffa595abe3b5723524685f2218595218a4e46ed81244"
+    },
+    {
+      "path": "samples/candlelit/case0/str4.png",
+      "sha256": "81dc6cf8ecf6bc2bc603d35ac4b5eca3ac06f869f505f6faf8fcc7a5cfcdd9ea"
+    },
+    {
+      "path": "samples/candlelit/case0/str5.png",
+      "sha256": "7e349f93214c6f5b2640f7b3b9c6517bbc74d525b7961ee182cedaaec27bd0ff"
+    },
+    {
+      "path": "distilled/samples/candlelit-case0-str5.png",
+      "sha256": "ad38890522b432183ffcae080c0844649e0dee28a491dfce05252f200b8e145d"
+    },
+    {
+      "path": "samples/candlelit/case1/str0.png",
+      "sha256": "4988137a70bcf7fbc8a49f9d76ad686a3a06cf280e2892a1205ab8312bbfff03"
+    },
+    {
+      "path": "samples/candlelit/case1/str1.png",
+      "sha256": "12a31cf936649ad122212d42ffe2aa280325056cfb1a460dc0fd43d25fa0cc63"
+    },
+    {
+      "path": "distilled/samples/candlelit-case1-str1.png",
+      "sha256": "9857a07573d9e72445689069c2b121a97bc46cbe83d3ec3761e5242995e3d11b"
+    },
+    {
+      "path": "samples/candlelit/case1/str2.png",
+      "sha256": "6b88ab1644e537e8e73ed8575aaaae9886001c5c23aa04d6e825ceda1d87177a"
+    },
+    {
+      "path": "samples/candlelit/case1/str3.png",
+      "sha256": "f43d31d29a16bda13f4d8f784989a735df3e7586d64bfc8e35ec3e4a1534d0f9"
+    },
+    {
+      "path": "distilled/samples/candlelit-case1-str3.png",
+      "sha256": "67c98e8ba71e6e7a43f472e5ba536dccebfa3992e1f8a7ddf46259b4aa1eca9e"
+    },
+    {
+      "path": "samples/candlelit/case1/str4.png",
+      "sha256": "15f7f1a1d324621521ee148399ff8eee358f0a69a24f14bcd12f64b64d77d6ee"
+    },
+    {
+      "path": "samples/candlelit/case1/str5.png",
+      "sha256": "4d302267a955749a206f45b0bea9fb8b310f210d434de8da52d28c12ef2196d0"
+    },
+    {
+      "path": "distilled/samples/candlelit-case1-str5.png",
+      "sha256": "ecc12e0e583b3b71c565ca13d51c71d11d19f69d217b5aacb08328dc3dc95a4b"
+    },
+    {
+      "path": "samples/candlelit/case2/str0.png",
+      "sha256": "24d18939bfcd36a192fa2a5ddbc30463837c6d51a98bccf88b335873088b8376"
+    },
+    {
+      "path": "samples/candlelit/case2/str1.png",
+      "sha256": "152a9b0626db337b0fdc9a519897cc2208eeb23b223f66581e77dcd489b5625b"
+    },
+    {
+      "path": "distilled/samples/candlelit-case2-str1.png",
+      "sha256": "a3ceb50e8efb218d1e4a3e29920e6c575cb1cd4b1763d5a33f14897c1e8fb7f4"
+    },
+    {
+      "path": "samples/candlelit/case2/str2.png",
+      "sha256": "46addafda4bec88013c7717e803229f423424cbb6a0d4d19c690ce1bbdaa2ac4"
+    },
+    {
+      "path": "samples/candlelit/case2/str3.png",
+      "sha256": "e3a0d94bcbd7c09f8fc5983f1449c2d0172d1051f28ab4244f0e884c65a25d31"
+    },
+    {
+      "path": "distilled/samples/candlelit-case2-str3.png",
+      "sha256": "3f48c4dc9f8f7fb760af4fa57e6113a4c043c84c0b0927deb531f7b43f8d5cc4"
+    },
+    {
+      "path": "samples/candlelit/case2/str4.png",
+      "sha256": "06b41354cb95bd4d6e97889c5116370f5944b35ac945d9c9003543c8b9ad394e"
+    },
+    {
+      "path": "samples/candlelit/case2/str5.png",
+      "sha256": "9cce9cea256f716c6b7bcf90978f99c7525885949a7cf67f8a8be4bb6c6628c2"
+    },
+    {
+      "path": "distilled/samples/candlelit-case2-str5.png",
+      "sha256": "d758a3d6bbb479325b8cb2d9bc0d6aed7f7d0f9bd7f5b88d23bd995fb21404f2"
+    },
+    {
+      "path": "samples/candlelit/case3/str0.png",
+      "sha256": "acc5cad87af3f8acf50a245b592c0b5c87a120ce49b6103e126a67d68af6603c"
+    },
+    {
+      "path": "samples/candlelit/case3/str1.png",
+      "sha256": "ed51967fc086eaf4a4efa878010ebbeaeec46adb9642e13d40ec1555cd466984"
+    },
+    {
+      "path": "distilled/samples/candlelit-case3-str1.png",
+      "sha256": "302e26c9b5a379501eff0f0c36243e38bcdcda96dd3ec47bb5f4cb5393c5f368"
+    },
+    {
+      "path": "samples/candlelit/case3/str2.png",
+      "sha256": "eeacb4a11e9f2ef691870aa99a8ff7135a2b906e027fa1c342eadb42f7e25e29"
+    },
+    {
+      "path": "samples/candlelit/case3/str3.png",
+      "sha256": "1b19a9c84a1cef8390c0241768adf519be3e875ad6d1828ca343b60deea056b7"
+    },
+    {
+      "path": "distilled/samples/candlelit-case3-str3.png",
+      "sha256": "a394ca738d3dad5f94980d943182a419fa9e4ffea2b48331dc852453ba885663"
+    },
+    {
+      "path": "samples/candlelit/case3/str4.png",
+      "sha256": "d4bc39a0e04e6fcb2de6190cd2edc5a07395c02978d16d1c2e13206b9725a996"
+    },
+    {
+      "path": "samples/candlelit/case3/str5.png",
+      "sha256": "15c90fcbfa79047aa2821f3629e38cb709fb07ad9b501b6edca7cc106279368e"
+    },
+    {
+      "path": "distilled/samples/candlelit-case3-str5.png",
+      "sha256": "c8089e5c64ee386ba122c566cafbb4642ef47d16d4af0f63c146e5133220802b"
+    },
+    {
+      "path": "samples/moonlit/case0/str0.png",
+      "sha256": "d59860a424ae82f3139b28b17d44178f4cd0472f70b0494db633fb9774461b73"
+    },
+    {
+      "path": "samples/moonlit/case0/str1.png",
+      "sha256": "f93a6fd0a4524b9c4205618447a074d892dcd514788831174fec4334db2e7f08"
+    },
+    {
+      "path": "distilled/samples/moonlit-case0-str1.png",
+      "sha256": "4e2155b3a6d542ae2928502cb4f43d8b3dd925268fbc48ebaded9087e79dbc9f"
+    },
+    {
+      "path": "samples/moonlit/case0/str2.png",
+      "sha256": "1b4f556f5c3d35f5d962d48f18df2d7bce6304ecbdad95a3eeb5d288527e58fb"
+    },
+    {
+      "path": "samples/moonlit/case0/str3.png",
+      "sha256": "c3865b9b5f1ac838904d21b4e312aee3d28c7268613187072e2997a519199b82"
+    },
+    {
+      "path": "distilled/samples/moonlit-case0-str3.png",
+      "sha256": "53d3c918179d71fc845825f7aaf8a12f6bb31069cc12cddd5f88df61fd3dbd66"
+    },
+    {
+      "path": "samples/moonlit/case0/str4.png",
+      "sha256": "910b09d4511c550a7f4896bd62f9b7a70f04d85237f419aa8ff556a1c37dadd2"
+    },
+    {
+      "path": "samples/moonlit/case0/str5.png",
+      "sha256": "1ad3687ad8e34e67c11d6a1e32dc40a4ac1527dd81a193509fdf3f956e6cdd4a"
+    },
+    {
+      "path": "distilled/samples/moonlit-case0-str5.png",
+      "sha256": "6ec4437d67e9754cc799f75a616fdc266eb0b1f5543927985973034886289594"
+    },
+    {
+      "path": "samples/moonlit/case1/str0.png",
+      "sha256": "4988137a70bcf7fbc8a49f9d76ad686a3a06cf280e2892a1205ab8312bbfff03"
+    },
+    {
+      "path": "samples/moonlit/case1/str1.png",
+      "sha256": "a78d419582d1eed1a10736f27993928aa676db7909ae3d13b85806ce7e9efa6e"
+    },
+    {
+      "path": "distilled/samples/moonlit-case1-str1.png",
+      "sha256": "9910ae0dda471bbd4c50e9219c5301ce1eea8336688bbd1059b4e43334505097"
+    },
+    {
+      "path": "samples/moonlit/case1/str2.png",
+      "sha256": "e6a70f192e02d4455203573d85530083d9de35069fb2326d710b1ae34927ee53"
+    },
+    {
+      "path": "samples/moonlit/case1/str3.png",
+      "sha256": "291093b45fab271039e5fe1c54ac70697549cc51303e7639218fba1bb6e638ba"
+    },
+    {
+      "path": "distilled/samples/moonlit-case1-str3.png",
+      "sha256": "20d232b68ff88e742ea642c1c3ab19e7ab8a4b78d3ba2c3ae342752eab1d610e"
+    },
+    {
+      "path": "samples/moonlit/case1/str4.png",
+      "sha256": "4763590ffdc23bfc700e1eea33db516d3a7c1181ab2b6c258c65cb9b6b964a12"
+    },
+    {
+      "path": "samples/moonlit/case1/str5.png",
+      "sha256": "6b47d98b46856b359cfc6ce212cd960e84bed1d9305ef1ad83bf4dabfdf5a429"
+    },
+    {
+      "path": "distilled/samples/moonlit-case1-str5.png",
+      "sha256": "dd7c7dc197e34563b086e21f4933bccc3cc32d5adb0ddb78251561d0d71307da"
+    },
+    {
+      "path": "samples/moonlit/case2/str0.png",
+      "sha256": "24d18939bfcd36a192fa2a5ddbc30463837c6d51a98bccf88b335873088b8376"
+    },
+    {
+      "path": "samples/moonlit/case2/str1.png",
+      "sha256": "bea94ae8c54f38b0a2751324368b23bec0239108bfb292a7e0e8b965e6b58d34"
+    },
+    {
+      "path": "distilled/samples/moonlit-case2-str1.png",
+      "sha256": "4ebfc30f449a130d113dad5de56d2d971ff37ee705d2ff1b034039d52cffe5af"
+    },
+    {
+      "path": "samples/moonlit/case2/str2.png",
+      "sha256": "4bb37720dd4300265e2a3bc3c3457583ea7967b86d88d203c320fd5644fde5ad"
+    },
+    {
+      "path": "samples/moonlit/case2/str3.png",
+      "sha256": "fe017900a6d489a6ef6bca2ac0c6b6f7e249c137566ec061c9ba409e707a6d49"
+    },
+    {
+      "path": "distilled/samples/moonlit-case2-str3.png",
+      "sha256": "354ce36e87e305830eae79720aa1f9bbaac3c277a169713a180f6db9b74e8c34"
+    },
+    {
+      "path": "samples/moonlit/case2/str4.png",
+      "sha256": "c9494dfed27538e900b7c20574cacb4fbb9fb1239bf74ae4a217f888642fb855"
+    },
+    {
+      "path": "samples/moonlit/case2/str5.png",
+      "sha256": "12a8e370f0e6390c139700506ac9bb940683cfb895b7a74e05caddd19ecec3fa"
+    },
+    {
+      "path": "distilled/samples/moonlit-case2-str5.png",
+      "sha256": "fa5994fce9e17e4787c9aa0fbb7ed9632c311186780eff18c9b3d51a267ec54f"
+    },
+    {
+      "path": "samples/moonlit/case3/str0.png",
+      "sha256": "acc5cad87af3f8acf50a245b592c0b5c87a120ce49b6103e126a67d68af6603c"
+    },
+    {
+      "path": "samples/moonlit/case3/str1.png",
+      "sha256": "7063834e4765b135b3ac6c6561e52f1aed1f1bde3963c9bf3729dba5a07a0e18"
+    },
+    {
+      "path": "distilled/samples/moonlit-case3-str1.png",
+      "sha256": "1b432bd9c6197fdf02b6256d5d78d36689eefaadc86bb323c19f13620f592443"
+    },
+    {
+      "path": "samples/moonlit/case3/str2.png",
+      "sha256": "73859564f63c7c31ebfe8fcb7690cc8a187d0062e1e7071b03b2b9be945b0d3d"
+    },
+    {
+      "path": "samples/moonlit/case3/str3.png",
+      "sha256": "9da6439d61af0acab708de7201e55330b32d194c5182aecafd0116e3caa2d5db"
+    },
+    {
+      "path": "distilled/samples/moonlit-case3-str3.png",
+      "sha256": "8f4a8879ebd3019fa4f48f825f1dd4a772202c0c41f6315d84c4f7bf80123818"
+    },
+    {
+      "path": "samples/moonlit/case3/str4.png",
+      "sha256": "7951e70ccf7cec08498039a0236d406f2c912db71043ed1577343fe6d345d5a6"
+    },
+    {
+      "path": "samples/moonlit/case3/str5.png",
+      "sha256": "72124019f2e2507552e2bb9fe54a96e4f8c3bc4bc869b12136ae2033852a5de6"
+    },
+    {
+      "path": "distilled/samples/moonlit-case3-str5.png",
+      "sha256": "e8041c0e41e5db8a90e9edca7cd9052131b94013b3ce543b78baa6d5dae512bf"
+    }
+  ]
+}

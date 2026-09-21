@@ -1,0 +1,914 @@
+[
+  {
+    "variation": "candlelit",
+    "case": 0,
+    "strength": 0,
+    "payload": {
+      "prompt": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, standing upright, facing viewer, arms at sides, upper body, waist-up view, eye-level camera, in an unadorned stone corridor with bare stone walls, anime illustration, neutral diffuse illumination, moderate shadow contrast",
+      "seed": 29001,
+      "width": 768,
+      "height": 768,
+      "steps": 10,
+      "energy": 0,
+      "mix": {
+        "candlelit": 1.0
+      },
+      "checkpoints": {
+        "candlelit": "46c02275cc131b6d60140edcdfedc27504e769fba206daa8be66198105097a2b"
+      }
+    }
+  },
+  {
+    "variation": "candlelit",
+    "case": 0,
+    "strength": 1,
+    "payload": {
+      "prompt": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, standing upright, facing viewer, arms at sides, upper body, waist-up view, eye-level camera, in an unadorned stone corridor with bare stone walls, anime illustration, neutral diffuse illumination, moderate shadow contrast",
+      "seed": 29001,
+      "width": 768,
+      "height": 768,
+      "steps": 10,
+      "energy": 1,
+      "mix": {
+        "candlelit": 1.0
+      },
+      "checkpoints": {
+        "candlelit": "46c02275cc131b6d60140edcdfedc27504e769fba206daa8be66198105097a2b"
+      }
+    }
+  },
+  {
+    "variation": "candlelit",
+    "case": 0,
+    "strength": 2,
+    "payload": {
+      "prompt": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, standing upright, facing viewer, arms at sides, upper body, waist-up view, eye-level camera, in an unadorned stone corridor with bare stone walls, anime illustration, neutral diffuse illumination, moderate shadow contrast",
+      "seed": 29001,
+      "width": 768,
+      "height": 768,
+      "steps": 10,
+      "energy": 2,
+      "mix": {
+        "candlelit": 1.0
+      },
+      "checkpoints": {
+        "candlelit": "46c02275cc131b6d60140edcdfedc27504e769fba206daa8be66198105097a2b"
+      }
+    }
+  },
+  {
+    "variation": "candlelit",
+    "case": 0,
+    "strength": 3,
+    "payload": {
+      "prompt": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, standing upright, facing viewer, arms at sides, upper body, waist-up view, eye-level camera, in an unadorned stone corridor with bare stone walls, anime illustration, neutral diffuse illumination, moderate shadow contrast",
+      "seed": 29001,
+      "width": 768,
+      "height": 768,
+      "steps": 10,
+      "energy": 3,
+      "mix": {
+        "candlelit": 1.0
+      },
+      "checkpoints": {
+        "candlelit": "46c02275cc131b6d60140edcdfedc27504e769fba206daa8be66198105097a2b"
+      }
+    }
+  },
+  {
+    "variation": "candlelit",
+    "case": 0,
+    "strength": 4,
+    "payload": {
+      "prompt": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, standing upright, facing viewer, arms at sides, upper body, waist-up view, eye-level camera, in an unadorned stone corridor with bare stone walls, anime illustration, neutral diffuse illumination, moderate shadow contrast",
+      "seed": 29001,
+      "width": 768,
+      "height": 768,
+      "steps": 10,
+      "energy": 4,
+      "mix": {
+        "candlelit": 1.0
+      },
+      "checkpoints": {
+        "candlelit": "46c02275cc131b6d60140edcdfedc27504e769fba206daa8be66198105097a2b"
+      }
+    }
+  },
+  {
+    "variation": "candlelit",
+    "case": 0,
+    "strength": 5,
+    "payload": {
+      "prompt": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, standing upright, facing viewer, arms at sides, upper body, waist-up view, eye-level camera, in an unadorned stone corridor with bare stone walls, anime illustration, neutral diffuse illumination, moderate shadow contrast",
+      "seed": 29001,
+      "width": 768,
+      "height": 768,
+      "steps": 10,
+      "energy": 5,
+      "mix": {
+        "candlelit": 1.0
+      },
+      "checkpoints": {
+        "candlelit": "46c02275cc131b6d60140edcdfedc27504e769fba206daa8be66198105097a2b"
+      }
+    }
+  },
+  {
+    "variation": "candlelit",
+    "case": 1,
+    "strength": 0,
+    "payload": {
+      "prompt": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer, wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric, facing viewer, head upright, portrait, head and shoulders, eye-level camera, in a quiet courtyard, anime illustration, neutral diffuse illumination, moderate shadow contrast",
+      "seed": 29001,
+      "width": 768,
+      "height": 768,
+      "steps": 10,
+      "energy": 0,
+      "mix": {
+        "candlelit": 1.0
+      },
+      "checkpoints": {
+        "candlelit": "46c02275cc131b6d60140edcdfedc27504e769fba206daa8be66198105097a2b"
+      }
+    }
+  },
+  {
+    "variation": "candlelit",
+    "case": 1,
+    "strength": 1,
+    "payload": {
+      "prompt": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer, wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric, facing viewer, head upright, portrait, head and shoulders, eye-level camera, in a quiet courtyard, anime illustration, neutral diffuse illumination, moderate shadow contrast",
+      "seed": 29001,
+      "width": 768,
+      "height": 768,
+      "steps": 10,
+      "energy": 1,
+      "mix": {
+        "candlelit": 1.0
+      },
+      "checkpoints": {
+        "candlelit": "46c02275cc131b6d60140edcdfedc27504e769fba206daa8be66198105097a2b"
+      }
+    }
+  },
+  {
+    "variation": "candlelit",
+    "case": 1,
+    "strength": 2,
+    "payload": {
+      "prompt": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer, wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric, facing viewer, head upright, portrait, head and shoulders, eye-level camera, in a quiet courtyard, anime illustration, neutral diffuse illumination, moderate shadow contrast",
+      "seed": 29001,
+      "width": 768,
+      "height": 768,
+      "steps": 10,
+      "energy": 2,
+      "mix": {
+        "candlelit": 1.0
+      },
+      "checkpoints": {
+        "candlelit": "46c02275cc131b6d60140edcdfedc27504e769fba206daa8be66198105097a2b"
+      }
+    }
+  },
+  {
+    "variation": "candlelit",
+    "case": 1,
+    "strength": 3,
+    "payload": {
+      "prompt": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer, wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric, facing viewer, head upright, portrait, head and shoulders, eye-level camera, in a quiet courtyard, anime illustration, neutral diffuse illumination, moderate shadow contrast",
+      "seed": 29001,
+      "width": 768,
+      "height": 768,
+      "steps": 10,
+      "energy": 3,
+      "mix": {
+        "candlelit": 1.0
+      },
+      "checkpoints": {
+        "candlelit": "46c02275cc131b6d60140edcdfedc27504e769fba206daa8be66198105097a2b"
+      }
+    }
+  },
+  {
+    "variation": "candlelit",
+    "case": 1,
+    "strength": 4,
+    "payload": {
+      "prompt": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer, wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric, facing viewer, head upright, portrait, head and shoulders, eye-level camera, in a quiet courtyard, anime illustration, neutral diffuse illumination, moderate shadow contrast",
+      "seed": 29001,
+      "width": 768,
+      "height": 768,
+      "steps": 10,
+      "energy": 4,
+      "mix": {
+        "candlelit": 1.0
+      },
+      "checkpoints": {
+        "candlelit": "46c02275cc131b6d60140edcdfedc27504e769fba206daa8be66198105097a2b"
+      }
+    }
+  },
+  {
+    "variation": "candlelit",
+    "case": 1,
+    "strength": 5,
+    "payload": {
+      "prompt": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer, wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric, facing viewer, head upright, portrait, head and shoulders, eye-level camera, in a quiet courtyard, anime illustration, neutral diffuse illumination, moderate shadow contrast",
+      "seed": 29001,
+      "width": 768,
+      "height": 768,
+      "steps": 10,
+      "energy": 5,
+      "mix": {
+        "candlelit": 1.0
+      },
+      "checkpoints": {
+        "candlelit": "46c02275cc131b6d60140edcdfedc27504e769fba206daa8be66198105097a2b"
+      }
+    }
+  },
+  {
+    "variation": "candlelit",
+    "case": 2,
+    "strength": 0,
+    "payload": {
+      "prompt": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap, full body, entire figure in frame, eye-level camera, in a wood-paneled room, anime illustration, neutral diffuse illumination, moderate shadow contrast",
+      "seed": 29001,
+      "width": 768,
+      "height": 768,
+      "steps": 10,
+      "energy": 0,
+      "mix": {
+        "candlelit": 1.0
+      },
+      "checkpoints": {
+        "candlelit": "46c02275cc131b6d60140edcdfedc27504e769fba206daa8be66198105097a2b"
+      }
+    }
+  },
+  {
+    "variation": "candlelit",
+    "case": 2,
+    "strength": 1,
+    "payload": {
+      "prompt": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap, full body, entire figure in frame, eye-level camera, in a wood-paneled room, anime illustration, neutral diffuse illumination, moderate shadow contrast",
+      "seed": 29001,
+      "width": 768,
+      "height": 768,
+      "steps": 10,
+      "energy": 1,
+      "mix": {
+        "candlelit": 1.0
+      },
+      "checkpoints": {
+        "candlelit": "46c02275cc131b6d60140edcdfedc27504e769fba206daa8be66198105097a2b"
+      }
+    }
+  },
+  {
+    "variation": "candlelit",
+    "case": 2,
+    "strength": 2,
+    "payload": {
+      "prompt": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap, full body, entire figure in frame, eye-level camera, in a wood-paneled room, anime illustration, neutral diffuse illumination, moderate shadow contrast",
+      "seed": 29001,
+      "width": 768,
+      "height": 768,
+      "steps": 10,
+      "energy": 2,
+      "mix": {
+        "candlelit": 1.0
+      },
+      "checkpoints": {
+        "candlelit": "46c02275cc131b6d60140edcdfedc27504e769fba206daa8be66198105097a2b"
+      }
+    }
+  },
+  {
+    "variation": "candlelit",
+    "case": 2,
+    "strength": 3,
+    "payload": {
+      "prompt": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap, full body, entire figure in frame, eye-level camera, in a wood-paneled room, anime illustration, neutral diffuse illumination, moderate shadow contrast",
+      "seed": 29001,
+      "width": 768,
+      "height": 768,
+      "steps": 10,
+      "energy": 3,
+      "mix": {
+        "candlelit": 1.0
+      },
+      "checkpoints": {
+        "candlelit": "46c02275cc131b6d60140edcdfedc27504e769fba206daa8be66198105097a2b"
+      }
+    }
+  },
+  {
+    "variation": "candlelit",
+    "case": 2,
+    "strength": 4,
+    "payload": {
+      "prompt": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap, full body, entire figure in frame, eye-level camera, in a wood-paneled room, anime illustration, neutral diffuse illumination, moderate shadow contrast",
+      "seed": 29001,
+      "width": 768,
+      "height": 768,
+      "steps": 10,
+      "energy": 4,
+      "mix": {
+        "candlelit": 1.0
+      },
+      "checkpoints": {
+        "candlelit": "46c02275cc131b6d60140edcdfedc27504e769fba206daa8be66198105097a2b"
+      }
+    }
+  },
+  {
+    "variation": "candlelit",
+    "case": 2,
+    "strength": 5,
+    "payload": {
+      "prompt": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap, full body, entire figure in frame, eye-level camera, in a wood-paneled room, anime illustration, neutral diffuse illumination, moderate shadow contrast",
+      "seed": 29001,
+      "width": 768,
+      "height": 768,
+      "steps": 10,
+      "energy": 5,
+      "mix": {
+        "candlelit": 1.0
+      },
+      "checkpoints": {
+        "candlelit": "46c02275cc131b6d60140edcdfedc27504e769fba206daa8be66198105097a2b"
+      }
+    }
+  },
+  {
+    "variation": "candlelit",
+    "case": 3,
+    "strength": 0,
+    "payload": {
+      "prompt": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, in an unadorned stone corridor with bare stone walls",
+      "seed": 29001,
+      "width": 768,
+      "height": 768,
+      "steps": 10,
+      "energy": 0,
+      "mix": {
+        "candlelit": 1.0
+      },
+      "checkpoints": {
+        "candlelit": "46c02275cc131b6d60140edcdfedc27504e769fba206daa8be66198105097a2b"
+      }
+    }
+  },
+  {
+    "variation": "candlelit",
+    "case": 3,
+    "strength": 1,
+    "payload": {
+      "prompt": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, in an unadorned stone corridor with bare stone walls",
+      "seed": 29001,
+      "width": 768,
+      "height": 768,
+      "steps": 10,
+      "energy": 1,
+      "mix": {
+        "candlelit": 1.0
+      },
+      "checkpoints": {
+        "candlelit": "46c02275cc131b6d60140edcdfedc27504e769fba206daa8be66198105097a2b"
+      }
+    }
+  },
+  {
+    "variation": "candlelit",
+    "case": 3,
+    "strength": 2,
+    "payload": {
+      "prompt": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, in an unadorned stone corridor with bare stone walls",
+      "seed": 29001,
+      "width": 768,
+      "height": 768,
+      "steps": 10,
+      "energy": 2,
+      "mix": {
+        "candlelit": 1.0
+      },
+      "checkpoints": {
+        "candlelit": "46c02275cc131b6d60140edcdfedc27504e769fba206daa8be66198105097a2b"
+      }
+    }
+  },
+  {
+    "variation": "candlelit",
+    "case": 3,
+    "strength": 3,
+    "payload": {
+      "prompt": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, in an unadorned stone corridor with bare stone walls",
+      "seed": 29001,
+      "width": 768,
+      "height": 768,
+      "steps": 10,
+      "energy": 3,
+      "mix": {
+        "candlelit": 1.0
+      },
+      "checkpoints": {
+        "candlelit": "46c02275cc131b6d60140edcdfedc27504e769fba206daa8be66198105097a2b"
+      }
+    }
+  },
+  {
+    "variation": "candlelit",
+    "case": 3,
+    "strength": 4,
+    "payload": {
+      "prompt": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, in an unadorned stone corridor with bare stone walls",
+      "seed": 29001,
+      "width": 768,
+      "height": 768,
+      "steps": 10,
+      "energy": 4,
+      "mix": {
+        "candlelit": 1.0
+      },
+      "checkpoints": {
+        "candlelit": "46c02275cc131b6d60140edcdfedc27504e769fba206daa8be66198105097a2b"
+      }
+    }
+  },
+  {
+    "variation": "candlelit",
+    "case": 3,
+    "strength": 5,
+    "payload": {
+      "prompt": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, in an unadorned stone corridor with bare stone walls",
+      "seed": 29001,
+      "width": 768,
+      "height": 768,
+      "steps": 10,
+      "energy": 5,
+      "mix": {
+        "candlelit": 1.0
+      },
+      "checkpoints": {
+        "candlelit": "46c02275cc131b6d60140edcdfedc27504e769fba206daa8be66198105097a2b"
+      }
+    }
+  },
+  {
+    "variation": "moonlit",
+    "case": 0,
+    "strength": 0,
+    "payload": {
+      "prompt": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, standing upright, facing viewer, arms at sides, upper body, waist-up view, eye-level camera, in an unadorned stone corridor with bare stone walls, anime illustration, neutral diffuse illumination, moderate shadow contrast",
+      "seed": 29001,
+      "width": 768,
+      "height": 768,
+      "steps": 10,
+      "energy": 0,
+      "mix": {
+        "moonlit": 1.0
+      },
+      "checkpoints": {
+        "moonlit": "245dc194b6a3ba681bbb8064099398a060f8ffc7fd05916dabf8013cae9f9eee"
+      }
+    }
+  },
+  {
+    "variation": "moonlit",
+    "case": 0,
+    "strength": 1,
+    "payload": {
+      "prompt": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, standing upright, facing viewer, arms at sides, upper body, waist-up view, eye-level camera, in an unadorned stone corridor with bare stone walls, anime illustration, neutral diffuse illumination, moderate shadow contrast",
+      "seed": 29001,
+      "width": 768,
+      "height": 768,
+      "steps": 10,
+      "energy": 1,
+      "mix": {
+        "moonlit": 1.0
+      },
+      "checkpoints": {
+        "moonlit": "245dc194b6a3ba681bbb8064099398a060f8ffc7fd05916dabf8013cae9f9eee"
+      }
+    }
+  },
+  {
+    "variation": "moonlit",
+    "case": 0,
+    "strength": 2,
+    "payload": {
+      "prompt": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, standing upright, facing viewer, arms at sides, upper body, waist-up view, eye-level camera, in an unadorned stone corridor with bare stone walls, anime illustration, neutral diffuse illumination, moderate shadow contrast",
+      "seed": 29001,
+      "width": 768,
+      "height": 768,
+      "steps": 10,
+      "energy": 2,
+      "mix": {
+        "moonlit": 1.0
+      },
+      "checkpoints": {
+        "moonlit": "245dc194b6a3ba681bbb8064099398a060f8ffc7fd05916dabf8013cae9f9eee"
+      }
+    }
+  },
+  {
+    "variation": "moonlit",
+    "case": 0,
+    "strength": 3,
+    "payload": {
+      "prompt": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, standing upright, facing viewer, arms at sides, upper body, waist-up view, eye-level camera, in an unadorned stone corridor with bare stone walls, anime illustration, neutral diffuse illumination, moderate shadow contrast",
+      "seed": 29001,
+      "width": 768,
+      "height": 768,
+      "steps": 10,
+      "energy": 3,
+      "mix": {
+        "moonlit": 1.0
+      },
+      "checkpoints": {
+        "moonlit": "245dc194b6a3ba681bbb8064099398a060f8ffc7fd05916dabf8013cae9f9eee"
+      }
+    }
+  },
+  {
+    "variation": "moonlit",
+    "case": 0,
+    "strength": 4,
+    "payload": {
+      "prompt": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, standing upright, facing viewer, arms at sides, upper body, waist-up view, eye-level camera, in an unadorned stone corridor with bare stone walls, anime illustration, neutral diffuse illumination, moderate shadow contrast",
+      "seed": 29001,
+      "width": 768,
+      "height": 768,
+      "steps": 10,
+      "energy": 4,
+      "mix": {
+        "moonlit": 1.0
+      },
+      "checkpoints": {
+        "moonlit": "245dc194b6a3ba681bbb8064099398a060f8ffc7fd05916dabf8013cae9f9eee"
+      }
+    }
+  },
+  {
+    "variation": "moonlit",
+    "case": 0,
+    "strength": 5,
+    "payload": {
+      "prompt": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, standing upright, facing viewer, arms at sides, upper body, waist-up view, eye-level camera, in an unadorned stone corridor with bare stone walls, anime illustration, neutral diffuse illumination, moderate shadow contrast",
+      "seed": 29001,
+      "width": 768,
+      "height": 768,
+      "steps": 10,
+      "energy": 5,
+      "mix": {
+        "moonlit": 1.0
+      },
+      "checkpoints": {
+        "moonlit": "245dc194b6a3ba681bbb8064099398a060f8ffc7fd05916dabf8013cae9f9eee"
+      }
+    }
+  },
+  {
+    "variation": "moonlit",
+    "case": 1,
+    "strength": 0,
+    "payload": {
+      "prompt": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer, wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric, facing viewer, head upright, portrait, head and shoulders, eye-level camera, in a quiet courtyard, anime illustration, neutral diffuse illumination, moderate shadow contrast",
+      "seed": 29001,
+      "width": 768,
+      "height": 768,
+      "steps": 10,
+      "energy": 0,
+      "mix": {
+        "moonlit": 1.0
+      },
+      "checkpoints": {
+        "moonlit": "245dc194b6a3ba681bbb8064099398a060f8ffc7fd05916dabf8013cae9f9eee"
+      }
+    }
+  },
+  {
+    "variation": "moonlit",
+    "case": 1,
+    "strength": 1,
+    "payload": {
+      "prompt": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer, wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric, facing viewer, head upright, portrait, head and shoulders, eye-level camera, in a quiet courtyard, anime illustration, neutral diffuse illumination, moderate shadow contrast",
+      "seed": 29001,
+      "width": 768,
+      "height": 768,
+      "steps": 10,
+      "energy": 1,
+      "mix": {
+        "moonlit": 1.0
+      },
+      "checkpoints": {
+        "moonlit": "245dc194b6a3ba681bbb8064099398a060f8ffc7fd05916dabf8013cae9f9eee"
+      }
+    }
+  },
+  {
+    "variation": "moonlit",
+    "case": 1,
+    "strength": 2,
+    "payload": {
+      "prompt": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer, wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric, facing viewer, head upright, portrait, head and shoulders, eye-level camera, in a quiet courtyard, anime illustration, neutral diffuse illumination, moderate shadow contrast",
+      "seed": 29001,
+      "width": 768,
+      "height": 768,
+      "steps": 10,
+      "energy": 2,
+      "mix": {
+        "moonlit": 1.0
+      },
+      "checkpoints": {
+        "moonlit": "245dc194b6a3ba681bbb8064099398a060f8ffc7fd05916dabf8013cae9f9eee"
+      }
+    }
+  },
+  {
+    "variation": "moonlit",
+    "case": 1,
+    "strength": 3,
+    "payload": {
+      "prompt": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer, wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric, facing viewer, head upright, portrait, head and shoulders, eye-level camera, in a quiet courtyard, anime illustration, neutral diffuse illumination, moderate shadow contrast",
+      "seed": 29001,
+      "width": 768,
+      "height": 768,
+      "steps": 10,
+      "energy": 3,
+      "mix": {
+        "moonlit": 1.0
+      },
+      "checkpoints": {
+        "moonlit": "245dc194b6a3ba681bbb8064099398a060f8ffc7fd05916dabf8013cae9f9eee"
+      }
+    }
+  },
+  {
+    "variation": "moonlit",
+    "case": 1,
+    "strength": 4,
+    "payload": {
+      "prompt": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer, wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric, facing viewer, head upright, portrait, head and shoulders, eye-level camera, in a quiet courtyard, anime illustration, neutral diffuse illumination, moderate shadow contrast",
+      "seed": 29001,
+      "width": 768,
+      "height": 768,
+      "steps": 10,
+      "energy": 4,
+      "mix": {
+        "moonlit": 1.0
+      },
+      "checkpoints": {
+        "moonlit": "245dc194b6a3ba681bbb8064099398a060f8ffc7fd05916dabf8013cae9f9eee"
+      }
+    }
+  },
+  {
+    "variation": "moonlit",
+    "case": 1,
+    "strength": 5,
+    "payload": {
+      "prompt": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer, wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric, facing viewer, head upright, portrait, head and shoulders, eye-level camera, in a quiet courtyard, anime illustration, neutral diffuse illumination, moderate shadow contrast",
+      "seed": 29001,
+      "width": 768,
+      "height": 768,
+      "steps": 10,
+      "energy": 5,
+      "mix": {
+        "moonlit": 1.0
+      },
+      "checkpoints": {
+        "moonlit": "245dc194b6a3ba681bbb8064099398a060f8ffc7fd05916dabf8013cae9f9eee"
+      }
+    }
+  },
+  {
+    "variation": "moonlit",
+    "case": 2,
+    "strength": 0,
+    "payload": {
+      "prompt": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap, full body, entire figure in frame, eye-level camera, in a wood-paneled room, anime illustration, neutral diffuse illumination, moderate shadow contrast",
+      "seed": 29001,
+      "width": 768,
+      "height": 768,
+      "steps": 10,
+      "energy": 0,
+      "mix": {
+        "moonlit": 1.0
+      },
+      "checkpoints": {
+        "moonlit": "245dc194b6a3ba681bbb8064099398a060f8ffc7fd05916dabf8013cae9f9eee"
+      }
+    }
+  },
+  {
+    "variation": "moonlit",
+    "case": 2,
+    "strength": 1,
+    "payload": {
+      "prompt": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap, full body, entire figure in frame, eye-level camera, in a wood-paneled room, anime illustration, neutral diffuse illumination, moderate shadow contrast",
+      "seed": 29001,
+      "width": 768,
+      "height": 768,
+      "steps": 10,
+      "energy": 1,
+      "mix": {
+        "moonlit": 1.0
+      },
+      "checkpoints": {
+        "moonlit": "245dc194b6a3ba681bbb8064099398a060f8ffc7fd05916dabf8013cae9f9eee"
+      }
+    }
+  },
+  {
+    "variation": "moonlit",
+    "case": 2,
+    "strength": 2,
+    "payload": {
+      "prompt": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap, full body, entire figure in frame, eye-level camera, in a wood-paneled room, anime illustration, neutral diffuse illumination, moderate shadow contrast",
+      "seed": 29001,
+      "width": 768,
+      "height": 768,
+      "steps": 10,
+      "energy": 2,
+      "mix": {
+        "moonlit": 1.0
+      },
+      "checkpoints": {
+        "moonlit": "245dc194b6a3ba681bbb8064099398a060f8ffc7fd05916dabf8013cae9f9eee"
+      }
+    }
+  },
+  {
+    "variation": "moonlit",
+    "case": 2,
+    "strength": 3,
+    "payload": {
+      "prompt": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap, full body, entire figure in frame, eye-level camera, in a wood-paneled room, anime illustration, neutral diffuse illumination, moderate shadow contrast",
+      "seed": 29001,
+      "width": 768,
+      "height": 768,
+      "steps": 10,
+      "energy": 3,
+      "mix": {
+        "moonlit": 1.0
+      },
+      "checkpoints": {
+        "moonlit": "245dc194b6a3ba681bbb8064099398a060f8ffc7fd05916dabf8013cae9f9eee"
+      }
+    }
+  },
+  {
+    "variation": "moonlit",
+    "case": 2,
+    "strength": 4,
+    "payload": {
+      "prompt": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap, full body, entire figure in frame, eye-level camera, in a wood-paneled room, anime illustration, neutral diffuse illumination, moderate shadow contrast",
+      "seed": 29001,
+      "width": 768,
+      "height": 768,
+      "steps": 10,
+      "energy": 4,
+      "mix": {
+        "moonlit": 1.0
+      },
+      "checkpoints": {
+        "moonlit": "245dc194b6a3ba681bbb8064099398a060f8ffc7fd05916dabf8013cae9f9eee"
+      }
+    }
+  },
+  {
+    "variation": "moonlit",
+    "case": 2,
+    "strength": 5,
+    "payload": {
+      "prompt": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap, full body, entire figure in frame, eye-level camera, in a wood-paneled room, anime illustration, neutral diffuse illumination, moderate shadow contrast",
+      "seed": 29001,
+      "width": 768,
+      "height": 768,
+      "steps": 10,
+      "energy": 5,
+      "mix": {
+        "moonlit": 1.0
+      },
+      "checkpoints": {
+        "moonlit": "245dc194b6a3ba681bbb8064099398a060f8ffc7fd05916dabf8013cae9f9eee"
+      }
+    }
+  },
+  {
+    "variation": "moonlit",
+    "case": 3,
+    "strength": 0,
+    "payload": {
+      "prompt": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, in an unadorned stone corridor with bare stone walls",
+      "seed": 29001,
+      "width": 768,
+      "height": 768,
+      "steps": 10,
+      "energy": 0,
+      "mix": {
+        "moonlit": 1.0
+      },
+      "checkpoints": {
+        "moonlit": "245dc194b6a3ba681bbb8064099398a060f8ffc7fd05916dabf8013cae9f9eee"
+      }
+    }
+  },
+  {
+    "variation": "moonlit",
+    "case": 3,
+    "strength": 1,
+    "payload": {
+      "prompt": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, in an unadorned stone corridor with bare stone walls",
+      "seed": 29001,
+      "width": 768,
+      "height": 768,
+      "steps": 10,
+      "energy": 1,
+      "mix": {
+        "moonlit": 1.0
+      },
+      "checkpoints": {
+        "moonlit": "245dc194b6a3ba681bbb8064099398a060f8ffc7fd05916dabf8013cae9f9eee"
+      }
+    }
+  },
+  {
+    "variation": "moonlit",
+    "case": 3,
+    "strength": 2,
+    "payload": {
+      "prompt": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, in an unadorned stone corridor with bare stone walls",
+      "seed": 29001,
+      "width": 768,
+      "height": 768,
+      "steps": 10,
+      "energy": 2,
+      "mix": {
+        "moonlit": 1.0
+      },
+      "checkpoints": {
+        "moonlit": "245dc194b6a3ba681bbb8064099398a060f8ffc7fd05916dabf8013cae9f9eee"
+      }
+    }
+  },
+  {
+    "variation": "moonlit",
+    "case": 3,
+    "strength": 3,
+    "payload": {
+      "prompt": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, in an unadorned stone corridor with bare stone walls",
+      "seed": 29001,
+      "width": 768,
+      "height": 768,
+      "steps": 10,
+      "energy": 3,
+      "mix": {
+        "moonlit": 1.0
+      },
+      "checkpoints": {
+        "moonlit": "245dc194b6a3ba681bbb8064099398a060f8ffc7fd05916dabf8013cae9f9eee"
+      }
+    }
+  },
+  {
+    "variation": "moonlit",
+    "case": 3,
+    "strength": 4,
+    "payload": {
+      "prompt": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, in an unadorned stone corridor with bare stone walls",
+      "seed": 29001,
+      "width": 768,
+      "height": 768,
+      "steps": 10,
+      "energy": 4,
+      "mix": {
+        "moonlit": 1.0
+      },
+      "checkpoints": {
+        "moonlit": "245dc194b6a3ba681bbb8064099398a060f8ffc7fd05916dabf8013cae9f9eee"
+      }
+    }
+  },
+  {
+    "variation": "moonlit",
+    "case": 3,
+    "strength": 5,
+    "payload": {
+      "prompt": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, in an unadorned stone corridor with bare stone walls",
+      "seed": 29001,
+      "width": 768,
+      "height": 768,
+      "steps": 10,
+      "energy": 5,
+      "mix": {
+        "moonlit": 1.0
+      },
+      "checkpoints": {
+        "moonlit": "245dc194b6a3ba681bbb8064099398a060f8ffc7fd05916dabf8013cae9f9eee"
+      }
+    }
+  }
+]

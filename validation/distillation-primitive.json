@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "fixture": "held-out recovery of a known rank-8 linear teacher",
+  "relative_mse": 1.1133475224672486e-06,
+  "ridge_fraction": 0.01
+}

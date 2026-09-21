@@ -1,0 +1,1017 @@
+{
+  "schema": 1,
+  "split": "dev",
+  "definitions_sha256": "199bc1e68e38b1eb25b218ff2dad30b86d031b296b41bbcc384ac64af64777ac",
+  "characters_sha256": "5c9c0a929e8a72b6594601b3d838355e79496f74439a773b6625f5d4fe2a3cfe",
+  "rows": [
+    {
+      "id": "candlelit-dev-00",
+      "variation": "candlelit",
+      "split": "dev",
+      "character": "original-13",
+      "definition": "candlelit-01",
+      "definition_split": "train",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": false,
+      "presentation": "woman",
+      "skin": "medium brown skin",
+      "shared": {
+        "character": "1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric",
+        "pose": "standing upright, facing viewer, arms at sides",
+        "framing": "upper body, waist-up view, eye-level camera",
+        "scene": "in an unadorned stone corridor with bare stone walls",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "neutral_lighting": "neutral diffuse illumination, moderate shadow contrast",
+      "positive_lighting": "warm directional illumination, deep shadows, low-key chiaroscuro",
+      "neutral": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, standing upright, facing viewer, arms at sides, upper body, waist-up view, eye-level camera, in an unadorned stone corridor with bare stone walls, anime illustration, neutral diffuse illumination, moderate shadow contrast",
+      "positive": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, standing upright, facing viewer, arms at sides, upper body, waist-up view, eye-level camera, in an unadorned stone corridor with bare stone walls, anime illustration, warm directional illumination, deep shadows, low-key chiaroscuro"
+    },
+    {
+      "id": "candlelit-dev-01",
+      "variation": "candlelit",
+      "split": "dev",
+      "character": "original-14",
+      "definition": "candlelit-02",
+      "definition_split": "train",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": false,
+      "presentation": "man",
+      "skin": "light skin",
+      "shared": {
+        "character": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric",
+        "pose": "sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap",
+        "framing": "full body, entire figure in frame, eye-level camera",
+        "scene": "in an unadorned stone corridor with bare stone walls",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "neutral_lighting": "neutral diffuse illumination, moderate shadow contrast",
+      "positive_lighting": "amber side illumination, low-key lighting, low-key chiaroscuro",
+      "neutral": "masterpiece, best quality, safe, solo, 1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap, full body, entire figure in frame, eye-level camera, in an unadorned stone corridor with bare stone walls, anime illustration, neutral diffuse illumination, moderate shadow contrast",
+      "positive": "masterpiece, best quality, safe, solo, 1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap, full body, entire figure in frame, eye-level camera, in an unadorned stone corridor with bare stone walls, anime illustration, amber side illumination, low-key lighting, low-key chiaroscuro"
+    },
+    {
+      "id": "candlelit-dev-02",
+      "variation": "candlelit",
+      "split": "dev",
+      "character": "original-15",
+      "definition": "candlelit-03",
+      "definition_split": "train",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": false,
+      "presentation": "woman",
+      "skin": "deep brown skin",
+      "shared": {
+        "character": "1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric",
+        "pose": "facing viewer, head upright",
+        "framing": "portrait, head and shoulders, eye-level camera",
+        "scene": "in a quiet courtyard",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "neutral_lighting": "neutral diffuse illumination, moderate shadow contrast",
+      "positive_lighting": "golden side illumination, strong shadow contrast, low-key chiaroscuro",
+      "neutral": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer, wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric, facing viewer, head upright, portrait, head and shoulders, eye-level camera, in a quiet courtyard, anime illustration, neutral diffuse illumination, moderate shadow contrast",
+      "positive": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer, wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric, facing viewer, head upright, portrait, head and shoulders, eye-level camera, in a quiet courtyard, anime illustration, golden side illumination, strong shadow contrast, low-key chiaroscuro"
+    },
+    {
+      "id": "candlelit-dev-03",
+      "variation": "candlelit",
+      "split": "dev",
+      "character": "original-16",
+      "definition": "candlelit-04",
+      "definition_split": "train",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": false,
+      "presentation": "man",
+      "skin": "medium brown skin",
+      "shared": {
+        "character": "1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a muted violet tunic and gray trousers, long sleeves, plain fabric",
+        "pose": "standing upright, facing viewer, both hands on hips",
+        "framing": "cowboy shot, thighs in frame, eye-level camera",
+        "scene": "in a quiet courtyard",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "neutral_lighting": "neutral diffuse illumination, moderate shadow contrast",
+      "positive_lighting": "soft warm side illumination, dense shadows, low-key chiaroscuro",
+      "neutral": "masterpiece, best quality, safe, solo, 1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, neutral expression, closed mouth, looking at viewer, wearing a muted violet tunic and gray trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, in a quiet courtyard, anime illustration, neutral diffuse illumination, moderate shadow contrast",
+      "positive": "masterpiece, best quality, safe, solo, 1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, neutral expression, closed mouth, looking at viewer, wearing a muted violet tunic and gray trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, in a quiet courtyard, anime illustration, soft warm side illumination, dense shadows, low-key chiaroscuro"
+    },
+    {
+      "id": "candlelit-dev-04",
+      "variation": "candlelit",
+      "split": "dev",
+      "character": "original-13",
+      "definition": "candlelit-05",
+      "definition_split": "train",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": false,
+      "presentation": "woman",
+      "skin": "medium brown skin",
+      "shared": {
+        "character": "1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric",
+        "pose": "sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap",
+        "framing": "full body, entire figure in frame, eye-level camera",
+        "scene": "in a wood-paneled room",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "neutral_lighting": "neutral diffuse illumination, moderate shadow contrast",
+      "positive_lighting": "copper illumination from below, steep light falloff, low-key chiaroscuro",
+      "neutral": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap, full body, entire figure in frame, eye-level camera, in a wood-paneled room, anime illustration, neutral diffuse illumination, moderate shadow contrast",
+      "positive": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap, full body, entire figure in frame, eye-level camera, in a wood-paneled room, anime illustration, copper illumination from below, steep light falloff, low-key chiaroscuro"
+    },
+    {
+      "id": "candlelit-dev-05",
+      "variation": "candlelit",
+      "split": "dev",
+      "character": "original-14",
+      "definition": "candlelit-06",
+      "definition_split": "train",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": false,
+      "presentation": "man",
+      "skin": "light skin",
+      "shared": {
+        "character": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric",
+        "pose": "facing viewer, head upright",
+        "framing": "portrait, head and shoulders, eye-level camera",
+        "scene": "in a wood-paneled room",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "neutral_lighting": "neutral diffuse illumination, moderate shadow contrast",
+      "positive_lighting": "dim honey-colored illumination, deep shadows, low-key chiaroscuro",
+      "neutral": "masterpiece, best quality, safe, solo, 1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, facing viewer, head upright, portrait, head and shoulders, eye-level camera, in a wood-paneled room, anime illustration, neutral diffuse illumination, moderate shadow contrast",
+      "positive": "masterpiece, best quality, safe, solo, 1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, facing viewer, head upright, portrait, head and shoulders, eye-level camera, in a wood-paneled room, anime illustration, dim honey-colored illumination, deep shadows, low-key chiaroscuro"
+    },
+    {
+      "id": "candlelit-dev-06",
+      "variation": "candlelit",
+      "split": "dev",
+      "character": "original-15",
+      "definition": "candlelit-07",
+      "definition_split": "eval",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": false,
+      "presentation": "woman",
+      "skin": "deep brown skin",
+      "shared": {
+        "character": "1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric",
+        "pose": "standing upright, facing viewer, both hands on hips",
+        "framing": "cowboy shot, thighs in frame, eye-level camera",
+        "scene": "on a balcony above a village",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "neutral_lighting": "neutral diffuse illumination, moderate shadow contrast",
+      "positive_lighting": "restrained warm highlights fading rapidly into darkness, sculptural shadow contrast, a sense of dread",
+      "neutral": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer, wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, on a balcony above a village, anime illustration, neutral diffuse illumination, moderate shadow contrast",
+      "positive": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer, wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, on a balcony above a village, anime illustration, restrained warm highlights fading rapidly into darkness, sculptural shadow contrast, a sense of dread"
+    },
+    {
+      "id": "candlelit-dev-07",
+      "variation": "candlelit",
+      "split": "dev",
+      "character": "original-16",
+      "definition": "candlelit-08",
+      "definition_split": "eval",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": false,
+      "presentation": "man",
+      "skin": "medium brown skin",
+      "shared": {
+        "character": "1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a muted violet tunic and gray trousers, long sleeves, plain fabric",
+        "pose": "standing upright, facing viewer, arms at sides",
+        "framing": "upper body, waist-up view, eye-level camera",
+        "scene": "on a balcony above a village",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "neutral_lighting": "neutral diffuse illumination, moderate shadow contrast",
+      "positive_lighting": "close amber-toned illumination against profound shadow, low-key tonal contrast, unsettling stillness",
+      "neutral": "masterpiece, best quality, safe, solo, 1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, neutral expression, closed mouth, looking at viewer, wearing a muted violet tunic and gray trousers, long sleeves, plain fabric, standing upright, facing viewer, arms at sides, upper body, waist-up view, eye-level camera, on a balcony above a village, anime illustration, neutral diffuse illumination, moderate shadow contrast",
+      "positive": "masterpiece, best quality, safe, solo, 1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, neutral expression, closed mouth, looking at viewer, wearing a muted violet tunic and gray trousers, long sleeves, plain fabric, standing upright, facing viewer, arms at sides, upper body, waist-up view, eye-level camera, on a balcony above a village, anime illustration, close amber-toned illumination against profound shadow, low-key tonal contrast, unsettling stillness"
+    },
+    {
+      "id": "candlelit-dev-08",
+      "variation": "candlelit",
+      "split": "dev",
+      "character": "original-13",
+      "definition": "candlelit-07",
+      "definition_split": "eval",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": true,
+      "presentation": "woman",
+      "skin": "medium brown skin",
+      "shared": {
+        "character": "1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric",
+        "pose": "facing viewer, head upright",
+        "framing": "portrait, head and shoulders, eye-level camera",
+        "scene": "in an unadorned stone corridor with bare stone walls",
+        "medium": "",
+        "quality": ""
+      },
+      "neutral_lighting": "",
+      "positive_lighting": "restrained warm highlights fading rapidly into darkness, sculptural shadow contrast, a sense of dread",
+      "neutral": "1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, facing viewer, head upright, portrait, head and shoulders, eye-level camera, in an unadorned stone corridor with bare stone walls",
+      "positive": "1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, facing viewer, head upright, portrait, head and shoulders, eye-level camera, in an unadorned stone corridor with bare stone walls, restrained warm highlights fading rapidly into darkness, sculptural shadow contrast, a sense of dread"
+    },
+    {
+      "id": "candlelit-dev-09",
+      "variation": "candlelit",
+      "split": "dev",
+      "character": "original-14",
+      "definition": "candlelit-08",
+      "definition_split": "eval",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": true,
+      "presentation": "man",
+      "skin": "light skin",
+      "shared": {
+        "character": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric",
+        "pose": "standing upright, facing viewer, both hands on hips",
+        "framing": "cowboy shot, thighs in frame, eye-level camera",
+        "scene": "in an unadorned stone corridor with bare stone walls",
+        "medium": "",
+        "quality": ""
+      },
+      "neutral_lighting": "",
+      "positive_lighting": "close amber-toned illumination against profound shadow, low-key tonal contrast, unsettling stillness",
+      "neutral": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, in an unadorned stone corridor with bare stone walls",
+      "positive": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, in an unadorned stone corridor with bare stone walls, close amber-toned illumination against profound shadow, low-key tonal contrast, unsettling stillness"
+    },
+    {
+      "id": "candlelit-dev-10",
+      "variation": "candlelit",
+      "split": "dev",
+      "character": "original-15",
+      "definition": "candlelit-07",
+      "definition_split": "eval",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": true,
+      "presentation": "woman",
+      "skin": "deep brown skin",
+      "shared": {
+        "character": "1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric",
+        "pose": "standing upright, facing viewer, arms at sides",
+        "framing": "upper body, waist-up view, eye-level camera",
+        "scene": "in a quiet courtyard",
+        "medium": "",
+        "quality": ""
+      },
+      "neutral_lighting": "",
+      "positive_lighting": "restrained warm highlights fading rapidly into darkness, sculptural shadow contrast, a sense of dread",
+      "neutral": "1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer, wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric, standing upright, facing viewer, arms at sides, upper body, waist-up view, eye-level camera, in a quiet courtyard",
+      "positive": "1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer, wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric, standing upright, facing viewer, arms at sides, upper body, waist-up view, eye-level camera, in a quiet courtyard, restrained warm highlights fading rapidly into darkness, sculptural shadow contrast, a sense of dread"
+    },
+    {
+      "id": "candlelit-dev-11",
+      "variation": "candlelit",
+      "split": "dev",
+      "character": "original-16",
+      "definition": "candlelit-08",
+      "definition_split": "eval",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": true,
+      "presentation": "man",
+      "skin": "medium brown skin",
+      "shared": {
+        "character": "1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a muted violet tunic and gray trousers, long sleeves, plain fabric",
+        "pose": "sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap",
+        "framing": "full body, entire figure in frame, eye-level camera",
+        "scene": "in a quiet courtyard",
+        "medium": "",
+        "quality": ""
+      },
+      "neutral_lighting": "",
+      "positive_lighting": "close amber-toned illumination against profound shadow, low-key tonal contrast, unsettling stillness",
+      "neutral": "1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, neutral expression, closed mouth, looking at viewer, wearing a muted violet tunic and gray trousers, long sleeves, plain fabric, sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap, full body, entire figure in frame, eye-level camera, in a quiet courtyard",
+      "positive": "1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, neutral expression, closed mouth, looking at viewer, wearing a muted violet tunic and gray trousers, long sleeves, plain fabric, sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap, full body, entire figure in frame, eye-level camera, in a quiet courtyard, close amber-toned illumination against profound shadow, low-key tonal contrast, unsettling stillness"
+    },
+    {
+      "id": "moonlit-dev-00",
+      "variation": "moonlit",
+      "split": "dev",
+      "character": "original-13",
+      "definition": "moonlit-01",
+      "definition_split": "train",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": false,
+      "presentation": "woman",
+      "skin": "medium brown skin",
+      "shared": {
+        "character": "1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric",
+        "pose": "standing upright, facing viewer, arms at sides",
+        "framing": "upper body, waist-up view, eye-level camera",
+        "scene": "in an unadorned stone corridor with bare stone walls",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "neutral_lighting": "neutral diffuse illumination, moderate shadow contrast",
+      "positive_lighting": "cool silvery directional illumination, deep blue shadows, low-key chiaroscuro",
+      "neutral": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, standing upright, facing viewer, arms at sides, upper body, waist-up view, eye-level camera, in an unadorned stone corridor with bare stone walls, anime illustration, neutral diffuse illumination, moderate shadow contrast",
+      "positive": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, standing upright, facing viewer, arms at sides, upper body, waist-up view, eye-level camera, in an unadorned stone corridor with bare stone walls, anime illustration, cool silvery directional illumination, deep blue shadows, low-key chiaroscuro"
+    },
+    {
+      "id": "moonlit-dev-01",
+      "variation": "moonlit",
+      "split": "dev",
+      "character": "original-14",
+      "definition": "moonlit-02",
+      "definition_split": "train",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": false,
+      "presentation": "man",
+      "skin": "light skin",
+      "shared": {
+        "character": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric",
+        "pose": "sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap",
+        "framing": "full body, entire figure in frame, eye-level camera",
+        "scene": "in an unadorned stone corridor with bare stone walls",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "neutral_lighting": "neutral diffuse illumination, moderate shadow contrast",
+      "positive_lighting": "pale blue side illumination, low-key lighting, low-key chiaroscuro",
+      "neutral": "masterpiece, best quality, safe, solo, 1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap, full body, entire figure in frame, eye-level camera, in an unadorned stone corridor with bare stone walls, anime illustration, neutral diffuse illumination, moderate shadow contrast",
+      "positive": "masterpiece, best quality, safe, solo, 1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap, full body, entire figure in frame, eye-level camera, in an unadorned stone corridor with bare stone walls, anime illustration, pale blue side illumination, low-key lighting, low-key chiaroscuro"
+    },
+    {
+      "id": "moonlit-dev-02",
+      "variation": "moonlit",
+      "split": "dev",
+      "character": "original-15",
+      "definition": "moonlit-03",
+      "definition_split": "train",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": false,
+      "presentation": "woman",
+      "skin": "deep brown skin",
+      "shared": {
+        "character": "1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric",
+        "pose": "facing viewer, head upright",
+        "framing": "portrait, head and shoulders, eye-level camera",
+        "scene": "in a quiet courtyard",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "neutral_lighting": "neutral diffuse illumination, moderate shadow contrast",
+      "positive_lighting": "silver side illumination, strong shadow contrast, low-key chiaroscuro",
+      "neutral": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer, wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric, facing viewer, head upright, portrait, head and shoulders, eye-level camera, in a quiet courtyard, anime illustration, neutral diffuse illumination, moderate shadow contrast",
+      "positive": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer, wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric, facing viewer, head upright, portrait, head and shoulders, eye-level camera, in a quiet courtyard, anime illustration, silver side illumination, strong shadow contrast, low-key chiaroscuro"
+    },
+    {
+      "id": "moonlit-dev-03",
+      "variation": "moonlit",
+      "split": "dev",
+      "character": "original-16",
+      "definition": "moonlit-04",
+      "definition_split": "train",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": false,
+      "presentation": "man",
+      "skin": "medium brown skin",
+      "shared": {
+        "character": "1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a muted violet tunic and gray trousers, long sleeves, plain fabric",
+        "pose": "standing upright, facing viewer, both hands on hips",
+        "framing": "cowboy shot, thighs in frame, eye-level camera",
+        "scene": "in a quiet courtyard",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "neutral_lighting": "neutral diffuse illumination, moderate shadow contrast",
+      "positive_lighting": "soft cool side illumination, dense shadows, low-key chiaroscuro",
+      "neutral": "masterpiece, best quality, safe, solo, 1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, neutral expression, closed mouth, looking at viewer, wearing a muted violet tunic and gray trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, in a quiet courtyard, anime illustration, neutral diffuse illumination, moderate shadow contrast",
+      "positive": "masterpiece, best quality, safe, solo, 1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, neutral expression, closed mouth, looking at viewer, wearing a muted violet tunic and gray trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, in a quiet courtyard, anime illustration, soft cool side illumination, dense shadows, low-key chiaroscuro"
+    },
+    {
+      "id": "moonlit-dev-04",
+      "variation": "moonlit",
+      "split": "dev",
+      "character": "original-13",
+      "definition": "moonlit-05",
+      "definition_split": "train",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": false,
+      "presentation": "woman",
+      "skin": "medium brown skin",
+      "shared": {
+        "character": "1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric",
+        "pose": "sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap",
+        "framing": "full body, entire figure in frame, eye-level camera",
+        "scene": "in a wood-paneled room",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "neutral_lighting": "neutral diffuse illumination, moderate shadow contrast",
+      "positive_lighting": "steel-blue illumination from above, steep light falloff, low-key chiaroscuro",
+      "neutral": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap, full body, entire figure in frame, eye-level camera, in a wood-paneled room, anime illustration, neutral diffuse illumination, moderate shadow contrast",
+      "positive": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap, full body, entire figure in frame, eye-level camera, in a wood-paneled room, anime illustration, steel-blue illumination from above, steep light falloff, low-key chiaroscuro"
+    },
+    {
+      "id": "moonlit-dev-05",
+      "variation": "moonlit",
+      "split": "dev",
+      "character": "original-14",
+      "definition": "moonlit-06",
+      "definition_split": "train",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": false,
+      "presentation": "man",
+      "skin": "light skin",
+      "shared": {
+        "character": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric",
+        "pose": "facing viewer, head upright",
+        "framing": "portrait, head and shoulders, eye-level camera",
+        "scene": "in a wood-paneled room",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "neutral_lighting": "neutral diffuse illumination, moderate shadow contrast",
+      "positive_lighting": "dim icy illumination, deep shadows, low-key chiaroscuro",
+      "neutral": "masterpiece, best quality, safe, solo, 1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, facing viewer, head upright, portrait, head and shoulders, eye-level camera, in a wood-paneled room, anime illustration, neutral diffuse illumination, moderate shadow contrast",
+      "positive": "masterpiece, best quality, safe, solo, 1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, facing viewer, head upright, portrait, head and shoulders, eye-level camera, in a wood-paneled room, anime illustration, dim icy illumination, deep shadows, low-key chiaroscuro"
+    },
+    {
+      "id": "moonlit-dev-06",
+      "variation": "moonlit",
+      "split": "dev",
+      "character": "original-15",
+      "definition": "moonlit-07",
+      "definition_split": "eval",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": false,
+      "presentation": "woman",
+      "skin": "deep brown skin",
+      "shared": {
+        "character": "1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric",
+        "pose": "standing upright, facing viewer, both hands on hips",
+        "framing": "cowboy shot, thighs in frame, eye-level camera",
+        "scene": "on a balcony above a village",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "neutral_lighting": "neutral diffuse illumination, moderate shadow contrast",
+      "positive_lighting": "restrained cold highlights fading rapidly into darkness, sculptural shadow contrast, a sense of dread",
+      "neutral": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer, wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, on a balcony above a village, anime illustration, neutral diffuse illumination, moderate shadow contrast",
+      "positive": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer, wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, on a balcony above a village, anime illustration, restrained cold highlights fading rapidly into darkness, sculptural shadow contrast, a sense of dread"
+    },
+    {
+      "id": "moonlit-dev-07",
+      "variation": "moonlit",
+      "split": "dev",
+      "character": "original-16",
+      "definition": "moonlit-08",
+      "definition_split": "eval",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": false,
+      "presentation": "man",
+      "skin": "medium brown skin",
+      "shared": {
+        "character": "1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a muted violet tunic and gray trousers, long sleeves, plain fabric",
+        "pose": "standing upright, facing viewer, arms at sides",
+        "framing": "upper body, waist-up view, eye-level camera",
+        "scene": "on a balcony above a village",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "neutral_lighting": "neutral diffuse illumination, moderate shadow contrast",
+      "positive_lighting": "pale blue-gray illumination against profound shadow, low-key tonal contrast, unsettling stillness",
+      "neutral": "masterpiece, best quality, safe, solo, 1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, neutral expression, closed mouth, looking at viewer, wearing a muted violet tunic and gray trousers, long sleeves, plain fabric, standing upright, facing viewer, arms at sides, upper body, waist-up view, eye-level camera, on a balcony above a village, anime illustration, neutral diffuse illumination, moderate shadow contrast",
+      "positive": "masterpiece, best quality, safe, solo, 1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, neutral expression, closed mouth, looking at viewer, wearing a muted violet tunic and gray trousers, long sleeves, plain fabric, standing upright, facing viewer, arms at sides, upper body, waist-up view, eye-level camera, on a balcony above a village, anime illustration, pale blue-gray illumination against profound shadow, low-key tonal contrast, unsettling stillness"
+    },
+    {
+      "id": "moonlit-dev-08",
+      "variation": "moonlit",
+      "split": "dev",
+      "character": "original-13",
+      "definition": "moonlit-07",
+      "definition_split": "eval",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": true,
+      "presentation": "woman",
+      "skin": "medium brown skin",
+      "shared": {
+        "character": "1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric",
+        "pose": "facing viewer, head upright",
+        "framing": "portrait, head and shoulders, eye-level camera",
+        "scene": "in an unadorned stone corridor with bare stone walls",
+        "medium": "",
+        "quality": ""
+      },
+      "neutral_lighting": "",
+      "positive_lighting": "restrained cold highlights fading rapidly into darkness, sculptural shadow contrast, a sense of dread",
+      "neutral": "1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, facing viewer, head upright, portrait, head and shoulders, eye-level camera, in an unadorned stone corridor with bare stone walls",
+      "positive": "1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, facing viewer, head upright, portrait, head and shoulders, eye-level camera, in an unadorned stone corridor with bare stone walls, restrained cold highlights fading rapidly into darkness, sculptural shadow contrast, a sense of dread"
+    },
+    {
+      "id": "moonlit-dev-09",
+      "variation": "moonlit",
+      "split": "dev",
+      "character": "original-14",
+      "definition": "moonlit-08",
+      "definition_split": "eval",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": true,
+      "presentation": "man",
+      "skin": "light skin",
+      "shared": {
+        "character": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric",
+        "pose": "standing upright, facing viewer, both hands on hips",
+        "framing": "cowboy shot, thighs in frame, eye-level camera",
+        "scene": "in an unadorned stone corridor with bare stone walls",
+        "medium": "",
+        "quality": ""
+      },
+      "neutral_lighting": "",
+      "positive_lighting": "pale blue-gray illumination against profound shadow, low-key tonal contrast, unsettling stillness",
+      "neutral": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, in an unadorned stone corridor with bare stone walls",
+      "positive": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, in an unadorned stone corridor with bare stone walls, pale blue-gray illumination against profound shadow, low-key tonal contrast, unsettling stillness"
+    },
+    {
+      "id": "moonlit-dev-10",
+      "variation": "moonlit",
+      "split": "dev",
+      "character": "original-15",
+      "definition": "moonlit-07",
+      "definition_split": "eval",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": true,
+      "presentation": "woman",
+      "skin": "deep brown skin",
+      "shared": {
+        "character": "1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric",
+        "pose": "standing upright, facing viewer, arms at sides",
+        "framing": "upper body, waist-up view, eye-level camera",
+        "scene": "in a quiet courtyard",
+        "medium": "",
+        "quality": ""
+      },
+      "neutral_lighting": "",
+      "positive_lighting": "restrained cold highlights fading rapidly into darkness, sculptural shadow contrast, a sense of dread",
+      "neutral": "1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer, wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric, standing upright, facing viewer, arms at sides, upper body, waist-up view, eye-level camera, in a quiet courtyard",
+      "positive": "1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer, wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric, standing upright, facing viewer, arms at sides, upper body, waist-up view, eye-level camera, in a quiet courtyard, restrained cold highlights fading rapidly into darkness, sculptural shadow contrast, a sense of dread"
+    },
+    {
+      "id": "moonlit-dev-11",
+      "variation": "moonlit",
+      "split": "dev",
+      "character": "original-16",
+      "definition": "moonlit-08",
+      "definition_split": "eval",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": true,
+      "presentation": "man",
+      "skin": "medium brown skin",
+      "shared": {
+        "character": "1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a muted violet tunic and gray trousers, long sleeves, plain fabric",
+        "pose": "sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap",
+        "framing": "full body, entire figure in frame, eye-level camera",
+        "scene": "in a quiet courtyard",
+        "medium": "",
+        "quality": ""
+      },
+      "neutral_lighting": "",
+      "positive_lighting": "pale blue-gray illumination against profound shadow, low-key tonal contrast, unsettling stillness",
+      "neutral": "1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, neutral expression, closed mouth, looking at viewer, wearing a muted violet tunic and gray trousers, long sleeves, plain fabric, sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap, full body, entire figure in frame, eye-level camera, in a quiet courtyard",
+      "positive": "1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, neutral expression, closed mouth, looking at viewer, wearing a muted violet tunic and gray trousers, long sleeves, plain fabric, sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap, full body, entire figure in frame, eye-level camera, in a quiet courtyard, pale blue-gray illumination against profound shadow, low-key tonal contrast, unsettling stillness"
+    },
+    {
+      "id": "theatrical-dev-00",
+      "variation": "theatrical",
+      "split": "dev",
+      "character": "original-13",
+      "definition": "theatrical-01",
+      "definition_split": "train",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": false,
+      "presentation": "woman",
+      "skin": "medium brown skin",
+      "shared": {
+        "character": "1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric",
+        "pose": "standing upright, facing viewer, arms at sides",
+        "framing": "upper body, waist-up view, eye-level camera",
+        "scene": "in an unadorned stone corridor with bare stone walls",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "neutral_lighting": "neutral diffuse illumination, moderate shadow contrast",
+      "positive_lighting": "neutral-white directional illumination, deep shadows, low-key chiaroscuro",
+      "neutral": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, standing upright, facing viewer, arms at sides, upper body, waist-up view, eye-level camera, in an unadorned stone corridor with bare stone walls, anime illustration, neutral diffuse illumination, moderate shadow contrast",
+      "positive": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, standing upright, facing viewer, arms at sides, upper body, waist-up view, eye-level camera, in an unadorned stone corridor with bare stone walls, anime illustration, neutral-white directional illumination, deep shadows, low-key chiaroscuro"
+    },
+    {
+      "id": "theatrical-dev-01",
+      "variation": "theatrical",
+      "split": "dev",
+      "character": "original-14",
+      "definition": "theatrical-02",
+      "definition_split": "train",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": false,
+      "presentation": "man",
+      "skin": "light skin",
+      "shared": {
+        "character": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric",
+        "pose": "sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap",
+        "framing": "full body, entire figure in frame, eye-level camera",
+        "scene": "in an unadorned stone corridor with bare stone walls",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "neutral_lighting": "neutral diffuse illumination, moderate shadow contrast",
+      "positive_lighting": "hard high-angle illumination, low-key lighting, low-key chiaroscuro",
+      "neutral": "masterpiece, best quality, safe, solo, 1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap, full body, entire figure in frame, eye-level camera, in an unadorned stone corridor with bare stone walls, anime illustration, neutral diffuse illumination, moderate shadow contrast",
+      "positive": "masterpiece, best quality, safe, solo, 1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap, full body, entire figure in frame, eye-level camera, in an unadorned stone corridor with bare stone walls, anime illustration, hard high-angle illumination, low-key lighting, low-key chiaroscuro"
+    },
+    {
+      "id": "theatrical-dev-02",
+      "variation": "theatrical",
+      "split": "dev",
+      "character": "original-15",
+      "definition": "theatrical-03",
+      "definition_split": "train",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": false,
+      "presentation": "woman",
+      "skin": "deep brown skin",
+      "shared": {
+        "character": "1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric",
+        "pose": "facing viewer, head upright",
+        "framing": "portrait, head and shoulders, eye-level camera",
+        "scene": "in a quiet courtyard",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "neutral_lighting": "neutral diffuse illumination, moderate shadow contrast",
+      "positive_lighting": "white oblique illumination, strong shadow contrast, low-key chiaroscuro",
+      "neutral": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer, wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric, facing viewer, head upright, portrait, head and shoulders, eye-level camera, in a quiet courtyard, anime illustration, neutral diffuse illumination, moderate shadow contrast",
+      "positive": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer, wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric, facing viewer, head upright, portrait, head and shoulders, eye-level camera, in a quiet courtyard, anime illustration, white oblique illumination, strong shadow contrast, low-key chiaroscuro"
+    },
+    {
+      "id": "theatrical-dev-03",
+      "variation": "theatrical",
+      "split": "dev",
+      "character": "original-16",
+      "definition": "theatrical-04",
+      "definition_split": "train",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": false,
+      "presentation": "man",
+      "skin": "medium brown skin",
+      "shared": {
+        "character": "1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a muted violet tunic and gray trousers, long sleeves, plain fabric",
+        "pose": "standing upright, facing viewer, both hands on hips",
+        "framing": "cowboy shot, thighs in frame, eye-level camera",
+        "scene": "in a quiet courtyard",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "neutral_lighting": "neutral diffuse illumination, moderate shadow contrast",
+      "positive_lighting": "focused white side illumination, dense shadows, low-key chiaroscuro",
+      "neutral": "masterpiece, best quality, safe, solo, 1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, neutral expression, closed mouth, looking at viewer, wearing a muted violet tunic and gray trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, in a quiet courtyard, anime illustration, neutral diffuse illumination, moderate shadow contrast",
+      "positive": "masterpiece, best quality, safe, solo, 1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, neutral expression, closed mouth, looking at viewer, wearing a muted violet tunic and gray trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, in a quiet courtyard, anime illustration, focused white side illumination, dense shadows, low-key chiaroscuro"
+    },
+    {
+      "id": "theatrical-dev-04",
+      "variation": "theatrical",
+      "split": "dev",
+      "character": "original-13",
+      "definition": "theatrical-05",
+      "definition_split": "train",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": false,
+      "presentation": "woman",
+      "skin": "medium brown skin",
+      "shared": {
+        "character": "1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric",
+        "pose": "sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap",
+        "framing": "full body, entire figure in frame, eye-level camera",
+        "scene": "in a wood-paneled room",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "neutral_lighting": "neutral diffuse illumination, moderate shadow contrast",
+      "positive_lighting": "white illumination from below, steep light falloff, low-key chiaroscuro",
+      "neutral": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap, full body, entire figure in frame, eye-level camera, in a wood-paneled room, anime illustration, neutral diffuse illumination, moderate shadow contrast",
+      "positive": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap, full body, entire figure in frame, eye-level camera, in a wood-paneled room, anime illustration, white illumination from below, steep light falloff, low-key chiaroscuro"
+    },
+    {
+      "id": "theatrical-dev-05",
+      "variation": "theatrical",
+      "split": "dev",
+      "character": "original-14",
+      "definition": "theatrical-06",
+      "definition_split": "train",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": false,
+      "presentation": "man",
+      "skin": "light skin",
+      "shared": {
+        "character": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric",
+        "pose": "facing viewer, head upright",
+        "framing": "portrait, head and shoulders, eye-level camera",
+        "scene": "in a wood-paneled room",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "neutral_lighting": "neutral diffuse illumination, moderate shadow contrast",
+      "positive_lighting": "narrow white illumination, deep shadows, low-key chiaroscuro",
+      "neutral": "masterpiece, best quality, safe, solo, 1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, facing viewer, head upright, portrait, head and shoulders, eye-level camera, in a wood-paneled room, anime illustration, neutral diffuse illumination, moderate shadow contrast",
+      "positive": "masterpiece, best quality, safe, solo, 1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, facing viewer, head upright, portrait, head and shoulders, eye-level camera, in a wood-paneled room, anime illustration, narrow white illumination, deep shadows, low-key chiaroscuro"
+    },
+    {
+      "id": "theatrical-dev-06",
+      "variation": "theatrical",
+      "split": "dev",
+      "character": "original-15",
+      "definition": "theatrical-07",
+      "definition_split": "eval",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": false,
+      "presentation": "woman",
+      "skin": "deep brown skin",
+      "shared": {
+        "character": "1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric",
+        "pose": "standing upright, facing viewer, both hands on hips",
+        "framing": "cowboy shot, thighs in frame, eye-level camera",
+        "scene": "on a balcony above a village",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "neutral_lighting": "neutral diffuse illumination, moderate shadow contrast",
+      "positive_lighting": "a tightly confined pool of illumination fading into darkness, sculptural shadow contrast, a sense of dread",
+      "neutral": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer, wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, on a balcony above a village, anime illustration, neutral diffuse illumination, moderate shadow contrast",
+      "positive": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer, wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, on a balcony above a village, anime illustration, a tightly confined pool of illumination fading into darkness, sculptural shadow contrast, a sense of dread"
+    },
+    {
+      "id": "theatrical-dev-07",
+      "variation": "theatrical",
+      "split": "dev",
+      "character": "original-16",
+      "definition": "theatrical-08",
+      "definition_split": "eval",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": false,
+      "presentation": "man",
+      "skin": "medium brown skin",
+      "shared": {
+        "character": "1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a muted violet tunic and gray trousers, long sleeves, plain fabric",
+        "pose": "standing upright, facing viewer, arms at sides",
+        "framing": "upper body, waist-up view, eye-level camera",
+        "scene": "on a balcony above a village",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "neutral_lighting": "neutral diffuse illumination, moderate shadow contrast",
+      "positive_lighting": "stark directional highlights against profound shadow, low-key tonal contrast, unsettling stillness",
+      "neutral": "masterpiece, best quality, safe, solo, 1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, neutral expression, closed mouth, looking at viewer, wearing a muted violet tunic and gray trousers, long sleeves, plain fabric, standing upright, facing viewer, arms at sides, upper body, waist-up view, eye-level camera, on a balcony above a village, anime illustration, neutral diffuse illumination, moderate shadow contrast",
+      "positive": "masterpiece, best quality, safe, solo, 1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, neutral expression, closed mouth, looking at viewer, wearing a muted violet tunic and gray trousers, long sleeves, plain fabric, standing upright, facing viewer, arms at sides, upper body, waist-up view, eye-level camera, on a balcony above a village, anime illustration, stark directional highlights against profound shadow, low-key tonal contrast, unsettling stillness"
+    },
+    {
+      "id": "theatrical-dev-08",
+      "variation": "theatrical",
+      "split": "dev",
+      "character": "original-13",
+      "definition": "theatrical-07",
+      "definition_split": "eval",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": true,
+      "presentation": "woman",
+      "skin": "medium brown skin",
+      "shared": {
+        "character": "1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric",
+        "pose": "facing viewer, head upright",
+        "framing": "portrait, head and shoulders, eye-level camera",
+        "scene": "in an unadorned stone corridor with bare stone walls",
+        "medium": "",
+        "quality": ""
+      },
+      "neutral_lighting": "",
+      "positive_lighting": "a tightly confined pool of illumination fading into darkness, sculptural shadow contrast, a sense of dread",
+      "neutral": "1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, facing viewer, head upright, portrait, head and shoulders, eye-level camera, in an unadorned stone corridor with bare stone walls",
+      "positive": "1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, facing viewer, head upright, portrait, head and shoulders, eye-level camera, in an unadorned stone corridor with bare stone walls, a tightly confined pool of illumination fading into darkness, sculptural shadow contrast, a sense of dread"
+    },
+    {
+      "id": "theatrical-dev-09",
+      "variation": "theatrical",
+      "split": "dev",
+      "character": "original-14",
+      "definition": "theatrical-08",
+      "definition_split": "eval",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": true,
+      "presentation": "man",
+      "skin": "light skin",
+      "shared": {
+        "character": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric",
+        "pose": "standing upright, facing viewer, both hands on hips",
+        "framing": "cowboy shot, thighs in frame, eye-level camera",
+        "scene": "in an unadorned stone corridor with bare stone walls",
+        "medium": "",
+        "quality": ""
+      },
+      "neutral_lighting": "",
+      "positive_lighting": "stark directional highlights against profound shadow, low-key tonal contrast, unsettling stillness",
+      "neutral": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, in an unadorned stone corridor with bare stone walls",
+      "positive": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, in an unadorned stone corridor with bare stone walls, stark directional highlights against profound shadow, low-key tonal contrast, unsettling stillness"
+    },
+    {
+      "id": "theatrical-dev-10",
+      "variation": "theatrical",
+      "split": "dev",
+      "character": "original-15",
+      "definition": "theatrical-07",
+      "definition_split": "eval",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": true,
+      "presentation": "woman",
+      "skin": "deep brown skin",
+      "shared": {
+        "character": "1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric",
+        "pose": "standing upright, facing viewer, arms at sides",
+        "framing": "upper body, waist-up view, eye-level camera",
+        "scene": "in a quiet courtyard",
+        "medium": "",
+        "quality": ""
+      },
+      "neutral_lighting": "",
+      "positive_lighting": "a tightly confined pool of illumination fading into darkness, sculptural shadow contrast, a sense of dread",
+      "neutral": "1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer, wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric, standing upright, facing viewer, arms at sides, upper body, waist-up view, eye-level camera, in a quiet courtyard",
+      "positive": "1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer, wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric, standing upright, facing viewer, arms at sides, upper body, waist-up view, eye-level camera, in a quiet courtyard, a tightly confined pool of illumination fading into darkness, sculptural shadow contrast, a sense of dread"
+    },
+    {
+      "id": "theatrical-dev-11",
+      "variation": "theatrical",
+      "split": "dev",
+      "character": "original-16",
+      "definition": "theatrical-08",
+      "definition_split": "eval",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": true,
+      "presentation": "man",
+      "skin": "medium brown skin",
+      "shared": {
+        "character": "1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a muted violet tunic and gray trousers, long sleeves, plain fabric",
+        "pose": "sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap",
+        "framing": "full body, entire figure in frame, eye-level camera",
+        "scene": "in a quiet courtyard",
+        "medium": "",
+        "quality": ""
+      },
+      "neutral_lighting": "",
+      "positive_lighting": "stark directional highlights against profound shadow, low-key tonal contrast, unsettling stillness",
+      "neutral": "1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, neutral expression, closed mouth, looking at viewer, wearing a muted violet tunic and gray trousers, long sleeves, plain fabric, sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap, full body, entire figure in frame, eye-level camera, in a quiet courtyard",
+      "positive": "1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, neutral expression, closed mouth, looking at viewer, wearing a muted violet tunic and gray trousers, long sleeves, plain fabric, sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap, full body, entire figure in frame, eye-level camera, in a quiet courtyard, stark directional highlights against profound shadow, low-key tonal contrast, unsettling stillness"
+    }
+  ],
+  "sha256": "ef75cb099703e2fc002fe57b6e97dfd3b9fe6f88f0ce71ad83cf18e1139b4867"
+}

@@ -1,0 +1,26 @@
+{
+  "passed": true,
+  "device": "cpu",
+  "comfy_revision": "387f98aa2822f684b8597959a52a467d88cc4806",
+  "sliders": [
+    {
+      "variation": "candlelit",
+      "particle_projections": 224,
+      "lora_patches": 224,
+      "particle_max_abs": 0.0,
+      "zero_bypass": true,
+      "clone_isolation": true,
+      "exception_restoration": true
+    },
+    {
+      "variation": "moonlit",
+      "particle_projections": 224,
+      "lora_patches": 224,
+      "particle_max_abs": 0.0,
+      "zero_bypass": true,
+      "clone_isolation": true,
+      "exception_restoration": true
+    }
+  ],
+  "limitation": "Full ComfyUI GPU image generation is not covered by this CPU integration check."
+}

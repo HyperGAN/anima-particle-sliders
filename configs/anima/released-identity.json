@@ -1,0 +1,7 @@
+{
+  "model": "circlestone-labs/Anima:turbo-v1.1",
+  "sha256": "eb5520f293d42a19df9242d8d442d5d2068e5121620814418c2b50a97de0552f",
+  "identity_schema": "portable-model-v1",
+  "environment_sha256": "55ac97305e688c56d4a2908243b020e999cf101a05b1cf7e5a3e2c48d4a4d7ba",
+  "runtime_sha256": "ca564ceaf401f96198258d773ef0c50eb586fe5b9937122b95ee4e3226cea076"
+}

@@ -1,0 +1,15 @@
+This release modifies the CircleStone Anima model through separately distributed
+Candlelit and Moonlit particle adapters and distilled LoRAs. It is an independent
+ntc-ai release, not an official or endorsed CircleStone product.
+
+The CircleStone Model is licensed by CircleStone Labs LLC under the CircleStone
+Non-Commercial License. Copyright CircleStone Labs LLC. IN NO EVENT SHALL
+CIRCLESTONE LABS LLC BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH USE OF THIS MODEL.
+
+Rights to use the model and derivatives are granted directly by CircleStone
+Labs LLC under the accompanying ANIMA-LICENSE.md. Separately licensed source
+code retains its notices: our code is MIT (LICENSE), the vendored ParticleGAN
+reference has its own license in lumen_studio/vendor/LICENSE. No additional
+restriction is imposed on CircleStone commercial license holders.
