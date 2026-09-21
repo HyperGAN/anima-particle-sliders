@@ -1,65 +1,47 @@
 # Anima Concept Sliders
 
-**Candlelit and Moonlit for Anima Turbo v1.1.** Same prompt and seed; turn the atmosphere from strength 0 to 5.
+**Moonlit and Candlelit for Anima Turbo v1.1.** Same prompt and seed; turn the atmosphere from strength 0 to 5.
 
 ## Samples
 
-Each grid reads **0, 1, 2** across the first row, then **3, 4, 5**. Original step-1600 EMA particles, 768 × 768, 10 Euler steps, CFG 1. Click through for full-resolution PNGs and exact prompts.
+**Start with Particle — the original slider.** Each comparison reads **Particle → Distill → Off**, left to right. Distill is the ordinary-LoRA approximation; Off is the base model.
 
-### Candlelit
+### Moonlit
 
-**Comparison 1** · [PNG images and prompt](https://huggingface.co/ntc-ai/anima-concept-sliders/tree/main/samples/candlelit/case0)
+**Particle · strength 3** → **Distill · strength 3** → **Off · strength 0**
 
-![Candlelit: matched samples at strengths 0 through 5](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/candlelit-case0.jpg)
+![Moonlit: Particle first, Distill second, Off third](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/moonlit-particle-distill-off.jpg)
 
-<details><summary>Prompt and seed</summary>
+Full-resolution samples: [Particle](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/moonlit/case0/str3.png) · [Distill](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/distilled/samples/moonlit-case0-str3.png) · [Off](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/moonlit/case0/str0.png)
+
+Same prompt and seed **29001**. 768 × 768, 10 Euler steps, CFG 1. Strength 3 extrapolates beyond the trained endpoint at 1.
+
+<details><summary>Prompt</summary>
 
 masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, standing upright, facing viewer, arms at sides, upper body, waist-up view, eye-level camera, in an unadorned stone corridor with bare stone walls, anime illustration, neutral diffuse illumination, moderate shadow contrast
 
-Seed: `29001`.
-
 </details>
 
-**Bare prompt** · [PNG images and prompt](https://huggingface.co/ntc-ai/anima-concept-sliders/tree/main/samples/candlelit/case3)
+### Candlelit
 
-![Candlelit: matched samples at strengths 0 through 5](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/candlelit-case3.jpg)
+**Particle · strength 3** → **Distill · strength 3** → **Off · strength 0**
 
-<details><summary>Prompt and seed</summary>
+![Candlelit: Particle first, Distill second, Off third](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/candlelit-particle-distill-off.jpg)
 
-1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, in an unadorned stone corridor with bare stone walls
+Full-resolution samples: [Particle](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/candlelit/case0/str3.png) · [Distill](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/distilled/samples/candlelit-case0-str3.png) · [Off](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/candlelit/case0/str0.png)
 
-Seed: `29001`.
+Same prompt and seed **29001**. 768 × 768, 10 Euler steps, CFG 1. Strength 3 extrapolates beyond the trained endpoint at 1.
+
+<details><summary>Prompt</summary>
+
+masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, standing upright, facing viewer, arms at sides, upper body, waist-up view, eye-level camera, in an unadorned stone corridor with bare stone walls, anime illustration, neutral diffuse illumination, moderate shadow contrast
 
 </details>
 
 <details>
-<summary>Two more matched prompts</summary>
+<summary>More samples: strengths 0–5, four matched prompts per slider</summary>
 
-**Comparison 2** · [PNG images and prompt](https://huggingface.co/ntc-ai/anima-concept-sliders/tree/main/samples/candlelit/case1)
-
-![Candlelit: matched samples at strengths 0 through 5](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/candlelit-case1.jpg)
-
-<details><summary>Prompt and seed</summary>
-
-masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer, wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric, facing viewer, head upright, portrait, head and shoulders, eye-level camera, in a quiet courtyard, anime illustration, neutral diffuse illumination, moderate shadow contrast
-
-Seed: `29001`.
-
-</details>
-
-**Comparison 3** · [PNG images and prompt](https://huggingface.co/ntc-ai/anima-concept-sliders/tree/main/samples/candlelit/case2)
-
-![Candlelit: matched samples at strengths 0 through 5](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/candlelit-case2.jpg)
-
-<details><summary>Prompt and seed</summary>
-
-masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap, full body, entire figure in frame, eye-level camera, in a wood-paneled room, anime illustration, neutral diffuse illumination, moderate shadow contrast
-
-Seed: `29001`.
-
-</details>
-
-</details>
+Each grid reads **0, 1, 2** across the first row, then **3, 4, 5**. Original step-1600 EMA particles.
 
 ### Moonlit
 
@@ -116,6 +98,63 @@ Seed: `29001`.
 
 </details>
 
+### Candlelit
+
+**Comparison 1** · [PNG images and prompt](https://huggingface.co/ntc-ai/anima-concept-sliders/tree/main/samples/candlelit/case0)
+
+![Candlelit: matched samples at strengths 0 through 5](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/candlelit-case0.jpg)
+
+<details><summary>Prompt and seed</summary>
+
+masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, standing upright, facing viewer, arms at sides, upper body, waist-up view, eye-level camera, in an unadorned stone corridor with bare stone walls, anime illustration, neutral diffuse illumination, moderate shadow contrast
+
+Seed: `29001`.
+
+</details>
+
+**Bare prompt** · [PNG images and prompt](https://huggingface.co/ntc-ai/anima-concept-sliders/tree/main/samples/candlelit/case3)
+
+![Candlelit: matched samples at strengths 0 through 5](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/candlelit-case3.jpg)
+
+<details><summary>Prompt and seed</summary>
+
+1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, in an unadorned stone corridor with bare stone walls
+
+Seed: `29001`.
+
+</details>
+
+<details>
+<summary>Two more matched prompts</summary>
+
+**Comparison 2** · [PNG images and prompt](https://huggingface.co/ntc-ai/anima-concept-sliders/tree/main/samples/candlelit/case1)
+
+![Candlelit: matched samples at strengths 0 through 5](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/candlelit-case1.jpg)
+
+<details><summary>Prompt and seed</summary>
+
+masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer, wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric, facing viewer, head upright, portrait, head and shoulders, eye-level camera, in a quiet courtyard, anime illustration, neutral diffuse illumination, moderate shadow contrast
+
+Seed: `29001`.
+
+</details>
+
+**Comparison 3** · [PNG images and prompt](https://huggingface.co/ntc-ai/anima-concept-sliders/tree/main/samples/candlelit/case2)
+
+![Candlelit: matched samples at strengths 0 through 5](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/candlelit-case2.jpg)
+
+<details><summary>Prompt and seed</summary>
+
+masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap, full body, entire figure in frame, eye-level camera, in a wood-paneled room, anime illustration, neutral diffuse illumination, moderate shadow contrast
+
+Seed: `29001`.
+
+</details>
+
+</details>
+
+</details>
+
 Strength **1** is the trained endpoint. Higher strengths extrapolate and can change clothing, framing and scene details; occasional camera-frame marks are visible in the unfiltered examples. These development samples illustrate behavior, not a final-test quality benchmark.
 
 <a id="comfyui"></a>
@@ -124,8 +163,8 @@ Strength **1** is the trained endpoint. Higher strengths extrapolate and can cha
 
 | Slider | Original particles | Distilled LoRA for ComfyUI | Distilled LoRA for native runtime |
 |---|---|---|---|
-| Candlelit | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/weights/candlelit.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/distilled/comfyui/candlelit.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/distilled/native/candlelit.safetensors?download=true) |
 | Moonlit | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/weights/moonlit.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/distilled/comfyui/moonlit.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/distilled/native/moonlit.safetensors?download=true) |
+| Candlelit | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/weights/candlelit.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/distilled/comfyui/candlelit.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/distilled/native/candlelit.safetensors?download=true) |
 
 **Particles:** use the [ComfyUI particle plugin](https://github.com/mikkel/anima-concept-sliders#comfyui), or the [native loader](https://github.com/mikkel/anima-concept-sliders/blob/main/REPRODUCE.md). [Plugin ZIP](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/comfyui/anima-concept-sliders.zip?download=true) · [ComfyUI setup](https://github.com/mikkel/anima-concept-sliders/blob/main/COMFYUI.md).
 
@@ -137,15 +176,20 @@ The reusable algorithms come from the [shared core in sliders-conceptmod](https:
 
 ## Distilled comparisons
 
+<details>
+<summary>Compare particles and distills at strengths 1, 3 and 5</summary>
+
 Top row: original particles at strengths **1, 3, 5**. Bottom row: the distilled ordinary LoRA at the same strengths. Prompt, seed, dimensions and sampler are identical. [All four prompt comparisons](https://huggingface.co/ntc-ai/anima-concept-sliders/tree/main/distilled/samples).
+
+### Moonlit — particles and distilled
+
+![Moonlit particle versus distilled LoRA at strengths 1, 3 and 5](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/moonlit-distilled.jpg)
 
 ### Candlelit — particles and distilled
 
 ![Candlelit particle versus distilled LoRA at strengths 1, 3 and 5](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/candlelit-distilled.jpg)
 
-### Moonlit — particles and distilled
-
-![Moonlit particle versus distilled LoRA at strengths 1, 3 and 5](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/moonlit-distilled.jpg)
+</details>
 
 The featured comparisons show a milder lighting change from the distills at the same strength. They are experimental approximations, not interchangeable replacements.
 
@@ -153,8 +197,8 @@ The distills were fitted on training activations. Development projection-relativ
 
 | Slider | Relative MSE |
 |---|---:|
-| Candlelit | 0.020457 |
 | Moonlit | 0.007559 |
+| Candlelit | 0.020457 |
 
 [Distillation formulation and reproduction](DISTILLATION.md).
 
