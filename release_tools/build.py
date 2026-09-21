@@ -72,6 +72,8 @@ def main():
 
 [Public source and training reproduction]({GITHUB}) · [Every sample and checkpoint](catalog.json) · [File hashes](release-manifest.json) · [Related YuE2 release](https://huggingface.co/ntc-ai/yue2-concept-sliders).
 
+The reusable algorithms come from the [shared core in sliders-conceptmod](https://github.com/mikkel/sliders-conceptmod/tree/main/packages/concept-slider-core). This Anima repository pins an exact core revision and owns the model integration, recipe and release evidence.
+
 ## Distilled comparisons
 
 Top row: original particles at strengths **1, 3, 5**. Bottom row: the distilled ordinary LoRA at the same strengths. Prompt, seed, dimensions and sampler are identical. [All four prompt comparisons]({WEB}/tree/main/distilled/samples).
@@ -118,14 +120,14 @@ tags:
         github=github.replace(']('+local+')',']('+WEB+'/blob/main/'+local+')')
     github=github.replace('## Get the adapters','<a id="comfyui"></a>\n\n## Get the adapters')
     (ROOT/'README.md').write_text(github)
-    for name in ('FORMULATION.md','DISTILLATION.md','REPRODUCE.md','COMFYUI.md','ANIMA-LICENSE.md','NOTICE','LICENSE'):
+    for name in ('FORMULATION.md','DISTILLATION.md','REPRODUCE.md','COMFYUI.md','ANIMA-LICENSE.md','NOTICE','LICENSE','core.lock.json','requirements.txt'):
         copy(ROOT/name,out/name)
     for path in (ROOT/'validation').glob('*.json'):copy(path,out/'validation'/path.name)
     copy(ROOT/'data/release-samples.json',out/'data/release-samples.json')
     for name in ('train','dev'):copy(ROOT/f'data/{name}.json',out/f'data/{name}.json')
     (out/'pending-samples.json').unlink(missing_ok=True)
     # Package only the files required to import the ComfyUI plugin.
-    plugin=['__init__.py','comfy_particle.py','particle_io.py','requirements.txt','COMFYUI.md','LICENSE','ANIMA-LICENSE.md','NOTICE',
+    plugin=['__init__.py','comfy_particle.py','particle_io.py','requirements.txt','core.lock.json','COMFYUI.md','LICENSE','ANIMA-LICENSE.md','NOTICE',
             'lumen_studio/__init__.py','lumen_studio/particles.py','lumen_studio/contracts.py',
             'lumen_studio/vendor/__init__.py','lumen_studio/vendor/reference.py','lumen_studio/vendor/LICENSE','lumen_studio/vendor/provenance.json']
     zpath=out/'comfyui/anima-concept-sliders.zip';zpath.parent.mkdir(exist_ok=True)

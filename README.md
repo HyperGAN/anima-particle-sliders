@@ -133,6 +133,8 @@ Strength **1** is the trained endpoint. Higher strengths extrapolate and can cha
 
 [Public source and training reproduction](https://github.com/mikkel/anima-concept-sliders) · [Every sample and checkpoint](https://huggingface.co/ntc-ai/anima-concept-sliders/blob/main/catalog.json) · [File hashes](https://huggingface.co/ntc-ai/anima-concept-sliders/blob/main/release-manifest.json) · [Related YuE2 release](https://huggingface.co/ntc-ai/yue2-concept-sliders).
 
+The reusable algorithms come from the [shared core in sliders-conceptmod](https://github.com/mikkel/sliders-conceptmod/tree/main/packages/concept-slider-core). This Anima repository pins an exact core revision and owns the model integration, recipe and release evidence.
+
 ## Distilled comparisons
 
 Top row: original particles at strengths **1, 3, 5**. Bottom row: the distilled ordinary LoRA at the same strengths. Prompt, seed, dimensions and sampler are identical. [All four prompt comparisons](https://huggingface.co/ntc-ai/anima-concept-sliders/tree/main/distilled/samples).
@@ -241,6 +243,10 @@ Noise starts at the training edit RMS divided by 0.28. It decays geometrically t
 The original adult character catalog separates 12 training characters, four development characters, and eight final-test characters. Six lighting definitions train each slider; two extra paraphrases are held out. The public gallery uses development cases, including a bare prompt, and is not a final-test benchmark.
 
 These are final-budget experimental checkpoints. They were not selected as the best checkpoint by perceptual quality. Strengths above one extrapolate beyond training and can change clothing, pose, setting, or composition. The measured 1,600-update runs did not establish convergence. Training traces, normalization provenance, checkpoint hashes, and development measurements accompany the weights.
+
+### Shared algorithm implementation
+
+The reusable routing, global-mix critic, paired losses, particle regularizer, noise function and ordinary-LoRA solver live in [sliders-conceptmod](https://github.com/mikkel/sliders-conceptmod/tree/beaffeb3640c4554a7315998c04a5909f384b972/packages/concept-slider-core). This release pins that revision in `requirements.txt` and [core.lock.json](https://huggingface.co/ntc-ai/anima-concept-sliders/blob/main/core.lock.json). Anima owns the model integration, target collection, training recipe and sample evidence. The extracted reference implementation is byte-identical to the original; runtime identity hashes the implementation rather than its compatibility import. [Architecture and research](https://github.com/mikkel/sliders-conceptmod/blob/main/docs/shared-core.md).
 
 ## License
 

@@ -29,6 +29,8 @@ def main():
         headings=page.locator('h2').all_text_contents()
         def pos(part):return next(i for i,v in enumerate(headings) if part in v)
         assert pos('Samples')<pos('Get the adapters')<pos('How the sliders learn')
+        assert page.locator('a[href="https://github.com/mikkel/sliders-conceptmod/tree/main/packages/concept-slider-core"]').count() > 0
+        assert page.locator('a[href="https://github.com/mikkel/anima-concept-sliders#comfyui"]').count() > 0
         first=images.first;first.scroll_into_view_if_needed()
         page.screenshot(path=str(args.output/'desktop.png'))
         records={}
@@ -40,7 +42,8 @@ def main():
             records[name]=sizes
             page.screenshot(path=str(args.output/(name+'.png')))
         result=dict(passed=True,url=url,sample_grids=images.count(),loaded_images=True,equations=equations,
-                    samples_before_downloads_and_formulation=True,layout=records,math_errors=0)
+                    samples_before_downloads_and_formulation=True,shared_core_link=True,comfyui_plugin_link=True,
+                    layout=records,math_errors=0)
         (args.output/'browser.json').write_text(json.dumps(result,indent=2)+'\n')
         print(json.dumps(result),flush=True)
         browser.close()

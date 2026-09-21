@@ -8,6 +8,19 @@ from .contracts import digest, file_hash
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def runtime_source(name):
+    """Hash the actual algorithm after extracting its byte-identical core.
+
+    The historical identity key remains vendor/reference.py. Its local file is
+    now a compatibility import; the installed implementation supplies the bytes.
+    A changed core implementation therefore changes the checkpoint identity.
+    """
+    if name == "vendor/reference.py":
+        from concept_slider_core import reference
+        return Path(reference.__file__)
+    return ROOT / "lumen_studio" / name
+
+
 def cache_runtime_compatibility(model_dir, recorded, current, cache_fingerprint):
     """Return evidence hash for explicitly verified reuse of older frozen targets.
 
@@ -58,7 +71,7 @@ def model_identity(model_dir):
     lock["files"]["modular_model_index.json"] = digest(portable(index))
     return dict(model=lock["model"], sha256=digest(lock), identity_schema="portable-model-v1",
                 environment_sha256=file_hash(ROOT / "configs/anima/requirements.lock"),
-                runtime_sha256=digest({name: file_hash(ROOT / "lumen_studio" / name)
+                runtime_sha256=digest({name: file_hash(runtime_source(name))
                     for name in ("runtime.py", "backends/anima.py", "contracts.py", "particles.py", "vendor/reference.py")}))
 
 

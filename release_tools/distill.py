@@ -13,6 +13,7 @@ from lumen_studio.backends.anima import TurboRuntime
 from lumen_studio.particles import ParticleAdapter
 from lumen_studio.cache import TargetCache
 from lumen_studio.contracts import file_hash
+from concept_slider_core import fit_routed_down
 
 
 def comfy_name(name):
@@ -99,10 +100,7 @@ def fit(adapter, train, dev):
     for i,(branch,(xc,yc),(xv,yv)) in enumerate(zip(adapter.branches,train,dev)):
         device=branch.up.weight.device
         x,y=xc.to(device),yc.to(device)
-        gram=x@x.T
-        ridge=1e-2*gram.diag().mean().clamp_min(1e-8)
-        gram.diagonal().add_(ridge)
-        down=(torch.linalg.solve(gram,y).T@x)
+        down,ridge=fit_routed_down(x,y,ridge_fraction=1e-2)
         up=branch.up.weight
         pred=xv.to(device)@down.T
         truth=yv.to(device)

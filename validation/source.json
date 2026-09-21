@@ -29,5 +29,12 @@
       3,
       5
     ]
+  },
+  "shared_core_extraction": {
+    "evidence": "shared-core.json",
+    "passed": true,
+    "tests": 76,
+    "complete_model_identity_unchanged": true,
+    "training_engine_unchanged": true
   }
 }

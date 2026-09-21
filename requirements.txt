@@ -1,1 +1,2 @@
-safetensors>=0.4.0
+safetensors>=0.4
+concept-slider-core @ git+https://github.com/mikkel/sliders-conceptmod.git@beaffeb3640c4554a7315998c04a5909f384b972#subdirectory=packages/concept-slider-core

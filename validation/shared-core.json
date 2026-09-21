@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "core_repository": "https://github.com/mikkel/sliders-conceptmod",
+  "core_commit": "beaffeb3640c4554a7315998c04a5909f384b972",
+  "core_package_version": "0.1.0",
+  "anima_tests": 76,
+  "core_tests": 10,
+  "installed_from_published_git_commit": true,
+  "shared_algorithm_file_hashes_match": true,
+  "reference_implementation_byte_identical": true,
+  "training_engine_sha256": "53f20872a7fa68cc1db0ab133bb77af5f80f286ad351bce5c04d2d2520ac8f0f",
+  "complete_model_identity_unchanged": true,
+  "distillation_operation_order_and_outputs_exact": true,
+  "comfyui_cpu_integration": true,
+  "comfyui_particle_max_abs": 0.0,
+  "migration_scope": "Anima only; YuE2 and Music 3 unchanged",
+  "gpu_rerender": false
+}

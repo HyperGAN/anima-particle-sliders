@@ -1,6 +1,13 @@
 # Reproduce the Anima release
 
-The source includes the unchanged training engine and native runtime, original prompt catalogs, complete train/development manifests, conversion checks, ordinary-LoRA fitting, and release assembly scripts. Weights, full-resolution PNGs, sample sidecars, training traces, normalization tensors and measurement reports are on [Hugging Face](https://huggingface.co/ntc-ai/anima-concept-sliders).
+The source includes the original training engine and native runtime integration, original prompt catalogs, complete train/development manifests, conversion checks, ordinary-LoRA fitting, and release assembly scripts. Weights, full-resolution PNGs, sample sidecars, training traces, normalization tensors and measurement reports are on [Hugging Face](https://huggingface.co/ntc-ai/anima-concept-sliders).
+
+The routed-particle implementation and fitting algorithm come from the pinned
+[shared core in sliders-conceptmod](https://github.com/mikkel/sliders-conceptmod/tree/main/packages/concept-slider-core).
+`core.lock.json` records the exact revision and implementation hashes. The runtime
+hashes the actual shared reference implementation, which is byte-identical to the
+original release, so existing checkpoint identities remain valid. The original
+CUDA environment lock stays intact; install the core separately as shown below.
 
 ## Environment and model
 
@@ -12,6 +19,7 @@ cd anima-concept-sliders
 uv venv .venv-anima --python 3.12.13
 uv pip sync --python .venv-anima/bin/python configs/anima/requirements.lock \
   --extra-index-url https://download.pytorch.org/whl/cu126
+uv pip install --python .venv-anima/bin/python --no-deps -r requirements.txt
 .venv-anima/bin/python release_tools/prepare_model.py --output artifacts/model
 .venv-anima/bin/hf download ntc-ai/anima-concept-sliders --local-dir artifacts/release
 ```
@@ -66,7 +74,7 @@ CUDA_VISIBLE_DEVICES=0 .venv-anima/bin/python scripts/anima_cuda_host.py \
   --gpu 0 --sm-count 82 --kernel-policy --script release_tools/distill.py -- \
   --root artifacts/reproduction --output artifacts/distilled \
   --samples data/release-samples.json
-CUDA_VISIBLE_DEVICES='' .venv-anima/bin/pytest tests/lumen_studio -q
+CUDA_VISIBLE_DEVICES='' .venv-anima/bin/pytest tests/lumen_studio tests/test_shared_core.py tests/test_release_lora.py -q
 node --check lumen_studio/static/studio.js
 ```
 
@@ -89,4 +97,4 @@ With a downloaded release in `artifacts/release`, regenerate the card and previe
 .venv-anima/bin/python release_tools/publish.py --folder artifacts/release
 ```
 
-The publisher defaults to validation only. Its explicit `--publish` option creates the intended model repository, checks that it is empty, uploads a single release revision, and verifies all remote Git/LFS hashes plus three download readbacks. It refuses to overwrite an existing release without reconciliation. Run `release_tools/verify_live.py --output artifacts/live-check` with Playwright and Chrome to check the deployed card's images, equations and mobile layout.
+The publisher defaults to validation only and requires committed source. Its explicit `--publish` option creates the intended model repository, uploads a single release revision, and verifies all remote Git/LFS hashes plus three download readbacks. For an existing release, first inspect its current revision and pass `--expected-parent REVISION`; every existing weight, sample, preview and evidence artifact must remain byte-identical. Source, docs and the plugin package can then be updated atomically. Run `release_tools/verify_live.py --output artifacts/live-check` with Playwright and Chrome to check the deployed card's images, equations and mobile layout.
