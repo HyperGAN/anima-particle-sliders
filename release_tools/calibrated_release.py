@@ -122,6 +122,8 @@ def stage(folder, studio):
             entry['featured_refresh'] = refresh
         entry['featured_comparison'] = entry['comparisons'][0]
     catalog['calibration'] = 'unit-alpha-v2' if balance else 'unit-alpha-v1'
+    from release_tools.refresh_examples import apply_refreshes
+    apply_refreshes(catalog)
     write_json(folder/'catalog.json', catalog)
     return catalog
 
@@ -188,7 +190,7 @@ def build_card(folder):
         '**'+', '.join(e['label'] for e in entries)+' for Anima Turbo v1.1.** Original Particle adapters and ordinary LoRA Distills, with strength stored in each file’s alpha.', '',
         '## Samples', '',
         '**Start at strength 1.0.** Every current comparison is **Particle 1 → Distill 1 → Off 0**, with the same prompt, seed, 768 × 768 resolution, 10 Euler steps and CFG 1. These are newly rendered examples from the calibrated files linked below.', '',
-        'Bad Intent changes expression and pose. Final Form adds supernatural transformations; Afterimage adds repeated figures. Moonlit, Candlelit and Dusk change atmosphere. Distills are linear approximations of the original particles; their images need not match exactly.', '']
+        'Bad Intent adds menacing expressions and close framing. Final Form adds supernatural transformations; Afterimage adds motion echoes and light trails. Moonlit, Candlelit and Dusk change atmosphere. Distills are linear approximations of the original particles; their images need not match exactly.', '']
     def show(entry, comp, lead=False):
         for sample in comp['samples']:
             assert (folder/sample['image']).is_file()
@@ -275,14 +277,14 @@ def verify(folder):
                 report['samples'].append(dict(path=sample['image'],metadata=sample['metadata'],sha256=sha(path),
                     adapter_sha256=meta['adapter_sha256'],strength=meta['strength'],alpha=meta['alpha']))
             assert records[0]['model_identity']==records[1]['model_identity']==records[2]['model_identity']
-            previous = (folder/entry['off_references'][comp['case']] if 'off_references' in entry else
+            previous = (folder/entry['off_references'][comp['case']] if comp['case'] in entry.get('off_references',{}) else
                         folder/'samples/featured-portrait/off.png' if comp['case']=='portrait' else
                         folder/f"samples/{entry['id']}/{comp['case']}/str0.png")
             if previous.exists():
                 assert np.array_equal(np.array(Image.open(previous)),np.array(Image.open(folder/comp['samples'][2]['image'])))
                 report['zero_replays'].append(dict(slider=entry['id'],case=comp['case'],pixel_exact=True))
             else:
-                refresh = entry['featured_refresh']
+                refresh = entry.get('example_refreshes',{}).get(comp['case'], entry.get('featured_refresh'))
                 assert request==refresh['request'] and records[2]['adapter'] is None
                 report['new_baselines'].append(dict(slider=entry['id'],case=comp['case'],
                     source_manifest=refresh['source_manifest'],source_row_id=refresh['source_row_id'],

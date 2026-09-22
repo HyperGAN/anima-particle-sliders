@@ -165,10 +165,18 @@ selected particle hashes and unchanged learned tensors, and creates new named
 LoRAs by changing alpha. It also applies the checked-in
 `data/bad-intent-balance.json`: derive the current Bad Intent particle at alpha
 12 from its original step-1600 EMA, retain LoRA alpha 24, and use separate
-`balanced-alpha` sample paths. `data/featured-refresh.json` then replaces Bad
-Intent's featured scene with development row `uncanny-dev-06`, seed 29027, under
-new `featured-v2` paths for all three formats. Existing weights and samples remain archived at their
-original paths. No training or regression is repeated. The original release
+`balanced-alpha` sample paths. The earlier `data/featured-refresh.json` records
+the archived balcony scene under `featured-v2` paths. The subsequent
+`data/example-refreshes.json` selects the current Bad Intent portrait and
+Afterimage action scenes under `featured-v3` paths. Staging applies those
+replacements; rendering uses each recorded prompt and seed with the exact
+public adapters at Particle 1 / Distill 1 / Off 0. Bad Intent uses a neutral
+development-manifest prompt. Afterimage uses authored action scenes with the
+same development characters, so the records explicitly distinguish those
+prompts from the archived neutral training-evaluation prompts. No final-test
+characters are used. Previous comparisons remain in the catalog's
+`example_archive`, and all earlier files remain at their original paths.
+No training or regression is repeated. The original release
 assembly instructions below describe the preceding, uncalibrated publication.
 
 For the additive Bad Intent release, start with a downloaded release and the

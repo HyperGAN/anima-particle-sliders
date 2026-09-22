@@ -1,0 +1,61 @@
+{
+  "passed": true,
+  "nominal_strength": 1,
+  "final_test_used": false,
+  "samples": [
+    {
+      "image": "samples/featured-v3/bad-intent/fixed-grin/particles.png",
+      "sha256": "ac4e38a3bef2184b9652faf115b7ae0a1dd9617faa52530b4e1a7fa788f2102f",
+      "candidate_case": "dev05-s29027",
+      "exact_candidate_file": true
+    },
+    {
+      "image": "samples/featured-v3/bad-intent/fixed-grin/lora.png",
+      "sha256": "c6a6a131cc064c2b7e8c73d11332c20b1a545b1812417032d4bf593506810ba8",
+      "candidate_case": "dev05-s29027",
+      "exact_candidate_file": true
+    },
+    {
+      "image": "samples/featured-v3/bad-intent/fixed-grin/off.png",
+      "sha256": "401e9c06abaeabf9926031bee772a789583ae80ae3a9881f55a4b64fe171b329",
+      "candidate_case": "dev05-s29027",
+      "exact_candidate_file": true
+    },
+    {
+      "image": "samples/featured-v3/afterimage/neon-turn/particles.png",
+      "sha256": "0335e7805e897a807ba6cf5dcaedbe2a09252b21ea5648e18a5ec01302837c49",
+      "candidate_case": "turn-s29027",
+      "exact_candidate_file": true
+    },
+    {
+      "image": "samples/featured-v3/afterimage/neon-turn/lora.png",
+      "sha256": "78061b408d910feddea980436690af40b23ad72bae5e58cc1ffc118dbc19f0fd",
+      "candidate_case": "turn-s29027",
+      "exact_candidate_file": true
+    },
+    {
+      "image": "samples/featured-v3/afterimage/neon-turn/off.png",
+      "sha256": "0da8871ee468e6502178d0c814c9adf8984159dab2589a8490b565b757a72850",
+      "candidate_case": "turn-s29027",
+      "exact_candidate_file": true
+    },
+    {
+      "image": "samples/featured-v3/afterimage/rooftop-kick/particles.png",
+      "sha256": "e4530e7340aec11f9438431480ed2573a82bcdf568cb9e480d9e7ea4dc4d58c4",
+      "candidate_case": "kick-s29027",
+      "exact_candidate_file": true
+    },
+    {
+      "image": "samples/featured-v3/afterimage/rooftop-kick/lora.png",
+      "sha256": "1af1a834c8246393077a3696ff0eeac5e96ac281d4f2edc1cddef3cce3b9e657",
+      "candidate_case": "kick-s29027",
+      "exact_candidate_file": true
+    },
+    {
+      "image": "samples/featured-v3/afterimage/rooftop-kick/off.png",
+      "sha256": "b9edf6acc89f2684cec1d35a65569f50bbc33041fb23ff6d8af012ac27da0771",
+      "candidate_case": "kick-s29027",
+      "exact_candidate_file": true
+    }
+  ]
+}

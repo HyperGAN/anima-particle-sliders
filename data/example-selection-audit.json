@@ -1,0 +1,357 @@
+{
+  "final_test_used": false,
+  "nominal_strength": 1,
+  "candidates": [
+    {
+      "slider": "bad-intent",
+      "source_row_id": "uncanny-dev-02",
+      "source_manifest": "data/bad-intent-dev.json",
+      "character": "original-15",
+      "prompt_origin": "manifest-neutral",
+      "request": {
+        "case": "dev02-s29001",
+        "prompt": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer, wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric, facing viewer, head upright, portrait, head and shoulders, eye-level camera, in a quiet courtyard, anime illustration",
+        "seed": 29001,
+        "width": 768,
+        "height": 768,
+        "steps": 10
+      }
+    },
+    {
+      "slider": "bad-intent",
+      "source_row_id": "uncanny-dev-02",
+      "source_manifest": "data/bad-intent-dev.json",
+      "character": "original-15",
+      "prompt_origin": "manifest-neutral",
+      "request": {
+        "case": "dev02-s29027",
+        "prompt": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer, wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric, facing viewer, head upright, portrait, head and shoulders, eye-level camera, in a quiet courtyard, anime illustration",
+        "seed": 29027,
+        "width": 768,
+        "height": 768,
+        "steps": 10
+      }
+    },
+    {
+      "slider": "bad-intent",
+      "source_row_id": "uncanny-dev-05",
+      "source_manifest": "data/bad-intent-dev.json",
+      "character": "original-14",
+      "prompt_origin": "manifest-neutral",
+      "request": {
+        "case": "dev05-s29001",
+        "prompt": "masterpiece, best quality, safe, solo, 1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, facing viewer, head upright, portrait, head and shoulders, eye-level camera, in a wood-paneled room, anime illustration",
+        "seed": 29001,
+        "width": 768,
+        "height": 768,
+        "steps": 10
+      }
+    },
+    {
+      "slider": "bad-intent",
+      "source_row_id": "uncanny-dev-05",
+      "source_manifest": "data/bad-intent-dev.json",
+      "character": "original-14",
+      "prompt_origin": "manifest-neutral",
+      "request": {
+        "case": "dev05-s29027",
+        "prompt": "masterpiece, best quality, safe, solo, 1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, facing viewer, head upright, portrait, head and shoulders, eye-level camera, in a wood-paneled room, anime illustration",
+        "seed": 29027,
+        "width": 768,
+        "height": 768,
+        "steps": 10
+      }
+    },
+    {
+      "slider": "bad-intent",
+      "source_row_id": "uncanny-dev-08",
+      "source_manifest": "data/bad-intent-dev.json",
+      "character": "original-13",
+      "prompt_origin": "manifest-neutral",
+      "request": {
+        "case": "dev08-s29001",
+        "prompt": "1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, facing viewer, head upright, portrait, head and shoulders, eye-level camera, in an unadorned stone corridor with bare stone walls",
+        "seed": 29001,
+        "width": 768,
+        "height": 768,
+        "steps": 10
+      }
+    },
+    {
+      "slider": "bad-intent",
+      "source_row_id": "uncanny-dev-08",
+      "source_manifest": "data/bad-intent-dev.json",
+      "character": "original-13",
+      "prompt_origin": "manifest-neutral",
+      "request": {
+        "case": "dev08-s29027",
+        "prompt": "1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, facing viewer, head upright, portrait, head and shoulders, eye-level camera, in an unadorned stone corridor with bare stone walls",
+        "seed": 29027,
+        "width": 768,
+        "height": 768,
+        "steps": 10
+      }
+    },
+    {
+      "slider": "bad-intent",
+      "source_row_id": "uncanny-dev-11",
+      "source_manifest": "data/bad-intent-dev.json",
+      "character": "original-16",
+      "prompt_origin": "manifest-neutral",
+      "request": {
+        "case": "dev11-s29001",
+        "prompt": "1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, neutral expression, closed mouth, looking at viewer, wearing a muted violet tunic and gray trousers, long sleeves, plain fabric, sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap, full body, entire figure in frame, eye-level camera, in a quiet courtyard",
+        "seed": 29001,
+        "width": 768,
+        "height": 768,
+        "steps": 10
+      }
+    },
+    {
+      "slider": "bad-intent",
+      "source_row_id": "uncanny-dev-11",
+      "source_manifest": "data/bad-intent-dev.json",
+      "character": "original-16",
+      "prompt_origin": "manifest-neutral",
+      "request": {
+        "case": "dev11-s29027",
+        "prompt": "1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, neutral expression, closed mouth, looking at viewer, wearing a muted violet tunic and gray trousers, long sleeves, plain fabric, sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap, full body, entire figure in frame, eye-level camera, in a quiet courtyard",
+        "seed": 29027,
+        "width": 768,
+        "height": 768,
+        "steps": 10
+      }
+    },
+    {
+      "slider": "afterimage",
+      "source_row_id": "afterimage-dev-00",
+      "source_manifest": "data/afterimage-dev.json",
+      "character": "original-13",
+      "prompt_origin": "authored-action-scene",
+      "request": {
+        "case": "runner-s29001",
+        "prompt": "masterpiece, best quality, anime illustration, solo, one adult woman age 35, tan skin, long straight slate-blue hair, hazel eyes, wearing a tobacco-brown coat over black running clothes, sprinting fast across an empty neon-lit street at night, dynamic side view, long stride, bent elbows, coat and hair streaming behind her, full body, low tracking camera, wide cinematic composition, cyan and magenta lighting, wet pavement",
+        "seed": 29001,
+        "width": 768,
+        "height": 768,
+        "steps": 10
+      }
+    },
+    {
+      "slider": "afterimage",
+      "source_row_id": "afterimage-dev-00",
+      "source_manifest": "data/afterimage-dev.json",
+      "character": "original-13",
+      "prompt_origin": "authored-action-scene",
+      "request": {
+        "case": "runner-s29027",
+        "prompt": "masterpiece, best quality, anime illustration, solo, one adult woman age 35, tan skin, long straight slate-blue hair, hazel eyes, wearing a tobacco-brown coat over black running clothes, sprinting fast across an empty neon-lit street at night, dynamic side view, long stride, bent elbows, coat and hair streaming behind her, full body, low tracking camera, wide cinematic composition, cyan and magenta lighting, wet pavement",
+        "seed": 29027,
+        "width": 768,
+        "height": 768,
+        "steps": 10
+      }
+    },
+    {
+      "slider": "afterimage",
+      "source_row_id": "afterimage-dev-00",
+      "source_manifest": "data/afterimage-dev.json",
+      "character": "original-13",
+      "prompt_origin": "authored-action-scene",
+      "request": {
+        "case": "spin-s29001",
+        "prompt": "masterpiece, best quality, anime illustration, solo, one adult woman age 35, tan skin, long straight slate-blue hair, hazel eyes, wearing a flowing black dress and tobacco-brown jacket, spinning with one arm sweeping outward, graceful dance turn, dynamic twisting pose, full body, in a spacious dark dance studio, blue and violet stage lighting, wide cinematic composition",
+        "seed": 29001,
+        "width": 768,
+        "height": 768,
+        "steps": 10
+      }
+    },
+    {
+      "slider": "afterimage",
+      "source_row_id": "afterimage-dev-00",
+      "source_manifest": "data/afterimage-dev.json",
+      "character": "original-13",
+      "prompt_origin": "authored-action-scene",
+      "request": {
+        "case": "spin-s29027",
+        "prompt": "masterpiece, best quality, anime illustration, solo, one adult woman age 35, tan skin, long straight slate-blue hair, hazel eyes, wearing a flowing black dress and tobacco-brown jacket, spinning with one arm sweeping outward, graceful dance turn, dynamic twisting pose, full body, in a spacious dark dance studio, blue and violet stage lighting, wide cinematic composition",
+        "seed": 29027,
+        "width": 768,
+        "height": 768,
+        "steps": 10
+      }
+    },
+    {
+      "slider": "afterimage",
+      "source_row_id": "afterimage-dev-09",
+      "source_manifest": "data/afterimage-dev.json",
+      "character": "original-14",
+      "prompt_origin": "authored-action-scene",
+      "request": {
+        "case": "kick-s29001",
+        "prompt": "masterpiece, best quality, anime illustration, solo, one adult man age 35, light skin, short curly red hair, blue eyes, wearing a cream sweater and black trousers, airborne spinning kick, extended leg and bent knee, arms held for balance, dynamic action pose, full body, on an empty city rooftop at night, teal and violet rim lighting, distant city lights, wide cinematic composition",
+        "seed": 29001,
+        "width": 768,
+        "height": 768,
+        "steps": 10
+      }
+    },
+    {
+      "slider": "afterimage",
+      "source_row_id": "afterimage-dev-09",
+      "source_manifest": "data/afterimage-dev.json",
+      "character": "original-14",
+      "prompt_origin": "authored-action-scene",
+      "request": {
+        "case": "kick-s29027",
+        "prompt": "masterpiece, best quality, anime illustration, solo, one adult man age 35, light skin, short curly red hair, blue eyes, wearing a cream sweater and black trousers, airborne spinning kick, extended leg and bent knee, arms held for balance, dynamic action pose, full body, on an empty city rooftop at night, teal and violet rim lighting, distant city lights, wide cinematic composition",
+        "seed": 29027,
+        "width": 768,
+        "height": 768,
+        "steps": 10
+      }
+    },
+    {
+      "slider": "afterimage",
+      "source_row_id": "afterimage-dev-11",
+      "source_manifest": "data/afterimage-dev.json",
+      "character": "original-16",
+      "prompt_origin": "authored-action-scene",
+      "request": {
+        "case": "skater-s29001",
+        "prompt": "masterpiece, best quality, anime illustration, solo, one adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, wearing a muted violet jacket and gray trousers, performing a high skateboard ollie, crouched in midair over his board, arms out for balance, dynamic full body, low angle, in an empty concrete skatepark at blue hour, orange street lamps, wide cinematic composition",
+        "seed": 29001,
+        "width": 768,
+        "height": 768,
+        "steps": 10
+      }
+    },
+    {
+      "slider": "afterimage",
+      "source_row_id": "afterimage-dev-11",
+      "source_manifest": "data/afterimage-dev.json",
+      "character": "original-16",
+      "prompt_origin": "authored-action-scene",
+      "request": {
+        "case": "skater-s29027",
+        "prompt": "masterpiece, best quality, anime illustration, solo, one adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, wearing a muted violet jacket and gray trousers, performing a high skateboard ollie, crouched in midair over his board, arms out for balance, dynamic full body, low angle, in an empty concrete skatepark at blue hour, orange street lamps, wide cinematic composition",
+        "seed": 29027,
+        "width": 768,
+        "height": 768,
+        "steps": 10
+      }
+    },
+    {
+      "slider": "afterimage",
+      "source_row_id": "afterimage-dev-00",
+      "source_manifest": "data/afterimage-dev.json",
+      "character": "original-13",
+      "prompt_origin": "authored-action-scene",
+      "request": {
+        "case": "sword-s29001",
+        "prompt": "masterpiece, best quality, anime illustration, solo, one adult woman age 35, tan skin, long straight slate-blue hair, hazel eyes, wearing a tobacco-brown coat and fitted black trousers, performing a powerful sweeping katana slash, a single katana gripped in both hands, twisting athletic stance, hair and coat in motion, full body, empty bamboo grove at night, distant moonlight and faint violet illumination, dynamic wide composition",
+        "seed": 29001,
+        "width": 768,
+        "height": 768,
+        "steps": 10
+      }
+    },
+    {
+      "slider": "afterimage",
+      "source_row_id": "afterimage-dev-00",
+      "source_manifest": "data/afterimage-dev.json",
+      "character": "original-13",
+      "prompt_origin": "authored-action-scene",
+      "request": {
+        "case": "sword-s29027",
+        "prompt": "masterpiece, best quality, anime illustration, solo, one adult woman age 35, tan skin, long straight slate-blue hair, hazel eyes, wearing a tobacco-brown coat and fitted black trousers, performing a powerful sweeping katana slash, a single katana gripped in both hands, twisting athletic stance, hair and coat in motion, full body, empty bamboo grove at night, distant moonlight and faint violet illumination, dynamic wide composition",
+        "seed": 29027,
+        "width": 768,
+        "height": 768,
+        "steps": 10
+      }
+    },
+    {
+      "slider": "afterimage",
+      "source_row_id": "afterimage-dev-09",
+      "source_manifest": "data/afterimage-dev.json",
+      "character": "original-14",
+      "prompt_origin": "authored-action-scene",
+      "request": {
+        "case": "drummer-s29001",
+        "prompt": "masterpiece, best quality, anime illustration, solo, one adult man age 35, light skin, short curly red hair, blue eyes, wearing a cream sweater with rolled-up sleeves, enthusiastically playing an acoustic drum kit, two drumsticks raised in a rapid drum fill, hands in motion, waist-up view, one seated drummer on an empty dark concert stage, cyan and magenta stage lights, dynamic composition",
+        "seed": 29001,
+        "width": 768,
+        "height": 768,
+        "steps": 10
+      }
+    },
+    {
+      "slider": "afterimage",
+      "source_row_id": "afterimage-dev-09",
+      "source_manifest": "data/afterimage-dev.json",
+      "character": "original-14",
+      "prompt_origin": "authored-action-scene",
+      "request": {
+        "case": "drummer-s29027",
+        "prompt": "masterpiece, best quality, anime illustration, solo, one adult man age 35, light skin, short curly red hair, blue eyes, wearing a cream sweater with rolled-up sleeves, enthusiastically playing an acoustic drum kit, two drumsticks raised in a rapid drum fill, hands in motion, waist-up view, one seated drummer on an empty dark concert stage, cyan and magenta stage lights, dynamic composition",
+        "seed": 29027,
+        "width": 768,
+        "height": 768,
+        "steps": 10
+      }
+    },
+    {
+      "slider": "afterimage",
+      "source_row_id": "afterimage-dev-00",
+      "source_manifest": "data/afterimage-dev.json",
+      "character": "original-13",
+      "prompt_origin": "authored-action-scene",
+      "request": {
+        "case": "turn-s29001",
+        "prompt": "masterpiece, best quality, anime illustration, solo, one adult woman age 35, tan skin, long straight slate-blue hair, hazel eyes, wearing a fitted black turtleneck and tobacco-brown coat, abruptly turning her head to look over her shoulder, hair whipping around her face, one hand reaching toward the camera, dynamic close-up, on an empty street at night, blue and violet neon rim lighting, black background, shallow depth of field",
+        "seed": 29001,
+        "width": 768,
+        "height": 768,
+        "steps": 10
+      }
+    },
+    {
+      "slider": "afterimage",
+      "source_row_id": "afterimage-dev-00",
+      "source_manifest": "data/afterimage-dev.json",
+      "character": "original-13",
+      "prompt_origin": "authored-action-scene",
+      "request": {
+        "case": "turn-s29027",
+        "prompt": "masterpiece, best quality, anime illustration, solo, one adult woman age 35, tan skin, long straight slate-blue hair, hazel eyes, wearing a fitted black turtleneck and tobacco-brown coat, abruptly turning her head to look over her shoulder, hair whipping around her face, one hand reaching toward the camera, dynamic close-up, on an empty street at night, blue and violet neon rim lighting, black background, shallow depth of field",
+        "seed": 29027,
+        "width": 768,
+        "height": 768,
+        "steps": 10
+      }
+    }
+  ],
+  "selected": [
+    {
+      "slider": "bad-intent",
+      "candidate_case": "dev05-s29027",
+      "reason": "Both formats replace the neutral portrait with a close looming face, wide fixed eyes, deep facial shadows and an exaggerated grin. Selected for a clearly creepy expression."
+    },
+    {
+      "slider": "afterimage",
+      "candidate_case": "turn-s29027",
+      "reason": "Both formats keep one clear foreground subject and add bright cyan motion trails and rim echoes, without separate duplicate people. The matched Off image has no luminous trails."
+    },
+    {
+      "slider": "afterimage",
+      "candidate_case": "kick-s29027",
+      "reason": "A single airborne subject with sweeping cyan and magenta motion arcs in both formats; the Off image shows the ordinary rooftop action pose."
+    }
+  ],
+  "review": {
+    "bad-intent": "Compared eight neutral development portraits; selected the wide-eyed looming grin in both particle and LoRA.",
+    "afterimage": "Compared fourteen development action requests. Rejected candidates with separate duplicate people, weak visible change, or less coherent motion. Selected neon-turn and rooftop-kick as clear single-subject effects in both formats."
+  }
+}

@@ -6,19 +6,19 @@
 
 **Start at strength 1.0.** Every current comparison is **Particle 1 → Distill 1 → Off 0**, with the same prompt, seed, 768 × 768 resolution, 10 Euler steps and CFG 1. These are newly rendered examples from the calibrated files linked below.
 
-Bad Intent changes expression and pose. Final Form adds supernatural transformations; Afterimage adds repeated figures. Moonlit, Candlelit and Dusk change atmosphere. Distills are linear approximations of the original particles; their images need not match exactly.
+Bad Intent adds menacing expressions and close framing. Final Form adds supernatural transformations; Afterimage adds motion echoes and light trails. Moonlit, Candlelit and Dusk change atmosphere. Distills are linear approximations of the original particles; their images need not match exactly.
 
 ### Bad Intent
 
 **Particle · strength 1** → **Distill · strength 1** → **Off · strength 0**
 
-![Bad Intent: Particle first, Distill second, Off third](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/featured-v2-bad-intent-balcony.jpg)
+![Bad Intent: Particle first, Distill second, Off third](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/featured-v3-bad-intent-fixed-grin.jpg)
 
-Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/featured-v2/bad-intent/balcony/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/featured-v2/bad-intent/balcony/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/featured-v2/bad-intent/balcony/off.png)
+Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/featured-v3/bad-intent/fixed-grin/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/featured-v3/bad-intent/fixed-grin/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/featured-v3/bad-intent/fixed-grin/off.png)
 
 <details><summary>Prompt and seed</summary>
 
-masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer, wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, on a balcony above a village, anime illustration
+masterpiece, best quality, safe, solo, 1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, facing viewer, head upright, portrait, head and shoulders, eye-level camera, in a wood-paneled room, anime illustration
 
 Seed: `29027`.
 
@@ -44,15 +44,15 @@ Seed: `29001`.
 
 **Particle · strength 1** → **Distill · strength 1** → **Off · strength 0**
 
-![Afterimage: Particle first, Distill second, Off third](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/expanded-v1-afterimage-case0.jpg)
+![Afterimage: Particle first, Distill second, Off third](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/featured-v3-afterimage-neon-turn.jpg)
 
-Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/expanded-v1/afterimage/case0/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/expanded-v1/afterimage/case0/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/expanded-v1/afterimage/case0/off.png)
+Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/featured-v3/afterimage/neon-turn/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/featured-v3/afterimage/neon-turn/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/featured-v3/afterimage/neon-turn/off.png)
 
 <details><summary>Prompt and seed</summary>
 
-masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, standing upright, facing viewer, arms at sides, upper body, waist-up view, eye-level camera, in an unadorned stone corridor with bare stone walls, anime illustration
+masterpiece, best quality, anime illustration, solo, one adult woman age 35, tan skin, long straight slate-blue hair, hazel eyes, wearing a fitted black turtleneck and tobacco-brown coat, abruptly turning her head to look over her shoulder, hair whipping around her face, one hand reaching toward the camera, dynamic close-up, on an empty street at night, blue and violet neon rim lighting, black background, shallow depth of field
 
-Seed: `29001`.
+Seed: `29027`.
 
 </details>
 
@@ -134,17 +134,17 @@ Seed: `29001`.
 
 </details>
 
-### Afterimage · case1
+### Afterimage · rooftop-kick
 
-![Afterimage: matched strength-one samples, case1](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/expanded-v1-afterimage-case1.jpg)
+![Afterimage: matched strength-one samples, rooftop-kick](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/featured-v3-afterimage-rooftop-kick.jpg)
 
-Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/expanded-v1/afterimage/case1/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/expanded-v1/afterimage/case1/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/expanded-v1/afterimage/case1/off.png)
+Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/featured-v3/afterimage/rooftop-kick/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/featured-v3/afterimage/rooftop-kick/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/featured-v3/afterimage/rooftop-kick/off.png)
 
 <details><summary>Prompt and seed</summary>
 
-1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, in an unadorned stone corridor with bare stone walls
+masterpiece, best quality, anime illustration, solo, one adult man age 35, light skin, short curly red hair, blue eyes, wearing a cream sweater and black trousers, airborne spinning kick, extended leg and bent knee, arms held for balance, dynamic action pose, full body, on an empty city rooftop at night, teal and violet rim lighting, distant city lights, wide cinematic composition
 
-Seed: `29001`.
+Seed: `29027`.
 
 </details>
 

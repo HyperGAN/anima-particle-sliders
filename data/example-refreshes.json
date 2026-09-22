@@ -1,0 +1,65 @@
+{
+  "version": "featured-v3",
+  "replacements": [
+    {
+      "slider": "bad-intent",
+      "source_row_id": "uncanny-dev-05",
+      "source_manifest": "data/bad-intent-dev.json",
+      "character": "original-14",
+      "prompt_origin": "manifest-neutral",
+      "request": {
+        "case": "fixed-grin",
+        "prompt": "masterpiece, best quality, safe, solo, 1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, facing viewer, head upright, portrait, head and shoulders, eye-level camera, in a wood-paneled room, anime illustration",
+        "seed": 29027,
+        "width": 768,
+        "height": 768,
+        "steps": 10
+      },
+      "version": "featured-v3",
+      "replaces": "balcony",
+      "candidate_case": "dev05-s29027",
+      "final_test_used": false,
+      "reason": "Both formats replace the neutral portrait with a close looming face, wide fixed eyes, deep facial shadows and an exaggerated grin. Selected for a clearly creepy expression."
+    },
+    {
+      "slider": "afterimage",
+      "source_row_id": "afterimage-dev-00",
+      "source_manifest": "data/afterimage-dev.json",
+      "character": "original-13",
+      "prompt_origin": "authored-action-scene",
+      "request": {
+        "case": "neon-turn",
+        "prompt": "masterpiece, best quality, anime illustration, solo, one adult woman age 35, tan skin, long straight slate-blue hair, hazel eyes, wearing a fitted black turtleneck and tobacco-brown coat, abruptly turning her head to look over her shoulder, hair whipping around her face, one hand reaching toward the camera, dynamic close-up, on an empty street at night, blue and violet neon rim lighting, black background, shallow depth of field",
+        "seed": 29027,
+        "width": 768,
+        "height": 768,
+        "steps": 10
+      },
+      "version": "featured-v3",
+      "replaces": "case0",
+      "candidate_case": "turn-s29027",
+      "final_test_used": false,
+      "reason": "Both formats keep one clear foreground subject and add bright cyan motion trails and rim echoes, without separate duplicate people. The matched Off image has no luminous trails."
+    },
+    {
+      "slider": "afterimage",
+      "source_row_id": "afterimage-dev-09",
+      "source_manifest": "data/afterimage-dev.json",
+      "character": "original-14",
+      "prompt_origin": "authored-action-scene",
+      "request": {
+        "case": "rooftop-kick",
+        "prompt": "masterpiece, best quality, anime illustration, solo, one adult man age 35, light skin, short curly red hair, blue eyes, wearing a cream sweater and black trousers, airborne spinning kick, extended leg and bent knee, arms held for balance, dynamic action pose, full body, on an empty city rooftop at night, teal and violet rim lighting, distant city lights, wide cinematic composition",
+        "seed": 29027,
+        "width": 768,
+        "height": 768,
+        "steps": 10
+      },
+      "version": "featured-v3",
+      "replaces": "case1",
+      "candidate_case": "kick-s29027",
+      "final_test_used": false,
+      "reason": "A single airborne subject with sweeping cyan and magenta motion arcs in both formats; the Off image shows the ordinary rooftop action pose."
+    }
+  ]
+}

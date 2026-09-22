@@ -10,9 +10,12 @@ def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--output',type=Path,required=True)
     p.add_argument('--browser',default='/bin/google-chrome')
+    p.add_argument('--expected-catalog',type=Path)
     args=p.parse_args();args.output.mkdir(parents=True,exist_ok=True)
     url='https://huggingface.co/ntc-ai/anima-concept-sliders'
     catalog=json.load(urlopen(url+'/resolve/main/catalog.json'))
+    if args.expected_catalog:
+        assert catalog==json.loads(args.expected_catalog.read_text()),'Live catalog is not the expected release'
     order=['bad-intent','final-form','afterimage','moonlit','candlelit','dusk','opal-fever']
     entries=sorted(catalog['sliders'],key=lambda e:order.index(e['id']))
     with sync_playwright() as pw:
@@ -23,9 +26,9 @@ def main():
         lead=page.locator('img[alt$="Off third"]')
         assert lead.count()==len(entries)
         assert lead.nth(0).get_attribute('alt').startswith('Bad Intent:')
-        assert 'assets/featured-v2-bad-intent-balcony.jpg' in lead.nth(0).get_attribute('src')
         for i,entry in enumerate(entries):
             assert lead.nth(i).get_attribute('alt').startswith(entry['label']+':')
+            assert entry['featured_comparison']['asset'] in lead.nth(i).get_attribute('src')
         assert lead.evaluate_all('(els)=>els.every(e=>!e.closest("details"))')
         # Open folded extra prompts and scroll through the card to trigger lazy images.
         page.locator('details').evaluate_all('(els)=>els.forEach(e=>e.open=true)')
@@ -59,7 +62,9 @@ def main():
             page.screenshot(path=str(args.output/(name+'.png')))
         result=dict(passed=True,url=url,sample_grids=images.count(),loaded_images=True,equations=equations,
                     lead_slider='Bad Intent',comparison_order=['Particle','Distill','Off'],comparison_strengths=[1,1,0],
-                    featured_case='balcony',featured_seed=29027,
+                    featured_case=entries[0]['featured_comparison']['case'],
+                    featured_seed=entries[0]['render_requests'][0]['seed'],
+                    featured_assets={e['id']:e['featured_comparison']['asset'] for e in entries},
                     samples_before_downloads_and_formulation=True,shared_core_link=True,comfyui_plugin_link=True,
                     layout=records,math_errors=0)
         (args.output/'browser.json').write_text(json.dumps(result,indent=2)+'\n')

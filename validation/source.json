@@ -56,5 +56,17 @@
     "comfy_cpu_validation": "comfyui.json",
     "single_particle_tests": 5,
     "manifest_integrity_tests": 3
+  },
+  "featured_v3": {
+    "passed": true,
+    "manifest_integrity_tests": 4,
+    "command": "PYTHONPATH=artifacts/shared-core pytest tests/test_bad_intent.py tests/test_release_manifests.py -q",
+    "selected_images": 9,
+    "exact_candidate_files": true,
+    "calibrated_staging_repeatable": true,
+    "expanded_staging_repeatable": true,
+    "all_current_sample_provenance": "unit-alpha.json",
+    "selection_evidence": "example-refreshes.json",
+    "adapter_files_unchanged": true
   }
 }

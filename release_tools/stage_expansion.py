@@ -90,6 +90,8 @@ def stage(studio,results,folder):
             entry['off_references'][case]=f'evidence/{name}/particle-alpha-sweep/{case}-off.png'
         entry['featured_comparison']=entry['comparisons'][0]
         entry['heldout_projection_relative_mse']=json.loads((result/'distilled/evaluation.json').read_text())['heldout_projection_relative_mse']
+        from release_tools.refresh_examples import apply_refreshes
+        apply_refreshes(dict(sliders=[entry]))
         old=next((i for i,e in enumerate(catalog['sliders']) if e['id']==name),None)
         if old is None:catalog['sliders'].append(entry)
         else:
