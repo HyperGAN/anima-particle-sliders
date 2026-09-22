@@ -340,49 +340,49 @@
       "alpha": null
     },
     {
-      "path": "samples/featured-v3/afterimage/neon-turn/particles.png",
-      "metadata": "samples/featured-v3/afterimage/neon-turn/particles.json",
-      "sha256": "0335e7805e897a807ba6cf5dcaedbe2a09252b21ea5648e18a5ec01302837c49",
+      "path": "samples/featured-v4/afterimage/violet-echo/particles.png",
+      "metadata": "samples/featured-v4/afterimage/violet-echo/particles.json",
+      "sha256": "2b00b941c69e0fa6a80ce0551e96acc1a2918bcc0ed99cc73324e46c5861c8d5",
       "adapter_sha256": "6a90f3031ddc240f79405a9387d50b7673e23ebcb0e3e354eefd6d2b8b7e0cd8",
       "strength": 1,
       "alpha": 8.0
     },
     {
-      "path": "samples/featured-v3/afterimage/neon-turn/lora.png",
-      "metadata": "samples/featured-v3/afterimage/neon-turn/lora.json",
-      "sha256": "78061b408d910feddea980436690af40b23ad72bae5e58cc1ffc118dbc19f0fd",
+      "path": "samples/featured-v4/afterimage/violet-echo/lora.png",
+      "metadata": "samples/featured-v4/afterimage/violet-echo/lora.json",
+      "sha256": "a2b73f93347a12b5e351aec941ec04afd5bbf6ba9f3c437e4426219d79224e22",
       "adapter_sha256": "1199a5230e89e23e7129f5316b85987f9450ed144c721b145dfa63fcf50b79d8",
       "strength": 1,
       "alpha": 16.0
     },
     {
-      "path": "samples/featured-v3/afterimage/neon-turn/off.png",
-      "metadata": "samples/featured-v3/afterimage/neon-turn/off.json",
-      "sha256": "0da8871ee468e6502178d0c814c9adf8984159dab2589a8490b565b757a72850",
+      "path": "samples/featured-v4/afterimage/violet-echo/off.png",
+      "metadata": "samples/featured-v4/afterimage/violet-echo/off.json",
+      "sha256": "19485858dfd7dd632f0dfbe4fba546db0c6d4638c047ac68ea1778f3bc0537cf",
       "adapter_sha256": null,
       "strength": 0,
       "alpha": null
     },
     {
-      "path": "samples/featured-v3/afterimage/rooftop-kick/particles.png",
-      "metadata": "samples/featured-v3/afterimage/rooftop-kick/particles.json",
-      "sha256": "e4530e7340aec11f9438431480ed2573a82bcdf568cb9e480d9e7ea4dc4d58c4",
+      "path": "samples/featured-v4/afterimage/gesture-echo/particles.png",
+      "metadata": "samples/featured-v4/afterimage/gesture-echo/particles.json",
+      "sha256": "8a25a4f0562170be0a5f5b3d2bfe2e7037119d0c4a064157312752f30fa7c245",
       "adapter_sha256": "6a90f3031ddc240f79405a9387d50b7673e23ebcb0e3e354eefd6d2b8b7e0cd8",
       "strength": 1,
       "alpha": 8.0
     },
     {
-      "path": "samples/featured-v3/afterimage/rooftop-kick/lora.png",
-      "metadata": "samples/featured-v3/afterimage/rooftop-kick/lora.json",
-      "sha256": "1af1a834c8246393077a3696ff0eeac5e96ac281d4f2edc1cddef3cce3b9e657",
+      "path": "samples/featured-v4/afterimage/gesture-echo/lora.png",
+      "metadata": "samples/featured-v4/afterimage/gesture-echo/lora.json",
+      "sha256": "c8507de348c30b5ffa2e10932a5cab09535007f600c5e792ef3b545e21d1f85e",
       "adapter_sha256": "1199a5230e89e23e7129f5316b85987f9450ed144c721b145dfa63fcf50b79d8",
       "strength": 1,
       "alpha": 16.0
     },
     {
-      "path": "samples/featured-v3/afterimage/rooftop-kick/off.png",
-      "metadata": "samples/featured-v3/afterimage/rooftop-kick/off.json",
-      "sha256": "b9edf6acc89f2684cec1d35a65569f50bbc33041fb23ff6d8af012ac27da0771",
+      "path": "samples/featured-v4/afterimage/gesture-echo/off.png",
+      "metadata": "samples/featured-v4/afterimage/gesture-echo/off.json",
+      "sha256": "815a1b6019d5d76b3672a5723f36123c5f0159aabf219c18a394487c04365e26",
       "adapter_sha256": null,
       "strength": 0,
       "alpha": null
@@ -724,19 +724,19 @@
     },
     {
       "slider": "afterimage",
-      "case": "neon-turn",
+      "case": "violet-echo",
       "source_manifest": "data/afterimage-dev.json",
-      "source_row_id": "afterimage-dev-00",
-      "image": "samples/featured-v3/afterimage/neon-turn/off.png",
-      "sha256": "0da8871ee468e6502178d0c814c9adf8984159dab2589a8490b565b757a72850"
+      "source_row_id": "afterimage-dev-05",
+      "image": "samples/featured-v4/afterimage/violet-echo/off.png",
+      "sha256": "19485858dfd7dd632f0dfbe4fba546db0c6d4638c047ac68ea1778f3bc0537cf"
     },
     {
       "slider": "afterimage",
-      "case": "rooftop-kick",
+      "case": "gesture-echo",
       "source_manifest": "data/afterimage-dev.json",
-      "source_row_id": "afterimage-dev-09",
-      "image": "samples/featured-v3/afterimage/rooftop-kick/off.png",
-      "sha256": "b9edf6acc89f2684cec1d35a65569f50bbc33041fb23ff6d8af012ac27da0771"
+      "source_row_id": "afterimage-dev-05",
+      "image": "samples/featured-v4/afterimage/gesture-echo/off.png",
+      "sha256": "815a1b6019d5d76b3672a5723f36123c5f0159aabf219c18a394487c04365e26"
     }
   ],
   "images": 54,

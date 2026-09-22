@@ -1,5 +1,5 @@
 {
-  "version": "featured-v3",
+  "version": "featured-v4",
   "replacements": [
     {
       "slider": "bad-intent",
@@ -60,6 +60,46 @@
       "candidate_case": "kick-s29027",
       "final_test_used": false,
       "reason": "A single airborne subject with sweeping cyan and magenta motion arcs in both formats; the Off image shows the ordinary rooftop action pose."
+    },
+    {
+      "slider": "afterimage",
+      "source_row_id": "afterimage-dev-05",
+      "source_manifest": "data/afterimage-dev.json",
+      "character": "original-14",
+      "prompt_origin": "authored-action-scene",
+      "request": {
+        "case": "violet-echo",
+        "prompt": "anime illustration, one adult man age 35, light skin, short curly red hair, blue eyes, wearing a cream sweater, turning his shoulders and lifting one hand, medium close-up, soft long-exposure ghosting around the moving face and hand, one solid central person, subdued violet lighting, plain dark backdrop",
+        "seed": 29027,
+        "width": 768,
+        "height": 768,
+        "steps": 10
+      },
+      "version": "featured-v4",
+      "replaces": "neon-turn",
+      "candidate_case": "motion-portrait-s29027",
+      "final_test_used": false,
+      "reason": "Both particle and LoRA show one solid subject with visible offset violet echoes of the face and hands. Matched Off uses the same exposure-study prompt but has no repeated faces or hands. Selected for actual afterimages, not luminous streaks alone."
+    },
+    {
+      "slider": "afterimage",
+      "source_row_id": "afterimage-dev-05",
+      "source_manifest": "data/afterimage-dev.json",
+      "character": "original-14",
+      "prompt_origin": "authored-action-scene",
+      "request": {
+        "case": "gesture-echo",
+        "prompt": "anime illustration, one adult man age 35, light skin, short curly red hair, blue eyes, wearing a cream sweater, turning his shoulders and lifting one hand, medium close-up, soft long-exposure ghosting around the moving face and hand, one solid central person, subdued violet lighting, plain dark backdrop",
+        "seed": 29001,
+        "width": 768,
+        "height": 768,
+        "steps": 10
+      },
+      "version": "featured-v4",
+      "replaces": "rooftop-kick",
+      "candidate_case": "motion-portrait-s29001",
+      "final_test_used": false,
+      "reason": "Both particle and LoRA show one solid subject with visible offset violet echoes of the face and hands. Matched Off uses the same exposure-study prompt but has no repeated faces or hands. Selected for actual afterimages, not luminous streaks alone."
     }
   ]
 }

@@ -167,14 +167,17 @@ LoRAs by changing alpha. It also applies the checked-in
 12 from its original step-1600 EMA, retain LoRA alpha 24, and use separate
 `balanced-alpha` sample paths. The earlier `data/featured-refresh.json` records
 the archived balcony scene under `featured-v2` paths. The subsequent
-`data/example-refreshes.json` selects the current Bad Intent portrait and
-Afterimage action scenes under `featured-v3` paths. Staging applies those
+`data/example-refreshes.json` records the Bad Intent portrait under `featured-v3`
+and the current Afterimage exposure studies under `featured-v4`. Staging applies those
 replacements; rendering uses each recorded prompt and seed with the exact
 public adapters at Particle 1 / Distill 1 / Off 0. Bad Intent uses a neutral
-development-manifest prompt. Afterimage uses authored action scenes with the
+development-manifest prompt. Afterimage uses an authored exposure-study prompt with the
 same development characters, so the records explicitly distinguish those
 prompts from the archived neutral training-evaluation prompts. No final-test
-characters are used. Previous comparisons remain in the catalog's
+characters are used. The Afterimage prompt asks for soft long-exposure ghosting
+in all three formats; the two selected Off seeds do not show the offset face
+and hand repetitions visible with the adapters. `data/afterimage-echo-audit.json`
+records the selection and rejected alternatives. Previous comparisons remain in the catalog's
 `example_archive`, and all earlier files remain at their original paths.
 No training or regression is repeated. The original release
 assembly instructions below describe the preceding, uncalibrated publication.

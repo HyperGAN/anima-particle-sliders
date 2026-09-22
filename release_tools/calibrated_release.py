@@ -190,7 +190,7 @@ def build_card(folder):
         '**'+', '.join(e['label'] for e in entries)+' for Anima Turbo v1.1.** Original Particle adapters and ordinary LoRA Distills, with strength stored in each file’s alpha.', '',
         '## Samples', '',
         '**Start at strength 1.0.** Every current comparison is **Particle 1 → Distill 1 → Off 0**, with the same prompt, seed, 768 × 768 resolution, 10 Euler steps and CFG 1. These are newly rendered examples from the calibrated files linked below.', '',
-        'Bad Intent adds menacing expressions and close framing. Final Form adds supernatural transformations; Afterimage adds motion echoes and light trails. Moonlit, Candlelit and Dusk change atmosphere. Distills are linear approximations of the original particles; their images need not match exactly.', '']
+        'Bad Intent adds menacing expressions and close framing. Final Form adds supernatural transformations; Afterimage adds translucent, offset echoes of faces and gestures. Moonlit, Candlelit and Dusk change atmosphere. Distills are linear approximations of the original particles; their images need not match exactly.', '']
     def show(entry, comp, lead=False):
         for sample in comp['samples']:
             assert (folder/sample['image']).is_file()

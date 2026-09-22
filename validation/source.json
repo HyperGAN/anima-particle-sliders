@@ -68,5 +68,15 @@
     "all_current_sample_provenance": "unit-alpha.json",
     "selection_evidence": "example-refreshes.json",
     "adapter_files_unchanged": true
+  },
+  "afterimage_echo_v4": {
+    "passed": true,
+    "new_images": 6,
+    "exact_candidate_files": true,
+    "calibrated_staging_repeatable": true,
+    "expanded_staging_repeatable": true,
+    "all_current_sample_provenance": "unit-alpha.json",
+    "selection_evidence": "data/afterimage-echo-audit.json",
+    "adapter_files_unchanged": true
   }
 }

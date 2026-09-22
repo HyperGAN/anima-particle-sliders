@@ -31,7 +31,12 @@ def apply_refreshes(catalog):
             assert entry['render_requests'][existing] == request
             assert entry['example_refreshes'][request['case']] == spec
             continue
-        index = next(i for i,r in enumerate(entry['render_requests']) if r['case'] == spec['replaces'])
+        index = next((i for i,r in enumerate(entry['render_requests']) if r['case'] == spec['replaces']), None)
+        if index is None:
+            # A later replacement already superseded this recorded example.
+            assert entry['example_refreshes'][request['case']] == spec
+            assert any(a['request'] == request for a in entry['example_archive'])
+            continue
         archived = copy.deepcopy(dict(request=entry['render_requests'][index],
                                       comparison=entry['comparisons'][index]))
         if archived not in entry.setdefault('example_archive', []):
@@ -60,7 +65,10 @@ def stage(folder, candidates):
     report = dict(passed=True, nominal_strength=1, final_test_used=False, samples=[])
     for spec in json.loads((ROOT/'data/example-refreshes.json').read_text())['replacements']:
         entry = next(e for e in catalog['sliders'] if e['id'] == spec['slider'])
-        comparison = next(c for c in entry['comparisons'] if c['case'] == spec['request']['case'])
+        comparison = next((c for c in entry['comparisons'] if c['case'] == spec['request']['case']), None)
+        if comparison is None:
+            assert any(a['request'] == spec['request'] for a in entry['example_archive'])
+            continue
         for sample in comparison['samples']:
             source = candidates/'samples'/spec['slider']/spec['candidate_case']/(sample['format']+'.png')
             metadata = json.loads(source.with_suffix('.json').read_text())
