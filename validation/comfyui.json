@@ -1,8 +1,17 @@
 {
   "passed": true,
   "device": "cpu",
-  "comfy_revision": "387f98aa2822f684b8597959a52a467d88cc4806",
+  "comfy_revision": "7a0b5eede3f9721c8faab290689893f36edc6d66",
   "sliders": [
+    {
+      "variation": "bad-intent",
+      "particle_projections": 224,
+      "lora_patches": 224,
+      "particle_max_abs": 0.0,
+      "zero_bypass": true,
+      "clone_isolation": true,
+      "exception_restoration": true
+    },
     {
       "variation": "candlelit",
       "particle_projections": 224,

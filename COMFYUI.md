@@ -14,11 +14,11 @@ python -m pip install -r anima-concept-sliders/requirements.txt
 
 Use the Python executable belonging to your ComfyUI installation for the install command (including its embedded Python on portable installations). The plugin ZIP needs the same requirements install. This installs the pinned shared algorithm package from [sliders-conceptmod](https://github.com/mikkel/sliders-conceptmod/tree/main/packages/concept-slider-core).
 
-Download [Candlelit](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/weights/candlelit.safetensors?download=true) or [Moonlit](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/weights/moonlit.safetensors?download=true) into `ComfyUI/models/loras/`. Insert **Anima Particle Slider (ntc-ai)** between the diffusion model loader and your sampler:
+Download [Bad Intent](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/weights/bad-intent.safetensors?download=true), [Candlelit](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/weights/candlelit.safetensors?download=true) or [Moonlit](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/weights/moonlit.safetensors?download=true) into `ComfyUI/models/loras/`. Update an existing plugin installation for Bad Intent's embedded-alpha format. Insert **Anima Particle Slider (ntc-ai)** between the diffusion model loader and your sampler:
 
 ```text
 Load Diffusion Model (anima-turbo-v1.1)
-  → Anima Particle Slider (adapter_name: candlelit.safetensors, strength: 1)
+  → Anima Particle Slider (adapter_name: bad-intent.safetensors, strength: 1)
   → existing Anima Turbo sampling workflow
 ```
 
@@ -36,4 +36,4 @@ Use standard **Load LoRA** with **MODEL strength 1**, **CLIP strength 0**, or **
 
 ## Verification scope
 
-[CPU integration evidence](validation/comfyui.json) records loading both real particle files, all 224 projection mappings, exact native branch math, zero bypass, clone isolation, exception cleanup, and ordinary-LoRA loader acceptance. Public images were rendered in the pinned native Anima runtime. Full ComfyUI GPU image generation has not been validated in this release. ComfyUI and native sampling/text-conditioning details may produce different images from the same integer seed.
+[CPU integration evidence](validation/comfyui.json) records loading all three real particle files, all 224 projection mappings, exact native branch math, zero bypass, clone isolation, exception cleanup, and ordinary-LoRA loader acceptance. Public images were rendered in the pinned native Anima runtime. Full ComfyUI GPU image generation has not been validated in this release. ComfyUI and native sampling/text-conditioning details may produce different images from the same integer seed.

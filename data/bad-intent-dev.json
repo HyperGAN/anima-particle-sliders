@@ -1,0 +1,556 @@
+{
+  "schema": 1,
+  "extension": "psychological-horror-v1",
+  "split": "dev",
+  "variation": "uncanny",
+  "source_spec_sha256": "137444d708ffe42fd2652c3d1268963062d0fda3005568ca9644738e7ece512c",
+  "compiler_sha256": "66c1b7bd908637bb91063ca2a59c3be2f5fce1b7d40d6ca9e1f070d60b39564f",
+  "shared_source_sha256": "26b209e3659e73c0ef04c73a5976e77c9302c605be36499d20875460064762a2",
+  "characters_sha256": "5c9c0a929e8a72b6594601b3d838355e79496f74439a773b6625f5d4fe2a3cfe",
+  "definitions_sha256": "7089aba9415edb2a76a61534c89be07bfbdec6a0ef3bb926d28a81835e0c3047",
+  "identity_preservation": false,
+  "edit_scope": "expression_pose_framing_atmosphere",
+  "rows": [
+    {
+      "id": "uncanny-dev-00",
+      "variation": "uncanny",
+      "split": "dev",
+      "character": "original-13",
+      "definition": "uncanny-01",
+      "definition_split": "train",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": false,
+      "presentation": "woman",
+      "skin": "medium brown skin",
+      "shared": {
+        "character": "1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric",
+        "pose": "standing upright, facing viewer, arms at sides",
+        "framing": "upper body, waist-up view, eye-level camera",
+        "scene": "in an unadorned stone corridor with bare stone walls",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "neutral_lighting": "",
+      "positive_lighting": "psychological horror, unsettling anticipation, oppressive intimacy, stark chiaroscuro, narrow light across the eyes, deep shadows around the face, ordinary surroundings falling into darkness",
+      "neutral": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, standing upright, facing viewer, arms at sides, upper body, waist-up view, eye-level camera, in an unadorned stone corridor with bare stone walls, anime illustration",
+      "positive": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, unnaturally wide unblinking eyes, small focused pupils, an eager smile that is slightly too broad, looking down directly at the viewer, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, leaning forward over the viewer, chin lowered, shoulders relaxed, face held very still, close-up portrait, low-angle view from below, face looming close to the camera, slightly off-center composition, in an unadorned stone corridor with bare stone walls, anime illustration, psychological horror, unsettling anticipation, oppressive intimacy, stark chiaroscuro, narrow light across the eyes, deep shadows around the face, ordinary surroundings falling into darkness",
+      "positive_shared": {
+        "character": "1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, unnaturally wide unblinking eyes, small focused pupils, an eager smile that is slightly too broad, looking down directly at the viewer, looking at viewer",
+        "outfit": "wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric",
+        "pose": "leaning forward over the viewer, chin lowered, shoulders relaxed, face held very still",
+        "framing": "close-up portrait, low-angle view from below, face looming close to the camera, slightly off-center composition",
+        "scene": "in an unadorned stone corridor with bare stone walls",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "changed_fields": [
+        "character.expression",
+        "pose",
+        "framing",
+        "atmosphere"
+      ],
+      "identity_preservation": false,
+      "edit_scope": "expression_pose_framing_atmosphere"
+    },
+    {
+      "id": "uncanny-dev-01",
+      "variation": "uncanny",
+      "split": "dev",
+      "character": "original-14",
+      "definition": "uncanny-02",
+      "definition_split": "train",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": false,
+      "presentation": "man",
+      "skin": "light skin",
+      "shared": {
+        "character": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric",
+        "pose": "sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap",
+        "framing": "full body, entire figure in frame, eye-level camera",
+        "scene": "in an unadorned stone corridor with bare stone walls",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "neutral_lighting": "",
+      "positive_lighting": "intense psychological horror, emotional mismatch, uncanny stillness, deep charcoal shadows, a small hard light on the face, the darkness behind the figure feels impossibly deep",
+      "neutral": "masterpiece, best quality, safe, solo, 1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap, full body, entire figure in frame, eye-level camera, in an unadorned stone corridor with bare stone walls, anime illustration",
+      "positive": "masterpiece, best quality, safe, solo, 1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, a warmly welcoming smile paired with cold unblinking eyes, fixed pupils, a look of patient and inappropriate delight, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, standing perfectly still, head tilted slightly to one side, looking directly at the viewer, head-and-shoulders portrait, slightly canted camera, tight asymmetric framing, in an unadorned stone corridor with bare stone walls, anime illustration, intense psychological horror, emotional mismatch, uncanny stillness, deep charcoal shadows, a small hard light on the face, the darkness behind the figure feels impossibly deep",
+      "positive_shared": {
+        "character": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, a warmly welcoming smile paired with cold unblinking eyes, fixed pupils, a look of patient and inappropriate delight, looking at viewer",
+        "outfit": "wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric",
+        "pose": "standing perfectly still, head tilted slightly to one side, looking directly at the viewer",
+        "framing": "head-and-shoulders portrait, slightly canted camera, tight asymmetric framing",
+        "scene": "in an unadorned stone corridor with bare stone walls",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "changed_fields": [
+        "character.expression",
+        "pose",
+        "framing",
+        "atmosphere"
+      ],
+      "identity_preservation": false,
+      "edit_scope": "expression_pose_framing_atmosphere"
+    },
+    {
+      "id": "uncanny-dev-02",
+      "variation": "uncanny",
+      "split": "dev",
+      "character": "original-15",
+      "definition": "uncanny-03",
+      "definition_split": "train",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": false,
+      "presentation": "woman",
+      "skin": "deep brown skin",
+      "shared": {
+        "character": "1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric",
+        "pose": "facing viewer, head upright",
+        "framing": "portrait, head and shoulders, eye-level camera",
+        "scene": "in a quiet courtyard",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "neutral_lighting": "",
+      "positive_lighting": "unsettling psychological horror, quiet malevolent delight, threatening patience, harsh oblique illumination, one cheek swallowed by shadow, muted cold colors",
+      "neutral": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer, wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric, facing viewer, head upright, portrait, head and shoulders, eye-level camera, in a quiet courtyard, anime illustration",
+      "positive": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, eyes opened too wide beneath lowered brows, tiny bright catchlights, a restrained eager grin, intensely watching the viewer, looking at viewer, wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric, bending slightly toward the camera, head lowered while maintaining direct eye contact, tight portrait from below, forehead close to the upper frame, intrusive proximity, in a quiet courtyard, anime illustration, unsettling psychological horror, quiet malevolent delight, threatening patience, harsh oblique illumination, one cheek swallowed by shadow, muted cold colors",
+      "positive_shared": {
+        "character": "1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, eyes opened too wide beneath lowered brows, tiny bright catchlights, a restrained eager grin, intensely watching the viewer, looking at viewer",
+        "outfit": "wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric",
+        "pose": "bending slightly toward the camera, head lowered while maintaining direct eye contact",
+        "framing": "tight portrait from below, forehead close to the upper frame, intrusive proximity",
+        "scene": "in a quiet courtyard",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "changed_fields": [
+        "character.expression",
+        "pose",
+        "framing",
+        "atmosphere"
+      ],
+      "identity_preservation": false,
+      "edit_scope": "expression_pose_framing_atmosphere"
+    },
+    {
+      "id": "uncanny-dev-03",
+      "variation": "uncanny",
+      "split": "dev",
+      "character": "original-16",
+      "definition": "uncanny-04",
+      "definition_split": "train",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": false,
+      "presentation": "man",
+      "skin": "medium brown skin",
+      "shared": {
+        "character": "1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a muted violet tunic and gray trousers, long sleeves, plain fabric",
+        "pose": "standing upright, facing viewer, both hands on hips",
+        "framing": "cowboy shot, thighs in frame, eye-level camera",
+        "scene": "in a quiet courtyard",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "neutral_lighting": "",
+      "positive_lighting": "psychological horror, invasive closeness, something subtly wrong with the perspective, low-key lighting, a hard glint in the eyes, black shadow at the edge of the face",
+      "neutral": "masterpiece, best quality, safe, solo, 1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, neutral expression, closed mouth, looking at viewer, wearing a muted violet tunic and gray trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, in a quiet courtyard, anime illustration",
+      "positive": "masterpiece, best quality, safe, solo, 1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, a delighted asymmetric smile, wide intent eyes that never seem to blink, eager recognition directed at the viewer, looking at viewer, wearing a muted violet tunic and gray trousers, long sleeves, plain fabric, leaning into the viewer's space, face turned slightly while the eyes track the camera, extreme close-up, tilted low camera angle, one eye much closer to the lens, part of the face cropped by the frame, in a quiet courtyard, anime illustration, psychological horror, invasive closeness, something subtly wrong with the perspective, low-key lighting, a hard glint in the eyes, black shadow at the edge of the face",
+      "positive_shared": {
+        "character": "1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, a delighted asymmetric smile, wide intent eyes that never seem to blink, eager recognition directed at the viewer, looking at viewer",
+        "outfit": "wearing a muted violet tunic and gray trousers, long sleeves, plain fabric",
+        "pose": "leaning into the viewer's space, face turned slightly while the eyes track the camera",
+        "framing": "extreme close-up, tilted low camera angle, one eye much closer to the lens, part of the face cropped by the frame",
+        "scene": "in a quiet courtyard",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "changed_fields": [
+        "character.expression",
+        "pose",
+        "framing",
+        "atmosphere"
+      ],
+      "identity_preservation": false,
+      "edit_scope": "expression_pose_framing_atmosphere"
+    },
+    {
+      "id": "uncanny-dev-04",
+      "variation": "uncanny",
+      "split": "dev",
+      "character": "original-13",
+      "definition": "uncanny-05",
+      "definition_split": "train",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": false,
+      "presentation": "woman",
+      "skin": "medium brown skin",
+      "shared": {
+        "character": "1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric",
+        "pose": "sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap",
+        "framing": "full body, entire figure in frame, eye-level camera",
+        "scene": "in a wood-paneled room",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "neutral_lighting": "",
+      "positive_lighting": "deeply unsettling psychological horror, oppressive silence, uncanny anticipation, pale desaturated light, dense black shadows, familiar surroundings made ominous",
+      "neutral": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap, full body, entire figure in frame, eye-level camera, in a wood-paneled room, anime illustration",
+      "positive": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, a small polite smile, unusually wide watchful eyes, fixed pupils, an incongruously pleased and expectant expression, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, standing motionless facing the viewer, chin tipped downward, shoulders level, upper-body portrait seen from below, figure filling the frame, empty space squeezed to one side, in a wood-paneled room, anime illustration, deeply unsettling psychological horror, oppressive silence, uncanny anticipation, pale desaturated light, dense black shadows, familiar surroundings made ominous",
+      "positive_shared": {
+        "character": "1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, a small polite smile, unusually wide watchful eyes, fixed pupils, an incongruously pleased and expectant expression, looking at viewer",
+        "outfit": "wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric",
+        "pose": "standing motionless facing the viewer, chin tipped downward, shoulders level",
+        "framing": "upper-body portrait seen from below, figure filling the frame, empty space squeezed to one side",
+        "scene": "in a wood-paneled room",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "changed_fields": [
+        "character.expression",
+        "pose",
+        "framing",
+        "atmosphere"
+      ],
+      "identity_preservation": false,
+      "edit_scope": "expression_pose_framing_atmosphere"
+    },
+    {
+      "id": "uncanny-dev-05",
+      "variation": "uncanny",
+      "split": "dev",
+      "character": "original-14",
+      "definition": "uncanny-06",
+      "definition_split": "train",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": false,
+      "presentation": "man",
+      "skin": "light skin",
+      "shared": {
+        "character": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric",
+        "pose": "facing viewer, head upright",
+        "framing": "portrait, head and shoulders, eye-level camera",
+        "scene": "in a wood-paneled room",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "neutral_lighting": "",
+      "positive_lighting": "intense psychological horror, wrong emotional timing, predatory eagerness, severe side lighting, deep eye-socket shadows with sharp catchlights, restrained color",
+      "neutral": "masterpiece, best quality, safe, solo, 1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, facing viewer, head upright, portrait, head and shoulders, eye-level camera, in a wood-paneled room, anime illustration",
+      "positive": "masterpiece, best quality, safe, solo, 1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, an eager almost-laughing smile that stops at the mouth, intensely focused unsmiling eyes, small pupils, looking down at the viewer, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, standing over the low camera, head angled down, upper body inclined forward, close portrait from a very low viewpoint, foreshortened shoulders, face dominating the composition, in a wood-paneled room, anime illustration, intense psychological horror, wrong emotional timing, predatory eagerness, severe side lighting, deep eye-socket shadows with sharp catchlights, restrained color",
+      "positive_shared": {
+        "character": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, an eager almost-laughing smile that stops at the mouth, intensely focused unsmiling eyes, small pupils, looking down at the viewer, looking at viewer",
+        "outfit": "wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric",
+        "pose": "standing over the low camera, head angled down, upper body inclined forward",
+        "framing": "close portrait from a very low viewpoint, foreshortened shoulders, face dominating the composition",
+        "scene": "in a wood-paneled room",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "changed_fields": [
+        "character.expression",
+        "pose",
+        "framing",
+        "atmosphere"
+      ],
+      "identity_preservation": false,
+      "edit_scope": "expression_pose_framing_atmosphere"
+    },
+    {
+      "id": "uncanny-dev-06",
+      "variation": "uncanny",
+      "split": "dev",
+      "character": "original-15",
+      "definition": "uncanny-07",
+      "definition_split": "eval",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": false,
+      "presentation": "woman",
+      "skin": "deep brown skin",
+      "shared": {
+        "character": "1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric",
+        "pose": "standing upright, facing viewer, both hands on hips",
+        "framing": "cowboy shot, thighs in frame, eye-level camera",
+        "scene": "on a balcony above a village",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "neutral_lighting": "",
+      "positive_lighting": "an atmosphere of psychological dread, frightening familiarity, silent anticipation, a sliver of illumination against enveloping darkness",
+      "neutral": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer, wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, on a balcony above a village, anime illustration",
+      "positive": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, a look of pleased recognition held a moment too long, eyes far too alert, a smile that feels rehearsed rather than friendly, looking at viewer, wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric, inclining toward the observer, head slightly bowed, gaze locked on the lens, intimate face portrait viewed from below, uncomfortably close and off balance, on a balcony above a village, anime illustration, an atmosphere of psychological dread, frightening familiarity, silent anticipation, a sliver of illumination against enveloping darkness",
+      "positive_shared": {
+        "character": "1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, a look of pleased recognition held a moment too long, eyes far too alert, a smile that feels rehearsed rather than friendly, looking at viewer",
+        "outfit": "wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric",
+        "pose": "inclining toward the observer, head slightly bowed, gaze locked on the lens",
+        "framing": "intimate face portrait viewed from below, uncomfortably close and off balance",
+        "scene": "on a balcony above a village",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "changed_fields": [
+        "character.expression",
+        "pose",
+        "framing",
+        "atmosphere"
+      ],
+      "identity_preservation": false,
+      "edit_scope": "expression_pose_framing_atmosphere"
+    },
+    {
+      "id": "uncanny-dev-07",
+      "variation": "uncanny",
+      "split": "dev",
+      "character": "original-16",
+      "definition": "uncanny-08",
+      "definition_split": "eval",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": false,
+      "presentation": "man",
+      "skin": "medium brown skin",
+      "shared": {
+        "character": "1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a muted violet tunic and gray trousers, long sleeves, plain fabric",
+        "pose": "standing upright, facing viewer, arms at sides",
+        "framing": "upper body, waist-up view, eye-level camera",
+        "scene": "on a balcony above a village",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "neutral_lighting": "",
+      "positive_lighting": "uncanny psychological terror, the feeling of being noticed by something pretending to be familiar, hard facial highlights, hollow shadows, a quietly wrong atmosphere",
+      "neutral": "masterpiece, best quality, safe, solo, 1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, neutral expression, closed mouth, looking at viewer, wearing a muted violet tunic and gray trousers, long sleeves, plain fabric, standing upright, facing viewer, arms at sides, upper body, waist-up view, eye-level camera, on a balcony above a village, anime illustration",
+      "positive": "masterpiece, best quality, safe, solo, 1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, bright expectant eyes and an inappropriately joyful grin, a fixed penetrating stare directed downward at the observer, looking at viewer, wearing a muted violet tunic and gray trousers, long sleeves, plain fabric, hovering close above the camera, unnervingly motionless, shoulders loose, cropped close-up from an oblique low angle, oppressive facial proximity, on a balcony above a village, anime illustration, uncanny psychological terror, the feeling of being noticed by something pretending to be familiar, hard facial highlights, hollow shadows, a quietly wrong atmosphere",
+      "positive_shared": {
+        "character": "1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, bright expectant eyes and an inappropriately joyful grin, a fixed penetrating stare directed downward at the observer, looking at viewer",
+        "outfit": "wearing a muted violet tunic and gray trousers, long sleeves, plain fabric",
+        "pose": "hovering close above the camera, unnervingly motionless, shoulders loose",
+        "framing": "cropped close-up from an oblique low angle, oppressive facial proximity",
+        "scene": "on a balcony above a village",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "changed_fields": [
+        "character.expression",
+        "pose",
+        "framing",
+        "atmosphere"
+      ],
+      "identity_preservation": false,
+      "edit_scope": "expression_pose_framing_atmosphere"
+    },
+    {
+      "id": "uncanny-dev-08",
+      "variation": "uncanny",
+      "split": "dev",
+      "character": "original-13",
+      "definition": "uncanny-07",
+      "definition_split": "eval",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": true,
+      "presentation": "woman",
+      "skin": "medium brown skin",
+      "shared": {
+        "character": "1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric",
+        "pose": "facing viewer, head upright",
+        "framing": "portrait, head and shoulders, eye-level camera",
+        "scene": "in an unadorned stone corridor with bare stone walls",
+        "medium": "",
+        "quality": ""
+      },
+      "neutral_lighting": "",
+      "positive_lighting": "an atmosphere of psychological dread, frightening familiarity, silent anticipation, a sliver of illumination against enveloping darkness",
+      "neutral": "1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, facing viewer, head upright, portrait, head and shoulders, eye-level camera, in an unadorned stone corridor with bare stone walls",
+      "positive": "1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, a look of pleased recognition held a moment too long, eyes far too alert, a smile that feels rehearsed rather than friendly, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, inclining toward the observer, head slightly bowed, gaze locked on the lens, intimate face portrait viewed from below, uncomfortably close and off balance, in an unadorned stone corridor with bare stone walls, an atmosphere of psychological dread, frightening familiarity, silent anticipation, a sliver of illumination against enveloping darkness",
+      "positive_shared": {
+        "character": "1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, a look of pleased recognition held a moment too long, eyes far too alert, a smile that feels rehearsed rather than friendly, looking at viewer",
+        "outfit": "wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric",
+        "pose": "inclining toward the observer, head slightly bowed, gaze locked on the lens",
+        "framing": "intimate face portrait viewed from below, uncomfortably close and off balance",
+        "scene": "in an unadorned stone corridor with bare stone walls",
+        "medium": "",
+        "quality": ""
+      },
+      "changed_fields": [
+        "character.expression",
+        "pose",
+        "framing",
+        "atmosphere"
+      ],
+      "identity_preservation": false,
+      "edit_scope": "expression_pose_framing_atmosphere"
+    },
+    {
+      "id": "uncanny-dev-09",
+      "variation": "uncanny",
+      "split": "dev",
+      "character": "original-14",
+      "definition": "uncanny-08",
+      "definition_split": "eval",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": true,
+      "presentation": "man",
+      "skin": "light skin",
+      "shared": {
+        "character": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric",
+        "pose": "standing upright, facing viewer, both hands on hips",
+        "framing": "cowboy shot, thighs in frame, eye-level camera",
+        "scene": "in an unadorned stone corridor with bare stone walls",
+        "medium": "",
+        "quality": ""
+      },
+      "neutral_lighting": "",
+      "positive_lighting": "uncanny psychological terror, the feeling of being noticed by something pretending to be familiar, hard facial highlights, hollow shadows, a quietly wrong atmosphere",
+      "neutral": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, in an unadorned stone corridor with bare stone walls",
+      "positive": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, bright expectant eyes and an inappropriately joyful grin, a fixed penetrating stare directed downward at the observer, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, hovering close above the camera, unnervingly motionless, shoulders loose, cropped close-up from an oblique low angle, oppressive facial proximity, in an unadorned stone corridor with bare stone walls, uncanny psychological terror, the feeling of being noticed by something pretending to be familiar, hard facial highlights, hollow shadows, a quietly wrong atmosphere",
+      "positive_shared": {
+        "character": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, bright expectant eyes and an inappropriately joyful grin, a fixed penetrating stare directed downward at the observer, looking at viewer",
+        "outfit": "wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric",
+        "pose": "hovering close above the camera, unnervingly motionless, shoulders loose",
+        "framing": "cropped close-up from an oblique low angle, oppressive facial proximity",
+        "scene": "in an unadorned stone corridor with bare stone walls",
+        "medium": "",
+        "quality": ""
+      },
+      "changed_fields": [
+        "character.expression",
+        "pose",
+        "framing",
+        "atmosphere"
+      ],
+      "identity_preservation": false,
+      "edit_scope": "expression_pose_framing_atmosphere"
+    },
+    {
+      "id": "uncanny-dev-10",
+      "variation": "uncanny",
+      "split": "dev",
+      "character": "original-15",
+      "definition": "uncanny-07",
+      "definition_split": "eval",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": true,
+      "presentation": "woman",
+      "skin": "deep brown skin",
+      "shared": {
+        "character": "1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric",
+        "pose": "standing upright, facing viewer, arms at sides",
+        "framing": "upper body, waist-up view, eye-level camera",
+        "scene": "in a quiet courtyard",
+        "medium": "",
+        "quality": ""
+      },
+      "neutral_lighting": "",
+      "positive_lighting": "an atmosphere of psychological dread, frightening familiarity, silent anticipation, a sliver of illumination against enveloping darkness",
+      "neutral": "1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer, wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric, standing upright, facing viewer, arms at sides, upper body, waist-up view, eye-level camera, in a quiet courtyard",
+      "positive": "1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, a look of pleased recognition held a moment too long, eyes far too alert, a smile that feels rehearsed rather than friendly, looking at viewer, wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric, inclining toward the observer, head slightly bowed, gaze locked on the lens, intimate face portrait viewed from below, uncomfortably close and off balance, in a quiet courtyard, an atmosphere of psychological dread, frightening familiarity, silent anticipation, a sliver of illumination against enveloping darkness",
+      "positive_shared": {
+        "character": "1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, a look of pleased recognition held a moment too long, eyes far too alert, a smile that feels rehearsed rather than friendly, looking at viewer",
+        "outfit": "wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric",
+        "pose": "inclining toward the observer, head slightly bowed, gaze locked on the lens",
+        "framing": "intimate face portrait viewed from below, uncomfortably close and off balance",
+        "scene": "in a quiet courtyard",
+        "medium": "",
+        "quality": ""
+      },
+      "changed_fields": [
+        "character.expression",
+        "pose",
+        "framing",
+        "atmosphere"
+      ],
+      "identity_preservation": false,
+      "edit_scope": "expression_pose_framing_atmosphere"
+    },
+    {
+      "id": "uncanny-dev-11",
+      "variation": "uncanny",
+      "split": "dev",
+      "character": "original-16",
+      "definition": "uncanny-08",
+      "definition_split": "eval",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": true,
+      "presentation": "man",
+      "skin": "medium brown skin",
+      "shared": {
+        "character": "1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a muted violet tunic and gray trousers, long sleeves, plain fabric",
+        "pose": "sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap",
+        "framing": "full body, entire figure in frame, eye-level camera",
+        "scene": "in a quiet courtyard",
+        "medium": "",
+        "quality": ""
+      },
+      "neutral_lighting": "",
+      "positive_lighting": "uncanny psychological terror, the feeling of being noticed by something pretending to be familiar, hard facial highlights, hollow shadows, a quietly wrong atmosphere",
+      "neutral": "1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, neutral expression, closed mouth, looking at viewer, wearing a muted violet tunic and gray trousers, long sleeves, plain fabric, sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap, full body, entire figure in frame, eye-level camera, in a quiet courtyard",
+      "positive": "1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, bright expectant eyes and an inappropriately joyful grin, a fixed penetrating stare directed downward at the observer, looking at viewer, wearing a muted violet tunic and gray trousers, long sleeves, plain fabric, hovering close above the camera, unnervingly motionless, shoulders loose, cropped close-up from an oblique low angle, oppressive facial proximity, in a quiet courtyard, uncanny psychological terror, the feeling of being noticed by something pretending to be familiar, hard facial highlights, hollow shadows, a quietly wrong atmosphere",
+      "positive_shared": {
+        "character": "1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, bright expectant eyes and an inappropriately joyful grin, a fixed penetrating stare directed downward at the observer, looking at viewer",
+        "outfit": "wearing a muted violet tunic and gray trousers, long sleeves, plain fabric",
+        "pose": "hovering close above the camera, unnervingly motionless, shoulders loose",
+        "framing": "cropped close-up from an oblique low angle, oppressive facial proximity",
+        "scene": "in a quiet courtyard",
+        "medium": "",
+        "quality": ""
+      },
+      "changed_fields": [
+        "character.expression",
+        "pose",
+        "framing",
+        "atmosphere"
+      ],
+      "identity_preservation": false,
+      "edit_scope": "expression_pose_framing_atmosphere"
+    }
+  ],
+  "sha256": "e7b2fd89c0c3ec07e9541d708657365a361c13fd4a06fd0e2390235509af0b33"
+}

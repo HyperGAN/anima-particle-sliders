@@ -3,6 +3,8 @@ import argparse
 import json
 from pathlib import Path
 import sys
+import os
+from contextlib import nullcontext
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
@@ -11,9 +13,15 @@ import torch
 from safetensors.torch import save_file, load_file
 from lumen_studio.backends.anima import TurboRuntime
 from lumen_studio.particles import ParticleAdapter
+from lumen_studio.alpha_adapter import AlphaParticleAdapter
 from lumen_studio.cache import TargetCache
 from lumen_studio.contracts import file_hash
 from concept_slider_core import fit_routed_down
+
+
+def particle_sample_path(root, name, case, strength, suffix):
+    # with_suffix() would turn str0.5 into str0 and collide with Off.
+    return root / name / f'case{case}' / f'str{strength:g}{suffix}'
 
 
 def comfy_name(name):
@@ -25,15 +33,17 @@ def comfy_name(name):
 
 def save_loras(adapter, downs, output, variation, teacher):
     native, comfy = {}, {}
-    for name, branch, down in zip(adapter.names, adapter.branches, downs):
+    for i, (name, branch, down) in enumerate(zip(adapter.names, adapter.branches, downs)):
         up = branch.up.weight.detach().cpu().contiguous()
         down = down.cpu().contiguous()
         native[name + '.lora_A.weight'] = down
         native[name + '.lora_B.weight'] = up
+        alpha = float(adapter.alphas[i]) if hasattr(adapter, 'alphas') else 8.
+        native[name + '.alpha'] = torch.tensor(alpha, dtype=torch.float64)
         prefix = 'diffusion_model.' + comfy_name(name)
         comfy[prefix + '.lora_down.weight'] = down
         comfy[prefix + '.lora_up.weight'] = up
-        comfy[prefix + '.alpha'] = torch.tensor(8.)
+        comfy[prefix + '.alpha'] = torch.tensor(alpha, dtype=torch.float64)
     metadata = dict(format='anima-distilled-rank8-v1', teacher_sha256=file_hash(teacher),
                     method='ridge regression of routed bottleneck output on full projection input', rank='8')
     for fmt, values in (('native',native),('comfyui',comfy)):
@@ -51,11 +61,15 @@ def attach_lora(transformer, path, strength):
         name = key.removesuffix('.lora_A.weight')
         device=modules[name].weight.device
         down, up = state[key].to(device), state[name+'.lora_B.weight'].to(device)
-        def hook(module,args,output,down=down,up=up):
+        alpha = float(state.get(name+'.alpha', torch.tensor(down.shape[0])))
+        if not 0 < alpha < float('inf'):
+            raise ValueError('LoRA alpha must be finite and positive')
+        scale = strength * alpha / down.shape[0]
+        def hook(module,args,output,down=down,up=up,scale=scale):
             if strength == 0: return output
             x = args[0].float()
             delta = (x @ down.to(x.device).T) @ up.to(x.device).T
-            return output + (strength * delta).to(output.dtype)
+            return output + (scale * delta).to(output.dtype)
         handles.append(modules[name].register_forward_hook(hook))
     return handles
 
@@ -82,7 +96,7 @@ def collect(runtime, adapter, cache, *, training):
         seen.add(shard['row'])
         for t in ([0,2,4,6,9] if training else [1,5,8]):
             # First seed per row. Train: neutral 0/2/4/6, positive 9; dev: positive 1/5, neutral 8.
-            records.append(si*20 + t + (10 if (si+t)%2 else 0))
+            records.append(si*20 + t + (10 if t in ((9,) if training else (1,5)) else 0))
     try:
         for n,idx in enumerate(records):
             rec=cache[idx]
@@ -122,64 +136,83 @@ def main():
     p.add_argument('--output',type=Path,required=True)
     p.add_argument('--samples',type=Path,required=True,help='JSON release sample requests')
     p.add_argument('--particle-samples-output',type=Path)
+    p.add_argument('--variation', choices=('candlelit','moonlit','uncanny'))
+    p.add_argument('--export-name', help='Public filename stem; does not change the training identity')
+    p.add_argument('--teacher', type=Path, help='Exact original or alpha-bearing native teacher')
+    p.add_argument('--strengths', type=float, nargs='+', default=[1,3,5])
     args=p.parse_args(); args.output.mkdir(parents=True,exist_ok=True)
     torch.set_num_threads(4)
     torch.cuda.set_per_process_memory_fraction(.25)
     runtime=TurboRuntime(args.root/'model','cuda:0')
     samples=json.loads(args.samples.read_text())
-    for variation in ('candlelit','moonlit'):
-        teacher=args.root/'runs'/variation/'ema-001600.safetensors'
-        adapter=ParticleAdapter(runtime.transformer).to(runtime.device)
+    if (args.teacher or args.export_name) and not args.variation:
+        raise ValueError('A teacher or export name requires one selected variation')
+    for variation in ([args.variation] if args.variation else ('candlelit','moonlit')):
+        export_name=args.export_name or variation
+        if Path(export_name).name != export_name:
+            raise ValueError('Export name must be a filename stem')
+        teacher=args.teacher or args.root/'runs'/variation/'ema-001600.safetensors'
+        adapter=AlphaParticleAdapter(runtime.transformer).to(runtime.device)
         adapter.load_export(teacher,model_identity=runtime.identity)
         adapter.requires_grad_(False).eval()
         runtime.mixer.add(variation,adapter)
-        report_path=args.output/f'{variation}-evaluation.json'
-        complete=report_path.exists() and all((args.output/fmt/f'{variation}.safetensors').exists() for fmt in ('native','comfyui'))
+        report_path=args.output/f'{export_name}-evaluation.json'
+        complete=report_path.exists() and all((args.output/fmt/f'{export_name}.safetensors').exists() for fmt in ('native','comfyui'))
         if complete:
             report=json.loads(report_path.read_text())
             if report['teacher_sha256']!=file_hash(teacher):raise ValueError('Resume teacher changed')
         else:
             with runtime.mixer.scales({variation:1.}):
-                train=collect(runtime,adapter,TargetCache(args.root/'targets'/variation/'train',verify=False),training=True)
-                dev=collect(runtime,adapter,TargetCache(args.root/'targets'/variation/'dev',verify=False),training=False)
+                train_cache=TargetCache(args.root/'targets'/variation/'train')
+                dev_cache=TargetCache(args.root/'targets'/variation/'dev')
+                train=collect(runtime,adapter,train_cache,training=True)
+                dev=collect(runtime,adapter,dev_cache,training=False)
         if args.particle_samples_output:
             for sample in samples:
                 if sample['variation'] != variation: continue
-                dest=args.particle_samples_output/variation/f"case{sample['case']}"/f"str{sample['strength']}"
-                if dest.with_suffix('.png').exists(): continue
+                dest=particle_sample_path(args.particle_samples_output,export_name,sample['case'],sample['strength'],'.png')
+                if dest.exists() and dest.with_suffix('.json').exists(): continue
                 payload=sample['payload']
                 with runtime.mixer.scales({variation:sample['strength']}):
                     image=runtime.render(payload['prompt'],payload['seed'],payload['width'],payload['height'],payload['steps'])
                 dest.parent.mkdir(parents=True,exist_ok=True)
-                image.save(dest.with_suffix('.png'))
+                image.save(dest)
                 dest.with_suffix('.json').write_text(json.dumps(dict(**payload,format='particles',
                     strength=sample['strength'],split='dev',model_identity=runtime.identity,
                     adapter_sha256=file_hash(teacher)),indent=2)+'\n')
                 print('particle',dest.name,flush=True)
         if not complete:
             downs,report=fit(adapter,train,dev)
-            save_loras(adapter,downs,args.output,variation,teacher)
-            report.update(variation=variation,teacher_sha256=file_hash(teacher),method='rank8-ridge-full-input',ridge_fraction=.01)
+            save_loras(adapter,downs,args.output,export_name,teacher)
+            report.update(variation=variation,export_name=export_name,teacher_sha256=file_hash(teacher),
+                method='rank8-ridge-full-input',ridge_fraction=.01,
+                train_cache_sha256=train_cache.index['fingerprint'],dev_cache_sha256=dev_cache.index['fingerprint'])
             report_path.write_text(json.dumps(report,indent=2)+'\n')
             del train,dev,downs
         runtime.mixer.close()
         for sample in samples:
-            if sample['variation'] != variation or sample['strength'] not in (1,3,5): continue
+            if sample['variation'] != variation or sample['strength'] not in args.strengths: continue
             payload=sample['payload']; strength=sample['strength']
-            name=f"{variation}-case{sample['case']}-str{strength}"
+            name=f"{export_name}-case{sample['case']}-str{strength:g}"
             dest=args.output/'samples'; dest.mkdir(exist_ok=True)
             if (dest/(name+'.png')).exists() and (dest/(name+'.json')).exists():continue
-            path=args.output/'native'/f'{variation}.safetensors'
+            path=args.output/'native'/f'{export_name}.safetensors'
             handles=attach_lora(runtime.transformer,path,strength)
             try:
                 image=runtime.render(payload['prompt'],payload['seed'],payload['width'],payload['height'],payload['steps'])
             finally:
                 for h in handles:h.remove()
-            name=f"{variation}-case{sample['case']}-str{strength}"
+            name=f"{export_name}-case{sample['case']}-str{strength:g}"
             dest=args.output/'samples'; dest.mkdir(exist_ok=True)
             image.save(dest/(name+'.png'))
-            (dest/(name+'.json')).write_text(json.dumps(dict(**payload,format='distilled',adapter_sha256=file_hash(path)),indent=2)+'\n')
+            (dest/(name+'.json')).write_text(json.dumps(dict(**payload,format='distilled',
+                strength=strength,split='dev',model_identity=runtime.identity,
+                teacher_sha256=file_hash(teacher),adapter_sha256=file_hash(path)),indent=2)+'\n')
             print('rendered',name,flush=True)
     runtime.close()
 
-if __name__=='__main__': main()
+if __name__=='__main__':
+    from lumen_studio.coordinator import GpuLease
+    lease = os.environ.get('ANIMA_GPU_LEASE')
+    with GpuLease(Path('/tmp'), lease) if lease else nullcontext():
+        main()

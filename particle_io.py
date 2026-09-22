@@ -9,8 +9,10 @@ from safetensors.torch import load_file
 
 try:
     from .lumen_studio.particles import Branch, ARCHITECTURE, FORMAT
+    from .lumen_studio.alpha_adapter import ALPHA_FORMAT, alpha_values
 except ImportError:
     from lumen_studio.particles import Branch, ARCHITECTURE, FORMAT
+    from lumen_studio.alpha_adapter import ALPHA_FORMAT, alpha_values
 
 
 def comfy_name(name):
@@ -34,14 +36,19 @@ class ParticleNetwork(nn.Module):
             if down.ndim!=2 or up.ndim!=2 or down.shape[0]!=8 or up.shape[1]!=8:
                 raise ValueError('Invalid rank-8 branch')
             self.branches.append(Branch(down.shape[1],up.shape[0]))
-        self.load_state_dict(state,strict=True)
+        alphas = (alpha_values(metadata, state) if metadata['format'] == ALPHA_FORMAT
+                  else [8.] * len(self.names))
+        self.load_state_dict({k:v for k,v in state.items() if not k.endswith('.alpha')},strict=True)
+        for branch, alpha in zip(self.branches, alphas):
+            if alpha != 8.:
+                branch.register_forward_hook(lambda module,args,output,scale=alpha/8.:output*scale)
         self.requires_grad_(False).eval()
 
     @classmethod
     def load(cls,path):
         with safe_open(str(path),framework='pt',device='cpu') as f:
             metadata=json.loads(f.metadata()['anima'])
-        if metadata['format']!=FORMAT or metadata['architecture']!=ARCHITECTURE:
+        if metadata['format'] not in (FORMAT,ALPHA_FORMAT) or metadata['architecture']!=ARCHITECTURE:
             raise ValueError('Expected a native Anima Turbo particle adapter')
         if metadata['model_identity']['model']!='circlestone-labs/Anima:turbo-v1.1':
             raise ValueError('This adapter is not for Anima Turbo v1.1')

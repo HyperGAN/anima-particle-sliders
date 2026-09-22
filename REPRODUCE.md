@@ -52,7 +52,7 @@ This policy changes kernel-selection heuristics. Exact pixel replay is only clai
 
 ## Rebuild training targets and train
 
-The checked-in `data/train.json` and `data/dev.json` reproduce the archived manifests used by the released runs. The historical catalog also contains Theatrical definitions to retain those manifest hashes; this release publishes only Candlelit and Moonlit. Do not use the final-test characters for fitting or checkpoint selection.
+The checked-in `data/train.json` and `data/dev.json` reproduce the archived lighting manifests. The historical catalog also contains Theatrical definitions to retain those manifest hashes; Theatrical is not released. Bad Intent has separate `data/bad-intent-train.json` and `data/bad-intent-dev.json` manifests. Do not use the final-test characters for fitting or checkpoint selection.
 
 ```bash
 CUDA_VISIBLE_DEVICES=0 .venv-anima/bin/python scripts/anima_cuda_host.py \
@@ -62,6 +62,20 @@ CUDA_VISIBLE_DEVICES=0 .venv-anima/bin/python scripts/anima_cuda_host.py \
 ```
 
 Repeat with `moonlit`. Target generation evaluates both frozen prompts at every timestep on both trajectories at 512 × 512. Training uses the frozen seed-7 recipe, microbatch one, effective batch eight, and no gradient checkpointing. It saves resumable state and immutable EMA exports. It does not select a perceptual winner or certify a newly trained checkpoint's image quality. Generation, training and preparation should run on a GPU you have assigned to this process.
+
+For Bad Intent use `bad-intent` in the same training command. Files remain under
+`targets/uncanny` and `runs/uncanny`, its original training identity. Its target
+contract deliberately edits expression, pose, framing and atmosphere, without
+an identity-preservation requirement. The archived manifests are hash-pinned and
+their rows recompile exactly from the original psychological-horror compiler.
+`lumen_studio/bad_intent.py` retains the original full-catalog provenance hash:
+Studio's unrelated Theatrical definitions had changed by this run, while the
+shared rows used for Bad Intent are identical to this repository's catalog.
+
+The public `weights/bad-intent.safetensors` contains rank 8, alpha 8 and unchanged
+step-1600 learned weights. The native inference command accepts both the original
+particle format and this embedded-alpha format; use `--strength 1` as the starting
+point. The ordinary LoRA uses `--format lora` and its `distilled/native` file.
 
 Training source/recipe hashes and original target-cache indexes accompany the published checkpoints. The original runs reused targets from an earlier runtime with a verified single-image-equivalence certificate; fresh targets use the current equivalent runtime. Rebuilt cache/provenance fingerprints can therefore differ from the original archival run. Numerical determinism depends on the pinned device and kernel policy as well as the seed.
 
@@ -80,6 +94,19 @@ node --check lumen_studio/static/studio.js
 
 `data/release-samples.json` fixes the development sample requests before fitting. The distiller uses training activations for regression and development activations for reporting, then renders matched ordinary-LoRA comparisons. See [DISTILLATION.md](DISTILLATION.md) for the exact ridge objective and measurements.
 
+After preparing Bad Intent's own caches, reproduce its distill using the exact
+public teacher and the separate two-case development sample manifest:
+
+```bash
+CUDA_VISIBLE_DEVICES=0 .venv-anima/bin/python scripts/anima_cuda_host.py \
+  --gpu 0 --sm-count 82 --kernel-policy --script release_tools/distill.py -- \
+  --root artifacts/reproduction --output artifacts/bad-intent/distilled \
+  --variation uncanny --export-name bad-intent \
+  --teacher artifacts/release/weights/bad-intent.safetensors \
+  --samples data/bad-intent-samples.json --strengths 0.5 1 \
+  --particle-samples-output artifacts/bad-intent/samples
+```
+
 ComfyUI integration can be checked in a separate environment with that checkout's dependencies:
 
 ```bash
@@ -90,10 +117,15 @@ CUDA_VISIBLE_DEVICES='' python release_tools/verify_comfy.py /path/to/ComfyUI ar
 
 ## Rebuild the publication
 
-With a downloaded release in `artifacts/release`, regenerate the card and preview grids without generating new images:
+For the additive Bad Intent release, start with a downloaded release and the
+distillation results above. Assemble the new card, comparisons, evidence and
+plugin without replacing previous weights, samples or featured portraits:
 
 ```bash
-.venv-anima/bin/python release_tools/build.py --output artifacts/release
+.venv-anima/bin/python release_tools/add_bad_intent.py \
+  --folder artifacts/release --results artifacts/bad-intent \
+  --root artifacts/reproduction \
+  --teacher artifacts/release/weights/bad-intent.safetensors
 .venv-anima/bin/python release_tools/publish.py --folder artifacts/release
 ```
 

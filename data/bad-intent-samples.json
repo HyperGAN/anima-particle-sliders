@@ -1,0 +1,110 @@
+[
+  {
+    "variation": "uncanny",
+    "public_id": "bad-intent",
+    "label": "Bad Intent",
+    "case": 0,
+    "strength": 0,
+    "source_row_id": "uncanny-dev-00",
+    "character": "original-13",
+    "payload": {
+      "prompt": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, standing upright, facing viewer, arms at sides, upper body, waist-up view, eye-level camera, in an unadorned stone corridor with bare stone walls, anime illustration",
+      "seed": 29001,
+      "width": 768,
+      "height": 768,
+      "steps": 10,
+      "energy": 0,
+      "cfg": 1
+    }
+  },
+  {
+    "variation": "uncanny",
+    "public_id": "bad-intent",
+    "label": "Bad Intent",
+    "case": 0,
+    "strength": 0.5,
+    "source_row_id": "uncanny-dev-00",
+    "character": "original-13",
+    "payload": {
+      "prompt": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, standing upright, facing viewer, arms at sides, upper body, waist-up view, eye-level camera, in an unadorned stone corridor with bare stone walls, anime illustration",
+      "seed": 29001,
+      "width": 768,
+      "height": 768,
+      "steps": 10,
+      "energy": 0.5,
+      "cfg": 1
+    }
+  },
+  {
+    "variation": "uncanny",
+    "public_id": "bad-intent",
+    "label": "Bad Intent",
+    "case": 0,
+    "strength": 1,
+    "source_row_id": "uncanny-dev-00",
+    "character": "original-13",
+    "payload": {
+      "prompt": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, standing upright, facing viewer, arms at sides, upper body, waist-up view, eye-level camera, in an unadorned stone corridor with bare stone walls, anime illustration",
+      "seed": 29001,
+      "width": 768,
+      "height": 768,
+      "steps": 10,
+      "energy": 1,
+      "cfg": 1
+    }
+  },
+  {
+    "variation": "uncanny",
+    "public_id": "bad-intent",
+    "label": "Bad Intent",
+    "case": 1,
+    "strength": 0,
+    "source_row_id": "uncanny-dev-09",
+    "character": "original-14",
+    "payload": {
+      "prompt": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, in an unadorned stone corridor with bare stone walls",
+      "seed": 29001,
+      "width": 768,
+      "height": 768,
+      "steps": 10,
+      "energy": 0,
+      "cfg": 1
+    }
+  },
+  {
+    "variation": "uncanny",
+    "public_id": "bad-intent",
+    "label": "Bad Intent",
+    "case": 1,
+    "strength": 0.5,
+    "source_row_id": "uncanny-dev-09",
+    "character": "original-14",
+    "payload": {
+      "prompt": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, in an unadorned stone corridor with bare stone walls",
+      "seed": 29001,
+      "width": 768,
+      "height": 768,
+      "steps": 10,
+      "energy": 0.5,
+      "cfg": 1
+    }
+  },
+  {
+    "variation": "uncanny",
+    "public_id": "bad-intent",
+    "label": "Bad Intent",
+    "case": 1,
+    "strength": 1,
+    "source_row_id": "uncanny-dev-09",
+    "character": "original-14",
+    "payload": {
+      "prompt": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, in an unadorned stone corridor with bare stone walls",
+      "seed": 29001,
+      "width": 768,
+      "height": 768,
+      "steps": 10,
+      "energy": 1,
+      "cfg": 1
+    }
+  }
+]

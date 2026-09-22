@@ -36,6 +36,7 @@ def grid(images,path,labels):
 
 
 def copy(source,dest):
+    if source.resolve()==dest.resolve():return
     dest.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(source,dest)
 
 
@@ -61,6 +62,8 @@ def main():
     p.add_argument('--output',type=Path,required=True)
     args=p.parse_args();out=args.output
     catalog=json.loads((out/'catalog.json').read_text())
+    if any(e['id'] == 'bad-intent' for e in catalog['sliders']):
+        raise ValueError('Use release_tools/add_bad_intent.py to preserve the additive release and its featured portraits')
     entries=sorted(catalog['sliders'],key=lambda e:0 if e['id']=='moonlit' else 1)
     intro='# Anima Concept Sliders\n\n**Moonlit and Candlelit for Anima Turbo v1.1.** Same prompt and seed; turn the atmosphere from strength 0 to 5.\n\n'
     card=intro+'## Samples\n\n**Start with Particle — the original slider.** Each comparison reads **Particle → Distill → Off**, left to right. Distill is the ordinary-LoRA approximation; Off is the base model.\n\n'
@@ -167,7 +170,7 @@ tags:
     (out/'pending-samples.json').unlink(missing_ok=True)
     # Package only the files required to import the ComfyUI plugin.
     plugin=['__init__.py','comfy_particle.py','particle_io.py','requirements.txt','core.lock.json','COMFYUI.md','LICENSE','ANIMA-LICENSE.md','NOTICE',
-            'lumen_studio/__init__.py','lumen_studio/particles.py','lumen_studio/contracts.py',
+            'lumen_studio/__init__.py','lumen_studio/particles.py','lumen_studio/contracts.py','lumen_studio/alpha_adapter.py',
             'lumen_studio/vendor/__init__.py','lumen_studio/vendor/reference.py','lumen_studio/vendor/LICENSE','lumen_studio/vendor/provenance.json']
     zpath=out/'comfyui/anima-concept-sliders.zip';zpath.parent.mkdir(exist_ok=True)
     with zipfile.ZipFile(zpath,'w',zipfile.ZIP_DEFLATED) as z:

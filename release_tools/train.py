@@ -13,19 +13,24 @@ from lumen_studio.training import Trainer
 
 def main():
     p=argparse.ArgumentParser(description=__doc__)
-    p.add_argument('variation',choices=['candlelit','moonlit'])
+    p.add_argument('variation',choices=['candlelit','moonlit','bad-intent'])
     p.add_argument('--root',type=Path,default=Path('artifacts/reproduction'))
     p.add_argument('--model',type=Path,required=True)
     p.add_argument('--prepare-targets',action='store_true')
     p.add_argument('--until',type=int,default=1600)
     args=p.parse_args()
+    if args.variation == 'bad-intent':
+        args.variation = 'uncanny'  # Immutable training identity predates the public name.
+        from lumen_studio.bad_intent import manifest_for
+    else:
+        manifest_for = compile_manifest
     if not 1<=args.until<=1600:p.error('--until must be between 1 and 1600')
     runtime=TurboRuntime(args.model,'cuda:0',checkpointing=False)
     trainer=None
     try:
         if args.prepare_targets:
             for split in ('train','dev'):
-                prepare_targets(runtime,compile_manifest(split),args.variation,
+                prepare_targets(runtime,manifest_for(split),args.variation,
                     args.root/'targets'/args.variation/split,
                     progress=lambda done,total:print('targets',done,total,flush=True))
         train=TargetCache(args.root/'targets'/args.variation/'train',pin_memory=True)

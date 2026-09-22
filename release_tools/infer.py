@@ -7,7 +7,7 @@ ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
 from lumen_studio import execution
 from lumen_studio.backends.anima import TurboRuntime
-from lumen_studio.particles import ParticleAdapter
+from lumen_studio.alpha_adapter import AlphaParticleAdapter
 from lumen_studio.contracts import file_hash
 from release_tools.distill import attach_lora
 
@@ -30,7 +30,7 @@ def main():
     handles=[]
     try:
         if args.format=='particles':
-            adapter=ParticleAdapter(runtime.transformer).to(runtime.device)
+            adapter=AlphaParticleAdapter(runtime.transformer).to(runtime.device)
             adapter.load_export(args.adapter,model_identity=runtime.identity)
             adapter.requires_grad_(False).eval()
             runtime.mixer.add('release',adapter)

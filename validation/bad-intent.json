@@ -1,0 +1,26 @@
+{
+  "passed": true,
+  "public_name": "Bad Intent",
+  "training_id": "uncanny",
+  "checkpoint_step": 1600,
+  "teacher_sha256": "21aafdd18bb67fbfc06e7c98dfa042f1a90761d6f926c19cf3aab4b71e538553",
+  "original_sha256": "2dbf8858c38061765a5d22aabdaf1e56dba661b4f95e206af77ece1cbf7ac4de",
+  "learned_tensors_unchanged": true,
+  "alpha": 8,
+  "rank": 8,
+  "projection_count": 224,
+  "heldout_projection_relative_mse": 0.0054337605894915824,
+  "distillation_method": "rank8-ridge-full-input",
+  "source_tests": 83,
+  "studio_tests": 113,
+  "source_training_engine_unchanged": true,
+  "studio_pinned_hashes_unchanged": 13,
+  "comfy_cpu_integration": "comfyui.json",
+  "sample_validation": "samples.json",
+  "gpu_native_render_cases": 2,
+  "final_test_used": false,
+  "limitations": [
+    "The strength-1 LoRA is much milder on these development cases despite small projection error.",
+    "Full ComfyUI GPU image generation was not tested."
+  ]
+}

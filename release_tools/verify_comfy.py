@@ -31,7 +31,7 @@ base.model_config=SimpleNamespace(unet_config={})
 patcher=ModelPatcher(base,torch.device('cpu'),torch.device('cpu'))
 folder_paths.add_model_folder_path('loras',str(WEIGHTS/'weights'))
 node=AnimaParticleSlider();reports=[]
-for variation in ('candlelit','moonlit'):
+for variation in [s['id'] for s in json.loads((WEIGHTS/'catalog.json').read_text())['sliders']]:
     file=WEIGHTS/'weights'/f'{variation}.safetensors'
     network,metadata=ParticleNetwork.load(file)
     wrapped=node.load(patcher,file.name,1.)[0]
@@ -71,6 +71,8 @@ for variation in ('candlelit','moonlit'):
         assert torch.equal(native[name+'.lora_A.weight'],state[prefix+'.lora_down.weight'])
         assert torch.equal(native[name+'.lora_B.weight'],state[prefix+'.lora_up.weight'])
         assert state[prefix+'.alpha']==8
+        if name+'.alpha' in native:
+            assert torch.equal(native[name+'.alpha'],state[prefix+'.alpha'])
     reports.append(dict(variation=variation,particle_projections=224,lora_patches=224,
         particle_max_abs=max(errors),zero_bypass=True,clone_isolation=True,exception_restoration=True))
 import subprocess

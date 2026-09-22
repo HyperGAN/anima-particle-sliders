@@ -67,6 +67,13 @@ def compile_manifest(split="train", *, definitions=None, characters=None):
 
 
 def validate_manifest(manifest, *, definitions=None, characters=None):
+    if "extension" in manifest:
+        from .psychological_horror import SCHEMA
+        from .bad_intent import validate_manifest as validate_horror
+        if manifest["extension"] != SCHEMA or definitions is not None or characters is not None:
+            raise ValueError("Unsupported extended manifest")
+        validate_horror(manifest)
+        return
     if digest({k: v for k, v in manifest.items() if k != "sha256"}) != manifest["sha256"]:
         raise ValueError("Manifest hash mismatch")
     if len({r["id"] for r in manifest["rows"]}) != len(manifest["rows"]):

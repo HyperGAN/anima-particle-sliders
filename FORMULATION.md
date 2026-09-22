@@ -1,6 +1,6 @@
 # How the Anima sliders learn
 
-These are nonlinear attention adapters for **Anima Turbo v1.1**. The base diffusion transformer, text encoders, text conditioner, and VAE stay frozen. Candlelit and Moonlit each have their own adapter, critic, and learned particle cloud.
+These are nonlinear attention adapters for **Anima Turbo v1.1**. The base diffusion transformer, text encoders, text conditioner, and VAE stay frozen. Bad Intent, Candlelit and Moonlit each have their own adapter, critic, and learned particle cloud. Bad Intent uses the same game with a broader psychological-horror target: expression, pose and framing may change as well as atmosphere. Its internal training identifier remains `uncanny`.
 
 ## The particle branch
 
@@ -80,7 +80,7 @@ Noise starts at the training edit RMS divided by 0.28. It decays geometrically t
 | Public samples | 768 × 768, 10 Euler steps, CFG 1, scheduler shift 3 |
 | Per slider training data | 24 paired prompt rows × 16 seeds; both trajectories × 10 positions |
 
-The original adult character catalog separates 12 training characters, four development characters, and eight final-test characters. Six lighting definitions train each slider; two extra paraphrases are held out. The public gallery uses development cases, including a bare prompt, and is not a final-test benchmark.
+The original adult character catalog separates 12 training characters, four development characters, and eight final-test characters. Six definitions train each slider; two extra paraphrases are held out. Candlelit and Moonlit edit lighting; Bad Intent uses expression, pose, framing and atmosphere definitions. The public gallery uses development cases, including a bare prompt, and is not a final-test benchmark.
 
 These are final-budget experimental checkpoints. They were not selected as the best checkpoint by perceptual quality. Strengths above one extrapolate beyond training and can change clothing, pose, setting, or composition. The measured 1,600-update runs did not establish convergence. Training traces, normalization provenance, checkpoint hashes, and development measurements accompany the weights.
 

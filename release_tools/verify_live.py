@@ -8,23 +8,25 @@ from playwright.sync_api import sync_playwright
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--output',type=Path,required=True)
+    p.add_argument('--browser',default='/bin/google-chrome')
     args=p.parse_args();args.output.mkdir(parents=True,exist_ok=True)
     url='https://huggingface.co/ntc-ai/anima-concept-sliders'
     with sync_playwright() as pw:
-        browser=pw.chromium.launch(executable_path='/bin/google-chrome',headless=True,args=['--no-sandbox','--disable-gpu'])
+        browser=pw.chromium.launch(executable_path=args.browser,headless=True,args=['--no-sandbox','--disable-gpu'])
         page=browser.new_page(viewport={'width':1440,'height':1050})
         assert page.goto(url,wait_until='domcontentloaded',timeout=60000).status==200
-        page.wait_for_selector('img[alt^="Moonlit: Particle first"]',timeout=30000)
+        page.wait_for_selector('img[alt^="Bad Intent: Particle first"]',timeout=30000)
         lead=page.locator('img[alt$="Off third"]')
-        assert lead.count()==2
-        assert lead.nth(0).get_attribute('alt').startswith('Moonlit:')
-        assert lead.nth(1).get_attribute('alt').startswith('Candlelit:')
+        assert lead.count()==3
+        assert lead.nth(0).get_attribute('alt').startswith('Bad Intent:')
+        assert lead.nth(1).get_attribute('alt').startswith('Moonlit:')
+        assert lead.nth(2).get_attribute('alt').startswith('Candlelit:')
         assert lead.evaluate_all('(els)=>els.every(e=>!e.closest("details"))')
         # Open folded extra prompts and scroll through the card to trigger lazy images.
         page.locator('details').evaluate_all('(els)=>els.forEach(e=>e.open=true)')
         selector='img[alt*="matched samples"], img[alt*="particle versus distilled"], img[alt$="Off third"]'
         images=page.locator(selector)
-        assert images.count()==12,images.count()
+        assert images.count()==14,images.count()
         for i in range(images.count()):
             im=images.nth(i);im.scroll_into_view_if_needed()
             im.evaluate('(e)=>e.loading="eager"')
@@ -48,7 +50,7 @@ def main():
             records[name]=sizes
             page.screenshot(path=str(args.output/(name+'.png')))
         result=dict(passed=True,url=url,sample_grids=images.count(),loaded_images=True,equations=equations,
-                    lead_slider='Moonlit',comparison_order=['Particle','Distill','Off'],comparison_strengths=[3,3,0],
+                    lead_slider='Bad Intent',comparison_order=['Particle','Distill','Off'],comparison_strengths=[1,1,0],
                     samples_before_downloads_and_formulation=True,shared_core_link=True,comfyui_plugin_link=True,
                     layout=records,math_errors=0)
         (args.output/'browser.json').write_text(json.dumps(result,indent=2)+'\n')

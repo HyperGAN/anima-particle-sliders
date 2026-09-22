@@ -15,6 +15,12 @@ def digest(path):
     with path.open('rb') as f:return hashlib.file_digest(f,'sha256').hexdigest()
 
 
+def release_files(folder):
+    # snapshot_download's bookkeeping is local state, never release evidence.
+    return [p for p in sorted(folder.rglob('*')) if p.is_file()
+            and p.relative_to(folder).parts[0] not in ('.cache','.git')]
+
+
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--folder',type=Path,required=True)
@@ -24,17 +30,22 @@ def main():
     for name in ('source','comfyui','shared-core'):
         assert json.loads((ROOT/f'validation/{name}.json').read_text())['passed']
     catalog=json.loads((folder/'catalog.json').read_text())
-    assert [e['id'] for e in catalog['sliders']]==['candlelit','moonlit']
+    assert [e['id'] for e in catalog['sliders']]==['bad-intent','candlelit','moonlit']
     for e in catalog['sliders']:
         assert digest(folder/e['particle'])==e['sha256']
         for key in ('native_lora','comfyui_lora'):assert (folder/e[key]).is_file()
-        assert len(e['samples'])==24
+        assert len(e['samples'])==(6 if e['id']=='bad-intent' else 24)
         for sample in e['samples']:
             assert 0<=sample['strength']<=5
             for key in ('image','metadata'):assert (folder/sample[key]).is_file()
-    assert len(list((folder/'distilled/samples').glob('*.png')))==24
+    assert len(list((folder/'distilled/samples').glob('*.png')))==28
+    bad=catalog['sliders'][0]
+    assert bad['training_id']=='uncanny' and bad['recommended_strength']==1
+    assert {s['strength'] for s in bad['samples']}=={0,.5,1}
+    assert any(r['variation']=='bad-intent' for r in json.loads((ROOT/'validation/comfyui.json').read_text())['sliders'])
     card=(folder/'README.md').read_text()
     assert card.index('## Samples')<card.index('## Get the adapters')<card.index('## How the sliders learn')
+    assert card.index('### Bad Intent')<card.index('### Moonlit')<card.index('### Candlelit')
     assert 'https://github.com/mikkel/anima-concept-sliders#comfyui' in card
     for name in re.findall(r'https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/([^)?\s]+)',card):
         assert (folder/name).is_file(),('Broken release link',name)
@@ -59,7 +70,7 @@ def main():
     with zipfile.ZipFile(folder/'source.zip','w',zipfile.ZIP_DEFLATED) as z:
         for name in files:z.write(ROOT/name,'anima-concept-sliders/'+name)
     manifest=dict(source_commit=commit,files={str(f.relative_to(folder)):dict(bytes=f.stat().st_size,sha256=digest(f))
-        for f in sorted(folder.rglob('*')) if f.is_file() and f.name!='release-manifest.json'})
+        for f in release_files(folder) if f.name!='release-manifest.json'})
     (folder/'release-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
     ModelCard.load(folder/'README.md').validate()
     print('Validated',len(manifest['files']),'release files; source',commit,flush=True)
@@ -70,7 +81,7 @@ def main():
     existing={f.rfilename:f for f in before.siblings}
     if set(existing)-{'.gitattributes'}:
         assert args.expected_parent==before.sha,'Supply the inspected release parent before updating'
-        local={str(p.relative_to(folder)) for p in folder.rglob('*') if p.is_file()}
+        local={str(p.relative_to(folder)) for p in release_files(folder)}
         assert set(existing)-{'.gitattributes'}<=local,'Reconcile unrecognized remote files'
         # Source/docs may evolve; preserve every released checkpoint and sample.
         for name,r in existing.items():
@@ -85,12 +96,12 @@ def main():
         assert args.expected_parent==before.sha,'Release parent changed'
     result=api.upload_folder(repo_id=REPO,repo_type='model',folder_path=folder,
         parent_commit=before.sha,
-        commit_message='Publish reproducible Anima release with pinned sliders-conceptmod shared core')
+        ignore_patterns=['.cache/**','.git/**'],
+        commit_message='Feature Bad Intent with native particles, ordinary LoRA distills and matched samples')
     revision=result.oid
     remote={f.rfilename:f for f in api.model_info(REPO,revision=revision,files_metadata=True).siblings}
     checked=0
-    for path in sorted(folder.rglob('*')):
-        if not path.is_file():continue
+    for path in release_files(folder):
         name=str(path.relative_to(folder));r=remote[name]
         assert r.size==path.stat().st_size,name
         if r.lfs:assert r.lfs.sha256==digest(path),name
@@ -98,7 +109,7 @@ def main():
             data=path.read_bytes()
             assert r.blob_id==hashlib.sha1(f'blob {len(data)}\0'.encode()+data).hexdigest(),name
         checked+=1
-    for name in ('README.md','weights/candlelit.safetensors','distilled/comfyui/moonlit.safetensors'):
+    for name in ('README.md','weights/bad-intent.safetensors','distilled/comfyui/bad-intent.safetensors'):
         downloaded=Path(hf_hub_download(REPO,name,revision=revision))
         assert digest(downloaded)==digest(folder/name),name
     report=dict(repo=REPO,commit=revision,source_commit=commit,core_commit=core['commit'],verified_files=checked,readbacks=3,
