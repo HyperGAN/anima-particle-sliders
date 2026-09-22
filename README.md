@@ -12,9 +12,9 @@ Bad Intent changes expression, pose, framing and sometimes appearance or medium.
 
 **Particle · strength 1** → **Distill · strength 1** → **Off · strength 0**
 
-![Bad Intent: Particle first, Distill second, Off third](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/unit-alpha-bad-intent-case0.jpg)
+![Bad Intent: Particle first, Distill second, Off third](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/balanced-alpha-bad-intent-case0.jpg)
 
-Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/bad-intent/case0/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/bad-intent/case0/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/bad-intent/case0/off.png)
+Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/balanced-alpha/bad-intent/case0/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/balanced-alpha/bad-intent/case0/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/balanced-alpha/bad-intent/case0/off.png)
 
 <details><summary>Prompt and seed</summary>
 
@@ -25,6 +25,8 @@ Seed: `29001`.
 </details>
 
 The alpha-24 distill restores the leaning pose and intense expression in these development examples. It remains an approximation; the bare male example differs in rendering medium from the particle teacher.
+
+The particle now uses alpha **12**, with the distill at **24**, to bring their visible intensity closer at strength 1. The two formats still differ in details and rendering style. [Comparison audit](validation/bad-intent-balance.json).
 
 ### Moonlit
 
@@ -62,9 +64,9 @@ Seed: `29001`.
 
 ### Bad Intent · case1
 
-![Bad Intent: matched strength-one samples, case1](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/unit-alpha-bad-intent-case1.jpg)
+![Bad Intent: matched strength-one samples, case1](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/balanced-alpha-bad-intent-case1.jpg)
 
-Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/bad-intent/case1/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/bad-intent/case1/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/bad-intent/case1/off.png)
+Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/balanced-alpha/bad-intent/case1/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/balanced-alpha/bad-intent/case1/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/balanced-alpha/bad-intent/case1/off.png)
 
 <details><summary>Prompt and seed</summary>
 
@@ -196,7 +198,7 @@ These are development examples, not a final-test benchmark. Strength 1 is the ca
 
 | Slider | Original particles | Distilled LoRA for ComfyUI | Distilled LoRA for native runtime |
 |---|---|---|---|
-| Bad Intent | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/weights/bad-intent.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/distilled/comfyui/bad-intent-unit-alpha.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/distilled/native/bad-intent-unit-alpha.safetensors?download=true) |
+| Bad Intent | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/weights/bad-intent-balanced-alpha.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/distilled/comfyui/bad-intent-unit-alpha.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/distilled/native/bad-intent-unit-alpha.safetensors?download=true) |
 | Moonlit | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/weights/moonlit-unit-alpha.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/distilled/comfyui/moonlit-unit-alpha.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/distilled/native/moonlit-unit-alpha.safetensors?download=true) |
 | Candlelit | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/weights/candlelit-unit-alpha.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/distilled/comfyui/candlelit-unit-alpha.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/distilled/native/candlelit-unit-alpha.safetensors?download=true) |
 
@@ -206,7 +208,7 @@ These are development examples, not a final-test benchmark. Strength 1 is the ca
 
 | Slider | Particle alpha | Distill alpha | Rank |
 |---|---:|---:|---:|
-| Bad Intent | 8 | 24 | 8 |
+| Bad Intent | 12 | 24 | 8 |
 | Moonlit | 23.08072422 | 23.08072422 | 8 |
 | Candlelit | 16 | 16 | 8 |
 

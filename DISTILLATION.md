@@ -33,7 +33,9 @@ characters were used for fitting, tuning or these demonstrations.
 A subsequent development sweep found that **alpha 24 at rank 8** recovers the
 looming composition and intense expression in both featured cases. The original
 alpha-8 distill at **MODEL strength 3** performs the same operation. This changes
-only the ordinary LoRA's alpha; the particle teacher stays at alpha 8, strength 1.
+only the ordinary LoRA's alpha; that first sweep kept the particle teacher at
+alpha 8, strength 1. The subsequent visual-strength balance below raises the
+current particle alpha to 12.
 The alpha-24 native and ComfyUI derivatives are the current downloads under
 `distilled/{native,comfyui}/bad-intent-unit-alpha.safetensors`. Original alpha-8
 files and historical examples remain at their original paths. Use nominal MODEL
@@ -85,7 +87,7 @@ hashes, measurements and limitations.
 Current Candlelit particles embed alpha 16 and Moonlit particles embed alpha
 23.08072421821097, both at rank 8. These are the exact previously selected Studio
 exports: nominal strength 1 applies gains 2 and 2.8850905272763714 relative to
-the original particles. Bad Intent's particle alpha remains 8. There is no extra
+the original particles. Bad Intent's current particle alpha is 12. There is no extra
 UI multiplier. Every learned tensor is unchanged from the original EMA export.
 
 Lighting LoRAs carry the same alpha gain as the corresponding particle teacher.
@@ -100,3 +102,39 @@ slider. All 36 Particle/Distill/Off images were regenerated from the selected
 exports. [Unit-alpha verification](validation/unit-alpha.json) records the exact
 file hashes, embedded alphas, unchanged learned weights, sample settings and
 pixel-exact Off replays. Full ComfyUI GPU generation remains outside this audit.
+
+## Matching Bad Intent's visual intensity
+
+The first publication's alpha-24 LoRA looked more intense than its alpha-8
+particle reference. A follow-up sweep compared particle alphas 8, 10, 12 and 16
+with LoRA alphas 20, 22 and 24 on the same two development prompts/seeds, plus
+the same 40 shared neutral states used above. The selected defaults are now
+**particle alpha 12, LoRA alpha 24**, both rank 8 at nominal strength **1.0**.
+
+The particle's forward pose and grin become stronger in both examples. Alpha 16
+pushes head tilt, grin and the male rendering-medium change further. Alpha 12
+was chosen for visual intensity, preserving the already preferred LoRA effect.
+The particle's 50% alpha increase does not imply a 50% whole-image or velocity
+change, since the complete denoiser remains nonlinear.
+
+| Particle alpha | LoRA alpha | LoRA / particle edit RMS | Edit cosine | Relative full-edit MSE |
+| ---: | ---: | ---: | ---: | ---: |
+| 8 | 24 | 1.1418 | 0.8205 | 0.4301 |
+| 10 | 24 | 1.0278 | 0.8706 | 0.2669 |
+| **12** | **24** | **0.9333** | **0.8533** | **0.2783** |
+| 16 | 24 | 0.8638 | 0.8122 | 0.3429 |
+
+Alpha 10 is the closest numerical amplitude/error match in this subset; 12 is
+the visual selection. The selected edit amplitudes differ by about 7% on these
+states. These measurements do not prove equal perceived strength or that the
+original must look better than its distill. Both images remain approximations
+of an intended effect, and the male particle still differs in medium.
+
+The current particle download is `weights/bad-intent-balanced-alpha.safetensors`.
+It contains unchanged learned tensors from the original step-1600 EMA; only
+alpha and provenance differ. The LoRA files are unchanged. The new examples
+under `samples/balanced-alpha/bad-intent/` were rendered directly from these
+files at nominal 1. Original alpha-8 and first calibrated samples remain
+available at their original paths. See the reproducible
+[`data/bad-intent-balance.json`](data/bad-intent-balance.json) selection and
+[`validation/bad-intent-balance.json`](validation/bad-intent-balance.json) audit.

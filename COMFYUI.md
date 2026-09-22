@@ -14,15 +14,19 @@ python -m pip install -r anima-concept-sliders/requirements.txt
 
 Use the Python executable belonging to your ComfyUI installation for the install command (including its embedded Python on portable installations). The plugin ZIP needs the same requirements install. This installs the pinned shared algorithm package from [sliders-conceptmod](https://github.com/mikkel/sliders-conceptmod/tree/main/packages/concept-slider-core).
 
-Download [Bad Intent](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/weights/bad-intent.safetensors?download=true), [Candlelit](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/weights/candlelit-unit-alpha.safetensors?download=true) or [Moonlit](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/weights/moonlit-unit-alpha.safetensors?download=true) into `ComfyUI/models/loras/`. Update an existing plugin installation for the embedded-alpha format. Insert **Anima Particle Slider (ntc-ai)** between the diffusion model loader and your sampler:
+Download [Bad Intent](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/weights/bad-intent-balanced-alpha.safetensors?download=true), [Candlelit](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/weights/candlelit-unit-alpha.safetensors?download=true) or [Moonlit](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/weights/moonlit-unit-alpha.safetensors?download=true) into `ComfyUI/models/loras/`. Update an existing plugin installation for the embedded-alpha format. Insert **Anima Particle Slider (ntc-ai)** between the diffusion model loader and your sampler:
 
 ```text
 Load Diffusion Model (anima-turbo-v1.1)
-  → Anima Particle Slider (adapter_name: bad-intent.safetensors, strength: 1)
+  → Anima Particle Slider (adapter_name: bad-intent-balanced-alpha.safetensors, strength: 1)
   → existing Anima Turbo sampling workflow
 ```
 
-Keep the official Turbo model-sampling settings. Start with 10 steps, CFG 1, Euler, 768 × 768. Strength 0 is an exact bypass; **1.0 is the calibrated default**. Higher strengths extrapolate the effect. Calibration is embedded in alpha (Bad Intent 8, Candlelit 16, Moonlit 23.08072421821097, all rank 8); do not add an external gain. No trigger word is needed. The sample prompt stays fixed while strength changes.
+Keep the official Turbo model-sampling settings. Start with 10 steps, CFG 1, Euler, 768 × 768. Strength 0 is an exact bypass; **1.0 is the calibrated default**. Higher strengths extrapolate the effect. Calibration is embedded in alpha (Bad Intent 12, Candlelit 16, Moonlit 23.08072421821097, all rank 8); do not add an external gain. No trigger word is needed. The sample prompt stays fixed while strength changes.
+
+The old `bad-intent.safetensors` particle remains at alpha 8. Its strength 1.5
+is equivalent to the current alpha-12 particle at strength 1. The Bad Intent
+LoRA retains alpha 24; no LoRA replacement is needed for this balance update.
 
 Chain two particle nodes to mix Candlelit and Moonlit. The nodes use independent direct strengths. To match a Studio mix, normalize each slider to `energy × proportion / sum(proportions)` before entering its node strength.
 

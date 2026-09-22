@@ -11,9 +11,9 @@
       "zero_bypass": true,
       "clone_isolation": true,
       "exception_restoration": true,
-      "particle": "weights/bad-intent.safetensors",
+      "particle": "weights/bad-intent-balanced-alpha.safetensors",
       "lora": "distilled/comfyui/bad-intent-unit-alpha.safetensors",
-      "particle_alpha": 8.0,
+      "particle_alpha": 12.0,
       "lora_alphas": [
         24.0
       ]

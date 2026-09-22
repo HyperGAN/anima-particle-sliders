@@ -43,6 +43,7 @@ def main():
             assert page.locator(f'a[href*="distilled/comfyui/{name}-unit-alpha.safetensors"]').count()>0
         for name in ('candlelit','moonlit'):
             assert page.locator(f'a[href*="weights/{name}-unit-alpha.safetensors"]').count()>0
+        assert page.locator('a[href*="weights/bad-intent-balanced-alpha.safetensors"]').count()>0
         first=images.first;first.scroll_into_view_if_needed()
         page.screenshot(path=str(args.output/'desktop.png'))
         records={}

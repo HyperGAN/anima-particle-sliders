@@ -4,48 +4,48 @@
   "final_test_used": false,
   "samples": [
     {
-      "path": "samples/unit-alpha/bad-intent/case0/particles.png",
-      "metadata": "samples/unit-alpha/bad-intent/case0/particles.json",
-      "sha256": "6026678a4b342c5221d203a92f71e97dfea9df21d28c14248044da8bbd27d462",
-      "adapter_sha256": "21aafdd18bb67fbfc06e7c98dfa042f1a90761d6f926c19cf3aab4b71e538553",
+      "path": "samples/balanced-alpha/bad-intent/case0/particles.png",
+      "metadata": "samples/balanced-alpha/bad-intent/case0/particles.json",
+      "sha256": "ced8ff4b445e165bed0687d6511f733eb9390a1d483bc43542a390efb4536a17",
+      "adapter_sha256": "c00e13684eefca669ac0d9c7b2afd2cc76b01791e43e04d81be72fe3f00c401b",
       "strength": 1,
-      "alpha": 8.0
+      "alpha": 12.0
     },
     {
-      "path": "samples/unit-alpha/bad-intent/case0/lora.png",
-      "metadata": "samples/unit-alpha/bad-intent/case0/lora.json",
+      "path": "samples/balanced-alpha/bad-intent/case0/lora.png",
+      "metadata": "samples/balanced-alpha/bad-intent/case0/lora.json",
       "sha256": "9b13f7920b3b7ea66fd870af9644479f46ce5ad50bbc9d9efa62b8fb3a0a96ec",
       "adapter_sha256": "0e7363288bcef49fb9e91c55dbf58533cacc3389e9d34575704d1a39cc56b94c",
       "strength": 1,
       "alpha": 24.0
     },
     {
-      "path": "samples/unit-alpha/bad-intent/case0/off.png",
-      "metadata": "samples/unit-alpha/bad-intent/case0/off.json",
+      "path": "samples/balanced-alpha/bad-intent/case0/off.png",
+      "metadata": "samples/balanced-alpha/bad-intent/case0/off.json",
       "sha256": "735ad5d840cfe2313b4b80d6048c09d07eb774cb138187053a14c873cb71a0eb",
       "adapter_sha256": null,
       "strength": 0,
       "alpha": null
     },
     {
-      "path": "samples/unit-alpha/bad-intent/case1/particles.png",
-      "metadata": "samples/unit-alpha/bad-intent/case1/particles.json",
-      "sha256": "63bb5fdbfcd94191866b84dd994d8943ff5bb77106852902dde431c56747510c",
-      "adapter_sha256": "21aafdd18bb67fbfc06e7c98dfa042f1a90761d6f926c19cf3aab4b71e538553",
+      "path": "samples/balanced-alpha/bad-intent/case1/particles.png",
+      "metadata": "samples/balanced-alpha/bad-intent/case1/particles.json",
+      "sha256": "d3417f2eb8cb5b380b041e438efa23da1f8b2c588b6a26c7b7231a20f056f2d0",
+      "adapter_sha256": "c00e13684eefca669ac0d9c7b2afd2cc76b01791e43e04d81be72fe3f00c401b",
       "strength": 1,
-      "alpha": 8.0
+      "alpha": 12.0
     },
     {
-      "path": "samples/unit-alpha/bad-intent/case1/lora.png",
-      "metadata": "samples/unit-alpha/bad-intent/case1/lora.json",
+      "path": "samples/balanced-alpha/bad-intent/case1/lora.png",
+      "metadata": "samples/balanced-alpha/bad-intent/case1/lora.json",
       "sha256": "4695ac1c86094ef83d62ec94d4dd77ccbe7669e9d91c6c2914325370313eaf59",
       "adapter_sha256": "0e7363288bcef49fb9e91c55dbf58533cacc3389e9d34575704d1a39cc56b94c",
       "strength": 1,
       "alpha": 24.0
     },
     {
-      "path": "samples/unit-alpha/bad-intent/case1/off.png",
-      "metadata": "samples/unit-alpha/bad-intent/case1/off.json",
+      "path": "samples/balanced-alpha/bad-intent/case1/off.png",
+      "metadata": "samples/balanced-alpha/bad-intent/case1/off.json",
       "sha256": "acc5cad87af3f8acf50a245b592c0b5c87a120ce49b6103e126a67d68af6603c",
       "adapter_sha256": null,
       "strength": 0,
@@ -296,11 +296,11 @@
     {
       "slider": "bad-intent",
       "format": "particle",
-      "path": "weights/bad-intent.safetensors",
-      "sha256": "21aafdd18bb67fbfc06e7c98dfa042f1a90761d6f926c19cf3aab4b71e538553",
+      "path": "weights/bad-intent-balanced-alpha.safetensors",
+      "sha256": "c00e13684eefca669ac0d9c7b2afd2cc76b01791e43e04d81be72fe3f00c401b",
       "source": "weights/bad-intent.safetensors",
       "source_sha256": "21aafdd18bb67fbfc06e7c98dfa042f1a90761d6f926c19cf3aab4b71e538553",
-      "alpha": 8.0,
+      "alpha": 12.0,
       "rank": 8,
       "learned_tensors_unchanged": true
     },
@@ -458,7 +458,7 @@
   "images": 36,
   "comparisons": 12,
   "particle_alphas": {
-    "bad-intent": 8.0,
+    "bad-intent": 12.0,
     "candlelit": 16.0,
     "moonlit": 23.08072421821097
   },
@@ -467,10 +467,5 @@
     "candlelit": 16.0,
     "moonlit": 23.08072421821097
   },
-  "limitation": "Development examples rendered in the pinned native runtime; full ComfyUI GPU generation is not covered.",
-  "visual_review": {
-    "comparisons_reviewed": 12,
-    "particle_effects": "Candlelit warm amber, Moonlit blue shadows, Bad Intent leaning and intense expression at nominal 1.",
-    "lora_limitations": "Lighting distills remain milder; Bad Intent restores the strong edit but differs from particle details and rendering medium."
-  }
+  "limitation": "Development examples rendered in the pinned native runtime; full ComfyUI GPU generation is not covered."
 }

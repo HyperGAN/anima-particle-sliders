@@ -135,7 +135,10 @@ python release_tools/calibrated_release.py verify --folder artifacts/release --s
 Use an available GPU; the exclusive lease rejects another Anima coordinator.
 The staging step reads `exports/alpha-unit-v1/exports.json`, verifies the exact
 selected particle hashes and unchanged learned tensors, and creates new named
-LoRAs by changing alpha. Existing weights and samples remain archived at their
+LoRAs by changing alpha. It also applies the checked-in
+`data/bad-intent-balance.json`: derive the current Bad Intent particle at alpha
+12 from its original step-1600 EMA, retain LoRA alpha 24, and use separate
+`balanced-alpha` sample paths. Existing weights and samples remain archived at their
 original paths. No training or regression is repeated. The original release
 assembly instructions below describe the preceding, uncalibrated publication.
 

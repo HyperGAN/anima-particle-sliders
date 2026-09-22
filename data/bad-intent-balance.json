@@ -1,0 +1,13 @@
+{
+  "version": "bad-intent-balanced-alpha-v1",
+  "particle_alpha": 12.0,
+  "lora_alpha": 24.0,
+  "rank": 8,
+  "nominal_strength": 1.0,
+  "method": "visual intensity selection on two matched development cases, supported by 40 shared-state full-denoiser measurements",
+  "particle_candidates": [8.0, 10.0, 12.0, 16.0],
+  "lora_candidates": [20.0, 22.0, 24.0],
+  "reason": "Keep the stronger LoRA effect and increase particle expression/pose intensity. Alpha 12 strengthens both particle examples while alpha 16 pushes tilt, grin and rendering-medium changes further. This is not a quality ranking of the two architectures.",
+  "final_test_used": false,
+  "evidence": "validation/bad-intent-balance.json"
+}

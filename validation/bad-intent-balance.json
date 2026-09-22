@@ -1,0 +1,280 @@
+{
+  "split": "dev",
+  "final_test_used": false,
+  "cache_sha256": "9e48de3e82a147cde00823733622228d9c407eb7427c45273220d3753a9828b3",
+  "cache_indices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    89,
+    120,
+    121,
+    122,
+    123,
+    124,
+    125,
+    126,
+    127,
+    128,
+    129
+  ],
+  "particle_sha256": "21aafdd18bb67fbfc06e7c98dfa042f1a90761d6f926c19cf3aab4b71e538553",
+  "lora_sha256": "59c6141e7217c7b8a0cb3ddf3da96817379b04c72ac30a2c800a24204248244b",
+  "nominal_strength": 1,
+  "measurements": [
+    {
+      "format": "particles",
+      "alpha": 8.0,
+      "relative_edit_mse": 0.0,
+      "edit_cosine": 1.0,
+      "edit_rms_ratio": 1.0,
+      "aligned_edit_gain": 1.0
+    },
+    {
+      "format": "particles",
+      "alpha": 10.0,
+      "relative_edit_mse": 0.22203005850315094,
+      "edit_cosine": 0.9056078791618347,
+      "edit_rms_ratio": 1.110926628112793,
+      "aligned_edit_gain": 1.0060639381408691
+    },
+    {
+      "format": "particles",
+      "alpha": 12.0,
+      "relative_edit_mse": 0.540509819984436,
+      "edit_cosine": 0.7994621992111206,
+      "edit_rms_ratio": 1.2233130931854248,
+      "aligned_edit_gain": 0.977992594242096
+    },
+    {
+      "format": "particles",
+      "alpha": 16.0,
+      "relative_edit_mse": 0.8506941199302673,
+      "edit_cosine": 0.7173997759819031,
+      "edit_rms_ratio": 1.321846842765808,
+      "aligned_edit_gain": 0.9482925534248352
+    },
+    {
+      "format": "lora",
+      "alpha": 20.0,
+      "relative_edit_mse": 0.36855199933052063,
+      "edit_cosine": 0.8155956864356995,
+      "edit_rms_ratio": 0.9993026852607727,
+      "aligned_edit_gain": 0.8150269389152527
+    },
+    {
+      "format": "lora",
+      "alpha": 22.0,
+      "relative_edit_mse": 0.3548409938812256,
+      "edit_cosine": 0.8385010957717896,
+      "edit_rms_ratio": 1.0791776180267334,
+      "aligned_edit_gain": 0.9048916697502136
+    },
+    {
+      "format": "lora",
+      "alpha": 24.0,
+      "relative_edit_mse": 0.4301016330718994,
+      "edit_cosine": 0.8204533457756042,
+      "edit_rms_ratio": 1.1417715549468994,
+      "aligned_edit_gain": 0.9367702603340149
+    }
+  ],
+  "pairs": [
+    {
+      "particle_alpha": 8.0,
+      "lora_alpha": 20.0,
+      "relative_edit_mse": 0.36855199933052063,
+      "edit_cosine": 0.8155956864356995,
+      "edit_rms_ratio": 0.9993026852607727,
+      "aligned_edit_gain": 0.8150269389152527
+    },
+    {
+      "particle_alpha": 10.0,
+      "lora_alpha": 20.0,
+      "relative_edit_mse": 0.3603755831718445,
+      "edit_cosine": 0.8052966594696045,
+      "edit_rms_ratio": 0.8995217084884644,
+      "aligned_edit_gain": 0.7243818640708923
+    },
+    {
+      "particle_alpha": 12.0,
+      "lora_alpha": 20.0,
+      "relative_edit_mse": 0.4274662435054779,
+      "edit_cosine": 0.7588794827461243,
+      "edit_rms_ratio": 0.8168821930885315,
+      "aligned_edit_gain": 0.6199151277542114
+    },
+    {
+      "particle_alpha": 16.0,
+      "lora_alpha": 20.0,
+      "relative_edit_mse": 0.4797312915325165,
+      "edit_cosine": 0.7220926284790039,
+      "edit_rms_ratio": 0.7559897899627686,
+      "aligned_edit_gain": 0.5458946824073792
+    },
+    {
+      "particle_alpha": 8.0,
+      "lora_alpha": 22.0,
+      "relative_edit_mse": 0.3548409938812256,
+      "edit_cosine": 0.8385010957717896,
+      "edit_rms_ratio": 1.0791776180267334,
+      "aligned_edit_gain": 0.9048916697502136
+    },
+    {
+      "particle_alpha": 10.0,
+      "lora_alpha": 22.0,
+      "relative_edit_mse": 0.26995471119880676,
+      "edit_cosine": 0.8614720106124878,
+      "edit_rms_ratio": 0.9714211821556091,
+      "aligned_edit_gain": 0.8368521928787231
+    },
+    {
+      "particle_alpha": 12.0,
+      "lora_alpha": 22.0,
+      "relative_edit_mse": 0.3344924747943878,
+      "edit_cosine": 0.8182845711708069,
+      "edit_rms_ratio": 0.8821761608123779,
+      "aligned_edit_gain": 0.7218711376190186
+    },
+    {
+      "particle_alpha": 16.0,
+      "lora_alpha": 22.0,
+      "relative_edit_mse": 0.40025585889816284,
+      "edit_cosine": 0.7755110859870911,
+      "edit_rms_ratio": 0.8164165616035461,
+      "aligned_edit_gain": 0.6331400871276855
+    },
+    {
+      "particle_alpha": 8.0,
+      "lora_alpha": 24.0,
+      "relative_edit_mse": 0.4301016330718994,
+      "edit_cosine": 0.8204533457756042,
+      "edit_rms_ratio": 1.1417715549468994,
+      "aligned_edit_gain": 0.9367702603340149
+    },
+    {
+      "particle_alpha": 10.0,
+      "lora_alpha": 24.0,
+      "relative_edit_mse": 0.2668527066707611,
+      "edit_cosine": 0.870553195476532,
+      "edit_rms_ratio": 1.027764916419983,
+      "aligned_edit_gain": 0.8947241306304932
+    },
+    {
+      "particle_alpha": 12.0,
+      "lora_alpha": 24.0,
+      "relative_edit_mse": 0.278301477432251,
+      "edit_cosine": 0.8532917499542236,
+      "edit_rms_ratio": 0.9333436489105225,
+      "aligned_edit_gain": 0.7964144349098206
+    },
+    {
+      "particle_alpha": 16.0,
+      "lora_alpha": 24.0,
+      "relative_edit_mse": 0.34293657541275024,
+      "edit_cosine": 0.8122312426567078,
+      "edit_rms_ratio": 0.8637699484825134,
+      "aligned_edit_gain": 0.7015808820724487
+    }
+  ],
+  "model_identity": {
+    "model": "circlestone-labs/Anima:turbo-v1.1",
+    "sha256": "eb5520f293d42a19df9242d8d442d5d2068e5121620814418c2b50a97de0552f",
+    "identity_schema": "portable-model-v1",
+    "environment_sha256": "55ac97305e688c56d4a2908243b020e999cf101a05b1cf7e5a3e2c48d4a4d7ba",
+    "runtime_sha256": "ca564ceaf401f96198258d773ef0c50eb586fe5b9937122b95ee4e3226cea076"
+  },
+  "baseline_max_abs": 0.0,
+  "passed": true,
+  "selection": {
+    "version": "bad-intent-balanced-alpha-v1",
+    "particle_alpha": 12.0,
+    "lora_alpha": 24.0,
+    "rank": 8,
+    "nominal_strength": 1.0,
+    "method": "visual intensity selection on two matched development cases, supported by 40 shared-state full-denoiser measurements",
+    "particle_candidates": [
+      8.0,
+      10.0,
+      12.0,
+      16.0
+    ],
+    "lora_candidates": [
+      20.0,
+      22.0,
+      24.0
+    ],
+    "reason": "Keep the stronger LoRA effect and increase particle expression/pose intensity. Alpha 12 strengthens both particle examples while alpha 16 pushes tilt, grin and rendering-medium changes further. This is not a quality ranking of the two architectures.",
+    "final_test_used": false,
+    "evidence": "validation/bad-intent-balance.json"
+  },
+  "selected_metrics": {
+    "particle_alpha": 12.0,
+    "lora_alpha": 24.0,
+    "relative_edit_mse": 0.278301477432251,
+    "edit_cosine": 0.8532917499542236,
+    "edit_rms_ratio": 0.9333436489105225,
+    "aligned_edit_gain": 0.7964144349098206
+  },
+  "pixel_replays": [
+    {
+      "case": 0,
+      "format": "particles",
+      "alpha": 12,
+      "pixel_exact": true
+    },
+    {
+      "case": 0,
+      "format": "lora",
+      "alpha": 24,
+      "pixel_exact": true
+    },
+    {
+      "case": 1,
+      "format": "particles",
+      "alpha": 12,
+      "pixel_exact": true
+    },
+    {
+      "case": 1,
+      "format": "lora",
+      "alpha": 24,
+      "pixel_exact": true
+    }
+  ],
+  "source_tests": 83,
+  "comfy_cpu_validation": "comfyui.json",
+  "final_export_validation": "unit-alpha.json",
+  "evidence": "evidence/bad-intent-balance",
+  "limitations": [
+    "Selection uses two development images and four-character cached states, not a final-test estimate.",
+    "Edit RMS does not establish perceptual equality or image quality.",
+    "Full ComfyUI GPU image generation was not tested."
+  ]
+}

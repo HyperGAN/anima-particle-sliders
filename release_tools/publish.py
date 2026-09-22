@@ -44,8 +44,10 @@ def main():
     bad=catalog['sliders'][0]
     assert bad['training_id']=='uncanny' and bad['recommended_strength']==1
     assert {s['strength'] for s in bad['samples']}=={0,1}
-    assert bad['lora_alpha']==24 and bad['particle_alpha']==8
-    assert json.loads((ROOT/'validation/unit-alpha.json').read_text())['passed']
+    calibration=json.loads((ROOT/'validation/unit-alpha.json').read_text())
+    assert calibration['passed']
+    assert calibration['particle_alphas']=={e['id']:e['particle_alpha'] for e in catalog['sliders']}
+    assert calibration['lora_alphas']=={e['id']:e['lora_alpha'] for e in catalog['sliders']}
     assert any(r['variation']=='bad-intent' for r in json.loads((ROOT/'validation/comfyui.json').read_text())['sliders'])
     card=(folder/'README.md').read_text()
     assert card.index('## Samples')<card.index('## Get the adapters')<card.index('## How the sliders learn')

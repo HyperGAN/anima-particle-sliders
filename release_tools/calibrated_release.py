@@ -9,7 +9,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from release_tools.build import comparison, copy, sha, RAW, WEB
 from release_tools.rescale_lora_alpha import rescale_alpha
-from lumen_studio.alpha_adapter import read_metadata
+from lumen_studio.alpha_adapter import read_metadata, export_with_alpha
 
 
 def write_json(path, value):
@@ -23,27 +23,45 @@ def stage(folder, studio):
     torch.set_num_threads(4)
     catalog = json.loads((folder/'catalog.json').read_text())
     inventory = json.loads((studio/'exports/alpha-unit-v1/exports.json').read_text())
+    balance_path = ROOT/'data/bad-intent-balance.json'
+    balance = json.loads(balance_path.read_text()) if balance_path.exists() else None
     for entry in catalog['sliders']:
         name = entry['id']
         if 'archived_release' not in entry:
             entry['archived_release'] = {k: entry[k] for k in
                 ('particle', 'sha256', 'native_lora', 'comfyui_lora', 'samples', 'featured_comparison') if k in entry}
         old = entry['archived_release']
-        selected = inventory['uncanny' if name == 'bad-intent' else name]
+        selected = dict(inventory['uncanny' if name == 'bad-intent' else name])
+        balanced = name == 'bad-intent' and balance is not None
+        if balanced:
+            selected['alpha'] = balance['particle_alpha']
+            particle_dest = folder/'weights/bad-intent-balanced-alpha.safetensors'
+            source = studio/'runs/uncanny/ema-001600.safetensors'
+            assert sha(source) == selected['source_sha256']
+            if not particle_dest.exists():
+                export_with_alpha(source,particle_dest,alpha=selected['alpha'],
+                    provenance=dict(method='matched-intensity-development-sweep',selection=balance))
+            selected.update(path=str(particle_dest),sha256=sha(particle_dest))
+            if 'unit_alpha_release' not in entry:
+                entry['unit_alpha_release'] = {k:entry[k] for k in
+                    ('particle','sha256','native_lora','comfyui_lora','particle_alpha','lora_alpha','samples','distilled_samples','comparisons','featured_comparison')}
         particle_path = Path(selected['path'])
         assert sha(particle_path) == selected['sha256']
         metadata = read_metadata(particle_path)
         old_state, new_state = load_file(str(folder/old['particle'])), load_file(str(particle_path))
         assert {k for k in old_state if not k.endswith('.alpha')} == {k for k in new_state if not k.endswith('.alpha')}
         assert all(torch.equal(v, new_state[k]) for k, v in old_state.items() if not k.endswith('.alpha'))
-        entry['particle'] = old['particle'] if name == 'bad-intent' else f'weights/{name}-unit-alpha.safetensors'
+        entry['particle'] = ('weights/bad-intent-balanced-alpha.safetensors' if balanced else
+                             old['particle'] if name == 'bad-intent' else f'weights/{name}-unit-alpha.safetensors')
         copy(particle_path, folder/entry['particle'])
         write_json((folder/entry['particle']).with_suffix('.json'), metadata)
         entry.update(sha256=selected['sha256'], rank=8, particle_alpha=selected['alpha'], recommended_strength=1)
         for fmt, key in [('native', 'native_lora'), ('comfyui', 'comfyui_lora')]:
-            entry[key] = f'distilled/{fmt}/{name}-unit-alpha.safetensors'
+            lora_alpha = balance['lora_alpha'] if balanced else 24. if name == 'bad-intent' else selected['alpha']
+            suffix = 'balanced-alpha' if balanced and lora_alpha != 24 else 'unit-alpha'
+            entry[key] = f'distilled/{fmt}/{name}-{suffix}.safetensors'
             source, dest = folder/old[key], folder/entry[key]
-            gain = 3. if name == 'bad-intent' else selected['alpha']/8.
+            gain = lora_alpha/8.
             if not dest.exists():
                 rescale_alpha(source, dest, gain)
             before, after = load_file(str(source)), load_file(str(dest))
@@ -51,7 +69,8 @@ def stage(folder, studio):
             assert all(torch.equal(v, after[k]) for k, v in before.items() if not k.endswith('.alpha'))
             assert {float(v) for k, v in after.items() if k.endswith('.alpha')} == {8.*gain}
             entry[key+'_sha256'] = sha(dest)
-        entry['lora_alpha'] = 24. if name == 'bad-intent' else selected['alpha']
+        entry['lora_alpha'] = lora_alpha
+        if balanced:entry['balance_selection'] = balance
         requests = []
         if name == 'bad-intent':
             requests = [dict(case=f"case{s['case']}", **{k:s['payload'][k] for k in
@@ -69,13 +88,14 @@ def stage(folder, studio):
             case = request['case']
             samples = []
             for fmt, strength in [('particles',1),('lora',1),('off',0)]:
-                path = f'samples/unit-alpha/{name}/{case}/{fmt}.png'
+                version = 'balanced-alpha' if balanced else 'unit-alpha'
+                path = f'samples/{version}/{name}/{case}/{fmt}.png'
                 sample = dict(case=case, format=fmt, strength=strength, image=path, metadata=str(Path(path).with_suffix('.json')))
                 samples.append(sample)
                 entry['distilled_samples' if fmt == 'lora' else 'samples'].append(sample)
-            entry['comparisons'].append(dict(case=case, asset=f'assets/unit-alpha-{name}-{case}.jpg', samples=samples))
+            entry['comparisons'].append(dict(case=case, asset=f'assets/{version}-{name}-{case}.jpg', samples=samples))
         entry['featured_comparison'] = entry['comparisons'][0]
-    catalog['calibration'] = 'unit-alpha-v1'
+    catalog['calibration'] = 'unit-alpha-v2' if balance else 'unit-alpha-v1'
     write_json(folder/'catalog.json', catalog)
     return catalog
 
@@ -99,7 +119,8 @@ def render(folder, studio):
                 try:
                     with runtime.mixer.scales({'particle': 1.} if fmt == 'particles' else {}):
                         for request in entry['render_requests']:
-                            dest = folder/f"samples/unit-alpha/{entry['id']}/{request['case']}/{fmt}.png"
+                            comp = next(c for c in entry['comparisons'] if c['case']==request['case'])
+                            dest = folder/next(s['image'] for s in comp['samples'] if s['format']==fmt)
                             adapter_path = entry['particle'] if fmt == 'particles' else entry['native_lora'] if fmt == 'lora' else None
                             alpha = entry['particle_alpha'] if fmt == 'particles' else entry['lora_alpha'] if fmt == 'lora' else None
                             metadata = dict(request, variation=entry['id'], format=fmt, energy=strength, strength=strength,
@@ -157,6 +178,8 @@ def build_card(folder):
         lines += show(entry,entry['featured_comparison'],True)
         if entry['id']=='bad-intent':
             lines += ['The alpha-24 distill restores the leaning pose and intense expression in these development examples. It remains an approximation; the bare male example differs in rendering medium from the particle teacher.', '']
+            if 'balance_selection' in entry:
+                lines += [f"The particle now uses alpha **{entry['particle_alpha']:g}**, with the distill at **{entry['lora_alpha']:g}**, to bring their visible intensity closer at strength 1. The two formats still differ in details and rendering style. [Comparison audit](validation/bad-intent-balance.json).", '']
     lines += ['<details><summary>More freshly rendered strength-one comparisons</summary>', '']
     for entry in entries:
         for comp in entry['comparisons'][1:]:
