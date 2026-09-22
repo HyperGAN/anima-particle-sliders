@@ -16,9 +16,10 @@ def digest(path):
 
 
 def release_files(folder):
-    # snapshot_download's bookkeeping is local state, never release evidence.
+    # snapshot_download bookkeeping is local. The Hub manages .gitattributes
+    # and adds LFS entries during upload, so it is not an immutable artifact.
     return [p for p in sorted(folder.rglob('*')) if p.is_file()
-            and p.relative_to(folder).parts[0] not in ('.cache','.git')]
+            and p.relative_to(folder).parts[0] not in ('.cache','.git','.gitattributes')]
 
 
 def main():
@@ -96,7 +97,7 @@ def main():
         assert args.expected_parent==before.sha,'Release parent changed'
     result=api.upload_folder(repo_id=REPO,repo_type='model',folder_path=folder,
         parent_commit=before.sha,
-        ignore_patterns=['.cache/**','.git/**'],
+        ignore_patterns=['.cache/**','.git/**','.gitattributes'],
         commit_message='Feature Bad Intent with native particles, ordinary LoRA distills and matched samples')
     revision=result.oid
     remote={f.rfilename:f for f in api.model_info(REPO,revision=revision,files_metadata=True).siblings}
@@ -113,7 +114,8 @@ def main():
         downloaded=Path(hf_hub_download(REPO,name,revision=revision))
         assert digest(downloaded)==digest(folder/name),name
     report=dict(repo=REPO,commit=revision,source_commit=commit,core_commit=core['commit'],verified_files=checked,readbacks=3,
-        previous_commit=before.sha,existing_checkpoints_and_samples_preserved=True)
+        previous_commit=before.sha,existing_checkpoints_and_samples_preserved=True,
+        hub_managed_files=['.gitattributes'])
     (folder.parent/'publication.json').write_text(json.dumps(report,indent=2)+'\n')
     print(json.dumps(report),flush=True)
 
