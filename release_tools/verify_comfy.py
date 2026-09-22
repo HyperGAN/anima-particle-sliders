@@ -31,8 +31,9 @@ base.model_config=SimpleNamespace(unet_config={})
 patcher=ModelPatcher(base,torch.device('cpu'),torch.device('cpu'))
 folder_paths.add_model_folder_path('loras',str(WEIGHTS/'weights'))
 node=AnimaParticleSlider();reports=[]
-for variation in [s['id'] for s in json.loads((WEIGHTS/'catalog.json').read_text())['sliders']]:
-    file=WEIGHTS/'weights'/f'{variation}.safetensors'
+for entry in json.loads((WEIGHTS/'catalog.json').read_text())['sliders']:
+    variation=entry['id']
+    file=WEIGHTS/entry['particle']
     network,metadata=ParticleNetwork.load(file)
     wrapped=node.load(patcher,file.name,1.)[0]
     assert 'model_function_wrapper' not in patcher.model_options
@@ -59,22 +60,24 @@ for variation in [s['id'] for s in json.loads((WEIGHTS/'catalog.json').read_text
     try:wrapper(fail,dict(input=torch.zeros(1),timestep=torch.zeros(1),c={}))
     except RuntimeError:pass
     assert all(not m._forward_hooks for m in wrapper.modules)
-    state=load_file(str(WEIGHTS/'distilled/comfyui'/f'{variation}.safetensors'))
+    state=load_file(str(WEIGHTS/entry['comfyui_lora']))
     mapping=comfy.lora.model_lora_keys_unet(base,{})
     patches=comfy.lora.load_lora(state,mapping)
     assert len(patches)==224,len(patches)
     assert len(patcher.clone().add_patches(patches,1.))==224
-    native=load_file(str(WEIGHTS/'distilled/native'/f'{variation}.safetensors'))
+    native=load_file(str(WEIGHTS/entry['native_lora']))
     # The released native and ComfyUI tensors represent exactly the same deltas.
     for name in network.names:
         prefix='diffusion_model.'+comfy_name(name)
         assert torch.equal(native[name+'.lora_A.weight'],state[prefix+'.lora_down.weight'])
         assert torch.equal(native[name+'.lora_B.weight'],state[prefix+'.lora_up.weight'])
-        assert state[prefix+'.alpha']==8
-        if name+'.alpha' in native:
-            assert torch.equal(native[name+'.alpha'],state[prefix+'.alpha'])
+        alpha=native.get(name+'.alpha',torch.tensor(float(native[name+'.lora_A.weight'].shape[0])))
+        assert float(alpha)==float(state[prefix+'.alpha'])
     reports.append(dict(variation=variation,particle_projections=224,lora_patches=224,
-        particle_max_abs=max(errors),zero_bypass=True,clone_isolation=True,exception_restoration=True))
+        particle_max_abs=max(errors),zero_bypass=True,clone_isolation=True,exception_restoration=True,
+        particle=entry['particle'],lora=entry['comfyui_lora'],
+        particle_alpha=metadata.get('network_alpha',8.),
+        lora_alphas=sorted({float(v) for k,v in state.items() if k.endswith('.alpha')})))
 import subprocess
 result=dict(passed=True,device='cpu',comfy_revision=subprocess.check_output(
     ['git','-C',str(COMFY),'rev-parse','HEAD'],text=True).strip(),sliders=reports,

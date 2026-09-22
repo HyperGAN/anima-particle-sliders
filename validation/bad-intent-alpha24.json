@@ -1,0 +1,159 @@
+{
+  "method": "development full-denoiser alpha sweep; learned matrices unchanged",
+  "selected_alpha": 24.0,
+  "rank": 8,
+  "nominal_strength": 1.0,
+  "original_strength_equivalent": 3.0,
+  "teacher_sha256": "21aafdd18bb67fbfc06e7c98dfa042f1a90761d6f926c19cf3aab4b71e538553",
+  "student_parent_sha256": "59c6141e7217c7b8a0cb3ddf3da96817379b04c72ac30a2c800a24204248244b",
+  "cache_sha256": "9e48de3e82a147cde00823733622228d9c407eb7427c45273220d3753a9828b3",
+  "cache_indices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    89,
+    120,
+    121,
+    122,
+    123,
+    124,
+    125,
+    126,
+    127,
+    128,
+    129
+  ],
+  "model_identity": {
+    "model": "circlestone-labs/Anima:turbo-v1.1",
+    "sha256": "eb5520f293d42a19df9242d8d442d5d2068e5121620814418c2b50a97de0552f",
+    "identity_schema": "portable-model-v1",
+    "environment_sha256": "55ac97305e688c56d4a2908243b020e999cf101a05b1cf7e5a3e2c48d4a4d7ba",
+    "runtime_sha256": "ca564ceaf401f96198258d773ef0c50eb586fe5b9937122b95ee4e3226cea076"
+  },
+  "split": "dev",
+  "final_test_used": false,
+  "cached_baseline_max_abs": 0.0,
+  "measurements": [
+    {
+      "gain": 1,
+      "effective_alphas": [
+        8.0
+      ],
+      "relative_edit_mse": 0.8255406022071838,
+      "edit_cosine": 0.42353004217147827,
+      "edit_rms_ratio": 0.3533995449542999,
+      "aligned_edit_gain": 0.14967532455921173
+    },
+    {
+      "gain": 2,
+      "effective_alphas": [
+        16.0
+      ],
+      "relative_edit_mse": 0.5374495983123779,
+      "edit_cosine": 0.6877468824386597,
+      "edit_rms_ratio": 0.7899490594863892,
+      "aligned_edit_gain": 0.5432850122451782
+    },
+    {
+      "gain": 3,
+      "effective_alphas": [
+        24.0
+      ],
+      "relative_edit_mse": 0.4301016330718994,
+      "edit_cosine": 0.8204533457756042,
+      "edit_rms_ratio": 1.1417715549468994,
+      "aligned_edit_gain": 0.9367702603340149
+    },
+    {
+      "gain": 5,
+      "effective_alphas": [
+        40.0
+      ],
+      "relative_edit_mse": 1.0923118591308594,
+      "edit_cosine": 0.6596276164054871,
+      "edit_rms_ratio": 1.3858648538589478,
+      "aligned_edit_gain": 0.9141547679901123
+    },
+    {
+      "gain": 8,
+      "effective_alphas": [
+        64.0
+      ],
+      "relative_edit_mse": 1.6605428457260132,
+      "edit_cosine": 0.5160103440284729,
+      "edit_rms_ratio": 1.47871994972229,
+      "aligned_edit_gain": 0.7630348205566406
+    }
+  ],
+  "exports": [
+    {
+      "path": "distilled/native/bad-intent-unit-alpha.safetensors",
+      "sha256": "0e7363288bcef49fb9e91c55dbf58533cacc3389e9d34575704d1a39cc56b94c",
+      "parent_sha256": "59c6141e7217c7b8a0cb3ddf3da96817379b04c72ac30a2c800a24204248244b",
+      "gain": 3.0,
+      "projections": 224,
+      "alphas": [
+        24.0
+      ],
+      "learned_tensors_unchanged": true
+    },
+    {
+      "path": "distilled/comfyui/bad-intent-unit-alpha.safetensors",
+      "sha256": "5331b96fdb46b65f7763746521a0b5dff827582b5c6bed4733c5174dbdf6d043",
+      "parent_sha256": "a28feefdf3c6b3268b0890a90da3e0ab96138ee63be239804529929c061da8c1",
+      "gain": 3.0,
+      "projections": 224,
+      "alphas": [
+        24.0
+      ],
+      "learned_tensors_unchanged": true
+    }
+  ],
+  "native_comfy_projections_equal": 224,
+  "alpha_strength_hook_parity": "exact across 224 projections",
+  "replay_checks": [
+    {
+      "case": 0,
+      "original_alpha8_gpu_replay": "pixel-identical"
+    },
+    {
+      "case": 1,
+      "original_alpha8_gpu_replay": "pixel-identical"
+    }
+  ],
+  "source_tests_passed": 83,
+  "visual_review": "Alpha 24 restores leaning-forward composition and intense smiling expression on both public development cases. Alpha 16 remains too mild; alpha 40/64 exaggerate eyes, darkness and facial geometry. The male stays illustrated instead of reproducing the particle render medium.",
+  "limitations": [
+    "Selected on development data; not a final-test estimate.",
+    "Approximation remains imperfect: relative full-edit MSE 0.4301.",
+    "ComfyUI full GPU render parity not evaluated."
+  ],
+  "publication_record": "release-manifest.json",
+  "current_samples": "validation/unit-alpha.json"
+}

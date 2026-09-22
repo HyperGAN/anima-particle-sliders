@@ -35,14 +35,17 @@ def main():
     for e in catalog['sliders']:
         assert digest(folder/e['particle'])==e['sha256']
         for key in ('native_lora','comfyui_lora'):assert (folder/e[key]).is_file()
-        assert len(e['samples'])==(6 if e['id']=='bad-intent' else 24)
-        for sample in e['samples']:
+        assert len(e['samples'])==(4 if e['id']=='bad-intent' else 10)
+        assert e['recommended_strength']==1
+        for sample in e['samples']+e['distilled_samples']:
             assert 0<=sample['strength']<=5
             for key in ('image','metadata'):assert (folder/sample[key]).is_file()
     assert len(list((folder/'distilled/samples').glob('*.png')))==28
     bad=catalog['sliders'][0]
     assert bad['training_id']=='uncanny' and bad['recommended_strength']==1
-    assert {s['strength'] for s in bad['samples']}=={0,.5,1}
+    assert {s['strength'] for s in bad['samples']}=={0,1}
+    assert bad['lora_alpha']==24 and bad['particle_alpha']==8
+    assert json.loads((ROOT/'validation/unit-alpha.json').read_text())['passed']
     assert any(r['variation']=='bad-intent' for r in json.loads((ROOT/'validation/comfyui.json').read_text())['sliders'])
     card=(folder/'README.md').read_text()
     assert card.index('## Samples')<card.index('## Get the adapters')<card.index('## How the sliders learn')
@@ -98,7 +101,7 @@ def main():
     result=api.upload_folder(repo_id=REPO,repo_type='model',folder_path=folder,
         parent_commit=before.sha,
         ignore_patterns=['.cache/**','.git/**','.gitattributes'],
-        commit_message='Feature Bad Intent with native particles, ordinary LoRA distills and matched samples')
+        commit_message='Publish calibrated strength-one particles and LoRAs with regenerated examples')
     revision=result.oid
     remote={f.rfilename:f for f in api.model_info(REPO,revision=revision,files_metadata=True).siblings}
     checked=0
@@ -110,10 +113,11 @@ def main():
             data=path.read_bytes()
             assert r.blob_id==hashlib.sha1(f'blob {len(data)}\0'.encode()+data).hexdigest(),name
         checked+=1
-    for name in ('README.md','weights/bad-intent.safetensors','distilled/comfyui/bad-intent.safetensors'):
+    readbacks=['README.md']+[e[k] for e in catalog['sliders'] for k in ('particle','native_lora','comfyui_lora')]
+    for name in readbacks:
         downloaded=Path(hf_hub_download(REPO,name,revision=revision))
         assert digest(downloaded)==digest(folder/name),name
-    report=dict(repo=REPO,commit=revision,source_commit=commit,core_commit=core['commit'],verified_files=checked,readbacks=3,
+    report=dict(repo=REPO,commit=revision,source_commit=commit,core_commit=core['commit'],verified_files=checked,readbacks=len(readbacks),
         previous_commit=before.sha,existing_checkpoints_and_samples_preserved=True,
         hub_managed_files=['.gitattributes'])
     (folder.parent/'publication.json').write_text(json.dumps(report,indent=2)+'\n')

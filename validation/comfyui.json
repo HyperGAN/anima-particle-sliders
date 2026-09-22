@@ -1,7 +1,7 @@
 {
   "passed": true,
   "device": "cpu",
-  "comfy_revision": "7a0b5eede3f9721c8faab290689893f36edc6d66",
+  "comfy_revision": "e80c1570b6b44a2557d5d8e341e05782d18c9bbb",
   "sliders": [
     {
       "variation": "bad-intent",
@@ -10,7 +10,13 @@
       "particle_max_abs": 0.0,
       "zero_bypass": true,
       "clone_isolation": true,
-      "exception_restoration": true
+      "exception_restoration": true,
+      "particle": "weights/bad-intent.safetensors",
+      "lora": "distilled/comfyui/bad-intent-unit-alpha.safetensors",
+      "particle_alpha": 8.0,
+      "lora_alphas": [
+        24.0
+      ]
     },
     {
       "variation": "candlelit",
@@ -19,7 +25,13 @@
       "particle_max_abs": 0.0,
       "zero_bypass": true,
       "clone_isolation": true,
-      "exception_restoration": true
+      "exception_restoration": true,
+      "particle": "weights/candlelit-unit-alpha.safetensors",
+      "lora": "distilled/comfyui/candlelit-unit-alpha.safetensors",
+      "particle_alpha": 16.0,
+      "lora_alphas": [
+        16.0
+      ]
     },
     {
       "variation": "moonlit",
@@ -28,7 +40,13 @@
       "particle_max_abs": 0.0,
       "zero_bypass": true,
       "clone_isolation": true,
-      "exception_restoration": true
+      "exception_restoration": true,
+      "particle": "weights/moonlit-unit-alpha.safetensors",
+      "lora": "distilled/comfyui/moonlit-unit-alpha.safetensors",
+      "particle_alpha": 23.08072421821097,
+      "lora_alphas": [
+        23.08072421821097
+      ]
     }
   ],
   "limitation": "Full ComfyUI GPU image generation is not covered by this CPU integration check."

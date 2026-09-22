@@ -36,5 +36,14 @@
     "tests": 76,
     "complete_model_identity_unchanged": true,
     "training_engine_unchanged": true
+  },
+  "unit_alpha_release": {
+    "passed": true,
+    "source_tests": 83,
+    "command": "PYTHONPATH=artifacts/shared-core pytest tests -q",
+    "javascript_syntax": true,
+    "unchanged_training_formulation": true,
+    "validation": "unit-alpha.json",
+    "comfy_cpu_validation": "comfyui.json"
   }
 }

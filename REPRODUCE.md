@@ -31,21 +31,21 @@ Model conversion downloads the exact official checkpoint revision, tokenizers an
 ```bash
 CUDA_VISIBLE_DEVICES=0 .venv-anima/bin/python release_tools/infer.py \
   --model artifacts/model \
-  --adapter artifacts/release/weights/candlelit.safetensors \
+  --adapter artifacts/release/weights/candlelit-unit-alpha.safetensors \
   --prompt 'an adult woman wearing a blue coat, standing in a stone corridor, anime illustration' \
-  --seed 29001 --strength 3 --output artifacts/candlelit.png
+  --seed 29001 --strength 1 --output artifacts/candlelit.png
 ```
 
-For an ordinary LoRA, pass `--format lora --adapter artifacts/release/distilled/native/candlelit.safetensors`. The sample sidecars record the exact gallery prompt, seed, dimensions, steps and checkpoint hashes. Strengths are direct scalars; zero exactly bypasses the native branches.
+For an ordinary LoRA, pass `--format lora --adapter artifacts/release/distilled/native/candlelit-unit-alpha.safetensors`. The sample sidecars record the exact gallery prompt, seed, dimensions, steps and checkpoint hashes. Strengths are direct scalars; zero exactly bypasses the native branches.
 
 To replay the release's verified A6000 kernel policy, use its launcher instead of a plain Python launch:
 
 ```bash
 CUDA_VISIBLE_DEVICES=0 .venv-anima/bin/python scripts/anima_cuda_host.py \
   --gpu 0 --sm-count 82 --kernel-policy --script release_tools/infer.py -- \
-  --model artifacts/model --adapter artifacts/release/weights/moonlit.safetensors \
+  --model artifacts/model --adapter artifacts/release/weights/moonlit-unit-alpha.safetensors \
   --prompt 'an adult man wearing a gray coat, standing beside a plain wall, anime illustration' \
-  --seed 29001 --strength 5 --output artifacts/moonlit.png
+  --seed 29001 --strength 1 --output artifacts/moonlit.png
 ```
 
 This policy changes kernel-selection heuristics. Exact pixel replay is only claimed for the recorded software and hardware path; other GPUs can differ. The source does not weaken checkpoint identity checks.
@@ -116,6 +116,28 @@ CUDA_VISIBLE_DEVICES='' python release_tools/verify_comfy.py /path/to/ComfyUI ar
 `validation/` records the release checks. `release-manifest.json` on Hugging Face gives each released file's size and SHA256. The release does not include optimizer-state binaries or the large regenerated target tensor caches; the source, catalogs, seeds, model pins and training recipe are provided to rebuild them.
 
 ## Rebuild the publication
+
+The current release embeds the selected Studio particle alphas and uses
+strength 1.0 for all new examples. To stage the calibrated derivatives, render
+all 36 matched images, build the gallery and verify its provenance:
+
+```bash
+python release_tools/calibrated_release.py stage --folder artifacts/release --studio /path/to/studio/artifacts/anima/remote
+# Run render through the pinned host launcher with the exclusive GPU lease.
+ANIMA_GPU_LEASE="$(nvidia-smi -i 0 --query-gpu=uuid --format=csv,noheader)" \
+python scripts/anima_cuda_host.py --gpu 0 --sm-count 82 --kernel-policy \
+  --script release_tools/calibrated_release.py -- render \
+  --folder artifacts/release --studio /path/to/studio/artifacts/anima/remote
+python release_tools/calibrated_release.py build --folder artifacts/release --studio /path/to/studio/artifacts/anima/remote
+python release_tools/calibrated_release.py verify --folder artifacts/release --studio /path/to/studio/artifacts/anima/remote
+```
+
+Use an available GPU; the exclusive lease rejects another Anima coordinator.
+The staging step reads `exports/alpha-unit-v1/exports.json`, verifies the exact
+selected particle hashes and unchanged learned tensors, and creates new named
+LoRAs by changing alpha. Existing weights and samples remain archived at their
+original paths. No training or regression is repeated. The original release
+assembly instructions below describe the preceding, uncalibrated publication.
 
 For the additive Bad Intent release, start with a downloaded release and the
 distillation results above. Assemble the new card, comparisons, evidence and

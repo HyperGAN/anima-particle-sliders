@@ -24,9 +24,9 @@ def main():
         assert lead.evaluate_all('(els)=>els.every(e=>!e.closest("details"))')
         # Open folded extra prompts and scroll through the card to trigger lazy images.
         page.locator('details').evaluate_all('(els)=>els.forEach(e=>e.open=true)')
-        selector='img[alt*="matched samples"], img[alt*="particle versus distilled"], img[alt$="Off third"]'
+        selector='img[alt*="matched strength-one samples"], img[alt$="Off third"]'
         images=page.locator(selector)
-        assert images.count()==14,images.count()
+        assert images.count()==12,images.count()
         for i in range(images.count()):
             im=images.nth(i);im.scroll_into_view_if_needed()
             im.evaluate('(e)=>e.loading="eager"')
@@ -39,6 +39,10 @@ def main():
         assert pos('Samples')<pos('Get the adapters')<pos('How the sliders learn')
         assert page.locator('a[href="https://github.com/mikkel/sliders-conceptmod/tree/main/packages/concept-slider-core"]').count() > 0
         assert page.locator('a[href="https://github.com/mikkel/anima-concept-sliders#comfyui"]').count() > 0
+        for name in ('bad-intent','candlelit','moonlit'):
+            assert page.locator(f'a[href*="distilled/comfyui/{name}-unit-alpha.safetensors"]').count()>0
+        for name in ('candlelit','moonlit'):
+            assert page.locator(f'a[href*="weights/{name}-unit-alpha.safetensors"]').count()>0
         first=images.first;first.scroll_into_view_if_needed()
         page.screenshot(path=str(args.output/'desktop.png'))
         records={}

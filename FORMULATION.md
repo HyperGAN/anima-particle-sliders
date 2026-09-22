@@ -16,7 +16,7 @@ $$
 y = W_0x + s\,W_{\mathrm{up}}F([u,z]).
 $$
 
-The up matrix maps rank 8 back to the projection output width and starts at zero. The same soft routing runs during training and inference. Strength $s=0$ bypasses the branch exactly. Training uses $s=1$; the gallery includes extrapolation through $s=5$. For multiple sliders the deltas sum on the same input. Studio normalizes nonnegative mix proportions as $s_j=E m_j/\sum_k m_k$.
+The up matrix maps rank 8 back to the projection output width and starts at zero. The same soft routing runs during training and inference. Strength $s=0$ bypasses the branch exactly. Training uses $s=1$; the historical gallery included extrapolation through $s=5$. Calibrated inference additionally multiplies the branch by its stored $\alpha/8$, and the current gallery uses nominal strength 1. No training weights or losses change. For multiple sliders the deltas sum on the same input. Studio normalizes nonnegative mix proportions as $s_j=E m_j/\sum_k m_k$.
 
 An ordinary LoRA has a linear branch $BAx$. The routed particle branch is nonlinear, so its full behavior cannot be merged into a fixed weight matrix. The [distilled LoRAs](DISTILLATION.md) are fitted approximations.
 

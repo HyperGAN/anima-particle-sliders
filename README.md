@@ -1,83 +1,84 @@
 # Anima Concept Sliders
 
-**Bad Intent — psychological horror for Anima Turbo v1.1.** An eager smile, a looming gaze, something wrong. Plus Moonlit and Candlelit lighting sliders. Each comes as the original Particle adapter and a standard LoRA Distill.
+**Bad Intent, Moonlit and Candlelit for Anima Turbo v1.1.** Original Particle adapters and ordinary LoRA Distills, with strength stored in each file’s alpha.
 
 ## Samples
 
-**Start with Particle — the original slider.** Each comparison reads **Particle → Distill → Off**, left to right. Distill is the ordinary-LoRA approximation; Off is the base model.
+**Start at strength 1.0.** Every current comparison is **Particle 1 → Distill 1 → Off 0**, with the same prompt, seed, 768 × 768 resolution, 10 Euler steps and CFG 1. These are newly rendered examples from the calibrated files linked below.
+
+Bad Intent changes expression, pose, framing and sometimes appearance or medium. Moonlit and Candlelit change atmosphere. Distills are linear approximations of the original particles; their images need not match exactly. The lighting distills remain visibly milder in these comparisons.
 
 ### Bad Intent
 
-Intense psychological horror, without gore. Start at **strength 1**. This deliberately changes expression, pose, framing and sometimes appearance or medium; identity preservation is outside its brief. Formerly named Uncanny.
-
 **Particle · strength 1** → **Distill · strength 1** → **Off · strength 0**
 
-![Bad Intent: Particle first, Distill second, Off third](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/bad-intent-case0-particle-distill-off.jpg)
+![Bad Intent: Particle first, Distill second, Off third](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/unit-alpha-bad-intent-case0.jpg)
 
-Full-resolution samples: [Particle](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/bad-intent/case0/str1.png) · [Distill](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/distilled/samples/bad-intent-case0-str1.png) · [Off](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/bad-intent/case0/str0.png)
+Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/bad-intent/case0/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/bad-intent/case0/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/bad-intent/case0/off.png)
 
-Same prompt and seed **29001**. 768 × 768, 10 Euler steps, CFG 1. **The Distill is much milder at the same strength:** it does not reproduce the original's looming pose or pronounced expression in these examples. Choose Particle for the featured effect.
-
-<details><summary>Prompt</summary>
+<details><summary>Prompt and seed</summary>
 
 masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, standing upright, facing viewer, arms at sides, upper body, waist-up view, eye-level camera, in an unadorned stone corridor with bare stone walls, anime illustration
 
-</details>
-
-<details><summary>Bad Intent: bare prompt comparison and strength 0.5 samples</summary>
-
-![Bad Intent bare prompt: particle versus distilled LoRA and Off at strength 1](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/bad-intent-case1-particle-distill-off.jpg)
-
-Particle → Distill → Off, at strengths 1 → 1 → 0. Same seed and settings as above. The particle version also shifts this case toward a rendered/realistic medium.
-
-1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, in an unadorned stone corridor with bare stone walls
-
-[All Bad Intent particle samples, strengths 0 / 0.5 / 1](https://huggingface.co/ntc-ai/anima-concept-sliders/tree/main/samples/bad-intent) · [Distill samples](https://huggingface.co/ntc-ai/anima-concept-sliders/tree/main/distilled/samples)
+Seed: `29001`.
 
 </details>
+
+The alpha-24 distill restores the leaning pose and intense expression in these development examples. It remains an approximation; the bare male example differs in rendering medium from the particle teacher.
 
 ### Moonlit
 
-**Particle · strength 3** → **Distill · strength 3** → **Off · strength 0**
+**Particle · strength 1** → **Distill · strength 1** → **Off · strength 0**
 
-![Moonlit: Particle first, Distill second, Off third](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/moonlit-portrait-particle-distill-off.jpg)
+![Moonlit: Particle first, Distill second, Off third](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/unit-alpha-moonlit-portrait.jpg)
 
-Full-resolution samples: [Particle](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/featured-portrait/moonlit-particle.png) · [Distill](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/featured-portrait/moonlit-distill.png) · [Off](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/featured-portrait/off.png)
+Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/moonlit/portrait/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/moonlit/portrait/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/moonlit/portrait/off.png)
 
-Same close-up portrait prompt and seed **29001**. 768 × 768, 10 Euler steps, CFG 1. Strength 3 extrapolates beyond the trained endpoint at 1.
-
-<details><summary>Prompt</summary>
+<details><summary>Prompt and seed</summary>
 
 1boy, male focus, solo, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater, crew neck, facing viewer, head upright, close-up portrait, head and shoulders, face filling the frame, eye-level camera, in an unadorned stone corridor with bare stone walls, anime illustration, neutral diffuse illumination, moderate shadow contrast
+
+Seed: `29001`.
 
 </details>
 
 ### Candlelit
 
-**Particle · strength 3** → **Distill · strength 3** → **Off · strength 0**
+**Particle · strength 1** → **Distill · strength 1** → **Off · strength 0**
 
-![Candlelit: Particle first, Distill second, Off third](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/candlelit-portrait-particle-distill-off.jpg)
+![Candlelit: Particle first, Distill second, Off third](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/unit-alpha-candlelit-portrait.jpg)
 
-Full-resolution samples: [Particle](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/featured-portrait/candlelit-particle.png) · [Distill](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/featured-portrait/candlelit-distill.png) · [Off](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/featured-portrait/off.png)
+Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/candlelit/portrait/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/candlelit/portrait/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/candlelit/portrait/off.png)
 
-Same close-up portrait prompt and seed **29001**. 768 × 768, 10 Euler steps, CFG 1. Strength 3 extrapolates beyond the trained endpoint at 1.
-
-<details><summary>Prompt</summary>
+<details><summary>Prompt and seed</summary>
 
 1boy, male focus, solo, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater, crew neck, facing viewer, head upright, close-up portrait, head and shoulders, face filling the frame, eye-level camera, in an unadorned stone corridor with bare stone walls, anime illustration, neutral diffuse illumination, moderate shadow contrast
 
+Seed: `29001`.
+
 </details>
 
-<details>
-<summary>More lighting samples: strengths 0–5, four matched prompts per slider</summary>
+<details><summary>More freshly rendered strength-one comparisons</summary>
 
-Each grid reads **0, 1, 2** across the first row, then **3, 4, 5**. Original step-1600 EMA particles.
+### Bad Intent · case1
 
-### Moonlit
+![Bad Intent: matched strength-one samples, case1](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/unit-alpha-bad-intent-case1.jpg)
 
-**Comparison 1** · [PNG images and prompt](https://huggingface.co/ntc-ai/anima-concept-sliders/tree/main/samples/moonlit/case0)
+Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/bad-intent/case1/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/bad-intent/case1/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/bad-intent/case1/off.png)
 
-![Moonlit: matched samples at strengths 0 through 5](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/moonlit-case0.jpg)
+<details><summary>Prompt and seed</summary>
+
+1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, in an unadorned stone corridor with bare stone walls
+
+Seed: `29001`.
+
+</details>
+
+### Moonlit · case0
+
+![Moonlit: matched strength-one samples, case0](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/unit-alpha-moonlit-case0.jpg)
+
+Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/moonlit/case0/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/moonlit/case0/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/moonlit/case0/off.png)
 
 <details><summary>Prompt and seed</summary>
 
@@ -87,24 +88,11 @@ Seed: `29001`.
 
 </details>
 
-**Bare prompt** · [PNG images and prompt](https://huggingface.co/ntc-ai/anima-concept-sliders/tree/main/samples/moonlit/case3)
+### Moonlit · case1
 
-![Moonlit: matched samples at strengths 0 through 5](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/moonlit-case3.jpg)
+![Moonlit: matched strength-one samples, case1](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/unit-alpha-moonlit-case1.jpg)
 
-<details><summary>Prompt and seed</summary>
-
-1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, in an unadorned stone corridor with bare stone walls
-
-Seed: `29001`.
-
-</details>
-
-<details>
-<summary>Two more matched prompts</summary>
-
-**Comparison 2** · [PNG images and prompt](https://huggingface.co/ntc-ai/anima-concept-sliders/tree/main/samples/moonlit/case1)
-
-![Moonlit: matched samples at strengths 0 through 5](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/moonlit-case1.jpg)
+Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/moonlit/case1/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/moonlit/case1/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/moonlit/case1/off.png)
 
 <details><summary>Prompt and seed</summary>
 
@@ -114,9 +102,11 @@ Seed: `29001`.
 
 </details>
 
-**Comparison 3** · [PNG images and prompt](https://huggingface.co/ntc-ai/anima-concept-sliders/tree/main/samples/moonlit/case2)
+### Moonlit · case2
 
-![Moonlit: matched samples at strengths 0 through 5](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/moonlit-case2.jpg)
+![Moonlit: matched strength-one samples, case2](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/unit-alpha-moonlit-case2.jpg)
+
+Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/moonlit/case2/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/moonlit/case2/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/moonlit/case2/off.png)
 
 <details><summary>Prompt and seed</summary>
 
@@ -126,13 +116,25 @@ Seed: `29001`.
 
 </details>
 
+### Moonlit · case3
+
+![Moonlit: matched strength-one samples, case3](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/unit-alpha-moonlit-case3.jpg)
+
+Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/moonlit/case3/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/moonlit/case3/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/moonlit/case3/off.png)
+
+<details><summary>Prompt and seed</summary>
+
+1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, in an unadorned stone corridor with bare stone walls
+
+Seed: `29001`.
+
 </details>
 
-### Candlelit
+### Candlelit · case0
 
-**Comparison 1** · [PNG images and prompt](https://huggingface.co/ntc-ai/anima-concept-sliders/tree/main/samples/candlelit/case0)
+![Candlelit: matched strength-one samples, case0](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/unit-alpha-candlelit-case0.jpg)
 
-![Candlelit: matched samples at strengths 0 through 5](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/candlelit-case0.jpg)
+Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/candlelit/case0/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/candlelit/case0/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/candlelit/case0/off.png)
 
 <details><summary>Prompt and seed</summary>
 
@@ -142,24 +144,11 @@ Seed: `29001`.
 
 </details>
 
-**Bare prompt** · [PNG images and prompt](https://huggingface.co/ntc-ai/anima-concept-sliders/tree/main/samples/candlelit/case3)
+### Candlelit · case1
 
-![Candlelit: matched samples at strengths 0 through 5](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/candlelit-case3.jpg)
+![Candlelit: matched strength-one samples, case1](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/unit-alpha-candlelit-case1.jpg)
 
-<details><summary>Prompt and seed</summary>
-
-1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, in an unadorned stone corridor with bare stone walls
-
-Seed: `29001`.
-
-</details>
-
-<details>
-<summary>Two more matched prompts</summary>
-
-**Comparison 2** · [PNG images and prompt](https://huggingface.co/ntc-ai/anima-concept-sliders/tree/main/samples/candlelit/case1)
-
-![Candlelit: matched samples at strengths 0 through 5](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/candlelit-case1.jpg)
+Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/candlelit/case1/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/candlelit/case1/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/candlelit/case1/off.png)
 
 <details><summary>Prompt and seed</summary>
 
@@ -169,9 +158,11 @@ Seed: `29001`.
 
 </details>
 
-**Comparison 3** · [PNG images and prompt](https://huggingface.co/ntc-ai/anima-concept-sliders/tree/main/samples/candlelit/case2)
+### Candlelit · case2
 
-![Candlelit: matched samples at strengths 0 through 5](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/candlelit-case2.jpg)
+![Candlelit: matched strength-one samples, case2](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/unit-alpha-candlelit-case2.jpg)
+
+Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/candlelit/case2/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/candlelit/case2/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/candlelit/case2/off.png)
 
 <details><summary>Prompt and seed</summary>
 
@@ -181,11 +172,23 @@ Seed: `29001`.
 
 </details>
 
-</details>
+### Candlelit · case3
+
+![Candlelit: matched strength-one samples, case3](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/unit-alpha-candlelit-case3.jpg)
+
+Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/candlelit/case3/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/candlelit/case3/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/candlelit/case3/off.png)
+
+<details><summary>Prompt and seed</summary>
+
+1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, in an unadorned stone corridor with bare stone walls
+
+Seed: `29001`.
 
 </details>
 
-Strength **1** is the trained endpoint. Higher strengths extrapolate and can change clothing, framing and scene details; occasional camera-frame marks are visible in the unfiltered examples. These development samples illustrate behavior, not a final-test quality benchmark.
+</details>
+
+These are development examples, not a final-test benchmark. Strength 1 is the calibrated default; higher settings extrapolate and can change pose, clothing, framing or appearance.
 
 <a id="comfyui"></a>
 
@@ -193,46 +196,35 @@ Strength **1** is the trained endpoint. Higher strengths extrapolate and can cha
 
 | Slider | Original particles | Distilled LoRA for ComfyUI | Distilled LoRA for native runtime |
 |---|---|---|---|
-| Bad Intent | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/weights/bad-intent.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/distilled/comfyui/bad-intent.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/distilled/native/bad-intent.safetensors?download=true) |
-| Moonlit | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/weights/moonlit.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/distilled/comfyui/moonlit.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/distilled/native/moonlit.safetensors?download=true) |
-| Candlelit | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/weights/candlelit.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/distilled/comfyui/candlelit.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/distilled/native/candlelit.safetensors?download=true) |
+| Bad Intent | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/weights/bad-intent.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/distilled/comfyui/bad-intent-unit-alpha.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/distilled/native/bad-intent-unit-alpha.safetensors?download=true) |
+| Moonlit | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/weights/moonlit-unit-alpha.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/distilled/comfyui/moonlit-unit-alpha.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/distilled/native/moonlit-unit-alpha.safetensors?download=true) |
+| Candlelit | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/weights/candlelit-unit-alpha.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/distilled/comfyui/candlelit-unit-alpha.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/distilled/native/candlelit-unit-alpha.safetensors?download=true) |
 
-**Particles:** use the [ComfyUI particle plugin](https://github.com/mikkel/anima-concept-sliders#comfyui), or the [native loader](https://github.com/mikkel/anima-concept-sliders/blob/main/REPRODUCE.md). [Plugin ZIP](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/comfyui/anima-concept-sliders.zip?download=true) · [ComfyUI setup](https://github.com/mikkel/anima-concept-sliders/blob/main/COMFYUI.md).
+**Particles:** use the [ComfyUI particle plugin](https://github.com/mikkel/anima-concept-sliders#comfyui) at strength **1.0**. Update the plugin for embedded-alpha files. [Plugin ZIP](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/comfyui/anima-concept-sliders.zip?download=true) · [Setup](https://github.com/mikkel/anima-concept-sliders/blob/main/COMFYUI.md).
 
-**Distilled LoRAs:** use standard **Load LoRA**, MODEL strength 1 and CLIP strength 0. These rank-8 linear approximations need no particle plugin. Compare their images below before choosing a format.
+**Distilled LoRAs:** use standard **Load LoRA**, **MODEL strength 1.0, CLIP strength 0**. No particle plugin is needed.
 
-[Public source and training reproduction](https://github.com/mikkel/anima-concept-sliders) · [Every sample and checkpoint](https://huggingface.co/ntc-ai/anima-concept-sliders/blob/main/catalog.json) · [File hashes](https://huggingface.co/ntc-ai/anima-concept-sliders/blob/main/release-manifest.json) · [Related YuE2 release](https://huggingface.co/ntc-ai/yue2-concept-sliders).
+| Slider | Particle alpha | Distill alpha | Rank |
+|---|---:|---:|---:|
+| Bad Intent | 8 | 24 | 8 |
+| Moonlit | 23.08072422 | 23.08072422 | 8 |
+| Candlelit | 16 | 16 | 8 |
 
-The reusable algorithms come from the [shared core in sliders-conceptmod](https://github.com/mikkel/sliders-conceptmod/tree/main/packages/concept-slider-core). This Anima repository pins an exact core revision and owns the model integration, recipe and release evidence.
+Calibration is embedded in the files; do not add an external gain. Bad Intent’s old alpha-8 LoRA needs strength 3 for the same operation as the new alpha-24 file at strength 1. Lighting LoRAs carry the same alpha gain as their calibrated particle teacher; this does not claim a new fit or exact image equivalence.
 
-## Distilled comparisons
+[Source and reproduction](https://github.com/mikkel/anima-concept-sliders) · [Catalog](https://huggingface.co/ntc-ai/anima-concept-sliders/blob/main/catalog.json) · [File hashes](https://huggingface.co/ntc-ai/anima-concept-sliders/blob/main/release-manifest.json) · [Distillation and alpha audit](DISTILLATION.md).
 
-<details>
-<summary>Compare lighting particles and distills at strengths 1, 3 and 5</summary>
+The reusable algorithms come from the [pinned shared core](https://github.com/mikkel/sliders-conceptmod/tree/main/packages/concept-slider-core). Training weights and the ParticleGAN formulation are unchanged.
 
-Top row: original particles at strengths **1, 3, 5**. Bottom row: the distilled ordinary LoRA at the same strengths. Prompt, seed, dimensions and sampler are identical. [All four prompt comparisons](https://huggingface.co/ntc-ai/anima-concept-sliders/tree/main/distilled/samples).
+<details><summary>Historical exports and examples</summary>
 
-### Moonlit — particles and distilled
+The original alpha-8 exports and their samples remain available for reproduction. Their strength numbers use the original scale and do not describe the new calibrated files. The catalog’s `archived_release` entries retain the original paths.
 
-![Moonlit particle versus distilled LoRA at strengths 1, 3 and 5](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/moonlit-distilled.jpg)
+[Original lighting/Bad Intent particle samples](https://huggingface.co/ntc-ai/anima-concept-sliders/tree/main/samples) · [Original distill samples](https://huggingface.co/ntc-ai/anima-concept-sliders/tree/main/distilled/samples).
 
-### Candlelit — particles and distilled
-
-![Candlelit particle versus distilled LoRA at strengths 1, 3 and 5](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/candlelit-distilled.jpg)
+Original, uncalibrated projection-relative fitting MSE: Bad Intent 0.005434, Moonlit 0.007559, Candlelit 0.020457. These local diagnostics are not image-quality scores and do not measure the calibrated complete-denoiser edit.
 
 </details>
-
-The featured comparisons show a milder lighting change from the distills at the same strength. They are experimental approximations, not interchangeable replacements.
-
-The distills were fitted on training activations. Development projection-relative MSE (lower is closer to the particle delta; **not** an image-quality score):
-
-| Slider | Relative MSE |
-|---|---:|
-| Bad Intent | 0.005434 |
-| Moonlit | 0.007559 |
-| Candlelit | 0.020457 |
-
-[Distillation formulation and reproduction](DISTILLATION.md).
 
 ## How the sliders learn
 
@@ -252,7 +244,7 @@ $$
 y = W_0x + s\,W_{\mathrm{up}}F([u,z]).
 $$
 
-The up matrix maps rank 8 back to the projection output width and starts at zero. The same soft routing runs during training and inference. Strength \\(s=0\\) bypasses the branch exactly. Training uses \\(s=1\\); the gallery includes extrapolation through \\(s=5\\). For multiple sliders the deltas sum on the same input. Studio normalizes nonnegative mix proportions as \\(s_j=E m_j/\sum_k m_k\\).
+The up matrix maps rank 8 back to the projection output width and starts at zero. The same soft routing runs during training and inference. Strength \\(s=0\\) bypasses the branch exactly. Training uses \\(s=1\\); the historical gallery included extrapolation through \\(s=5\\). Calibrated inference additionally multiplies the branch by its stored alpha/rank; the current gallery uses nominal strength 1. No training weights or losses change. For multiple sliders the deltas sum on the same input. Studio normalizes nonnegative mix proportions as \\(s_j=E m_j/\sum_k m_k\\).
 
 An ordinary LoRA has a linear branch \\(BAx\\). The routed particle branch is nonlinear, so its full behavior cannot be merged into a fixed weight matrix. The [distilled LoRAs](DISTILLATION.md) are fitted approximations.
 

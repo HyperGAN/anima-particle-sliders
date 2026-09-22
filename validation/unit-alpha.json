@@ -1,0 +1,476 @@
+{
+  "passed": true,
+  "nominal_strength": 1,
+  "final_test_used": false,
+  "samples": [
+    {
+      "path": "samples/unit-alpha/bad-intent/case0/particles.png",
+      "metadata": "samples/unit-alpha/bad-intent/case0/particles.json",
+      "sha256": "6026678a4b342c5221d203a92f71e97dfea9df21d28c14248044da8bbd27d462",
+      "adapter_sha256": "21aafdd18bb67fbfc06e7c98dfa042f1a90761d6f926c19cf3aab4b71e538553",
+      "strength": 1,
+      "alpha": 8.0
+    },
+    {
+      "path": "samples/unit-alpha/bad-intent/case0/lora.png",
+      "metadata": "samples/unit-alpha/bad-intent/case0/lora.json",
+      "sha256": "9b13f7920b3b7ea66fd870af9644479f46ce5ad50bbc9d9efa62b8fb3a0a96ec",
+      "adapter_sha256": "0e7363288bcef49fb9e91c55dbf58533cacc3389e9d34575704d1a39cc56b94c",
+      "strength": 1,
+      "alpha": 24.0
+    },
+    {
+      "path": "samples/unit-alpha/bad-intent/case0/off.png",
+      "metadata": "samples/unit-alpha/bad-intent/case0/off.json",
+      "sha256": "735ad5d840cfe2313b4b80d6048c09d07eb774cb138187053a14c873cb71a0eb",
+      "adapter_sha256": null,
+      "strength": 0,
+      "alpha": null
+    },
+    {
+      "path": "samples/unit-alpha/bad-intent/case1/particles.png",
+      "metadata": "samples/unit-alpha/bad-intent/case1/particles.json",
+      "sha256": "63bb5fdbfcd94191866b84dd994d8943ff5bb77106852902dde431c56747510c",
+      "adapter_sha256": "21aafdd18bb67fbfc06e7c98dfa042f1a90761d6f926c19cf3aab4b71e538553",
+      "strength": 1,
+      "alpha": 8.0
+    },
+    {
+      "path": "samples/unit-alpha/bad-intent/case1/lora.png",
+      "metadata": "samples/unit-alpha/bad-intent/case1/lora.json",
+      "sha256": "4695ac1c86094ef83d62ec94d4dd77ccbe7669e9d91c6c2914325370313eaf59",
+      "adapter_sha256": "0e7363288bcef49fb9e91c55dbf58533cacc3389e9d34575704d1a39cc56b94c",
+      "strength": 1,
+      "alpha": 24.0
+    },
+    {
+      "path": "samples/unit-alpha/bad-intent/case1/off.png",
+      "metadata": "samples/unit-alpha/bad-intent/case1/off.json",
+      "sha256": "acc5cad87af3f8acf50a245b592c0b5c87a120ce49b6103e126a67d68af6603c",
+      "adapter_sha256": null,
+      "strength": 0,
+      "alpha": null
+    },
+    {
+      "path": "samples/unit-alpha/candlelit/portrait/particles.png",
+      "metadata": "samples/unit-alpha/candlelit/portrait/particles.json",
+      "sha256": "ba1679a4dec44f6eadad406134ec8279e41c1227a8c9e054dc0fb63500540a3e",
+      "adapter_sha256": "6da05dd3d7b111ae47edc1c2cb05d15e17a4bae66691233725df3c991a5745c8",
+      "strength": 1,
+      "alpha": 16.0
+    },
+    {
+      "path": "samples/unit-alpha/candlelit/portrait/lora.png",
+      "metadata": "samples/unit-alpha/candlelit/portrait/lora.json",
+      "sha256": "e94ecbb69e1e1235a4ce99ffc1b40f0f6d3fdac02631844eb54232bf7a32fc9b",
+      "adapter_sha256": "e686b1bb28601e620234dd22994598caa87760a0742f408a0a96ecd55b6e29de",
+      "strength": 1,
+      "alpha": 16.0
+    },
+    {
+      "path": "samples/unit-alpha/candlelit/portrait/off.png",
+      "metadata": "samples/unit-alpha/candlelit/portrait/off.json",
+      "sha256": "a065834843b96c4453deb33a49bfbfc23d820588c988fdde18f4ff1dadb623e6",
+      "adapter_sha256": null,
+      "strength": 0,
+      "alpha": null
+    },
+    {
+      "path": "samples/unit-alpha/candlelit/case0/particles.png",
+      "metadata": "samples/unit-alpha/candlelit/case0/particles.json",
+      "sha256": "7ddc1cbf8750e2e8970d2882fe43bafbdfe5bb85695370bc5239117c5902e190",
+      "adapter_sha256": "6da05dd3d7b111ae47edc1c2cb05d15e17a4bae66691233725df3c991a5745c8",
+      "strength": 1,
+      "alpha": 16.0
+    },
+    {
+      "path": "samples/unit-alpha/candlelit/case0/lora.png",
+      "metadata": "samples/unit-alpha/candlelit/case0/lora.json",
+      "sha256": "94ceae7c299c9c30c404e32a90ad0cb3b6ad4a3573b50d65e1d3379b0f237cc9",
+      "adapter_sha256": "e686b1bb28601e620234dd22994598caa87760a0742f408a0a96ecd55b6e29de",
+      "strength": 1,
+      "alpha": 16.0
+    },
+    {
+      "path": "samples/unit-alpha/candlelit/case0/off.png",
+      "metadata": "samples/unit-alpha/candlelit/case0/off.json",
+      "sha256": "d59860a424ae82f3139b28b17d44178f4cd0472f70b0494db633fb9774461b73",
+      "adapter_sha256": null,
+      "strength": 0,
+      "alpha": null
+    },
+    {
+      "path": "samples/unit-alpha/candlelit/case1/particles.png",
+      "metadata": "samples/unit-alpha/candlelit/case1/particles.json",
+      "sha256": "6b88ab1644e537e8e73ed8575aaaae9886001c5c23aa04d6e825ceda1d87177a",
+      "adapter_sha256": "6da05dd3d7b111ae47edc1c2cb05d15e17a4bae66691233725df3c991a5745c8",
+      "strength": 1,
+      "alpha": 16.0
+    },
+    {
+      "path": "samples/unit-alpha/candlelit/case1/lora.png",
+      "metadata": "samples/unit-alpha/candlelit/case1/lora.json",
+      "sha256": "876a1c95bb4f843719b7cf242fb18bcd194c03c42db2687839549aee0de0d5cc",
+      "adapter_sha256": "e686b1bb28601e620234dd22994598caa87760a0742f408a0a96ecd55b6e29de",
+      "strength": 1,
+      "alpha": 16.0
+    },
+    {
+      "path": "samples/unit-alpha/candlelit/case1/off.png",
+      "metadata": "samples/unit-alpha/candlelit/case1/off.json",
+      "sha256": "4988137a70bcf7fbc8a49f9d76ad686a3a06cf280e2892a1205ab8312bbfff03",
+      "adapter_sha256": null,
+      "strength": 0,
+      "alpha": null
+    },
+    {
+      "path": "samples/unit-alpha/candlelit/case2/particles.png",
+      "metadata": "samples/unit-alpha/candlelit/case2/particles.json",
+      "sha256": "46addafda4bec88013c7717e803229f423424cbb6a0d4d19c690ce1bbdaa2ac4",
+      "adapter_sha256": "6da05dd3d7b111ae47edc1c2cb05d15e17a4bae66691233725df3c991a5745c8",
+      "strength": 1,
+      "alpha": 16.0
+    },
+    {
+      "path": "samples/unit-alpha/candlelit/case2/lora.png",
+      "metadata": "samples/unit-alpha/candlelit/case2/lora.json",
+      "sha256": "433984fedebbb8199445eeb09162194014fb3be2c09fef29a6eeeccf7c0827da",
+      "adapter_sha256": "e686b1bb28601e620234dd22994598caa87760a0742f408a0a96ecd55b6e29de",
+      "strength": 1,
+      "alpha": 16.0
+    },
+    {
+      "path": "samples/unit-alpha/candlelit/case2/off.png",
+      "metadata": "samples/unit-alpha/candlelit/case2/off.json",
+      "sha256": "24d18939bfcd36a192fa2a5ddbc30463837c6d51a98bccf88b335873088b8376",
+      "adapter_sha256": null,
+      "strength": 0,
+      "alpha": null
+    },
+    {
+      "path": "samples/unit-alpha/candlelit/case3/particles.png",
+      "metadata": "samples/unit-alpha/candlelit/case3/particles.json",
+      "sha256": "eeacb4a11e9f2ef691870aa99a8ff7135a2b906e027fa1c342eadb42f7e25e29",
+      "adapter_sha256": "6da05dd3d7b111ae47edc1c2cb05d15e17a4bae66691233725df3c991a5745c8",
+      "strength": 1,
+      "alpha": 16.0
+    },
+    {
+      "path": "samples/unit-alpha/candlelit/case3/lora.png",
+      "metadata": "samples/unit-alpha/candlelit/case3/lora.json",
+      "sha256": "f8879690617e70e41b67d6caa9310d9955794f6164ba92dbfec34d7d436091f4",
+      "adapter_sha256": "e686b1bb28601e620234dd22994598caa87760a0742f408a0a96ecd55b6e29de",
+      "strength": 1,
+      "alpha": 16.0
+    },
+    {
+      "path": "samples/unit-alpha/candlelit/case3/off.png",
+      "metadata": "samples/unit-alpha/candlelit/case3/off.json",
+      "sha256": "acc5cad87af3f8acf50a245b592c0b5c87a120ce49b6103e126a67d68af6603c",
+      "adapter_sha256": null,
+      "strength": 0,
+      "alpha": null
+    },
+    {
+      "path": "samples/unit-alpha/moonlit/portrait/particles.png",
+      "metadata": "samples/unit-alpha/moonlit/portrait/particles.json",
+      "sha256": "dad9dee855fafa5168063035e1a32343851a2898969c33e0a7262f61abfd8e6b",
+      "adapter_sha256": "5d3b433f34e23ce505e9fe19698d11175cd7a5453558b513e35acdb56bc8b873",
+      "strength": 1,
+      "alpha": 23.08072421821097
+    },
+    {
+      "path": "samples/unit-alpha/moonlit/portrait/lora.png",
+      "metadata": "samples/unit-alpha/moonlit/portrait/lora.json",
+      "sha256": "a91c912dc61409db04da264a413f31d1568405fd01b533ba4bc29ab3a18d9fbb",
+      "adapter_sha256": "bff7208de40ea33e76b254cf2adc46c20553e0cb405d946948d8123fb6a0e32d",
+      "strength": 1,
+      "alpha": 23.08072421821097
+    },
+    {
+      "path": "samples/unit-alpha/moonlit/portrait/off.png",
+      "metadata": "samples/unit-alpha/moonlit/portrait/off.json",
+      "sha256": "a065834843b96c4453deb33a49bfbfc23d820588c988fdde18f4ff1dadb623e6",
+      "adapter_sha256": null,
+      "strength": 0,
+      "alpha": null
+    },
+    {
+      "path": "samples/unit-alpha/moonlit/case0/particles.png",
+      "metadata": "samples/unit-alpha/moonlit/case0/particles.json",
+      "sha256": "8488e154fb9982648978735d1f688fc09e91a05c2878b5507f23d339e3246247",
+      "adapter_sha256": "5d3b433f34e23ce505e9fe19698d11175cd7a5453558b513e35acdb56bc8b873",
+      "strength": 1,
+      "alpha": 23.08072421821097
+    },
+    {
+      "path": "samples/unit-alpha/moonlit/case0/lora.png",
+      "metadata": "samples/unit-alpha/moonlit/case0/lora.json",
+      "sha256": "d0a56e16d70572f4637829568ac61cecfe4947346605dcb66b989c65d6e447ab",
+      "adapter_sha256": "bff7208de40ea33e76b254cf2adc46c20553e0cb405d946948d8123fb6a0e32d",
+      "strength": 1,
+      "alpha": 23.08072421821097
+    },
+    {
+      "path": "samples/unit-alpha/moonlit/case0/off.png",
+      "metadata": "samples/unit-alpha/moonlit/case0/off.json",
+      "sha256": "d59860a424ae82f3139b28b17d44178f4cd0472f70b0494db633fb9774461b73",
+      "adapter_sha256": null,
+      "strength": 0,
+      "alpha": null
+    },
+    {
+      "path": "samples/unit-alpha/moonlit/case1/particles.png",
+      "metadata": "samples/unit-alpha/moonlit/case1/particles.json",
+      "sha256": "77bdca0453d5c0ad9c1b78df6187fef28cf534159ec2fde8f43c9ba6c5b89631",
+      "adapter_sha256": "5d3b433f34e23ce505e9fe19698d11175cd7a5453558b513e35acdb56bc8b873",
+      "strength": 1,
+      "alpha": 23.08072421821097
+    },
+    {
+      "path": "samples/unit-alpha/moonlit/case1/lora.png",
+      "metadata": "samples/unit-alpha/moonlit/case1/lora.json",
+      "sha256": "9f4861a76288a00b7f556a713ae7981713ac0948dd261d3b91f85a037692c2a6",
+      "adapter_sha256": "bff7208de40ea33e76b254cf2adc46c20553e0cb405d946948d8123fb6a0e32d",
+      "strength": 1,
+      "alpha": 23.08072421821097
+    },
+    {
+      "path": "samples/unit-alpha/moonlit/case1/off.png",
+      "metadata": "samples/unit-alpha/moonlit/case1/off.json",
+      "sha256": "4988137a70bcf7fbc8a49f9d76ad686a3a06cf280e2892a1205ab8312bbfff03",
+      "adapter_sha256": null,
+      "strength": 0,
+      "alpha": null
+    },
+    {
+      "path": "samples/unit-alpha/moonlit/case2/particles.png",
+      "metadata": "samples/unit-alpha/moonlit/case2/particles.json",
+      "sha256": "ebc2068fec171f59cb1dd3d8ec223270ee6c7f1c59583c35bd01af1094324eea",
+      "adapter_sha256": "5d3b433f34e23ce505e9fe19698d11175cd7a5453558b513e35acdb56bc8b873",
+      "strength": 1,
+      "alpha": 23.08072421821097
+    },
+    {
+      "path": "samples/unit-alpha/moonlit/case2/lora.png",
+      "metadata": "samples/unit-alpha/moonlit/case2/lora.json",
+      "sha256": "0c350cfdaa16d36cb6bff7238185cea7f9945e63ed1acbae8093fcfab491cc06",
+      "adapter_sha256": "bff7208de40ea33e76b254cf2adc46c20553e0cb405d946948d8123fb6a0e32d",
+      "strength": 1,
+      "alpha": 23.08072421821097
+    },
+    {
+      "path": "samples/unit-alpha/moonlit/case2/off.png",
+      "metadata": "samples/unit-alpha/moonlit/case2/off.json",
+      "sha256": "24d18939bfcd36a192fa2a5ddbc30463837c6d51a98bccf88b335873088b8376",
+      "adapter_sha256": null,
+      "strength": 0,
+      "alpha": null
+    },
+    {
+      "path": "samples/unit-alpha/moonlit/case3/particles.png",
+      "metadata": "samples/unit-alpha/moonlit/case3/particles.json",
+      "sha256": "d7a0841a5f6fd91e3a2f5d64a3d31af3c5cf0951d2df216a6520e4aaf063badb",
+      "adapter_sha256": "5d3b433f34e23ce505e9fe19698d11175cd7a5453558b513e35acdb56bc8b873",
+      "strength": 1,
+      "alpha": 23.08072421821097
+    },
+    {
+      "path": "samples/unit-alpha/moonlit/case3/lora.png",
+      "metadata": "samples/unit-alpha/moonlit/case3/lora.json",
+      "sha256": "98bc7d812e35240da9b4158ae7511c13fdd273dde009909f2cdda19d3687944f",
+      "adapter_sha256": "bff7208de40ea33e76b254cf2adc46c20553e0cb405d946948d8123fb6a0e32d",
+      "strength": 1,
+      "alpha": 23.08072421821097
+    },
+    {
+      "path": "samples/unit-alpha/moonlit/case3/off.png",
+      "metadata": "samples/unit-alpha/moonlit/case3/off.json",
+      "sha256": "acc5cad87af3f8acf50a245b592c0b5c87a120ce49b6103e126a67d68af6603c",
+      "adapter_sha256": null,
+      "strength": 0,
+      "alpha": null
+    }
+  ],
+  "exports": [
+    {
+      "slider": "bad-intent",
+      "format": "particle",
+      "path": "weights/bad-intent.safetensors",
+      "sha256": "21aafdd18bb67fbfc06e7c98dfa042f1a90761d6f926c19cf3aab4b71e538553",
+      "source": "weights/bad-intent.safetensors",
+      "source_sha256": "21aafdd18bb67fbfc06e7c98dfa042f1a90761d6f926c19cf3aab4b71e538553",
+      "alpha": 8.0,
+      "rank": 8,
+      "learned_tensors_unchanged": true
+    },
+    {
+      "slider": "bad-intent",
+      "format": "native_lora",
+      "path": "distilled/native/bad-intent-unit-alpha.safetensors",
+      "sha256": "0e7363288bcef49fb9e91c55dbf58533cacc3389e9d34575704d1a39cc56b94c",
+      "source": "distilled/native/bad-intent.safetensors",
+      "source_sha256": "59c6141e7217c7b8a0cb3ddf3da96817379b04c72ac30a2c800a24204248244b",
+      "alpha": 24.0,
+      "rank": 8,
+      "learned_tensors_unchanged": true
+    },
+    {
+      "slider": "bad-intent",
+      "format": "comfyui_lora",
+      "path": "distilled/comfyui/bad-intent-unit-alpha.safetensors",
+      "sha256": "5331b96fdb46b65f7763746521a0b5dff827582b5c6bed4733c5174dbdf6d043",
+      "source": "distilled/comfyui/bad-intent.safetensors",
+      "source_sha256": "a28feefdf3c6b3268b0890a90da3e0ab96138ee63be239804529929c061da8c1",
+      "alpha": 24.0,
+      "rank": 8,
+      "learned_tensors_unchanged": true
+    },
+    {
+      "slider": "candlelit",
+      "format": "particle",
+      "path": "weights/candlelit-unit-alpha.safetensors",
+      "sha256": "6da05dd3d7b111ae47edc1c2cb05d15e17a4bae66691233725df3c991a5745c8",
+      "source": "weights/candlelit.safetensors",
+      "source_sha256": "46c02275cc131b6d60140edcdfedc27504e769fba206daa8be66198105097a2b",
+      "alpha": 16.0,
+      "rank": 8,
+      "learned_tensors_unchanged": true
+    },
+    {
+      "slider": "candlelit",
+      "format": "native_lora",
+      "path": "distilled/native/candlelit-unit-alpha.safetensors",
+      "sha256": "e686b1bb28601e620234dd22994598caa87760a0742f408a0a96ecd55b6e29de",
+      "source": "distilled/native/candlelit.safetensors",
+      "source_sha256": "f379001e71bcb72a8451026e6980ef6466675190d46ac6f4dde288da1ecff532",
+      "alpha": 16.0,
+      "rank": 8,
+      "learned_tensors_unchanged": true
+    },
+    {
+      "slider": "candlelit",
+      "format": "comfyui_lora",
+      "path": "distilled/comfyui/candlelit-unit-alpha.safetensors",
+      "sha256": "75bda15a60340a99877b50406571341e12bb71bdaf06f3c560a9a59c4f8e5fa4",
+      "source": "distilled/comfyui/candlelit.safetensors",
+      "source_sha256": "029dd2fac6ce3b40fe2cd8322e33716da6bc280d29e97b02eab6e957c71952f8",
+      "alpha": 16.0,
+      "rank": 8,
+      "learned_tensors_unchanged": true
+    },
+    {
+      "slider": "moonlit",
+      "format": "particle",
+      "path": "weights/moonlit-unit-alpha.safetensors",
+      "sha256": "5d3b433f34e23ce505e9fe19698d11175cd7a5453558b513e35acdb56bc8b873",
+      "source": "weights/moonlit.safetensors",
+      "source_sha256": "245dc194b6a3ba681bbb8064099398a060f8ffc7fd05916dabf8013cae9f9eee",
+      "alpha": 23.08072421821097,
+      "rank": 8,
+      "learned_tensors_unchanged": true
+    },
+    {
+      "slider": "moonlit",
+      "format": "native_lora",
+      "path": "distilled/native/moonlit-unit-alpha.safetensors",
+      "sha256": "bff7208de40ea33e76b254cf2adc46c20553e0cb405d946948d8123fb6a0e32d",
+      "source": "distilled/native/moonlit.safetensors",
+      "source_sha256": "cc9b0d7e6fc49cb875d6d4cc01bab4e9ee738c9f68fc4dfa373eaab839a22e2a",
+      "alpha": 23.08072421821097,
+      "rank": 8,
+      "learned_tensors_unchanged": true
+    },
+    {
+      "slider": "moonlit",
+      "format": "comfyui_lora",
+      "path": "distilled/comfyui/moonlit-unit-alpha.safetensors",
+      "sha256": "7d1b875ed110d36cc508830588e475bde3317a43ec98ab251deb8fe96b05c7c8",
+      "source": "distilled/comfyui/moonlit.safetensors",
+      "source_sha256": "03db4af11673d9cf1dbe3d98433140c8dc0d8db8b70a81eb560915edcb827d50",
+      "alpha": 23.08072421821097,
+      "rank": 8,
+      "learned_tensors_unchanged": true
+    }
+  ],
+  "zero_replays": [
+    {
+      "slider": "bad-intent",
+      "case": "case0",
+      "pixel_exact": true
+    },
+    {
+      "slider": "bad-intent",
+      "case": "case1",
+      "pixel_exact": true
+    },
+    {
+      "slider": "candlelit",
+      "case": "portrait",
+      "pixel_exact": true
+    },
+    {
+      "slider": "candlelit",
+      "case": "case0",
+      "pixel_exact": true
+    },
+    {
+      "slider": "candlelit",
+      "case": "case1",
+      "pixel_exact": true
+    },
+    {
+      "slider": "candlelit",
+      "case": "case2",
+      "pixel_exact": true
+    },
+    {
+      "slider": "candlelit",
+      "case": "case3",
+      "pixel_exact": true
+    },
+    {
+      "slider": "moonlit",
+      "case": "portrait",
+      "pixel_exact": true
+    },
+    {
+      "slider": "moonlit",
+      "case": "case0",
+      "pixel_exact": true
+    },
+    {
+      "slider": "moonlit",
+      "case": "case1",
+      "pixel_exact": true
+    },
+    {
+      "slider": "moonlit",
+      "case": "case2",
+      "pixel_exact": true
+    },
+    {
+      "slider": "moonlit",
+      "case": "case3",
+      "pixel_exact": true
+    }
+  ],
+  "images": 36,
+  "comparisons": 12,
+  "particle_alphas": {
+    "bad-intent": 8.0,
+    "candlelit": 16.0,
+    "moonlit": 23.08072421821097
+  },
+  "lora_alphas": {
+    "bad-intent": 24.0,
+    "candlelit": 16.0,
+    "moonlit": 23.08072421821097
+  },
+  "limitation": "Development examples rendered in the pinned native runtime; full ComfyUI GPU generation is not covered.",
+  "visual_review": {
+    "comparisons_reviewed": 12,
+    "particle_effects": "Candlelit warm amber, Moonlit blue shadows, Bad Intent leaning and intense expression at nominal 1.",
+    "lora_limitations": "Lighting distills remain milder; Bad Intent restores the strong edit but differs from particle details and rendering medium."
+  }
+}
