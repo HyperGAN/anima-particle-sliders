@@ -4,25 +4,25 @@
   "final_test_used": false,
   "samples": [
     {
-      "path": "samples/balanced-alpha/bad-intent/case0/particles.png",
-      "metadata": "samples/balanced-alpha/bad-intent/case0/particles.json",
-      "sha256": "ced8ff4b445e165bed0687d6511f733eb9390a1d483bc43542a390efb4536a17",
+      "path": "samples/featured-v2/bad-intent/balcony/particles.png",
+      "metadata": "samples/featured-v2/bad-intent/balcony/particles.json",
+      "sha256": "b3224ba20b6a813b70e795a38776d68e9a223d3d6c702241bc6f3f767084d05a",
       "adapter_sha256": "c00e13684eefca669ac0d9c7b2afd2cc76b01791e43e04d81be72fe3f00c401b",
       "strength": 1,
       "alpha": 12.0
     },
     {
-      "path": "samples/balanced-alpha/bad-intent/case0/lora.png",
-      "metadata": "samples/balanced-alpha/bad-intent/case0/lora.json",
-      "sha256": "9b13f7920b3b7ea66fd870af9644479f46ce5ad50bbc9d9efa62b8fb3a0a96ec",
+      "path": "samples/featured-v2/bad-intent/balcony/lora.png",
+      "metadata": "samples/featured-v2/bad-intent/balcony/lora.json",
+      "sha256": "ed9060aaf305c04bd48d5700760d082630e90e4e78ebe29097d222025ab01c02",
       "adapter_sha256": "0e7363288bcef49fb9e91c55dbf58533cacc3389e9d34575704d1a39cc56b94c",
       "strength": 1,
       "alpha": 24.0
     },
     {
-      "path": "samples/balanced-alpha/bad-intent/case0/off.png",
-      "metadata": "samples/balanced-alpha/bad-intent/case0/off.json",
-      "sha256": "735ad5d840cfe2313b4b80d6048c09d07eb774cb138187053a14c873cb71a0eb",
+      "path": "samples/featured-v2/bad-intent/balcony/off.png",
+      "metadata": "samples/featured-v2/bad-intent/balcony/off.json",
+      "sha256": "ce89d4b11967d11e01a26303063f9f26072acec43c170e7cf013c9fc43cc3d00",
       "adapter_sha256": null,
       "strength": 0,
       "alpha": null
@@ -396,63 +396,68 @@
   "zero_replays": [
     {
       "slider": "bad-intent",
+      "case": "case1",
+      "pixel_exact": true
+    },
+    {
+      "slider": "candlelit",
+      "case": "portrait",
+      "pixel_exact": true
+    },
+    {
+      "slider": "candlelit",
       "case": "case0",
       "pixel_exact": true
     },
+    {
+      "slider": "candlelit",
+      "case": "case1",
+      "pixel_exact": true
+    },
+    {
+      "slider": "candlelit",
+      "case": "case2",
+      "pixel_exact": true
+    },
+    {
+      "slider": "candlelit",
+      "case": "case3",
+      "pixel_exact": true
+    },
+    {
+      "slider": "moonlit",
+      "case": "portrait",
+      "pixel_exact": true
+    },
+    {
+      "slider": "moonlit",
+      "case": "case0",
+      "pixel_exact": true
+    },
+    {
+      "slider": "moonlit",
+      "case": "case1",
+      "pixel_exact": true
+    },
+    {
+      "slider": "moonlit",
+      "case": "case2",
+      "pixel_exact": true
+    },
+    {
+      "slider": "moonlit",
+      "case": "case3",
+      "pixel_exact": true
+    }
+  ],
+  "new_baselines": [
     {
       "slider": "bad-intent",
-      "case": "case1",
-      "pixel_exact": true
-    },
-    {
-      "slider": "candlelit",
-      "case": "portrait",
-      "pixel_exact": true
-    },
-    {
-      "slider": "candlelit",
-      "case": "case0",
-      "pixel_exact": true
-    },
-    {
-      "slider": "candlelit",
-      "case": "case1",
-      "pixel_exact": true
-    },
-    {
-      "slider": "candlelit",
-      "case": "case2",
-      "pixel_exact": true
-    },
-    {
-      "slider": "candlelit",
-      "case": "case3",
-      "pixel_exact": true
-    },
-    {
-      "slider": "moonlit",
-      "case": "portrait",
-      "pixel_exact": true
-    },
-    {
-      "slider": "moonlit",
-      "case": "case0",
-      "pixel_exact": true
-    },
-    {
-      "slider": "moonlit",
-      "case": "case1",
-      "pixel_exact": true
-    },
-    {
-      "slider": "moonlit",
-      "case": "case2",
-      "pixel_exact": true
-    },
-    {
-      "slider": "moonlit",
-      "case": "case3",
-      "pixel_exact": true
+      "case": "balcony",
+      "source_manifest": "data/bad-intent-dev.json",
+      "source_row_id": "uncanny-dev-06",
+      "image": "samples/featured-v2/bad-intent/balcony/off.png",
+      "sha256": "ce89d4b11967d11e01a26303063f9f26072acec43c170e7cf013c9fc43cc3d00"
     }
   ],
   "images": 36,

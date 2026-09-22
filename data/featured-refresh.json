@@ -1,0 +1,18 @@
+{
+  "version": "featured-v2",
+  "slider": "bad-intent",
+  "replaces": "case0",
+  "source_manifest": "data/bad-intent-dev.json",
+  "source_row_id": "uncanny-dev-06",
+  "character": "original-15",
+  "final_test_used": false,
+  "request": {
+    "case": "balcony",
+    "prompt": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer, wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, on a balcony above a village, anime illustration",
+    "seed": 29027,
+    "width": 768,
+    "height": 768,
+    "steps": 10
+  },
+  "reason": "User requested a new featured Bad Intent image across Particle, Distill and Off, on GitHub and Hugging Face."
+}

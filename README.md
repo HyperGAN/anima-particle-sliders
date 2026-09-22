@@ -12,19 +12,19 @@ Bad Intent changes expression, pose, framing and sometimes appearance or medium.
 
 **Particle · strength 1** → **Distill · strength 1** → **Off · strength 0**
 
-![Bad Intent: Particle first, Distill second, Off third](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/balanced-alpha-bad-intent-case0.jpg)
+![Bad Intent: Particle first, Distill second, Off third](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/featured-v2-bad-intent-balcony.jpg)
 
-Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/balanced-alpha/bad-intent/case0/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/balanced-alpha/bad-intent/case0/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/balanced-alpha/bad-intent/case0/off.png)
+Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/featured-v2/bad-intent/balcony/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/featured-v2/bad-intent/balcony/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/featured-v2/bad-intent/balcony/off.png)
 
 <details><summary>Prompt and seed</summary>
 
-masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, standing upright, facing viewer, arms at sides, upper body, waist-up view, eye-level camera, in an unadorned stone corridor with bare stone walls, anime illustration
+masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer, wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, on a balcony above a village, anime illustration
 
-Seed: `29001`.
+Seed: `29027`.
 
 </details>
 
-The alpha-24 distill restores the leaning pose and intense expression in these development examples. It remains an approximation; the bare male example differs in rendering medium from the particle teacher.
+Both formats can change expression, pose, framing and rendering style. The featured balcony scene uses a different development character and seed from the earlier alpha audit.
 
 The particle now uses alpha **12**, with the distill at **24**, to bring their visible intensity closer at strength 1. The two formats still differ in details and rendering style. [Comparison audit](validation/bad-intent-balance.json).
 
@@ -202,7 +202,7 @@ These are development examples, not a final-test benchmark. Strength 1 is the ca
 | Moonlit | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/weights/moonlit-unit-alpha.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/distilled/comfyui/moonlit-unit-alpha.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/distilled/native/moonlit-unit-alpha.safetensors?download=true) |
 | Candlelit | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/weights/candlelit-unit-alpha.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/distilled/comfyui/candlelit-unit-alpha.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/distilled/native/candlelit-unit-alpha.safetensors?download=true) |
 
-**Particles:** use the [ComfyUI particle plugin](https://github.com/mikkel/anima-concept-sliders#comfyui) at strength **1.0**. Update the plugin for embedded-alpha files. [Plugin ZIP](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/comfyui/anima-concept-sliders.zip?download=true) · [Setup](https://github.com/mikkel/anima-concept-sliders/blob/main/COMFYUI.md).
+**Particles:** use the [ComfyUI particle plugin](https://github.com/HyperGAN/anima-particle-sliders#comfyui) at strength **1.0**. Update the plugin for embedded-alpha files. [Plugin ZIP](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/comfyui/anima-concept-sliders.zip?download=true) · [Setup](https://github.com/HyperGAN/anima-particle-sliders/blob/main/COMFYUI.md).
 
 **Distilled LoRAs:** use standard **Load LoRA**, **MODEL strength 1.0, CLIP strength 0**. No particle plugin is needed.
 
@@ -214,7 +214,7 @@ These are development examples, not a final-test benchmark. Strength 1 is the ca
 
 Calibration is embedded in the files; do not add an external gain. Bad Intent’s old alpha-8 LoRA needs strength 3 for the same operation as the new alpha-24 file at strength 1. Lighting LoRAs carry the same alpha gain as their calibrated particle teacher; this does not claim a new fit or exact image equivalence.
 
-[Source and reproduction](https://github.com/mikkel/anima-concept-sliders) · [Catalog](https://huggingface.co/ntc-ai/anima-concept-sliders/blob/main/catalog.json) · [File hashes](https://huggingface.co/ntc-ai/anima-concept-sliders/blob/main/release-manifest.json) · [Distillation and alpha audit](DISTILLATION.md).
+[Source and reproduction](https://github.com/HyperGAN/anima-particle-sliders) · [Catalog](https://huggingface.co/ntc-ai/anima-concept-sliders/blob/main/catalog.json) · [File hashes](https://huggingface.co/ntc-ai/anima-concept-sliders/blob/main/release-manifest.json) · [Distillation and alpha audit](DISTILLATION.md).
 
 The reusable algorithms come from the [pinned shared core](https://github.com/mikkel/sliders-conceptmod/tree/main/packages/concept-slider-core). Training weights and the ParticleGAN formulation are unchanged.
 

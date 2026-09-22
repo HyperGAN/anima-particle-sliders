@@ -94,6 +94,29 @@ def stage(folder, studio):
                 samples.append(sample)
                 entry['distilled_samples' if fmt == 'lora' else 'samples'].append(sample)
             entry['comparisons'].append(dict(case=case, asset=f'assets/{version}-{name}-{case}.jpg', samples=samples))
+        refresh_path = ROOT/'data/featured-refresh.json'
+        refresh = json.loads(refresh_path.read_text()) if refresh_path.exists() else None
+        if refresh and name == refresh['slider']:
+            if 'balanced_alpha_release' not in entry:
+                entry['balanced_alpha_release'] = json.loads(json.dumps({k:entry[k] for k in
+                    ('render_requests','samples','distilled_samples','comparisons')}))
+            request = refresh['request']
+            source_rows = json.loads((ROOT/refresh['source_manifest']).read_text())['rows']
+            source = next(r for r in source_rows if r['id']==refresh['source_row_id'])
+            assert source['split']=='dev' and source['character']==refresh['character']
+            assert request['prompt']==source['neutral'] and request['seed'] in source['seeds']
+            index = next(i for i,r in enumerate(requests) if r['case']==refresh['replaces'])
+            requests[index] = request
+            samples = []
+            for fmt,strength in [('particles',1),('lora',1),('off',0)]:
+                path = f"samples/{refresh['version']}/{name}/{request['case']}/{fmt}.png"
+                samples.append(dict(case=request['case'],format=fmt,strength=strength,
+                    image=path,metadata=str(Path(path).with_suffix('.json'))))
+            entry['comparisons'][index] = dict(case=request['case'],
+                asset=f"assets/{refresh['version']}-{name}-{request['case']}.jpg",samples=samples)
+            entry['samples'] = [s for c in entry['comparisons'] for s in c['samples'] if s['format']!='lora']
+            entry['distilled_samples'] = [s for c in entry['comparisons'] for s in c['samples'] if s['format']=='lora']
+            entry['featured_refresh'] = refresh
         entry['featured_comparison'] = entry['comparisons'][0]
     catalog['calibration'] = 'unit-alpha-v2' if balance else 'unit-alpha-v1'
     write_json(folder/'catalog.json', catalog)
@@ -171,13 +194,13 @@ def build_card(folder):
             'Full resolution: '+' · '.join(f"[{label}]({RAW}{s['image']})" for label,s in zip(('Particle','Distill','Off'),comp['samples'])), '',
             '<details><summary>Prompt and seed</summary>', '',
             next(r['prompt'] for r in entry['render_requests'] if r['case']==comp['case']), '',
-            'Seed: `29001`.', '', '</details>', '']
+            f"Seed: `{next(r['seed'] for r in entry['render_requests'] if r['case']==comp['case'])}`.", '', '</details>', '']
         return result
     for entry in entries:
         lines += [f"### {entry['label']}", '', '**Particle · strength 1** → **Distill · strength 1** → **Off · strength 0**', '']
         lines += show(entry,entry['featured_comparison'],True)
         if entry['id']=='bad-intent':
-            lines += ['The alpha-24 distill restores the leaning pose and intense expression in these development examples. It remains an approximation; the bare male example differs in rendering medium from the particle teacher.', '']
+            lines += ['Both formats can change expression, pose, framing and rendering style. The featured balcony scene uses a different development character and seed from the earlier alpha audit.', '']
             if 'balance_selection' in entry:
                 lines += [f"The particle now uses alpha **{entry['particle_alpha']:g}**, with the distill at **{entry['lora_alpha']:g}**, to bring their visible intensity closer at strength 1. The two formats still differ in details and rendering style. [Comparison audit](validation/bad-intent-balance.json).", '']
     lines += ['<details><summary>More freshly rendered strength-one comparisons</summary>', '']
@@ -191,13 +214,13 @@ def build_card(folder):
         '|---|---|---|---|']
     for entry in entries:
         lines.append(f"| {entry['label']} | [Download]({RAW}{entry['particle']}?download=true) | [Download]({RAW}{entry['comfyui_lora']}?download=true) | [Download]({RAW}{entry['native_lora']}?download=true) |")
-    lines += ['', '**Particles:** use the [ComfyUI particle plugin](https://github.com/mikkel/anima-concept-sliders#comfyui) at strength **1.0**. Update the plugin for embedded-alpha files. [Plugin ZIP]('+RAW+'comfyui/anima-concept-sliders.zip?download=true) · [Setup](https://github.com/mikkel/anima-concept-sliders/blob/main/COMFYUI.md).', '',
+    lines += ['', '**Particles:** use the [ComfyUI particle plugin](https://github.com/HyperGAN/anima-particle-sliders#comfyui) at strength **1.0**. Update the plugin for embedded-alpha files. [Plugin ZIP]('+RAW+'comfyui/anima-concept-sliders.zip?download=true) · [Setup](https://github.com/HyperGAN/anima-particle-sliders/blob/main/COMFYUI.md).', '',
         '**Distilled LoRAs:** use standard **Load LoRA**, **MODEL strength 1.0, CLIP strength 0**. No particle plugin is needed.', '',
         '| Slider | Particle alpha | Distill alpha | Rank |', '|---|---:|---:|---:|']
     for entry in entries:
         lines.append(f"| {entry['label']} | {entry['particle_alpha']:.10g} | {entry['lora_alpha']:.10g} | 8 |")
     lines += ['', 'Calibration is embedded in the files; do not add an external gain. Bad Intent’s old alpha-8 LoRA needs strength 3 for the same operation as the new alpha-24 file at strength 1. Lighting LoRAs carry the same alpha gain as their calibrated particle teacher; this does not claim a new fit or exact image equivalence.', '',
-        '[Source and reproduction](https://github.com/mikkel/anima-concept-sliders) · [Catalog](catalog.json) · [File hashes](release-manifest.json) · [Distillation and alpha audit](DISTILLATION.md).', '',
+        '[Source and reproduction](https://github.com/HyperGAN/anima-particle-sliders) · [Catalog](catalog.json) · [File hashes](release-manifest.json) · [Distillation and alpha audit](DISTILLATION.md).', '',
         'The reusable algorithms come from the [pinned shared core](https://github.com/mikkel/sliders-conceptmod/tree/main/packages/concept-slider-core). Training weights and the ParticleGAN formulation are unchanged.', '',
         '<details><summary>Historical exports and examples</summary>', '',
         'The original alpha-8 exports and their samples remain available for reproduction. Their strength numbers use the original scale and do not describe the new calibrated files. The catalog’s `archived_release` entries retain the original paths.', '',
@@ -217,7 +240,7 @@ def verify(folder):
     from release_tools.distill import comfy_name
     torch.set_num_threads(4)
     catalog = json.loads((folder/'catalog.json').read_text())
-    report = dict(passed=True, nominal_strength=1, final_test_used=False, samples=[], exports=[], zero_replays=[])
+    report = dict(passed=True, nominal_strength=1, final_test_used=False, samples=[], exports=[], zero_replays=[], new_baselines=[])
     for entry in catalog['sliders']:
         old = entry['archived_release']
         for key in ('particle','native_lora','comfyui_lora'):
@@ -254,8 +277,15 @@ def verify(folder):
             assert records[0]['model_identity']==records[1]['model_identity']==records[2]['model_identity']
             previous = (folder/'samples/featured-portrait/off.png' if comp['case']=='portrait' else
                         folder/f"samples/{entry['id']}/{comp['case']}/str0.png")
-            assert np.array_equal(np.array(Image.open(previous)),np.array(Image.open(folder/comp['samples'][2]['image'])))
-            report['zero_replays'].append(dict(slider=entry['id'],case=comp['case'],pixel_exact=True))
+            if previous.exists():
+                assert np.array_equal(np.array(Image.open(previous)),np.array(Image.open(folder/comp['samples'][2]['image'])))
+                report['zero_replays'].append(dict(slider=entry['id'],case=comp['case'],pixel_exact=True))
+            else:
+                refresh = entry['featured_refresh']
+                assert request==refresh['request'] and records[2]['adapter'] is None
+                report['new_baselines'].append(dict(slider=entry['id'],case=comp['case'],
+                    source_manifest=refresh['source_manifest'],source_row_id=refresh['source_row_id'],
+                    image=comp['samples'][2]['image'],sha256=records[2]['image_sha256']))
     report.update(images=len(report['samples']),comparisons=sum(len(e['comparisons']) for e in catalog['sliders']),
                   particle_alphas={e['id']:e['particle_alpha'] for e in catalog['sliders']},
                   lora_alphas={e['id']:e['lora_alpha'] for e in catalog['sliders']},

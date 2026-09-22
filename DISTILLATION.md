@@ -96,12 +96,20 @@ exact teacher matching. Bad Intent's distinct LoRA alpha 24 comes from the
 complete-denoiser sweep above. All current files and examples use strength 1 as
 the default. The older strength-3/5 examples remain historical artifacts.
 
-The gallery contains 12 matched comparisons: both Bad Intent development cases,
+The gallery contains 12 matched comparisons: two Bad Intent development cases,
 four original development prompts plus the featured portrait for each lighting
 slider. All 36 Particle/Distill/Off images were regenerated from the selected
 exports. [Unit-alpha verification](validation/unit-alpha.json) records the exact
 file hashes, embedded alphas, unchanged learned weights, sample settings and
 pixel-exact Off replays. Full ComfyUI GPU generation remains outside this audit.
+
+The current Bad Intent featured scene is a woman on a
+village balcony, from development row `uncanny-dev-06`, seed 29027. Its three
+matched images are under `samples/featured-v2/bad-intent/balcony/`. This replaces
+the featured corridor example on both GitHub and Hugging Face; the second scene
+and alpha calibration are unchanged. The new Off image has no historical replay;
+the other 11 comparisons still match their original Off images exactly.
+[`data/featured-refresh.json`](data/featured-refresh.json) records the request.
 
 ## Matching Bad Intent's visual intensity
 

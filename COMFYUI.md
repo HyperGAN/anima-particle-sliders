@@ -8,8 +8,8 @@ Use a current ComfyUI installation with Python 3.10 or newer. Install this repos
 
 ```bash
 cd ComfyUI/custom_nodes
-git clone https://github.com/mikkel/anima-concept-sliders.git
-python -m pip install -r anima-concept-sliders/requirements.txt
+git clone https://github.com/HyperGAN/anima-particle-sliders.git
+python -m pip install -r anima-particle-sliders/requirements.txt
 ```
 
 Use the Python executable belonging to your ComfyUI installation for the install command (including its embedded Python on portable installations). The plugin ZIP needs the same requirements install. This installs the pinned shared algorithm package from [sliders-conceptmod](https://github.com/mikkel/sliders-conceptmod/tree/main/packages/concept-slider-core).

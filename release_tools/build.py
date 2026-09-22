@@ -12,7 +12,7 @@ ROOT=Path(__file__).resolve().parents[1]
 REPO='ntc-ai/anima-concept-sliders'
 WEB='https://huggingface.co/'+REPO
 RAW=WEB+'/resolve/main/'
-GITHUB='https://github.com/mikkel/anima-concept-sliders'
+GITHUB='https://github.com/HyperGAN/anima-particle-sliders'
 
 
 def sha(path):

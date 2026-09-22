@@ -52,7 +52,7 @@ def main():
     card=(folder/'README.md').read_text()
     assert card.index('## Samples')<card.index('## Get the adapters')<card.index('## How the sliders learn')
     assert card.index('### Bad Intent')<card.index('### Moonlit')<card.index('### Candlelit')
-    assert 'https://github.com/mikkel/anima-concept-sliders#comfyui' in card
+    assert 'https://github.com/HyperGAN/anima-particle-sliders#comfyui' in card
     for name in re.findall(r'https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/([^)?\s]+)',card):
         assert (folder/name).is_file(),('Broken release link',name)
     # Verify finite tensors in every original/exported checkpoint.
@@ -70,7 +70,7 @@ def main():
     core_root=Path(concept_slider_core.__file__).parent
     for name,expected in core['files'].items():
         assert digest(core_root/name)==expected,('Shared core source mismatch',name)
-    provenance=dict(repository='https://github.com/mikkel/anima-concept-sliders',commit=commit,shared_core=core,
+    provenance=dict(repository='https://github.com/HyperGAN/anima-particle-sliders',commit=commit,shared_core=core,
         files={f:dict(sha256=digest(ROOT/f),bytes=(ROOT/f).stat().st_size) for f in files})
     (folder/'source-provenance.json').write_text(json.dumps(provenance,indent=2)+'\n')
     with zipfile.ZipFile(folder/'source.zip','w',zipfile.ZIP_DEFLATED) as z:

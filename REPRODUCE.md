@@ -14,8 +14,8 @@ CUDA environment lock stays intact; install the core separately as shown below.
 The release was run on an RTX A6000 using Python 3.12.13 and the complete pinned CUDA 12.6 environment below. Use a separate environment:
 
 ```bash
-git clone https://github.com/mikkel/anima-concept-sliders.git
-cd anima-concept-sliders
+git clone https://github.com/HyperGAN/anima-particle-sliders.git
+cd anima-particle-sliders
 uv venv .venv-anima --python 3.12.13
 uv pip sync --python .venv-anima/bin/python configs/anima/requirements.lock \
   --extra-index-url https://download.pytorch.org/whl/cu126
@@ -138,7 +138,9 @@ selected particle hashes and unchanged learned tensors, and creates new named
 LoRAs by changing alpha. It also applies the checked-in
 `data/bad-intent-balance.json`: derive the current Bad Intent particle at alpha
 12 from its original step-1600 EMA, retain LoRA alpha 24, and use separate
-`balanced-alpha` sample paths. Existing weights and samples remain archived at their
+`balanced-alpha` sample paths. `data/featured-refresh.json` then replaces Bad
+Intent's featured scene with development row `uncanny-dev-06`, seed 29027, under
+new `featured-v2` paths for all three formats. Existing weights and samples remain archived at their
 original paths. No training or regression is repeated. The original release
 assembly instructions below describe the preceding, uncalibrated publication.
 

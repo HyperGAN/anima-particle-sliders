@@ -19,6 +19,7 @@ def main():
         lead=page.locator('img[alt$="Off third"]')
         assert lead.count()==3
         assert lead.nth(0).get_attribute('alt').startswith('Bad Intent:')
+        assert 'assets/featured-v2-bad-intent-balcony.jpg' in lead.nth(0).get_attribute('src')
         assert lead.nth(1).get_attribute('alt').startswith('Moonlit:')
         assert lead.nth(2).get_attribute('alt').startswith('Candlelit:')
         assert lead.evaluate_all('(els)=>els.every(e=>!e.closest("details"))')
@@ -38,7 +39,7 @@ def main():
         def pos(part):return next(i for i,v in enumerate(headings) if part in v)
         assert pos('Samples')<pos('Get the adapters')<pos('How the sliders learn')
         assert page.locator('a[href="https://github.com/mikkel/sliders-conceptmod/tree/main/packages/concept-slider-core"]').count() > 0
-        assert page.locator('a[href="https://github.com/mikkel/anima-concept-sliders#comfyui"]').count() > 0
+        assert page.locator('a[href="https://github.com/HyperGAN/anima-particle-sliders#comfyui"]').count() > 0
         for name in ('bad-intent','candlelit','moonlit'):
             assert page.locator(f'a[href*="distilled/comfyui/{name}-unit-alpha.safetensors"]').count()>0
         for name in ('candlelit','moonlit'):
@@ -56,6 +57,7 @@ def main():
             page.screenshot(path=str(args.output/(name+'.png')))
         result=dict(passed=True,url=url,sample_grids=images.count(),loaded_images=True,equations=equations,
                     lead_slider='Bad Intent',comparison_order=['Particle','Distill','Off'],comparison_strengths=[1,1,0],
+                    featured_case='balcony',featured_seed=29027,
                     samples_before_downloads_and_formulation=True,shared_core_link=True,comfyui_plugin_link=True,
                     layout=records,math_errors=0)
         (args.output/'browser.json').write_text(json.dumps(result,indent=2)+'\n')
