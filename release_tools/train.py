@@ -13,13 +13,21 @@ from lumen_studio.training import Trainer
 
 def main():
     p=argparse.ArgumentParser(description=__doc__)
-    p.add_argument('variation',choices=['candlelit','moonlit','bad-intent'])
+    p.add_argument('variation',choices=['candlelit','moonlit','bad-intent','final-form','afterimage','dusk'])
     p.add_argument('--root',type=Path,default=Path('artifacts/reproduction'))
     p.add_argument('--model',type=Path,required=True)
     p.add_argument('--prepare-targets',action='store_true')
     p.add_argument('--until',type=int,default=1600)
     args=p.parse_args()
-    if args.variation == 'bad-intent':
+    if args.variation in ('final-form','afterimage','dusk'):
+        public_id=args.variation
+        args.variation={'final-form':'finalform'}.get(public_id,public_id)
+        from lumen_studio import cache as cache_module
+        from lumen_studio.release_manifests import manifest_for as archived_manifest, validate_manifest
+        # Entry-point dispatch leaves the frozen cache/training source identity unchanged.
+        cache_module.validate_manifest=validate_manifest
+        manifest_for=lambda split:archived_manifest(public_id,split)
+    elif args.variation == 'bad-intent':
         args.variation = 'uncanny'  # Immutable training identity predates the public name.
         from lumen_studio.bad_intent import manifest_for
     else:

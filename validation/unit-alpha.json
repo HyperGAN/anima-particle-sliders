@@ -290,6 +290,150 @@
       "adapter_sha256": null,
       "strength": 0,
       "alpha": null
+    },
+    {
+      "path": "samples/expanded-v1/final-form/case0/particles.png",
+      "metadata": "samples/expanded-v1/final-form/case0/particles.json",
+      "sha256": "3c4da0317ebfbe6ea2b7241d67c9463a92cb6bdcdcf11877af17efdc0c9b4443",
+      "adapter_sha256": "367d296b4208f5d2246c137e47b0216361f71e6fd51fca6a0bc446fdef7d1ff1",
+      "strength": 1,
+      "alpha": 12.0
+    },
+    {
+      "path": "samples/expanded-v1/final-form/case0/lora.png",
+      "metadata": "samples/expanded-v1/final-form/case0/lora.json",
+      "sha256": "4f72d8423f3366d325f007a37b61d6c8461308e3f47a584ab1a47f1f4eeb80bf",
+      "adapter_sha256": "a38b9ea2c542df73e4dcf816074584b58e12ea8a5e3641ab2a3349b984f2adfc",
+      "strength": 1,
+      "alpha": 24.0
+    },
+    {
+      "path": "samples/expanded-v1/final-form/case0/off.png",
+      "metadata": "samples/expanded-v1/final-form/case0/off.json",
+      "sha256": "735ad5d840cfe2313b4b80d6048c09d07eb774cb138187053a14c873cb71a0eb",
+      "adapter_sha256": null,
+      "strength": 0,
+      "alpha": null
+    },
+    {
+      "path": "samples/expanded-v1/final-form/case1/particles.png",
+      "metadata": "samples/expanded-v1/final-form/case1/particles.json",
+      "sha256": "112b46755af2d24b20a10567b7445811afe5485a6c4c824eab0c248267331570",
+      "adapter_sha256": "367d296b4208f5d2246c137e47b0216361f71e6fd51fca6a0bc446fdef7d1ff1",
+      "strength": 1,
+      "alpha": 12.0
+    },
+    {
+      "path": "samples/expanded-v1/final-form/case1/lora.png",
+      "metadata": "samples/expanded-v1/final-form/case1/lora.json",
+      "sha256": "6f6acb783184177cbc231952eeb8367e354ee528a0f2c28ec5bafe0a80073126",
+      "adapter_sha256": "a38b9ea2c542df73e4dcf816074584b58e12ea8a5e3641ab2a3349b984f2adfc",
+      "strength": 1,
+      "alpha": 24.0
+    },
+    {
+      "path": "samples/expanded-v1/final-form/case1/off.png",
+      "metadata": "samples/expanded-v1/final-form/case1/off.json",
+      "sha256": "acc5cad87af3f8acf50a245b592c0b5c87a120ce49b6103e126a67d68af6603c",
+      "adapter_sha256": null,
+      "strength": 0,
+      "alpha": null
+    },
+    {
+      "path": "samples/expanded-v1/afterimage/case0/particles.png",
+      "metadata": "samples/expanded-v1/afterimage/case0/particles.json",
+      "sha256": "43352bbda1036904e500b7333ae3ffcc0920bc7ddfbc948418e988511a9ae025",
+      "adapter_sha256": "6a90f3031ddc240f79405a9387d50b7673e23ebcb0e3e354eefd6d2b8b7e0cd8",
+      "strength": 1,
+      "alpha": 8.0
+    },
+    {
+      "path": "samples/expanded-v1/afterimage/case0/lora.png",
+      "metadata": "samples/expanded-v1/afterimage/case0/lora.json",
+      "sha256": "9ca3f45b79496e89a2726cd531b54dcc51910b22a2343eeef0800daa09d5fe39",
+      "adapter_sha256": "1199a5230e89e23e7129f5316b85987f9450ed144c721b145dfa63fcf50b79d8",
+      "strength": 1,
+      "alpha": 16.0
+    },
+    {
+      "path": "samples/expanded-v1/afterimage/case0/off.png",
+      "metadata": "samples/expanded-v1/afterimage/case0/off.json",
+      "sha256": "735ad5d840cfe2313b4b80d6048c09d07eb774cb138187053a14c873cb71a0eb",
+      "adapter_sha256": null,
+      "strength": 0,
+      "alpha": null
+    },
+    {
+      "path": "samples/expanded-v1/afterimage/case1/particles.png",
+      "metadata": "samples/expanded-v1/afterimage/case1/particles.json",
+      "sha256": "81396e6aedc4b08e5522832da856cedd0b67820e175bc723abf3cdfec50c13d5",
+      "adapter_sha256": "6a90f3031ddc240f79405a9387d50b7673e23ebcb0e3e354eefd6d2b8b7e0cd8",
+      "strength": 1,
+      "alpha": 8.0
+    },
+    {
+      "path": "samples/expanded-v1/afterimage/case1/lora.png",
+      "metadata": "samples/expanded-v1/afterimage/case1/lora.json",
+      "sha256": "0e1f54adad4226ebea6b8efa415c0acc7a0507f2d8de6d4f5583340397074f38",
+      "adapter_sha256": "1199a5230e89e23e7129f5316b85987f9450ed144c721b145dfa63fcf50b79d8",
+      "strength": 1,
+      "alpha": 16.0
+    },
+    {
+      "path": "samples/expanded-v1/afterimage/case1/off.png",
+      "metadata": "samples/expanded-v1/afterimage/case1/off.json",
+      "sha256": "acc5cad87af3f8acf50a245b592c0b5c87a120ce49b6103e126a67d68af6603c",
+      "adapter_sha256": null,
+      "strength": 0,
+      "alpha": null
+    },
+    {
+      "path": "samples/expanded-v1/dusk/case0/particles.png",
+      "metadata": "samples/expanded-v1/dusk/case0/particles.json",
+      "sha256": "e328fd4125a5dcff0bc2b6f8c1111b7de44ddee444c6e4c08db373275ab1f04d",
+      "adapter_sha256": "9b2ac2f3199afe0817da72205384e7fd93b433e807d9a648cc0bc6912b1e6909",
+      "strength": 1,
+      "alpha": 32.0
+    },
+    {
+      "path": "samples/expanded-v1/dusk/case0/lora.png",
+      "metadata": "samples/expanded-v1/dusk/case0/lora.json",
+      "sha256": "fc49bdf1df95eac2a6a9f4ca7b7317c2ba69bdd8437b82b591baff350ac77064",
+      "adapter_sha256": "e1b6c8d015601ffca05550df2d9b8f6fe0213e0f568d798a21d321f550b9c848",
+      "strength": 1,
+      "alpha": 96.0
+    },
+    {
+      "path": "samples/expanded-v1/dusk/case0/off.png",
+      "metadata": "samples/expanded-v1/dusk/case0/off.json",
+      "sha256": "77e153fa61a364b645faabb136c7cfd8b2fe08e7a0011050e7229f7b754052d6",
+      "adapter_sha256": null,
+      "strength": 0,
+      "alpha": null
+    },
+    {
+      "path": "samples/expanded-v1/dusk/case1/particles.png",
+      "metadata": "samples/expanded-v1/dusk/case1/particles.json",
+      "sha256": "6933d00932347c43372c2cf9652156885aaf8e6e4916eca74de2a9e846c43661",
+      "adapter_sha256": "9b2ac2f3199afe0817da72205384e7fd93b433e807d9a648cc0bc6912b1e6909",
+      "strength": 1,
+      "alpha": 32.0
+    },
+    {
+      "path": "samples/expanded-v1/dusk/case1/lora.png",
+      "metadata": "samples/expanded-v1/dusk/case1/lora.json",
+      "sha256": "41105c7c26313fa6586a266bbe1d3416e191d78f87ee25075940100333138c89",
+      "adapter_sha256": "e1b6c8d015601ffca05550df2d9b8f6fe0213e0f568d798a21d321f550b9c848",
+      "strength": 1,
+      "alpha": 96.0
+    },
+    {
+      "path": "samples/expanded-v1/dusk/case1/off.png",
+      "metadata": "samples/expanded-v1/dusk/case1/off.json",
+      "sha256": "acc5cad87af3f8acf50a245b592c0b5c87a120ce49b6103e126a67d68af6603c",
+      "adapter_sha256": null,
+      "strength": 0,
+      "alpha": null
     }
   ],
   "exports": [
@@ -391,6 +535,105 @@
       "alpha": 23.08072421821097,
       "rank": 8,
       "learned_tensors_unchanged": true
+    },
+    {
+      "slider": "final-form",
+      "format": "particle",
+      "path": "weights/final-form-unit-alpha.safetensors",
+      "sha256": "367d296b4208f5d2246c137e47b0216361f71e6fd51fca6a0bc446fdef7d1ff1",
+      "source": "weights/final-form.safetensors",
+      "source_sha256": "39c680237e2a83c18ceaea78ab5408e70ac985f3fe834b0d143716bccee9c8ae",
+      "alpha": 12.0,
+      "rank": 8,
+      "learned_tensors_unchanged": true
+    },
+    {
+      "slider": "final-form",
+      "format": "native_lora",
+      "path": "distilled/native/final-form-unit-alpha.safetensors",
+      "sha256": "a38b9ea2c542df73e4dcf816074584b58e12ea8a5e3641ab2a3349b984f2adfc",
+      "source": "distilled/native/final-form.safetensors",
+      "source_sha256": "d5c21e2622a4ebb9a42fc885ddc611c4ac142d9d8060396813edff35f84a8a02",
+      "alpha": 24.0,
+      "rank": 8,
+      "learned_tensors_unchanged": true
+    },
+    {
+      "slider": "final-form",
+      "format": "comfyui_lora",
+      "path": "distilled/comfyui/final-form-unit-alpha.safetensors",
+      "sha256": "17d889d8e4d25542526438d3c2dabbbbcb099e1238026bca29c820700a07e0f6",
+      "source": "distilled/comfyui/final-form.safetensors",
+      "source_sha256": "d7630e1dd7d7438433b342867dde450fe7b9b247d47559dcc8679dd34849ab5c",
+      "alpha": 24.0,
+      "rank": 8,
+      "learned_tensors_unchanged": true
+    },
+    {
+      "slider": "afterimage",
+      "format": "particle",
+      "path": "weights/afterimage-unit-alpha.safetensors",
+      "sha256": "6a90f3031ddc240f79405a9387d50b7673e23ebcb0e3e354eefd6d2b8b7e0cd8",
+      "source": "weights/afterimage.safetensors",
+      "source_sha256": "d4adbf580b12dc773ea5db2c02d7da9594bd74bec702209743f77107b6ea9439",
+      "alpha": 8.0,
+      "rank": 8,
+      "learned_tensors_unchanged": true
+    },
+    {
+      "slider": "afterimage",
+      "format": "native_lora",
+      "path": "distilled/native/afterimage-unit-alpha.safetensors",
+      "sha256": "1199a5230e89e23e7129f5316b85987f9450ed144c721b145dfa63fcf50b79d8",
+      "source": "distilled/native/afterimage.safetensors",
+      "source_sha256": "38c303142293561d10e3d6078d0dfc35a4d1902f1c90365ad3845890b93aa007",
+      "alpha": 16.0,
+      "rank": 8,
+      "learned_tensors_unchanged": true
+    },
+    {
+      "slider": "afterimage",
+      "format": "comfyui_lora",
+      "path": "distilled/comfyui/afterimage-unit-alpha.safetensors",
+      "sha256": "a1a2e97599c3d09d783f3ff120087b12815582e8556ec664343dc8a58db39f44",
+      "source": "distilled/comfyui/afterimage.safetensors",
+      "source_sha256": "7cfc0c7e055ce980a0c8093ae679d81d3c48a7ab2e45e22cb5608c2496872e9c",
+      "alpha": 16.0,
+      "rank": 8,
+      "learned_tensors_unchanged": true
+    },
+    {
+      "slider": "dusk",
+      "format": "particle",
+      "path": "weights/dusk-unit-alpha.safetensors",
+      "sha256": "9b2ac2f3199afe0817da72205384e7fd93b433e807d9a648cc0bc6912b1e6909",
+      "source": "weights/dusk.safetensors",
+      "source_sha256": "808097524cb5f72e3c00c376edf05c5e64873082bd17c09bd41da62551a2c9dd",
+      "alpha": 32.0,
+      "rank": 8,
+      "learned_tensors_unchanged": true
+    },
+    {
+      "slider": "dusk",
+      "format": "native_lora",
+      "path": "distilled/native/dusk-unit-alpha.safetensors",
+      "sha256": "e1b6c8d015601ffca05550df2d9b8f6fe0213e0f568d798a21d321f550b9c848",
+      "source": "distilled/native/dusk.safetensors",
+      "source_sha256": "937f297b8e14ba4505795e172b67dce6e81749316b2abd8f05bceddeea5a1630",
+      "alpha": 96.0,
+      "rank": 8,
+      "learned_tensors_unchanged": true
+    },
+    {
+      "slider": "dusk",
+      "format": "comfyui_lora",
+      "path": "distilled/comfyui/dusk-unit-alpha.safetensors",
+      "sha256": "ba75b6987f3479d6922115703ac69035ba11085df32d7379415d48aa16b3b7e7",
+      "source": "distilled/comfyui/dusk.safetensors",
+      "source_sha256": "60da36ac2b6c3f7d290c9059a9d24ef3b605718546cb5046a6a8c3723c4f5f7a",
+      "alpha": 96.0,
+      "rank": 8,
+      "learned_tensors_unchanged": true
     }
   ],
   "zero_replays": [
@@ -448,6 +691,36 @@
       "slider": "moonlit",
       "case": "case3",
       "pixel_exact": true
+    },
+    {
+      "slider": "final-form",
+      "case": "case0",
+      "pixel_exact": true
+    },
+    {
+      "slider": "final-form",
+      "case": "case1",
+      "pixel_exact": true
+    },
+    {
+      "slider": "afterimage",
+      "case": "case0",
+      "pixel_exact": true
+    },
+    {
+      "slider": "afterimage",
+      "case": "case1",
+      "pixel_exact": true
+    },
+    {
+      "slider": "dusk",
+      "case": "case0",
+      "pixel_exact": true
+    },
+    {
+      "slider": "dusk",
+      "case": "case1",
+      "pixel_exact": true
     }
   ],
   "new_baselines": [
@@ -460,17 +733,23 @@
       "sha256": "ce89d4b11967d11e01a26303063f9f26072acec43c170e7cf013c9fc43cc3d00"
     }
   ],
-  "images": 36,
-  "comparisons": 12,
+  "images": 54,
+  "comparisons": 18,
   "particle_alphas": {
     "bad-intent": 12.0,
     "candlelit": 16.0,
-    "moonlit": 23.08072421821097
+    "moonlit": 23.08072421821097,
+    "final-form": 12.0,
+    "afterimage": 8.0,
+    "dusk": 32.0
   },
   "lora_alphas": {
     "bad-intent": 24.0,
     "candlelit": 16.0,
-    "moonlit": 23.08072421821097
+    "moonlit": 23.08072421821097,
+    "final-form": 24.0,
+    "afterimage": 16.0,
+    "dusk": 96.0
   },
   "limitation": "Development examples rendered in the pinned native runtime; full ComfyUI GPU generation is not covered."
 }

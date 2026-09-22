@@ -40,6 +40,15 @@ def copy(source,dest):
     dest.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(source,dest)
 
 
+def package_plugin(out):
+    plugin=['__init__.py','comfy_particle.py','particle_io.py','requirements.txt','core.lock.json','COMFYUI.md','LICENSE','ANIMA-LICENSE.md','NOTICE',
+        'lumen_studio/__init__.py','lumen_studio/particles.py','lumen_studio/contracts.py','lumen_studio/alpha_adapter.py','single_particle.py',
+        'lumen_studio/vendor/__init__.py','lumen_studio/vendor/reference.py','lumen_studio/vendor/LICENSE','lumen_studio/vendor/provenance.json']
+    zpath=out/'comfyui/anima-concept-sliders.zip';zpath.parent.mkdir(exist_ok=True)
+    with zipfile.ZipFile(zpath,'w',zipfile.ZIP_DEFLATED) as z:
+        for name in plugin:z.write(ROOT/name,'anima-concept-sliders/'+name)
+
+
 def comparison(images,path):
     """Three matched samples, with the original particle result leading."""
     cell=384;bar=72
@@ -169,12 +178,7 @@ tags:
     for name in ('train','dev'):copy(ROOT/f'data/{name}.json',out/f'data/{name}.json')
     (out/'pending-samples.json').unlink(missing_ok=True)
     # Package only the files required to import the ComfyUI plugin.
-    plugin=['__init__.py','comfy_particle.py','particle_io.py','requirements.txt','core.lock.json','COMFYUI.md','LICENSE','ANIMA-LICENSE.md','NOTICE',
-            'lumen_studio/__init__.py','lumen_studio/particles.py','lumen_studio/contracts.py','lumen_studio/alpha_adapter.py',
-            'lumen_studio/vendor/__init__.py','lumen_studio/vendor/reference.py','lumen_studio/vendor/LICENSE','lumen_studio/vendor/provenance.json']
-    zpath=out/'comfyui/anima-concept-sliders.zip';zpath.parent.mkdir(exist_ok=True)
-    with zipfile.ZipFile(zpath,'w',zipfile.ZIP_DEFLATED) as z:
-        for name in plugin:z.write(ROOT/name,'anima-concept-sliders/'+name)
+    package_plugin(out)
     print('Built card, grids, documentation and plugin ZIP')
 
 if __name__=='__main__':main()

@@ -47,6 +47,51 @@
       "lora_alphas": [
         23.08072421821097
       ]
+    },
+    {
+      "variation": "final-form",
+      "particle_projections": 224,
+      "lora_patches": 224,
+      "particle_max_abs": 0.0,
+      "zero_bypass": true,
+      "clone_isolation": true,
+      "exception_restoration": true,
+      "particle": "weights/final-form-unit-alpha.safetensors",
+      "lora": "distilled/comfyui/final-form-unit-alpha.safetensors",
+      "particle_alpha": 12.0,
+      "lora_alphas": [
+        24.0
+      ]
+    },
+    {
+      "variation": "afterimage",
+      "particle_projections": 224,
+      "lora_patches": 224,
+      "particle_max_abs": 0.0,
+      "zero_bypass": true,
+      "clone_isolation": true,
+      "exception_restoration": true,
+      "particle": "weights/afterimage-unit-alpha.safetensors",
+      "lora": "distilled/comfyui/afterimage-unit-alpha.safetensors",
+      "particle_alpha": 8.0,
+      "lora_alphas": [
+        16.0
+      ]
+    },
+    {
+      "variation": "dusk",
+      "particle_projections": 224,
+      "lora_patches": 224,
+      "particle_max_abs": 0.0,
+      "zero_bypass": true,
+      "clone_isolation": true,
+      "exception_restoration": true,
+      "particle": "weights/dusk-unit-alpha.safetensors",
+      "lora": "distilled/comfyui/dusk-unit-alpha.safetensors",
+      "particle_alpha": 32.0,
+      "lora_alphas": [
+        96.0
+      ]
     }
   ],
   "limitation": "Full ComfyUI GPU image generation is not covered by this CPU integration check."

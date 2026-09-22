@@ -1,0 +1,350 @@
+{
+  "schema": 1,
+  "extension": "experimental-atmosphere-v1",
+  "split": "dev",
+  "variation": "dusk",
+  "candidate_sha256": "14705080e92e2eb2c29073a88eef7c289bf8f8d6a0d3c5e2804f624c63bd6bcd",
+  "source_spec_sha256": "799edbc56ac7126d108322a7d673fbded4099b533c0e47ad8f13b9587f6f0f36",
+  "compiler_sha256": "7388ca5c95630ce7642cf4d287fd5c4053eca11c05005dee8629900e975e5733",
+  "definitions_sha256": "ef44041bd3abb1fd767b4cc85fdb135ec65f66854eed6c76b0d6f9a908022388",
+  "characters_sha256": "5c9c0a929e8a72b6594601b3d838355e79496f74439a773b6625f5d4fe2a3cfe",
+  "rows": [
+    {
+      "id": "dusk-dev-00",
+      "variation": "dusk",
+      "split": "dev",
+      "character": "original-13",
+      "definition": "dusk-01",
+      "definition_split": "train",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": false,
+      "presentation": "woman",
+      "skin": "medium brown skin",
+      "shared": {
+        "character": "1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric",
+        "pose": "standing upright, facing viewer, arms at sides",
+        "framing": "upper body, waist-up view, eye-level camera",
+        "scene": "in an unadorned stone corridor with bare stone walls",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "neutral_lighting": "soft illumination, gentle shadows",
+      "positive_lighting": "soft amber illumination, gentle violet shadows, twilight atmosphere",
+      "neutral": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, standing upright, facing viewer, arms at sides, upper body, waist-up view, eye-level camera, in an unadorned stone corridor with bare stone walls, anime illustration, soft illumination, gentle shadows",
+      "positive": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, standing upright, facing viewer, arms at sides, upper body, waist-up view, eye-level camera, in an unadorned stone corridor with bare stone walls, anime illustration, soft amber illumination, gentle violet shadows, twilight atmosphere"
+    },
+    {
+      "id": "dusk-dev-01",
+      "variation": "dusk",
+      "split": "dev",
+      "character": "original-14",
+      "definition": "dusk-02",
+      "definition_split": "train",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": false,
+      "presentation": "man",
+      "skin": "light skin",
+      "shared": {
+        "character": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric",
+        "pose": "sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap",
+        "framing": "full body, entire figure in frame, eye-level camera",
+        "scene": "in an unadorned stone corridor with bare stone walls",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "neutral_lighting": "side lighting, fill light",
+      "positive_lighting": "warm amber side lighting, cool violet fill light, subdued twilight atmosphere",
+      "neutral": "masterpiece, best quality, safe, solo, 1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap, full body, entire figure in frame, eye-level camera, in an unadorned stone corridor with bare stone walls, anime illustration, side lighting, fill light",
+      "positive": "masterpiece, best quality, safe, solo, 1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap, full body, entire figure in frame, eye-level camera, in an unadorned stone corridor with bare stone walls, anime illustration, warm amber side lighting, cool violet fill light, subdued twilight atmosphere"
+    },
+    {
+      "id": "dusk-dev-02",
+      "variation": "dusk",
+      "split": "dev",
+      "character": "original-15",
+      "definition": "dusk-03",
+      "definition_split": "train",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": false,
+      "presentation": "woman",
+      "skin": "deep brown skin",
+      "shared": {
+        "character": "1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric",
+        "pose": "facing viewer, head upright",
+        "framing": "portrait, head and shoulders, eye-level camera",
+        "scene": "in a quiet courtyard",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "neutral_lighting": "muted highlights, shadows",
+      "positive_lighting": "muted golden-amber highlights, lavender-violet shadows, dusk atmosphere",
+      "neutral": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer, wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric, facing viewer, head upright, portrait, head and shoulders, eye-level camera, in a quiet courtyard, anime illustration, muted highlights, shadows",
+      "positive": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer, wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric, facing viewer, head upright, portrait, head and shoulders, eye-level camera, in a quiet courtyard, anime illustration, muted golden-amber highlights, lavender-violet shadows, dusk atmosphere"
+    },
+    {
+      "id": "dusk-dev-03",
+      "variation": "dusk",
+      "split": "dev",
+      "character": "original-16",
+      "definition": "dusk-04",
+      "definition_split": "train",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": false,
+      "presentation": "man",
+      "skin": "medium brown skin",
+      "shared": {
+        "character": "1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a muted violet tunic and gray trousers, long sleeves, plain fabric",
+        "pose": "standing upright, facing viewer, both hands on hips",
+        "framing": "cowboy shot, thighs in frame, eye-level camera",
+        "scene": "in a quiet courtyard",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "neutral_lighting": "directional illumination, soft ambient light",
+      "positive_lighting": "amber directional illumination, soft violet ambient light, quiet twilight atmosphere",
+      "neutral": "masterpiece, best quality, safe, solo, 1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, neutral expression, closed mouth, looking at viewer, wearing a muted violet tunic and gray trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, in a quiet courtyard, anime illustration, directional illumination, soft ambient light",
+      "positive": "masterpiece, best quality, safe, solo, 1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, neutral expression, closed mouth, looking at viewer, wearing a muted violet tunic and gray trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, in a quiet courtyard, anime illustration, amber directional illumination, soft violet ambient light, quiet twilight atmosphere"
+    },
+    {
+      "id": "dusk-dev-04",
+      "variation": "dusk",
+      "split": "dev",
+      "character": "original-13",
+      "definition": "dusk-05",
+      "definition_split": "train",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": false,
+      "presentation": "woman",
+      "skin": "medium brown skin",
+      "shared": {
+        "character": "1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric",
+        "pose": "sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap",
+        "framing": "full body, entire figure in frame, eye-level camera",
+        "scene": "in a wood-paneled room",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "neutral_lighting": "faint rim lighting, reflected illumination",
+      "positive_lighting": "faint amber rim lighting, violet reflected illumination, soft dusk atmosphere",
+      "neutral": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap, full body, entire figure in frame, eye-level camera, in a wood-paneled room, anime illustration, faint rim lighting, reflected illumination",
+      "positive": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap, full body, entire figure in frame, eye-level camera, in a wood-paneled room, anime illustration, faint amber rim lighting, violet reflected illumination, soft dusk atmosphere"
+    },
+    {
+      "id": "dusk-dev-05",
+      "variation": "dusk",
+      "split": "dev",
+      "character": "original-14",
+      "definition": "dusk-06",
+      "definition_split": "train",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": false,
+      "presentation": "man",
+      "skin": "light skin",
+      "shared": {
+        "character": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric",
+        "pose": "facing viewer, head upright",
+        "framing": "portrait, head and shoulders, eye-level camera",
+        "scene": "in a wood-paneled room",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "neutral_lighting": "low illumination fading into shadows",
+      "positive_lighting": "low amber illumination fading into violet shadows, hushed twilight atmosphere",
+      "neutral": "masterpiece, best quality, safe, solo, 1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, facing viewer, head upright, portrait, head and shoulders, eye-level camera, in a wood-paneled room, anime illustration, low illumination fading into shadows",
+      "positive": "masterpiece, best quality, safe, solo, 1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, facing viewer, head upright, portrait, head and shoulders, eye-level camera, in a wood-paneled room, anime illustration, low amber illumination fading into violet shadows, hushed twilight atmosphere"
+    },
+    {
+      "id": "dusk-dev-06",
+      "variation": "dusk",
+      "split": "dev",
+      "character": "original-15",
+      "definition": "dusk-07",
+      "definition_split": "eval",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": false,
+      "presentation": "woman",
+      "skin": "deep brown skin",
+      "shared": {
+        "character": "1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric",
+        "pose": "standing upright, facing viewer, both hands on hips",
+        "framing": "cowboy shot, thighs in frame, eye-level camera",
+        "scene": "on a balcony above a village",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "neutral_lighting": "light against shade",
+      "positive_lighting": "honey-colored light against cool purple shade, the muted glow of twilight",
+      "neutral": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer, wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, on a balcony above a village, anime illustration, light against shade",
+      "positive": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer, wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, on a balcony above a village, anime illustration, honey-colored light against cool purple shade, the muted glow of twilight"
+    },
+    {
+      "id": "dusk-dev-07",
+      "variation": "dusk",
+      "split": "dev",
+      "character": "original-16",
+      "definition": "dusk-08",
+      "definition_split": "eval",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": false,
+      "presentation": "man",
+      "skin": "medium brown skin",
+      "shared": {
+        "character": "1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a muted violet tunic and gray trousers, long sleeves, plain fabric",
+        "pose": "standing upright, facing viewer, arms at sides",
+        "framing": "upper body, waist-up view, eye-level camera",
+        "scene": "on a balcony above a village",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "neutral_lighting": "light blending into shadow",
+      "positive_lighting": "last amber light blending into dusky lavender shadow, calm evening atmosphere",
+      "neutral": "masterpiece, best quality, safe, solo, 1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, neutral expression, closed mouth, looking at viewer, wearing a muted violet tunic and gray trousers, long sleeves, plain fabric, standing upright, facing viewer, arms at sides, upper body, waist-up view, eye-level camera, on a balcony above a village, anime illustration, light blending into shadow",
+      "positive": "masterpiece, best quality, safe, solo, 1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, neutral expression, closed mouth, looking at viewer, wearing a muted violet tunic and gray trousers, long sleeves, plain fabric, standing upright, facing viewer, arms at sides, upper body, waist-up view, eye-level camera, on a balcony above a village, anime illustration, last amber light blending into dusky lavender shadow, calm evening atmosphere"
+    },
+    {
+      "id": "dusk-dev-08",
+      "variation": "dusk",
+      "split": "dev",
+      "character": "original-13",
+      "definition": "dusk-07",
+      "definition_split": "eval",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": true,
+      "presentation": "woman",
+      "skin": "medium brown skin",
+      "shared": {
+        "character": "1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric",
+        "pose": "facing viewer, head upright",
+        "framing": "portrait, head and shoulders, eye-level camera",
+        "scene": "in an unadorned stone corridor with bare stone walls",
+        "medium": "",
+        "quality": ""
+      },
+      "neutral_lighting": "",
+      "positive_lighting": "honey-colored light against cool purple shade, the muted glow of twilight",
+      "neutral": "1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, facing viewer, head upright, portrait, head and shoulders, eye-level camera, in an unadorned stone corridor with bare stone walls",
+      "positive": "1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, facing viewer, head upright, portrait, head and shoulders, eye-level camera, in an unadorned stone corridor with bare stone walls, honey-colored light against cool purple shade, the muted glow of twilight"
+    },
+    {
+      "id": "dusk-dev-09",
+      "variation": "dusk",
+      "split": "dev",
+      "character": "original-14",
+      "definition": "dusk-08",
+      "definition_split": "eval",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": true,
+      "presentation": "man",
+      "skin": "light skin",
+      "shared": {
+        "character": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric",
+        "pose": "standing upright, facing viewer, both hands on hips",
+        "framing": "cowboy shot, thighs in frame, eye-level camera",
+        "scene": "in an unadorned stone corridor with bare stone walls",
+        "medium": "",
+        "quality": ""
+      },
+      "neutral_lighting": "",
+      "positive_lighting": "last amber light blending into dusky lavender shadow, calm evening atmosphere",
+      "neutral": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, in an unadorned stone corridor with bare stone walls",
+      "positive": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, in an unadorned stone corridor with bare stone walls, last amber light blending into dusky lavender shadow, calm evening atmosphere"
+    },
+    {
+      "id": "dusk-dev-10",
+      "variation": "dusk",
+      "split": "dev",
+      "character": "original-15",
+      "definition": "dusk-07",
+      "definition_split": "eval",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": true,
+      "presentation": "woman",
+      "skin": "deep brown skin",
+      "shared": {
+        "character": "1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric",
+        "pose": "standing upright, facing viewer, arms at sides",
+        "framing": "upper body, waist-up view, eye-level camera",
+        "scene": "in a quiet courtyard",
+        "medium": "",
+        "quality": ""
+      },
+      "neutral_lighting": "",
+      "positive_lighting": "honey-colored light against cool purple shade, the muted glow of twilight",
+      "neutral": "1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer, wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric, standing upright, facing viewer, arms at sides, upper body, waist-up view, eye-level camera, in a quiet courtyard",
+      "positive": "1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer, wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric, standing upright, facing viewer, arms at sides, upper body, waist-up view, eye-level camera, in a quiet courtyard, honey-colored light against cool purple shade, the muted glow of twilight"
+    },
+    {
+      "id": "dusk-dev-11",
+      "variation": "dusk",
+      "split": "dev",
+      "character": "original-16",
+      "definition": "dusk-08",
+      "definition_split": "eval",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": true,
+      "presentation": "man",
+      "skin": "medium brown skin",
+      "shared": {
+        "character": "1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a muted violet tunic and gray trousers, long sleeves, plain fabric",
+        "pose": "sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap",
+        "framing": "full body, entire figure in frame, eye-level camera",
+        "scene": "in a quiet courtyard",
+        "medium": "",
+        "quality": ""
+      },
+      "neutral_lighting": "",
+      "positive_lighting": "last amber light blending into dusky lavender shadow, calm evening atmosphere",
+      "neutral": "1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, neutral expression, closed mouth, looking at viewer, wearing a muted violet tunic and gray trousers, long sleeves, plain fabric, sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap, full body, entire figure in frame, eye-level camera, in a quiet courtyard",
+      "positive": "1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, neutral expression, closed mouth, looking at viewer, wearing a muted violet tunic and gray trousers, long sleeves, plain fabric, sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap, full body, entire figure in frame, eye-level camera, in a quiet courtyard, last amber light blending into dusky lavender shadow, calm evening atmosphere"
+    }
+  ],
+  "sha256": "fa8633a758f256e954b3a939aee48e6bd2db5979f8db13441633c921f61320b2"
+}

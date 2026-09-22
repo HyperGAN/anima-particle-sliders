@@ -28,6 +28,11 @@ The old `bad-intent.safetensors` particle remains at alpha 8. Its strength 1.5
 is equivalent to the current alpha-12 particle at strength 1. The Bad Intent
 LoRA retains alpha 24; no LoRA replacement is needed for this balance update.
 
+Final Form, Afterimage and Dusk use the same plugin. Download their current
+`*-unit-alpha.safetensors` files from [the particle weights folder](https://huggingface.co/ntc-ai/anima-concept-sliders/tree/main/weights)
+and start at strength 1.0. Their separate ordinary LoRAs are in
+[distilled/comfyui](https://huggingface.co/ntc-ai/anima-concept-sliders/tree/main/distilled/comfyui).
+
 Chain two particle nodes to mix Candlelit and Moonlit. The nodes use independent direct strengths. To match a Studio mix, normalize each slider to `energy × proportion / sum(proportions)` before entering its node strength.
 
 The custom node retains all particle tensors and maps all 224 native Q/K/V/output branches to ComfyUI's separate projections. It registers temporary hooks inside the clone's model-call wrapper and removes them in `finally`, including after failures. It does not modify the original model's persistent weights. Use the particle files with this node.

@@ -96,10 +96,9 @@ exact teacher matching. Bad Intent's distinct LoRA alpha 24 comes from the
 complete-denoiser sweep above. All current files and examples use strength 1 as
 the default. The older strength-3/5 examples remain historical artifacts.
 
-The gallery contains 12 matched comparisons: two Bad Intent development cases,
-four original development prompts plus the featured portrait for each lighting
-slider. All 36 Particle/Distill/Off images were regenerated from the selected
-exports. [Unit-alpha verification](validation/unit-alpha.json) records the exact
+The gallery contains 18 matched comparisons: two cases each for Bad Intent,
+Final Form, Afterimage and Dusk, plus five cases each for Moonlit and Candlelit.
+All 54 Particle/Distill/Off images were rendered from the selected exports. [Unit-alpha verification](validation/unit-alpha.json) records the exact
 file hashes, embedded alphas, unchanged learned weights, sample settings and
 pixel-exact Off replays. Full ComfyUI GPU generation remains outside this audit.
 
@@ -108,7 +107,7 @@ village balcony, from development row `uncanny-dev-06`, seed 29027. Its three
 matched images are under `samples/featured-v2/bad-intent/balcony/`. This replaces
 the featured corridor example on both GitHub and Hugging Face; the second scene
 and alpha calibration are unchanged. The new Off image has no historical replay;
-the other 11 comparisons still match their original Off images exactly.
+the other 17 comparisons match their archived or independently rendered Off images exactly.
 [`data/featured-refresh.json`](data/featured-refresh.json) records the request.
 
 ## Matching Bad Intent's visual intensity
@@ -146,3 +145,35 @@ files at nominal 1. Original alpha-8 and first calibrated samples remain
 available at their original paths. See the reproducible
 [`data/bad-intent-balance.json`](data/bad-intent-balance.json) selection and
 [`validation/bad-intent-balance.json`](validation/bad-intent-balance.json) audit.
+
+## Final Form, Afterimage and Dusk
+
+All three use the same 224 rank-eight attention adapters and fixed-ridge LoRA
+fit above. The particle sweep compared Final Form checkpoints 1200/1600 at
+alphas 6/8/12, Afterimage 1600 at 6/8/10/12/16, and Dusk 200 at 8/16/24/32.
+Two development prompts (one with explicit illustration wording, one bare)
+were rendered at 768 pixels with seed 29001. No final-test characters were used.
+
+| Slider | Selected update | Particle alpha | LoRA alpha | Projection-relative fitting MSE | Full-edit MSE | Edit cosine | LoRA / particle RMS |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Final Form | 1200 | 12 | 24 | 0.004524 | 0.5218 | 0.7307 | 0.9667 |
+| Afterimage | 1600 | 8 | 16 | 0.006328 | 0.3152 | 0.8287 | 0.7851 |
+| Dusk | 200 | 32 | 96 | 0.057137 | 0.1661 | 0.9168 | 0.9979 |
+
+The complete-denoiser measurements use 40 shared neutral development states
+(four characters, all ten timestep positions), comparing the ordinary LoRA
+with the selected particle at nominal strength one. These describe the edit
+approximation, not image quality. Final Form's distill softens structure into
+colored glow; Afterimage can change rendering medium and produces solid
+duplicates as well as translucent echoes. Dusk remains a 200-update pilot.
+
+The selected Final Form 1200 checkpoint tolerates a strong effect better than
+1600 in the inspected images; 1600 at alpha 12 fragments into bright shapes.
+Afterimage retains alpha 8 because 10 and above tile the female example. Dusk
+needs alpha 32 for a clear warm twilight shift. Separate LoRA gains were chosen
+after fitting, using both complete-denoiser measurements and matched images.
+
+Selections and all candidates are in `data/expansion-{plan,selection}.json` and
+the published `evidence/{final-form,afterimage,dusk}/` directories. Final public
+files replay the selected candidate images pixel-for-pixel. All learned tensors
+remain unchanged by calibration; there is no external strength multiplier.

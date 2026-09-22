@@ -45,5 +45,16 @@
     "unchanged_training_formulation": true,
     "validation": "unit-alpha.json",
     "comfy_cpu_validation": "comfyui.json"
+  },
+  "expanded_release": {
+    "passed": true,
+    "source_tests": 91,
+    "command": "PYTHONPATH=artifacts/shared-core pytest tests -q",
+    "javascript_syntax": true,
+    "unchanged_training_formulation": true,
+    "validation": "expansion.json",
+    "comfy_cpu_validation": "comfyui.json",
+    "single_particle_tests": 5,
+    "manifest_integrity_tests": 3
   }
 }

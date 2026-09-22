@@ -132,11 +132,8 @@ Particle → Distill → Off, at strengths 1 → 1 → 0. Same seed and settings
         copy(ROOT/name,out/name)
     for path in (ROOT/'validation').glob('*.json'):copy(path,out/'validation'/path.name)
     for path in (ROOT/'data').glob('bad-intent-*.json'):copy(path,out/'data'/path.name)
-    plugin=['__init__.py','comfy_particle.py','particle_io.py','requirements.txt','core.lock.json','COMFYUI.md','LICENSE','ANIMA-LICENSE.md','NOTICE',
-        'lumen_studio/__init__.py','lumen_studio/particles.py','lumen_studio/contracts.py','lumen_studio/alpha_adapter.py',
-        'lumen_studio/vendor/__init__.py','lumen_studio/vendor/reference.py','lumen_studio/vendor/LICENSE','lumen_studio/vendor/provenance.json']
-    with zipfile.ZipFile(out/'comfyui/anima-concept-sliders.zip','w',zipfile.ZIP_DEFLATED) as z:
-        for name in plugin:z.write(ROOT/name,'anima-concept-sliders/'+name)
+    from release_tools.build import package_plugin
+    package_plugin(out)
     print('Staged Bad Intent: 6 particle samples, 4 distill samples, 2 comparisons, three adapter formats')
 
 

@@ -1,0 +1,23 @@
+{
+  "final-form": {
+    "step": 1200,
+    "particle_alpha": 12.0,
+    "reason": "The 1200 checkpoint gives clear armor, luminous headpieces and energy on both development cases at alpha 12; the 1600 checkpoint fragments at that alpha. Alpha 6 is too weak on the bare male case.",
+    "lora_alpha": 24.0,
+    "lora_reason": "Alpha 24 is the closest whole-denoiser match among tested gains (edit RMS ratio 0.967, cosine 0.731) and restores the large transformation in both cases; alpha 36 diffuses structure into colored glow."
+  },
+  "afterimage": {
+    "step": 1600,
+    "particle_alpha": 8.0,
+    "reason": "Alpha 8 provides repeated figures and translucent echoes in both cases. Alphas 10/12/16 turn the female case into a tiled collage; retain 8 as the calibrated nominal-one default.",
+    "lora_alpha": 16.0,
+    "lora_reason": "Alpha 16 restores repeated figures on both examples and is the lowest full-edit MSE in the sweep (0.315, cosine 0.829). Alpha 24 produces tiled faces and excessive overlap."
+  },
+  "dusk": {
+    "step": 200,
+    "particle_alpha": 32.0,
+    "reason": "Alpha 32 gives a visible warm twilight shift on both cases; lower alphas remain mild. Some framing and coat details change. This remains the completed 200-update pilot.",
+    "lora_alpha": 96.0,
+    "lora_reason": "Alpha 96 reproduces the stronger twilight coloration at nearly equal full-edit RMS (0.998), cosine 0.917 and MSE 0.166. Lower gains remain visibly milder in both cases."
+  }
+}

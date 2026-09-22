@@ -6,6 +6,7 @@ from pathlib import Path
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
+DISPLAY_ORDER = ['bad-intent','final-form','afterimage','moonlit','candlelit','dusk','opal-fever']
 sys.path.insert(0, str(ROOT))
 from release_tools.build import comparison, copy, sha, RAW, WEB
 from release_tools.rescale_lora_alpha import rescale_alpha
@@ -27,6 +28,8 @@ def stage(folder, studio):
     balance = json.loads(balance_path.read_text()) if balance_path.exists() else None
     for entry in catalog['sliders']:
         name = entry['id']
+        if name not in ('bad-intent','candlelit','moonlit'):
+            continue  # Additional releases are staged from their own audited selections.
         if 'archived_release' not in entry:
             entry['archived_release'] = {k: entry[k] for k in
                 ('particle', 'sha256', 'native_lora', 'comfyui_lora', 'samples', 'featured_comparison') if k in entry}
@@ -127,6 +130,7 @@ def render(folder, studio):
     import torch
     from lumen_studio.backends.anima import TurboRuntime
     from lumen_studio.alpha_adapter import AlphaParticleAdapter
+    from single_particle import adapter_class
     from release_tools.distill import attach_lora
     torch.set_num_threads(4)
     torch.cuda.set_per_process_memory_fraction(.35)
@@ -134,7 +138,7 @@ def render(folder, studio):
     runtime = TurboRuntime(studio/'model', 'cuda:0')
     try:
         for entry in catalog['sliders']:
-            adapter = AlphaParticleAdapter(runtime.transformer).to(runtime.device).eval().requires_grad_(False)
+            adapter = adapter_class(folder/entry['particle'])(runtime.transformer).to(runtime.device).eval().requires_grad_(False)
             adapter.load_export(folder/entry['particle'], model_identity=runtime.identity)
             runtime.mixer.add('particle', adapter)
             for fmt, strength in [('particles',1),('lora',1),('off',0)]:
@@ -172,7 +176,7 @@ def render(folder, studio):
 
 def build_card(folder):
     catalog = json.loads((folder/'catalog.json').read_text())
-    entries = sorted(catalog['sliders'], key=lambda e: ['bad-intent','moonlit','candlelit'].index(e['id']))
+    entries = sorted(catalog['sliders'], key=lambda e: DISPLAY_ORDER.index(e['id']))
     old_card = (folder/'README.md').read_text()
     frontmatter = old_card[:old_card.index('# Anima Concept Sliders')]
     formulation = old_card[old_card.index('## How the sliders learn'):]
@@ -181,10 +185,10 @@ def build_card(folder):
     if note not in formulation:
         formulation = formulation.replace('For multiple sliders the deltas sum on the same input.', note+'For multiple sliders the deltas sum on the same input.')
     lines = ['# Anima Concept Sliders', '',
-        '**Bad Intent, Moonlit and Candlelit for Anima Turbo v1.1.** Original Particle adapters and ordinary LoRA Distills, with strength stored in each file’s alpha.', '',
+        '**'+', '.join(e['label'] for e in entries)+' for Anima Turbo v1.1.** Original Particle adapters and ordinary LoRA Distills, with strength stored in each file’s alpha.', '',
         '## Samples', '',
         '**Start at strength 1.0.** Every current comparison is **Particle 1 → Distill 1 → Off 0**, with the same prompt, seed, 768 × 768 resolution, 10 Euler steps and CFG 1. These are newly rendered examples from the calibrated files linked below.', '',
-        'Bad Intent changes expression, pose, framing and sometimes appearance or medium. Moonlit and Candlelit change atmosphere. Distills are linear approximations of the original particles; their images need not match exactly. The lighting distills remain visibly milder in these comparisons.', '']
+        'Bad Intent changes expression and pose. Final Form adds supernatural transformations; Afterimage adds repeated figures. Moonlit, Candlelit and Dusk change atmosphere. Distills are linear approximations of the original particles; their images need not match exactly.', '']
     def show(entry, comp, lead=False):
         for sample in comp['samples']:
             assert (folder/sample['image']).is_file()
@@ -271,7 +275,8 @@ def verify(folder):
                 report['samples'].append(dict(path=sample['image'],metadata=sample['metadata'],sha256=sha(path),
                     adapter_sha256=meta['adapter_sha256'],strength=meta['strength'],alpha=meta['alpha']))
             assert records[0]['model_identity']==records[1]['model_identity']==records[2]['model_identity']
-            previous = (folder/'samples/featured-portrait/off.png' if comp['case']=='portrait' else
+            previous = (folder/entry['off_references'][comp['case']] if 'off_references' in entry else
+                        folder/'samples/featured-portrait/off.png' if comp['case']=='portrait' else
                         folder/f"samples/{entry['id']}/{comp['case']}/str0.png")
             if previous.exists():
                 assert np.array_equal(np.array(Image.open(previous)),np.array(Image.open(folder/comp['samples'][2]['image'])))

@@ -1,0 +1,150 @@
+{
+  "version": "expanded-v1",
+  "sliders": [
+    {
+      "id": "final-form",
+      "training_id": "finalform",
+      "label": "Final Form",
+      "run_directory": "runs/finalform",
+      "checkpoint_candidates": [
+        1200,
+        1600
+      ],
+      "particle_alpha_candidates": [
+        6.0,
+        8.0,
+        12.0
+      ],
+      "lora_gain_candidates": [
+        0.5,
+        1.0,
+        1.5,
+        2.0,
+        3.0
+      ],
+      "render_requests": [
+        {
+          "case": "case0",
+          "source_row_id": "finalform-dev-00",
+          "character": "original-13",
+          "prompt": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, standing upright, facing viewer, arms at sides, upper body, waist-up view, eye-level camera, in an unadorned stone corridor with bare stone walls, anime illustration",
+          "seed": 29001,
+          "width": 768,
+          "height": 768,
+          "steps": 10
+        },
+        {
+          "case": "case1",
+          "source_row_id": "finalform-dev-09",
+          "character": "original-14",
+          "prompt": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, in an unadorned stone corridor with bare stone walls",
+          "seed": 29001,
+          "width": 768,
+          "height": 768,
+          "steps": 10
+        }
+      ],
+      "manifests": {
+        "train": "f0fd99f9c0f83b227b71fac71a1b8d9d4f92b74dcbba5cc439fb214829da0fa9",
+        "dev": "d829149c9caeb352225ea27c576d271c323e21ce72cf65d351344fbe5cd45222"
+      }
+    },
+    {
+      "id": "afterimage",
+      "training_id": "afterimage",
+      "label": "Afterimage",
+      "run_directory": "runs/afterimage",
+      "checkpoint_candidates": [
+        1600
+      ],
+      "particle_alpha_candidates": [
+        6.0,
+        8.0,
+        10.0,
+        12.0,
+        16.0
+      ],
+      "lora_gain_candidates": [
+        0.5,
+        1.0,
+        1.5,
+        2.0,
+        3.0
+      ],
+      "render_requests": [
+        {
+          "case": "case0",
+          "source_row_id": "afterimage-dev-00",
+          "character": "original-13",
+          "prompt": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, standing upright, facing viewer, arms at sides, upper body, waist-up view, eye-level camera, in an unadorned stone corridor with bare stone walls, anime illustration",
+          "seed": 29001,
+          "width": 768,
+          "height": 768,
+          "steps": 10
+        },
+        {
+          "case": "case1",
+          "source_row_id": "afterimage-dev-09",
+          "character": "original-14",
+          "prompt": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, in an unadorned stone corridor with bare stone walls",
+          "seed": 29001,
+          "width": 768,
+          "height": 768,
+          "steps": 10
+        }
+      ],
+      "manifests": {
+        "train": "ee9c0a359f6ba9b9f57188285042690ae2176ea37513cb7dc96457a777dfedb9",
+        "dev": "fe9cc6356f93d684eff9f3db70227c1ca3f540a3b845a14199006b59aa3909ab"
+      }
+    },
+    {
+      "id": "dusk",
+      "training_id": "dusk",
+      "label": "Dusk",
+      "run_directory": "runs/dusk",
+      "checkpoint_candidates": [
+        200
+      ],
+      "particle_alpha_candidates": [
+        8.0,
+        16.0,
+        24.0,
+        32.0
+      ],
+      "lora_gain_candidates": [
+        0.5,
+        1.0,
+        1.5,
+        2.0,
+        3.0
+      ],
+      "render_requests": [
+        {
+          "case": "case0",
+          "source_row_id": "dusk-dev-00",
+          "character": "original-13",
+          "prompt": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, standing upright, facing viewer, arms at sides, upper body, waist-up view, eye-level camera, in an unadorned stone corridor with bare stone walls, anime illustration, soft illumination, gentle shadows",
+          "seed": 29001,
+          "width": 768,
+          "height": 768,
+          "steps": 10
+        },
+        {
+          "case": "case1",
+          "source_row_id": "dusk-dev-09",
+          "character": "original-14",
+          "prompt": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, in an unadorned stone corridor with bare stone walls",
+          "seed": 29001,
+          "width": 768,
+          "height": 768,
+          "steps": 10
+        }
+      ],
+      "manifests": {
+        "train": "10d8db7a0304f59457977079d115cb3afea0e1e2217ea1068260b4643730e883",
+        "dev": "fa8633a758f256e954b3a939aee48e6bd2db5979f8db13441633c921f61320b2"
+      }
+    }
+  ]
+}

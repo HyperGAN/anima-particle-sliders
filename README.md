@@ -1,12 +1,12 @@
 # Anima Concept Sliders
 
-**Bad Intent, Moonlit and Candlelit for Anima Turbo v1.1.** Original Particle adapters and ordinary LoRA Distills, with strength stored in each file’s alpha.
+**Bad Intent, Final Form, Afterimage, Moonlit, Candlelit, Dusk for Anima Turbo v1.1.** Original Particle adapters and ordinary LoRA Distills, with strength stored in each file’s alpha.
 
 ## Samples
 
 **Start at strength 1.0.** Every current comparison is **Particle 1 → Distill 1 → Off 0**, with the same prompt, seed, 768 × 768 resolution, 10 Euler steps and CFG 1. These are newly rendered examples from the calibrated files linked below.
 
-Bad Intent changes expression, pose, framing and sometimes appearance or medium. Moonlit and Candlelit change atmosphere. Distills are linear approximations of the original particles; their images need not match exactly. The lighting distills remain visibly milder in these comparisons.
+Bad Intent changes expression and pose. Final Form adds supernatural transformations; Afterimage adds repeated figures. Moonlit, Candlelit and Dusk change atmosphere. Distills are linear approximations of the original particles; their images need not match exactly.
 
 ### Bad Intent
 
@@ -21,6 +21,38 @@ Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-concept-sliders/
 masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer, wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, on a balcony above a village, anime illustration
 
 Seed: `29027`.
+
+</details>
+
+### Final Form
+
+**Particle · strength 1** → **Distill · strength 1** → **Off · strength 0**
+
+![Final Form: Particle first, Distill second, Off third](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/expanded-v1-final-form-case0.jpg)
+
+Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/expanded-v1/final-form/case0/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/expanded-v1/final-form/case0/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/expanded-v1/final-form/case0/off.png)
+
+<details><summary>Prompt and seed</summary>
+
+masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, standing upright, facing viewer, arms at sides, upper body, waist-up view, eye-level camera, in an unadorned stone corridor with bare stone walls, anime illustration
+
+Seed: `29001`.
+
+</details>
+
+### Afterimage
+
+**Particle · strength 1** → **Distill · strength 1** → **Off · strength 0**
+
+![Afterimage: Particle first, Distill second, Off third](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/expanded-v1-afterimage-case0.jpg)
+
+Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/expanded-v1/afterimage/case0/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/expanded-v1/afterimage/case0/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/expanded-v1/afterimage/case0/off.png)
+
+<details><summary>Prompt and seed</summary>
+
+masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, standing upright, facing viewer, arms at sides, upper body, waist-up view, eye-level camera, in an unadorned stone corridor with bare stone walls, anime illustration
+
+Seed: `29001`.
 
 </details>
 
@@ -56,6 +88,22 @@ Seed: `29001`.
 
 </details>
 
+### Dusk
+
+**Particle · strength 1** → **Distill · strength 1** → **Off · strength 0**
+
+![Dusk: Particle first, Distill second, Off third](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/expanded-v1-dusk-case0.jpg)
+
+Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/expanded-v1/dusk/case0/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/expanded-v1/dusk/case0/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/expanded-v1/dusk/case0/off.png)
+
+<details><summary>Prompt and seed</summary>
+
+masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, standing upright, facing viewer, arms at sides, upper body, waist-up view, eye-level camera, in an unadorned stone corridor with bare stone walls, anime illustration, soft illumination, gentle shadows
+
+Seed: `29001`.
+
+</details>
+
 <details><summary>More freshly rendered strength-one comparisons</summary>
 
 ### Bad Intent · case1
@@ -63,6 +111,34 @@ Seed: `29001`.
 ![Bad Intent: matched strength-one samples, case1](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/balanced-alpha-bad-intent-case1.jpg)
 
 Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/balanced-alpha/bad-intent/case1/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/balanced-alpha/bad-intent/case1/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/balanced-alpha/bad-intent/case1/off.png)
+
+<details><summary>Prompt and seed</summary>
+
+1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, in an unadorned stone corridor with bare stone walls
+
+Seed: `29001`.
+
+</details>
+
+### Final Form · case1
+
+![Final Form: matched strength-one samples, case1](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/expanded-v1-final-form-case1.jpg)
+
+Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/expanded-v1/final-form/case1/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/expanded-v1/final-form/case1/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/expanded-v1/final-form/case1/off.png)
+
+<details><summary>Prompt and seed</summary>
+
+1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, in an unadorned stone corridor with bare stone walls
+
+Seed: `29001`.
+
+</details>
+
+### Afterimage · case1
+
+![Afterimage: matched strength-one samples, case1](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/expanded-v1-afterimage-case1.jpg)
+
+Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/expanded-v1/afterimage/case1/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/expanded-v1/afterimage/case1/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/expanded-v1/afterimage/case1/off.png)
 
 <details><summary>Prompt and seed</summary>
 
@@ -184,6 +260,20 @@ Seed: `29001`.
 
 </details>
 
+### Dusk · case1
+
+![Dusk: matched strength-one samples, case1](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/expanded-v1-dusk-case1.jpg)
+
+Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/expanded-v1/dusk/case1/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/expanded-v1/dusk/case1/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/expanded-v1/dusk/case1/off.png)
+
+<details><summary>Prompt and seed</summary>
+
+1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, in an unadorned stone corridor with bare stone walls
+
+Seed: `29001`.
+
+</details>
+
 </details>
 
 These are development examples, not a final-test benchmark. Strength 1 is the calibrated default; higher settings extrapolate and can change pose, clothing, framing or appearance.
@@ -195,8 +285,11 @@ These are development examples, not a final-test benchmark. Strength 1 is the ca
 | Slider | Original particles | Distilled LoRA for ComfyUI | Distilled LoRA for native runtime |
 |---|---|---|---|
 | Bad Intent | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/weights/bad-intent-balanced-alpha.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/distilled/comfyui/bad-intent-unit-alpha.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/distilled/native/bad-intent-unit-alpha.safetensors?download=true) |
+| Final Form | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/weights/final-form-unit-alpha.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/distilled/comfyui/final-form-unit-alpha.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/distilled/native/final-form-unit-alpha.safetensors?download=true) |
+| Afterimage | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/weights/afterimage-unit-alpha.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/distilled/comfyui/afterimage-unit-alpha.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/distilled/native/afterimage-unit-alpha.safetensors?download=true) |
 | Moonlit | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/weights/moonlit-unit-alpha.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/distilled/comfyui/moonlit-unit-alpha.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/distilled/native/moonlit-unit-alpha.safetensors?download=true) |
 | Candlelit | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/weights/candlelit-unit-alpha.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/distilled/comfyui/candlelit-unit-alpha.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/distilled/native/candlelit-unit-alpha.safetensors?download=true) |
+| Dusk | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/weights/dusk-unit-alpha.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/distilled/comfyui/dusk-unit-alpha.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/distilled/native/dusk-unit-alpha.safetensors?download=true) |
 
 **Particles:** use the [ComfyUI particle plugin](https://github.com/HyperGAN/anima-particle-sliders#comfyui) at strength **1.0**. Update the plugin for embedded-alpha files. [Plugin ZIP](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/comfyui/anima-concept-sliders.zip?download=true) · [Setup](https://github.com/HyperGAN/anima-particle-sliders/blob/main/COMFYUI.md).
 
@@ -205,8 +298,11 @@ These are development examples, not a final-test benchmark. Strength 1 is the ca
 | Slider | Particle alpha | Distill alpha | Rank |
 |---|---:|---:|---:|
 | Bad Intent | 12 | 24 | 8 |
+| Final Form | 12 | 24 | 8 |
+| Afterimage | 8 | 16 | 8 |
 | Moonlit | 23.08072422 | 23.08072422 | 8 |
 | Candlelit | 16 | 16 | 8 |
+| Dusk | 32 | 96 | 8 |
 
 Calibration is embedded in the files; do not add an external gain. Bad Intent’s old alpha-8 LoRA needs strength 3 for the same operation as the new alpha-24 file at strength 1. Lighting LoRAs carry the same alpha gain as their calibrated particle teacher; this does not claim a new fit or exact image equivalence.
 

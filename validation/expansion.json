@@ -1,0 +1,162 @@
+{
+  "passed": true,
+  "final_test_used": false,
+  "sliders": [
+    {
+      "id": "final-form",
+      "passed": true,
+      "selected": {
+        "step": 1200,
+        "particle_alpha": 12.0,
+        "reason": "The 1200 checkpoint gives clear armor, luminous headpieces and energy on both development cases at alpha 12; the 1600 checkpoint fragments at that alpha. Alpha 6 is too weak on the bare male case.",
+        "lora_alpha": 24.0,
+        "lora_reason": "Alpha 24 is the closest whole-denoiser match among tested gains (edit RMS ratio 0.967, cosine 0.731) and restores the large transformation in both cases; alpha 36 diffuses structure into colored glow."
+      },
+      "learned_particle_tensors_unchanged": true,
+      "source_sha256": "39c680237e2a83c18ceaea78ab5408e70ac985f3fe834b0d143716bccee9c8ae",
+      "particle_sha256": "367d296b4208f5d2246c137e47b0216361f71e6fd51fca6a0bc446fdef7d1ff1",
+      "pixel_replays": [
+        {
+          "case": "case0",
+          "format": "particles",
+          "pixel_exact": true,
+          "image": "samples/expanded-v1/final-form/case0/particles.png"
+        },
+        {
+          "case": "case0",
+          "format": "lora",
+          "pixel_exact": true,
+          "image": "samples/expanded-v1/final-form/case0/lora.png"
+        },
+        {
+          "case": "case0",
+          "format": "off",
+          "pixel_exact": true,
+          "image": "samples/expanded-v1/final-form/case0/off.png"
+        },
+        {
+          "case": "case1",
+          "format": "particles",
+          "pixel_exact": true,
+          "image": "samples/expanded-v1/final-form/case1/particles.png"
+        },
+        {
+          "case": "case1",
+          "format": "lora",
+          "pixel_exact": true,
+          "image": "samples/expanded-v1/final-form/case1/lora.png"
+        },
+        {
+          "case": "case1",
+          "format": "off",
+          "pixel_exact": true,
+          "image": "samples/expanded-v1/final-form/case1/off.png"
+        }
+      ]
+    },
+    {
+      "id": "afterimage",
+      "passed": true,
+      "selected": {
+        "step": 1600,
+        "particle_alpha": 8.0,
+        "reason": "Alpha 8 provides repeated figures and translucent echoes in both cases. Alphas 10/12/16 turn the female case into a tiled collage; retain 8 as the calibrated nominal-one default.",
+        "lora_alpha": 16.0,
+        "lora_reason": "Alpha 16 restores repeated figures on both examples and is the lowest full-edit MSE in the sweep (0.315, cosine 0.829). Alpha 24 produces tiled faces and excessive overlap."
+      },
+      "learned_particle_tensors_unchanged": true,
+      "source_sha256": "d4adbf580b12dc773ea5db2c02d7da9594bd74bec702209743f77107b6ea9439",
+      "particle_sha256": "6a90f3031ddc240f79405a9387d50b7673e23ebcb0e3e354eefd6d2b8b7e0cd8",
+      "pixel_replays": [
+        {
+          "case": "case0",
+          "format": "particles",
+          "pixel_exact": true,
+          "image": "samples/expanded-v1/afterimage/case0/particles.png"
+        },
+        {
+          "case": "case0",
+          "format": "lora",
+          "pixel_exact": true,
+          "image": "samples/expanded-v1/afterimage/case0/lora.png"
+        },
+        {
+          "case": "case0",
+          "format": "off",
+          "pixel_exact": true,
+          "image": "samples/expanded-v1/afterimage/case0/off.png"
+        },
+        {
+          "case": "case1",
+          "format": "particles",
+          "pixel_exact": true,
+          "image": "samples/expanded-v1/afterimage/case1/particles.png"
+        },
+        {
+          "case": "case1",
+          "format": "lora",
+          "pixel_exact": true,
+          "image": "samples/expanded-v1/afterimage/case1/lora.png"
+        },
+        {
+          "case": "case1",
+          "format": "off",
+          "pixel_exact": true,
+          "image": "samples/expanded-v1/afterimage/case1/off.png"
+        }
+      ]
+    },
+    {
+      "id": "dusk",
+      "passed": true,
+      "selected": {
+        "step": 200,
+        "particle_alpha": 32.0,
+        "reason": "Alpha 32 gives a visible warm twilight shift on both cases; lower alphas remain mild. Some framing and coat details change. This remains the completed 200-update pilot.",
+        "lora_alpha": 96.0,
+        "lora_reason": "Alpha 96 reproduces the stronger twilight coloration at nearly equal full-edit RMS (0.998), cosine 0.917 and MSE 0.166. Lower gains remain visibly milder in both cases."
+      },
+      "learned_particle_tensors_unchanged": true,
+      "source_sha256": "808097524cb5f72e3c00c376edf05c5e64873082bd17c09bd41da62551a2c9dd",
+      "particle_sha256": "9b2ac2f3199afe0817da72205384e7fd93b433e807d9a648cc0bc6912b1e6909",
+      "pixel_replays": [
+        {
+          "case": "case0",
+          "format": "particles",
+          "pixel_exact": true,
+          "image": "samples/expanded-v1/dusk/case0/particles.png"
+        },
+        {
+          "case": "case0",
+          "format": "lora",
+          "pixel_exact": true,
+          "image": "samples/expanded-v1/dusk/case0/lora.png"
+        },
+        {
+          "case": "case0",
+          "format": "off",
+          "pixel_exact": true,
+          "image": "samples/expanded-v1/dusk/case0/off.png"
+        },
+        {
+          "case": "case1",
+          "format": "particles",
+          "pixel_exact": true,
+          "image": "samples/expanded-v1/dusk/case1/particles.png"
+        },
+        {
+          "case": "case1",
+          "format": "lora",
+          "pixel_exact": true,
+          "image": "samples/expanded-v1/dusk/case1/lora.png"
+        },
+        {
+          "case": "case1",
+          "format": "off",
+          "pixel_exact": true,
+          "image": "samples/expanded-v1/dusk/case1/off.png"
+        }
+      ]
+    }
+  ]
+}

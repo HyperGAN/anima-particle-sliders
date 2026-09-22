@@ -1,0 +1,556 @@
+{
+  "schema": 1,
+  "extension": "expressive-concept-v1",
+  "split": "dev",
+  "variation": "afterimage",
+  "source_spec_sha256": "ec094b62518a08e639880b4f9963418570d5a49f51efcd7f3b1a1e8708fd00ef",
+  "compiler_sha256": "5eef79b1bf99fe190b569d08ec3c044314431bd0ed122d6c6fae9c394402c3de",
+  "shared_source_sha256": "26b209e3659e73c0ef04c73a5976e77c9302c605be36499d20875460064762a2",
+  "characters_sha256": "5c9c0a929e8a72b6594601b3d838355e79496f74439a773b6625f5d4fe2a3cfe",
+  "definitions_sha256": "750294666078642d9a84a841c80306eed76757becf02e9af6ef77cb5cea26b34",
+  "identity_preservation": false,
+  "edit_scope": "expression_pose_framing_temporal_effects",
+  "rows": [
+    {
+      "id": "afterimage-dev-00",
+      "variation": "afterimage",
+      "split": "dev",
+      "character": "original-13",
+      "definition": "afterimage-01",
+      "definition_split": "train",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": false,
+      "presentation": "woman",
+      "skin": "medium brown skin",
+      "shared": {
+        "character": "1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric",
+        "pose": "standing upright, facing viewer, arms at sides",
+        "framing": "upper body, waist-up view, eye-level camera",
+        "scene": "in an unadorned stone corridor with bare stone walls",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "neutral_lighting": "",
+      "positive_lighting": "surreal temporal afterimage, one solid central character with multiple translucent offset impressions of the same face and shoulders, successive moments layered together, cyan and magenta edge separation, luminous motion trails",
+      "neutral": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, standing upright, facing viewer, arms at sides, upper body, waist-up view, eye-level camera, in an unadorned stone corridor with bare stone walls, anime illustration",
+      "positive": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, an intent distant gaze, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, turning the head sharply while the shoulders twist in the opposite direction, close upper-body composition with space around the moving silhouette, in an unadorned stone corridor with bare stone walls, anime illustration, surreal temporal afterimage, one solid central character with multiple translucent offset impressions of the same face and shoulders, successive moments layered together, cyan and magenta edge separation, luminous motion trails",
+      "positive_shared": {
+        "character": "1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, an intent distant gaze, looking at viewer",
+        "outfit": "wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric",
+        "pose": "turning the head sharply while the shoulders twist in the opposite direction",
+        "framing": "close upper-body composition with space around the moving silhouette",
+        "scene": "in an unadorned stone corridor with bare stone walls",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "changed_fields": [
+        "character.expression",
+        "pose",
+        "framing",
+        "atmosphere"
+      ],
+      "identity_preservation": false,
+      "edit_scope": "expression_pose_framing_temporal_effects"
+    },
+    {
+      "id": "afterimage-dev-01",
+      "variation": "afterimage",
+      "split": "dev",
+      "character": "original-14",
+      "definition": "afterimage-02",
+      "definition_split": "train",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": false,
+      "presentation": "man",
+      "skin": "light skin",
+      "shared": {
+        "character": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric",
+        "pose": "sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap",
+        "framing": "full body, entire figure in frame, eye-level camera",
+        "scene": "in an unadorned stone corridor with bare stone walls",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "neutral_lighting": "",
+      "positive_lighting": "fractured time, a readable central figure surrounded by fading spectral repetitions of the same gesture, overlapping hand and face afterimages, long-exposure light smears, colored silhouettes receding through space",
+      "neutral": "masterpiece, best quality, safe, solo, 1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap, full body, entire figure in frame, eye-level camera, in an unadorned stone corridor with bare stone walls, anime illustration",
+      "positive": "masterpiece, best quality, safe, solo, 1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, an ambiguous half-smile, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, sweeping one arm across the body while turning toward the viewer, dynamic three-quarter figure, diagonal movement across the frame, in an unadorned stone corridor with bare stone walls, anime illustration, fractured time, a readable central figure surrounded by fading spectral repetitions of the same gesture, overlapping hand and face afterimages, long-exposure light smears, colored silhouettes receding through space",
+      "positive_shared": {
+        "character": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, an ambiguous half-smile, looking at viewer",
+        "outfit": "wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric",
+        "pose": "sweeping one arm across the body while turning toward the viewer",
+        "framing": "dynamic three-quarter figure, diagonal movement across the frame",
+        "scene": "in an unadorned stone corridor with bare stone walls",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "changed_fields": [
+        "character.expression",
+        "pose",
+        "framing",
+        "atmosphere"
+      ],
+      "identity_preservation": false,
+      "edit_scope": "expression_pose_framing_temporal_effects"
+    },
+    {
+      "id": "afterimage-dev-02",
+      "variation": "afterimage",
+      "split": "dev",
+      "character": "original-15",
+      "definition": "afterimage-03",
+      "definition_split": "train",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": false,
+      "presentation": "woman",
+      "skin": "deep brown skin",
+      "shared": {
+        "character": "1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric",
+        "pose": "facing viewer, head upright",
+        "framing": "portrait, head and shoulders, eye-level camera",
+        "scene": "in a quiet courtyard",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "neutral_lighting": "",
+      "positive_lighting": "dreamlike double exposure, successive expressions of the same person superimposed at small offsets, ghosted eyes and translucent profiles drifting away from the solid central face, soft spectral trails and chromatic fringes",
+      "neutral": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer, wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric, facing viewer, head upright, portrait, head and shoulders, eye-level camera, in a quiet courtyard, anime illustration",
+      "positive": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, wide searching eyes, parted lips, looking at viewer, wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric, leaning sideways with the head caught midway through a turn, tight asymmetric portrait with breathing room on both sides of the face, in a quiet courtyard, anime illustration, dreamlike double exposure, successive expressions of the same person superimposed at small offsets, ghosted eyes and translucent profiles drifting away from the solid central face, soft spectral trails and chromatic fringes",
+      "positive_shared": {
+        "character": "1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, wide searching eyes, parted lips, looking at viewer",
+        "outfit": "wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric",
+        "pose": "leaning sideways with the head caught midway through a turn",
+        "framing": "tight asymmetric portrait with breathing room on both sides of the face",
+        "scene": "in a quiet courtyard",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "changed_fields": [
+        "character.expression",
+        "pose",
+        "framing",
+        "atmosphere"
+      ],
+      "identity_preservation": false,
+      "edit_scope": "expression_pose_framing_temporal_effects"
+    },
+    {
+      "id": "afterimage-dev-03",
+      "variation": "afterimage",
+      "split": "dev",
+      "character": "original-16",
+      "definition": "afterimage-04",
+      "definition_split": "train",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": false,
+      "presentation": "man",
+      "skin": "medium brown skin",
+      "shared": {
+        "character": "1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a muted violet tunic and gray trousers, long sleeves, plain fabric",
+        "pose": "standing upright, facing viewer, both hands on hips",
+        "framing": "cowboy shot, thighs in frame, eye-level camera",
+        "scene": "in a quiet courtyard",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "neutral_lighting": "",
+      "positive_lighting": "multiple moments visible simultaneously, a sharp leading figure followed by transparent copies of its previous positions, staggered limbs as motion echoes, streaked highlights and flowing luminous trails, surreal anime motion study",
+      "neutral": "masterpiece, best quality, safe, solo, 1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, neutral expression, closed mouth, looking at viewer, wearing a muted violet tunic and gray trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, in a quiet courtyard, anime illustration",
+      "positive": "masterpiece, best quality, safe, solo, 1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, a concentrated intense stare, looking at viewer, wearing a muted violet tunic and gray trousers, long sleeves, plain fabric, stepping rapidly forward, hair and clothing trailing behind, full figure moving diagonally toward the camera, in a quiet courtyard, anime illustration, multiple moments visible simultaneously, a sharp leading figure followed by transparent copies of its previous positions, staggered limbs as motion echoes, streaked highlights and flowing luminous trails, surreal anime motion study",
+      "positive_shared": {
+        "character": "1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, a concentrated intense stare, looking at viewer",
+        "outfit": "wearing a muted violet tunic and gray trousers, long sleeves, plain fabric",
+        "pose": "stepping rapidly forward, hair and clothing trailing behind",
+        "framing": "full figure moving diagonally toward the camera",
+        "scene": "in a quiet courtyard",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "changed_fields": [
+        "character.expression",
+        "pose",
+        "framing",
+        "atmosphere"
+      ],
+      "identity_preservation": false,
+      "edit_scope": "expression_pose_framing_temporal_effects"
+    },
+    {
+      "id": "afterimage-dev-04",
+      "variation": "afterimage",
+      "split": "dev",
+      "character": "original-13",
+      "definition": "afterimage-05",
+      "definition_split": "train",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": false,
+      "presentation": "woman",
+      "skin": "medium brown skin",
+      "shared": {
+        "character": "1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric",
+        "pose": "sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap",
+        "framing": "full body, entire figure in frame, eye-level camera",
+        "scene": "in a wood-paneled room",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "neutral_lighting": "",
+      "positive_lighting": "temporal echo, one main character surrounded by translucent overlapping phases of the same spin, several faint profiles and repeated hand gestures, curved light trails, saturated spectral color separation",
+      "neutral": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap, full body, entire figure in frame, eye-level camera, in a wood-paneled room, anime illustration",
+      "positive": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, a fleeting playful smile, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, spinning with one arm extended and the head looking back toward the viewer, sweeping upper-body view, broad circular movement around a central face, in a wood-paneled room, anime illustration, temporal echo, one main character surrounded by translucent overlapping phases of the same spin, several faint profiles and repeated hand gestures, curved light trails, saturated spectral color separation",
+      "positive_shared": {
+        "character": "1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, a fleeting playful smile, looking at viewer",
+        "outfit": "wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric",
+        "pose": "spinning with one arm extended and the head looking back toward the viewer",
+        "framing": "sweeping upper-body view, broad circular movement around a central face",
+        "scene": "in a wood-paneled room",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "changed_fields": [
+        "character.expression",
+        "pose",
+        "framing",
+        "atmosphere"
+      ],
+      "identity_preservation": false,
+      "edit_scope": "expression_pose_framing_temporal_effects"
+    },
+    {
+      "id": "afterimage-dev-05",
+      "variation": "afterimage",
+      "split": "dev",
+      "character": "original-14",
+      "definition": "afterimage-06",
+      "definition_split": "train",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": false,
+      "presentation": "man",
+      "skin": "light skin",
+      "shared": {
+        "character": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric",
+        "pose": "facing viewer, head upright",
+        "framing": "portrait, head and shoulders, eye-level camera",
+        "scene": "in a wood-paneled room",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "neutral_lighting": "",
+      "positive_lighting": "fractured perception, solid central face with a sequence of fading offset faces and hands from adjacent moments, layered translucent contours, dreamlike photographic multiple exposure rendered as anime illustration, luminous smearing at the edges",
+      "neutral": "masterpiece, best quality, safe, solo, 1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, facing viewer, head upright, portrait, head and shoulders, eye-level camera, in a wood-paneled room, anime illustration",
+      "positive": "masterpiece, best quality, safe, solo, 1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, a pensive faraway expression, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, lifting a hand toward the face while slowly turning away, head-and-shoulders portrait, slightly off-center with room for drifting impressions, in a wood-paneled room, anime illustration, fractured perception, solid central face with a sequence of fading offset faces and hands from adjacent moments, layered translucent contours, dreamlike photographic multiple exposure rendered as anime illustration, luminous smearing at the edges",
+      "positive_shared": {
+        "character": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, a pensive faraway expression, looking at viewer",
+        "outfit": "wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric",
+        "pose": "lifting a hand toward the face while slowly turning away",
+        "framing": "head-and-shoulders portrait, slightly off-center with room for drifting impressions",
+        "scene": "in a wood-paneled room",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "changed_fields": [
+        "character.expression",
+        "pose",
+        "framing",
+        "atmosphere"
+      ],
+      "identity_preservation": false,
+      "edit_scope": "expression_pose_framing_temporal_effects"
+    },
+    {
+      "id": "afterimage-dev-06",
+      "variation": "afterimage",
+      "split": "dev",
+      "character": "original-15",
+      "definition": "afterimage-07",
+      "definition_split": "eval",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": false,
+      "presentation": "woman",
+      "skin": "deep brown skin",
+      "shared": {
+        "character": "1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric",
+        "pose": "standing upright, facing viewer, both hands on hips",
+        "framing": "cowboy shot, thighs in frame, eye-level camera",
+        "scene": "on a balcony above a village",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "neutral_lighting": "",
+      "positive_lighting": "a single character seen across several instants at once, ghostly repeated profiles and gestures trailing the clearest central figure, transparent temporal layers, prismatic edge echoes and streaks of light",
+      "neutral": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer, wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, on a balcony above a village, anime illustration",
+      "positive": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, a smile caught between amusement and surprise, looking at viewer, wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric, pivoting toward the camera with a hand raised, angled waist-up view with movement extending across the composition, on a balcony above a village, anime illustration, a single character seen across several instants at once, ghostly repeated profiles and gestures trailing the clearest central figure, transparent temporal layers, prismatic edge echoes and streaks of light",
+      "positive_shared": {
+        "character": "1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, a smile caught between amusement and surprise, looking at viewer",
+        "outfit": "wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric",
+        "pose": "pivoting toward the camera with a hand raised",
+        "framing": "angled waist-up view with movement extending across the composition",
+        "scene": "on a balcony above a village",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "changed_fields": [
+        "character.expression",
+        "pose",
+        "framing",
+        "atmosphere"
+      ],
+      "identity_preservation": false,
+      "edit_scope": "expression_pose_framing_temporal_effects"
+    },
+    {
+      "id": "afterimage-dev-07",
+      "variation": "afterimage",
+      "split": "dev",
+      "character": "original-16",
+      "definition": "afterimage-08",
+      "definition_split": "eval",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": false,
+      "presentation": "man",
+      "skin": "medium brown skin",
+      "shared": {
+        "character": "1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a muted violet tunic and gray trousers, long sleeves, plain fabric",
+        "pose": "standing upright, facing viewer, arms at sides",
+        "framing": "upper body, waist-up view, eye-level camera",
+        "scene": "on a balcony above a village",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "neutral_lighting": "",
+      "positive_lighting": "time slipping out of alignment, the same face and shoulders recurring in faint displaced impressions, overlapping expressions from successive moments, spectral double contours and soft flowing color trails",
+      "neutral": "masterpiece, best quality, safe, solo, 1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, neutral expression, closed mouth, looking at viewer, wearing a muted violet tunic and gray trousers, long sleeves, plain fabric, standing upright, facing viewer, arms at sides, upper body, waist-up view, eye-level camera, on a balcony above a village, anime illustration",
+      "positive": "masterpiece, best quality, safe, solo, 1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, an absorbed watchful look, looking at viewer, wearing a muted violet tunic and gray trousers, long sleeves, plain fabric, moving laterally while turning the face back toward the viewer, intimate portrait with a broad trail of motion to one side, on a balcony above a village, anime illustration, time slipping out of alignment, the same face and shoulders recurring in faint displaced impressions, overlapping expressions from successive moments, spectral double contours and soft flowing color trails",
+      "positive_shared": {
+        "character": "1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, an absorbed watchful look, looking at viewer",
+        "outfit": "wearing a muted violet tunic and gray trousers, long sleeves, plain fabric",
+        "pose": "moving laterally while turning the face back toward the viewer",
+        "framing": "intimate portrait with a broad trail of motion to one side",
+        "scene": "on a balcony above a village",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "changed_fields": [
+        "character.expression",
+        "pose",
+        "framing",
+        "atmosphere"
+      ],
+      "identity_preservation": false,
+      "edit_scope": "expression_pose_framing_temporal_effects"
+    },
+    {
+      "id": "afterimage-dev-08",
+      "variation": "afterimage",
+      "split": "dev",
+      "character": "original-13",
+      "definition": "afterimage-07",
+      "definition_split": "eval",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": true,
+      "presentation": "woman",
+      "skin": "medium brown skin",
+      "shared": {
+        "character": "1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric",
+        "pose": "facing viewer, head upright",
+        "framing": "portrait, head and shoulders, eye-level camera",
+        "scene": "in an unadorned stone corridor with bare stone walls",
+        "medium": "",
+        "quality": ""
+      },
+      "neutral_lighting": "",
+      "positive_lighting": "a single character seen across several instants at once, ghostly repeated profiles and gestures trailing the clearest central figure, transparent temporal layers, prismatic edge echoes and streaks of light",
+      "neutral": "1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, facing viewer, head upright, portrait, head and shoulders, eye-level camera, in an unadorned stone corridor with bare stone walls",
+      "positive": "1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, a smile caught between amusement and surprise, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, pivoting toward the camera with a hand raised, angled waist-up view with movement extending across the composition, in an unadorned stone corridor with bare stone walls, a single character seen across several instants at once, ghostly repeated profiles and gestures trailing the clearest central figure, transparent temporal layers, prismatic edge echoes and streaks of light",
+      "positive_shared": {
+        "character": "1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, a smile caught between amusement and surprise, looking at viewer",
+        "outfit": "wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric",
+        "pose": "pivoting toward the camera with a hand raised",
+        "framing": "angled waist-up view with movement extending across the composition",
+        "scene": "in an unadorned stone corridor with bare stone walls",
+        "medium": "",
+        "quality": ""
+      },
+      "changed_fields": [
+        "character.expression",
+        "pose",
+        "framing",
+        "atmosphere"
+      ],
+      "identity_preservation": false,
+      "edit_scope": "expression_pose_framing_temporal_effects"
+    },
+    {
+      "id": "afterimage-dev-09",
+      "variation": "afterimage",
+      "split": "dev",
+      "character": "original-14",
+      "definition": "afterimage-08",
+      "definition_split": "eval",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": true,
+      "presentation": "man",
+      "skin": "light skin",
+      "shared": {
+        "character": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric",
+        "pose": "standing upright, facing viewer, both hands on hips",
+        "framing": "cowboy shot, thighs in frame, eye-level camera",
+        "scene": "in an unadorned stone corridor with bare stone walls",
+        "medium": "",
+        "quality": ""
+      },
+      "neutral_lighting": "",
+      "positive_lighting": "time slipping out of alignment, the same face and shoulders recurring in faint displaced impressions, overlapping expressions from successive moments, spectral double contours and soft flowing color trails",
+      "neutral": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, in an unadorned stone corridor with bare stone walls",
+      "positive": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, an absorbed watchful look, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, moving laterally while turning the face back toward the viewer, intimate portrait with a broad trail of motion to one side, in an unadorned stone corridor with bare stone walls, time slipping out of alignment, the same face and shoulders recurring in faint displaced impressions, overlapping expressions from successive moments, spectral double contours and soft flowing color trails",
+      "positive_shared": {
+        "character": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, an absorbed watchful look, looking at viewer",
+        "outfit": "wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric",
+        "pose": "moving laterally while turning the face back toward the viewer",
+        "framing": "intimate portrait with a broad trail of motion to one side",
+        "scene": "in an unadorned stone corridor with bare stone walls",
+        "medium": "",
+        "quality": ""
+      },
+      "changed_fields": [
+        "character.expression",
+        "pose",
+        "framing",
+        "atmosphere"
+      ],
+      "identity_preservation": false,
+      "edit_scope": "expression_pose_framing_temporal_effects"
+    },
+    {
+      "id": "afterimage-dev-10",
+      "variation": "afterimage",
+      "split": "dev",
+      "character": "original-15",
+      "definition": "afterimage-07",
+      "definition_split": "eval",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": true,
+      "presentation": "woman",
+      "skin": "deep brown skin",
+      "shared": {
+        "character": "1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric",
+        "pose": "standing upright, facing viewer, arms at sides",
+        "framing": "upper body, waist-up view, eye-level camera",
+        "scene": "in a quiet courtyard",
+        "medium": "",
+        "quality": ""
+      },
+      "neutral_lighting": "",
+      "positive_lighting": "a single character seen across several instants at once, ghostly repeated profiles and gestures trailing the clearest central figure, transparent temporal layers, prismatic edge echoes and streaks of light",
+      "neutral": "1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer, wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric, standing upright, facing viewer, arms at sides, upper body, waist-up view, eye-level camera, in a quiet courtyard",
+      "positive": "1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, a smile caught between amusement and surprise, looking at viewer, wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric, pivoting toward the camera with a hand raised, angled waist-up view with movement extending across the composition, in a quiet courtyard, a single character seen across several instants at once, ghostly repeated profiles and gestures trailing the clearest central figure, transparent temporal layers, prismatic edge echoes and streaks of light",
+      "positive_shared": {
+        "character": "1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, a smile caught between amusement and surprise, looking at viewer",
+        "outfit": "wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric",
+        "pose": "pivoting toward the camera with a hand raised",
+        "framing": "angled waist-up view with movement extending across the composition",
+        "scene": "in a quiet courtyard",
+        "medium": "",
+        "quality": ""
+      },
+      "changed_fields": [
+        "character.expression",
+        "pose",
+        "framing",
+        "atmosphere"
+      ],
+      "identity_preservation": false,
+      "edit_scope": "expression_pose_framing_temporal_effects"
+    },
+    {
+      "id": "afterimage-dev-11",
+      "variation": "afterimage",
+      "split": "dev",
+      "character": "original-16",
+      "definition": "afterimage-08",
+      "definition_split": "eval",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": true,
+      "presentation": "man",
+      "skin": "medium brown skin",
+      "shared": {
+        "character": "1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a muted violet tunic and gray trousers, long sleeves, plain fabric",
+        "pose": "sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap",
+        "framing": "full body, entire figure in frame, eye-level camera",
+        "scene": "in a quiet courtyard",
+        "medium": "",
+        "quality": ""
+      },
+      "neutral_lighting": "",
+      "positive_lighting": "time slipping out of alignment, the same face and shoulders recurring in faint displaced impressions, overlapping expressions from successive moments, spectral double contours and soft flowing color trails",
+      "neutral": "1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, neutral expression, closed mouth, looking at viewer, wearing a muted violet tunic and gray trousers, long sleeves, plain fabric, sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap, full body, entire figure in frame, eye-level camera, in a quiet courtyard",
+      "positive": "1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, an absorbed watchful look, looking at viewer, wearing a muted violet tunic and gray trousers, long sleeves, plain fabric, moving laterally while turning the face back toward the viewer, intimate portrait with a broad trail of motion to one side, in a quiet courtyard, time slipping out of alignment, the same face and shoulders recurring in faint displaced impressions, overlapping expressions from successive moments, spectral double contours and soft flowing color trails",
+      "positive_shared": {
+        "character": "1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, an absorbed watchful look, looking at viewer",
+        "outfit": "wearing a muted violet tunic and gray trousers, long sleeves, plain fabric",
+        "pose": "moving laterally while turning the face back toward the viewer",
+        "framing": "intimate portrait with a broad trail of motion to one side",
+        "scene": "in a quiet courtyard",
+        "medium": "",
+        "quality": ""
+      },
+      "changed_fields": [
+        "character.expression",
+        "pose",
+        "framing",
+        "atmosphere"
+      ],
+      "identity_preservation": false,
+      "edit_scope": "expression_pose_framing_temporal_effects"
+    }
+  ],
+  "sha256": "fe9cc6356f93d684eff9f3db70227c1ca3f540a3b845a14199006b59aa3909ab"
+}

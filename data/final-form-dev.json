@@ -1,0 +1,580 @@
+{
+  "schema": 1,
+  "extension": "expressive-concept-v1",
+  "split": "dev",
+  "variation": "finalform",
+  "source_spec_sha256": "862875ac2de60f146fdfc32d9f4c1ce9af984ea01d1bc30756b6a2399c9fc4c6",
+  "compiler_sha256": "5eef79b1bf99fe190b569d08ec3c044314431bd0ed122d6c6fae9c394402c3de",
+  "shared_source_sha256": "26b209e3659e73c0ef04c73a5976e77c9302c605be36499d20875460064762a2",
+  "characters_sha256": "5c9c0a929e8a72b6594601b3d838355e79496f74439a773b6625f5d4fe2a3cfe",
+  "definitions_sha256": "73dff90e66f5773f0c89dac21a9779f9538cd07324daee1b97bbdca2f25cf7ac",
+  "identity_preservation": false,
+  "edit_scope": "appearance_expression_outfit_pose_framing_atmosphere",
+  "rows": [
+    {
+      "id": "finalform-dev-00",
+      "variation": "finalform",
+      "split": "dev",
+      "character": "original-13",
+      "definition": "finalform-01",
+      "definition_split": "train",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": false,
+      "presentation": "woman",
+      "skin": "medium brown skin",
+      "shared": {
+        "character": "1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric",
+        "pose": "standing upright, facing viewer, arms at sides",
+        "framing": "upper body, waist-up view, eye-level camera",
+        "scene": "in an unadorned stone corridor with bare stone walls",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "neutral_lighting": "",
+      "positive_lighting": "ultimate anime transformation, overwhelming supernatural presence, luminous aura, suspended debris, concentric rings of energy, brilliant rim light",
+      "neutral": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, standing upright, facing viewer, arms at sides, upper body, waist-up view, eye-level camera, in an unadorned stone corridor with bare stone walls, anime illustration",
+      "positive": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, blazing luminous eyes, fierce exalted expression, looking at viewer, hair lifted into a sweeping gravity-defying mane, radiant markings across the face, an elaborate crown of floating crystalline horns, ornate fully covering transformed battle armor, layered sculptural shoulder plates, long flowing armored robes, levitating upright, arms spread slightly, open hands radiating power, hair and robes surging upward, dramatic low-angle full figure, monumental silhouette filling the frame, in an unadorned stone corridor with bare stone walls, anime illustration, ultimate anime transformation, overwhelming supernatural presence, luminous aura, suspended debris, concentric rings of energy, brilliant rim light",
+      "positive_shared": {
+        "character": "1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, blazing luminous eyes, fierce exalted expression, looking at viewer, hair lifted into a sweeping gravity-defying mane, radiant markings across the face, an elaborate crown of floating crystalline horns",
+        "outfit": "ornate fully covering transformed battle armor, layered sculptural shoulder plates, long flowing armored robes",
+        "pose": "levitating upright, arms spread slightly, open hands radiating power, hair and robes surging upward",
+        "framing": "dramatic low-angle full figure, monumental silhouette filling the frame",
+        "scene": "in an unadorned stone corridor with bare stone walls",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "changed_fields": [
+        "character.expression",
+        "pose",
+        "framing",
+        "atmosphere",
+        "character.appearance",
+        "outfit"
+      ],
+      "identity_preservation": false,
+      "edit_scope": "appearance_expression_outfit_pose_framing_atmosphere"
+    },
+    {
+      "id": "finalform-dev-01",
+      "variation": "finalform",
+      "split": "dev",
+      "character": "original-14",
+      "definition": "finalform-02",
+      "definition_split": "train",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": false,
+      "presentation": "man",
+      "skin": "light skin",
+      "shared": {
+        "character": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric",
+        "pose": "sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap",
+        "framing": "full body, entire figure in frame, eye-level camera",
+        "scene": "in an unadorned stone corridor with bare stone walls",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "neutral_lighting": "",
+      "positive_lighting": "final ascended form, spectacular anime power awakening, cascading light, a vast radiant aura, sparks spiraling around the figure",
+      "neutral": "masterpiece, best quality, safe, solo, 1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap, full body, entire figure in frame, eye-level camera, in an unadorned stone corridor with bare stone walls, anime illustration",
+      "positive": "masterpiece, best quality, safe, solo, 1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, intense glowing eyes, a confident triumphant smile, looking at viewer, great branching antlers of light, long floating locks of hair, luminous geometric markings on the face, elaborate fully covering celestial armor over flowing robes, enormous ornamental pauldrons, layered metallic filigree, rising above the ground with one hand extended, body poised with effortless power, low-angle three-quarter figure, sweeping hair and transformed silhouette dominating the composition, in an unadorned stone corridor with bare stone walls, anime illustration, final ascended form, spectacular anime power awakening, cascading light, a vast radiant aura, sparks spiraling around the figure",
+      "positive_shared": {
+        "character": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, intense glowing eyes, a confident triumphant smile, looking at viewer, great branching antlers of light, long floating locks of hair, luminous geometric markings on the face",
+        "outfit": "elaborate fully covering celestial armor over flowing robes, enormous ornamental pauldrons, layered metallic filigree",
+        "pose": "rising above the ground with one hand extended, body poised with effortless power",
+        "framing": "low-angle three-quarter figure, sweeping hair and transformed silhouette dominating the composition",
+        "scene": "in an unadorned stone corridor with bare stone walls",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "changed_fields": [
+        "character.expression",
+        "pose",
+        "framing",
+        "atmosphere",
+        "character.appearance",
+        "outfit"
+      ],
+      "identity_preservation": false,
+      "edit_scope": "appearance_expression_outfit_pose_framing_atmosphere"
+    },
+    {
+      "id": "finalform-dev-02",
+      "variation": "finalform",
+      "split": "dev",
+      "character": "original-15",
+      "definition": "finalform-03",
+      "definition_split": "train",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": false,
+      "presentation": "woman",
+      "skin": "deep brown skin",
+      "shared": {
+        "character": "1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric",
+        "pose": "facing viewer, head upright",
+        "framing": "portrait, head and shoulders, eye-level camera",
+        "scene": "in a quiet courtyard",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "neutral_lighting": "",
+      "positive_lighting": "ultimate dark transformation, immense contained power, violet fire-like energy, levitating stone fragments, violent backlight and deep shadows",
+      "neutral": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer, wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric, facing viewer, head upright, portrait, head and shoulders, eye-level camera, in a quiet courtyard, anime illustration",
+      "positive": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, glowing irises, calm imperious expression, looking at viewer, a crown of sweeping black horns, floating hair, supernatural luminous veins of light across the cheeks, fully enclosing obsidian armor, extravagant blade-shaped shoulder plates, a flowing layered cape with luminous lining, standing with one arm raised, fingers spread, cape and hair billowing in an impossible wind, heroic low-angle upper-body composition, exaggerated sculptural silhouette, in a quiet courtyard, anime illustration, ultimate dark transformation, immense contained power, violet fire-like energy, levitating stone fragments, violent backlight and deep shadows",
+      "positive_shared": {
+        "character": "1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, glowing irises, calm imperious expression, looking at viewer, a crown of sweeping black horns, floating hair, supernatural luminous veins of light across the cheeks",
+        "outfit": "fully enclosing obsidian armor, extravagant blade-shaped shoulder plates, a flowing layered cape with luminous lining",
+        "pose": "standing with one arm raised, fingers spread, cape and hair billowing in an impossible wind",
+        "framing": "heroic low-angle upper-body composition, exaggerated sculptural silhouette",
+        "scene": "in a quiet courtyard",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "changed_fields": [
+        "character.expression",
+        "pose",
+        "framing",
+        "atmosphere",
+        "character.appearance",
+        "outfit"
+      ],
+      "identity_preservation": false,
+      "edit_scope": "appearance_expression_outfit_pose_framing_atmosphere"
+    },
+    {
+      "id": "finalform-dev-03",
+      "variation": "finalform",
+      "split": "dev",
+      "character": "original-16",
+      "definition": "finalform-04",
+      "definition_split": "train",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": false,
+      "presentation": "man",
+      "skin": "medium brown skin",
+      "shared": {
+        "character": "1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a muted violet tunic and gray trousers, long sleeves, plain fabric",
+        "pose": "standing upright, facing viewer, both hands on hips",
+        "framing": "cowboy shot, thighs in frame, eye-level camera",
+        "scene": "in a quiet courtyard",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "neutral_lighting": "",
+      "positive_lighting": "spectacular anime metamorphosis, transcendent final form, prismatic light, floating crystal shards, radiating waves of power",
+      "neutral": "masterpiece, best quality, safe, solo, 1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, neutral expression, closed mouth, looking at viewer, wearing a muted violet tunic and gray trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, in a quiet courtyard, anime illustration",
+      "positive": "masterpiece, best quality, safe, solo, 1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, eyes shining white with power, fiercely determined expression, looking at viewer, hair streaming upward in luminous tendrils, branching crystal growths forming an ornate headpiece, fully covering crystalline armor, layered iridescent plates, immense faceted shoulder ornaments and a long armored skirt, hovering with both hands open beside the body, chest raised, supernatural energy pulling everything upward, full-body view from below, figure centered within an enormous sweeping silhouette, in a quiet courtyard, anime illustration, spectacular anime metamorphosis, transcendent final form, prismatic light, floating crystal shards, radiating waves of power",
+      "positive_shared": {
+        "character": "1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, eyes shining white with power, fiercely determined expression, looking at viewer, hair streaming upward in luminous tendrils, branching crystal growths forming an ornate headpiece",
+        "outfit": "fully covering crystalline armor, layered iridescent plates, immense faceted shoulder ornaments and a long armored skirt",
+        "pose": "hovering with both hands open beside the body, chest raised, supernatural energy pulling everything upward",
+        "framing": "full-body view from below, figure centered within an enormous sweeping silhouette",
+        "scene": "in a quiet courtyard",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "changed_fields": [
+        "character.expression",
+        "pose",
+        "framing",
+        "atmosphere",
+        "character.appearance",
+        "outfit"
+      ],
+      "identity_preservation": false,
+      "edit_scope": "appearance_expression_outfit_pose_framing_atmosphere"
+    },
+    {
+      "id": "finalform-dev-04",
+      "variation": "finalform",
+      "split": "dev",
+      "character": "original-13",
+      "definition": "finalform-05",
+      "definition_split": "train",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": false,
+      "presentation": "woman",
+      "skin": "medium brown skin",
+      "shared": {
+        "character": "1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric",
+        "pose": "sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap",
+        "framing": "full body, entire figure in frame, eye-level camera",
+        "scene": "in a wood-paneled room",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "neutral_lighting": "",
+      "positive_lighting": "unleashed ultimate form, explosive anime transformation, crackling energy ribbons, shockwave-like luminous arcs, overwhelming intensity",
+      "neutral": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap, full body, entire figure in frame, eye-level camera, in a wood-paneled room, anime illustration",
+      "positive": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, bright supernatural eyes, an ecstatic fearless grin, looking at viewer, wildly floating hair, a fan of horn-like luminous spines behind the head, glowing facial markings, extravagant fully covering ceremonial battle armor, huge curved pauldrons, trailing embroidered cloth and metallic ribbons, lunging forward through the air with one open hand reaching outward, hair and ribbons streaming behind, dynamic foreshortened figure from a low viewpoint, grand diagonal composition, in a wood-paneled room, anime illustration, unleashed ultimate form, explosive anime transformation, crackling energy ribbons, shockwave-like luminous arcs, overwhelming intensity",
+      "positive_shared": {
+        "character": "1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, bright supernatural eyes, an ecstatic fearless grin, looking at viewer, wildly floating hair, a fan of horn-like luminous spines behind the head, glowing facial markings",
+        "outfit": "extravagant fully covering ceremonial battle armor, huge curved pauldrons, trailing embroidered cloth and metallic ribbons",
+        "pose": "lunging forward through the air with one open hand reaching outward, hair and ribbons streaming behind",
+        "framing": "dynamic foreshortened figure from a low viewpoint, grand diagonal composition",
+        "scene": "in a wood-paneled room",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "changed_fields": [
+        "character.expression",
+        "pose",
+        "framing",
+        "atmosphere",
+        "character.appearance",
+        "outfit"
+      ],
+      "identity_preservation": false,
+      "edit_scope": "appearance_expression_outfit_pose_framing_atmosphere"
+    },
+    {
+      "id": "finalform-dev-05",
+      "variation": "finalform",
+      "split": "dev",
+      "character": "original-14",
+      "definition": "finalform-06",
+      "definition_split": "train",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": false,
+      "presentation": "man",
+      "skin": "light skin",
+      "shared": {
+        "character": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric",
+        "pose": "facing viewer, head upright",
+        "framing": "portrait, head and shoulders, eye-level camera",
+        "scene": "in a wood-paneled room",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "neutral_lighting": "",
+      "positive_lighting": "ultimate ascension, godlike anime transformation, overwhelming luminous presence, suspended fragments and brilliant shafts of light",
+      "neutral": "masterpiece, best quality, safe, solo, 1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, facing viewer, head upright, portrait, head and shoulders, eye-level camera, in a wood-paneled room, anime illustration",
+      "positive": "masterpiece, best quality, safe, solo, 1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, luminous eyes, serene commanding expression, looking at viewer, hair suspended in an enormous flowing halo, elegant curving horns and radiant markings, elaborate fully covering gold-and-ivory transformed armor, towering sculptural collar, layered ceremonial robes, floating motionless with arms gently opened, an impossibly regal bearing, monumental low-angle portrait with upper body and ornate silhouette visible, in a wood-paneled room, anime illustration, ultimate ascension, godlike anime transformation, overwhelming luminous presence, suspended fragments and brilliant shafts of light",
+      "positive_shared": {
+        "character": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, luminous eyes, serene commanding expression, looking at viewer, hair suspended in an enormous flowing halo, elegant curving horns and radiant markings",
+        "outfit": "elaborate fully covering gold-and-ivory transformed armor, towering sculptural collar, layered ceremonial robes",
+        "pose": "floating motionless with arms gently opened, an impossibly regal bearing",
+        "framing": "monumental low-angle portrait with upper body and ornate silhouette visible",
+        "scene": "in a wood-paneled room",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "changed_fields": [
+        "character.expression",
+        "pose",
+        "framing",
+        "atmosphere",
+        "character.appearance",
+        "outfit"
+      ],
+      "identity_preservation": false,
+      "edit_scope": "appearance_expression_outfit_pose_framing_atmosphere"
+    },
+    {
+      "id": "finalform-dev-06",
+      "variation": "finalform",
+      "split": "dev",
+      "character": "original-15",
+      "definition": "finalform-07",
+      "definition_split": "eval",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": false,
+      "presentation": "woman",
+      "skin": "deep brown skin",
+      "shared": {
+        "character": "1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric",
+        "pose": "standing upright, facing viewer, both hands on hips",
+        "framing": "cowboy shot, thighs in frame, eye-level camera",
+        "scene": "on a balcony above a village",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "neutral_lighting": "",
+      "positive_lighting": "the ultimate evolved state, spectacular supernatural awakening, a corona of energy, light and fragments revolving around the character",
+      "neutral": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer, wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, on a balcony above a village, anime illustration",
+      "positive": "masterpiece, best quality, safe, solo, 1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, radiant pupils, an expression of effortless supremacy, looking at viewer, weightless flowing hair, branching luminous horns, intricate shining patterns across the face, fully enclosing fantastical armor with enormous ornamental shoulders and long layered drapery, suspended above the floor, one palm lifted as if holding invisible power, upward-looking three-quarter figure, transformed silhouette spreading across the image, on a balcony above a village, anime illustration, the ultimate evolved state, spectacular supernatural awakening, a corona of energy, light and fragments revolving around the character",
+      "positive_shared": {
+        "character": "1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, radiant pupils, an expression of effortless supremacy, looking at viewer, weightless flowing hair, branching luminous horns, intricate shining patterns across the face",
+        "outfit": "fully enclosing fantastical armor with enormous ornamental shoulders and long layered drapery",
+        "pose": "suspended above the floor, one palm lifted as if holding invisible power",
+        "framing": "upward-looking three-quarter figure, transformed silhouette spreading across the image",
+        "scene": "on a balcony above a village",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "changed_fields": [
+        "character.expression",
+        "pose",
+        "framing",
+        "atmosphere",
+        "character.appearance",
+        "outfit"
+      ],
+      "identity_preservation": false,
+      "edit_scope": "appearance_expression_outfit_pose_framing_atmosphere"
+    },
+    {
+      "id": "finalform-dev-07",
+      "variation": "finalform",
+      "split": "dev",
+      "character": "original-16",
+      "definition": "finalform-08",
+      "definition_split": "eval",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": false,
+      "presentation": "man",
+      "skin": "medium brown skin",
+      "shared": {
+        "character": "1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a muted violet tunic and gray trousers, long sleeves, plain fabric",
+        "pose": "standing upright, facing viewer, arms at sides",
+        "framing": "upper body, waist-up view, eye-level camera",
+        "scene": "on a balcony above a village",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "neutral_lighting": "",
+      "positive_lighting": "limitless awakened form, extravagant anime apotheosis, radiant pressure waves, floating fragments, dramatic otherworldly illumination",
+      "neutral": "masterpiece, best quality, safe, solo, 1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, neutral expression, closed mouth, looking at viewer, wearing a muted violet tunic and gray trousers, long sleeves, plain fabric, standing upright, facing viewer, arms at sides, upper body, waist-up view, eye-level camera, on a balcony above a village, anime illustration",
+      "positive": "masterpiece, best quality, safe, solo, 1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, brilliant glowing eyes, a fierce knowing smile, looking at viewer, hair fanning outward against gravity, crystalline horned headpiece and shining facial tracery, fully covering ornate metamorphosed battle regalia, sculpted armor plates and immense flowing fabric, surging upward with hands open, every strand and fold lifted by immense power, sweeping full-figure composition from beneath, imposing fantastical silhouette, on a balcony above a village, anime illustration, limitless awakened form, extravagant anime apotheosis, radiant pressure waves, floating fragments, dramatic otherworldly illumination",
+      "positive_shared": {
+        "character": "1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, brilliant glowing eyes, a fierce knowing smile, looking at viewer, hair fanning outward against gravity, crystalline horned headpiece and shining facial tracery",
+        "outfit": "fully covering ornate metamorphosed battle regalia, sculpted armor plates and immense flowing fabric",
+        "pose": "surging upward with hands open, every strand and fold lifted by immense power",
+        "framing": "sweeping full-figure composition from beneath, imposing fantastical silhouette",
+        "scene": "on a balcony above a village",
+        "medium": "anime illustration",
+        "quality": "masterpiece, best quality, safe, solo"
+      },
+      "changed_fields": [
+        "character.expression",
+        "pose",
+        "framing",
+        "atmosphere",
+        "character.appearance",
+        "outfit"
+      ],
+      "identity_preservation": false,
+      "edit_scope": "appearance_expression_outfit_pose_framing_atmosphere"
+    },
+    {
+      "id": "finalform-dev-08",
+      "variation": "finalform",
+      "split": "dev",
+      "character": "original-13",
+      "definition": "finalform-07",
+      "definition_split": "eval",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": true,
+      "presentation": "woman",
+      "skin": "medium brown skin",
+      "shared": {
+        "character": "1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric",
+        "pose": "facing viewer, head upright",
+        "framing": "portrait, head and shoulders, eye-level camera",
+        "scene": "in an unadorned stone corridor with bare stone walls",
+        "medium": "",
+        "quality": ""
+      },
+      "neutral_lighting": "",
+      "positive_lighting": "the ultimate evolved state, spectacular supernatural awakening, a corona of energy, light and fragments revolving around the character",
+      "neutral": "1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, neutral expression, closed mouth, looking at viewer, wearing a tobacco-brown coat and black skirt, long sleeves, plain fabric, facing viewer, head upright, portrait, head and shoulders, eye-level camera, in an unadorned stone corridor with bare stone walls",
+      "positive": "1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, radiant pupils, an expression of effortless supremacy, looking at viewer, weightless flowing hair, branching luminous horns, intricate shining patterns across the face, fully enclosing fantastical armor with enormous ornamental shoulders and long layered drapery, suspended above the floor, one palm lifted as if holding invisible power, upward-looking three-quarter figure, transformed silhouette spreading across the image, in an unadorned stone corridor with bare stone walls, the ultimate evolved state, spectacular supernatural awakening, a corona of energy, light and fragments revolving around the character",
+      "positive_shared": {
+        "character": "1girl, mature female, adult woman age 35, tan skin, medium brown skin, long straight slate-blue hair, hazel eyes, radiant pupils, an expression of effortless supremacy, looking at viewer, weightless flowing hair, branching luminous horns, intricate shining patterns across the face",
+        "outfit": "fully enclosing fantastical armor with enormous ornamental shoulders and long layered drapery",
+        "pose": "suspended above the floor, one palm lifted as if holding invisible power",
+        "framing": "upward-looking three-quarter figure, transformed silhouette spreading across the image",
+        "scene": "in an unadorned stone corridor with bare stone walls",
+        "medium": "",
+        "quality": ""
+      },
+      "changed_fields": [
+        "character.expression",
+        "pose",
+        "framing",
+        "atmosphere",
+        "character.appearance",
+        "outfit"
+      ],
+      "identity_preservation": false,
+      "edit_scope": "appearance_expression_outfit_pose_framing_atmosphere"
+    },
+    {
+      "id": "finalform-dev-09",
+      "variation": "finalform",
+      "split": "dev",
+      "character": "original-14",
+      "definition": "finalform-08",
+      "definition_split": "eval",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": true,
+      "presentation": "man",
+      "skin": "light skin",
+      "shared": {
+        "character": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric",
+        "pose": "standing upright, facing viewer, both hands on hips",
+        "framing": "cowboy shot, thighs in frame, eye-level camera",
+        "scene": "in an unadorned stone corridor with bare stone walls",
+        "medium": "",
+        "quality": ""
+      },
+      "neutral_lighting": "",
+      "positive_lighting": "limitless awakened form, extravagant anime apotheosis, radiant pressure waves, floating fragments, dramatic otherworldly illumination",
+      "neutral": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, neutral expression, closed mouth, looking at viewer, wearing a cream cable-knit sweater and olive trousers, long sleeves, plain fabric, standing upright, facing viewer, both hands on hips, cowboy shot, thighs in frame, eye-level camera, in an unadorned stone corridor with bare stone walls",
+      "positive": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, brilliant glowing eyes, a fierce knowing smile, looking at viewer, hair fanning outward against gravity, crystalline horned headpiece and shining facial tracery, fully covering ornate metamorphosed battle regalia, sculpted armor plates and immense flowing fabric, surging upward with hands open, every strand and fold lifted by immense power, sweeping full-figure composition from beneath, imposing fantastical silhouette, in an unadorned stone corridor with bare stone walls, limitless awakened form, extravagant anime apotheosis, radiant pressure waves, floating fragments, dramatic otherworldly illumination",
+      "positive_shared": {
+        "character": "1boy, male focus, mature male, adult man age 35, light skin, short curly red hair, blue eyes, brilliant glowing eyes, a fierce knowing smile, looking at viewer, hair fanning outward against gravity, crystalline horned headpiece and shining facial tracery",
+        "outfit": "fully covering ornate metamorphosed battle regalia, sculpted armor plates and immense flowing fabric",
+        "pose": "surging upward with hands open, every strand and fold lifted by immense power",
+        "framing": "sweeping full-figure composition from beneath, imposing fantastical silhouette",
+        "scene": "in an unadorned stone corridor with bare stone walls",
+        "medium": "",
+        "quality": ""
+      },
+      "changed_fields": [
+        "character.expression",
+        "pose",
+        "framing",
+        "atmosphere",
+        "character.appearance",
+        "outfit"
+      ],
+      "identity_preservation": false,
+      "edit_scope": "appearance_expression_outfit_pose_framing_atmosphere"
+    },
+    {
+      "id": "finalform-dev-10",
+      "variation": "finalform",
+      "split": "dev",
+      "character": "original-15",
+      "definition": "finalform-07",
+      "definition_split": "eval",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": true,
+      "presentation": "woman",
+      "skin": "deep brown skin",
+      "shared": {
+        "character": "1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric",
+        "pose": "standing upright, facing viewer, arms at sides",
+        "framing": "upper body, waist-up view, eye-level camera",
+        "scene": "in a quiet courtyard",
+        "medium": "",
+        "quality": ""
+      },
+      "neutral_lighting": "",
+      "positive_lighting": "the ultimate evolved state, spectacular supernatural awakening, a corona of energy, light and fragments revolving around the character",
+      "neutral": "1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, neutral expression, closed mouth, looking at viewer, wearing a jade high-neck blouse and charcoal trousers, long sleeves, plain fabric, standing upright, facing viewer, arms at sides, upper body, waist-up view, eye-level camera, in a quiet courtyard",
+      "positive": "1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, radiant pupils, an expression of effortless supremacy, looking at viewer, weightless flowing hair, branching luminous horns, intricate shining patterns across the face, fully enclosing fantastical armor with enormous ornamental shoulders and long layered drapery, suspended above the floor, one palm lifted as if holding invisible power, upward-looking three-quarter figure, transformed silhouette spreading across the image, in a quiet courtyard, the ultimate evolved state, spectacular supernatural awakening, a corona of energy, light and fragments revolving around the character",
+      "positive_shared": {
+        "character": "1girl, mature female, adult woman age 35, dark skin, deep brown skin, short silver coils, brown eyes, radiant pupils, an expression of effortless supremacy, looking at viewer, weightless flowing hair, branching luminous horns, intricate shining patterns across the face",
+        "outfit": "fully enclosing fantastical armor with enormous ornamental shoulders and long layered drapery",
+        "pose": "suspended above the floor, one palm lifted as if holding invisible power",
+        "framing": "upward-looking three-quarter figure, transformed silhouette spreading across the image",
+        "scene": "in a quiet courtyard",
+        "medium": "",
+        "quality": ""
+      },
+      "changed_fields": [
+        "character.expression",
+        "pose",
+        "framing",
+        "atmosphere",
+        "character.appearance",
+        "outfit"
+      ],
+      "identity_preservation": false,
+      "edit_scope": "appearance_expression_outfit_pose_framing_atmosphere"
+    },
+    {
+      "id": "finalform-dev-11",
+      "variation": "finalform",
+      "split": "dev",
+      "character": "original-16",
+      "definition": "finalform-08",
+      "definition_split": "eval",
+      "seeds": [
+        29001,
+        29027
+      ],
+      "bare": true,
+      "presentation": "man",
+      "skin": "medium brown skin",
+      "shared": {
+        "character": "1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, neutral expression, closed mouth, looking at viewer",
+        "outfit": "wearing a muted violet tunic and gray trousers, long sleeves, plain fabric",
+        "pose": "sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap",
+        "framing": "full body, entire figure in frame, eye-level camera",
+        "scene": "in a quiet courtyard",
+        "medium": "",
+        "quality": ""
+      },
+      "neutral_lighting": "",
+      "positive_lighting": "limitless awakened form, extravagant anime apotheosis, radiant pressure waves, floating fragments, dramatic otherworldly illumination",
+      "neutral": "1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, neutral expression, closed mouth, looking at viewer, wearing a muted violet tunic and gray trousers, long sleeves, plain fabric, sitting upright on a plain wooden chair, facing viewer, feet flat on floor, hands resting in lap, full body, entire figure in frame, eye-level camera, in a quiet courtyard",
+      "positive": "1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, brilliant glowing eyes, a fierce knowing smile, looking at viewer, hair fanning outward against gravity, crystalline horned headpiece and shining facial tracery, fully covering ornate metamorphosed battle regalia, sculpted armor plates and immense flowing fabric, surging upward with hands open, every strand and fold lifted by immense power, sweeping full-figure composition from beneath, imposing fantastical silhouette, in a quiet courtyard, limitless awakened form, extravagant anime apotheosis, radiant pressure waves, floating fragments, dramatic otherworldly illumination",
+      "positive_shared": {
+        "character": "1boy, male focus, mature male, adult man age 35, tan skin, medium brown skin, wavy black hair to the jaw, gray eyes, brilliant glowing eyes, a fierce knowing smile, looking at viewer, hair fanning outward against gravity, crystalline horned headpiece and shining facial tracery",
+        "outfit": "fully covering ornate metamorphosed battle regalia, sculpted armor plates and immense flowing fabric",
+        "pose": "surging upward with hands open, every strand and fold lifted by immense power",
+        "framing": "sweeping full-figure composition from beneath, imposing fantastical silhouette",
+        "scene": "in a quiet courtyard",
+        "medium": "",
+        "quality": ""
+      },
+      "changed_fields": [
+        "character.expression",
+        "pose",
+        "framing",
+        "atmosphere",
+        "character.appearance",
+        "outfit"
+      ],
+      "identity_preservation": false,
+      "edit_scope": "appearance_expression_outfit_pose_framing_atmosphere"
+    }
+  ],
+  "sha256": "d829149c9caeb352225ea27c576d271c323e21ce72cf65d351344fbe5cd45222"
+}

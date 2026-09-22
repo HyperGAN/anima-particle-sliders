@@ -117,9 +117,36 @@ CUDA_VISIBLE_DEVICES='' python release_tools/verify_comfy.py /path/to/ComfyUI ar
 
 ## Rebuild the publication
 
+Final Form, Afterimage and Dusk use the same original training recipe. Their
+exact train/development manifests are `data/{final-form,afterimage,dusk}-{train,dev}.json`;
+the training command accepts those public names and verifies the archived
+manifest hashes. Dusk is a 200-update pilot; the expressive campaigns ran to
+1600. `data/expansion-selection.json` records the checkpoint and alpha chosen
+for each release. No untouched final-test characters enter this selection.
+
+The additional calibration and distillation commands, through the same pinned
+host launcher and exclusive GPU lease, are:
+
+```bash
+python release_tools/prepare_expansion.py particles --studio /path/to/studio/artifacts/anima/remote --output artifacts/expansion-v1
+python release_tools/prepare_expansion.py fit --studio /path/to/studio/artifacts/anima/remote --output artifacts/expansion-v1
+python release_tools/prepare_expansion.py loras --studio /path/to/studio/artifacts/anima/remote --output artifacts/expansion-v1
+python release_tools/prepare_expansion.py final --studio /path/to/studio/artifacts/anima/remote --output artifacts/expansion-v1
+python release_tools/stage_expansion.py --studio /path/to/studio/artifacts/anima/remote --results artifacts/expansion-v1 --folder artifacts/release
+```
+
+The first sweep compares the checked-in checkpoint/alpha candidates; `fit`
+uses only training activations for the fixed-ridge solve. The LoRA sweep
+measures complete-denoiser edits on 40 shared development states, plus matched
+renders. Final rendering reads the exact calibrated files. Staging verifies
+unchanged learned tensors and pixel-exact replay against the selected sweep
+images. The published `evidence/{final-form,afterimage,dusk}/` directories
+include sweeps, fits, selected values, training traces, and original compiler
+and definition sources. Use the gallery build/verify commands below afterward.
+
 The current release embeds the selected Studio particle alphas and uses
 strength 1.0 for all new examples. To stage the calibrated derivatives, render
-all 36 matched images, build the gallery and verify its provenance:
+all current matched images, build the gallery and verify its provenance:
 
 ```bash
 python release_tools/calibrated_release.py stage --folder artifacts/release --studio /path/to/studio/artifacts/anima/remote

@@ -31,11 +31,13 @@ def main():
     for name in ('source','comfyui','shared-core'):
         assert json.loads((ROOT/f'validation/{name}.json').read_text())['passed']
     catalog=json.loads((folder/'catalog.json').read_text())
-    assert [e['id'] for e in catalog['sliders']]==['bad-intent','candlelit','moonlit']
+    ids=[e['id'] for e in catalog['sliders']]
+    assert ids[:3]==['bad-intent','candlelit','moonlit'] and len(ids)==len(set(ids))
     for e in catalog['sliders']:
         assert digest(folder/e['particle'])==e['sha256']
         for key in ('native_lora','comfyui_lora'):assert (folder/e[key]).is_file()
-        assert len(e['samples'])==(4 if e['id']=='bad-intent' else 10)
+        assert len(e['samples'])==2*len(e['comparisons'])
+        assert len(e['distilled_samples'])==len(e['comparisons'])
         assert e['recommended_strength']==1
         for sample in e['samples']+e['distilled_samples']:
             assert 0<=sample['strength']<=5
@@ -48,7 +50,12 @@ def main():
     assert calibration['passed']
     assert calibration['particle_alphas']=={e['id']:e['particle_alpha'] for e in catalog['sliders']}
     assert calibration['lora_alphas']=={e['id']:e['lora_alpha'] for e in catalog['sliders']}
-    assert any(r['variation']=='bad-intent' for r in json.loads((ROOT/'validation/comfyui.json').read_text())['sliders'])
+    comfy=json.loads((ROOT/'validation/comfyui.json').read_text())
+    assert set(ids)<={r['variation'] for r in comfy['sliders']}
+    additions=set(ids)-{'bad-intent','candlelit','moonlit'}
+    if additions:
+        expansion=json.loads((ROOT/'validation/expansion.json').read_text())
+        assert expansion['passed'] and additions<={r['id'] for r in expansion['sliders'] if r['passed']}
     card=(folder/'README.md').read_text()
     assert card.index('## Samples')<card.index('## Get the adapters')<card.index('## How the sliders learn')
     assert card.index('### Bad Intent')<card.index('### Moonlit')<card.index('### Candlelit')
@@ -103,7 +110,7 @@ def main():
     result=api.upload_folder(repo_id=REPO,repo_type='model',folder_path=folder,
         parent_commit=before.sha,
         ignore_patterns=['.cache/**','.git/**','.gitattributes'],
-        commit_message='Publish calibrated strength-one particles and LoRAs with regenerated examples')
+        commit_message='Publish calibrated particle sliders, ordinary LoRAs and matched examples')
     revision=result.oid
     remote={f.rfilename:f for f in api.model_info(REPO,revision=revision,files_metadata=True).siblings}
     checked=0

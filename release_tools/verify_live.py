@@ -2,6 +2,7 @@
 import argparse
 import json
 from pathlib import Path
+from urllib.request import urlopen
 from playwright.sync_api import sync_playwright
 
 
@@ -11,23 +12,26 @@ def main():
     p.add_argument('--browser',default='/bin/google-chrome')
     args=p.parse_args();args.output.mkdir(parents=True,exist_ok=True)
     url='https://huggingface.co/ntc-ai/anima-concept-sliders'
+    catalog=json.load(urlopen(url+'/resolve/main/catalog.json'))
+    order=['bad-intent','final-form','afterimage','moonlit','candlelit','dusk','opal-fever']
+    entries=sorted(catalog['sliders'],key=lambda e:order.index(e['id']))
     with sync_playwright() as pw:
         browser=pw.chromium.launch(executable_path=args.browser,headless=True,args=['--no-sandbox','--disable-gpu'])
         page=browser.new_page(viewport={'width':1440,'height':1050})
         assert page.goto(url,wait_until='domcontentloaded',timeout=60000).status==200
         page.wait_for_selector('img[alt^="Bad Intent: Particle first"]',timeout=30000)
         lead=page.locator('img[alt$="Off third"]')
-        assert lead.count()==3
+        assert lead.count()==len(entries)
         assert lead.nth(0).get_attribute('alt').startswith('Bad Intent:')
         assert 'assets/featured-v2-bad-intent-balcony.jpg' in lead.nth(0).get_attribute('src')
-        assert lead.nth(1).get_attribute('alt').startswith('Moonlit:')
-        assert lead.nth(2).get_attribute('alt').startswith('Candlelit:')
+        for i,entry in enumerate(entries):
+            assert lead.nth(i).get_attribute('alt').startswith(entry['label']+':')
         assert lead.evaluate_all('(els)=>els.every(e=>!e.closest("details"))')
         # Open folded extra prompts and scroll through the card to trigger lazy images.
         page.locator('details').evaluate_all('(els)=>els.forEach(e=>e.open=true)')
         selector='img[alt*="matched strength-one samples"], img[alt$="Off third"]'
         images=page.locator(selector)
-        assert images.count()==12,images.count()
+        assert images.count()==sum(len(e['comparisons']) for e in entries),images.count()
         for i in range(images.count()):
             im=images.nth(i);im.scroll_into_view_if_needed()
             im.evaluate('(e)=>e.loading="eager"')
@@ -40,11 +44,9 @@ def main():
         assert pos('Samples')<pos('Get the adapters')<pos('How the sliders learn')
         assert page.locator('a[href="https://github.com/mikkel/sliders-conceptmod/tree/main/packages/concept-slider-core"]').count() > 0
         assert page.locator('a[href="https://github.com/HyperGAN/anima-particle-sliders#comfyui"]').count() > 0
-        for name in ('bad-intent','candlelit','moonlit'):
-            assert page.locator(f'a[href*="distilled/comfyui/{name}-unit-alpha.safetensors"]').count()>0
-        for name in ('candlelit','moonlit'):
-            assert page.locator(f'a[href*="weights/{name}-unit-alpha.safetensors"]').count()>0
-        assert page.locator('a[href*="weights/bad-intent-balanced-alpha.safetensors"]').count()>0
+        for entry in entries:
+            for key in ('particle','native_lora','comfyui_lora'):
+                assert page.locator(f'a[href*="{entry[key]}"]').count()>0
         first=images.first;first.scroll_into_view_if_needed()
         page.screenshot(path=str(args.output/'desktop.png'))
         records={}
