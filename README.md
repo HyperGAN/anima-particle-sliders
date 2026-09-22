@@ -24,10 +24,6 @@ Seed: `29027`.
 
 </details>
 
-Both formats can change expression, pose, framing and rendering style. The featured balcony scene uses a different development character and seed from the earlier alpha audit.
-
-The particle now uses alpha **12**, with the distill at **24**, to bring their visible intensity closer at strength 1. The two formats still differ in details and rendering style. [Comparison audit](validation/bad-intent-balance.json).
-
 ### Moonlit
 
 **Particle · strength 1** → **Distill · strength 1** → **Off · strength 0**

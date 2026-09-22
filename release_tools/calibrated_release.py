@@ -199,10 +199,6 @@ def build_card(folder):
     for entry in entries:
         lines += [f"### {entry['label']}", '', '**Particle · strength 1** → **Distill · strength 1** → **Off · strength 0**', '']
         lines += show(entry,entry['featured_comparison'],True)
-        if entry['id']=='bad-intent':
-            lines += ['Both formats can change expression, pose, framing and rendering style. The featured balcony scene uses a different development character and seed from the earlier alpha audit.', '']
-            if 'balance_selection' in entry:
-                lines += [f"The particle now uses alpha **{entry['particle_alpha']:g}**, with the distill at **{entry['lora_alpha']:g}**, to bring their visible intensity closer at strength 1. The two formats still differ in details and rendering style. [Comparison audit](validation/bad-intent-balance.json).", '']
     lines += ['<details><summary>More freshly rendered strength-one comparisons</summary>', '']
     for entry in entries:
         for comp in entry['comparisons'][1:]:
