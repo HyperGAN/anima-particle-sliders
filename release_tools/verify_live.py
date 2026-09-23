@@ -45,7 +45,7 @@ def main():
         headings=page.locator('h2').all_text_contents()
         def pos(part):return next(i for i,v in enumerate(headings) if part in v)
         assert pos('Samples')<pos('Get the adapters')<pos('How the sliders learn')
-        assert page.locator('a[href="https://github.com/HyperGAN/particle-sliders/tree/4340e28bed388d50800c469525b460a108091da0/packages/particle-sliders-core"]').count() > 0
+        assert page.locator('a[href="https://github.com/HyperGAN/particle-sliders/tree/a119ca1ecd3d5d6c437065839d22739b04f2f4d8/packages/particle-sliders-core"]').count() > 0
         assert page.locator('a[href="https://github.com/HyperGAN/anima-particle-sliders#comfyui"]').count() > 0
         for entry in entries:
             for key in ('particle','native_lora','comfyui_lora'):

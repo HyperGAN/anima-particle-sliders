@@ -308,7 +308,7 @@ Calibration is embedded in the files; do not add an external gain. Bad Intent’
 
 [Source and reproduction](https://github.com/HyperGAN/anima-particle-sliders) · [Catalog](https://huggingface.co/ntc-ai/anima-particle-sliders/blob/main/catalog.json) · [File hashes](https://huggingface.co/ntc-ai/anima-particle-sliders/blob/main/release-manifest.json) · [Distillation and alpha audit](DISTILLATION.md).
 
-The reusable algorithms come from the [pinned particle-sliders core](https://github.com/HyperGAN/particle-sliders/tree/4340e28bed388d50800c469525b460a108091da0/packages/particle-sliders-core). Training follows `winning_formulation()` (`gmix`, provisional `particle-gmix-1600-v2`). Published weights used noise hold 1.0; the stamp hold ratio is 1.3.
+The reusable algorithms come from the [pinned particle-sliders core](https://github.com/HyperGAN/particle-sliders/tree/a119ca1ecd3d5d6c437065839d22739b04f2f4d8/packages/particle-sliders-core). Training follows `winning_formulation()` (`gmix`, provisional `particle-gmix-1600-v2`). Published weights used noise hold 1.0; the stamp hold ratio is 1.3.
 
 <details><summary>Historical exports and examples</summary>
 
@@ -410,9 +410,9 @@ These are final-budget experimental checkpoints. They were not selected as the b
 
 ### Shared algorithm implementation
 
-Routing, the global-mix critic, paired losses, the particle regularizer, the noise schedule, and the ordinary-LoRA solver live in [particle-sliders-core](https://github.com/HyperGAN/particle-sliders/tree/4340e28bed388d50800c469525b460a108091da0/packages/particle-sliders-core). `requirements.txt` pins commit `4340e28bed388d50800c469525b460a108091da0`. Training imports `winning_formulation` and calls `require()` on the training config after setting generator learning rate \\(2\\times10^{-5}\\). Architecture is `gmix`. The formulation overlay is provisional `particle-gmix-1600-v2` until ParticleGAN #38 crowns a full-board winner.
+Routing, the global-mix critic, paired losses, the particle regularizer, the noise schedule, and the ordinary-LoRA solver live in [particle-sliders-core](https://github.com/HyperGAN/particle-sliders/tree/a119ca1ecd3d5d6c437065839d22739b04f2f4d8/packages/particle-sliders-core). `requirements.txt` pins commit `a119ca1ecd3d5d6c437065839d22739b04f2f4d8`. Training imports `winning_formulation` and calls `require()` on the training config after setting generator learning rate \\(2\\times10^{-5}\\). Architecture is `gmix`. The formulation overlay is provisional `particle-gmix-1600-v2` until ParticleGAN #38 crowns a full-board winner.
 
-Anima keeps the Hub id `ntc-ai/anima-particle-sliders`, the Comfy class in `comfy_particle.py`, the Candlelit and Moonlit surfaces, and the published sample cards. `core.lock.json` records this pin. It does not treat file hashes from the retired `mikkel/sliders-conceptmod` `concept-slider-core` package as the source of truth. Runtime identity hashes `particle_sliders.reference`. Published checkpoints still record the earlier runtime hash in `configs/anima/released-identity.json`; loaders accept that historical identity when the converted model matches. [Winning formulation](https://github.com/HyperGAN/particle-sliders/blob/4340e28bed388d50800c469525b460a108091da0/docs/winning-formulation.md).
+Anima keeps the Hub id `ntc-ai/anima-particle-sliders`, the Comfy class in `comfy_particle.py`, the Candlelit and Moonlit surfaces, and the published sample cards. `core.lock.json` records this pin. It does not treat file hashes from the retired `mikkel/sliders-conceptmod` `concept-slider-core` package as the source of truth. Runtime identity hashes `particle_sliders.reference`. Published checkpoints still record the earlier runtime hash in `configs/anima/released-identity.json`; loaders accept that historical identity when the converted model matches. [Winning formulation](https://github.com/HyperGAN/particle-sliders/blob/a119ca1ecd3d5d6c437065839d22739b04f2f4d8/docs/winning-formulation.md).
 
 ## License
 

@@ -3,7 +3,7 @@
 The source includes the original training engine and native runtime integration, original prompt catalogs, complete train/development manifests, conversion checks, ordinary-LoRA fitting, and release assembly scripts. Weights, full-resolution PNGs, sample sidecars, training traces, normalization tensors and measurement reports are on [Hugging Face](https://huggingface.co/ntc-ai/anima-particle-sliders).
 
 The routed-particle implementation and fitting algorithm come from the pinned
-[particle-sliders-core](https://github.com/HyperGAN/particle-sliders/tree/4340e28bed388d50800c469525b460a108091da0/packages/particle-sliders-core).
+[particle-sliders-core](https://github.com/HyperGAN/particle-sliders/tree/a119ca1ecd3d5d6c437065839d22739b04f2f4d8/packages/particle-sliders-core).
 `requirements.txt` installs that commit. `core.lock.json` records the pin and
 does not hash the retired `concept-slider-core` tree. Training calls
 `winning_formulation().require(...)` after overlaying the Anima generator
