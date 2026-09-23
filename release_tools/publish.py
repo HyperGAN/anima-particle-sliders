@@ -74,7 +74,7 @@ def main():
     files=[f for f in files if f]
     core=json.loads((ROOT/'core.lock.json').read_text())
     assert core['package']=='particle-sliders-core' and core['import']=='particle_sliders'
-    assert core['commit']=='4340e28bed388d50800c469525b460a108091da0'
+    assert core['commit']=='a119ca1ecd3d5d6c437065839d22739b04f2f4d8'
     assert 'files' not in core,'Retired concept-slider-core file hashes are not the source of truth'
     import particle_sliders
     from importlib.metadata import distribution

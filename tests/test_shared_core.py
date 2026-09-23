@@ -13,7 +13,7 @@ from lumen_studio.vendor import reference
 ROOT = Path(__file__).resolve().parents[1]
 PIN = (
     "particle-sliders-core @ git+https://github.com/HyperGAN/particle-sliders.git@"
-    "4340e28bed388d50800c469525b460a108091da0#subdirectory=packages/particle-sliders-core"
+    "a119ca1ecd3d5d6c437065839d22739b04f2f4d8#subdirectory=packages/particle-sliders-core"
 )
 
 
@@ -26,7 +26,7 @@ def test_winning_formulation_is_gmix_and_pinned():
     assert "concept-slider-core" not in (ROOT / "requirements.txt").read_text()
     lock = json.loads((ROOT / "core.lock.json").read_text())
     assert lock["repository"] == "https://github.com/HyperGAN/particle-sliders"
-    assert lock["commit"] == "4340e28bed388d50800c469525b460a108091da0"
+    assert lock["commit"] == "a119ca1ecd3d5d6c437065839d22739b04f2f4d8"
     assert "files" not in lock
     stamp.require(TRAINING_CONFIG)
     assert TRAINING_CONFIG["g_lr"] == 2e-5

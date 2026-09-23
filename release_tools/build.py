@@ -119,7 +119,7 @@ def main():
 
 [Public source and training reproduction]({GITHUB}) · [Every sample and checkpoint](catalog.json) · [File hashes](release-manifest.json) · [Related YuE2 release](https://huggingface.co/ntc-ai/yue2-particle-sliders).
 
-The reusable algorithms come from the [pinned particle-sliders core](https://github.com/HyperGAN/particle-sliders/tree/4340e28bed388d50800c469525b460a108091da0/packages/particle-sliders-core). This Anima repository pins that commit and owns Hub ids, Comfy class names, prompt cards, sampling, and model-surface keys.
+The reusable algorithms come from the [pinned particle-sliders core](https://github.com/HyperGAN/particle-sliders/tree/a119ca1ecd3d5d6c437065839d22739b04f2f4d8/packages/particle-sliders-core). This Anima repository pins that commit and owns Hub ids, Comfy class names, prompt cards, sampling, and model-surface keys.
 
 ## Distilled comparisons
 
