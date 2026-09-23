@@ -95,7 +95,9 @@ class AlphaParticleAdapter(ParticleAdapter):
             result = super().load_export(path, model_identity=model_identity)
             self.alphas = [float(ARCHITECTURE["rank"])] * len(self.branches)
             return result
-        if metadata.get("targets") != self.names or metadata.get("model_identity") != model_identity:
+        from .provenance import checkpoint_identity_accepted
+        if metadata.get("targets") != self.names or not checkpoint_identity_accepted(
+                metadata.get("model_identity"), model_identity):
             raise ValueError("Alpha checkpoint targets or model runtime differ")
         state = load_file(str(path))
         alphas = alpha_values(metadata, state)

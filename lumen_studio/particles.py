@@ -7,20 +7,29 @@ import torch
 from torch import nn
 from safetensors.torch import load_file, save_file
 
+from particle_sliders import winning_formulation
+
 from .contracts import canonical, digest, file_hash, normalized_strengths
-from .vendor.reference import RoutedMLP
 
 FORMAT = "anima-turbo-routed-particles-v1"
 ARCHITECTURE = dict(rank=8, particles=128, particle_dim=4, router_width=16, branch_width=48,
                     targets=["to_q", "to_k", "to_v", "to_out.0"])
+_STAMP = winning_formulation()
+_SPEC = _STAMP.spec
+if (ARCHITECTURE["rank"] != _SPEC["adapter_rank"] or ARCHITECTURE["particles"] != _SPEC["parts"]
+        or ARCHITECTURE["particle_dim"] != _SPEC["particle_dim"]
+        or ARCHITECTURE["router_width"] != _SPEC["router_width"]
+        or ARCHITECTURE["branch_width"] != _SPEC["adapter_width"]):
+    raise RuntimeError("Anima export architecture drifted from the gmix stamp")
 
 
 class Branch(nn.Module):
     def __init__(self, inputs, outputs):
         super().__init__()
-        self.down = nn.Linear(inputs, 8, bias=False)
-        self.routed = RoutedMLP(8, 8, z_dim=4, width=48, router_width=16)
-        self.up = nn.Linear(8, outputs, bias=False)
+        rank = int(winning_formulation().spec["adapter_rank"])
+        self.down = nn.Linear(inputs, rank, bias=False)
+        self.routed = winning_formulation().bridge()
+        self.up = nn.Linear(rank, outputs, bias=False)
         nn.init.kaiming_uniform_(self.down.weight, a=5 ** .5)
         nn.init.zeros_(self.up.weight)
 
@@ -31,7 +40,8 @@ class Branch(nn.Module):
 class ParticleAdapter(nn.Module):
     def __init__(self, transformer):
         super().__init__()
-        self.particles = nn.Parameter(torch.randn(128, 4))
+        spec = winning_formulation().spec
+        self.particles = nn.Parameter(torch.randn(int(spec["parts"]), int(spec["particle_dim"])))
         self.names = [name for name, mod in transformer.named_modules()
                       if isinstance(mod, nn.Linear) and any(name.endswith(t) for t in ARCHITECTURE["targets"])]
         if not self.names:
@@ -62,7 +72,8 @@ class ParticleAdapter(nn.Module):
             meta = json.loads(f.metadata()["anima"])
         if meta["format"] != FORMAT or meta["architecture"] != ARCHITECTURE or meta["targets"] != self.names:
             raise ValueError("Incompatible particle architecture")
-        if meta["model_identity"] != model_identity:
+        from .provenance import checkpoint_identity_accepted
+        if not checkpoint_identity_accepted(meta["model_identity"], model_identity):
             raise ValueError("Checkpoint belongs to a different model runtime")
         self.load_state_dict(load_file(str(path)), strict=True)
         return meta
@@ -127,5 +138,6 @@ def init_ema(adapter):
 
 @torch.no_grad()
 def update_ema(ema, adapter):
+    decay = float(winning_formulation().spec["ema"])
     for k, v in adapter.state_dict().items():
-        ema[k].lerp_(v, .005)
+        ema[k].lerp_(v, 1. - decay)

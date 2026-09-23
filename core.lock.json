@@ -1,14 +1,13 @@
 {
-  "repository": "https://github.com/mikkel/sliders-conceptmod",
-  "commit": "beaffeb3640c4554a7315998c04a5909f384b972",
-  "subdirectory": "packages/concept-slider-core",
-  "package": "concept-slider-core",
-  "version": "0.1.0",
-  "files": {
-    "reference.py": "c5ef81e49826a8b9065f1b1ab11b03f3fccce7a93c9de8d31b897f668f48b833",
-    "__init__.py": "cec80cf6da69ef39309aa0cc0a7fed1328be4596e26654fd0a59e618ad2fe40e",
-    "LICENSE": "2b61d4a8dd7a958b99133a92e92eede6f5e8b0f7b44d234665f822051e530685",
-    "provenance.json": "16d875715549da05c922caba8bce46cc228d3e028ddecaba0eef288425ba0264",
-    "distillation.py": "b277e561517a9cb40d1a399ad07c6350aa22a287232aea816b7f6e434e18a232"
-  }
+  "repository": "https://github.com/HyperGAN/particle-sliders",
+  "commit": "4340e28bed388d50800c469525b460a108091da0",
+  "subdirectory": "packages/particle-sliders-core",
+  "package": "particle-sliders-core",
+  "version": "0.3.0",
+  "import": "particle_sliders",
+  "entry_point": "winning_formulation",
+  "architecture_id": "gmix",
+  "formulation_id": "particle-gmix-1600-v2",
+  "formulation_provisional": true,
+  "note": "requirements.txt and particle_sliders.winning_formulation() are the source of truth. File hashes from the retired mikkel/sliders-conceptmod concept-slider-core package are not."
 }

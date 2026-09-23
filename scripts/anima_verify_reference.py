@@ -25,7 +25,7 @@ def main():
     from torch.nn import functional as F
     from lumen_studio.contracts import atomic_json, file_hash
     from lumen_studio.vendor import reference as vendored
-    from lumen_studio.vendor.grad_regularizers import GradRegularizer
+    from particle_sliders import GradRegularizer
     torch.set_num_threads(2)
     pinned = json.loads((ROOT / "lumen_studio/vendor/provenance.json").read_text())
     scope = dict(torch=torch, nn=nn, F=F, math=math, REFERENCE=vendored.REFERENCE.copy())

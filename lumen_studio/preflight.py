@@ -21,8 +21,8 @@ def verify_gpu_resume(root, configuration, gpu="0", should_stop=None, profile_up
         from .provenance import model_identity
         from .execution import DETERMINISM
         proof = json.loads(report_path.read_text()) if report_path.exists() else {}
-        engine = digest({name: file_hash(Path(__file__).parent / name) for name in (
-            "training.py", "game.py", "cache.py", "metrics.py", "execution.py", "vendor/grad_regularizers.py")})
+        from .training import ENGINE_FILES
+        engine = digest({name: file_hash(Path(__file__).parent / name) for name in ENGINE_FILES})
         expected = dict(microbatch=configuration["microbatch"], checkpointing=configuration["checkpointing"],
                         determinism=DETERMINISM)
         if (proof.get("passed") and proof.get("optimizer_counters_on_cpu") and proof.get("frozen_base")

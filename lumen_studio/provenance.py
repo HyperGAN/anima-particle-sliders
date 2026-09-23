@@ -16,9 +16,34 @@ def runtime_source(name):
     A changed core implementation therefore changes the checkpoint identity.
     """
     if name == "vendor/reference.py":
-        from concept_slider_core import reference
+        from particle_sliders import reference
         return Path(reference.__file__)
     return ROOT / "lumen_studio" / name
+
+
+_PORTABLE_KEYS = ("model", "sha256", "identity_schema", "environment_sha256")
+
+
+def released_identity():
+    return json.loads((ROOT / "configs/anima/released-identity.json").read_text())
+
+
+def same_portable_model(recorded, current):
+    """Converted Anima model and environment, without the shared-core runtime hash."""
+    return isinstance(recorded, dict) and isinstance(current, dict) and all(
+        recorded.get(key) == current.get(key) for key in _PORTABLE_KEYS)
+
+
+def checkpoint_identity_accepted(recorded, current):
+    """Accept the live runtime, or a published checkpoint from the historical runtime.
+
+    Published weights embed the runtime hash from before this repository pinned
+    particle-sliders-core. Their converted model and environment still match.
+    """
+    if recorded == current:
+        return True
+    released = released_identity()
+    return recorded == released and same_portable_model(current, released)
 
 
 def cache_runtime_compatibility(model_dir, recorded, current, cache_fingerprint):

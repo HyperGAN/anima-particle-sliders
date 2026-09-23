@@ -7,7 +7,7 @@ ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
 from lumen_studio.prepare import convert
 from lumen_studio.contracts import atomic_json,file_hash
-from lumen_studio.provenance import model_identity
+from lumen_studio.provenance import model_identity, released_identity, same_portable_model
 
 
 def main():
@@ -24,8 +24,8 @@ def main():
     expected['files']['modular_model_index.json']=file_hash(target/'modular_model_index.json')
     before=(target/'anima-lock.json').read_bytes()
     atomic_json(target/'anima-lock.json',expected)
-    released=json.loads((ROOT/'configs/anima/released-identity.json').read_text())
-    if model_identity(target)!=released:
+    released=released_identity()
+    if not same_portable_model(model_identity(target), released):
         (target/'anima-lock.json').write_bytes(before)
         raise ValueError('Conversion does not reproduce the released portable identity')
     print('Verified',target)

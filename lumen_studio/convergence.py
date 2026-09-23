@@ -1,12 +1,19 @@
-"""Diagnostics on fixed inputs and disposable opponents; training is unchanged."""
+"""Diagnostics on fixed inputs and disposable opponents.
+
+They use the same stamp losses and noise curve as training.
+"""
 import math
 
 import numpy as np
 import torch
 
+from particle_sliders import winning_formulation
+
 from .game import grad_norm
 from .metrics import residual_breakdown
-from .vendor.reference import noise_std, particle_vic, rp_d_loss, rp_g_loss
+
+_STAMP = winning_formulation()
+rp_d_loss, rp_g_loss, particle_vic = _STAMP.losses()
 
 
 def rms(x):
@@ -52,8 +59,7 @@ def paired_improvement(before, after, groups, seed=4701):
 
 def noise_and_scale(game, positions, indices, draws, step):
     ts = [positions[i] for i in indices]
-    sigma = torch.tensor([noise_std(step - 1, start=game.noise_starts[t], decay_steps=1600, hold=1.)
-                          for t in ts], device=game.device)
+    sigma = torch.tensor([game.noise_level(step, t) for t in ts], device=game.device)
     return draws.to(game.device) * sigma[:, None], game.scale[ts]
 
 
@@ -96,7 +102,9 @@ def response_step(game, predict_residual, positions, step, side):
         penalty_total += float(penalty.detach()) * len(batch) / len(ids)
     vic = 0.
     if side == "g":
-        selection = torch.randperm(128, generator=game.sampler.generators["vic"])[:64].to(game.device)
+        parts = int(game.stamp.spec["parts"])
+        vic_batch = int(game.stamp.spec["particle_vic_batch"])
+        selection = torch.randperm(parts, generator=game.sampler.generators["vic"])[:vic_batch].to(game.device)
         value = particle_vic(game.adapter.particles[selection])
         value.backward()
         vic = float(value.detach())
@@ -112,9 +120,10 @@ def objective_rows(game, residuals, positions, *, seed=3803, noise_repeats=2):
     """Evaluate both current objectives under fixed common noise on unseen rows.
 
     Cap is evaluated exactly then divided by lazy_k to express its expected
-    per-update weight. All selected late checkpoints use sigma=1, as does this
-    diagnostic. VIC uses four fixed 64-particle subsets. Critic evaluation is
-    microbatch one, matching the accepted production execution.
+    per-update weight. This probe uses a fixed sigma of 1. The training noise
+    hold is the shared stamp (edit RMS times noise_hold_ratio), not this probe.
+    VIC uses four fixed particle subsets. Critic evaluation is microbatch one,
+    matching the accepted production execution.
     """
     if len(residuals) != len(positions):
         raise ValueError("Residual and timestep coverage differs")
@@ -140,8 +149,10 @@ def objective_rows(game, residuals, positions, *, seed=3803, noise_repeats=2):
         g_adv.append(sum(v[2] for v in values) / len(values))
     vic_generator = torch.Generator().manual_seed(seed+1)
     with torch.no_grad():
+        parts = int(game.stamp.spec["parts"])
+        vic_batch = int(game.stamp.spec["particle_vic_batch"])
         vic = sum(float(particle_vic(game.adapter.particles[
-            torch.randperm(128, generator=vic_generator)[:64].to(game.device)])) for _ in range(4)) / 4
+            torch.randperm(parts, generator=vic_generator)[:vic_batch].to(game.device)])) for _ in range(4)) / 4
     return dict(d_adversarial=d_adv, d_cap=d_cap,
         d_total=[a+b for a, b in zip(d_adv, d_cap, strict=True)],
         g_adversarial=g_adv, g_vic=vic, g_total=[x+vic for x in g_adv],

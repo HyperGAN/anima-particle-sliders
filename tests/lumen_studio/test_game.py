@@ -13,8 +13,8 @@ from lumen_studio.game import Game
 from lumen_studio.metrics import make_fixtures, measure
 from lumen_studio.particles import ParticleAdapter, Mixer
 from lumen_studio.training import Trainer
-from lumen_studio.vendor.reference import particle_vic, rp_d_loss, rp_g_loss, noise_std
-from lumen_studio.vendor.grad_regularizers import GradRegularizer
+from particle_sliders import GradRegularizer, winning_formulation
+from lumen_studio.vendor.reference import particle_vic, rp_d_loss, rp_g_loss
 from conftest import TinyRuntime, tiny_cache
 
 
@@ -226,9 +226,13 @@ def test_fixed_probe_rejects_teacher_pairing_corruption(tiny, tmp_path, corrupti
     assert result["game_swd"]["1.0"] > 0
 
 
-def test_pilot_uses_full_noise_horizon():
-    assert noise_std(199, start=3.5, decay_steps=1600, hold=1) > 1
-    assert noise_std(1599, start=3.5, decay_steps=1600, hold=1) == 1
+def test_training_noise_follows_stamp_hold():
+    stamp = winning_formulation()
+    edit_rms = 0.98
+    hold = edit_rms * float(stamp.spec["noise_hold_ratio"])
+    assert stamp.spec["noise_hold_ratio"] == 1.3
+    assert stamp.noise_std_at(199, edit_rms) > hold
+    assert stamp.noise_std_at(1599, edit_rms) == pytest.approx(hold)
 
 
 def test_resume_verifier_checks_active_cap_and_studio_all_timesteps(tiny, tmp_path):
