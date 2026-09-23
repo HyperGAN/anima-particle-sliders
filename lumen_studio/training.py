@@ -12,10 +12,12 @@ import torch
 
 from .cache import TargetCache, fit_normalization, save_tensor_file
 from .contracts import atomic_json, digest, file_hash
-from .game import Game, RECIPE
+from .game import HORIZON, Game, RECIPE, STAMP, TRAINING_CONFIG
 from .metrics import make_fixtures, measure, residual_breakdown
 from .particles import ParticleAdapter, init_ema, update_ema
 from .execution import DETERMINISM
+
+ENGINE_FILES = ("training.py", "game.py", "cache.py", "metrics.py", "execution.py")
 
 
 class Trainer:
@@ -32,13 +34,13 @@ class Trainer:
         from .provenance import cache_runtime_compatibility
         compatibility = cache_runtime_compatibility(getattr(runtime, "model_dir", None),
             identity["model"], runtime.identity, cache.index["fingerprint"])
+        STAMP.require(TRAINING_CONFIG)
         self.identity = dict(recipe=RECIPE, model=runtime.identity, cache=cache.index["fingerprint"],
                              seed=seed, variation=variation,
             execution=dict(microbatch=microbatch,
                            determinism=DETERMINISM,
                            checkpointing=bool(getattr(runtime.transformer, "is_gradient_checkpointing", False))),
-            engine_sha256=digest({name: file_hash(Path(__file__).parent / name) for name in (
-                "training.py", "game.py", "cache.py", "metrics.py", "execution.py", "vendor/grad_regularizers.py")}))
+            engine_sha256=digest({name: file_hash(Path(__file__).parent / name) for name in ENGINE_FILES}))
         if compatibility is not None:
             self.identity["teacher_runtime_compatibility_sha256"] = compatibility
         if (self.directory / "run.json").exists():
@@ -111,8 +113,8 @@ class Trainer:
         self.prefetched.clear()
 
     def update(self):
-        if self.step >= 1600:
-            raise ValueError("The pinned campaign horizon is 1600 updates")
+        if self.step >= HORIZON:
+            raise ValueError(f"The pinned campaign horizon is {HORIZON} updates")
         start = time.monotonic()
         with self.runtime.mixer.scales({self.variation: 1.}):
             result = self.game.update(self.predict_residual, self.positions, self.step + 1, self.prefetch)

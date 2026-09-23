@@ -16,7 +16,7 @@ from lumen_studio.particles import ParticleAdapter
 from lumen_studio.alpha_adapter import AlphaParticleAdapter
 from lumen_studio.cache import TargetCache
 from lumen_studio.contracts import file_hash
-from concept_slider_core import fit_routed_down
+from particle_sliders import fit_routed_down
 
 
 def particle_sample_path(root, name, case, strength, suffix):

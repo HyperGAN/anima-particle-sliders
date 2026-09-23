@@ -1,4 +1,5 @@
 {
+  "role": "Historical research snapshot for anima_verify scripts. Not the install pin.",
   "source_repository": "ntc-ai/sliders-conceptmod",
   "source_commit": "3e184ad604569328fe93d17959945109e7cf30e7",
   "source_worktree": "source SHA256 values pin the captured working-tree contents, including local changes",

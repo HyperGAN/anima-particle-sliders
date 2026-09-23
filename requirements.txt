@@ -1,2 +1,2 @@
 safetensors>=0.4
-concept-slider-core @ git+https://github.com/mikkel/sliders-conceptmod.git@beaffeb3640c4554a7315998c04a5909f384b972#subdirectory=packages/concept-slider-core
+particle-sliders-core @ git+https://github.com/HyperGAN/particle-sliders.git@4340e28bed388d50800c469525b460a108091da0#subdirectory=packages/particle-sliders-core

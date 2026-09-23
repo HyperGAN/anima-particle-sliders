@@ -308,7 +308,7 @@ Calibration is embedded in the files; do not add an external gain. Bad Intent’
 
 [Source and reproduction](https://github.com/HyperGAN/anima-particle-sliders) · [Catalog](https://huggingface.co/ntc-ai/anima-particle-sliders/blob/main/catalog.json) · [File hashes](https://huggingface.co/ntc-ai/anima-particle-sliders/blob/main/release-manifest.json) · [Distillation and alpha audit](DISTILLATION.md).
 
-The reusable algorithms come from the [pinned shared core](https://github.com/mikkel/sliders-conceptmod/tree/main/packages/concept-slider-core). Training weights and the ParticleGAN formulation are unchanged.
+The reusable algorithms come from the [pinned particle-sliders core](https://github.com/HyperGAN/particle-sliders/tree/4340e28bed388d50800c469525b460a108091da0/packages/particle-sliders-core). Training follows `winning_formulation()` (`gmix`, provisional `particle-gmix-1600-v2`). Published weights used noise hold 1.0; the stamp hold ratio is 1.3.
 
 <details><summary>Historical exports and examples</summary>
 
@@ -387,7 +387,9 @@ $$
 
 Other updates have zero cap loss. VIC acts on a random 64-particle subset: mean \\(\max(0,1-\sqrt{\operatorname{Var}(P_j)+10^{-4}})\\) plus the squared off-diagonal sample covariance sum divided by particle dimension four. Both regularizer coefficients are one. There is no reconstruction or perceptual auxiliary loss in the particle training game.
 
-Noise starts at the training edit RMS divided by 0.28. It decays geometrically toward 0.03 over 1,600 updates, with an absolute hold at 1.0 when the start exceeds that hold. Update \\(k\\) uses schedule index \\(k-1\\). The pilot keeps the same horizon.
+Noise follows the shared stamp. It starts at \\(\\max(\\mathrm{edit\\ RMS}/0.28, 0.03)\\) and decays geometrically toward 0.03 over 1,600 updates. The hold is \\(\\mathrm{edit\\ RMS}\\times 1.3\\) (`noise_hold_ratio`). Update \\(k\\) uses schedule index \\(k-1\\). The pilot keeps the same horizon.
+
+The published Anima weights were trained with an absolute noise hold of 1.0. That published schedule disagrees with the stamp's `noise_hold_ratio` of 1.3. New training uses the stamp. This repository does not keep a separate noise schedule. Generator learning rate \\(2\\times10^{-5}\\) remains an Anima model surface.
 
 ### Released recipe and evidence
 
@@ -408,7 +410,9 @@ These are final-budget experimental checkpoints. They were not selected as the b
 
 ### Shared algorithm implementation
 
-The reusable routing, global-mix critic, paired losses, particle regularizer, noise function and ordinary-LoRA solver live in [sliders-conceptmod](https://github.com/mikkel/sliders-conceptmod/tree/beaffeb3640c4554a7315998c04a5909f384b972/packages/concept-slider-core). This release pins that revision in `requirements.txt` and [core.lock.json](https://huggingface.co/ntc-ai/anima-particle-sliders/blob/main/core.lock.json). Anima owns the model integration, target collection, training recipe and sample evidence. The extracted reference implementation is byte-identical to the original; runtime identity hashes the implementation rather than its compatibility import. [Architecture and research](https://github.com/mikkel/sliders-conceptmod/blob/main/docs/shared-core.md).
+Routing, the global-mix critic, paired losses, the particle regularizer, the noise schedule, and the ordinary-LoRA solver live in [particle-sliders-core](https://github.com/HyperGAN/particle-sliders/tree/4340e28bed388d50800c469525b460a108091da0/packages/particle-sliders-core). `requirements.txt` pins commit `4340e28bed388d50800c469525b460a108091da0`. Training imports `winning_formulation` and calls `require()` on the training config after setting generator learning rate \\(2\\times10^{-5}\\). Architecture is `gmix`. The formulation overlay is provisional `particle-gmix-1600-v2` until ParticleGAN #38 crowns a full-board winner.
+
+Anima keeps the Hub id `ntc-ai/anima-particle-sliders`, the Comfy class in `comfy_particle.py`, the Candlelit and Moonlit surfaces, and the published sample cards. `core.lock.json` records this pin. It does not treat file hashes from the retired `mikkel/sliders-conceptmod` `concept-slider-core` package as the source of truth. Runtime identity hashes `particle_sliders.reference`. Published checkpoints still record the earlier runtime hash in `configs/anima/released-identity.json`; loaders accept that historical identity when the converted model matches. [Winning formulation](https://github.com/HyperGAN/particle-sliders/blob/4340e28bed388d50800c469525b460a108091da0/docs/winning-formulation.md).
 
 ## License
 

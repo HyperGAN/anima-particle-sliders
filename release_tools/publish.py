@@ -73,10 +73,14 @@ def main():
     files=subprocess.check_output(['git','ls-files','-z'],cwd=ROOT).decode().split('\0')
     files=[f for f in files if f]
     core=json.loads((ROOT/'core.lock.json').read_text())
-    import concept_slider_core
-    core_root=Path(concept_slider_core.__file__).parent
-    for name,expected in core['files'].items():
-        assert digest(core_root/name)==expected,('Shared core source mismatch',name)
+    assert core['package']=='particle-sliders-core' and core['import']=='particle_sliders'
+    assert core['commit']=='4340e28bed388d50800c469525b460a108091da0'
+    assert 'files' not in core,'Retired concept-slider-core file hashes are not the source of truth'
+    import particle_sliders
+    from importlib.metadata import distribution
+    installed=json.loads(distribution('particle-sliders-core').read_text('direct_url.json') or '{}')
+    assert installed.get('vcs_info',{}).get('commit_id')==core['commit'],installed
+    assert particle_sliders.winning_formulation().architecture_id==core['architecture_id']
     provenance=dict(repository='https://github.com/HyperGAN/anima-particle-sliders',commit=commit,shared_core=core,
         files={f:dict(sha256=digest(ROOT/f),bytes=(ROOT/f).stat().st_size) for f in files})
     (folder/'source-provenance.json').write_text(json.dumps(provenance,indent=2)+'\n')

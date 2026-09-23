@@ -3,11 +3,20 @@
 The source includes the original training engine and native runtime integration, original prompt catalogs, complete train/development manifests, conversion checks, ordinary-LoRA fitting, and release assembly scripts. Weights, full-resolution PNGs, sample sidecars, training traces, normalization tensors and measurement reports are on [Hugging Face](https://huggingface.co/ntc-ai/anima-particle-sliders).
 
 The routed-particle implementation and fitting algorithm come from the pinned
-[shared core in sliders-conceptmod](https://github.com/mikkel/sliders-conceptmod/tree/main/packages/concept-slider-core).
-`core.lock.json` records the exact revision and implementation hashes. The runtime
-hashes the actual shared reference implementation, which is byte-identical to the
-original release, so existing checkpoint identities remain valid. The original
-CUDA environment lock stays intact; install the core separately as shown below.
+[particle-sliders-core](https://github.com/HyperGAN/particle-sliders/tree/4340e28bed388d50800c469525b460a108091da0/packages/particle-sliders-core).
+`requirements.txt` installs that commit. `core.lock.json` records the pin and
+does not hash the retired `concept-slider-core` tree. Training calls
+`winning_formulation().require(...)` after overlaying the Anima generator
+learning rate `2e-5`. Architecture is `gmix`; the overlay is provisional
+`particle-gmix-1600-v2`.
+
+The published weights used an absolute noise hold of 1.0. The shared stamp's
+`noise_hold_ratio` is 1.3, so the hold is edit RMS times 1.3. New training
+follows the stamp. Inference still loads the published Candlelit, Moonlit, and
+other released adapters: their embedded runtime hash is the historical identity
+in `configs/anima/released-identity.json`, accepted when the converted Anima
+model matches. The original CUDA environment lock stays intact; install the
+core separately as shown below.
 
 ## Environment and model
 

@@ -20,6 +20,7 @@ def main():
     from torch import nn
     from lumen_studio.cache import fit_normalization
     from lumen_studio.contracts import atomic_json, digest, file_hash
+    from particle_sliders import winning_formulation
     from lumen_studio.vendor.reference import REFERENCE, noise_std
     torch.set_num_threads(2)
     source_name = "conceptmod/textsliders/particle_bridge_gan.py"
@@ -63,10 +64,18 @@ def main():
             scale, rms = actual["scale"][position], actual["edit_rms"][position]
             torch.testing.assert_close(scale, expected.target_std, rtol=2e-6, atol=1e-7)
             torch.testing.assert_close(rms, expected.edit_rms, rtol=2e-6, atol=1e-7)
+            stamp = winning_formulation()
+            assert stamp.spec["noise_hold_ratio"] == 1.3
             for step in (0, 199, 399, 799, 1199, 1599):
-                start = float(rms) / .28
-                assert noise_std(step, start=start, decay_steps=1600, hold=1.) == scope["noise_std"](
-                    step, start=start, decay_steps=1600, hold=1.)
+                # The historical source function still accepts an absolute hold.
+                # Training uses the stamp hold, edit RMS times noise_hold_ratio.
+                edit_rms = float(rms)
+                start = max(edit_rms / .28, .03)
+                hold = edit_rms * float(stamp.spec["noise_hold_ratio"])
+                assert stamp.noise_std_at(step, edit_rms) == noise_std(
+                    step, start=start, decay_steps=1600, hold=hold)
+                assert noise_std(step, start=start, decay_steps=1600, hold=hold) == scope["noise_std"](
+                    step, start=start, decay_steps=1600, hold=hold)
             checks.append(dict(position=position, rows=len(rows),
                 scale_max_abs=float((scale - expected.target_std).abs().max()),
                 scale_max_relative=float(((scale - expected.target_std).abs() / expected.target_std).max()),

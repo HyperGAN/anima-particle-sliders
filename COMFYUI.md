@@ -12,7 +12,7 @@ git clone https://github.com/HyperGAN/anima-particle-sliders.git
 python -m pip install -r anima-particle-sliders/requirements.txt
 ```
 
-Use the Python executable belonging to your ComfyUI installation for the install command (including its embedded Python on portable installations). The plugin ZIP needs the same requirements install. This installs the pinned shared algorithm package from [sliders-conceptmod](https://github.com/mikkel/sliders-conceptmod/tree/main/packages/concept-slider-core).
+Use the Python executable belonging to your ComfyUI installation for the install command (including its embedded Python on portable installations). The plugin ZIP needs the same requirements install. This installs the pinned [particle-sliders-core](https://github.com/HyperGAN/particle-sliders/tree/4340e28bed388d50800c469525b460a108091da0/packages/particle-sliders-core) package. Comfy class names, Hub ids, and the Candlelit and Moonlit sample cards stay in this repository.
 
 Download [Bad Intent](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/weights/bad-intent-balanced-alpha.safetensors?download=true), [Candlelit](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/weights/candlelit-unit-alpha.safetensors?download=true) or [Moonlit](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/weights/moonlit-unit-alpha.safetensors?download=true) into `ComfyUI/models/loras/`. Update an existing plugin installation for the embedded-alpha format. Insert **Anima Particle Slider (ntc-ai)** between the diffusion model loader and your sampler:
 

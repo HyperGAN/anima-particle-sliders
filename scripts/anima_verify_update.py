@@ -86,7 +86,7 @@ def main():
                 replay = Sampler(5, 7)
                 replay.load_state_dict(actual.sampler.state_dict())
                 fixtures = [replay.draw(phase, 16) for phase in ('d', 'g')]
-                sigma = reference.noise_std(step - 1, start=actual.noise_starts[0], decay_steps=1600, hold=1.)
+                sigma = actual.noise_level(step, 0)
 
                 class FixedSampler:
                     def __init__(self):

@@ -61,7 +61,11 @@ class SingleParticleAdapter(AlphaParticleAdapter):
     def load_export(self,path,*,model_identity):
         metadata=read_metadata(path);state=load_file(str(path))
         alphas=alpha_values(metadata,state)
-        if metadata.get('model_identity')!=model_identity or metadata.get('targets')!=self.names:
+        try:
+            from .lumen_studio.provenance import checkpoint_identity_accepted
+        except ImportError:
+            from lumen_studio.provenance import checkpoint_identity_accepted
+        if not checkpoint_identity_accepted(metadata.get('model_identity'), model_identity) or metadata.get('targets')!=self.names:
             raise ValueError('Checkpoint runtime or targets differ')
         self.load_state_dict({k:v for k,v in state.items() if not k.endswith('.alpha')},strict=True)
         self.alphas=alphas
