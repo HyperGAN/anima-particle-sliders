@@ -180,13 +180,13 @@ def build_card(folder):
     catalog = json.loads((folder/'catalog.json').read_text())
     entries = sorted(catalog['sliders'], key=lambda e: DISPLAY_ORDER.index(e['id']))
     old_card = (folder/'README.md').read_text()
-    frontmatter = old_card[:old_card.index('# Anima Concept Sliders')]
+    frontmatter = old_card[:old_card.index('# Anima Particle Sliders')]
     formulation = old_card[old_card.index('## How the sliders learn'):]
     formulation = formulation.replace('the gallery includes extrapolation through', 'the historical gallery included extrapolation through')
     note = 'Calibrated inference additionally multiplies the branch by its stored alpha/rank; the current gallery uses nominal strength 1. No training weights or losses change. '
     if note not in formulation:
         formulation = formulation.replace('For multiple sliders the deltas sum on the same input.', note+'For multiple sliders the deltas sum on the same input.')
-    lines = ['# Anima Concept Sliders', '',
+    lines = ['# Anima Particle Sliders', '',
         '**'+', '.join(e['label'] for e in entries)+' for Anima Turbo v1.1.** Original Particle adapters and ordinary LoRA Distills, with strength stored in each file’s alpha.', '',
         '## Samples', '',
         '**Start at strength 1.0.** Every current comparison is **Particle 1 → Distill 1 → Off 0**, with the same prompt, seed, 768 × 768 resolution, 10 Euler steps and CFG 1. These are newly rendered examples from the calibrated files linked below.', '',
@@ -216,7 +216,7 @@ def build_card(folder):
         '|---|---|---|---|']
     for entry in entries:
         lines.append(f"| {entry['label']} | [Download]({RAW}{entry['particle']}?download=true) | [Download]({RAW}{entry['comfyui_lora']}?download=true) | [Download]({RAW}{entry['native_lora']}?download=true) |")
-    lines += ['', '**Particles:** use the [ComfyUI particle plugin](https://github.com/HyperGAN/anima-particle-sliders#comfyui) at strength **1.0**. Update the plugin for embedded-alpha files. [Plugin ZIP]('+RAW+'comfyui/anima-concept-sliders.zip?download=true) · [Setup](https://github.com/HyperGAN/anima-particle-sliders/blob/main/COMFYUI.md).', '',
+    lines += ['', '**Particles:** use the [ComfyUI particle plugin](https://github.com/HyperGAN/anima-particle-sliders#comfyui) at strength **1.0**. Update the plugin for embedded-alpha files. [Plugin ZIP]('+RAW+'comfyui/anima-particle-sliders.zip?download=true) · [Setup](https://github.com/HyperGAN/anima-particle-sliders/blob/main/COMFYUI.md).', '',
         '**Distilled LoRAs:** use standard **Load LoRA**, **MODEL strength 1.0, CLIP strength 0**. No particle plugin is needed.', '',
         '| Slider | Particle alpha | Distill alpha | Rank |', '|---|---:|---:|---:|']
     for entry in entries:

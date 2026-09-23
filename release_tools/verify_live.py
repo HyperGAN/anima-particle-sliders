@@ -12,7 +12,7 @@ def main():
     p.add_argument('--browser',default='/bin/google-chrome')
     p.add_argument('--expected-catalog',type=Path)
     args=p.parse_args();args.output.mkdir(parents=True,exist_ok=True)
-    url='https://huggingface.co/ntc-ai/anima-concept-sliders'
+    url='https://huggingface.co/ntc-ai/anima-particle-sliders'
     catalog=json.load(urlopen(url+'/resolve/main/catalog.json'))
     if args.expected_catalog:
         assert catalog==json.loads(args.expected_catalog.read_text()),'Live catalog is not the expected release'

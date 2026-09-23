@@ -1,6 +1,6 @@
 # Reproduce the Anima release
 
-The source includes the original training engine and native runtime integration, original prompt catalogs, complete train/development manifests, conversion checks, ordinary-LoRA fitting, and release assembly scripts. Weights, full-resolution PNGs, sample sidecars, training traces, normalization tensors and measurement reports are on [Hugging Face](https://huggingface.co/ntc-ai/anima-concept-sliders).
+The source includes the original training engine and native runtime integration, original prompt catalogs, complete train/development manifests, conversion checks, ordinary-LoRA fitting, and release assembly scripts. Weights, full-resolution PNGs, sample sidecars, training traces, normalization tensors and measurement reports are on [Hugging Face](https://huggingface.co/ntc-ai/anima-particle-sliders).
 
 The routed-particle implementation and fitting algorithm come from the pinned
 [shared core in sliders-conceptmod](https://github.com/mikkel/sliders-conceptmod/tree/main/packages/concept-slider-core).
@@ -21,7 +21,7 @@ uv pip sync --python .venv-anima/bin/python configs/anima/requirements.lock \
   --extra-index-url https://download.pytorch.org/whl/cu126
 uv pip install --python .venv-anima/bin/python --no-deps -r requirements.txt
 .venv-anima/bin/python release_tools/prepare_model.py --output artifacts/model
-.venv-anima/bin/hf download ntc-ai/anima-concept-sliders --local-dir artifacts/release
+.venv-anima/bin/hf download ntc-ai/anima-particle-sliders --local-dir artifacts/release
 ```
 
 Model conversion downloads the exact official checkpoint revision, tokenizers and Diffusers converter recorded in `configs/anima/model.lock.json`. It verifies the converted tensor hashes and restores the original conversion provenance before checking the complete portable identity. An incompatible conversion fails rather than silently loading the adapters into a different model.

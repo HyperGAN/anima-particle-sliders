@@ -1,4 +1,4 @@
-# Anima Concept Sliders
+# Anima Particle Sliders
 
 **Bad Intent, Final Form, Afterimage, Moonlit, Candlelit, Dusk for Anima Turbo v1.1.** Original Particle adapters and ordinary LoRA Distills, with strength stored in each file’s alpha.
 
@@ -12,9 +12,9 @@ Bad Intent adds menacing expressions and close framing. Final Form adds supernat
 
 **Particle · strength 1** → **Distill · strength 1** → **Off · strength 0**
 
-![Bad Intent: Particle first, Distill second, Off third](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/featured-v3-bad-intent-fixed-grin.jpg)
+![Bad Intent: Particle first, Distill second, Off third](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/assets/featured-v3-bad-intent-fixed-grin.jpg)
 
-Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/featured-v3/bad-intent/fixed-grin/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/featured-v3/bad-intent/fixed-grin/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/featured-v3/bad-intent/fixed-grin/off.png)
+Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/samples/featured-v3/bad-intent/fixed-grin/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/samples/featured-v3/bad-intent/fixed-grin/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/samples/featured-v3/bad-intent/fixed-grin/off.png)
 
 <details><summary>Prompt and seed</summary>
 
@@ -28,9 +28,9 @@ Seed: `29027`.
 
 **Particle · strength 1** → **Distill · strength 1** → **Off · strength 0**
 
-![Final Form: Particle first, Distill second, Off third](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/expanded-v1-final-form-case0.jpg)
+![Final Form: Particle first, Distill second, Off third](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/assets/expanded-v1-final-form-case0.jpg)
 
-Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/expanded-v1/final-form/case0/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/expanded-v1/final-form/case0/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/expanded-v1/final-form/case0/off.png)
+Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/samples/expanded-v1/final-form/case0/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/samples/expanded-v1/final-form/case0/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/samples/expanded-v1/final-form/case0/off.png)
 
 <details><summary>Prompt and seed</summary>
 
@@ -44,9 +44,9 @@ Seed: `29001`.
 
 **Particle · strength 1** → **Distill · strength 1** → **Off · strength 0**
 
-![Afterimage: Particle first, Distill second, Off third](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/featured-v4-afterimage-violet-echo.jpg)
+![Afterimage: Particle first, Distill second, Off third](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/assets/featured-v4-afterimage-violet-echo.jpg)
 
-Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/featured-v4/afterimage/violet-echo/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/featured-v4/afterimage/violet-echo/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/featured-v4/afterimage/violet-echo/off.png)
+Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/samples/featured-v4/afterimage/violet-echo/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/samples/featured-v4/afterimage/violet-echo/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/samples/featured-v4/afterimage/violet-echo/off.png)
 
 <details><summary>Prompt and seed</summary>
 
@@ -60,9 +60,9 @@ Seed: `29027`.
 
 **Particle · strength 1** → **Distill · strength 1** → **Off · strength 0**
 
-![Moonlit: Particle first, Distill second, Off third](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/unit-alpha-moonlit-portrait.jpg)
+![Moonlit: Particle first, Distill second, Off third](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/assets/unit-alpha-moonlit-portrait.jpg)
 
-Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/moonlit/portrait/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/moonlit/portrait/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/moonlit/portrait/off.png)
+Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/samples/unit-alpha/moonlit/portrait/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/samples/unit-alpha/moonlit/portrait/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/samples/unit-alpha/moonlit/portrait/off.png)
 
 <details><summary>Prompt and seed</summary>
 
@@ -76,9 +76,9 @@ Seed: `29001`.
 
 **Particle · strength 1** → **Distill · strength 1** → **Off · strength 0**
 
-![Candlelit: Particle first, Distill second, Off third](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/unit-alpha-candlelit-portrait.jpg)
+![Candlelit: Particle first, Distill second, Off third](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/assets/unit-alpha-candlelit-portrait.jpg)
 
-Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/candlelit/portrait/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/candlelit/portrait/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/candlelit/portrait/off.png)
+Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/samples/unit-alpha/candlelit/portrait/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/samples/unit-alpha/candlelit/portrait/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/samples/unit-alpha/candlelit/portrait/off.png)
 
 <details><summary>Prompt and seed</summary>
 
@@ -92,9 +92,9 @@ Seed: `29001`.
 
 **Particle · strength 1** → **Distill · strength 1** → **Off · strength 0**
 
-![Dusk: Particle first, Distill second, Off third](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/expanded-v1-dusk-case0.jpg)
+![Dusk: Particle first, Distill second, Off third](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/assets/expanded-v1-dusk-case0.jpg)
 
-Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/expanded-v1/dusk/case0/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/expanded-v1/dusk/case0/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/expanded-v1/dusk/case0/off.png)
+Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/samples/expanded-v1/dusk/case0/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/samples/expanded-v1/dusk/case0/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/samples/expanded-v1/dusk/case0/off.png)
 
 <details><summary>Prompt and seed</summary>
 
@@ -108,9 +108,9 @@ Seed: `29001`.
 
 ### Bad Intent · case1
 
-![Bad Intent: matched strength-one samples, case1](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/balanced-alpha-bad-intent-case1.jpg)
+![Bad Intent: matched strength-one samples, case1](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/assets/balanced-alpha-bad-intent-case1.jpg)
 
-Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/balanced-alpha/bad-intent/case1/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/balanced-alpha/bad-intent/case1/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/balanced-alpha/bad-intent/case1/off.png)
+Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/samples/balanced-alpha/bad-intent/case1/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/samples/balanced-alpha/bad-intent/case1/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/samples/balanced-alpha/bad-intent/case1/off.png)
 
 <details><summary>Prompt and seed</summary>
 
@@ -122,9 +122,9 @@ Seed: `29001`.
 
 ### Final Form · case1
 
-![Final Form: matched strength-one samples, case1](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/expanded-v1-final-form-case1.jpg)
+![Final Form: matched strength-one samples, case1](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/assets/expanded-v1-final-form-case1.jpg)
 
-Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/expanded-v1/final-form/case1/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/expanded-v1/final-form/case1/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/expanded-v1/final-form/case1/off.png)
+Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/samples/expanded-v1/final-form/case1/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/samples/expanded-v1/final-form/case1/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/samples/expanded-v1/final-form/case1/off.png)
 
 <details><summary>Prompt and seed</summary>
 
@@ -136,9 +136,9 @@ Seed: `29001`.
 
 ### Afterimage · gesture-echo
 
-![Afterimage: matched strength-one samples, gesture-echo](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/featured-v4-afterimage-gesture-echo.jpg)
+![Afterimage: matched strength-one samples, gesture-echo](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/assets/featured-v4-afterimage-gesture-echo.jpg)
 
-Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/featured-v4/afterimage/gesture-echo/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/featured-v4/afterimage/gesture-echo/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/featured-v4/afterimage/gesture-echo/off.png)
+Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/samples/featured-v4/afterimage/gesture-echo/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/samples/featured-v4/afterimage/gesture-echo/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/samples/featured-v4/afterimage/gesture-echo/off.png)
 
 <details><summary>Prompt and seed</summary>
 
@@ -150,9 +150,9 @@ Seed: `29001`.
 
 ### Moonlit · case0
 
-![Moonlit: matched strength-one samples, case0](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/unit-alpha-moonlit-case0.jpg)
+![Moonlit: matched strength-one samples, case0](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/assets/unit-alpha-moonlit-case0.jpg)
 
-Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/moonlit/case0/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/moonlit/case0/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/moonlit/case0/off.png)
+Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/samples/unit-alpha/moonlit/case0/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/samples/unit-alpha/moonlit/case0/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/samples/unit-alpha/moonlit/case0/off.png)
 
 <details><summary>Prompt and seed</summary>
 
@@ -164,9 +164,9 @@ Seed: `29001`.
 
 ### Moonlit · case1
 
-![Moonlit: matched strength-one samples, case1](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/unit-alpha-moonlit-case1.jpg)
+![Moonlit: matched strength-one samples, case1](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/assets/unit-alpha-moonlit-case1.jpg)
 
-Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/moonlit/case1/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/moonlit/case1/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/moonlit/case1/off.png)
+Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/samples/unit-alpha/moonlit/case1/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/samples/unit-alpha/moonlit/case1/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/samples/unit-alpha/moonlit/case1/off.png)
 
 <details><summary>Prompt and seed</summary>
 
@@ -178,9 +178,9 @@ Seed: `29001`.
 
 ### Moonlit · case2
 
-![Moonlit: matched strength-one samples, case2](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/unit-alpha-moonlit-case2.jpg)
+![Moonlit: matched strength-one samples, case2](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/assets/unit-alpha-moonlit-case2.jpg)
 
-Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/moonlit/case2/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/moonlit/case2/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/moonlit/case2/off.png)
+Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/samples/unit-alpha/moonlit/case2/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/samples/unit-alpha/moonlit/case2/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/samples/unit-alpha/moonlit/case2/off.png)
 
 <details><summary>Prompt and seed</summary>
 
@@ -192,9 +192,9 @@ Seed: `29001`.
 
 ### Moonlit · case3
 
-![Moonlit: matched strength-one samples, case3](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/unit-alpha-moonlit-case3.jpg)
+![Moonlit: matched strength-one samples, case3](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/assets/unit-alpha-moonlit-case3.jpg)
 
-Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/moonlit/case3/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/moonlit/case3/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/moonlit/case3/off.png)
+Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/samples/unit-alpha/moonlit/case3/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/samples/unit-alpha/moonlit/case3/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/samples/unit-alpha/moonlit/case3/off.png)
 
 <details><summary>Prompt and seed</summary>
 
@@ -206,9 +206,9 @@ Seed: `29001`.
 
 ### Candlelit · case0
 
-![Candlelit: matched strength-one samples, case0](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/unit-alpha-candlelit-case0.jpg)
+![Candlelit: matched strength-one samples, case0](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/assets/unit-alpha-candlelit-case0.jpg)
 
-Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/candlelit/case0/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/candlelit/case0/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/candlelit/case0/off.png)
+Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/samples/unit-alpha/candlelit/case0/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/samples/unit-alpha/candlelit/case0/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/samples/unit-alpha/candlelit/case0/off.png)
 
 <details><summary>Prompt and seed</summary>
 
@@ -220,9 +220,9 @@ Seed: `29001`.
 
 ### Candlelit · case1
 
-![Candlelit: matched strength-one samples, case1](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/unit-alpha-candlelit-case1.jpg)
+![Candlelit: matched strength-one samples, case1](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/assets/unit-alpha-candlelit-case1.jpg)
 
-Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/candlelit/case1/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/candlelit/case1/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/candlelit/case1/off.png)
+Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/samples/unit-alpha/candlelit/case1/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/samples/unit-alpha/candlelit/case1/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/samples/unit-alpha/candlelit/case1/off.png)
 
 <details><summary>Prompt and seed</summary>
 
@@ -234,9 +234,9 @@ Seed: `29001`.
 
 ### Candlelit · case2
 
-![Candlelit: matched strength-one samples, case2](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/unit-alpha-candlelit-case2.jpg)
+![Candlelit: matched strength-one samples, case2](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/assets/unit-alpha-candlelit-case2.jpg)
 
-Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/candlelit/case2/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/candlelit/case2/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/candlelit/case2/off.png)
+Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/samples/unit-alpha/candlelit/case2/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/samples/unit-alpha/candlelit/case2/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/samples/unit-alpha/candlelit/case2/off.png)
 
 <details><summary>Prompt and seed</summary>
 
@@ -248,9 +248,9 @@ Seed: `29001`.
 
 ### Candlelit · case3
 
-![Candlelit: matched strength-one samples, case3](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/unit-alpha-candlelit-case3.jpg)
+![Candlelit: matched strength-one samples, case3](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/assets/unit-alpha-candlelit-case3.jpg)
 
-Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/candlelit/case3/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/candlelit/case3/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/unit-alpha/candlelit/case3/off.png)
+Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/samples/unit-alpha/candlelit/case3/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/samples/unit-alpha/candlelit/case3/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/samples/unit-alpha/candlelit/case3/off.png)
 
 <details><summary>Prompt and seed</summary>
 
@@ -262,9 +262,9 @@ Seed: `29001`.
 
 ### Dusk · case1
 
-![Dusk: matched strength-one samples, case1](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/assets/expanded-v1-dusk-case1.jpg)
+![Dusk: matched strength-one samples, case1](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/assets/expanded-v1-dusk-case1.jpg)
 
-Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/expanded-v1/dusk/case1/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/expanded-v1/dusk/case1/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/samples/expanded-v1/dusk/case1/off.png)
+Full resolution: [Particle](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/samples/expanded-v1/dusk/case1/particles.png) · [Distill](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/samples/expanded-v1/dusk/case1/lora.png) · [Off](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/samples/expanded-v1/dusk/case1/off.png)
 
 <details><summary>Prompt and seed</summary>
 
@@ -284,14 +284,14 @@ These are development examples, not a final-test benchmark. Strength 1 is the ca
 
 | Slider | Original particles | Distilled LoRA for ComfyUI | Distilled LoRA for native runtime |
 |---|---|---|---|
-| Bad Intent | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/weights/bad-intent-balanced-alpha.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/distilled/comfyui/bad-intent-unit-alpha.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/distilled/native/bad-intent-unit-alpha.safetensors?download=true) |
-| Final Form | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/weights/final-form-unit-alpha.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/distilled/comfyui/final-form-unit-alpha.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/distilled/native/final-form-unit-alpha.safetensors?download=true) |
-| Afterimage | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/weights/afterimage-unit-alpha.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/distilled/comfyui/afterimage-unit-alpha.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/distilled/native/afterimage-unit-alpha.safetensors?download=true) |
-| Moonlit | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/weights/moonlit-unit-alpha.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/distilled/comfyui/moonlit-unit-alpha.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/distilled/native/moonlit-unit-alpha.safetensors?download=true) |
-| Candlelit | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/weights/candlelit-unit-alpha.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/distilled/comfyui/candlelit-unit-alpha.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/distilled/native/candlelit-unit-alpha.safetensors?download=true) |
-| Dusk | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/weights/dusk-unit-alpha.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/distilled/comfyui/dusk-unit-alpha.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/distilled/native/dusk-unit-alpha.safetensors?download=true) |
+| Bad Intent | [Download](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/weights/bad-intent-balanced-alpha.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/distilled/comfyui/bad-intent-unit-alpha.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/distilled/native/bad-intent-unit-alpha.safetensors?download=true) |
+| Final Form | [Download](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/weights/final-form-unit-alpha.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/distilled/comfyui/final-form-unit-alpha.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/distilled/native/final-form-unit-alpha.safetensors?download=true) |
+| Afterimage | [Download](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/weights/afterimage-unit-alpha.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/distilled/comfyui/afterimage-unit-alpha.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/distilled/native/afterimage-unit-alpha.safetensors?download=true) |
+| Moonlit | [Download](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/weights/moonlit-unit-alpha.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/distilled/comfyui/moonlit-unit-alpha.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/distilled/native/moonlit-unit-alpha.safetensors?download=true) |
+| Candlelit | [Download](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/weights/candlelit-unit-alpha.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/distilled/comfyui/candlelit-unit-alpha.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/distilled/native/candlelit-unit-alpha.safetensors?download=true) |
+| Dusk | [Download](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/weights/dusk-unit-alpha.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/distilled/comfyui/dusk-unit-alpha.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/distilled/native/dusk-unit-alpha.safetensors?download=true) |
 
-**Particles:** use the [ComfyUI particle plugin](https://github.com/HyperGAN/anima-particle-sliders#comfyui) at strength **1.0**. Update the plugin for embedded-alpha files. [Plugin ZIP](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/comfyui/anima-concept-sliders.zip?download=true) · [Setup](https://github.com/HyperGAN/anima-particle-sliders/blob/main/COMFYUI.md).
+**Particles:** use the [ComfyUI particle plugin](https://github.com/HyperGAN/anima-particle-sliders#comfyui) at strength **1.0**. Update the plugin for embedded-alpha files. [Plugin ZIP](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/comfyui/anima-particle-sliders.zip?download=true) · [Setup](https://github.com/HyperGAN/anima-particle-sliders/blob/main/COMFYUI.md).
 
 **Distilled LoRAs:** use standard **Load LoRA**, **MODEL strength 1.0, CLIP strength 0**. No particle plugin is needed.
 
@@ -306,7 +306,7 @@ These are development examples, not a final-test benchmark. Strength 1 is the ca
 
 Calibration is embedded in the files; do not add an external gain. Bad Intent’s old alpha-8 LoRA needs strength 3 for the same operation as the new alpha-24 file at strength 1. Lighting LoRAs carry the same alpha gain as their calibrated particle teacher; this does not claim a new fit or exact image equivalence.
 
-[Source and reproduction](https://github.com/HyperGAN/anima-particle-sliders) · [Catalog](https://huggingface.co/ntc-ai/anima-concept-sliders/blob/main/catalog.json) · [File hashes](https://huggingface.co/ntc-ai/anima-concept-sliders/blob/main/release-manifest.json) · [Distillation and alpha audit](DISTILLATION.md).
+[Source and reproduction](https://github.com/HyperGAN/anima-particle-sliders) · [Catalog](https://huggingface.co/ntc-ai/anima-particle-sliders/blob/main/catalog.json) · [File hashes](https://huggingface.co/ntc-ai/anima-particle-sliders/blob/main/release-manifest.json) · [Distillation and alpha audit](DISTILLATION.md).
 
 The reusable algorithms come from the [pinned shared core](https://github.com/mikkel/sliders-conceptmod/tree/main/packages/concept-slider-core). Training weights and the ParticleGAN formulation are unchanged.
 
@@ -314,7 +314,7 @@ The reusable algorithms come from the [pinned shared core](https://github.com/mi
 
 The original alpha-8 exports and their samples remain available for reproduction. Their strength numbers use the original scale and do not describe the new calibrated files. The catalog’s `archived_release` entries retain the original paths.
 
-[Original lighting/Bad Intent particle samples](https://huggingface.co/ntc-ai/anima-concept-sliders/tree/main/samples) · [Original distill samples](https://huggingface.co/ntc-ai/anima-concept-sliders/tree/main/distilled/samples).
+[Original lighting/Bad Intent particle samples](https://huggingface.co/ntc-ai/anima-particle-sliders/tree/main/samples) · [Original distill samples](https://huggingface.co/ntc-ai/anima-particle-sliders/tree/main/distilled/samples).
 
 Original, uncalibrated projection-relative fitting MSE: Bad Intent 0.005434, Moonlit 0.007559, Candlelit 0.020457. These local diagnostics are not image-quality scores and do not measure the calibrated complete-denoiser edit.
 
@@ -408,7 +408,7 @@ These are final-budget experimental checkpoints. They were not selected as the b
 
 ### Shared algorithm implementation
 
-The reusable routing, global-mix critic, paired losses, particle regularizer, noise function and ordinary-LoRA solver live in [sliders-conceptmod](https://github.com/mikkel/sliders-conceptmod/tree/beaffeb3640c4554a7315998c04a5909f384b972/packages/concept-slider-core). This release pins that revision in `requirements.txt` and [core.lock.json](https://huggingface.co/ntc-ai/anima-concept-sliders/blob/main/core.lock.json). Anima owns the model integration, target collection, training recipe and sample evidence. The extracted reference implementation is byte-identical to the original; runtime identity hashes the implementation rather than its compatibility import. [Architecture and research](https://github.com/mikkel/sliders-conceptmod/blob/main/docs/shared-core.md).
+The reusable routing, global-mix critic, paired losses, particle regularizer, noise function and ordinary-LoRA solver live in [sliders-conceptmod](https://github.com/mikkel/sliders-conceptmod/tree/beaffeb3640c4554a7315998c04a5909f384b972/packages/concept-slider-core). This release pins that revision in `requirements.txt` and [core.lock.json](https://huggingface.co/ntc-ai/anima-particle-sliders/blob/main/core.lock.json). Anima owns the model integration, target collection, training recipe and sample evidence. The extracted reference implementation is byte-identical to the original; runtime identity hashes the implementation rather than its compatibility import. [Architecture and research](https://github.com/mikkel/sliders-conceptmod/blob/main/docs/shared-core.md).
 
 ## License
 

@@ -8,7 +8,7 @@ import subprocess
 import zipfile
 from huggingface_hub import HfApi,ModelCard,hf_hub_download
 ROOT=Path(__file__).resolve().parents[1]
-REPO='ntc-ai/anima-concept-sliders'
+REPO='ntc-ai/anima-particle-sliders'
 
 
 def digest(path):
@@ -60,7 +60,7 @@ def main():
     assert card.index('## Samples')<card.index('## Get the adapters')<card.index('## How the sliders learn')
     assert card.index('### Bad Intent')<card.index('### Moonlit')<card.index('### Candlelit')
     assert 'https://github.com/HyperGAN/anima-particle-sliders#comfyui' in card
-    for name in re.findall(r'https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/([^)?\s]+)',card):
+    for name in re.findall(r'https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/([^)?\s]+)',card):
         assert (folder/name).is_file(),('Broken release link',name)
     # Verify finite tensors in every original/exported checkpoint.
     import torch
@@ -81,7 +81,7 @@ def main():
         files={f:dict(sha256=digest(ROOT/f),bytes=(ROOT/f).stat().st_size) for f in files})
     (folder/'source-provenance.json').write_text(json.dumps(provenance,indent=2)+'\n')
     with zipfile.ZipFile(folder/'source.zip','w',zipfile.ZIP_DEFLATED) as z:
-        for name in files:z.write(ROOT/name,'anima-concept-sliders/'+name)
+        for name in files:z.write(ROOT/name,'anima-particle-sliders/'+name)
     manifest=dict(source_commit=commit,files={str(f.relative_to(folder)):dict(bytes=f.stat().st_size,sha256=digest(f))
         for f in release_files(folder) if f.name!='release-manifest.json'})
     (folder/'release-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')

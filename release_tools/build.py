@@ -9,7 +9,7 @@ import subprocess
 import zipfile
 from PIL import Image, ImageDraw, ImageFont
 ROOT=Path(__file__).resolve().parents[1]
-REPO='ntc-ai/anima-concept-sliders'
+REPO='ntc-ai/anima-particle-sliders'
 WEB='https://huggingface.co/'+REPO
 RAW=WEB+'/resolve/main/'
 GITHUB='https://github.com/HyperGAN/anima-particle-sliders'
@@ -44,9 +44,9 @@ def package_plugin(out):
     plugin=['__init__.py','comfy_particle.py','particle_io.py','requirements.txt','core.lock.json','COMFYUI.md','LICENSE','ANIMA-LICENSE.md','NOTICE',
         'lumen_studio/__init__.py','lumen_studio/particles.py','lumen_studio/contracts.py','lumen_studio/alpha_adapter.py','single_particle.py',
         'lumen_studio/vendor/__init__.py','lumen_studio/vendor/reference.py','lumen_studio/vendor/LICENSE','lumen_studio/vendor/provenance.json']
-    zpath=out/'comfyui/anima-concept-sliders.zip';zpath.parent.mkdir(exist_ok=True)
+    zpath=out/'comfyui/anima-particle-sliders.zip';zpath.parent.mkdir(exist_ok=True)
     with zipfile.ZipFile(zpath,'w',zipfile.ZIP_DEFLATED) as z:
-        for name in plugin:z.write(ROOT/name,'anima-concept-sliders/'+name)
+        for name in plugin:z.write(ROOT/name,'anima-particle-sliders/'+name)
 
 
 def comparison(images,path):
@@ -74,7 +74,7 @@ def main():
     if any(e['id'] == 'bad-intent' for e in catalog['sliders']):
         raise ValueError('Use release_tools/add_bad_intent.py to preserve the additive release and its featured portraits')
     entries=sorted(catalog['sliders'],key=lambda e:0 if e['id']=='moonlit' else 1)
-    intro='# Anima Concept Sliders\n\n**Moonlit and Candlelit for Anima Turbo v1.1.** Same prompt and seed; turn the atmosphere from strength 0 to 5.\n\n'
+    intro='# Anima Particle Sliders\n\n**Moonlit and Candlelit for Anima Turbo v1.1.** Same prompt and seed; turn the atmosphere from strength 0 to 5.\n\n'
     card=intro+'## Samples\n\n**Start with Particle — the original slider.** Each comparison reads **Particle → Distill → Off**, left to right. Distill is the ordinary-LoRA approximation; Off is the base model.\n\n'
     samples=json.loads((ROOT/'data/release-samples.json').read_text())
     for entry in entries:
@@ -113,11 +113,11 @@ def main():
     for e in entries:
         card+=f"| {e['label']} | [Download]({RAW}{e['particle']}?download=true) | [Download]({RAW}{e['comfyui_lora']}?download=true) | [Download]({RAW}{e['native_lora']}?download=true) |\n"
     card+=f'''
-**Particles:** use the [ComfyUI particle plugin]({GITHUB}#comfyui), or the [native loader]({GITHUB}/blob/main/REPRODUCE.md). [Plugin ZIP]({RAW}comfyui/anima-concept-sliders.zip?download=true) · [ComfyUI setup]({GITHUB}/blob/main/COMFYUI.md).
+**Particles:** use the [ComfyUI particle plugin]({GITHUB}#comfyui), or the [native loader]({GITHUB}/blob/main/REPRODUCE.md). [Plugin ZIP]({RAW}comfyui/anima-particle-sliders.zip?download=true) · [ComfyUI setup]({GITHUB}/blob/main/COMFYUI.md).
 
 **Distilled LoRAs:** use standard **Load LoRA**, MODEL strength 1 and CLIP strength 0. These rank-8 linear approximations need no particle plugin. Compare their images below before choosing a format.
 
-[Public source and training reproduction]({GITHUB}) · [Every sample and checkpoint](catalog.json) · [File hashes](release-manifest.json) · [Related YuE2 release](https://huggingface.co/ntc-ai/yue2-concept-sliders).
+[Public source and training reproduction]({GITHUB}) · [Every sample and checkpoint](catalog.json) · [File hashes](release-manifest.json) · [Related YuE2 release](https://huggingface.co/ntc-ai/yue2-particle-sliders).
 
 The reusable algorithms come from the [shared core in sliders-conceptmod](https://github.com/mikkel/sliders-conceptmod/tree/main/packages/concept-slider-core). This Anima repository pins an exact core revision and owns the model integration, recipe and release evidence.
 
@@ -150,7 +150,7 @@ Top row: original particles at strengths **1, 3, 5**. Bottom row: the distilled 
     yaml='''---
 license: other
 license_name: circlestone-labs-non-commercial-license
-license_link: https://huggingface.co/ntc-ai/anima-concept-sliders/blob/main/ANIMA-LICENSE.md
+license_link: https://huggingface.co/ntc-ai/anima-particle-sliders/blob/main/ANIMA-LICENSE.md
 base_model: circlestone-labs/Anima
 base_model_relation: adapter
 pipeline_tag: text-to-image
@@ -158,7 +158,7 @@ language:
 - en
 tags:
 - anima
-- concept-sliders
+- particle-sliders
 - particle-adapter
 - lora
 - comfyui

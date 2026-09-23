@@ -14,7 +14,7 @@ python -m pip install -r anima-particle-sliders/requirements.txt
 
 Use the Python executable belonging to your ComfyUI installation for the install command (including its embedded Python on portable installations). The plugin ZIP needs the same requirements install. This installs the pinned shared algorithm package from [sliders-conceptmod](https://github.com/mikkel/sliders-conceptmod/tree/main/packages/concept-slider-core).
 
-Download [Bad Intent](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/weights/bad-intent-balanced-alpha.safetensors?download=true), [Candlelit](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/weights/candlelit-unit-alpha.safetensors?download=true) or [Moonlit](https://huggingface.co/ntc-ai/anima-concept-sliders/resolve/main/weights/moonlit-unit-alpha.safetensors?download=true) into `ComfyUI/models/loras/`. Update an existing plugin installation for the embedded-alpha format. Insert **Anima Particle Slider (ntc-ai)** between the diffusion model loader and your sampler:
+Download [Bad Intent](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/weights/bad-intent-balanced-alpha.safetensors?download=true), [Candlelit](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/weights/candlelit-unit-alpha.safetensors?download=true) or [Moonlit](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/weights/moonlit-unit-alpha.safetensors?download=true) into `ComfyUI/models/loras/`. Update an existing plugin installation for the embedded-alpha format. Insert **Anima Particle Slider (ntc-ai)** between the diffusion model loader and your sampler:
 
 ```text
 Load Diffusion Model (anima-turbo-v1.1)
@@ -29,9 +29,9 @@ is equivalent to the current alpha-12 particle at strength 1. The Bad Intent
 LoRA retains alpha 24; no LoRA replacement is needed for this balance update.
 
 Final Form, Afterimage and Dusk use the same plugin. Download their current
-`*-unit-alpha.safetensors` files from [the particle weights folder](https://huggingface.co/ntc-ai/anima-concept-sliders/tree/main/weights)
+`*-unit-alpha.safetensors` files from [the particle weights folder](https://huggingface.co/ntc-ai/anima-particle-sliders/tree/main/weights)
 and start at strength 1.0. Their separate ordinary LoRAs are in
-[distilled/comfyui](https://huggingface.co/ntc-ai/anima-concept-sliders/tree/main/distilled/comfyui).
+[distilled/comfyui](https://huggingface.co/ntc-ai/anima-particle-sliders/tree/main/distilled/comfyui).
 
 Chain two particle nodes to mix Candlelit and Moonlit. The nodes use independent direct strengths. To match a Studio mix, normalize each slider to `energy × proportion / sum(proportions)` before entering its node strength.
 
@@ -39,7 +39,7 @@ The custom node retains all particle tensors and maps all 224 native Q/K/V/outpu
 
 ## Distilled ordinary LoRAs
 
-Download the files from [distilled/comfyui](https://huggingface.co/ntc-ai/anima-concept-sliders/tree/main/distilled/comfyui), give them distinct local names such as `candlelit-distilled.safetensors`, and place them in `ComfyUI/models/loras/`.
+Download the files from [distilled/comfyui](https://huggingface.co/ntc-ai/anima-particle-sliders/tree/main/distilled/comfyui), give them distinct local names such as `candlelit-distilled.safetensors`, and place them in `ComfyUI/models/loras/`.
 
 Select the current **`*-unit-alpha.safetensors`** files. Bad Intent uses alpha 24;
 Candlelit uses 16 and Moonlit 23.08072421821097. The older filenames retain the
