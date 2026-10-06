@@ -2,7 +2,7 @@
   "passed": true,
   "historical": true,
   "note": "Archived extraction check. The current pin is core.lock.json (particle-sliders-core). This file is not the source of truth.",
-  "core_repository": "https://github.com/mikkel/sliders-conceptmod",
+  "core_repository": "https://github.com/HyperGAN/particle-sliders",
   "core_commit": "beaffeb3640c4554a7315998c04a5909f384b972",
   "core_package_version": "0.1.0",
   "anima_tests": 76,
