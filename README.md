@@ -2,6 +2,11 @@
 
 **Bad Intent, Final Form, Afterimage, Moonlit, Candlelit, Dusk for Anima Turbo v1.1.** Original Particle adapters and ordinary LoRA Distills, with strength stored in each file’s alpha.
 
+The explicit new PG0.9 training API and its CPU qualification are documented
+in [PG09_TRAINING.md](PG09_TRAINING.md). Existing reproduction and Studio
+training commands retain historical CPU fixtures; native training through
+those paths is disabled. They do not execute PG0.9.
+
 ## Samples
 
 **Start at strength 1.0.** Every current comparison is **Particle 1 → Distill 1 → Off 0**, with the same prompt, seed, 768 × 768 resolution, 10 Euler steps and CFG 1. These are newly rendered examples from the calibrated files linked below.

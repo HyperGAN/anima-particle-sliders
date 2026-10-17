@@ -79,7 +79,7 @@ def test_mixer_zero_sum_order_export_reload(tiny, tmp_path):
 def test_frozen_base_and_exact_resume(tiny, tmp_path):
     cache = tiny_cache(tmp_path / "cache", tiny)
     before = copy.deepcopy(tiny.transformer.state_dict())
-    trainer = Trainer(tiny, cache, tmp_path / "run", "candlelit")
+    trainer = Trainer(tiny, cache, tmp_path / "run", "candlelit", legacy_cpu_fixture=True)
     for _ in range(4):
         trainer.update()
     trainer.save()
@@ -91,7 +91,7 @@ def test_frozen_base_and_exact_resume(tiny, tmp_path):
     assert expected_log["particle_gan_grad_norm"] > 0
     assert expected_log["d_rows"] != expected_log["g_rows"]
     other = TinyRuntime()
-    resumed = Trainer(other, cache, tmp_path / "run", "candlelit")
+    resumed = Trainer(other, cache, tmp_path / "run", "candlelit", legacy_cpu_fixture=True)
     actual_log = resumed.update()
     assert actual_log["d_rows"] == expected_log["d_rows"]
     assert actual_log["g_rows"] == expected_log["g_rows"]
@@ -105,7 +105,7 @@ def test_microbatch_update_parity(tmp_path):
     for micro in (1, 2, 4, 8):
         runtime = TinyRuntime()
         cache = tiny_cache(tmp_path / f"cache{micro}", runtime)
-        trainer = Trainer(runtime, cache, tmp_path / f"run{micro}", "candlelit", microbatch=micro)
+        trainer = Trainer(runtime, cache, tmp_path / f"run{micro}", "candlelit", microbatch=micro, legacy_cpu_fixture=True)
         for _ in range(4):
             trainer.update()
         states.append(copy.deepcopy(trainer.adapter.state_dict()))
@@ -238,7 +238,7 @@ def test_training_noise_follows_stamp_hold():
 def test_resume_verifier_checks_active_cap_and_studio_all_timesteps(tiny, tmp_path):
     import json
     cache = tiny_cache(tmp_path / 'cache', tiny)
-    trainer = Trainer(tiny, cache, tmp_path / 'run', 'candlelit')
+    trainer = Trainer(tiny, cache, tmp_path / 'run', 'candlelit', legacy_cpu_fixture=True)
     for _ in range(3):
         trainer.update()
     expected = copy.deepcopy(trainer.adapter.state_dict())
