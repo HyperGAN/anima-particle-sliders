@@ -2,6 +2,7 @@
 from copy import deepcopy
 from importlib.metadata import version
 import json
+import os
 from types import SimpleNamespace
 
 import pytest
@@ -166,12 +167,11 @@ def test_cache_features_native_geometry_and_training_only(tmp_path):
     # change the frozen field or its conditions.
     cache.shards['0.pt']['records'][0]['positive'] = cache[0]['positive'].flatten(1)
     assert CachedResponses(cache, runtime, 'finalform').response_shape == (1, 4, 1, 2, 2)
-    provider.cache.shards['0.pt']['records'][0]['positive'] = provider.cache[0]['positive'].flatten(1)
-    with pytest.raises(ValueError, match='native'):
-        provider[0]
-    provider.cache.offsets.reverse()
-    with pytest.raises(ValueError, match='record ordering'):
-        provider.conditions(torch.tensor([0]))
+    snapshot = provider.cache
+    snapshot.shards['0.pt']['records'][0]['positive'] = snapshot[0]['positive'].flatten(1)
+    snapshot.offsets.reverse()
+    assert provider[0].target.shape == (1, 4, 1, 2, 2)
+    assert torch.equal(conditions, provider.conditions(torch.tensor([0, 1])))
     runtime.mixer.close()
 
 
@@ -236,3 +236,151 @@ def test_external_native_admission_requires_exact_teacher_parity(tmp_path):
     proof = json.loads((tmp_path / 'pg09-admission.json').read_text())
     assert proof['external_admission'] and proof['cache_fingerprint'] == 'a' * 64
     assert not torch.cuda.is_initialized()
+
+
+def test_public_cache_snapshots_cannot_mutate_the_frozen_response_law(tmp_path):
+    runtime = runtime_fixture()
+    cache = cache_fixture(tmp_path / 'cache', runtime)
+    trainer = PG09Trainer(runtime, cache, tmp_path / 'run', 'finalform', total_steps=2, critic_width=8)
+    provider = trainer.responses
+    original = provider[0]
+    original_conditions = provider.conditions(torch.tensor([0, 1]))
+    original_identity = provider.identity()
+    for snapshot in (provider.cache, trainer.cache, cache):
+        snapshot[0]
+        snapshot.shards['0.pt']['records'][0]['positive'].add_(10.)
+        snapshot.shards['0.pt']['embedding'].mul_(0.)
+        snapshot.index['fingerprint'] = 'c' * 64
+        snapshot.offsets.reverse()
+        snapshot.max_shards = 999
+        snapshot.shards.clear()
+    assert torch.equal(original.target, provider[0].target)
+    assert torch.equal(original.row.neutral, provider[0].row.neutral)
+    assert torch.equal(original_conditions, provider.conditions(torch.tensor([0, 1])))
+    assert provider.identity() == original_identity
+    assert provider.cache is not trainer.cache
+    assert provider.cache.max_shards == 4
+    trainer.close()
+    runtime.mixer.close()
+
+
+@pytest.mark.parametrize('state', ['resident', 'evicted', 'unloaded'])
+@pytest.mark.parametrize('mutation', ['replacement', 'same_inode_same_size', 'deleted'])
+@pytest.mark.parametrize('access', ['response', 'conditions'])
+def test_selected_shard_changes_fail_without_changing_frozen_identity(tmp_path, state, mutation, access):
+    runtime = runtime_fixture()
+    cache = cache_fixture(tmp_path / 'cache', runtime)
+    cache.max_shards = 1
+    provider = CachedResponses(cache, runtime, 'finalform')
+    selected = 1 if state == 'unloaded' else 0
+    if state == 'evicted':
+        provider[1]
+        assert '0.pt' not in provider.cache.shards
+    original_identity = provider.identity()
+    path = tmp_path / 'cache' / f'{selected}.pt'
+    before = path.stat()
+    if mutation == 'deleted':
+        path.unlink()
+    else:
+        data = torch.load(path, map_location='cpu', weights_only=True)
+        old_shape, old_fingerprint = data['records'][0]['positive'].shape, data['fingerprint']
+        data['records'][0]['positive'].add_(1.)
+        if mutation == 'replacement':
+            save_tensor_file(path, data)
+        else:
+            torch.save(data, path)
+            assert path.stat().st_ino == before.st_ino
+            assert path.stat().st_size == before.st_size
+            os.utime(path, ns=(before.st_atime_ns, before.st_mtime_ns))
+        actual = torch.load(path, weights_only=True)
+        assert actual['fingerprint'] == old_fingerprint and actual['records'][0]['positive'].shape == old_shape
+    with pytest.raises(ValueError, match='PG09 frozen target shard'):
+        if access == 'response':
+            provider[selected]
+        else:
+            provider.conditions(torch.tensor([selected]))
+    assert provider.identity() == original_identity
+    assert len(provider.cache.shards) <= 1
+    runtime.mixer.close()
+
+
+def test_lazy_loading_hashes_only_misses_and_preserves_bounded_lru(tmp_path, monkeypatch):
+    runtime = runtime_fixture()
+    cache = cache_fixture(tmp_path / 'cache', runtime)
+    cache.max_shards = 1
+    provider = CachedResponses(cache, runtime, 'finalform')
+    calls = []
+    original_hash = provider._hash_open_file
+    def counted(file):
+        calls.append(file.name)
+        return original_hash(file)
+    monkeypatch.setattr(provider, '_hash_open_file', counted)
+    provider[0]
+    provider.conditions(torch.tensor([0, 0]))
+    assert calls == []
+    provider[1]
+    provider.conditions(torch.tensor([1]))
+    assert len(calls) == 1 and list(provider.cache.shards) == ['1.pt']
+    provider[0]
+    assert len(calls) == 2 and list(provider.cache.shards) == ['0.pt']
+    runtime.mixer.close()
+
+
+def test_runtime_mutations_fail_but_returned_identity_snapshot_is_isolated(tmp_path):
+    runtime = runtime_fixture()
+    runtime.identity['nested'] = dict(weights=['verified'])
+    cache = cache_fixture(tmp_path / 'cache', runtime)
+    provider = CachedResponses(cache, runtime, 'finalform')
+    identity = provider.identity()
+    conditions = provider.conditions(torch.tensor([0, 1]))
+    identity['runtime']['nested']['weights'][0] = 'changed-snapshot'
+    assert provider.identity()['runtime']['nested']['weights'] == ['verified']
+    assert torch.equal(provider.conditions(torch.tensor([0, 1])), conditions)
+    runtime.identity['nested']['weights'][0] = 'mutated'
+    for read in (provider.identity, lambda: provider[0], lambda: provider.conditions(torch.tensor([0]))):
+        with pytest.raises(ValueError, match='runtime identity or native timestep scale changed'):
+            read()
+    runtime.identity['nested']['weights'][0] = 'verified'
+    runtime.pipe.scheduler.config.num_train_timesteps = 1
+    for read in (provider.identity, lambda: provider[0], lambda: provider.conditions(torch.tensor([0]))):
+        with pytest.raises(ValueError, match='runtime identity or native timestep scale changed'):
+            read()
+    runtime.mixer.close()
+
+
+def test_shard_replaced_during_initial_hash_is_not_adopted_as_verified(tmp_path, monkeypatch):
+    runtime = runtime_fixture()
+    cache = cache_fixture(tmp_path / 'cache', runtime)
+    original_hash = CachedResponses._hash_open_file
+    def replace_after_hash(file):
+        result = original_hash(file)
+        path = tmp_path / 'cache/0.pt'
+        if str(file.name) == str(path):
+            data = torch.load(path, weights_only=True)
+            data['records'][0]['positive'].add_(3.)
+            save_tensor_file(path, data)
+        return result
+    monkeypatch.setattr(CachedResponses, '_hash_open_file', staticmethod(replace_after_hash))
+    with pytest.raises(ValueError, match='changed during verification'):
+        CachedResponses(cache, runtime, 'finalform')
+    runtime.mixer.close()
+
+
+def test_shard_replaced_during_lazy_load_is_rejected_before_lru_commit(tmp_path, monkeypatch):
+    runtime = runtime_fixture()
+    cache = cache_fixture(tmp_path / 'cache', runtime)
+    provider = CachedResponses(cache, runtime, 'finalform')
+    path = tmp_path / 'cache/1.pt'
+    original_load = torch.load
+    def replace_after_load(file, *args, **kwargs):
+        data = original_load(file, *args, **kwargs)
+        if getattr(file, 'name', None) == str(path):
+            replacement = deepcopy(data)
+            replacement['records'][0]['positive'].add_(3.)
+            save_tensor_file(path, replacement)
+        return data
+    monkeypatch.setattr(torch, 'load', replace_after_load)
+    with pytest.raises(ValueError, match='PG09 frozen target shard changed'):
+        provider[1]
+    assert '1.pt' not in provider.cache.shards
+    runtime.mixer.close()

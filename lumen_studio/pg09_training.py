@@ -5,6 +5,9 @@ adapter. The installed particle_sliders package owns every GAN update,
 optimizer, constraint, sampler and resumable training packet.
 """
 from copy import deepcopy
+import hashlib
+import math
+import os
 from pathlib import Path
 
 import torch
@@ -31,55 +34,135 @@ class CachedResponses:
 
     def __init__(self, cache, runtime, variation):
         self.runtime = runtime
-        identity = cache.index['identity']
+        runtime_identity = deepcopy(runtime.identity)
+        self._num_train_timesteps = float(runtime.pipe.scheduler.config.num_train_timesteps)
+        if not math.isfinite(self._num_train_timesteps) or self._num_train_timesteps <= 0:
+            raise ValueError('PG09 requires a finite positive native timestep scale')
+        approved_index = deepcopy(cache.index)
+        identity = approved_index['identity']
         if identity.get('split') != 'train' or identity.get('variation') != variation:
             raise ValueError('PG09 requires the matching training cache')
         if len(cache) < 2:
             raise ValueError('PG09 requires at least two frozen response rows')
         self.compatibility = cache_runtime_compatibility(
-            getattr(runtime, 'model_dir', None), identity['model'], runtime.identity,
-            cache.index['fingerprint'])
+            getattr(runtime, 'model_dir', None), identity['model'], runtime_identity,
+            approved_index['fingerprint'])
         # TargetCache historically trusts its path strings. Resolve and contain
         # every path before reading bytes, including symlinks and absolute paths.
         root = cache.directory.resolve()
-        for shard in cache.index['shards']:
+        self._shard_files = {}
+        for shard in approved_index['shards']:
             relative = Path(shard['path'])
             path = (root / relative).resolve()
             if relative.is_absolute() or '..' in relative.parts or not path.is_relative_to(root):
                 raise ValueError('PG09 target shard path escapes the cache directory')
-            if file_hash(path) != shard['sha256']:
-                raise ValueError('Corrupt PG09 target shard: ' + shard['path'])
+            with path.open('rb') as file:
+                before = self._file_identity(os.fstat(file.fileno()))
+                if (root / relative).resolve() != path or self._file_identity(path.stat()) != before:
+                    raise ValueError('PG09 target shard changed during verification: ' + shard['path'])
+                if self._hash_open_file(file) != shard['sha256']:
+                    raise ValueError('Corrupt PG09 target shard: ' + shard['path'])
+                if (self._file_identity(os.fstat(file.fileno())) != before
+                        or (root / relative).resolve() != path or self._file_identity(path.stat()) != before):
+                    raise ValueError('PG09 target shard changed during verification: ' + shard['path'])
+            self._shard_files[shard['path']] = dict(path=path, stat=before, sha256=shard['sha256'])
         # Own a private verified reader. A caller changing its mutable cached
         # records/offsets/index cannot silently change this game's frozen law.
-        self.cache = TargetCache(root, verify=True, max_shards=cache.max_shards)
-        if self.cache.index != cache.index:
+        if type(cache.max_shards) is not int or cache.max_shards < 1:
+            raise ValueError('PG09 cache requires a positive bounded shard capacity')
+        self._cache = TargetCache(root, verify=False, max_shards=cache.max_shards)
+        if self._cache.index != approved_index:
             raise ValueError('PG09 target cache index differs from its committed bytes')
-        self._index = deepcopy(self.cache.index)
-        self._offsets = deepcopy(self.cache.offsets)
+        self._index = deepcopy(self._cache.index)
+        self._offsets = deepcopy(self._cache.offsets)
         if 'input_fingerprint' in self._index:
             input_hash = digest(self._index['identity'])
             if (input_hash != self._index['input_fingerprint']
                     or digest(dict(input=input_hash, shards=self._index['shards'])) != self._index['fingerprint']):
                 raise ValueError('PG09 target index fingerprint differs from its shard manifest')
         self._identity = dict(schema='anima-pg09-cache-v1', index=deepcopy(self._index),
-            runtime=deepcopy(runtime.identity), teacher_runtime_compatibility=self.compatibility,
+            runtime=runtime_identity, teacher_runtime_compatibility=self.compatibility,
+            native_timestep_scale=self._num_train_timesteps,
             cache_implementation_sha256=file_hash(Path(__file__).with_name('cache.py')),
             condition_features='mean-neutral-embedding,time,position,trajectory,scale+1')
-        record = self.cache[0]
+        record = self._read_record(0)
         self.response_shape = tuple(record['positive'].shape)
         self.embedding_width = int(record['embedding'].shape[-1])
         self._validate(record)
 
     def __len__(self):
-        return len(self.cache)
+        return len(self._offsets)
+
+    @property
+    def cache(self):
+        """Detached diagnostic snapshot; never expose the mutable live reader."""
+        self._guard_index()
+        return deepcopy(self._cache)
 
     def identity(self):
         self._guard_index()
         return deepcopy(self._identity)
 
     def _guard_index(self):
-        if self.cache.index != self._index or self.cache.offsets != self._offsets:
+        if self._cache.index != self._index or self._cache.offsets != self._offsets:
             raise ValueError('PG09 frozen cache identity or record ordering changed')
+        try:
+            runtime_changed = (self.runtime.identity != self._identity['runtime']
+                or float(self.runtime.pipe.scheduler.config.num_train_timesteps) != self._num_train_timesteps)
+        except (AttributeError, TypeError, ValueError) as exc:
+            raise ValueError('PG09 runtime identity or native timestep scale changed') from exc
+        if runtime_changed:
+            raise ValueError('PG09 runtime identity or native timestep scale changed')
+
+    @staticmethod
+    def _file_identity(stat):
+        return (stat.st_dev, stat.st_ino, stat.st_size, stat.st_mtime_ns, stat.st_ctime_ns)
+
+    @staticmethod
+    def _hash_open_file(file):
+        return hashlib.file_digest(file, 'sha256').hexdigest()
+
+    def _check_shard_file(self, key, file=None):
+        expected = self._shard_files[key]
+        named = self._cache.directory / key
+        try:
+            if named.resolve() != expected['path'] or self._file_identity(named.stat()) != expected['stat']:
+                raise ValueError('PG09 frozen target shard changed: ' + key)
+            if file is not None and self._file_identity(os.fstat(file.fileno())) != expected['stat']:
+                raise ValueError('PG09 frozen target shard changed: ' + key)
+        except OSError as exc:
+            raise ValueError('PG09 frozen target shard unavailable or changed: ' + key) from exc
+        return expected['path']
+
+    def _read_record(self, index):
+        self._guard_index()
+        shard, position = self._offsets[index]
+        key = shard['path']
+        path = self._check_shard_file(key)
+        if key not in self._cache.shards:
+            try:
+                with path.open('rb') as file:
+                    self._check_shard_file(key, file)
+                    if self._hash_open_file(file) != self._shard_files[key]['sha256']:
+                        raise ValueError('Corrupt PG09 target shard: ' + key)
+                    self._check_shard_file(key, file)
+                    file.seek(0)
+                    data = torch.load(file, map_location='cpu', weights_only=True)
+                    self._check_shard_file(key, file)
+                self._check_shard_file(key)
+            except OSError as exc:
+                raise ValueError('PG09 frozen target shard unavailable or changed: ' + key) from exc
+            if data['fingerprint'] != self._index.get('input_fingerprint', self._index['fingerprint']):
+                raise ValueError('Shard identity differs from frozen PG09 cache')
+            self._cache.shards[key] = data
+            if len(self._cache.shards) > self._cache.max_shards:
+                self._cache.shards.popitem(last=False)
+        self._cache.shards.move_to_end(key)
+        data = self._cache.shards[key]
+        record = {**data['records'][position], 'embedding': data['embedding'],
+                  'row': data['row'], 'seed': data['seed']}
+        self._check_shard_file(key)
+        return record
 
     def _validate(self, record):
         if len(self.response_shape) != 5 or self.response_shape[0] != 1 or self.response_shape[2] != 1:
@@ -100,11 +183,10 @@ class CachedResponses:
             raise ValueError('PG09 cache path or denoise position is invalid')
 
     def _time_scale(self):
-        return float(self.runtime.pipe.scheduler.config.num_train_timesteps)
+        return self._num_train_timesteps
 
     def __getitem__(self, index):
-        self._guard_index()
-        record = self.cache[index]
+        record = self._read_record(index)
         self._validate(record)
         device = self.runtime.device
         clone = lambda value: value.detach().to(device=device).clone()
@@ -116,10 +198,9 @@ class CachedResponses:
         return PreparedResponse(row, clone(record['positive']), clone(record['neutral']))
 
     def conditions(self, indices):
-        self._guard_index()
         values = []
         for index in indices.tolist():
-            record = self.cache[index]
+            record = self._read_record(index)
             self._validate(record)
             context = record['embedding'].float().mean(dim=1).squeeze(0)
             extra = context.new_tensor([float(record['timestep']) / self._time_scale(),
@@ -162,7 +243,6 @@ class PG09Trainer:
         self.runtime, self.variation = runtime, variation
         self.directory = Path(directory)
         self.responses = CachedResponses(cache, runtime, variation)
-        self.cache = self.responses.cache
         self._frozen_identity = self.responses.identity()
         self._native_admission, self._native_admitted = native_admission, False
         if runtime.device.type != 'cpu' and not callable(native_admission):
@@ -193,6 +273,10 @@ class PG09Trainer:
     @property
     def step(self):
         return self.game.completed_steps
+
+    @property
+    def cache(self):
+        return self.responses.cache
 
     def update(self):
         self._admit_native_update()
