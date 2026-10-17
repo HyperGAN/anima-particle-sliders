@@ -10,6 +10,7 @@ from safetensors.torch import load_file, save_file
 from particle_sliders import winning_formulation
 
 from .contracts import canonical, digest, file_hash, normalized_strengths
+from .checkpoint_validation import validated_tensor_state
 
 FORMAT = "anima-turbo-routed-particles-v1"
 ARCHITECTURE = dict(rank=8, particles=128, particle_dim=4, router_width=16, branch_width=48,
@@ -75,7 +76,8 @@ class ParticleAdapter(nn.Module):
         from .provenance import checkpoint_identity_accepted
         if not checkpoint_identity_accepted(meta["model_identity"], model_identity):
             raise ValueError("Checkpoint belongs to a different model runtime")
-        self.load_state_dict(load_file(str(path)), strict=True)
+        state = validated_tensor_state(load_file(str(path)), self.state_dict())
+        self.load_state_dict(state, strict=True)
         return meta
 
 

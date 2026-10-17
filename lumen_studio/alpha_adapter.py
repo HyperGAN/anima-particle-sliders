@@ -13,6 +13,7 @@ from safetensors import safe_open
 from safetensors.torch import load_file, save_file
 
 from .contracts import canonical, file_hash
+from .checkpoint_validation import validated_tensor_state
 from .particles import ARCHITECTURE, FORMAT, ParticleAdapter
 
 ALPHA_FORMAT = "anima-turbo-routed-particles-alpha-v2"
@@ -29,6 +30,10 @@ def alpha_values(metadata, state):
         raise ValueError("Unsupported adapter alpha format")
     if metadata.get("architecture") != ARCHITECTURE:
         raise ValueError("Incompatible particle architecture")
+    network_alpha = metadata.get("network_alpha")
+    if (isinstance(network_alpha, bool) or not isinstance(network_alpha, (int, float))
+            or not math.isfinite(network_alpha) or network_alpha <= 0):
+        raise ValueError("Network alpha must be finite and positive")
     names = metadata["targets"]
     expected = {f"branches.{i}.alpha" for i in range(len(names))}
     if {k for k in state if k.endswith(".alpha")} != expected:
@@ -100,8 +105,9 @@ class AlphaParticleAdapter(ParticleAdapter):
                 metadata.get("model_identity"), model_identity):
             raise ValueError("Alpha checkpoint targets or model runtime differ")
         state = load_file(str(path))
+        weights = validated_tensor_state(state, self.state_dict(),
+            scalar_keys=[f"branches.{i}.alpha" for i in range(len(self.branches))])
         alphas = alpha_values(metadata, state)
-        weights = {k: v for k, v in state.items() if not k.endswith(".alpha")}
         self.load_state_dict(weights, strict=True)
         self.alphas = alphas
         return metadata
