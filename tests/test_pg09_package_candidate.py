@@ -11,7 +11,10 @@ ROOT = Path(__file__).resolve().parents[1]
 def test_immutable_candidate_lock_matches_optional_requirements():
     lock = json.loads((ROOT / 'core.pg09.lock.json').read_text())
     requirements = (ROOT / 'requirements-pg09.txt').read_text()
-    assert lock['status'] == 'PROPOSED_NOT_ADA_APPROVED_OR_MERGED'
+    assert lock['status'] == 'REVIEW_PENDING_PUBLICATION_HOLD_RUNTIME_UNQUALIFIED'
+    assert lock['code_review']['approval_claimed'] is False
+    assert lock['package_availability']['publication_status'] == 'HOLD_UNRESOLVED'
+    assert lock['runtime_qualification']['status'] == 'NOT_PERFORMED_OR_ADMITTED'
     assert not lock['native_adoption']
     assert len(lock['commit']) == 40
     assert f"particle-sliders-core=={lock['version']} --hash=sha256:{lock['wheel_sha256']}" in requirements

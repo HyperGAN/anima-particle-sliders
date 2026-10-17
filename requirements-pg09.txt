@@ -1,5 +1,7 @@
-# Proposed immutable candidate cdfb80a76b882b4b73861b12f555263bd64ffeb7; not Ada-approved or merged.
-# Install only in a new isolated environment with runtime dependencies already supplied:
+# Exact local CDF wheel candidate cdfb80a76b882b4b73861b12f555263bd64ffeb7 exists; public source is a draft.
+# Product code review and exact installable-dependency review are pending; publication/adoption hold is unresolved.
+# Clean main-based shared reconstruction remains publication-blocked. Native runtime/cache qualification is not performed or admitted.
+# These hashes support isolated CPU review only; do not retarget an active environment or old cohort.
 # python -m pip install --no-index --find-links <verified-wheelhouse> --no-deps --require-hashes --force-reinstall --report <new-env>/pg09-install-report.json -r requirements-pg09.txt
 particlegan==0.9.1 --hash=sha256:b01b7957169cb3de45887e22b4d525fd54071577e1de58089707cf05fe6992ec
 particle-sliders-core==0.6.0 --hash=sha256:4abc83988fdeb6d7478de830e7ee8ec5d9bd99c20d52f89e4ce594d50dfd39a3

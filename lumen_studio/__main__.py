@@ -38,6 +38,9 @@ def main():
     bench.add_argument("variation", choices=VARIATIONS)
     bench.add_argument("--gpu", default="1")
     args = parser.parse_args()
+    if args.command in ("train", "benchmark"):
+        from .training_policy import legacy_training_unavailable
+        legacy_training_unavailable(f"Studio {args.command} CLI")
     root = args.root.resolve()
     root.mkdir(parents=True, exist_ok=True)
     if args.command == "prepare-model":
@@ -102,26 +105,7 @@ def main():
                 print(json.dumps(index, default=str))
             finally:
                 runtime.close()
-    elif args.command == "train":
-        from .store import Store
-        store = Store(root / "studio/studio.sqlite3")
-        config = dict(variation=args.variation, until=args.until, seed=args.seed, microbatch=args.microbatch,
-            checkpointing=args.checkpointing,
-            directory=str(root / "runs" / args.variation),
-            train_cache=str(root / "targets" / args.variation / "train"),
-            dev_cache=str(root / "targets" / args.variation / "dev"))
-        for name in ("train_cache", "dev_cache"):
-            if not (Path(config[name]) / "index.json").exists():
-                raise ValueError(f"Prepare {name} first")
-        if args.until == 1600:
-            from .audits import require_pilot_qualification
-            require_pilot_qualification(config["directory"])
-        store.add_run(f"{args.variation}-{args.until}", config)
-        print(f"Queued {args.variation} through update {args.until}; start the coordinator with worker")
-    elif args.command == "benchmark":
-        os.environ["CUDA_VISIBLE_DEVICES"] = args.gpu
-        from .benchmark import benchmark
-        print(json.dumps(benchmark(root, args.variation, args.gpu), indent=2))
+
 
 
 if __name__ == "__main__":

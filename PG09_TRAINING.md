@@ -6,9 +6,14 @@ executes `particle_sliders.pg09.ConditionalPG09` with the public
 The product contains no PG0.9 loss, optimizer, constraint or sampler copy.
 ParticleGAN must match the exact version and verified source profile required
 by the proposed installed shared package. `core.pg09.lock.json` binds the
-final frozen 0.6.0 candidate at commit
+available local frozen 0.6.0 candidate at commit
 `cdfb80a76b882b4b73861b12f555263bd64ffeb7` and official PG0.9.1.
-This candidate is not Ada-approved or merged. Existing admitted PG0.9.0
+Product code review is pending after Ada withheld clearance on the previous
+`b8572b3` head. The exact local wheel exists and its source is a public draft;
+shared publication/adoption is still on hold, and the clean main-based
+reconstruction remains publication-blocked. Review of the exact installable
+dependency remains required. Native runtime/cache qualification has not been
+performed or admitted. These are separate gates. Existing admitted PG0.9.0
 cohorts are a separate source lineage; this proposal does not retarget them
 and does not support PG0.10.
 Its source is staged on the public `audit/shared-core-contracts-20261017` branch.
@@ -31,7 +36,9 @@ Keep the installation report in the new environment prefix. Version-and-hash
 wheelhouse installs may omit `direct_url.json`; the source-free provenance test
 accepts the report's exact archive hashes alongside installed source hashes.
 
-Release artifact publication, Ada approval and coordinator-owned native
+The lock records code review, package availability/publication and runtime
+qualification separately; no field claims approval. Release artifact
+publication/adoption, fresh Ada review and coordinator-owned native
 qualification remain gates. The historical `requirements.txt` and
 `core.lock.json` retain the earlier 0.3.0 reproduction dependency, which does
 not supply this PG09 API. Do not install both dependency selections together.
@@ -95,8 +102,9 @@ selected weights.
 | Entry | Executed implementation | Status |
 | --- | --- | --- |
 | `lumen_studio.pg09_training.PG09Trainer` | installed `ConditionalPG09`, native product adapter | new PG0.9 path |
-| `release_tools/train.py`, Studio `Coordinator.train_quantum`, `python -m lumen_studio train`, `scripts/anima_campaign.py` | archived `Trainer` and handwritten stamp `Game` | historical gmix reproduction; not PG0.9 |
-| `benchmark.py`, `preflight.py`, `convergence.py`, `scripts/anima_verify_update.py` | archived game/reference probes | historical diagnostics; not PG0.9 |
+| `release_tools/train.py`, Studio `Coordinator.train_quantum`, `python -m lumen_studio train`, `scripts/anima_campaign.py` | early unsupported-legacy refusal | no runtime load, target preparation or legacy optimizer dispatch |
+| `benchmark.py`, `preflight.py` | early unsupported-legacy refusal | no runtime/cache work or reuse of historical proof |
+| `convergence.py`, `scripts/anima_verify_update.py` | archived game/reference probes | historical diagnostics; not PG0.9 |
 | `release_tools/distill.py`, `prepare_expansion.py` | shared closed-form `fit_routed_down` | ordinary LoRA approximation; not slider GAN training |
 | Studio render, `release_tools/infer.py`, Comfy particle node | selected native/alpha/single particle or native LoRA file | inference only |
 
@@ -105,10 +113,10 @@ the callable entrypoints they reach at the audited product base `36ad1267`:
 
 | Files or routes | Training/inference behavior and disposition |
 | --- | --- |
-| `lumen_studio/__main__.py` `train`, `worker`; `api.py` `/api/training/runs`; `coordinator.py` `train_quantum` | queue/execute archived `training.Trainer` and `game.Game`; legacy gmix only |
-| `scripts/anima_campaign.py` | target preparation and archived coordinator training; legacy gmix only |
-| `release_tools/train.py` | archived release recipe, explicit Final Form/Afterimage/Dusk manifest dispatch; legacy gmix only |
-| `lumen_studio/benchmark.py`, `preflight.py` | archived Trainer update/resume/performance probes; legacy gmix only |
+| `lumen_studio/__main__.py` `train`, `worker`; `api.py` `/api/training/runs`; `coordinator.py` `train_quantum` | training CLI/API refuse before cache checks or queue writes; worker fails old queued/recovered runs before memory checks, retaining inference |
+| `scripts/anima_campaign.py` | refuses after argument parsing, before target preparation, device changes or worker launch |
+| `release_tools/train.py` | refuses after argument parsing, before manifest dispatch, runtime loading or target preparation |
+| `lumen_studio/benchmark.py`, `preflight.py` | unsupported historical diagnostics refuse before cache/proof reads, file changes, memory probes or native runtime imports |
 | `lumen_studio/convergence.py` `response_step`; `scripts/anima_verify_update.py` | historical separate D/G/VIC/reference update diagnostics; no PG0.9 claim |
 | `scripts/anima_verify_reference.py`, `anima_verify_normalization.py`, `anima_probe_training.py` | archived source, normalization and selected-EMA residual diagnostics; no new optimizer path |
 | `lumen_studio/__main__.py` `serve`, `references`, `cache`, `compile`, `prepare-model`; `runtime.py` `create_runtime`; `cache.py` `prepare_targets` | API serving, queueing, frozen target preparation or official model conversion; no GAN update |
@@ -147,16 +155,30 @@ names describe Anima-derived prompts, but they execute MOSS
 `moss_sliders.training.train_step`; their paired monitor scripts launch those
 MOSS pilots. They were read only and are not Anima runtime evidence.
 
-Historical Game helpers remain available only with `legacy_cpu_fixture=True`
-on a CPU runtime. Default execution through the old Trainer fails before
-Trainer allocation or any historical optimizer update, and CUDA is always refused even with that fixture flag, so
-CLI, release and coordinator wrappers cannot optimize the historical gmix
-objective on a live runtime. Previously trained caches and checkpoints are
-read-only inputs; they are not resumed under the new PG0.9 objective. Old CLI wrappers may load a model or prepare caches before reaching Trainer;
-this guard is not an admission or GPU dispatch mechanism. New coordinator
-routing must select this explicit callable after admission; it is not enabled in a resident service.
+The historical Trainer remains available only with `legacy_cpu_fixture=True`
+on a CPU runtime. Default execution through the old Trainer fails before Trainer allocation.
+Production legacy training wrappers now refuse earlier: CLI/campaign/release
+commands stop immediately after parsing, benchmark/preflight callables stop
+before any filesystem/device/cache work, and `train_quantum` stops before
+releasing an inference runtime. The training API returns HTTP 409 before
+cache checks or queue writes. Under its normal ownership lease the worker
+marks old queued/recovered legacy runs failed at their stored steps before
+scheduling or memory checks, and continues image work.
+
+The legacy EMA/pilot/microbatch/resume protocols are unsupported by PG09.
+Renaming those wrappers would not establish new source-bound cache identity,
+checkpoint semantics or native admission, and the package publication hold
+prevents automatic adoption. The supported explicit `PG09Trainer` callable
+executes the installed shared package; coordinator routing must select it
+only after the separate gates above are resolved. No resident service route
+is enabled by this proposal.
 
 ## CPU qualification and remaining gates
+
+The dispatch-order repair passed 16 real entrypoint tests, six installed-wheel
+PG09/native-bank/Trainer-guard checks, and the existing target/render handoff
+test. Its API test invokes the actual endpoint and HTTP 409 handler directly;
+the separately reproduced main/PR4 TestClient stall is not a passing suite claim.
 
 ```bash
 CUDA_VISIBLE_DEVICES='' PYTHONDONTWRITEBYTECODE=1 \
@@ -165,6 +187,7 @@ PYTHONPATH=. /path/to/new-wheel-env/bin/python -m pytest \
   tests/test_pg09_package_candidate.py \
   tests/lumen_studio/test_pg09_training.py::test_native_bank_shared_pg09_exact_resume_and_inference_export \
   tests/lumen_studio/test_pg09_consumer_history.py \
+  tests/lumen_studio/test_legacy_dispatch_ordering.py \
   -q -o pythonpath='' -p no:cacheprovider
 ```
 

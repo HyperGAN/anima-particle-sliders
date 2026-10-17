@@ -1,6 +1,6 @@
 {
   "schema": "anima-pg09-package-candidate-v1",
-  "status": "PROPOSED_NOT_ADA_APPROVED_OR_MERGED",
+  "status": "REVIEW_PENDING_PUBLICATION_HOLD_RUNTIME_UNQUALIFIED",
   "repository": "https://github.com/HyperGAN/particle-sliders",
   "commit": "cdfb80a76b882b4b73861b12f555263bd64ffeb7",
   "subdirectory": "packages/particle-sliders-core",
@@ -27,6 +27,26 @@
     "particle_sliders._training": "0a5802997adec58998beb6598861f6a0f0aa1245a10053666e16300b67d3bc44"
   },
   "native_adoption": false,
-  "notes": "Exact proposed wheel identity only. Legacy requirements.txt/core.lock.json remain historical. Parent/Ada approval, publication and new native source/cache lineage remain gates; no active environment retarget.",
-  "supersedes": "4be0b5b29d2e2c741431f468d71ba8a7c884b724"
+  "notes": "Exact available local CDF candidate identity for isolated CPU review. Product code review, shared artifact publication/adoption and native runtime/cache qualification are separate pending gates. Legacy requirements.txt/core.lock.json remain historical; no native environment or old source-bound cohort retarget.",
+  "supersedes": "4be0b5b29d2e2c741431f468d71ba8a7c884b724",
+  "code_review": {
+    "status": "FRESH_EXACT_HEAD_REVIEW_REQUIRED",
+    "previous_reviewed_head": "b8572b3eb7e76f1d9e80b741809648692736b46f",
+    "previous_clearance": "WITHHELD_PENDING_DISPATCH_ORDER_REPAIR",
+    "approval_claimed": false
+  },
+  "package_availability": {
+    "status": "EXACT_LOCAL_FROZEN_WHEEL_AVAILABLE_PUBLIC_DRAFT_SOURCE",
+    "public_source_kind": "draft_candidate",
+    "public_source_ref": "audit/shared-core-contracts-20261017",
+    "publication_status": "HOLD_UNRESOLVED",
+    "clean_main_based_reconstruction": "PUBLICATION_BLOCKED",
+    "reviewed_installable_dependency": "PENDING_EXACT_ARTIFACT_REVIEW",
+    "notes": "Local CDF wheel and CPU receipts exist; they do not resolve publication/adoption approval."
+  },
+  "runtime_qualification": {
+    "status": "NOT_PERFORMED_OR_ADMITTED",
+    "active_environment_retargeted": false,
+    "teacher_cache_migration_approved": false
+  }
 }

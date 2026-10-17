@@ -3,9 +3,9 @@
 **Bad Intent, Final Form, Afterimage, Moonlit, Candlelit, Dusk for Anima Turbo v1.1.** Original Particle adapters and ordinary LoRA Distills, with strength stored in each file’s alpha.
 
 The explicit new PG0.9 training API and its CPU qualification are documented
-in [PG09_TRAINING.md](PG09_TRAINING.md). Existing reproduction and Studio
-training commands retain historical CPU fixtures; native training through
-those paths is disabled. They do not execute PG0.9. The optional hashed
+in [PG09_TRAINING.md](PG09_TRAINING.md). Archived reproduction and Studio
+training commands refuse before runtime or cache work. Historical Game
+helpers remain available for explicit CPU fixtures. The optional hashed
 `requirements-pg09.txt` selects the proposed 0.6.0/PG0.9.1 wheel pair;
 `core.pg09.lock.json` records its exact candidate commit and review status.
 
