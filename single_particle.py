@@ -6,10 +6,12 @@ from safetensors.torch import load_file,save_file
 try:
     from .lumen_studio.alpha_adapter import AlphaParticleAdapter,read_metadata
     from .lumen_studio.contracts import canonical,file_hash
+    from .lumen_studio.checkpoint_validation import validated_tensor_state
     from .lumen_studio.particles import ARCHITECTURE
 except ImportError:
     from lumen_studio.alpha_adapter import AlphaParticleAdapter,read_metadata
     from lumen_studio.contracts import canonical,file_hash
+    from lumen_studio.checkpoint_validation import validated_tensor_state
     from lumen_studio.particles import ARCHITECTURE
 
 ORIGINAL_FORMAT='anima-turbo-single-particle-alpha-v1'
@@ -60,6 +62,8 @@ class SingleParticleAdapter(AlphaParticleAdapter):
 
     def load_export(self,path,*,model_identity):
         metadata=read_metadata(path);state=load_file(str(path))
+        weights=validated_tensor_state(state,self.state_dict(),
+            scalar_keys=[f'branches.{i}.alpha' for i in range(len(self.branches))])
         alphas=alpha_values(metadata,state)
         try:
             from .lumen_studio.provenance import checkpoint_identity_accepted
@@ -67,7 +71,7 @@ class SingleParticleAdapter(AlphaParticleAdapter):
             from lumen_studio.provenance import checkpoint_identity_accepted
         if not checkpoint_identity_accepted(metadata.get('model_identity'), model_identity) or metadata.get('targets')!=self.names:
             raise ValueError('Checkpoint runtime or targets differ')
-        self.load_state_dict({k:v for k,v in state.items() if not k.endswith('.alpha')},strict=True)
+        self.load_state_dict(weights,strict=True)
         self.alphas=alphas
         return metadata
 

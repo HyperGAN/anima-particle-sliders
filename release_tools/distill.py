@@ -1,6 +1,7 @@
 """Fit ordinary rank-8 LoRAs to native particle branches on cached train activations."""
 import argparse
 import json
+import math
 from pathlib import Path
 import sys
 import os
@@ -10,6 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from lumen_studio import execution
 import torch
+from safetensors import safe_open
 from safetensors.torch import save_file, load_file
 from lumen_studio.backends.anima import TurboRuntime
 from lumen_studio.particles import ParticleAdapter
@@ -53,24 +55,61 @@ def save_loras(adapter, downs, output, variation, teacher):
 
 
 def attach_lora(transformer, path, strength):
+    if not math.isfinite(strength):
+        raise ValueError('LoRA strength must be finite')
+    with safe_open(str(path), framework='pt', device='cpu') as handle:
+        metadata = handle.metadata() or {}
+    if 'anima' in metadata or metadata.get('format', 'anima-distilled-rank8-v1') != 'anima-distilled-rank8-v1':
+        raise ValueError('Expected a native ordinary-LoRA checkpoint')
+    if 'format' in metadata and metadata.get('rank') != '8':
+        raise ValueError('Expected native rank-8 LoRA metadata')
     state = load_file(str(path))
     modules = dict(transformer.named_modules())
+    names = sorted(key.removesuffix('.lora_A.weight') for key in state if key.endswith('.lora_A.weight'))
+    if not names:
+        raise ValueError('Expected nonempty native LoRA A/B projection pairs')
+    expected = {name + suffix for name in names for suffix in ('.lora_A.weight', '.lora_B.weight')}
+    optional = {name + '.alpha' for name in names}
+    if not expected.issubset(state) or set(state) - expected - optional:
+        raise ValueError('Unmatched or unexpected native LoRA tensors')
+    # Validate every branch before installing any hook. A bad later projection
+    # must never leave the earlier projections active on the caller's model.
+    branches = []
+    for name in names:
+        module = modules.get(name)
+        down, up = state[name + '.lora_A.weight'], state[name + '.lora_B.weight']
+        if (down.ndim != 2 or up.ndim != 2 or down.shape[0] < 1 or up.shape[1] != down.shape[0]
+                or ('format' in metadata and down.shape[0] != 8)):
+            raise ValueError(f'Invalid native LoRA rank or matrices: {name}')
+        weight = getattr(module, 'weight', None)
+        if not isinstance(weight, torch.Tensor) or tuple(weight.shape) != (up.shape[0], down.shape[1]):
+            raise ValueError(f'Native LoRA target or projection shape differs: {name}')
+        if any(not value.is_floating_point() or not torch.isfinite(value).all() for value in (down, up)):
+            raise ValueError(f'Native LoRA matrices must be finite floating tensors: {name}')
+        alpha = state.get(name + '.alpha', torch.tensor(float(down.shape[0])))
+        if alpha.ndim != 0 or not alpha.is_floating_point() or not 0 < float(alpha) < math.inf:
+            raise ValueError('LoRA alpha must be a finite positive floating scalar')
+        scale = strength * float(alpha) / down.shape[0]
+        if not math.isfinite(scale):
+            raise ValueError('Effective LoRA scale must be finite')
+        down = down.to(device=weight.device, dtype=torch.float32)
+        up = up.to(device=weight.device, dtype=torch.float32)
+        if any(not torch.isfinite(value).all() for value in (down, up)):
+            raise ValueError(f'Native LoRA matrices must remain finite in FP32: {name}')
+        branches.append((module, down, up, scale))
     handles = []
-    for key in state:
-        if not key.endswith('.lora_A.weight'): continue
-        name = key.removesuffix('.lora_A.weight')
-        device=modules[name].weight.device
-        down, up = state[key].to(device), state[name+'.lora_B.weight'].to(device)
-        alpha = float(state.get(name+'.alpha', torch.tensor(down.shape[0])))
-        if not 0 < alpha < float('inf'):
-            raise ValueError('LoRA alpha must be finite and positive')
-        scale = strength * alpha / down.shape[0]
-        def hook(module,args,output,down=down,up=up,scale=scale):
-            if strength == 0: return output
-            x = args[0].float()
-            delta = (x @ down.to(x.device).T) @ up.to(x.device).T
-            return output + (scale * delta).to(output.dtype)
-        handles.append(modules[name].register_forward_hook(hook))
+    try:
+        for module, down, up, scale in branches:
+            def hook(module,args,output,down=down,up=up,scale=scale):
+                if strength == 0: return output
+                x = args[0].float()
+                delta = (x @ down.to(x.device).T) @ up.to(x.device).T
+                return output + (scale * delta).to(output.dtype)
+            handles.append(module.register_forward_hook(hook))
+    except Exception:
+        for handle in handles:
+            handle.remove()
+        raise
     return handles
 
 
