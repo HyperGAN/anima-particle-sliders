@@ -5,7 +5,9 @@
 The explicit new PG0.9 training API and its CPU qualification are documented
 in [PG09_TRAINING.md](PG09_TRAINING.md). Existing reproduction and Studio
 training commands retain historical CPU fixtures; native training through
-those paths is disabled. They do not execute PG0.9.
+those paths is disabled. They do not execute PG0.9. The optional hashed
+`requirements-pg09.txt` selects the proposed 0.6.0/PG0.9.1 wheel pair;
+`core.pg09.lock.json` records its exact candidate commit and review status.
 
 ## Samples
 

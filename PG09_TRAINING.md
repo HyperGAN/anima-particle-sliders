@@ -5,14 +5,35 @@ executes `particle_sliders.pg09.ConditionalPG09` with the public
 `bispf_optimized` recipe and `particle_sliders.pg09_backends.AnimaRuntimeResponseAdapter`.
 The product contains no PG0.9 loss, optimizer, constraint or sampler copy.
 ParticleGAN must match the exact version and verified source profile required
-by the reviewed installed shared package. The package owner is qualifying
-PG0.9.1; the existing admitted lineage uses PG0.9.0. This proposal does not
-retarget an admitted runtime and does not support PG0.10.
+by the proposed installed shared package. `core.pg09.lock.json` binds the
+authoritative replacement 0.6.0 candidate at commit
+`4be0b5b29d2e2c741431f468d71ba8a7c884b724` and official PG0.9.1.
+This candidate is not Ada-approved or merged. Existing admitted PG0.9.0
+cohorts are a separate source lineage; this proposal does not retarget them
+and does not support PG0.10.
 
-The shared package owner must publish the reviewed 0.6.0 integration containing
-`particle_sliders.pg09_backends`; the prior 0.3.0 dependency does not provide
-this API. The immutable dependency pin is updated only to that reviewed
-integration commit. This remains an integration gate until publication.
+`requirements-pg09.txt` pins both exact wheel versions and SHA256 hashes.
+In a new isolated environment whose runtime dependencies are already supplied,
+install from the coordinator's verified wheel directory:
+
+```bash
+python -m pip install --no-index --find-links /verified/wheelhouse \
+  --no-deps --require-hashes --force-reinstall \
+  --report /path/to/new-env/pg09-install-report.json -r requirements-pg09.txt
+```
+
+The core wheel SHA256 is
+`2e7621c370e790f65702acf76cfa2f428b393cd3f863245aa26d8a76ff096ada`.
+The official ParticleGAN wheel SHA256 is
+`b01b7957169cb3de45887e22b4d525fd54071577e1de58089707cf05fe6992ec`.
+Keep the installation report in the new environment prefix. Version-and-hash
+wheelhouse installs may omit `direct_url.json`; the source-free provenance test
+accepts the report's exact archive hashes alongside installed source hashes.
+
+Shared wheel/source publication, Ada approval and coordinator-owned native
+qualification remain gates. The historical `requirements.txt` and
+`core.lock.json` retain the earlier 0.3.0 reproduction dependency, which does
+not supply this PG09 API. Do not install both dependency selections together.
 
 Runtime loading, GPU admission and scheduling belong to the external
 coordinator. After that coordinator has admitted and loaded the frozen
@@ -139,16 +160,29 @@ routing must select this explicit callable after admission; it is not enabled in
 ```bash
 CUDA_VISIBLE_DEVICES='' PYTHONDONTWRITEBYTECODE=1 \
 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 \
-PYTHONPATH=/path/to/particle-sliders/packages/particle-sliders-core/src:. \
-/path/to/pg090/bin/python -m pytest tests/lumen_studio/test_pg09_training.py \
+PYTHONPATH=. /path/to/new-wheel-env/bin/python -m pytest \
+  tests/lumen_studio/test_pg09_training.py tests/test_pg09_package_candidate.py \
+  tests/lumen_studio/test_pg09_consumer_history.py \
   -q -o pythonpath='' -p no:cacheprovider
 ```
 
-A supplemental CPU API fixture passed eleven tests with immutable core `1e960d9b`
-(PG0.9.0) plus the sole owner's packaged backend definitions. That process-only
-composition does not qualify the release wheel. Final release-target tests
-remain blocked while the owner investigates PG0.9.1; the qualified test
-environment currently contains PG0.9.0. No installed environment was changed.
+Earlier supplemental CPU evidence composed immutable PG0.9.0 core sources
+with the proposed backend definitions. It was API evidence only and did not
+qualify a release wheel. The candidate tests now require installed wheel
+origins under the isolated environment, exact source and archive hashes,
+shared object identity, and the verified PG0.9.1 release source profile.
+An isolated `python -I` subprocess starts outside the repository and inserts
+only the product path, with no shared source checkout on the import path.
+The Anima field test uses the release/auto profile; it does not qualify the
+separate wide continuous-vector profile.
+
+The frozen replacement wheel passed 49 focused CPU tests in 7.63 seconds.
+Consumer disk-restore tests reject missing, extra, deleted and emptied started
+G/D history atomically, require the history schema, and reproduce the next
+update after initial-empty and genuinely unused-critic resumes. The default
+`bispf_optimized` history contains step records, without Adam moments. Separate
+negative-second-moment checks use the public `bispf` preset with the product's
+actual native backend, bank and critic. They do not change the product preset.
 
 The tests use a real Cosmos transformer at tiny random dimensions, the
 product runtime methods and the actual routed bank. They verify shared

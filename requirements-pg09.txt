@@ -1,0 +1,5 @@
+# Proposed immutable candidate 4be0b5b29d2e2c741431f468d71ba8a7c884b724; not Ada-approved or merged.
+# Install only in a new isolated environment with runtime dependencies already supplied:
+# python -m pip install --no-index --find-links <verified-wheelhouse> --no-deps --require-hashes --force-reinstall --report <new-env>/pg09-install-report.json -r requirements-pg09.txt
+particlegan==0.9.1 --hash=sha256:b01b7957169cb3de45887e22b4d525fd54071577e1de58089707cf05fe6992ec
+particle-sliders-core==0.6.0 --hash=sha256:2e7621c370e790f65702acf76cfa2f428b393cd3f863245aa26d8a76ff096ada
