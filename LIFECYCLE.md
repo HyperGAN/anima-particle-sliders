@@ -10,7 +10,8 @@ PG09 trainer and early legacy-dispatch safeguards. It is unpublished and
 unqualified for pretrained/native execution. A parent-scheduled bounded CPU slot
 passed six tiny Cosmos lifecycle checks at the prior 0.7.0 proposal, including
 from an extracted product wheel. Those results do not qualify this new 0.8.1
-adoption; another CPU slot is pending. See `LIFECYCLE-CPU.md` for scope,
+adoption. A subsequent allocated slot qualified the unchanged 0.8.1 runtime
+with 32 installed/regression checks; see `CORE081-CPU.md`. See `LIFECYCLE-CPU.md` for scope,
 commands, resource receipts and retained initial harness failure.
 
 The new `anima-particle-sliders` distribution registers backend `anima` in
@@ -90,7 +91,8 @@ model/environment, verified frozen cache, architecture and PG recipe. Corrupt,
 legacy or changed-cohort packets are rejected; no implicit rebinding is offered.
 The explicit v1 loader still constructs the prepared game/cache. Core 0.8.1
 also supplies a distinct native-only v2 API, now wired in this proposal; see
-`CORE081-ADOPTION.md`. It has not been tested here yet.
+`CORE081-ADOPTION.md`. Its bounded raw/EMA native-only checks now pass; see
+`CORE081-CPU.md` for the exact installed qualification scope.
 
 Core 0.8.1 now supplies `Binding.before_update`; this factory wires a pure
 CPU/evidence check. The original Anima native trainer requires actual model/cache
@@ -102,8 +104,8 @@ The frozen pretrained backbone remains native.
 
 See `LIFECYCLE-PLAN.md` for entrypoint audit, migration boundaries and the
 parent-scheduled conformance matrix. Six bounded lifecycle tests and extracted
-wheel registration passed at 0.7.0; the 0.8.1 hooks/native factory await a new
-CPU slot. Full native runtime/environment loading, sampler
+wheel registration passed at 0.7.0; the subsequent installed 0.8.1 slot passed
+32 lifecycle/native-inference/PR5 regression checks without implementation edits. Full native runtime/environment loading, sampler
 parity, pretrained convergence/quality and native memory remain unqualified.
 No GPU work, model download, dependency installation, publication, merge,
 deployment, system change or active pin change occurred.

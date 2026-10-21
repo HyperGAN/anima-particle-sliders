@@ -1,0 +1,179 @@
+{
+  "schema": "anima-core081-installed-qualification-v1",
+  "status": "PASS_BOUNDED_CPU_EXISTING_DERIVATIVE_QUALIFICATION",
+  "tested_implementation_head": "5ecda1b5f4b5960bc1a25f05f5ac2923ede16fb4",
+  "implementation_and_package_metadata_unchanged": true,
+  "core_head": "32f6830f6402e85aa77b6631db64fcbbb2131f6b",
+  "core_version": "0.8.1",
+  "pg_version": "0.9.1",
+  "pg_source_profile": "release",
+  "pg_sources_sha256": "04624298310cd4b28d5bf687a1eac8951efd9439fb0310709ba5b9703208ceab",
+  "artifacts": {
+    "product_wheel": "/ml2/codex-storage/future-workspaces/2026-10-21/task-4/evidence/core081-qualification/dist/anima_particle_sliders-0.2.0-py3-none-any.whl",
+    "product_wheel_sha256": "264671c876909afb46c43f330f8b4959ea1b250ed966d98cac9d722a1ed517ec",
+    "core_wheel": "/ml2/codex-storage/future-workspaces/2026-10-21/task-2/evidence/core081-build/particle_sliders_core-0.8.1-py3-none-any.whl",
+    "core_wheel_sha256": "279aaab83da05b6ebeca030dfe115e1ae2232ca4924fe4278ea48103918fbd8d",
+    "installation_target": "/ml2/codex-storage/future-workspaces/2026-10-21/task-4/evidence/core081-qualification/site",
+    "dependency_resolution": false,
+    "source_head": "5ecda1b5f4b5960bc1a25f05f5ac2923ede16fb4"
+  },
+  "canonical_source_hashes_matched": 30,
+  "product_python_config_members_matched": 56,
+  "preserved_pr5_head": "4477716c8dbedd3a079e3299a1229adaaa2b407f",
+  "preserved_pr5_files_byte_matched": 158,
+  "test_results": {
+    "existing_lifecycle": {
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0,
+      "pytest_seconds": 5.34
+    },
+    "native_inference_hooks_installed_cli": {
+      "passed": 10,
+      "failed": 0,
+      "skipped": 0,
+      "pytest_seconds": 3.86
+    },
+    "original_pr5_dispatch": {
+      "passed": 16,
+      "failed": 0,
+      "skipped": 0,
+      "pytest_seconds": 1.03
+    },
+    "total_unique_test_cases": 32
+  },
+  "resources": {
+    "setup": {
+      "command": [
+        "/ml2/codex-storage/future-workspaces/2026-10-21/task-2/.venv311/bin/python",
+        "-I",
+        "/ml2/codex-storage/future-workspaces/2026-10-21/task-4/evidence/core081-qualification/setup.py"
+      ],
+      "cwd": "/tmp",
+      "returncode": 0,
+      "elapsed_seconds": 1.412,
+      "sampled_tree_peak_rss_bytes": 117383168,
+      "child_peak_rss_bytes": 52195328,
+      "minimum_host_available_bytes": 51220316160,
+      "guard_stop": null,
+      "environment": {
+        "CUDA_VISIBLE_DEVICES": "",
+        "HF_HUB_OFFLINE": "1",
+        "TRANSFORMERS_OFFLINE": "1",
+        "OMP_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1"
+      }
+    },
+    "baseline": {
+      "command": [
+        "/ml2/codex-storage/future-workspaces/2026-10-21/task-2/.venv311/bin/python",
+        "-I",
+        "/ml2/codex-storage/future-workspaces/2026-10-21/task-4/evidence/core081-qualification/run_tests.py"
+      ],
+      "cwd": "/tmp",
+      "returncode": 0,
+      "elapsed_seconds": 9.202,
+      "sampled_tree_peak_rss_bytes": 815005696,
+      "child_peak_rss_bytes": 817438720,
+      "minimum_host_available_bytes": 50498850816,
+      "guard_stop": null,
+      "environment": {
+        "CUDA_VISIBLE_DEVICES": "",
+        "HF_HUB_OFFLINE": "1",
+        "TRANSFORMERS_OFFLINE": "1",
+        "OMP_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1"
+      }
+    },
+    "extended": {
+      "command": [
+        "/ml2/codex-storage/future-workspaces/2026-10-21/task-2/.venv311/bin/python",
+        "-I",
+        "/ml2/codex-storage/future-workspaces/2026-10-21/task-4/evidence/core081-qualification/run_tests.py",
+        "/ml2/codex-storage/future-workspaces/2026-10-21/task-4/anima/tests/lumen_studio/test_image_lifecycle081.py"
+      ],
+      "cwd": "/tmp",
+      "returncode": 0,
+      "elapsed_seconds": 5.886,
+      "sampled_tree_peak_rss_bytes": 774262784,
+      "child_peak_rss_bytes": 821936128,
+      "minimum_host_available_bytes": 50895564800,
+      "guard_stop": null,
+      "environment": {
+        "CUDA_VISIBLE_DEVICES": "",
+        "HF_HUB_OFFLINE": "1",
+        "TRANSFORMERS_OFFLINE": "1",
+        "OMP_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1"
+      }
+    },
+    "legacy-dispatch": {
+      "command": [
+        "/ml2/codex-storage/future-workspaces/2026-10-21/task-2/.venv311/bin/python",
+        "-I",
+        "/ml2/codex-storage/future-workspaces/2026-10-21/task-4/evidence/core081-qualification/run_legacy.py",
+        "/ml2/codex-storage/future-workspaces/2026-10-21/task-4/anima/tests/lumen_studio/test_legacy_dispatch_ordering.py"
+      ],
+      "cwd": "/tmp",
+      "returncode": 0,
+      "elapsed_seconds": 3.015,
+      "sampled_tree_peak_rss_bytes": 657981440,
+      "child_peak_rss_bytes": 701169664,
+      "minimum_host_available_bytes": 49588207616,
+      "guard_stop": null,
+      "environment": {
+        "CUDA_VISIBLE_DEVICES": "",
+        "HF_HUB_OFFLINE": "1",
+        "TRANSFORMERS_OFFLINE": "1",
+        "OMP_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1"
+      }
+    }
+  },
+  "max_child_rss_bytes": 821936128,
+  "min_host_available_bytes": 49588207616,
+  "torch_threads": 1,
+  "interop_threads": 1,
+  "cuda_initialized": false,
+  "scope": [
+    "installed wheels in fresh task-local pip --target; no global environment changes",
+    "source injection disabled for installed lifecycle/native inference tests except test helpers",
+    "PR5 source wrappers explicitly added only in separately classified legacy run; lumen_studio/core module origins stay installed",
+    "raw/EMA v2 inference with cache deleted and all training/cache/critic constructors trapped",
+    "native buffer/reference/persistence/mode/gradient/scheduler/mix/cache/RNG restoration on success and failure",
+    "preflight accelerator gating; before_update rejection preserves full state/EMA/RNG/observer",
+    "v1 exact resume/EMA/coverage and invalid restore before mutation",
+    "no implementation defect found or implementation patch made"
+  ],
+  "test_sources_sha256": {
+    "lumen_studio/lifecycle.py": "27d4082c3637b88b47e855438c6e1e8933ce7a21977344f54e6c7097fd6e22b3",
+    "pyproject.toml": "33c869f7829d897b0205814276b2587033603a8f9b34716cab530b1091171af4",
+    "tests/lumen_studio/test_image_lifecycle.py": "d4daab2995f51be3b49ab9383d26df382b80de4174f3add96538d5ca1c422ae8",
+    "tests/lumen_studio/test_image_lifecycle081.py": "ce8c15f539f9c0c0367e5d64f263729dff39e84c12a97d9b035799ffc017fdc8",
+    "tests/lumen_studio/test_legacy_dispatch_ordering.py": "3ce8be8442992abe3ddbd02c281559821d396d72e0684538a8ce56515ed62668"
+  },
+  "core_rough_spots": [
+    "Malformed v2 adapter tensor shape raises ValueError instead of CheckpointError; rejection-before-mutation and cleanup passed; no core edit or workaround"
+  ],
+  "remaining_limits": [
+    "random tiny Cosmos/synthetic teacher only; real loader substituted",
+    "no pretrained/native accelerator admission, model sampling/decoder/memory/convergence qualification",
+    "native response still programmatic CPU tensor protocol; no CLI tensor-file adapter",
+    "HNDL matched-network parity and publication/activation remain separate"
+  ],
+  "receipt_limits": [
+    "Initial six-check JUnit overwritten by later default filename; full passing console log and resource command receipt retained; later JUnit files preserved"
+  ],
+  "forbidden_actions_performed": [],
+  "denied_or_uncertain_actions": [],
+  "resource_limits": {
+    "max_sampled_tree_rss_bytes": 2147483648,
+    "min_host_available_bytes": 17179869184,
+    "sample_interval_seconds": 0.05,
+    "timeout_seconds": 180
+  }
+}

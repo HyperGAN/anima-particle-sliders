@@ -1,5 +1,9 @@
 # Core 0.8.1 local source adoption
 
+Follow-up: the allocated installed CPU qualification passed 32 checks without
+implementation changes; see `CORE081-CPU.md`. The source-phase record below
+preserves the decisions and pending status at adoption `5ecda1b`.
+
 Proposed dependency: clean core `32f6830f6402e85aa77b6631db64fcbbb2131f6b`,
 version 0.8.1. Product version advances from 0.1.0 to 0.2.0. This replaces only
 this isolated derivative proposal's pyproject requirement. The original shared

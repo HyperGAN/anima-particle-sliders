@@ -1,0 +1,9 @@
+{
+  "product_wheel": "/ml2/codex-storage/future-workspaces/2026-10-21/task-4/evidence/core081-qualification/dist/anima_particle_sliders-0.2.0-py3-none-any.whl",
+  "product_wheel_sha256": "264671c876909afb46c43f330f8b4959ea1b250ed966d98cac9d722a1ed517ec",
+  "core_wheel": "/ml2/codex-storage/future-workspaces/2026-10-21/task-2/evidence/core081-build/particle_sliders_core-0.8.1-py3-none-any.whl",
+  "core_wheel_sha256": "279aaab83da05b6ebeca030dfe115e1ae2232ca4924fe4278ea48103918fbd8d",
+  "installation_target": "/ml2/codex-storage/future-workspaces/2026-10-21/task-4/evidence/core081-qualification/site",
+  "dependency_resolution": false,
+  "source_head": "5ecda1b5f4b5960bc1a25f05f5ac2923ede16fb4"
+}
