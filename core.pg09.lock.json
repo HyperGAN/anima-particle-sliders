@@ -1,0 +1,52 @@
+{
+  "schema": "anima-pg09-package-candidate-v1",
+  "status": "REVIEW_PENDING_PUBLICATION_HOLD_RUNTIME_UNQUALIFIED",
+  "repository": "https://github.com/HyperGAN/particle-sliders",
+  "commit": "cdfb80a76b882b4b73861b12f555263bd64ffeb7",
+  "subdirectory": "packages/particle-sliders-core",
+  "package": "particle-sliders-core",
+  "version": "0.6.0",
+  "wheel": "particle_sliders_core-0.6.0-py3-none-any.whl",
+  "wheel_sha256": "4abc83988fdeb6d7478de830e7ee8ec5d9bd99c20d52f89e4ce594d50dfd39a3",
+  "particlegan": {
+    "version": "0.9.1",
+    "wheel": "particlegan-0.9.1-py3-none-any.whl",
+    "wheel_sha256": "b01b7957169cb3de45887e22b4d525fd54071577e1de58089707cf05fe6992ec",
+    "source_profile": "release",
+    "penalty_input_domain": "auto"
+  },
+  "entry_points": [
+    "particle_sliders.pg09.ConditionalPG09",
+    "particle_sliders.pg09_backends.AnimaRuntimeResponseAdapter"
+  ],
+  "source_sha256": {
+    "particle_sliders.pg09": "190a7e6c3a8b53d7d495a577183deacce5c8a1250b674de87c349fb7aead84b3",
+    "particle_sliders.pg09_backends": "5db98918880af33f55ca7312975a0fd112bdae8a7c69a3e357433beb056e32c1",
+    "particle_sliders.reference": "2c5809edd3818fab9efdd0c5234ea6b5027de5fc0130155e537950471018a371",
+    "particle_sliders.formulation": "a61b06e93efb24e92a72d826f696ede8694e97a3c27c5e6262a2912caac28e12",
+    "particle_sliders._training": "0a5802997adec58998beb6598861f6a0f0aa1245a10053666e16300b67d3bc44"
+  },
+  "native_adoption": false,
+  "notes": "Exact available local CDF candidate identity for isolated CPU review. Product code review, shared artifact publication/adoption and native runtime/cache qualification are separate pending gates. Legacy requirements.txt/core.lock.json remain historical; no native environment or old source-bound cohort retarget.",
+  "supersedes": "4be0b5b29d2e2c741431f468d71ba8a7c884b724",
+  "code_review": {
+    "status": "FRESH_EXACT_HEAD_REVIEW_REQUIRED",
+    "previous_reviewed_head": "b8572b3eb7e76f1d9e80b741809648692736b46f",
+    "previous_clearance": "WITHHELD_PENDING_DISPATCH_ORDER_REPAIR",
+    "approval_claimed": false
+  },
+  "package_availability": {
+    "status": "EXACT_LOCAL_FROZEN_WHEEL_AVAILABLE_PUBLIC_DRAFT_SOURCE",
+    "public_source_kind": "draft_candidate",
+    "public_source_ref": "audit/shared-core-contracts-20261017",
+    "publication_status": "HOLD_UNRESOLVED",
+    "clean_main_based_reconstruction": "PUBLICATION_BLOCKED",
+    "reviewed_installable_dependency": "PENDING_EXACT_ARTIFACT_REVIEW",
+    "notes": "Local CDF wheel and CPU receipts exist; they do not resolve publication/adoption approval."
+  },
+  "runtime_qualification": {
+    "status": "NOT_PERFORMED_OR_ADMITTED",
+    "active_environment_retargeted": false,
+    "teacher_cache_migration_approved": false
+  }
+}

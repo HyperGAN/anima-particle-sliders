@@ -127,6 +127,13 @@ def create_app(directory, model_dir=None, model_identity=None):
     app.state.store = store
     app.state.model_identity = model_identity
 
+    from .training_policy import LegacyTrainingUnavailable, legacy_training_unavailable
+
+    @app.exception_handler(LegacyTrainingUnavailable)
+    async def legacy_training_error(request, error):
+        from fastapi.responses import JSONResponse
+        return JSONResponse(status_code=409, content={"detail": str(error)})
+
     @app.exception_handler(ValueError)
     async def value_error(request, error):
         from fastapi.responses import JSONResponse
@@ -376,24 +383,9 @@ def create_app(directory, model_dir=None, model_identity=None):
                 WHERE json_extract(metadata,'$.purpose')='development'
                 ORDER BY created DESC LIMIT 32""")]
 
-    @app.post("/api/training/runs", status_code=202)
+    @app.post("/api/training/runs", status_code=409)
     def start_run(value: TrainingRequest):
-        if value.variation in RETIRED:
-            raise ValueError(RETIRED[value.variation])
-        root = directory.parent
-        config = dict(**value.model_dump(), directory=str(root / "runs" / value.variation),
-            train_cache=str(root / "targets" / value.variation / "train"),
-            dev_cache=str(root / "targets" / value.variation / "dev"))
-        if any(not (Path(config[name]) / "index.json").exists() for name in ("train_cache", "dev_cache")):
-            raise ValueError("Prepare qualified training and development target caches first")
-        if any(r["config"]["variation"] == value.variation and r["status"] in ("queued", "running") for r in store.runs()):
-            raise ValueError("This variation already has an active training run")
-        if value.until == 1600:
-            from .audits import require_pilot_qualification
-            require_pilot_qualification(config["directory"])
-        ident = f"{value.variation}-{value.until}-{secrets.token_hex(4)}"
-        store.add_run(ident, config)
-        return dict(id=ident)
+        legacy_training_unavailable("Studio training API")
 
     @app.post("/api/training/{variation}/qualify")
     def pilot_qualification(variation: str):

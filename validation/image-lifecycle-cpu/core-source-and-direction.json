@@ -1,0 +1,22 @@
+{
+  "command": [
+    "/ml2/codex-storage/future-workspaces/2026-10-21/task-2/.venv311/bin/python",
+    "-I",
+    "/ml2/codex-storage/future-workspaces/2026-10-21/task-4/evidence/check_core_guard.py"
+  ],
+  "cwd": "/tmp",
+  "returncode": 0,
+  "elapsed_seconds": 1.506,
+  "sampled_tree_peak_rss_bytes": 543965184,
+  "child_peak_rss_bytes": 664371200,
+  "minimum_host_available_bytes": 49824350208,
+  "guard_stop": null,
+  "environment": {
+    "CUDA_VISIBLE_DEVICES": "",
+    "HF_HUB_OFFLINE": "1",
+    "TRANSFORMERS_OFFLINE": "1",
+    "OMP_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+  }
+}

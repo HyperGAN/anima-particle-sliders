@@ -1,0 +1,67 @@
+{
+  "schema": "anima-core081-source-adoption-v1",
+  "status": "SOURCE_ONLY_PENDING_PARENT_CPU_SLOT",
+  "prior_product_head": "bcd519e59ff403c2f2d2508388021471dc4a28a4",
+  "core_head": "32f6830f6402e85aa77b6631db64fcbbb2131f6b",
+  "core_version": "0.8.1",
+  "canonical_receipt": "validation/core081-canonical-receipt.json",
+  "canonical_receipt_sha256": "81c9407544a97568ff8f8eb5d78166595cb7971837f14ef0e08dc78a3bb38046",
+  "canonical_source_map_entries_verified": 30,
+  "canonical_wheel_sha256": "279aaab83da05b6ebeca030dfe115e1ae2232ca4924fe4278ea48103918fbd8d",
+  "dependency_profile": "existing PG0.9.1; no downgrade or formulation change",
+  "preserved_math_source_files": [
+    "pg09.py",
+    "pg09_backends.py",
+    "reference.py",
+    "formulation.py",
+    "_training.py"
+  ],
+  "preserved_pr5_files": 158,
+  "derivative_sources_sha256": {
+    "lumen_studio/lifecycle.py": "27d4082c3637b88b47e855438c6e1e8933ce7a21977344f54e6c7097fd6e22b3",
+    "pyproject.toml": "33c869f7829d897b0205814276b2587033603a8f9b34716cab530b1091171af4",
+    "MANIFEST.in": "d877fd831848b0e852c6dfb1536e9a97ec4004ebfbf96db1b59758dc7f1f4bcd",
+    "LIFECYCLE.md": "e82277fb1724298d0bf4b5c11248387124bf5f6e1fa38aa575b3f54f9e4ca23e",
+    "CORE081-ADOPTION.md": "c792770591a7fa800f3f2ca36a2abb0863ee43cee38eef6e5f7445686056aea0",
+    "tests/lumen_studio/test_image_lifecycle.py": "d4daab2995f51be3b49ab9383d26df382b80de4174f3add96538d5ca1c422ae8"
+  },
+  "static_checks": [
+    "Python AST syntax only; no product imports",
+    "TOML and both backend registrations",
+    "native-only factory/owner has no game/cache/critic constructor references",
+    "canonical receipt copied verbatim and all 30 source hashes matched",
+    "old and new PG/backend/reference/formulation/training source hashes identical",
+    "all PR5 files byte-unchanged"
+  ],
+  "hooks": [
+    "allocation-free staged-runtime preflight",
+    "pure CPU/evidence before_update",
+    "native state observation restoration",
+    "native_cleanup borrowed flags/checkpoint restoration",
+    "separate native-only v2 specification/factory"
+  ],
+  "gates": [
+    "CPU/BF16 only",
+    "native image rendering/reference images unsupported",
+    "Anima 0.8.1 conformance pending",
+    "actual accelerator admission/native sampler and HNDL parity unqualified"
+  ],
+  "rough_spots": [
+    "No new core defect established by source inspection",
+    "native response currently accepts programmatic CPU tensors, not a CLI tensor-file protocol",
+    "canonical IMAGE-LIFECYCLE.md remains v1-oriented; use NATIVE-INFERENCE.md for v2",
+    "historical six-check 0.7.0 result is not 0.8.1 qualification"
+  ],
+  "not_executed": [
+    "test suites",
+    "model loads",
+    "GPU work",
+    "model downloads",
+    "builds",
+    "dependency installations",
+    "publication",
+    "merge",
+    "active pin changes"
+  ],
+  "denied_or_uncertain_actions": []
+}

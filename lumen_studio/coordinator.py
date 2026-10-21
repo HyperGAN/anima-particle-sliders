@@ -150,62 +150,15 @@ class Coordinator:
         return True
 
     def train_quantum(self, run):
-        from .cache import TargetCache
-        from .training import Trainer
-        self.release_runtime()
-        config = run["config"]
-        runtime = trainer = None
-        try:
-            runtime = self.load_runtime(training=True, checkpointing=config.get("checkpointing", True))
-            cache = TargetCache(config["train_cache"], pin_memory=self.device != "cpu")
-            dev = TargetCache(config["dev_cache"], pin_memory=self.device != "cpu")
-            trainer = Trainer(runtime, cache, config["directory"], config["variation"],
-                microbatch=config.get("microbatch", 1), seed=config.get("seed", 7), dev_cache=dev)
-            target = config.get("until", 200)
-            if target > 200:
-                from .audits import require_pilot_qualification
-                require_pilot_qualification(config["directory"])
-            controls = self.store.controls()
-            # Switching from any render burst starts a fresh 20-update quota.
-            updates = 0 if controls["render_burst"] else controls["training_updates"]
-            self.store.control(render_burst=0, training_updates=updates,
-                               owner=dict(pid=os.getpid(), gpu=self.gpu, state="training"))
-            if trainer.step == 0:
-                self.store.update_run(run["id"], "running", 0, trainer.probe())
-            while trainer.step < target and not self.stopping:
-                trainer.update()
-                updates += 1
-                self.store.control(training_updates=updates)
-                self.store.update_run(run["id"], "running", trainer.step)
-                if trainer.step == 20 or trainer.step % 100 == 0:
-                    trainer.save(snapshot=True)
-                    snapshot = Path(config["directory"]) / f"ema-{trainer.step:06}.safetensors"
-                    sha = self.store.register_checkpoint(snapshot, config["variation"])
-                    if trainer.step % 100 == 0:
-                        self.store.update_run(run["id"], "running", trainer.step, trainer.probe())
-                    from .sampling import enqueue_cadence
-                    enqueue_cadence(self.store, runtime.identity, config["variation"], sha, trainer.step)
-                controls = self.store.controls()
-                has_images = any(j["status"] == "queued" for j in self.store.jobs())
-                if controls["paused"] or (has_images and updates >= 20):
-                    break
-            trainer.save(snapshot=trainer.step == target)
-            if trainer.step == target == 200:
-                trainer.verify_resume()
-            status = "pilot_review" if trainer.step == target == 200 else (
-                "completed" if trainer.step >= target else "queued")
-            self.store.update_run(run["id"], status, trainer.step)
-        except Exception as exc:
-            # Only completed updates are resumable. Save in normal paths, never a
-            # half-finished D/G update after an exception.
-            self.store.update_run(run["id"], "failed", trainer.step if trainer else run["step"],
-                                  error=f"{type(exc).__name__}: {exc}")
-        finally:
-            if trainer is not None:
-                trainer.close()
-            del trainer
-            del runtime
-            self.release_runtime()
+        from .training_policy import legacy_training_unavailable
+        legacy_training_unavailable("Studio legacy training quantum")
+
+    def _reject_legacy_runs(self):
+        from .training_policy import LEGACY_TRAINING_MESSAGE
+        for run in self.store.runs():
+            if run["status"] == "queued":
+                self.store.update_run(run["id"], "failed", run["step"],
+                                      error=LEGACY_TRAINING_MESSAGE)
 
     def enough_memory(self, training):
         if self.gpu == "cpu" or self.runtime_factory:
@@ -236,11 +189,11 @@ class Coordinator:
             try:
                 while not self.stopping:
                     queued = any(j["status"] == "queued" for j in self.store.jobs())
-                    runs = [r for r in self.store.runs() if r["status"] == "queued"]
-                    # Finish a new or revised pilot before spending more on
-                    # already-qualified full runs. Existing updates stay atomic.
-                    runs.sort(key=lambda r: (r["config"].get("until", 200) != 200, r["id"]))
-                    work = choose_work(self.store.controls(), queued, bool(runs))
+                    # Hold the normal ownership lease before changing queue state.
+                    # Recovered legacy jobs fail before memory probes or native loads;
+                    # image work keeps its existing inference-only dispatch.
+                    self._reject_legacy_runs()
+                    work = choose_work(self.store.controls(), queued, False)
                     if work and self.runtime is None and not self.enough_memory(work == "train"):
                         self.store.control(owner=dict(pid=os.getpid(), gpu=self.gpu, state="waiting for GPU memory"))
                         if once:
@@ -250,8 +203,6 @@ class Coordinator:
                     if work == "render":
                         self.store.control(owner=dict(pid=os.getpid(), gpu=self.gpu, state="rendering"))
                         self.render_one()
-                    elif work == "train":
-                        self.train_quantum(runs[0])
                     else:
                         if self.runtime is not None:
                             self.release_runtime()

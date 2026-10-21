@@ -1,0 +1,229 @@
+# Explicit ParticleGAN 0.9 training
+
+`lumen_studio.pg09_training.PG09Trainer` is the new training entrypoint. It
+executes `particle_sliders.pg09.ConditionalPG09` with the public
+`bispf_optimized` recipe and `particle_sliders.pg09_backends.AnimaRuntimeResponseAdapter`.
+The product contains no PG0.9 loss, optimizer, constraint or sampler copy.
+ParticleGAN must match the exact version and verified source profile required
+by the proposed installed shared package. `core.pg09.lock.json` binds the
+available local frozen 0.6.0 candidate at commit
+`cdfb80a76b882b4b73861b12f555263bd64ffeb7` and official PG0.9.1.
+Product code review is pending after Ada withheld clearance on the previous
+`b8572b3` head. The exact local wheel exists and its source is a public draft;
+shared publication/adoption is still on hold, and the clean main-based
+reconstruction remains publication-blocked. Review of the exact installable
+dependency remains required. Native runtime/cache qualification has not been
+performed or admitted. These are separate gates. Existing admitted PG0.9.0
+cohorts are a separate source lineage; this proposal does not retarget them
+and does not support PG0.10.
+Its source is staged on the public `audit/shared-core-contracts-20261017` branch.
+
+`requirements-pg09.txt` pins both exact wheel versions and SHA256 hashes.
+In a new isolated environment whose runtime dependencies are already supplied,
+install from the coordinator's verified wheel directory:
+
+```bash
+python -m pip install --no-index --find-links /verified/wheelhouse \
+  --no-deps --require-hashes --force-reinstall \
+  --report /path/to/new-env/pg09-install-report.json -r requirements-pg09.txt
+```
+
+The core wheel SHA256 is
+`4abc83988fdeb6d7478de830e7ee8ec5d9bd99c20d52f89e4ce594d50dfd39a3`.
+The official ParticleGAN wheel SHA256 is
+`b01b7957169cb3de45887e22b4d525fd54071577e1de58089707cf05fe6992ec`.
+Keep the installation report in the new environment prefix. Version-and-hash
+wheelhouse installs may omit `direct_url.json`; the source-free provenance test
+accepts the report's exact archive hashes alongside installed source hashes.
+
+The lock records code review, package availability/publication and runtime
+qualification separately; no field claims approval. Release artifact
+publication/adoption, fresh Ada review and coordinator-owned native
+qualification remain gates. The historical `requirements.txt` and
+`core.lock.json` retain the earlier 0.3.0 reproduction dependency, which does
+not supply this PG09 API. Do not install both dependency selections together.
+
+Runtime loading, GPU admission and scheduling belong to the external
+coordinator. After that coordinator has admitted and loaded the frozen
+`TurboRuntime`, it may call:
+
+```python
+from lumen_studio.cache import TargetCache
+from lumen_studio.pg09_training import PG09Trainer
+
+cache = TargetCache(verified_train_cache, verify=True)
+trainer = PG09Trainer(admitted_runtime, cache, new_run_directory,
+                      "finalform", total_steps=100, batch_size=2,
+                      native_admission=coordinator_admission_check)
+try:
+    trainer.update()
+    trainer.save()                  # exact shared-core resume packet
+    trainer.export(new_export)      # immutable native live-weight export
+finally:
+    trainer.close()
+```
+
+This API does not create a runtime, submit work or infer GPU availability.
+For non-CPU runtimes, a mandatory coordinator callback receives the exact
+model identity, cache fingerprint and native response shape before the first
+update. It must return the literal `True` after the coordinator verifies the
+actual staged weights, numerical frozen-teacher/native parity, source pins
+and memory/admission constraints. Its boolean decision is recorded; the
+callback is an admission seam and does not perform or replace those numerical
+checks. CPU software fixtures do not require admission.
+Use a separate run directory. It automatically restores `pg09-resume.pt`
+when present and refuses changed conditioning, targets, model identity,
+recipe, budget, architecture or implementation sources through the shared
+core's checkpoint contract. An inference export is distinct from this full
+training packet. The exported weights are explicitly `live`; no EMA is
+computed or claimed by this binding.
+
+The existing `ParticleAdapter` and its actual 128 by 4 routed bank are used
+in hooked model forwards and passed to the shared game. Frozen base model
+parameters are excluded from optimizers. Target records retain genuine
+`[1,C,1,H,W]` velocity fields. The penalty receives that native geometry;
+only the critic extracts spatial patches internally using rank-two Linear
+weights supported by PG0.9. Critic logits are unbounded. Training optimizes
+the PG adversarial objective and its required public constraints, with no
+MSE or reconstruction objective.
+
+Training is unipolar: the adapted neutral conditioning at scale +1 learns
+the frozen positive response at the same latent and raw scheduler time.
+Conditions contain mean neutral token embeddings, normalized native time,
+denoise position, frozen trajectory choice and +1. Row IDs, prompt labels,
+character IDs and seeds are excluded. Conditioning is read lazily from the
+verified training cache; no development cache is used for training. Native
+exports load through the existing `adapter_class`/`ParticleAdapter` paths
+and retain CFG1 Turbo rendering with the original scheduler, VAE and
+selected weights.
+
+## Existing entrypoints
+
+| Entry | Executed implementation | Status |
+| --- | --- | --- |
+| `lumen_studio.pg09_training.PG09Trainer` | installed `ConditionalPG09`, native product adapter | new PG0.9 path |
+| `release_tools/train.py`, Studio `Coordinator.train_quantum`, `python -m lumen_studio train`, `scripts/anima_campaign.py` | early unsupported-legacy refusal | no runtime load, target preparation or legacy optimizer dispatch |
+| `benchmark.py`, `preflight.py` | early unsupported-legacy refusal | no runtime/cache work or reuse of historical proof |
+| `convergence.py`, `scripts/anima_verify_update.py` | archived game/reference probes | historical diagnostics; not PG0.9 |
+| `release_tools/distill.py`, `prepare_expansion.py` | shared closed-form `fit_routed_down` | ordinary LoRA approximation; not slider GAN training |
+| Studio render, `release_tools/infer.py`, Comfy particle node | selected native/alpha/single particle or native LoRA file | inference only |
+
+The following inventory includes all production Python command wrappers and
+the callable entrypoints they reach at the audited product base `36ad1267`:
+
+| Files or routes | Training/inference behavior and disposition |
+| --- | --- |
+| `lumen_studio/__main__.py` `train`, `worker`; `api.py` `/api/training/runs`; `coordinator.py` `train_quantum` | training CLI/API refuse before cache checks or queue writes; worker fails old queued/recovered runs before memory checks, retaining inference |
+| `scripts/anima_campaign.py` | refuses after argument parsing, before target preparation, device changes or worker launch |
+| `release_tools/train.py` | refuses after argument parsing, before manifest dispatch, runtime loading or target preparation |
+| `lumen_studio/benchmark.py`, `preflight.py` | unsupported historical diagnostics refuse before cache/proof reads, file changes, memory probes or native runtime imports |
+| `lumen_studio/convergence.py` `response_step`; `scripts/anima_verify_update.py` | historical separate D/G/VIC/reference update diagnostics; no PG0.9 claim |
+| `scripts/anima_verify_reference.py`, `anima_verify_normalization.py`, `anima_probe_training.py` | archived source, normalization and selected-EMA residual diagnostics; no new optimizer path |
+| `lumen_studio/__main__.py` `serve`, `references`, `cache`, `compile`, `prepare-model`; `runtime.py` `create_runtime`; `cache.py` `prepare_targets` | API serving, queueing, frozen target preparation or official model conversion; no GAN update |
+| `api.py` `/api/generate`, `/api/comparisons`, image rerender; `coordinator.py` `render_one` | selected stored original native EMA snapshot plus exact requested mix/prompt/seed; `TurboRuntime.render` |
+| `release_tools/infer.py` | explicit selected native/alpha/single particle or native LoRA file; `TurboRuntime.render` |
+| `release_tools/distill.py`, `prepare_expansion.py` | selected EMA teacher activations, shared closed-form LoRA approximation, explicit particle/LoRA render sweeps; not slider GAN training |
+| `release_tools/audit_distill.py`, `match_bad_intent.py`, `calibrated_release.py` | selected native particle/LoRA comparison renders; no GAN update |
+| `comfy_particle.py`, `single_particle.py`, `alpha_adapter.py`, `particle_io.py` | Comfy/native checkpoint loading, format dispatch, alpha application and routed forward hooks; no training objective |
+| `release_tools/queue_samples.py`, `refresh_examples.py` | enqueue/render selected checkpoint examples; no GAN update |
+| `release_tools/prepare_model.py`; `scripts/anima_reuse_targets.py` | model conversion or byte-verified frozen cache reuse; no GAN update |
+| `scripts/anima_cuda_host.py` | kernel-policy host wrapper for the supplied script/module; does not change its training objective; requires separate native admission |
+| `scripts/anima_submit_audit_review.py`; `release_tools/verify_live.py`, `verify_comfy.py`, `verify_distillation.py`, `verify_samples.py` | review/source/math/sample checks; no PG0.9 trainer dispatch |
+| `release_tools/build.py`, `stage.py`, `stage_expansion.py`, `add_bad_intent.py`, `rescale_lora_alpha.py`, `publish.py` | release assembly, alpha rescaling or publishing commands never invoked; only the ZIP packaging helper runs in a CPU regression |
+
+`configs/anima/model.lock.json` and `converted-model.lock.json` pin the actual
+runtime to `circlestone-labs/Anima:turbo-v1.1`, repository revision
+`f973fc41ec7545364ac9776c2440285f43ff2a30`, with official
+`anima-turbo-v1.1.safetensors`, `qwen_3_06b_base.safetensors` and
+`qwen_image_vae.safetensors`. The Base-v1.0 model identifier in that lock is
+the tokenizer source, not the active diffusion weights. `TurboRuntime`
+rejects a different model label, verifies staged file hashes and loads local
+components only. It uses frozen Qwen/conditioner/VAE and the selected routed
+DiT adapter, native scheduler times divided by the training timestep count,
+CPU-seeded noise, 8/10/12 Euler steps and CFG1.
+
+`data/expansion-selection.json` chooses Final Form EMA step 1200, particle
+alpha 12 and ordinary-LoRA alpha 24. `prepare_expansion.py` reads that exact
+EMA for export rather than choosing the latest 1600 snapshot. No selected
+weights or alpha values were changed by this audit.
+
+Outside this product, `conceptmod/textsliders/train_lora_anima.py` and the
+Anima smoke/embedding scripts in the adapter repository run legacy Base
+UNI/trajectory/MSE experiments, not this Turbo PG0.9 path. The external
+`/mnt/nvme/sliders/scripts/train_verified_anima_concept{,_duty_cycle}.py`
+names describe Anima-derived prompts, but they execute MOSS
+`moss_sliders.training.train_step`; their paired monitor scripts launch those
+MOSS pilots. They were read only and are not Anima runtime evidence.
+
+The historical Trainer remains available only with `legacy_cpu_fixture=True`
+on a CPU runtime. Default execution through the old Trainer fails before Trainer allocation.
+Production legacy training wrappers now refuse earlier: CLI/campaign/release
+commands stop immediately after parsing, benchmark/preflight callables stop
+before any filesystem/device/cache work, and `train_quantum` stops before
+releasing an inference runtime. The training API returns HTTP 409 before
+cache checks or queue writes. Under its normal ownership lease the worker
+marks old queued/recovered legacy runs failed at their stored steps before
+scheduling or memory checks, and continues image work.
+
+The legacy EMA/pilot/microbatch/resume protocols are unsupported by PG09.
+Renaming those wrappers would not establish new source-bound cache identity,
+checkpoint semantics or native admission, and the package publication hold
+prevents automatic adoption. The supported explicit `PG09Trainer` callable
+executes the installed shared package; coordinator routing must select it
+only after the separate gates above are resolved. No resident service route
+is enabled by this proposal.
+
+## CPU qualification and remaining gates
+
+The dispatch-order repair passed 16 real entrypoint tests, six installed-wheel
+PG09/native-bank/Trainer-guard checks, and the existing target/render handoff
+test. Its API test invokes the actual endpoint and HTTP 409 handler directly;
+the separately reproduced main/PR4 TestClient stall is not a passing suite claim.
+
+```bash
+CUDA_VISIBLE_DEVICES='' PYTHONDONTWRITEBYTECODE=1 \
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 \
+PYTHONPATH=. /path/to/new-wheel-env/bin/python -m pytest \
+  tests/test_pg09_package_candidate.py \
+  tests/lumen_studio/test_pg09_training.py::test_native_bank_shared_pg09_exact_resume_and_inference_export \
+  tests/lumen_studio/test_pg09_consumer_history.py \
+  tests/lumen_studio/test_legacy_dispatch_ordering.py \
+  -q -o pythonpath='' -p no:cacheprovider
+```
+
+Earlier supplemental CPU evidence composed immutable PG0.9.0 core sources
+with the proposed backend definitions. It was API evidence only and did not
+qualify a release wheel. The candidate tests now require installed wheel
+origins under the isolated environment, exact source and archive hashes,
+shared object identity, and the verified PG0.9.1 release source profile.
+An isolated `python -I` subprocess starts outside the repository and inserts
+only the product path, with no shared source checkout on the import path.
+The Anima field test uses the release/auto profile; it does not qualify the
+separate wide continuous-vector profile.
+
+The earlier `4be0b5b` wheel passed 49 focused CPU tests in 7.63 seconds.
+Those receipts remain scoped to that superseded candidate. The final
+`cdfb80a` installed-wheel rerun passed 19 consumer-history tests in 5.80 seconds
+and three package-origin/native update/export/resume tests in 4.20 seconds.
+Consumer disk-restore tests reject missing, extra, deleted and emptied started
+G/D history atomically, require the history schema, and reproduce the next
+update after initial-empty and genuinely unused-critic resumes. The default
+`bispf_optimized` history contains step records, without Adam moments. Separate
+negative-second-moment checks use the public `bispf` preset with the product's
+actual native backend, bank and critic. They do not change the product preset.
+The final candidate also rejects Adam generator clocks that disagree with
+completed steps and sparse critic clocks outside the completed-step bounds.
+A critic branch first used on step two has a real clock of one; its valid
+disk checkpoint reproduces the next metrics and complete game state exactly.
+
+The tests use a real Cosmos transformer at tiny random dimensions, the
+product runtime methods and the actual routed bank. They verify shared
+PG0.9 execution, nonzero response gradient to the same bank, bank/branch
+updates, frozen base weights, native geometry, condition features, exact
+resume, cache rejection and portable native live-weight reload. No
+pretrained model is loaded and CUDA remains uninitialized.
+
+Native image quality, full-model memory, BF16 CUDA numerical parity,
+admitted checkpoint recomputation and image/export parity require the
+coordinator's separate native-runtime gate. Published adapters and archived
+example selection are not changed or republished by this work.

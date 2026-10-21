@@ -1,0 +1,54 @@
+{
+  "schema": "anima-image-lifecycle-source-review-v1",
+  "status": "SOURCE_ONLY_RUNTIME_CONFORMANCE_PENDING_PARENT_SCHEDULE",
+  "review_base": "4477716c8dbedd3a079e3299a1229adaaa2b407f",
+  "preserved_pr": "https://github.com/HyperGAN/anima-particle-sliders/pull/5",
+  "inventory_main_not_migration_base": "8bcf7f2cd3d08933556f79b87cb1519e7cecbe8d",
+  "core_milestone": "fd89e1c780ab5210cd1be98ec3b70977e6349379",
+  "core_version": "0.7.0",
+  "core_wheel_sha256_from_owner_receipt_not_installed_here": "9637aede473939e4284cf05c4c8d950e5a84ab5b0fe3c482080eb10028abc4d9",
+  "source_sha256": {
+    "lumen_studio/lifecycle.py": "dde4063bd86895fc49754e7f1eeb9a3a5970e1251b074e1337e0b4a214d339f1",
+    "pyproject.toml": "4203fe205c0e145efb25800f4611d814dd21f9100f6edcb115f796bd61a87697",
+    "MANIFEST.in": "0b421cd000c67235970cba90a0e92158209a125756f39c1bd65a6164de505d9d",
+    "LIFECYCLE.md": "6442fa14146523a07324eeb2283f188b9c98d68f708d2322e35807ff760dd47e",
+    "LIFECYCLE-PLAN.md": "593363e69ff867ca2394f329b4e03afcb634b8a6d548547c7256f5ede54ecd23"
+  },
+  "static_checks": [
+    "Python AST parse without imports",
+    "TOML parse",
+    "backend entrypoint metadata",
+    "product depends on core, no direct ParticleGAN dependency",
+    "all PR5 tracked files byte-unchanged",
+    "exact local core copy clean"
+  ],
+  "not_executed": [
+    "test suites",
+    "dependency installations",
+    "builds",
+    "native model loads",
+    "GPU work",
+    "model downloads",
+    "publication",
+    "merges",
+    "deployments",
+    "system changes",
+    "active pin changes"
+  ],
+  "remaining_gates": [
+    "parent-scheduled installed-wheel CPU conformance",
+    "core native admission seam",
+    "native sampling/decoder parity",
+    "compact inference core update",
+    "separate HNDL definition parity",
+    "clean shared main integration/publication and exact dependency review"
+  ],
+  "parent_report": {
+    "target": "01a157c0-24ba-7273-9be8-c36fa69e301f",
+    "action": "send early plan and core blocker",
+    "outcome": "FAILED_NOT_DELIVERED",
+    "reason": "thread not found; also attempted explicit durable host after host discovery",
+    "fallback": "final task handoff includes report"
+  },
+  "static_check_retry": "Default python 3.9 lacked tomllib; rerun with existing /usr/bin/python3.14 passed. No installation or product import."
+}

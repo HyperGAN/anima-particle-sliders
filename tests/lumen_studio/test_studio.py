@@ -117,7 +117,7 @@ def test_retired_atmosphere_is_kept_for_history_but_not_offered_in_mixer(tmp_pat
     assert catalog['checkpoints'][0]['sha256'] == 'retired-sha'
     assert client.get('/api/training/runs').json()[0]['id'] == 'old-pilot'
     response = client.post('/api/training/runs', json=dict(variation='theatrical'))
-    assert response.status_code == 422 and 'Retired' in response.json()['detail']
+    assert response.status_code == 409 and 'PG09Trainer' in response.json()['detail']
 
 
 def test_convergence_report_requires_matching_run_identity(tmp_path):

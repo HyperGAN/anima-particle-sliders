@@ -21,7 +21,14 @@ ENGINE_FILES = ("training.py", "game.py", "cache.py", "metrics.py", "execution.p
 
 
 class Trainer:
-    def __init__(self, runtime, cache, directory, variation, *, seed=7, microbatch=1, dev_cache=None):
+    def __init__(self, runtime, cache, directory, variation, *, seed=7, microbatch=1, dev_cache=None,
+                 legacy_cpu_fixture=False):
+        if runtime.device.type != "cpu" or legacy_cpu_fixture is not True:
+            raise RuntimeError(
+                "Historical gmix training is disabled outside explicit CPU software fixtures. "
+                "Use the externally admitted lumen_studio.pg09_training.PG09Trainer "
+                "with the reviewed installed particle-sliders package."
+            )
         self.runtime, self.cache = runtime, cache
         self.prefetch_pool = ThreadPoolExecutor(max_workers=1, thread_name_prefix="lumen-targets")
         self.prefetched = {}

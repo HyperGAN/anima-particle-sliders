@@ -1,0 +1,13 @@
+{
+  "wheel": "/ml2/codex-storage/future-workspaces/2026-10-21/task-4/evidence/product-dist/anima_particle_sliders-0.1.0-py3-none-any.whl",
+  "sha256": "084c636d4edb551715c1c81b99ab324a89de8aa05cba84fc1fd3afc8c3ba261b",
+  "bytes": 121317,
+  "extracted_product": "/ml2/codex-storage/future-workspaces/2026-10-21/task-4/evidence/installed-product",
+  "required_members": [
+    "configs/anima/released-identity.json",
+    "configs/anima/requirements.lock",
+    "lumen_studio/lifecycle.py",
+    "lumen_studio/vendor/provenance.json"
+  ],
+  "no_dependency_install": true
+}

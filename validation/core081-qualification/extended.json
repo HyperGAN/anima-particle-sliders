@@ -1,0 +1,23 @@
+{
+  "command": [
+    "/ml2/codex-storage/future-workspaces/2026-10-21/task-2/.venv311/bin/python",
+    "-I",
+    "/ml2/codex-storage/future-workspaces/2026-10-21/task-4/evidence/core081-qualification/run_tests.py",
+    "/ml2/codex-storage/future-workspaces/2026-10-21/task-4/anima/tests/lumen_studio/test_image_lifecycle081.py"
+  ],
+  "cwd": "/tmp",
+  "returncode": 0,
+  "elapsed_seconds": 5.886,
+  "sampled_tree_peak_rss_bytes": 774262784,
+  "child_peak_rss_bytes": 821936128,
+  "minimum_host_available_bytes": 50895564800,
+  "guard_stop": null,
+  "environment": {
+    "CUDA_VISIBLE_DEVICES": "",
+    "HF_HUB_OFFLINE": "1",
+    "TRANSFORMERS_OFFLINE": "1",
+    "OMP_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+  }
+}
