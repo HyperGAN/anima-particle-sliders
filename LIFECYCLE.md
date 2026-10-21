@@ -1,12 +1,12 @@
 # Anima image sessions: proposed new cohort
 
-This local proposal now targets clean core 0.8.1 candidate
+This draft targets the reviewed core 0.8.1 pin
 `32f6830f6402e85aa77b6631db64fcbbb2131f6b`; see `CORE081-ADOPTION.md` for
 source-only adoption and new native inference/hooks. The original 0.7.0
 `fd89e1c780ab5210cd1be98ec3b70977e6349379` cohort remains preserved.
 The proposal is based on draft PR5
 `4477716c8dbedd3a079e3299a1229adaaa2b407f`, preserving its existing shared
-PG09 trainer and early legacy-dispatch safeguards. It is unpublished and
+PG09 trainer and early legacy-dispatch safeguards. It remains a draft and is
 unqualified for pretrained/native execution. A parent-scheduled bounded CPU slot
 passed six tiny Cosmos lifecycle checks at the prior 0.7.0 proposal, including
 from an extracted product wheel. Those results do not qualify this new 0.8.1
@@ -23,7 +23,9 @@ copied GAN objective, regularizer, prior, optimizer or stepping loop.
 `core.pg09.lock.json` retain their original historical pins and qualification
 states. Select one isolated new environment for this proposal. Do not install
 the historical dependency selections with this package or retarget active runs.
-The exact proposed shared commit is local, not yet a publicly fetchable release.
+The exact tested shared commit is publicly reachable through merged common-core
+PR144 ancestry. This is a source draft, not a package release; see
+[publication and qualification status](PUBLICATION-STATUS.md).
 Existing native runtime environment checks remain authoritative; the optional
 `native` dependencies are not a qualified full environment lock.
 

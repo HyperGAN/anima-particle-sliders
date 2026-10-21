@@ -1,3 +1,7 @@
+For the common session interface, see [LIFECYCLE.md](LIFECYCLE.md).
+
+Common lifecycle draft: **32 selected CPU checks passed** on the tested runtime below. See [publication and qualification status](PUBLICATION-STATUS.md); native/pretrained limits remain explicit.
+
 # Anima Particle Sliders
 
 **Bad Intent, Final Form, Afterimage, Moonlit, Candlelit, Dusk for Anima Turbo v1.1.** Original Particle adapters and ordinary LoRA Distills, with strength stored in each file’s alpha.
