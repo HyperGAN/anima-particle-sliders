@@ -1,12 +1,16 @@
 # Anima image sessions: proposed new cohort
 
-This local integration targets the exact core 0.7.0 milestone
-`fd89e1c780ab5210cd1be98ec3b70977e6349379`. It is based on draft PR5
+This local proposal now targets clean core 0.8.1 candidate
+`32f6830f6402e85aa77b6631db64fcbbb2131f6b`; see `CORE081-ADOPTION.md` for
+source-only adoption and new native inference/hooks. The original 0.7.0
+`fd89e1c780ab5210cd1be98ec3b70977e6349379` cohort remains preserved.
+The proposal is based on draft PR5
 `4477716c8dbedd3a079e3299a1229adaaa2b407f`, preserving its existing shared
 PG09 trainer and early legacy-dispatch safeguards. It is unpublished and
 unqualified for pretrained/native execution. A parent-scheduled bounded CPU slot
-subsequently passed six tiny Cosmos lifecycle checks, including from an extracted
-product wheel against the exact installed core. See `LIFECYCLE-CPU.md` for scope,
+passed six tiny Cosmos lifecycle checks at the prior 0.7.0 proposal, including
+from an extracted product wheel. Those results do not qualify this new 0.8.1
+adoption; another CPU slot is pending. See `LIFECYCLE-CPU.md` for scope,
 commands, resource receipts and retained initial harness failure.
 
 The new `anima-particle-sliders` distribution registers backend `anima` in
@@ -75,7 +79,8 @@ Rendering is unavailable pending native 8/10/12-step Turbo scheduler/rounding,
 CFG1 and decoder parity. Original Studio/release/Comfy inference continues to
 use its own selected native safetensors/alpha/LoRA entrypoints. A session packet
 is a separate versioned format; do not feed it to those historical loaders.
-No native callback or generic solver is substituted for missing qualification.
+The new velocity-response callback does not substitute for native image sampler
+or decoder qualification.
 
 ## Strict identity and remaining seams
 
@@ -83,19 +88,22 @@ Training and inference session packets differ and bind the complete prepared
 configuration/cohort, capabilities, factory/core/product source bytes, native
 model/environment, verified frozen cache, architecture and PG recipe. Corrupt,
 legacy or changed-cohort packets are rejected; no implicit rebinding is offered.
-At this milestone loading an inference packet still constructs the prepared
-game/cache. Compact inference is being fixed by the core owner separately.
+The explicit v1 loader still constructs the prepared game/cache. Core 0.8.1
+also supplies a distinct native-only v2 API, now wired in this proposal; see
+`CORE081-ADOPTION.md`. It has not been tested here yet.
 
-Core's `Binding` has no pre-update native admission callback. The original
-Anima trainer requires one for exact runtime/cache teacher parity before a
-non-CPU update; this factory gates non-CPU execution until that seam is fixed.
+Core 0.8.1 now supplies `Binding.before_update`; this factory wires a pure
+CPU/evidence check. The original Anima native trainer requires actual model/cache
+teacher-parity admission for accelerators, so non-CPU execution remains gated
+until separately qualified.
 Custom `NativeFieldCritic`, low-rank `Branch` and routed bridge definitions
 require a separate matched-parameter HNDL migration and PG update parity review.
 The frozen pretrained backbone remains native.
 
 See `LIFECYCLE-PLAN.md` for entrypoint audit, migration boundaries and the
 parent-scheduled conformance matrix. Six bounded lifecycle tests and extracted
-wheel registration passed; full native runtime/environment loading, sampler
+wheel registration passed at 0.7.0; the 0.8.1 hooks/native factory await a new
+CPU slot. Full native runtime/environment loading, sampler
 parity, pretrained convergence/quality and native memory remain unqualified.
 No GPU work, model download, dependency installation, publication, merge,
 deployment, system change or active pin change occurred.

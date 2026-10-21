@@ -69,9 +69,9 @@ def test_exact_split_resume_ema_coverage_and_inference(tmp_path):
         assert inference.inference_only
         response = inference.evaluate(strength=.5)
         assert response.shape == (1, 4, 1, 2, 2) and torch.isfinite(response).all()
-        with pytest.raises(RuntimeError, match='inference export is not a resumable'):
+        with pytest.raises(UnsupportedOperation, match='inference-loaded sessions cannot train'):
             inference.step()
-        assert inference.closed
+        assert not inference.closed  # Core 0.8.1 refuses before the update boundary.
     runtime.mixer.close()
     other.mixer.close()
     assert_cpu()

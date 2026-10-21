@@ -3,32 +3,172 @@
 This new source cohort is CPU response-only. Native admission, sampler parity
 and HNDL definition migration require separate review; legacy routes stay put.
 """
+from contextlib import contextmanager
+from copy import deepcopy
 import hashlib
 import json
 import math
 from pathlib import Path
 
 from particle_sliders.lifecycle import (
-    Backend, Binding, Capabilities, UnsupportedOperation, checkpoint_cleanup,
+    Backend, Binding, Capabilities, UnsupportedOperation, native_cleanup,
 )
+
+from particle_sliders.inference import InferenceBackend, InferenceBinding, native_identity
 
 
 CAPABILITIES = Capabilities(
     'routed_particle_gan', render=False, strength_min=0., strength_max=1.,
     base_precisions=('bfloat16',), render_outputs=(),
-    qualification='Tiny Cosmos CPU lifecycle checks only; pretrained/native parity unqualified',
+    qualification='Core 0.8.1 source proposal; prior 0.7 CPU receipts are historical',
+    unavailable_reasons=(('render', 'Anima native sampler/decoder parity remains unqualified'),),
 )
 _OPTIONS = {'cache_dir', 'cache_index_sha256', 'model_dir', 'variation', 'device',
             'base_precision', 'steps', 'batch', 'seed', 'ema_decay', 'response_scale',
             'sigma', 'critic_width'}
 
 
-def validate(options):
-    """Allocation-free checks, including gates before native imports/loading."""
+def validate_runtime(options):
     if options.get('device', 'cpu') != 'cpu':
-        raise UnsupportedOperation('Anima lifecycle requires CPU; native update admission seam is pending')
+        raise UnsupportedOperation('Anima lifecycle requires CPU; native accelerator admission remains unqualified')
     if options.get('base_precision', 'bfloat16') != 'bfloat16':
         raise UnsupportedOperation('Anima preserves its native BF16 base and FP32 trainables')
+
+
+def preflight_runtime(runtime):
+    if runtime is not None and (str(runtime.device) != 'cpu' or str(runtime.dtype) != 'torch.bfloat16'):
+        raise UnsupportedOperation('staged Anima runtime must be CPU with the native BF16 base')
+
+
+class NativeOwner:
+    """One runtime owner reused by training and data-independent inference."""
+    def __init__(self, options, runtime=None):
+        validate_runtime(options)
+        preflight_runtime(runtime)
+        self.runtime = runtime
+        self.owns_runtime = runtime is None
+        self.adapter = None
+        self.restore = None
+        self.original_handles = set()
+        self.attachment_started = False
+        self.closed = False
+        self.variation = options['variation']
+        try:
+            if runtime is None:
+                if not options.get('model_dir'):
+                    raise ValueError('model_dir is required unless a staged CPU runtime is supplied')
+                from .backends.anima import TurboRuntime
+                self.runtime = TurboRuntime.__new__(TurboRuntime)
+                TurboRuntime.__init__(self.runtime, options['model_dir'], device='cpu',
+                                      verify=True, checkpointing=False)
+            preflight_runtime(self.runtime)
+            if self.variation in self.runtime.mixer.adapters:
+                raise ValueError('Anima session requires its own unused adapter name')
+            self.original_handles = set(self.runtime.mixer.handles)
+            self.restore = native_cleanup(self.runtime.transformer)
+        except BaseException:
+            self.close()
+            raise
+
+    def attach(self):
+        # Training controls the seed context across bank AND critic construction.
+        import torch
+        from particle_sliders.pg09_backends import AnimaRuntimeResponseAdapter
+        from .particles import ParticleAdapter
+        self.adapter = ParticleAdapter(self.runtime.transformer).to(device='cpu', dtype=torch.float32)
+        self.attachment_started = True
+        self.runtime.mixer.add(self.variation, self.adapter)
+        return AnimaRuntimeResponseAdapter(self.runtime, self.adapter, self.variation)
+
+    @contextmanager
+    def observation(self):
+        """Restore native state outside AdapterParameters on success or failure."""
+        import torch
+        runtime = self.runtime
+        roots = [runtime.transformer, self.adapter]
+        for key in ('text_encoder', 'text_conditioner', 'vae'):
+            module = getattr(runtime.pipe, key, None)
+            if isinstance(module, torch.nn.Module):
+                roots.append(module)
+        restores = [native_cleanup(module) for module in roots]
+        # AdapterParameters registers leaves, not the original native modules.
+        # Own their buffers here, including nonpersistent registrations.
+        modules = {id(module): module for root in roots for module in root.modules()}.values()
+        buffers = [(module, dict(module._buffers), set(module._non_persistent_buffers_set))
+                   for module in modules]
+        values = {id(buffer): (buffer, buffer.detach().clone())
+                  for _, registered, _ in buffers for buffer in registered.values() if buffer is not None}
+        scheduler = runtime.pipe.scheduler
+        scheduler_state = deepcopy(vars(scheduler))
+        strengths = runtime.mixer.strengths
+        mix = strengths.copy()
+        embeddings = getattr(runtime, 'embeddings', None)
+        entries = list(embeddings.items()) if embeddings is not None else None
+        try:
+            self.adapter.eval()
+            yield
+        finally:
+            try:
+                with torch.no_grad():
+                    for buffer, saved in values.values():
+                        if (buffer.shape, buffer.dtype, buffer.device) == (saved.shape, saved.dtype, saved.device):
+                            buffer.copy_(saved)
+                        else:
+                            buffer.data = saved.clone()
+                    for module, registered, nonpersistent in buffers:
+                        module._buffers.clear()
+                        module._buffers.update(registered)
+                        module._non_persistent_buffers_set.clear()
+                        module._non_persistent_buffers_set.update(nonpersistent)
+                for restore in reversed(restores):
+                    restore()
+            finally:
+                runtime.pipe.scheduler = scheduler
+                vars(scheduler).clear()
+                vars(scheduler).update(scheduler_state)
+                runtime.mixer.strengths = strengths
+                strengths.clear()
+                strengths.update(mix)
+                if embeddings is not None:
+                    runtime.embeddings = embeddings
+                    embeddings.clear()
+                    embeddings.update(entries)
+
+    def close(self):
+        if self.closed:
+            return
+        self.closed = True
+        runtime = self.runtime
+        try:
+            mixer = getattr(runtime, 'mixer', None)
+            if mixer is not None:
+                if self.adapter is not None and mixer.adapters.get(self.variation) is self.adapter:
+                    mixer.adapters.pop(self.variation)
+                    mixer.strengths.pop(self.variation, None)
+                if self.attachment_started and not mixer.adapters:
+                    for handle in tuple(mixer.handles):
+                        if handle not in self.original_handles:
+                            handle.remove()
+                            mixer.handles.remove(handle)
+        finally:
+            try:
+                if self.restore is not None:
+                    self.restore()
+            finally:
+                if self.owns_runtime and runtime is not None:
+                    mixer = getattr(runtime, 'mixer', None)
+                    if mixer is not None:
+                        mixer.close()
+                    embeddings = getattr(runtime, 'embeddings', None)
+                    if embeddings is not None:
+                        embeddings.clear()
+                    for name in ('transformer', 'pipe'):
+                        vars(runtime).pop(name, None)
+
+
+def validate(options):
+    """Allocation-free checks, including gates before native imports/loading."""
+    validate_runtime(options)
     if set(options) - _OPTIONS:
         raise ValueError('unknown Anima session option: ' + ', '.join(sorted(set(options) - _OPTIONS)))
     variation = options.get('variation')
@@ -66,98 +206,140 @@ def validate(options):
         raise ValueError('critic_width must be an integer in [1,512]')
 
 
-def prepare(options, *, runtime=None):
-    """Own provider/bank/game construction and unwind only owned resources.
+def preflight(options, request, staged):
+    if set(staged) - {'runtime'}:
+        raise ValueError('Anima only accepts a staged runtime, not caller-built training components')
+    preflight_runtime(staged.get('runtime'))
+    if request['native']:
+        raise UnsupportedOperation('Anima training-session native rendering remains unqualified')
 
-    A supplied runtime remains caller-owned. Normal installed CLI usage supplies
-    model_dir and the factory loads frozen local components itself. Neither path
-    captures teachers, discovers a checkpoint or creates a run directory.
-    """
+
+def prepare(options, *, runtime=None):
+    """Own construction; common core owns stepping, packets and observation."""
     validate(options)
     import torch
     from particle_sliders.pg09 import ConditionalPG09
-    from particle_sliders.pg09_backends import AnimaRuntimeResponseAdapter
     from .cache import TargetCache
-    from .particles import ParticleAdapter
     from .pg09_training import CachedResponses, NativeFieldCritic
 
-    owns_runtime = runtime is None
-    adapter = None
-    restore_checkpointing = None
-    original_handles = set()
-    attachment_started = False
-    closed = False
-    variation = options['variation']
-
-    def close():
-        nonlocal closed
-        if closed:
-            return
-        closed = True
-        try:
-            mixer = getattr(runtime, 'mixer', None)
-            if mixer is not None:
-                if adapter is not None and mixer.adapters.get(variation) is adapter:
-                    mixer.adapters.pop(variation)
-                    mixer.strengths.pop(variation, None)
-                # Mixer.add may fail after attaching only part of its hooks.
-                if attachment_started and not mixer.adapters:
-                    for handle in tuple(mixer.handles):
-                        if handle not in original_handles:
-                            handle.remove()
-                            mixer.handles.remove(handle)
-        finally:
-            try:
-                if restore_checkpointing is not None:
-                    restore_checkpointing()
-            finally:
-                if owns_runtime and runtime is not None:
-                    # Also works if native __init__ failed between components.
-                    mixer = getattr(runtime, 'mixer', None)
-                    if mixer is not None:
-                        mixer.close()
-                    embeddings = getattr(runtime, 'embeddings', None)
-                    if embeddings is not None:
-                        embeddings.clear()
-                    for name in ('transformer', 'pipe'):
-                        vars(runtime).pop(name, None)
-
+    owner = NativeOwner(options, runtime)
     try:
-        if runtime is None:
-            if not options.get('model_dir'):
-                raise ValueError('model_dir is required unless Backend.open receives a staged CPU runtime')
-            from .backends.anima import TurboRuntime
-            # Retain a reference so a partial native load can be cleaned up.
-            runtime = TurboRuntime.__new__(TurboRuntime)
-            TurboRuntime.__init__(runtime, options['model_dir'], device='cpu', verify=True, checkpointing=False)
-        if runtime.device != torch.device('cpu') or runtime.dtype != torch.bfloat16:
-            raise UnsupportedOperation('staged Anima runtime must be CPU with the native BF16 base')
-        if variation in runtime.mixer.adapters:
-            raise ValueError('Anima session requires its own unused adapter name')
-        original_handles = set(runtime.mixer.handles)
-        validate(options)  # Native loading must not silently change the cache snapshot.
-        # CachedResponses contains/rehashes shard paths before any tensor read.
-        cache = TargetCache(options['cache_dir'], verify=False)
-        responses = CachedResponses(cache, runtime, variation)
-        restore_checkpointing = checkpoint_cleanup(runtime.transformer)
+        runtime = owner.runtime
+        validate(options)  # Loading must not silently change the configured index.
+        responses = CachedResponses(TargetCache(options['cache_dir'], verify=False),
+                                    runtime, options['variation'])
+        frozen_identity = responses.identity()
+        # Keep the original bank-then-critic seeded initialization sequence.
         with torch.random.fork_rng(devices=[]):
             torch.manual_seed(options.get('seed', 7))
-            adapter = ParticleAdapter(runtime.transformer).to(device='cpu', dtype=torch.float32)
+            backend = owner.attach()
             critic = NativeFieldCritic(responses.response_shape[1],
                 responses.embedding_width + 4, options.get('critic_width', 32)).to(dtype=torch.float32)
-        attachment_started = True
-        runtime.mixer.add(variation, adapter)
-        backend = AnimaRuntimeResponseAdapter(runtime, adapter, variation)
         game = ConditionalPG09(backend, responses, critic,
-            particles=adapter.particles, preset='bispf_optimized',
+            particles=owner.adapter.particles, preset='bispf_optimized',
             response_domain='continuous_field', sampling='balanced',
             batch_size=options.get('batch', 2), seed=options.get('seed', 7),
             total_steps=options.get('steps', 4),
             response_scale=options.get('response_scale', 1.), sigma=options.get('sigma', 1.))
-        return Binding(game, close)
+        specification = NATIVE_BACKEND.specification(backend, model_identity=runtime.identity,
+            protocol=PROTOCOL, configuration=dict(variation=options['variation'], base_precision='bfloat16',
+                latent_channels=int(runtime.transformer.config.in_channels),
+                embedding_width=int(runtime.transformer.config.text_embed_dim)))
+        def before_update(request):
+            # Pure decision over existing evidence. No external I/O, cached
+            # approval or inference that CPU fixtures admit accelerator work.
+            if str(runtime.device) != 'cpu':
+                raise UnsupportedOperation('Anima native accelerator admission remains unqualified')
+            if responses.identity() != frozen_identity:
+                raise ValueError('Anima frozen runtime/cache evidence changed before update')
+            return True
+        return Binding(game, owner.close, inference=specification,
+                       before_update=before_update, observation=owner.observation)
     except BaseException:
-        close()
+        owner.close()
         raise
 
 
-BACKEND = Backend('anima', CAPABILITIES, prepare, validate)
+PROTOCOL = 'anima-turbo-native-velocity-v1'
+NATIVE_CAPABILITIES = Capabilities('routed_particle_gan', render=False,
+    base_precisions=('bfloat16',), render_outputs=(), operations=('response',),
+    unavailable_reasons=(('render', 'Anima native sampler/decoder parity remains unqualified'),),
+    qualification='Core 0.8.1 source proposal; Anima native-only conformance pending')
+
+
+def validate_inference(options, specification):
+    validate_runtime(options)
+    if set(options) - {'model_dir', 'device', 'base_precision'}:
+        raise ValueError('native inference accepts only local model_dir/device/base_precision; no training cache')
+    directory = options.get('model_dir')
+    if not isinstance(directory, str) or not (Path(directory) / 'anima-lock.json').is_file():
+        raise ValueError('native inference requires the original local staged anima-lock.json')
+    configuration = specification.configuration
+    if (set(configuration) != {'variation', 'base_precision', 'latent_channels', 'embedding_width'}
+            or not isinstance(configuration['variation'], str) or not configuration['variation'].strip()
+            or configuration['base_precision'] != 'bfloat16'
+            or any(type(configuration[key]) is not int or configuration[key] < 1
+                   for key in ('latent_channels', 'embedding_width'))):
+        raise ValueError('invalid native Anima architecture configuration')
+    if specification.identity['protocol'] != PROTOCOL:
+        raise ValueError('unsupported native Anima inference protocol')
+
+
+def preflight_inference(options, request, specification):
+    validate_inference(options, specification)
+    native = request['native']
+    if set(native) - {'latent', 'embedding', 'timestep'}:
+        raise ValueError('native Anima response requires only latent, embedding and native timestep')
+    if not native:
+        return  # Opening may precede supplying a response request.
+    if set(native) != {'latent', 'embedding', 'timestep'}:
+        raise ValueError('supply latent, embedding and timestep together')
+    # Inspect tensor metadata before a model is allocated; values are checked by
+    # the callback without assuming tensor contents are finite from shape alone.
+    for key, rank in (('latent', 5), ('embedding', 3)):
+        tensor = native[key]
+        if (getattr(tensor, 'ndim', None) != rank or tensor.shape[0] != 1
+                or any(size < 1 for size in tensor.shape) or str(tensor.device) != 'cpu'
+                or not tensor.is_floating_point()):
+            raise ValueError('native Anima requires a CPU floating ' + key + ' tensor with singleton batch')
+    if native['latent'].shape[2] != 1:
+        raise ValueError('native Anima retains its singleton time plane')
+    if (native['latent'].shape[1] != specification.configuration['latent_channels']
+            or native['embedding'].shape[-1] != specification.configuration['embedding_width']):
+        raise ValueError('native Anima channel/conditioning geometry differs from the export')
+    timestep = native['timestep']
+    if isinstance(timestep, bool) or not isinstance(timestep, (int, float)) or not math.isfinite(timestep) or timestep < 0:
+        raise ValueError('native Anima timestep must be a finite nonnegative scheduler scalar')
+
+
+def prepare_inference(options, specification):
+    validate_inference(options, specification)
+    import torch
+    owner = NativeOwner(dict(options, variation=specification.configuration['variation']))
+    try:
+        with torch.random.fork_rng(devices=[]):
+            torch.manual_seed(0)
+            backend = owner.attach()
+        runtime = owner.runtime
+        identity = native_identity(backend, model_identity=runtime.identity, protocol=PROTOCOL)
+        def response(*, strength, seed, latent, embedding, timestep):
+            if (latent.shape[1] != runtime.transformer.config.in_channels
+                    or embedding.shape[-1] != runtime.transformer.config.text_embed_dim):
+                raise ValueError('native Anima latent channels or embedding width differ from the actual model')
+            if (timestep > float(runtime.pipe.scheduler.config.num_train_timesteps)
+                    or not torch.isfinite(latent).all() or not torch.isfinite(embedding).all()):
+                raise ValueError('native Anima response values or scheduler timestep are invalid')
+            with backend.network.scaled(strength):
+                return runtime.predict(latent, timestep, embedding).detach().clone()
+        return InferenceBinding(backend.network, identity, owner.close, response=response,
+                                observation=owner.observation)
+    except BaseException:
+        owner.close()
+        raise
+
+
+NATIVE_BACKEND = InferenceBackend('anima', NATIVE_CAPABILITIES, prepare_inference,
+                                  validate_inference, preflight=preflight_inference)
+
+
+BACKEND = Backend('anima', CAPABILITIES, prepare, validate, preflight=preflight)
