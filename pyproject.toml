@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "anima-particle-sliders"
+version = "0.1.0"
+description = "Anima Turbo product adapter for the Particle Sliders image lifecycle"
+readme = "LIFECYCLE.md"
+requires-python = ">=3.11"
+license = {file = "LICENSE"}
+dependencies = [
+  "safetensors>=0.4,<1",
+  "packaging>=24",
+  "particle-sliders-core @ git+https://github.com/HyperGAN/particle-sliders.git@fd89e1c780ab5210cd1be98ec3b70977e6349379#subdirectory=packages/particle-sliders-core",
+]
+
+[project.optional-dependencies]
+native = [
+  "numpy>=1.26", "pillow>=10", "accelerate==1.14.0",
+  "transformers==5.15.0", "huggingface-hub==1.27.0",
+  "diffusers @ git+https://github.com/huggingface/diffusers.git@d5baa4fb548294f47dbca49890abd4b291204c60",
+]
+
+[project.entry-points."particle_sliders.image_backends"]
+anima = "lumen_studio.lifecycle:BACKEND"
+
+[tool.setuptools]
+py-modules = ["particle_io", "single_particle", "comfy_particle"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["lumen_studio*", "configs.anima*"]
+namespaces = true
+
+[tool.setuptools.package-data]
+"configs.anima" = ["*.json", "requirements.lock", "candidates/*.json"]
+lumen_studio = ["static/*", "vendor/LICENSE", "vendor/provenance.json"]
