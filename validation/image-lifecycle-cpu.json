@@ -1,0 +1,142 @@
+{
+  "schema": "anima-image-lifecycle-bounded-cpu-v1",
+  "status": "SIX_BOUNDED_CHECKS_PASSED_NATIVE_UNQUALIFIED",
+  "source_phase_commit": "faa47f71a833a3a3f5fa28ce9d787a338b71be48",
+  "preserved_pr5": "4477716c8dbedd3a079e3299a1229adaaa2b407f",
+  "core_milestone": "fd89e1c780ab5210cd1be98ec3b70977e6349379",
+  "all_core_python_json_byte_matches": 39,
+  "pg_sources_sha256": "04624298310cd4b28d5bf687a1eac8951efd9439fb0310709ba5b9703208ceab",
+  "final_wheel": {
+    "wheel": "/ml2/codex-storage/future-workspaces/2026-10-21/task-4/evidence/product-dist/anima_particle_sliders-0.1.0-py3-none-any.whl",
+    "sha256": "084c636d4edb551715c1c81b99ab324a89de8aa05cba84fc1fd3afc8c3ba261b",
+    "bytes": 121317,
+    "extracted_product": "/ml2/codex-storage/future-workspaces/2026-10-21/task-4/evidence/installed-product",
+    "required_members": [
+      "configs/anima/released-identity.json",
+      "configs/anima/requirements.lock",
+      "lumen_studio/lifecycle.py",
+      "lumen_studio/vendor/provenance.json"
+    ],
+    "no_dependency_install": true
+  },
+  "tested_source_sha256": {
+    "lumen_studio/lifecycle.py": "5d909414b19785dee0c25d52ec5b6e09d1178162295f1c968ffc030d5c81116f",
+    "pyproject.toml": "46e5e7cdae25847669da28f6200e8873d2266fd34ec8bdd099004a86b160b974",
+    "MANIFEST.in": "5cf4cbb7e1e632b628d27207c19d3c310be11ed28df8f128b1fa5863e83e5f28",
+    "LIFECYCLE.md": "1532f1e4749a70335789420dca00d5f799901677936174b755fa4e4a6fc96807",
+    "LIFECYCLE-PLAN.md": "054931a076116ab2c581ea0ff6c255532be773bc7d4e8e8a3f22473c388b96da",
+    "LIFECYCLE-CPU.md": "ed237ac2c75b5ed43574bbf6ac0910035ec29f4ab2ef43aaa8f103243a2ff6cd",
+    "tests/lumen_studio/test_image_lifecycle.py": "ea2125dd1293d31077f78a5957ff689bcd74e81d7d9ec1a7e9112eeb68cb0b98"
+  },
+  "resources": {
+    "dependencies": {
+      "command": [
+        "/ml2/codex-storage/future-workspaces/2026-10-21/task-2/.venv311/bin/python",
+        "-I",
+        "/ml2/codex-storage/future-workspaces/2026-10-21/task-4/evidence/dependencies.py"
+      ],
+      "cwd": "/tmp",
+      "returncode": 0,
+      "elapsed_seconds": 4.015,
+      "sampled_tree_peak_rss_bytes": 753647616,
+      "child_peak_rss_bytes": 877412352,
+      "minimum_host_available_bytes": 49243549696,
+      "guard_stop": null,
+      "environment": {
+        "CUDA_VISIBLE_DEVICES": "",
+        "HF_HUB_OFFLINE": "1",
+        "TRANSFORMERS_OFFLINE": "1",
+        "OMP_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1"
+      }
+    },
+    "core-source-and-direction": {
+      "command": [
+        "/ml2/codex-storage/future-workspaces/2026-10-21/task-2/.venv311/bin/python",
+        "-I",
+        "/ml2/codex-storage/future-workspaces/2026-10-21/task-4/evidence/check_core_guard.py"
+      ],
+      "cwd": "/tmp",
+      "returncode": 0,
+      "elapsed_seconds": 1.506,
+      "sampled_tree_peak_rss_bytes": 543965184,
+      "child_peak_rss_bytes": 664371200,
+      "minimum_host_available_bytes": 49824350208,
+      "guard_stop": null,
+      "environment": {
+        "CUDA_VISIBLE_DEVICES": "",
+        "HF_HUB_OFFLINE": "1",
+        "TRANSFORMERS_OFFLINE": "1",
+        "OMP_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1"
+      }
+    },
+    "wheel-conformance": {
+      "command": [
+        "/ml2/codex-storage/future-workspaces/2026-10-21/task-2/.venv311/bin/python",
+        "-I",
+        "/ml2/codex-storage/future-workspaces/2026-10-21/task-4/evidence/run_wheel_conformance.py"
+      ],
+      "cwd": "/tmp",
+      "returncode": 0,
+      "elapsed_seconds": 6.625,
+      "sampled_tree_peak_rss_bytes": 801927168,
+      "child_peak_rss_bytes": 926818304,
+      "minimum_host_available_bytes": 47918346240,
+      "guard_stop": null,
+      "environment": {
+        "CUDA_VISIBLE_DEVICES": "",
+        "HF_HUB_OFFLINE": "1",
+        "TRANSFORMERS_OFFLINE": "1",
+        "OMP_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1"
+      }
+    },
+    "product-build": {
+      "command": [
+        "/ml2/codex-storage/future-workspaces/2026-10-21/task-2/.venv311/bin/python",
+        "-I",
+        "/ml2/codex-storage/future-workspaces/2026-10-21/task-4/evidence/build_product.py"
+      ],
+      "cwd": "/tmp",
+      "returncode": 0,
+      "elapsed_seconds": 0.302,
+      "sampled_tree_peak_rss_bytes": 36016128,
+      "child_peak_rss_bytes": 35946496,
+      "minimum_host_available_bytes": 48810905600,
+      "guard_stop": null,
+      "environment": {
+        "CUDA_VISIBLE_DEVICES": "",
+        "HF_HUB_OFFLINE": "1",
+        "TRANSFORMERS_OFFLINE": "1",
+        "OMP_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1"
+      }
+    }
+  },
+  "results": {
+    "wheel_tests_passed": 6,
+    "wheel_tests_failed": 0,
+    "junit": "validation/image-lifecycle-cpu/wheel-conformance.junit.xml",
+    "cuda_initialized": false,
+    "torch_threads": 1,
+    "new_core_defects_observed": [],
+    "core_seam_still_pending": "pre-update native admission callback; non-CPU gate retained",
+    "dependency_guard": "exact milestone parser; only inventoried MOSS edge",
+    "product_import_origin": "/ml2/codex-storage/future-workspaces/2026-10-21/task-4/evidence/installed-product/lumen_studio/lifecycle.py"
+  },
+  "initial_failure": "Six final thread assertions failed because historical conftest sets two Torch threads. Behavior assertions passed. Autouse fixture now sets one before all fixture/model/update work; initial log/JUnit/resources retained.",
+  "scope_limits": [
+    "synthetic real tiny Cosmos; no pretrained weights",
+    "owned loader replaced by synthetic loader",
+    "no real native model/environment loading or sampler parity",
+    "wheel extracted locally; no clean dependency resolution claim",
+    "core compact inference update and HNDL parity remain separate"
+  ],
+  "forbidden_actions_performed": [],
+  "parent_messages_sent": false
+}

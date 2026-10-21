@@ -16,7 +16,7 @@ from particle_sliders.lifecycle import (
 CAPABILITIES = Capabilities(
     'routed_particle_gan', render=False, strength_min=0., strength_max=1.,
     base_precisions=('bfloat16',), render_outputs=(),
-    qualification='Source integration only; CPU conformance and native parity pending',
+    qualification='Tiny Cosmos CPU lifecycle checks only; pretrained/native parity unqualified',
 )
 _OPTIONS = {'cache_dir', 'cache_index_sha256', 'model_dir', 'variation', 'device',
             'base_precision', 'steps', 'batch', 'seed', 'ema_decay', 'response_scale',

@@ -78,7 +78,7 @@ Reference images and native rendering are unsupported in this slice.
 - Core publication/main integration and exact installed package review remain
   unresolved. The new proposed dependency is not an active environment pin.
 
-## Deferred verification (parent must schedule)
+## Initial deferred verification plan
 
 No tests, dependency installs, model loads or builds during this source-only
 phase. Later run one bounded installed-wheel CPU job outside all source trees:
@@ -89,3 +89,8 @@ observation state/RNG preservation, setup/update failure cleanup, borrowed
 runtime mix/hook/checkpoint restoration, installed source origins and dependency
 direction guard. Use CUDA hidden, HF offline and one thread; no model downloads.
 Archive hashes, wheels and command receipts only after that scheduled phase.
+
+The parent subsequently allocated a bounded CPU slot. Its executed six-check
+scope, extracted-wheel registration, exact-core byte comparison, dependency
+guard and resource receipts are recorded in `LIFECYCLE-CPU.md`. Broader native
+qualification and the interface gaps above remain pending.

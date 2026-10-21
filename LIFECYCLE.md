@@ -4,8 +4,10 @@ This local integration targets the exact core 0.7.0 milestone
 `fd89e1c780ab5210cd1be98ec3b70977e6349379`. It is based on draft PR5
 `4477716c8dbedd3a079e3299a1229adaaa2b407f`, preserving its existing shared
 PG09 trainer and early legacy-dispatch safeguards. It is unpublished and
-unqualified. Source inspection and static checks are the only current evidence;
-installed-wheel CPU conformance must be scheduled by the parent.
+unqualified for pretrained/native execution. A parent-scheduled bounded CPU slot
+subsequently passed six tiny Cosmos lifecycle checks, including from an extracted
+product wheel against the exact installed core. See `LIFECYCLE-CPU.md` for scope,
+commands, resource receipts and retained initial harness failure.
 
 The new `anima-particle-sliders` distribution registers backend `anima` in
 `particle_sliders.image_backends`. It depends on Particle Sliders, which owns
@@ -58,8 +60,9 @@ with open_session(config, artifact='new-run/adapter.pt', operation='evaluate') a
 `hypergan_observer` is an externally supplied run observer. The product does
 not create a second dashboard. The common installed `particle-slider`
 capabilities/train/evaluate commands consume `config.as_dict()` as JSON.
-No commands have been executed for this proposal. The small test job should
-use the existing real tiny random Cosmos fixture, not a pretrained CPU load.
+The bounded test job uses the existing real tiny random Cosmos fixture, not a
+pretrained CPU load. It exercises registered `open_session` and the owned-loader
+branch with a synthetic loader; native staged weight loading remains untested.
 
 Public strength support is finite [0,1]. Base precision is BF16, all generator
 and critic trainables FP32. Native geometry is `[1,C,1,H,W]`; evaluation returns
@@ -91,7 +94,8 @@ require a separate matched-parameter HNDL migration and PG update parity review.
 The frozen pretrained backbone remains native.
 
 See `LIFECYCLE-PLAN.md` for entrypoint audit, migration boundaries and the
-parent-scheduled conformance matrix. Pretrained convergence/quality, native
-memory, installed packaging and this new lifecycle's runtime behavior are not
-yet qualified. No GPU work, model download, package installation, publication,
-merge, deployment, system change or active pin change is part of this phase.
+parent-scheduled conformance matrix. Six bounded lifecycle tests and extracted
+wheel registration passed; full native runtime/environment loading, sampler
+parity, pretrained convergence/quality and native memory remain unqualified.
+No GPU work, model download, dependency installation, publication, merge,
+deployment, system change or active pin change occurred.

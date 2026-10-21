@@ -1,4 +1,4 @@
-include LICENSE NOTICE ANIMA-LICENSE.md LIFECYCLE.md LIFECYCLE-PLAN.md
+include LICENSE NOTICE ANIMA-LICENSE.md LIFECYCLE.md LIFECYCLE-PLAN.md LIFECYCLE-CPU.md
 recursive-include configs/anima *.json requirements.lock
 recursive-include lumen_studio/static *.html *.js *.css
 include lumen_studio/vendor/LICENSE lumen_studio/vendor/provenance.json
