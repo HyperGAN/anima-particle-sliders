@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=77"]
+requires = ["setuptools>=84.2.1"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -18,7 +18,7 @@ dependencies = [
 
 [project.optional-dependencies]
 native = [
-  "numpy>=1.26", "pillow>=10", "accelerate==1.14.0",
+  "numpy>=1.26", "pillow>=13.0.0", "accelerate==1.14.0",
   "transformers==5.15.0", "huggingface-hub==1.27.0",
   "diffusers @ git+https://github.com/huggingface/diffusers.git@d5baa4fb548294f47dbca49890abd4b291204c60",
 ]
