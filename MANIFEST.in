@@ -2,3 +2,12 @@ include LICENSE NOTICE ANIMA-LICENSE.md LIFECYCLE.md LIFECYCLE-PLAN.md LIFECYCLE
 recursive-include configs/anima *.json requirements.lock
 recursive-include lumen_studio/static *.html *.js *.css
 include lumen_studio/vendor/LICENSE lumen_studio/vendor/provenance.json
+
+# Source archives must preserve the same install/cohort choices as a checkout.
+include *.md requirements*.txt core*.lock.json pytest.ini __init__.py
+recursive-include tests *.py
+recursive-include release_tools *.py
+recursive-include scripts *.py
+recursive-include data *.json
+recursive-include validation *.json
+recursive-include cohorts *.py *.toml

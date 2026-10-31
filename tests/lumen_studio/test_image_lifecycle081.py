@@ -46,6 +46,10 @@ def ban_training_construction(monkeypatch):
         monkeypatch.setattr(cls, '__init__', forbidden)
 
 
+def test_product_runtime_imports_from_installed_wheel():
+    assert Path(lifecycle.__file__).resolve().is_relative_to(Path(sys.prefix).resolve())
+
+
 def request_from(session):
     row = session.game.rows[0].row
     return dict(latent=row.latent.detach().clone(), embedding=row.neutral.detach().clone(),
@@ -133,6 +137,49 @@ def test_before_update_rejection_preserves_state_ema_rng_and_observer(tmp_path):
         session.train(stop_after=1, on_step=observed.append)
         assert len(observed) == 1 and session.game.completed_steps == 1
     runtime.mixer.close()
+
+
+def test_native_adapter_owns_generator_gradients_and_optimizer_leaves(tmp_path):
+    runtime = runtime_fixture()
+    frozen = deepcopy(runtime.transformer.state_dict())
+    try:
+        with open_session(configuration(tmp_path, runtime), runtime=runtime) as session:
+            adapter = session.game.backend.adapter
+            generator = [p for group in session.game.opt_g.param_groups for p in group['params']]
+            critic = [p for group in session.game.opt_d.param_groups for p in group['params']]
+            assert len(generator) == len({id(p) for p in generator})
+            assert {id(p) for p in generator} == {id(p) for p in adapter.parameters()}
+            assert {id(p) for p in critic} == {id(p) for p in session.game.critic.parameters()}
+            assert not {id(p) for p in generator} & {id(p) for p in critic}
+            assert session.game.prior.z is adapter.particles
+            assert all(p.dtype == torch.float32 and p.requires_grad for p in generator)
+            assert all(p.dtype == torch.bfloat16 and not p.requires_grad
+                       for p in runtime.transformer.parameters())
+            # Public shared updates make the initially zero-up branches active.
+            session.train(stop_after=2)
+            session.game.network.zero_grad(set_to_none=True)
+            session.game.critic.zero_grad(set_to_none=True)
+            with session.game.network.scaled(.5):
+                response = session.game.backend.generated(session.game.rows[0])
+                response.float().sum().backward()
+            assert adapter.particles.grad is not None and adapter.particles.grad.abs().sum() > 0
+            assert any(p.grad is not None and p.grad.abs().sum() > 0
+                       for p in adapter.branches.parameters())
+            assert all(p.grad is None for p in runtime.transformer.parameters())
+            assert all(p.grad is None for p in session.game.critic.parameters())
+            assert equal(frozen, runtime.transformer.state_dict())
+    finally:
+        runtime.mixer.close()
+    assert not torch.cuda.is_initialized()
+
+
+def test_hndl_candidate_refuses_in_default_core081_environment(monkeypatch):
+    from lumen_studio import hndl_lifecycle
+    def forbidden(*args, **kwargs):
+        pytest.fail('new HNDL profile reached model allocation in the old environment')
+    monkeypatch.setattr(hndl_lifecycle.NativeOwner, '__init__', forbidden)
+    with pytest.raises(RuntimeError, match='separate core0.12/PG0.9.4'):
+        hndl_lifecycle.verified_builder()
 
 
 def decorate_observation(runtime):

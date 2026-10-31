@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=84.2.1"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "anima-particle-sliders"
+version = "0.3.0"
+description = "Anima Turbo product adapter for the Particle Sliders image lifecycle"
+readme = "HNDL-CANDIDATE.md"
+requires-python = ">=3.11"
+license = "MIT"
+license-files = ["LICENSE", "NOTICE", "ANIMA-LICENSE.md"]
+dependencies = [
+  "safetensors>=0.4,<1",
+  "packaging>=24",
+  "particle-sliders-core[hypergan-hndl] @ git+https://github.com/HyperGAN/particle-sliders.git@4abc0eb03a4e3a84fc3e6d02734c13dc7e8ea231#subdirectory=packages/particle-sliders-core",
+]
+
+[project.optional-dependencies]
+native = [
+  "numpy>=1.26", "pillow>=13.0.0", "torchvision>=0.21,<1", "accelerate==1.14.0",
+  "transformers==5.15.0", "huggingface-hub==1.27.0",
+  "diffusers @ git+https://github.com/huggingface/diffusers.git@d5baa4fb548294f47dbca49890abd4b291204c60",
+]
+
+[project.entry-points."particle_sliders.image_backends"]
+anima-hndl = "lumen_studio.hndl_lifecycle:BACKEND"
+
+[project.entry-points."particle_sliders.inference_backends"]
+anima-hndl = "lumen_studio.hndl_lifecycle:NATIVE_BACKEND"
+
+[tool.setuptools]
+py-modules = ["particle_io", "single_particle", "comfy_particle"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["lumen_studio*", "configs.anima*"]
+namespaces = true
+
+[tool.setuptools.package-data]
+"configs.anima" = ["*.json", "requirements.lock", "candidates/*.json"]
+lumen_studio = ["static/*", "vendor/LICENSE", "vendor/provenance.json"]

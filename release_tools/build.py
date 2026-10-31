@@ -41,7 +41,7 @@ def copy(source,dest):
 
 
 def package_plugin(out):
-    plugin=['__init__.py','comfy_particle.py','particle_io.py','requirements.txt','requirements-legacy.txt','core.lock.json','COMFYUI.md','LICENSE','ANIMA-LICENSE.md','NOTICE',
+    plugin=['__init__.py','comfy_particle.py','particle_io.py','requirements.txt','requirements-legacy.txt','core.lock.json','COMFYUI.md','INSTALL-COHORTS.md','HNDL-CANDIDATE.md','HNDL-CPU.md','LICENSE','ANIMA-LICENSE.md','NOTICE',
         'lumen_studio/__init__.py','lumen_studio/particles.py','lumen_studio/contracts.py','lumen_studio/alpha_adapter.py',
         'lumen_studio/checkpoint_validation.py','single_particle.py',
         'lumen_studio/vendor/__init__.py','lumen_studio/vendor/reference.py','lumen_studio/vendor/LICENSE','lumen_studio/vendor/provenance.json']
