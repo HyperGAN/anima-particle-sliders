@@ -10,7 +10,7 @@ experimental v1 artifacts require their original environment.
 | Final0.3 could replace stable | Explicit prerelease0.3.0a1 plus runtime admission of a dedicated venv and selected installed roots. Both artifacts still share a distribution name: pip can overwrite stable. Dedicated installation is an operator requirement; no install-time isolation is claimed. |
 | Modern code leaked into stable wheel | Moved to candidate-only `anima_hndl`; stable wheel tests assert neither that namespace nor the old `lumen_studio.hndl_lifecycle` is present. Stable retains `anima`; candidate registers only `anima-hndl`. |
 | Version-only core admission | Verify exact core Git commit4abc0eb or the reviewed joint wheel SHA, plus all50 canonical core files from that Git tree. Wrong Git metadata and actual core-file tampering are rejected. |
-| Imported product helpers unbound | Committed manifest covers all64 packaged product files, including particles/cache/PG09 training, native owner, source validator and configuration. Actual changes in those three helpers are rejected; source-closure digests and manifest hash enter network identity. Sdist-built candidate contents are checked against the complete manifest. |
+| Imported product helpers unbound | Committed manifest covers all65 packaged product files, including particles/cache/PG09 training, native owner, source validator and configuration. Actual changes in those three helpers are rejected; source-closure digests and manifest hash enter network identity. Sdist-built candidate contents are checked against the complete manifest. |
 | Installer/lock ambiguity | The a119-to-project installer change intentionally resolves the existing core0.3/core0.8.1 conflict. Torchvision is intentional for the pinned Cosmos import. README/formulation/reproduction/install docs and generator explicitly scope core.lock's original note/version to the historical archive. Its bytes remain unchanged. |
 | Missing validation after load | Revalidate after native owner construction; a loader replacing the configured cache index is rejected before adapter/critic construction, with cleanup verified. |
 | Magic bank dimensions | Allocation and HNDL input shape derive from `ARCHITECTURE['particles']` and `ARCHITECTURE['particle_dim']`. |
@@ -45,7 +45,7 @@ Executable source evidence:
   core0.8.1 packet, exact `unsupported session packet version; no automatic
   migration` refusal, complete state unchanged in core0.12.
 
-Results: 88 stable installed checks, 123 archive/release checks and39 installed
+Results: 88 stable installed checks, 123 archive/release checks and49 installed
 candidate/admission/loader checks pass. The genuine two-environment packet probe
 passes with the exact refusal above. The updated wheel reuses the previously
 physically isolated dependency environment; it is a new artifact/source test.
@@ -58,3 +58,16 @@ Full owned pretrained/GPU/render qualification remains blocked: among other
 full-lock differences, native-extra Pillow>=13 conflicts with inherited
 Pillow==12.3.0. A separate qualified native cohort must resolve that conflict.
 No checkpoint labels, historical locks, permissions or shared GAN math changed.
+
+The subsequent return-review path correction rejects relative/bare/None component
+roots instead of normalizing them. The literal must exactly equal the absolute
+admitted root. A candidate-only `LocalTurboRuntime` initializer explicitly passes
+`local_files_only=True` to both loading calls; all native execution methods are
+inherited, and stable loader/source bytes stay unchanged. Actual pinned pipeline,
+component and Cosmos loaders are exercised by the generated fixture regression,
+which asserts literal arguments and local-only propagation with network forbidden.
+Eight ambiguous path forms refuse before initialization; same-byte inode
+replacement during loading also refuses with owned cleanup. The immutable-input
+requirement remains: snapshots are not a concurrent filesystem sandbox. Native
+identity retains the actual candidate runtime class; legacy classes are not
+relabeled as equivalent.

@@ -24,6 +24,7 @@ from lumen_studio import lifecycle as legacy
 from lumen_studio.particles import ARCHITECTURE
 from .source_validation import verify_cohort
 from .admission import verify_model_directory, verified_cache_index
+from .runtime import LocalTurboRuntime
 
 
 PROTOCOL = 'anima-hypergan-hndl-native-velocity-v2'
@@ -127,12 +128,29 @@ class NativeFieldCritic(nn.Module):
 
 class NativeOwner(legacy.NativeOwner):
     def __init__(self, options, runtime=None):
-        if runtime is None:
-            verify_model_directory(options['model_dir'])
-        super().__init__(options, runtime)
+        legacy.validate_runtime(options)
+        legacy.preflight_runtime(runtime)
+        self.runtime = runtime
+        self.owns_runtime = runtime is None
+        self.adapter = None
+        self.restore = None
+        self.original_handles = set()
+        self.attachment_started = False
+        self.closed = False
+        self.variation = options['variation']
         try:
             if runtime is None:
-                verify_model_directory(options['model_dir'])
+                before = verify_model_directory(options.get('model_dir'))
+                self.runtime = LocalTurboRuntime.__new__(LocalTurboRuntime)
+                LocalTurboRuntime.__init__(self.runtime, options['model_dir'], device='cpu',
+                                           verify=True, checkpointing=False)
+                if verify_model_directory(options['model_dir']) != before:
+                    raise ValueError('model file identities changed during owned loading')
+            legacy.preflight_runtime(self.runtime)
+            if self.variation in self.runtime.mixer.adapters:
+                raise ValueError('Anima session requires its own unused adapter name')
+            self.original_handles = set(self.runtime.mixer.handles)
+            self.restore = legacy.native_cleanup(self.runtime.transformer)
         except BaseException:
             self.close()
             raise

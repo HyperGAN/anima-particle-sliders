@@ -5,6 +5,9 @@ They exercise ComponentSpec.load, the component path used by ModularPipeline.
 They do not qualify the pretrained Anima model or arbitrary untrusted artifacts.
 """
 import json
+from copy import deepcopy
+import hashlib
+from pathlib import Path
 import pytest
 import torch
 
@@ -76,4 +79,97 @@ def test_extra_index_component_behavior_with_own_outside_fixture(tmp_path, famil
     else:
         loaded = spec.load(local_files_only=True, dtype=torch.float32)
         assert all(torch.equal(v, loaded.state_dict()[k]) for k, v in model.state_dict().items())
+    assert not torch.cuda.is_initialized()
+
+
+def test_candidate_actual_pipeline_and_component_loaders_use_exact_local_root(tmp_path, monkeypatch):
+    """Actual pipeline -> spec -> Cosmos loader, with only generated tiny weights.
+
+    The fixture substitutes its own manifest authority and historical environment
+    check. Production has neither override. This is a loader argument/path test,
+    not qualification of the full historical environment or pretrained Anima.
+    """
+    import socket
+    from diffusers import ModularPipeline, CosmosTransformer3DModel
+    from diffusers.modular_pipelines.modular_pipeline import ModularPipelineBlocks
+    from diffusers.modular_pipelines.modular_pipeline_utils import ComponentSpec
+    from anima_hndl import admission, runtime as candidate_runtime
+    from anima_hndl.lifecycle import NativeOwner
+    from lumen_studio.backends.anima import TurboRuntime
+    from lumen_studio.contracts import digest
+    root = tmp_path / 'admitted-model'
+    root.mkdir()
+    model = random_model('cosmos')
+    model.save_pretrained(root / 'transformer', safe_serialization=True)
+
+    class Blocks(ModularPipelineBlocks):
+        @property
+        def expected_components(self):
+            return [ComponentSpec(name='transformer', type_hint=CosmosTransformer3DModel,
+                pretrained_model_name_or_path=str(root), subfolder='transformer')]
+
+    definition = ModularPipeline(blocks=Blocks())
+    index = dict(definition.config)
+    index['_class_name'] = 'ModularPipeline'
+    (root / 'modular_model_index.json').write_text(json.dumps(index))
+    trusted = {'model': 'circlestone-labs/Anima:turbo-v1.1', 'revision': 'a' * 40,
+        'files': {str(p.relative_to(root)): hashlib.sha256(p.read_bytes()).hexdigest()
+                  for p in root.rglob('*') if p.is_file()}}
+    (root / 'anima-lock.json').write_text(json.dumps(trusted))
+    portable = deepcopy(trusted)
+    portable_index = deepcopy(index)
+    portable_index['transformer'][2]['pretrained_model_name_or_path'] = '$MODEL_ROOT'
+    portable['files']['modular_model_index.json'] = digest(portable_index)
+    released = {'model': trusted['model'], 'sha256': digest(portable)}
+    monkeypatch.setattr(admission, '_trusted_model', lambda: (deepcopy(trusted), deepcopy(released)))
+    calls = []
+    monkeypatch.setattr(candidate_runtime, 'verify_environment', lambda: calls.append(('environment',)))
+    actual_pipeline_load = ModularPipeline.from_pretrained
+    actual_components_load = ModularPipeline.load_components
+    actual_model_load = CosmosTransformer3DModel.from_pretrained
+
+    def pipeline_load(cls, path, **kwargs):
+        calls.append(('pipeline', path, dict(kwargs)))
+        pipe = actual_pipeline_load(path, **kwargs)
+        # Only the transformer needs real loading in this bounded path fixture.
+        for name in ('text_encoder', 'text_conditioner', 'vae'):
+            setattr(pipe, name, torch.nn.Linear(1, 1))
+        pipe.vae_scale_factor = 1
+        return pipe
+
+    def components_load(self, **kwargs):
+        calls.append(('components', dict(kwargs)))
+        return actual_components_load(self, **kwargs)
+
+    def model_load(cls, path, **kwargs):
+        calls.append(('model', path, dict(kwargs)))
+        return actual_model_load(path, **kwargs)
+
+    def no_network(*args, **kwargs):
+        pytest.fail('local generated fixture attempted a network connection')
+
+    monkeypatch.setattr(ModularPipeline, 'from_pretrained', classmethod(pipeline_load))
+    # The fixture block class is test-local, not a dynamically fetched plugin.
+    monkeypatch.setattr(ModularPipelineBlocks, 'from_pretrained', classmethod(lambda cls, *a, **k: Blocks()))
+    monkeypatch.setattr(ModularPipeline, 'load_components', components_load)
+    monkeypatch.setattr(CosmosTransformer3DModel, 'from_pretrained', classmethod(model_load))
+    monkeypatch.setattr(socket.socket, 'connect', no_network)
+    monkeypatch.chdir(tmp_path)  # Actual component resolution must ignore CWD.
+    owner = NativeOwner({'model_dir': str(root), 'variation': 'finalform'})
+    try:
+        assert calls[0] == ('environment',)
+        assert ('pipeline', str(root), {'local_files_only': True}) in calls
+        assert ('components', {'dtype': torch.bfloat16, 'local_files_only': True}) in calls
+        model_calls = [call for call in calls if call[0] == 'model']
+        assert len(model_calls) == 1
+        _, path, kwargs = model_calls[0]
+        assert path == str(root) and Path(path).is_absolute()
+        assert kwargs['subfolder'] == 'transformer' and kwargs['local_files_only'] is True
+        assert isinstance(owner.runtime, candidate_runtime.LocalTurboRuntime)
+        assert candidate_runtime.LocalTurboRuntime.predict is TurboRuntime.predict
+        assert all(torch.equal(v.to(torch.bfloat16), owner.runtime.transformer.state_dict()[k])
+                   for k, v in model.state_dict().items())
+    finally:
+        owner.close()
+    assert not hasattr(owner.runtime, 'pipe')
     assert not torch.cuda.is_initialized()

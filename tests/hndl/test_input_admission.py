@@ -15,6 +15,14 @@ from anima_hndl import lifecycle as candidate
 from lumen_studio.contracts import digest
 
 
+def stage_owned_runtime(tmp_path, monkeypatch):
+    from test_image_lifecycle081 import staged_model
+    from lumen_studio.backends.anima import TurboRuntime
+    options, loaded = staged_model(tmp_path, monkeypatch)
+    monkeypatch.setattr(candidate.LocalTurboRuntime, '__init__', TurboRuntime.__init__)
+    return options, loaded
+
+
 def stage_model_admission_fixture(root, monkeypatch):
     """Unit-test authority; production reads only its committed package manifests.
 
@@ -46,7 +54,9 @@ def stage_model_admission_fixture(root, monkeypatch):
 
 def test_exact_trusted_fixture_layout_and_content_pass(tmp_path, monkeypatch):
     _, released = stage_model_admission_fixture(tmp_path, monkeypatch)
-    assert admission.verify_model_directory(tmp_path) == released
+    receipt = admission.verify_model_directory(tmp_path)
+    assert {k: receipt[k] for k in released} == released
+    assert len(receipt['files_stat_sha256']) == 64
 
 
 @pytest.mark.parametrize('attack', ['extra_index', 'self_attested_extra_index', 'self_attested_weights',
@@ -92,10 +102,9 @@ def test_model_attack_fixtures_refused_before_any_loader(tmp_path, monkeypatch, 
         weight.unlink()
         os.mkfifo(weight)
     (root / 'anima-lock.json').write_text(json.dumps(lock))
-    from lumen_studio.backends.anima import TurboRuntime
     def forbidden(*args, **kwargs):
         pytest.fail('attack fixture reached a model loader')
-    monkeypatch.setattr(TurboRuntime, '__init__', forbidden)
+    monkeypatch.setattr(candidate.LocalTurboRuntime, '__init__', forbidden)
     with pytest.raises(ValueError, match='model (layout|file|lock|component|index)'):
         candidate.NativeOwner({'model_dir': str(root), 'variation': 'finalform'})
 
@@ -103,27 +112,52 @@ def test_model_attack_fixtures_refused_before_any_loader(tmp_path, monkeypatch, 
 def test_production_manifest_cannot_be_replaced_by_local_self_attestation(tmp_path, monkeypatch):
     (tmp_path / 'anima-lock.json').write_text(json.dumps({'model': 'circlestone-labs/Anima:turbo-v1.1',
                                                        'files': {}}))
-    from lumen_studio.backends.anima import TurboRuntime
-    monkeypatch.setattr(TurboRuntime, '__init__', lambda *a, **k: pytest.fail('unadmitted layout reached loader'))
+    monkeypatch.setattr(candidate.LocalTurboRuntime, '__init__', lambda *a, **k: pytest.fail('unadmitted layout reached loader'))
     with pytest.raises(ValueError, match='committed conversion manifest'):
         candidate.NativeOwner({'model_dir': str(tmp_path), 'variation': 'finalform'})
 
 
-def test_owned_loader_changing_admitted_model_is_closed_and_refused(tmp_path, monkeypatch):
-    from test_image_lifecycle081 import staged_model
-    from lumen_studio.backends.anima import TurboRuntime
-    options, loaded = staged_model(tmp_path, monkeypatch)
+@pytest.mark.parametrize('same_bytes', [False, True])
+def test_owned_loader_changing_admitted_model_is_closed_and_refused(tmp_path, monkeypatch, same_bytes):
+    options, loaded = stage_owned_runtime(tmp_path, monkeypatch)
     options['variation'] = 'finalform'
     stage_model_admission_fixture(options['model_dir'], monkeypatch)
-    original = TurboRuntime.__init__
+    original = candidate.LocalTurboRuntime.__init__
     def changed(self, *args, **kwargs):
         original(self, *args, **kwargs)
-        (Path(options['model_dir']) / 'transformer/model.safetensors').write_bytes(b'changed own fixture')
-    monkeypatch.setattr(TurboRuntime, '__init__', changed)
-    with pytest.raises(ValueError, match='model file differs from the committed digest'):
+        path = Path(options['model_dir']) / 'transformer/model.safetensors'
+        if same_bytes:
+            replacement = path.with_suffix('.replacement')
+            replacement.write_bytes(path.read_bytes())
+            replacement.replace(path)
+        else:
+            path.write_bytes(b'changed own fixture')
+    monkeypatch.setattr(candidate.LocalTurboRuntime, '__init__', changed)
+    with pytest.raises(ValueError, match='model file (differs|identities changed)'):
         candidate.NativeOwner(options)
     assert not hasattr(loaded[-1], 'pipe')
     assert not loaded[-1].mixer.adapters and not loaded[-1].mixer.handles
+
+
+@pytest.mark.parametrize('value', ['.', 'transformer', 'repo/model', None, '', 'trailing', 'component', 'noncanonical'])
+def test_literal_component_root_required_before_loader(tmp_path, monkeypatch, value):
+    root = tmp_path / 'model'
+    stage_model_admission_fixture(root, monkeypatch)
+    replacements = {'trailing': str(root) + '/', 'component': str(root / 'transformer'),
+                    'noncanonical': str(root) + '/../model'}
+    literal = replacements.get(value, value)
+    path = root / 'modular_model_index.json'
+    index = json.loads(path.read_text())
+    index['components'][0]['pretrained_model_name_or_path'] = literal
+    path.write_text(json.dumps(index))
+    lock_path = root / 'anima-lock.json'
+    lock = json.loads(lock_path.read_text())
+    lock['files']['modular_model_index.json'] = hashlib.sha256(path.read_bytes()).hexdigest()
+    lock_path.write_text(json.dumps(lock))
+    monkeypatch.setattr(candidate.LocalTurboRuntime, '__init__', lambda *a, **k: pytest.fail('ambiguous literal reached loader'))
+    monkeypatch.chdir(tmp_path)  # Relative names could otherwise resolve this different CWD.
+    with pytest.raises(ValueError, match='exact absolute admitted root'):
+        candidate.NativeOwner({'model_dir': str(root), 'variation': 'finalform'})
 
 
 def test_fifo_descriptor_open_is_bounded_and_refused(tmp_path):

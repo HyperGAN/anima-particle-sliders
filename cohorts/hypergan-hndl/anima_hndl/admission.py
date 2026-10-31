@@ -60,11 +60,13 @@ def _regular(root, name):
             os.close(fd)
 
 
-def _read(root, name, limit):
+def _read(root, name, limit, identities=None):
     with _regular(root, name) as file:
         data = file.read(limit + 1)
         if len(data) > limit:
             raise ValueError('admitted metadata exceeds its byte limit: ' + name)
+        if identities is not None:
+            identities[name] = _identity(os.fstat(file.fileno()))
         return data
 
 
@@ -96,28 +98,20 @@ def _model_layout(root, expected):
         raise ValueError('model file set differs from the committed conversion manifest')
 
 
-def _portable_index(value, root, components):
+def _portable_index(value, root):
     if isinstance(value, list):
-        return [_portable_index(item, root, components) for item in value]
+        return [_portable_index(item, root) for item in value]
     if not isinstance(value, dict):
         return value
     result = {}
     for key, item in value.items():
         if key != 'pretrained_model_name_or_path':
-            result[key] = _portable_index(item, root, components)
+            result[key] = _portable_index(item, root)
             continue
-        if item is not None:
-            if not isinstance(item, str) or not item or '://' in item:
-                raise ValueError('model component requires a local admitted path')
-            path = Path(item)
-            if not path.is_absolute():
-                path = root / path
-            subfolder = value.get('subfolder')
-            if subfolder:
-                path = path / _relative(subfolder)
-            admitted = {root, *(root / component for component in components)}
-            if path.resolve() not in admitted:
-                raise ValueError('model component path is outside the committed local layout')
+        # Diffusers forwards this literal, rather than interpreting it relative
+        # to the pipeline directory. Never normalize an ambiguous CWD/Hub name.
+        if not isinstance(item, str) or not Path(item).is_absolute() or item != str(root):
+            raise ValueError('model component path must equal the exact absolute admitted root')
         result[key] = '$MODEL_ROOT'
     return result
 
@@ -135,16 +129,16 @@ def verify_model_directory(directory):
     expected = set(trusted['files']) | {'anima-lock.json'}
     _model_layout(root, expected)
     root = root.resolve()
-    index_bytes = _read(root, 'modular_model_index.json', 1024 * 1024)
-    recorded = json.loads(_read(root, 'anima-lock.json', 64 * 1024))
+    identities = {'.': _identity(root.stat())}
+    index_bytes = _read(root, 'modular_model_index.json', 1024 * 1024, identities)
+    recorded = json.loads(_read(root, 'anima-lock.json', 64 * 1024, identities))
     local_expected = deepcopy(trusted)
     local_expected['files']['modular_model_index.json'] = hashlib.sha256(index_bytes).hexdigest()
     if recorded != local_expected:
         raise ValueError('model lock differs from the committed conversion manifest')
-    components = {Path(name).parts[0] for name in trusted['files'] if len(Path(name).parts) > 1}
     portable = deepcopy(trusted)
     portable['files']['modular_model_index.json'] = digest(
-        _portable_index(json.loads(index_bytes), root, components))
+        _portable_index(json.loads(index_bytes), root))
     if trusted['model'] != released['model'] or digest(portable) != released['sha256']:
         raise ValueError('model index differs from the committed portable model identity')
     for name, expected_hash in trusted['files'].items():
@@ -153,7 +147,9 @@ def verify_model_directory(directory):
         with _regular(root, name) as file:
             if hashlib.file_digest(file, 'sha256').hexdigest() != expected_hash:
                 raise ValueError('model file differs from the committed digest: ' + name)
-    return dict(model=released['model'], sha256=released['sha256'])
+            identities[name] = _identity(os.fstat(file.fileno()))
+    return dict(model=released['model'], sha256=released['sha256'],
+                files_stat_sha256=digest(identities))
 
 
 def verified_cache_index(options):

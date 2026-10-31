@@ -57,10 +57,15 @@ The candidate now compares it with packaged, committed
 `configs/anima/converted-model.lock.json`, admits exactly that file set plus the
 lock, hashes every non-index file against the committed digests, and binds the
 complete portable modular index to `configs/anima/released-identity.json`.
-Only local component paths within the admitted layout are accepted. Extra shard
+Each component `pretrained_model_name_or_path` must be an absolute string
+exactly equal to `str(admitted_root)`. Relative/CWD/Hub names, `.` and None
+are refused. The candidate-only native initializer passes `local_files_only=True`
+at both `ModularPipeline.from_pretrained` and the actual `load_components` call.
+It inherits the original runtime methods; the historical loader is unchanged. Extra shard
 indexes (even added to the local lock), different revisions or content, symlinks,
 FIFOs and external component paths are refused before a model loader runs.
-The directory is rechecked after loading. Descriptor-relative no-follow opens
+The directory and admitted file inode/stat identities are rechecked after
+loading; same-byte file replacement is refused too. Descriptor-relative no-follow opens
 refuse special files without blocking. Admission requires an immutable directory
 throughout subsequent loading/use; it does not sandbox a concurrent malicious
 writer. Historical stable code and locks are unchanged.
@@ -93,3 +98,12 @@ qualified native cohort is required before owned pretrained/GPU execution.
 See [CLEAN-INSTALL-CPU.md](CLEAN-INSTALL-CPU.md) for installation versus runtime
 qualification. The candidate's selected import-root checks run after Python
 startup and are not a universal PYTHONPATH or dependency sandbox.
+
+The actual loader-argument regression in `tests/hndl/test_loading_advisory.py`
+executes pinned `ModularPipeline.from_pretrained`, `load_components`,
+`ComponentSpec.load` and Cosmos `from_pretrained` on a generated tiny model, with
+network connections forbidden and a different CWD. It asserts the literal
+absolute root, component subfolder, and `local_files_only=True` propagation.
+The test supplies its own manifest authority, test-local block definitions,
+auxiliary placeholders and environment-check override; it does not qualify
+pretrained Anima or bypass the production environment check.

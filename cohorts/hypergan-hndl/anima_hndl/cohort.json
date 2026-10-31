@@ -60,8 +60,9 @@
   },
   "product_files": {
     "anima_hndl/__init__.py": "1379741bf4266c30baaa7c6781a6d20e4255621e1ec0fb0e3c1335250e9e96a2",
-    "anima_hndl/admission.py": "d42530b3be245152fa7639bb027331f708a23a4cf60641c7742d0ee74d3c5474",
-    "anima_hndl/lifecycle.py": "30ed7c7458a3ff8c3dbdd4f82518c305c02efd7043ce897530f8a0933dcd482c",
+    "anima_hndl/admission.py": "04523a0cb0945944bbc42ec65dd92454d7a252e41bf247743f4215c74f0c0219",
+    "anima_hndl/lifecycle.py": "b7e7d62c3f2512af8b64db13bebf2e86a3b4e8996aa42b3d206de6b6128d5072",
+    "anima_hndl/runtime.py": "814a7dfcf6b324c6760d4b616881ccab695f0f1b3d8372d9f5ed7bee92964387",
     "anima_hndl/source_validation.py": "888634c8b3d18419568c4839ba84592524c7b4b5c6b7c938a4b28a7a5c56051b",
     "comfy_particle.py": "73c7015d729261e6f1ad12ec094de2dd05955a3b7a269df2695cfdf59ebbb925",
     "configs/anima/candidates/dusk-v1.json": "799edbc56ac7126d108322a7d673fbded4099b533c0e47ad8f13b9587f6f0f36",

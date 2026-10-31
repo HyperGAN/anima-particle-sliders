@@ -21,9 +21,17 @@ from anima_hndl import lifecycle as candidate
 from lumen_studio.particles import Branch
 from lumen_studio.pg09_training import NativeFieldCritic
 from test_image_lifecycle import configuration
-from test_image_lifecycle081 import staged_model
-from test_pg09_training import equal, runtime_fixture
-from test_input_admission import stage_model_admission_fixture
+from test_pg09_training import equal, runtime_fixture as legacy_runtime_fixture
+from test_input_admission import stage_model_admission_fixture, stage_owned_runtime as staged_model
+
+
+def runtime_fixture():
+    # Actual candidate runtime class, using generated Cosmos state without any
+    # loader. Native identity must retain this class's real source identity.
+    original = legacy_runtime_fixture()
+    runtime = candidate.LocalTurboRuntime.__new__(candidate.LocalTurboRuntime)
+    runtime.__dict__.update(original.__dict__)
+    return runtime
 
 
 @pytest.fixture(autouse=True)
@@ -258,12 +266,11 @@ def test_model_load_cannot_replace_configured_cache_index(tmp_path, monkeypatch)
     options, loaded = staged_model(tmp_path, monkeypatch)
     stage_model_admission_fixture(options['model_dir'], monkeypatch)
     config = SessionConfig(config.backend, config.cohort, **dict(config.options, model_dir=options['model_dir']))
-    from lumen_studio.backends.anima import TurboRuntime
-    original = TurboRuntime.__init__
+    original = candidate.LocalTurboRuntime.__init__
     def changed(self, *args, **kwargs):
         original(self, *args, **kwargs)
         (Path(config.options['cache_dir']) / 'index.json').write_text('{}')
-    monkeypatch.setattr(TurboRuntime, '__init__', changed)
+    monkeypatch.setattr(candidate.LocalTurboRuntime, '__init__', changed)
     with pytest.raises(ValueError, match='index differs'):
         open_session(config)
     assert not loaded[-1].mixer.adapters and not loaded[-1].mixer.handles

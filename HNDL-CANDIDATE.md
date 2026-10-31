@@ -83,18 +83,28 @@ The probe creates a genuine installed core0.8.1/PG0.9.1 packet after two tiny CP
 updates, then requires the exact refusal reason `unsupported session packet version; no
 automatic migration` and verifies complete state preservation.
 
-CPU fixtures use a tiny random Cosmos model without pretrained loaders. Native
-pretrained/GPU execution, sampler/decoder parity, HNDL performance at production
+Response fixtures use tiny random Cosmos state without model loaders. Separate
+loader regressions load only their own generated weights. Native pretrained/GPU execution, sampler/decoder parity, HNDL performance at production
 resolution, and model-weight publication remain unqualified. CPU construction
 and response tests do not open accelerator admission; GPU0 remains reserved.
 
 Candidate owned-model loading additionally admits only the committed converted
 model file set and content digests, matching revision and portable index identity.
 The local `anima-lock.json` is compared with that authority; it cannot authorize
-extra files. Extra indexes, external component paths, symlinks and special files
-are refused before loading, and the directory is rechecked after loading. The
+extra files. Every `pretrained_model_name_or_path` must be an absolute string
+exactly equal to the resolved admitted model root. Relative names, `.` and None
+are refused rather than normalized. Both `ModularPipeline.from_pretrained` and
+the actual `load_components` call receive `local_files_only=True` from the
+candidate-only initializer; the inherited predict/encode/decode methods and
+historical loader remain unchanged. Extra indexes, external paths, symlinks and special files
+are refused before loading, and the directory is rechecked after loading, including inode/stat identities
+that detect same-byte file replacement across the load boundary. The
 operator must keep it immutable throughout use; this is not a filesystem sandbox.
 The historical stable loader is unchanged. Cache index bytes are bound before
 provider construction; all selected paths must be regular local files, and
 `CachedResponses` independently verifies every shard digest despite the lower
 reader using `verify=False`. Hash integrity is not teacher authenticity.
+
+Borrowed CPU runtime exports retain the actual runtime class source identity.
+Use the candidate `LocalTurboRuntime` implementation for candidate native export
+and restoration. A legacy runtime class is not relabeled as that implementation.
