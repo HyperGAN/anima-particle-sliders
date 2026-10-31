@@ -4,7 +4,7 @@ The source includes the original training engine and native runtime integration,
 
 The routed-particle implementation and fitting algorithm come from the pinned
 [particle-sliders-core](https://github.com/HyperGAN/particle-sliders/tree/a119ca1ecd3d5d6c437065839d22739b04f2f4d8/packages/particle-sliders-core).
-`requirements.txt` installs that commit. `core.lock.json` records the pin and
+`requirements-legacy.txt` installs that commit. `core.lock.json` records the pin and
 does not hash the retired `concept-slider-core` tree. Training calls
 `winning_formulation().require(...)` after overlaying the Anima generator
 learning rate `2e-5`. Architecture is `gmix`; the overlay is provisional
@@ -28,7 +28,7 @@ cd anima-particle-sliders
 uv venv .venv-anima --python 3.12.13
 uv pip sync --python .venv-anima/bin/python configs/anima/requirements.lock \
   --extra-index-url https://download.pytorch.org/whl/cu126
-uv pip install --python .venv-anima/bin/python --no-deps -r requirements.txt
+uv pip install --python .venv-anima/bin/python --no-deps -r requirements-legacy.txt
 .venv-anima/bin/python release_tools/prepare_model.py --output artifacts/model
 .venv-anima/bin/hf download ntc-ai/anima-particle-sliders --local-dir artifacts/release
 ```

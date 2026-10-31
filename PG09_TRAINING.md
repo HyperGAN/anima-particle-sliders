@@ -39,7 +39,7 @@ accepts the report's exact archive hashes alongside installed source hashes.
 The lock records code review, package availability/publication and runtime
 qualification separately; no field claims approval. Release artifact
 publication/adoption, fresh Ada review and coordinator-owned native
-qualification remain gates. The historical `requirements.txt` and
+qualification remain gates. The historical `requirements-legacy.txt` and
 `core.lock.json` retain the earlier 0.3.0 reproduction dependency, which does
 not supply this PG09 API. Do not install both dependency selections together.
 

@@ -9,7 +9,7 @@ Use a current ComfyUI installation with Python 3.10 or newer. Install this repos
 ```bash
 cd ComfyUI/custom_nodes
 git clone https://github.com/HyperGAN/anima-particle-sliders.git
-python -m pip install -r anima-particle-sliders/requirements.txt
+python -m pip install -r anima-particle-sliders/requirements-legacy.txt
 ```
 
 Use the Python executable belonging to your ComfyUI installation for the install command (including its embedded Python on portable installations). The plugin ZIP needs the same requirements install. This installs the pinned [particle-sliders-core](https://github.com/HyperGAN/particle-sliders/tree/a119ca1ecd3d5d6c437065839d22739b04f2f4d8/packages/particle-sliders-core) package. Comfy class names, Hub ids, and the Candlelit and Moonlit sample cards stay in this repository.

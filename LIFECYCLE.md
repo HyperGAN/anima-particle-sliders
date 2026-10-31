@@ -19,7 +19,7 @@ The new `anima-particle-sliders` distribution registers backend `anima` in
 the ParticleGAN dependency and GAN math. There is no reverse product import or
 copied GAN objective, regularizer, prior, optimizer or stepping loop.
 
-`requirements.txt`, `core.lock.json`, `requirements-pg09.txt` and
+`requirements-legacy.txt`, `core.lock.json`, `requirements-pg09.txt` and
 `core.pg09.lock.json` retain their original historical pins and qualification
 states. Select one isolated new environment for this proposal. Do not install
 the historical dependency selections with this package or retarget active runs.
