@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 import shutil
 import sys
+import sysconfig
 
 import pytest
 import torch
@@ -16,7 +17,7 @@ if version('particle-sliders-core') != '0.12.0':
 from particle_sliders.inference import open_inference
 from particle_sliders.lifecycle import CheckpointError, SessionConfig, UnsupportedOperation, open_session
 from particle_sliders.pg09 import _hash, validate_pg09_domain
-from lumen_studio import hndl_lifecycle as candidate
+from anima_hndl import lifecycle as candidate
 from lumen_studio.particles import Branch
 from lumen_studio.pg09_training import NativeFieldCritic
 from test_image_lifecycle import configuration
@@ -84,7 +85,7 @@ def test_actual_patch_critic_output_and_penalty_second_derivative_parity(spatial
 
 def config_for(tmp_path, runtime):
     old = configuration(tmp_path, runtime)
-    return SessionConfig('anima-hndl', 'anima-hypergan-hndl-v1-cpu', **old.options)
+    return SessionConfig('anima-hndl', 'anima-hypergan-hndl-v2-cpu', **old.options)
 
 
 def test_candidate_and_shared_core_import_from_installed_wheels():
@@ -161,11 +162,22 @@ def test_real_shared_session_resume_ownership_ema_and_native_only_inference(tmp_
         pytest.fail('native-only inference constructed training state')
     monkeypatch.setattr(ConditionalPG09, '__init__', forbidden)
     monkeypatch.setattr(candidate.NativeFieldCritic, '__init__', forbidden)
+    wrong_shape = dict(request, latent=torch.zeros(1, 4, 1, 3, 2))
+    with pytest.raises(ValueError, match='fixed H/W'):
+        open_inference(tmp_path / 'raw.pt', options=options,
+                       operation='response', native_request=wrong_shape)
+    assert not loaded
     inference_rng = torch.get_rng_state().clone()
     for selection in ('raw', 'ema'):
         with open_inference(tmp_path / (selection + '.pt'), options=options,
                             operation='response', native_request=request) as native:
             assert native.selection == selection
+            adapter = loaded[-1].mixer.adapters['finalform']
+            assert isinstance(adapter, candidate.ParticleAdapter)
+            assert {id(p) for p in native.binding.network.parameters()} == {id(p) for p in adapter.parameters()}
+            assert native.binding.identity['protocol'] == candidate.PROTOCOL
+            assert 'anima_hndl.lifecycle' in native.binding.identity['sources']
+            assert 'product_sources_sha256' in json.dumps(native.binding.identity)
             assert torch.equal(native.response(strength=0., **request), base)
             assert torch.equal(native.response(strength=.5, **request), expected_inference[selection])
             with pytest.raises(UnsupportedOperation):
@@ -195,3 +207,57 @@ def test_candidate_accelerator_request_refuses_before_builder_or_model(tmp_path,
     monkeypatch.setattr(candidate, 'verified_builder', forbidden)
     with pytest.raises(UnsupportedOperation, match='requires CPU'):
         candidate.BACKEND.open(SessionConfig('anima-hndl', 'refused', device='cuda:0'))
+
+
+@pytest.mark.parametrize('relative', ['lumen_studio/particles.py', 'lumen_studio/cache.py',
+                                    'lumen_studio/pg09_training.py', 'particle_sliders/recipe.py'])
+def test_complete_installed_source_closure_rejects_actual_file_changes(relative):
+    path = Path(sysconfig.get_paths()['purelib']) / relative
+    original = path.read_bytes()
+    try:
+        path.write_bytes(original + b'\n# source-closure rejection fixture\n')
+        with pytest.raises(ValueError, match='complete .* source closure differs'):
+            candidate.verified_builder()
+    finally:
+        path.write_bytes(original)
+
+
+def test_exact_core_provenance_and_isolation_refusals(monkeypatch):
+    from anima_hndl import source_validation as validation
+    actual_distribution = validation.distribution
+    core = actual_distribution('particle-sliders-core')
+    class WrongProvenance:
+        version = core.version
+        def read_text(self, name):
+            if name == 'direct_url.json':
+                return json.dumps({'url': 'https://github.com/HyperGAN/particle-sliders.git',
+                    'subdirectory': 'packages/particle-sliders-core',
+                    'vcs_info': {'vcs': 'git', 'commit_id': '0' * 40}})
+            return core.read_text(name)
+    with monkeypatch.context() as scoped:
+        scoped.setattr(validation, 'distribution', lambda name: WrongProvenance()
+                       if name == 'particle-sliders-core' else actual_distribution(name))
+        with pytest.raises(ValueError, match='Git/wheel provenance'):
+            candidate.verified_builder()
+    with monkeypatch.context() as scoped:
+        scoped.setattr(sys, 'path', sys.path + ['/tmp/unqualified/site-packages'])
+        with pytest.raises(RuntimeError, match='shared dependency'):
+            candidate.verified_builder()
+
+
+def test_model_load_cannot_replace_configured_cache_index(tmp_path, monkeypatch):
+    runtime = runtime_fixture()
+    config = config_for(tmp_path, runtime)
+    options, loaded = staged_model(tmp_path, monkeypatch)
+    config = SessionConfig(config.backend, config.cohort, **dict(config.options, model_dir=options['model_dir']))
+    from lumen_studio.backends.anima import TurboRuntime
+    original = TurboRuntime.__init__
+    def changed(self, *args, **kwargs):
+        original(self, *args, **kwargs)
+        (Path(config.options['cache_dir']) / 'index.json').write_text('{}')
+    monkeypatch.setattr(TurboRuntime, '__init__', changed)
+    with pytest.raises(ValueError, match='index differs'):
+        open_session(config)
+    assert not loaded[-1].mixer.adapters and not loaded[-1].mixer.handles
+    assert not hasattr(loaded[-1], 'pipe')
+    runtime.mixer.close()

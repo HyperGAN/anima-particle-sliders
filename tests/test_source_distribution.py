@@ -1,5 +1,7 @@
 """Source installs retain cohort evidence and can rebuild the historical plugin."""
 from pathlib import Path
+import hashlib
+import json
 import shutil
 import subprocess
 import sys
@@ -32,6 +34,7 @@ def test_sdist_preserves_installers_locks_and_release_inputs(tmp_path):
     for name in ('requirements.txt', 'requirements-legacy.txt', 'requirements-pg09.txt',
                  'core.lock.json', 'core.pg09.lock.json', 'INSTALL-COHORTS.md',
                  'CORE081-CPU.md', 'PUBLICATION-STATUS.md', 'pytest.ini', '__init__.py',
+                 'ACCELERATE-ADVISORY.md', 'CLEAN-INSTALL-CPU.md',
                  'release_tools/build.py', 'data/release-samples.json',
                  'cohorts/hypergan-hndl/build.py', 'cohorts/hypergan-hndl/pyproject.toml',
                  'tests/lumen_studio/test_image_lifecycle081.py'):
@@ -58,6 +61,8 @@ def test_sdist_preserves_installers_locks_and_release_inputs(tmp_path):
     with zipfile.ZipFile(wheel) as file:
         assert 'lumen_studio/lifecycle.py' in file.namelist()
         assert 'configs/anima/released-identity.json' in file.namelist()
+        assert 'lumen_studio/hndl_lifecycle.py' not in file.namelist()
+        assert not any(name.startswith('anima_hndl/') for name in file.namelist())
     with zipfile.ZipFile(output / 'comfyui/anima-particle-sliders.zip') as file:
         legacy = (ROOT / 'requirements-legacy.txt').read_bytes()
         for name in ('requirements.txt', 'requirements-legacy.txt'):
@@ -70,16 +75,25 @@ def test_sdist_preserves_installers_locks_and_release_inputs(tmp_path):
     assert result.returncode == 0, result.stdout + result.stderr
     candidate_wheel, = candidate_wheels.glob('*.whl')
     with zipfile.ZipFile(candidate_wheel) as file:
-        metadata = file.read('anima_particle_sliders-0.3.0.dist-info/METADATA').decode()
-        entrypoints = file.read('anima_particle_sliders-0.3.0.dist-info/entry_points.txt').decode()
+        metadata = file.read('anima_particle_sliders-0.3.0a1.dist-info/METADATA').decode()
+        entrypoints = file.read('anima_particle_sliders-0.3.0a1.dist-info/entry_points.txt').decode()
         dependencies = [Requirement(line.removeprefix('Requires-Dist: '))
                         for line in metadata.splitlines() if line.startswith('Requires-Dist: ')]
         core, = [dep for dep in dependencies if dep.name == 'particle-sliders-core']
         assert core.extras == {'hypergan-hndl'}
         assert core.url == ('git+https://github.com/HyperGAN/particle-sliders.git@'
                             '4abc0eb03a4e3a84fc3e6d02734c13dc7e8ea231#subdirectory=packages/particle-sliders-core')
-        assert 'anima-hndl = lumen_studio.hndl_lifecycle:BACKEND' in entrypoints
+        assert 'anima-hndl = anima_hndl.lifecycle:BACKEND' in entrypoints
         assert '\nanima = ' not in entrypoints
+        assert 'anima_hndl/cohort.json' in file.namelist()
+        assert 'lumen_studio/hndl_lifecycle.py' not in file.namelist()
+        closure = json.loads(file.read('anima_hndl/cohort.json'))
+        for name, digest in closure['product_files'].items():
+            assert hashlib.sha256(file.read(name)).hexdigest() == digest, name
+        actual = {name for name in file.namelist()
+                  if name.startswith(('lumen_studio/', 'anima_hndl/', 'configs/anima/'))
+                  or name in ('particle_io.py', 'single_particle.py', 'comfy_particle.py')}
+        assert actual - {'anima_hndl/cohort.json'} == set(closure['product_files'])
     # Building the new profile never retargets the default source manifest.
     assert (unpacked / 'pyproject.toml').read_bytes() == (ROOT / 'pyproject.toml').read_bytes()
 
@@ -89,4 +103,4 @@ def test_candidate_native_dependencies_preserve_the_current_model_cohort():
     candidate = tomllib.loads((ROOT / 'cohorts/hypergan-hndl/pyproject.toml').read_text())
     assert candidate['project']['optional-dependencies']['native'] == default['project']['optional-dependencies']['native']
     assert '32f6830f6402e85aa77b6631db64fcbbb2131f6b' in default['project']['dependencies'][-1]
-    assert candidate['project']['version'] == '0.3.0'
+    assert candidate['project']['version'] == '0.3.0a1'

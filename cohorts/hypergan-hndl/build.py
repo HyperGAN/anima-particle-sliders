@@ -19,6 +19,7 @@ def main():
         shutil.copytree(root, staged, ignore=shutil.ignore_patterns(
             '.git', '.venv*', 'build', 'dist', '*.egg-info', '__pycache__', '.pytest_cache'))
         shutil.copyfile(Path(__file__).with_name('pyproject.toml'), staged / 'pyproject.toml')
+        shutil.copytree(Path(__file__).with_name('anima_hndl'), staged / 'anima_hndl')
         code = 'from setuptools.build_meta import build_wheel; build_wheel({!r})'.format(str(destination))
         subprocess.run([sys.executable, '-I', '-c', code], cwd=staged, check=True)
 

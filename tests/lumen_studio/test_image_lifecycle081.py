@@ -174,12 +174,9 @@ def test_native_adapter_owns_generator_gradients_and_optimizer_leaves(tmp_path):
 
 
 def test_hndl_candidate_refuses_in_default_core081_environment(monkeypatch):
-    from lumen_studio import hndl_lifecycle
-    def forbidden(*args, **kwargs):
-        pytest.fail('new HNDL profile reached model allocation in the old environment')
-    monkeypatch.setattr(hndl_lifecycle.NativeOwner, '__init__', forbidden)
-    with pytest.raises(RuntimeError, match='separate core0.12/PG0.9.4'):
-        hndl_lifecycle.verified_builder()
+    from importlib.util import find_spec
+    assert find_spec('anima_hndl') is None
+    assert find_spec('lumen_studio.hndl_lifecycle') is None
 
 
 def decorate_observation(runtime):

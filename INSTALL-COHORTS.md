@@ -6,6 +6,15 @@ Install from this repository root with `python -m pip install -r requirements.tx
 The requirements entry delegates to `pyproject.toml`, so the two install paths
 resolve the same immutable shared core. No unpublished PyPI core release is assumed.
 
+The default installer's move from historical core0.3.0/a119 to the local project
+is intentional: it resolves the pre-existing conflict with the core0.8.1
+pyproject. `core.lock.json` stays byte-identical as a historical core0.3.0 record;
+its embedded `requirements.txt` source-of-truth note applies to the historical
+ZIP, whose requirements still contain those original bytes. It does not describe
+the current source checkout. Package versions are distinct labels: stable Anima
+product0.2.0, historical shared core0.3.0, current shared core0.8.1, and opt-in
+Anima product0.3.0a1 with shared core0.12.0.
+
 `requirements-legacy.txt` preserves the previous installer verbatim for historical
 trainer reproduction in a separate environment. Existing source locks, model
 identities, checkpoints and receipts retain their original meaning. Do not combine
@@ -20,6 +29,9 @@ continuous-response/render operations. Those require distinct reviewed cohorts.
 The native extra declares torchvision, required by the pinned Cosmos model
 implementation. CPU fixture verification pairs torch2.14.1+cpu with
 torchvision0.29.1+cpu; native pretrained execution remains unqualified.
+Declaring torchvision was intentional because the pinned Cosmos import path
+requires it. Pip must choose a compatible torch/torchvision pair; the later clean
+CPU receipt also verifies official Torch2.6/torchvision0.21 together.
 
 Keep this PG0.9.1 environment separate from core0.11.0/PG0.9.3 and
 HyperGAN develop, which currently requires PG0.9.4/HNDL0.10.
@@ -40,12 +52,12 @@ repository's release/publication commands as executable entry points.
 The separate [Anima HyperGAN/HNDL candidate](HNDL-CANDIDATE.md) implements the
 bounded product binding and build path. It does not change the default installer.
 
-The jointly tested local shared candidate is core 0.12.0 at
+The jointly tested public shared candidate is core 0.12.0 at
 `4abc0eb03a4e3a84fc3e6d02734c13dc7e8ea231`, with exact PG 0.9.4 and HyperGAN
-develop `5f368a3770cf5bdae0448995c9f76e29af8049f7` / HNDL 0.10.0. It is
-unpublished and has not qualified Anima's product factory, pretrained execution
-or image rendering. Keep the current default until a separately reviewed Anima
-cohort passes its own installed-package checks.
+develop `5f368a3770cf5bdae0448995c9f76e29af8049f7` / HNDL 0.10.0. The separate
+product prerelease has passed bounded installed CPU contracts and clean
+base/native-extra installation. Pretrained/GPU execution and image rendering
+remain unqualified; the default stays on the supported prior environment.
 
 Prepare that adoption in another environment and branch. Record the exact core
 source manifest and wheel provenance, then run the installed product's cache,

@@ -421,7 +421,12 @@ The original adult character catalog separates 12 training characters, four deve
 
 These are final-budget experimental checkpoints. They were not selected as the best checkpoint by perceptual quality. Strengths above one extrapolate beyond training and can change clothing, pose, setting, or composition. The measured 1,600-update runs did not establish convergence. Training traces, normalization provenance, checkpoint hashes, and development measurements accompany the weights.
 
-### Shared algorithm implementation
+### Historical shared algorithm implementation
+
+This section describes the released gmix cohort. `core.lock.json` is its preserved
+core0.3.0 record, not the current packaged lifecycle dependency. The current
+stable product is Anima0.2.0/core0.8.1; its source installer is `pyproject.toml`.
+See [installation cohorts](INSTALL-COHORTS.md) for the separate HNDL prerelease.
 
 Routing, the global-mix critic, paired losses, the particle regularizer, the noise schedule, and the ordinary-LoRA solver live in [particle-sliders-core](https://github.com/HyperGAN/particle-sliders/tree/a119ca1ecd3d5d6c437065839d22739b04f2f4d8/packages/particle-sliders-core). `requirements-legacy.txt` pins commit `a119ca1ecd3d5d6c437065839d22739b04f2f4d8`. Training imports `winning_formulation` and calls `require()` on the training config after setting generator learning rate \\(2\\times10^{-5}\\). Architecture is `gmix`. The formulation overlay is provisional `particle-gmix-1600-v2` until ParticleGAN #38 crowns a full-board winner.
 
