@@ -30,8 +30,11 @@ Fixture files were copied byte-for-byte outside the source checkout to avoid
 egg-info shadowing. No pretrained weights, Hub model downloads or GPU were used.
 
 The review follow-up is an explicit0.3.0a1 prerelease in the `anima_hndl`
-namespace with enforced environment isolation and complete source-closure
-admission. It was installed with all native extras into a second completely
+namespace with runtime environment admission and complete source-closure
+admission. Isolation remains an operator installation requirement: the two
+wheels share a distribution name, and pip can replace one with the other. The
+runtime checks selected package roots after Python startup, not all imports or
+arbitrary PYTHONPATH execution. It was installed with all native extras into a second completely
 fresh venv using normal dependency resolution; 17 installed tests and `pip check`
 pass there. The first eleven-check result above preserves the initial source lane.
 The final lane additionally tests actual core/product file tampering, wrong Git
@@ -57,8 +60,17 @@ combination. It does not reproduce the much larger original GPU model lock in
 `configs/anima/requirements.lock`: `verify_environment` still refuses this CPU
 environment, first for missing historical `annotated-types`. That lock includes
 studio/CUDA and other exact dependencies outside the optional model extra.
-Neither it nor any prior source receipt was relaxed or relabeled.
+There is also an unresolved declaration conflict: the candidate native extra
+requires Pillow>=13, while the inherited full native environment lock requires
+Pillow==12.3.0. No environment can satisfy both. Native owned-model execution
+therefore remains blocked until a separate qualified native cohort resolves
+this conflict. Neither lock nor any prior source receipt was relaxed or relabeled.
 
 Pretrained/GPU admission, production-scale HNDL performance and sampler/decoder
 parity remain pending. Accelerate is not claimed patched; the tested API
 reachability and bounded mitigation are in [ACCELERATE-ADVISORY.md](ACCELERATE-ADVISORY.md).
+
+The subsequent return-review changes reuse that physically isolated dependency
+environment and reinstall the new candidate wheel with `--no-deps`; this is a
+new source/artifact test, not another fresh dependency-resolution claim. The
+original full resolver reports remain available in the review packet.

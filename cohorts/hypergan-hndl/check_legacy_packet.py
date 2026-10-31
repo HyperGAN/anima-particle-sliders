@@ -28,6 +28,7 @@ if mode=='candidate':
     assert version('particle-sliders-core')=='0.12.0'
     config=SessionConfig('anima-hndl','anima-hypergan-hndl-v2-cpu',**config.options)
 else:
+    assert version('anima-particle-sliders')=='0.2.0'
     assert version('particle-sliders-core')=='0.8.1'
     assert version('particlegan')=='0.9.1'
 with open_session(config,runtime=runtime) as session:
@@ -38,13 +39,15 @@ with open_session(config,runtime=runtime) as session:
     else:
         before=session.checkpoint()
         try:session.restore(root/'actual-core081.pt')
-        except CheckpointError as exc:reason=str(exc)
+        except CheckpointError as exc:
+            reason=str(exc)
+            assert reason=='unsupported session packet version; no automatic migration',reason
         else:raise AssertionError('historical packet was admitted')
         assert equal(before,session.checkpoint()) and not session.closed
         result={'actual_legacy_packet_rejected':True,'complete_state_unchanged':True,'reason':reason}
 runtime.mixer.close()
 assert not torch.cuda.is_initialized()
-print(json.dumps(dict(result,core=version('particle-sliders-core'),pg=version('particlegan'))))
+print(json.dumps(dict(result,product=version('anima-particle-sliders'),core=version('particle-sliders-core'),pg=version('particlegan'))))
 '''
 
 

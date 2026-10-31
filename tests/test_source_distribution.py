@@ -37,6 +37,10 @@ def test_sdist_preserves_installers_locks_and_release_inputs(tmp_path):
                  'ACCELERATE-ADVISORY.md', 'CLEAN-INSTALL-CPU.md',
                  'release_tools/build.py', 'data/release-samples.json',
                  'cohorts/hypergan-hndl/build.py', 'cohorts/hypergan-hndl/pyproject.toml',
+                 'cohorts/hypergan-hndl/check_legacy_packet.py',
+                 'cohorts/hypergan-hndl/anima_hndl/admission.py',
+                 'tests/hndl/test_anima_hndl.py', 'tests/hndl/test_loading_advisory.py',
+                 'tests/hndl/test_input_admission.py',
                  'tests/lumen_studio/test_image_lifecycle081.py'):
         assert (unpacked / name).read_bytes() == (ROOT / name).read_bytes(), name
     requirements = (unpacked / 'requirements.txt').read_text().splitlines()

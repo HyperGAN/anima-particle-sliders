@@ -60,8 +60,9 @@
   },
   "product_files": {
     "anima_hndl/__init__.py": "1379741bf4266c30baaa7c6781a6d20e4255621e1ec0fb0e3c1335250e9e96a2",
-    "anima_hndl/lifecycle.py": "46af3f086a2fb1f4b680693a2e4ca1f280ac4464ec316bd313e1be6df477d212",
-    "anima_hndl/source_validation.py": "cab3a9ecb9b972a0571c727fa4650e7be8877aa20b0bc96058a21dbe5498b124",
+    "anima_hndl/admission.py": "d42530b3be245152fa7639bb027331f708a23a4cf60641c7742d0ee74d3c5474",
+    "anima_hndl/lifecycle.py": "30ed7c7458a3ff8c3dbdd4f82518c305c02efd7043ce897530f8a0933dcd482c",
+    "anima_hndl/source_validation.py": "888634c8b3d18419568c4839ba84592524c7b4b5c6b7c938a4b28a7a5c56051b",
     "comfy_particle.py": "73c7015d729261e6f1ad12ec094de2dd05955a3b7a269df2695cfdf59ebbb925",
     "configs/anima/candidates/dusk-v1.json": "799edbc56ac7126d108322a7d673fbded4099b533c0e47ad8f13b9587f6f0f36",
     "configs/anima/candidates/dusk-v2.json": "f7efaa7adbf56f51c02fdc8a7d93b19180141ac1da79ba01e3016a0f9c008fd1",

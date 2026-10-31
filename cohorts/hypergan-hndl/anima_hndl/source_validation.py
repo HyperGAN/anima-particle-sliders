@@ -48,6 +48,11 @@ def _require_isolated_environment():
         spec = find_spec(name)
         if spec is None or spec.origin is None or not Path(spec.origin).resolve().is_relative_to(prefix):
             raise RuntimeError('Anima HNDL dependency must be installed in the isolated venv: ' + name)
+        loaded = sys.modules.get(name)
+        if loaded is not None:
+            origin = getattr(loaded, '__file__', None)
+            if not isinstance(origin, str) or Path(origin).resolve() != Path(spec.origin).resolve():
+                raise RuntimeError('Anima HNDL loaded dependency origin differs from its admitted spec: ' + name)
 
 
 def verify_cohort():

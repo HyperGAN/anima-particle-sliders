@@ -49,21 +49,47 @@ Borrowed staged-runtime CPU sessions construct no model loader. Product routed
 exports use safetensors with tensor-schema/identity checks; shared session and
 native envelopes use the shared restore API, not either affected loader.
 
-## Bounded mitigation
+## Bounded candidate admission and remaining limits
 
-Continue using only the original operator-trusted fixed-revision Anima conversion
-staged and checked by `release_tools/prepare_model.py`. Its recorded model uses
-individual safetensors files rather than supplied sharded indexes. Keep
-verification enabled. Do not use the generic affected Accelerate loaders on
-arbitrary directories or uploaded indexes. Use the isolated base candidate when
-only shared CPU contracts are required.
+A model directory's own `anima-lock.json` is self-attestation. The historical
+stable loader's staged-hash check alone does not establish trusted file admission.
+The candidate now compares it with packaged, committed
+`configs/anima/converted-model.lock.json`, admits exactly that file set plus the
+lock, hashes every non-index file against the committed digests, and binds the
+complete portable modular index to `configs/anima/released-identity.json`.
+Only local component paths within the admitted layout are accepted. Extra shard
+indexes (even added to the local lock), different revisions or content, symlinks,
+FIFOs and external component paths are refused before a model loader runs.
+The directory is rechecked after loading. Descriptor-relative no-follow opens
+refuse special files without blocking. Admission requires an immutable directory
+throughout subsequent loading/use; it does not sandbox a concurrent malicious
+writer. Historical stable code and locks are unchanged.
 
-This is a trust/format boundary, not automatic sanitization: a locally supplied
-checksum manifest is not a signature, and `local_files_only=True` does not
-validate shard paths. Replacing or concurrently changing the trusted directory
-invalidates that premise. No global monkeypatch, weaker check or permission
-change is introduced. Supporting untrusted sharded directories would require a
-separately reviewed containment/regular-file boundary or an official tested fix;
-that capability is not admitted. Historical locks and identities stay unchanged.
-Full pretrained/GPU qualification remains pending. See the separate
-[clean-install receipt](CLEAN-INSTALL-CPU.md).
+`tests/hndl/test_input_admission.py` uses only generated placeholder file attacks,
+with the model loader forbidden. A separate local-component diagnostic found
+that an extra index is considered by pinned Cosmos loading, which rejects its
+parent-traversal name, while pinned Qwen3 selects its existing single weight file.
+Neither component loaded the outside fixture. This does not negate the direct
+Accelerate API reproduction above. The API traps in
+`tests/hndl/test_loading_advisory.py` are **test-only assertions of avoidance**;
+there is no installed runtime trap or global patch. Avoidance is qualified only
+for those two actual pinned component paths and fixtures.
+
+Cache admission binds configured index bytes before provider construction and
+compares the reader's index with that admitted snapshot. It refuses traversal,
+symlinks and special shard files; `CachedResponses` independently hashes every
+shard even though `TargetCache(..., verify=False)` skips its own first hash pass.
+Tests corrupt content without changing the index and replace the index between
+admission and reader construction; both refuse before attachment. This proves
+integrity checks, not teacher authenticity or protection from concurrent writers.
+
+Do not use the generic affected Accelerate loaders on arbitrary directories or
+uploaded indexes. Keep verification enabled and use the isolated base candidate
+when only shared CPU contracts are required. No verified official patch was
+found, so pins remain unchanged. No pretrained model was downloaded or loaded.
+The full inherited native environment is still refused; in particular its
+Pillow==12.3.0 conflicts with the candidate extra's Pillow>=13. A separately
+qualified native cohort is required before owned pretrained/GPU execution.
+See [CLEAN-INSTALL-CPU.md](CLEAN-INSTALL-CPU.md) for installation versus runtime
+qualification. The candidate's selected import-root checks run after Python
+startup and are not a universal PYTHONPATH or dependency sandbox.

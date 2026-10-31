@@ -23,6 +23,7 @@ from particle_sliders.pg09_backends import AnimaRuntimeResponseAdapter
 from lumen_studio import lifecycle as legacy
 from lumen_studio.particles import ARCHITECTURE
 from .source_validation import verify_cohort
+from .admission import verify_model_directory, verified_cache_index
 
 
 PROTOCOL = 'anima-hypergan-hndl-native-velocity-v2'
@@ -125,6 +126,17 @@ class NativeFieldCritic(nn.Module):
 
 
 class NativeOwner(legacy.NativeOwner):
+    def __init__(self, options, runtime=None):
+        if runtime is None:
+            verify_model_directory(options['model_dir'])
+        super().__init__(options, runtime)
+        try:
+            if runtime is None:
+                verify_model_directory(options['model_dir'])
+        except BaseException:
+            self.close()
+            raise
+
     def attach(self):
         self.adapter = ParticleAdapter(self.runtime.transformer).to(device='cpu', dtype=torch.float32)
         self.attachment_started = True
@@ -138,6 +150,8 @@ NATIVE_CAPABILITIES = replace(legacy.NATIVE_CAPABILITIES, qualification=CAPABILI
 
 
 def validate(options):
+    legacy.validate_runtime(options)
+    verified_cache_index(options)
     legacy.validate(options)
     verified_builder()
 
@@ -150,8 +164,11 @@ def prepare(options, *, runtime=None):
     owner = NativeOwner(options, runtime)
     try:
         validate(options)  # Model loading must not silently change the frozen index.
-        responses = CachedResponses(TargetCache(options['cache_dir'], verify=False),
-                                    owner.runtime, options['variation'])
+        index = verified_cache_index(options)
+        cache = TargetCache(options['cache_dir'], verify=False)
+        if cache.index != index:
+            raise ValueError('Anima cache index changed between admission and provider construction')
+        responses = CachedResponses(cache, owner.runtime, options['variation'])
         frozen = responses.identity()
         # Preserve actual native shape at admission and every penalty boundary.
         validate_pg09_domain(responses.response_shape, response_domain='continuous_field')

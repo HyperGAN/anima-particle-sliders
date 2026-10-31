@@ -23,6 +23,7 @@ from lumen_studio.pg09_training import NativeFieldCritic
 from test_image_lifecycle import configuration
 from test_image_lifecycle081 import staged_model
 from test_pg09_training import equal, runtime_fixture
+from test_input_admission import stage_model_admission_fixture
 
 
 @pytest.fixture(autouse=True)
@@ -157,6 +158,7 @@ def test_real_shared_session_resume_ownership_ema_and_native_only_inference(tmp_
     other.mixer.close()
     shutil.rmtree(config.options['cache_dir'])
     options, loaded = staged_model(tmp_path, monkeypatch)
+    stage_model_admission_fixture(options['model_dir'], monkeypatch)
     from particle_sliders.pg09 import ConditionalPG09
     def forbidden(*args, **kwargs):
         pytest.fail('native-only inference constructed training state')
@@ -243,12 +245,18 @@ def test_exact_core_provenance_and_isolation_refusals(monkeypatch):
         scoped.setattr(sys, 'path', sys.path + ['/tmp/unqualified/site-packages'])
         with pytest.raises(RuntimeError, match='shared dependency'):
             candidate.verified_builder()
+    import numpy
+    with monkeypatch.context() as scoped:
+        scoped.setattr(numpy, '__file__', '/tmp/own-shadow-fixture/numpy.py')
+        with pytest.raises(RuntimeError, match='loaded dependency origin'):
+            candidate.verified_builder()
 
 
 def test_model_load_cannot_replace_configured_cache_index(tmp_path, monkeypatch):
     runtime = runtime_fixture()
     config = config_for(tmp_path, runtime)
     options, loaded = staged_model(tmp_path, monkeypatch)
+    stage_model_admission_fixture(options['model_dir'], monkeypatch)
     config = SessionConfig(config.backend, config.cohort, **dict(config.options, model_dir=options['model_dir']))
     from lumen_studio.backends.anima import TurboRuntime
     original = TurboRuntime.__init__

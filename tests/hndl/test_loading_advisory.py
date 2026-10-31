@@ -4,8 +4,27 @@ These are local random model files, including genuine sharded safetensors.
 They exercise ComponentSpec.load, the component path used by ModularPipeline.
 They do not qualify the pretrained Anima model or arbitrary untrusted artifacts.
 """
+import json
 import pytest
 import torch
+
+
+def random_model(family):
+    torch.set_num_threads(1)
+    torch.manual_seed(29)
+    if family == 'cosmos':
+        from diffusers import CosmosTransformer3DModel
+        model = CosmosTransformer3DModel(
+            in_channels=4, out_channels=4, num_attention_heads=2, attention_head_dim=32,
+            num_layers=1, mlp_ratio=2, text_embed_dim=8, adaln_lora_dim=4,
+            max_size=(2, 4, 4), patch_size=(1, 1, 1), extra_pos_embed_type=None)
+    else:
+        from transformers import Qwen3Config, Qwen3Model
+        model = Qwen3Model(Qwen3Config(vocab_size=32, hidden_size=16,
+            intermediate_size=32, num_hidden_layers=1, num_attention_heads=2,
+            num_key_value_heads=2, max_position_embeddings=32))
+    model.eval().requires_grad_(False)
+    return model
 
 
 @pytest.mark.parametrize('family', ['cosmos', 'qwen3'])
@@ -22,20 +41,7 @@ def test_native_component_loading_avoids_affected_accelerate_apis(tmp_path, monk
         for name in ('load_checkpoint_in_model', 'load_checkpoint_and_dispatch'):
             if hasattr(module, name):
                 monkeypatch.setattr(module, name, forbidden)
-    torch.set_num_threads(1)
-    torch.manual_seed(29)
-    if family == 'cosmos':
-        from diffusers import CosmosTransformer3DModel
-        model = CosmosTransformer3DModel(
-            in_channels=4, out_channels=4, num_attention_heads=2, attention_head_dim=32,
-            num_layers=1, mlp_ratio=2, text_embed_dim=8, adaln_lora_dim=4,
-            max_size=(2, 4, 4), patch_size=(1, 1, 1), extra_pos_embed_type=None)
-    else:
-        from transformers import Qwen3Config, Qwen3Model
-        model = Qwen3Model(Qwen3Config(vocab_size=32, hidden_size=16,
-            intermediate_size=32, num_hidden_layers=1, num_attention_heads=2,
-            num_key_value_heads=2, max_position_embeddings=32))
-    model.eval().requires_grad_(False)
+    model = random_model(family)
     model.save_pretrained(tmp_path, safe_serialization=True, max_shard_size='2KB')
     assert list(tmp_path.glob('*.index.json')), 'fixture must exercise a real shard index'
     spec = ComponentSpec(name=family, type_hint=type(model),
@@ -45,4 +51,29 @@ def test_native_component_loading_avoids_affected_accelerate_apis(tmp_path, monk
     assert model.state_dict().keys() == loaded.state_dict().keys()
     assert all(torch.equal(value, loaded.state_dict()[name])
                for name, value in model.state_dict().items())
+    assert not torch.cuda.is_initialized()
+
+
+@pytest.mark.parametrize('family', ['cosmos', 'qwen3'])
+def test_extra_index_component_behavior_with_own_outside_fixture(tmp_path, family):
+    """Actual pinned loader behavior; no claim that all libraries ignore indexes."""
+    from diffusers.modular_pipelines.modular_pipeline_utils import ComponentSpec
+    from safetensors.torch import save_file
+    model = random_model(family)
+    root = tmp_path / 'model'
+    model.save_pretrained(root, safe_serialization=True)
+    outside = tmp_path / 'own-outside.safetensors'
+    save_file({k: v.detach().clone() + 1 for k, v in model.state_dict().items()}, str(outside))
+    index_name = ('diffusion_pytorch_model.safetensors.index.json' if family == 'cosmos'
+                  else 'model.safetensors.index.json')
+    (root / index_name).write_text(json.dumps({'metadata': {},
+        'weight_map': {key: '../own-outside.safetensors' for key in model.state_dict()}}))
+    spec = ComponentSpec(name=family, type_hint=type(model),
+                         pretrained_model_name_or_path=str(root))
+    if family == 'cosmos':
+        with pytest.raises(ValueError, match='path separator or a parent-directory reference'):
+            spec.load(local_files_only=True, dtype=torch.float32)
+    else:
+        loaded = spec.load(local_files_only=True, dtype=torch.float32)
+        assert all(torch.equal(v, loaded.state_dict()[k]) for k, v in model.state_dict().items())
     assert not torch.cuda.is_initialized()
