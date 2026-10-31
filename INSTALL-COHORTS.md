@@ -6,14 +6,14 @@ Install from this repository root with `python -m pip install -r requirements.tx
 The requirements entry delegates to `pyproject.toml`, so the two install paths
 resolve the same immutable shared core. No unpublished PyPI core release is assumed.
 
-The default installer's move from historical core0.3.0/a119 to the local project
-is intentional: it resolves the pre-existing conflict with the core0.8.1
-pyproject. `core.lock.json` stays byte-identical as a historical core0.3.0 record;
+The default installer's move from historical core 0.3.0/a119 to the local project
+is intentional: it resolves the pre-existing conflict with the core 0.8.1
+pyproject. `core.lock.json` stays byte-identical as a historical core 0.3.0 record;
 its embedded `requirements.txt` source-of-truth note applies to the historical
 ZIP, whose requirements still contain those original bytes. It does not describe
 the current source checkout. Package versions are distinct labels: stable Anima
-product0.2.0, historical shared core0.3.0, current shared core0.8.1, and opt-in
-Anima product0.3.0a1 with shared core0.12.0.
+product 0.2.0, historical shared core 0.3.0, current shared core 0.8.1, and opt-in
+Anima product 0.3.0a2 with exact shared core 0.12.0/a794.
 
 `requirements-legacy.txt` preserves the previous installer verbatim for historical
 trainer reproduction in a separate environment. Existing source locks, model
@@ -22,8 +22,8 @@ legacy requirements and the packaged lifecycle in one environment, or repoint a
 historical lock to newer bytes. The product runtime still verifies its own
 canonical source map; a successful installation alone does not qualify execution.
 
-This repairs installation consistency. It does not adopt core0.11.0/PG0.9.3 or
-PG0.9.4, migrate checkpoints, qualify pretrained/GPU output, or enable refused
+This repairs installation consistency. It does not adopt core 0.11.0/PG 0.9.3 or
+PG 0.9.4, migrate checkpoints, qualify pretrained/GPU output, or enable refused
 continuous-response/render operations. Those require distinct reviewed cohorts.
 
 The native extra declares torchvision, required by the pinned Cosmos model
@@ -33,8 +33,8 @@ Declaring torchvision was intentional because the pinned Cosmos import path
 requires it. Pip must choose a compatible torch/torchvision pair; the later clean
 CPU receipt also verifies official Torch2.6/torchvision0.21 together.
 
-Keep this PG0.9.1 environment separate from core0.11.0/PG0.9.3 and
-HyperGAN develop, which currently requires PG0.9.4/HNDL0.10.
+Keep this PG 0.9.1 environment separate from core 0.11.0/PG 0.9.3 and
+HyperGAN develop, which currently requires PG 0.9.4/HNDL 0.10.
 These Git dependency wheels are for source installation, not a PyPI release.
 
 The historical Comfy ZIP and Hub release intentionally expose the preserved
@@ -53,9 +53,9 @@ The separate [Anima HyperGAN/HNDL candidate](HNDL-CANDIDATE.md) implements the
 bounded product binding and build path. It does not change the default installer.
 
 The jointly tested public shared candidate is core 0.12.0 at
-`4abc0eb03a4e3a84fc3e6d02734c13dc7e8ea231`, with exact PG 0.9.4 and HyperGAN
+`a794e3b4a8813b012f2c4faa3da82b78d4a90214`, with exact PG 0.9.4 and HyperGAN
 develop `5f368a3770cf5bdae0448995c9f76e29af8049f7` / HNDL 0.10.0. The separate
-product prerelease has passed bounded installed CPU contracts and clean
+product prerelease 0.3.0a2/profile v3 has passed bounded installed CPU contracts and clean
 base/native-extra installation. Pretrained/GPU execution and image rendering
 remain unqualified; the default stays on the supported prior environment.
 
@@ -72,3 +72,7 @@ provenance. Keep old locks and receipts byte-identical, verify rejection without
 state mutation, and reproduce old checkpoints only in their recorded environment.
 Do not relabel historical artifacts or change the compatibility import shim
 `lumen_studio/vendor/reference.py` into a second mathematical implementation.
+
+Current reproducible candidate wheel/sdist installation and artifact impact are
+in [MODERN-CORE-A794.md](MODERN-CORE-A794.md). Preview0.3.0a1/core 4abc packets
+remain old cohorts and require their original environment.

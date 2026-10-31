@@ -27,8 +27,8 @@ from .admission import verify_model_directory, verified_cache_index
 from .runtime import LocalTurboRuntime
 
 
-PROTOCOL = 'anima-hypergan-hndl-native-velocity-v2'
-PROFILE = 'anima-hypergan-hndl-v2'
+PROTOCOL = 'anima-hypergan-hndl-native-velocity-v3'
+PROFILE = 'anima-hypergan-hndl-v3'
 # Same local-patch architecture as NativeFieldCritic, authored through HNDL.
 # Unfold is native input geometry; the shared PG penalty still receives 5D fields.
 CRITIC_SOURCE = '''field = linear(patches, $width, name="field0")

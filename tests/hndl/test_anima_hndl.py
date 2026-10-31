@@ -94,7 +94,7 @@ def test_actual_patch_critic_output_and_penalty_second_derivative_parity(spatial
 
 def config_for(tmp_path, runtime):
     old = configuration(tmp_path, runtime)
-    return SessionConfig('anima-hndl', 'anima-hypergan-hndl-v2-cpu', **old.options)
+    return SessionConfig('anima-hndl', 'anima-hypergan-hndl-v3-cpu', **old.options)
 
 
 def test_candidate_and_shared_core_import_from_installed_wheels():
@@ -121,7 +121,7 @@ def test_real_shared_session_resume_ownership_ema_and_native_only_inference(tmp_
         assert not torch.equal(bank, adapter.particles)
         packet = session.checkpoint(tmp_path / 'training.pt')
         assert session.game.state_dict()['config']['pg_version'] == '0.9.4'
-        assert 'hypergan-hndl-v2' in json.dumps(packet, default=str)
+        assert 'hypergan-hndl-v3' in json.dumps(packet, default=str)
         before = session.checkpoint()
         bad = deepcopy(before)
         bad['manifest']['config']['cohort'] = 'historical-anima-cohort'
@@ -211,6 +211,67 @@ def test_exact_builder_refusal_before_attachment_and_preserved_domain_guard(tmp_
     runtime.mixer.close()
 
 
+def test_failed_update_closes_and_fresh_resume_retries_exactly(tmp_path, monkeypatch):
+    runtime = runtime_fixture()
+    config = config_for(tmp_path, runtime)
+    frozen = deepcopy(runtime.transformer.state_dict())
+    try:
+        with open_session(config, runtime=runtime) as session:
+            session.train(stop_after=1)
+            valid = session.checkpoint(tmp_path / 'retry-valid.pt')
+            expected_metrics = session.train()
+            expected = session.checkpoint()
+            session.restore(valid)
+            def failed_step(*args, **kwargs):
+                raise RuntimeError('own injected generator update failure')
+            with monkeypatch.context() as patch:
+                patch.setattr(session.game.opt_g, 'step', failed_step)
+                with pytest.raises(RuntimeError, match='own injected generator update failure'):
+                    session.step()
+            assert session.game._failed
+            assert session.closed
+        assert not runtime.mixer.adapters and not runtime.mixer.handles
+        with open_session(config, resume=tmp_path / 'retry-valid.pt', runtime=runtime) as retry:
+            assert not retry.game._failed and equal(valid, retry.checkpoint())
+            assert equal(expected_metrics, retry.train())
+            assert equal(expected, retry.checkpoint())
+            assert equal(frozen, runtime.transformer.state_dict())
+        assert not runtime.mixer.adapters and not runtime.mixer.handles
+    finally:
+        runtime.mixer.close()
+
+
+def test_failed_native_observation_restores_flags_buffers_rng_and_retries(tmp_path, monkeypatch):
+    runtime = runtime_fixture()
+    config = config_for(tmp_path, runtime)
+    try:
+        with open_session(config, runtime=runtime) as session:
+            session.train(stop_after=1)
+            expected = session.evaluate(strength=.5)
+            before, rng = session.checkpoint(), torch.get_rng_state().clone()
+            modes = [(module, module.training) for module in runtime.transformer.modules()]
+            gradients = [(parameter, parameter.requires_grad) for parameter in runtime.transformer.parameters()]
+            def failed_predict(*args, **kwargs):
+                runtime.transformer.train()
+                next(runtime.transformer.parameters()).requires_grad_(True)
+                runtime.transformer.register_buffer('own_transient_fixture', torch.ones(1), persistent=False)
+                torch.rand(3)
+                raise RuntimeError('own injected native observation failure')
+            with monkeypatch.context() as patch:
+                patch.setattr(runtime, 'predict', failed_predict)
+                with pytest.raises(RuntimeError, match='own injected native observation failure'):
+                    session.evaluate(strength=.5)
+            assert all(module.training == mode for module, mode in modes)
+            assert all(parameter.requires_grad == flag for parameter, flag in gradients)
+            assert not hasattr(runtime.transformer, 'own_transient_fixture')
+            assert torch.equal(rng, torch.get_rng_state())
+            assert equal(before, session.checkpoint()) and not session.closed
+            assert torch.equal(expected, session.evaluate(strength=.5))
+        assert not runtime.mixer.adapters and not runtime.mixer.handles
+    finally:
+        runtime.mixer.close()
+
+
 def test_candidate_accelerator_request_refuses_before_builder_or_model(tmp_path, monkeypatch):
     def forbidden(*args, **kwargs):
         pytest.fail('accelerator request reached builder/model work')
@@ -220,7 +281,9 @@ def test_candidate_accelerator_request_refuses_before_builder_or_model(tmp_path,
 
 
 @pytest.mark.parametrize('relative', ['lumen_studio/particles.py', 'lumen_studio/cache.py',
-                                    'lumen_studio/pg09_training.py', 'particle_sliders/recipe.py'])
+                                    'lumen_studio/pg09_training.py', 'particle_sliders/recipe.py',
+                                    'configs/anima/candidates/dusk-v1.json',
+                                    'particle_sliders/pg094_release.json', 'particle_sliders/fibo_projection.hndl'])
 def test_complete_installed_source_closure_rejects_actual_file_changes(relative):
     path = Path(sysconfig.get_paths()['purelib']) / relative
     original = path.read_bytes()

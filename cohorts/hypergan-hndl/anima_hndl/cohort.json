@@ -1,9 +1,7 @@
 {
   "core": {
-    "commit": "4abc0eb03a4e3a84fc3e6d02734c13dc7e8ea231",
-    "qualified_wheel_sha256": [
-      "9afad3afc1f6c653a574074dc14f0da1f1c43975c31ca45c4eac049df0b0b4ad"
-    ],
+    "commit": "a794e3b4a8813b012f2c4faa3da82b78d4a90214",
+    "qualified_wheel_sha256": [],
     "version": "0.12.0"
   },
   "core_files": {
@@ -26,16 +24,16 @@
     "formulation.py": "1c248ca0d3d7bf5edb5ae06821cf52480ed9877414b10d1c7c9f843968bd8d01",
     "formulation_game.py": "a11585b4dc6b549de6e62716f0b05d6810addcf61932e190ed50cd2469c21490",
     "grad_regularizers.py": "25852cf640d87485e01ccef1ec6f5bb6a57a03ac9970121e1ca9124b345d6092",
-    "inference.py": "945f11cb3c465627da686483ecf1d137e81c272bf5dcb81c05da8c6482ec6830",
+    "inference.py": "a44ad31b8976f5ad4519f658e4d5ab3c0ab875c4345696eba728835971be914a",
     "legacy_compat.py": "82d036b7ec0aa9e3da7efd7b932fd756ef07a7cad799434180ec9ae4f9280435",
     "legacy_stamp.json": "3532272646d7ab6d7d304f289e5866225f066aac6a3f9a0691a53807a0cf0605",
-    "lifecycle.py": "cc94be191c5810f79642349c9258c466553c41e509df2e28622bfac82bc802c0",
+    "lifecycle.py": "ec27ef58ba544ddaf4f5e51ff48dd08d73686bf81df4e500d822500a297f2c29",
     "locked_provenance.json": "c38e864b789823476036800eea435586ba6d5208bba4008cbd54fdb8cc88826d",
     "music3_native.py": "bbdd408259475b6d2a16158eaa283d302f22f6d8e7a64c44aad35d8a1e943819",
     "native_lora.py": "9cb43b8b03148e11c9b957e81ed3897a965f2a21c69d440c6aaafee452aa6018",
     "optimizer_policy.py": "9ae5fd84987d9a2ae4c202801a9f24b2fe4cebc6d0c8bdc737341a895a79b9a9",
     "peft_scaling.py": "bdb9bdb8b77bfb785658542d48cd4fa04969320898fa83ed30e8d33bcef9640e",
-    "pg09.py": "e580a9339630bea7cf3aa82e34c2d08a3e231b8df0aa408b29baa08b8de01671",
+    "pg09.py": "8d347665884fc371505e39819d6ee1081d893a8b2a8bbf8e5842b0d11f54c895",
     "pg093.py": "61bcd076d0c79dc47ae041d79d45defee25d326fee34fd2cc5b6b42d6e878b8d",
     "pg093_release.json": "551f015d5e8cb359d570f6b3eea4772f1f986267b92d51e58643733cb49b9a91",
     "pg094.py": "3ab6309465328332bb5b35702fa9d04848d2f81bfb25e74d8c7187dc552d9ab3",
@@ -61,9 +59,9 @@
   "product_files": {
     "anima_hndl/__init__.py": "1379741bf4266c30baaa7c6781a6d20e4255621e1ec0fb0e3c1335250e9e96a2",
     "anima_hndl/admission.py": "04523a0cb0945944bbc42ec65dd92454d7a252e41bf247743f4215c74f0c0219",
-    "anima_hndl/lifecycle.py": "b7e7d62c3f2512af8b64db13bebf2e86a3b4e8996aa42b3d206de6b6128d5072",
+    "anima_hndl/lifecycle.py": "643d06c5f11ca8c881ab6d127f851a2902dc8966a742cb04a0e9d730ebf2c506",
     "anima_hndl/runtime.py": "814a7dfcf6b324c6760d4b616881ccab695f0f1b3d8372d9f5ed7bee92964387",
-    "anima_hndl/source_validation.py": "888634c8b3d18419568c4839ba84592524c7b4b5c6b7c938a4b28a7a5c56051b",
+    "anima_hndl/source_validation.py": "537f6a504fe1a34472aaf957f3cc39549e4f0e70d65a2d9059bd2cbe06bc38a3",
     "comfy_particle.py": "73c7015d729261e6f1ad12ec094de2dd05955a3b7a269df2695cfdf59ebbb925",
     "configs/anima/candidates/dusk-v1.json": "799edbc56ac7126d108322a7d673fbded4099b533c0e47ad8f13b9587f6f0f36",
     "configs/anima/candidates/dusk-v2.json": "f7efaa7adbf56f51c02fdc8a7d93b19180141ac1da79ba01e3016a0f9c008fd1",
@@ -125,6 +123,6 @@
     "particle_io.py": "9c10790fd79b18b1d8b66fbe8390975c21bbe7efa017aeb626378b1df00691dc",
     "single_particle.py": "e7e38001fa97bccf0721c5e6a09f83fc7ee3fa98a21e4c2c0c32b3420f3826d8"
   },
-  "product_version": "0.3.0a1",
-  "schema": "anima-hypergan-hndl-cohort-v2"
+  "product_version": "0.3.0a2",
+  "schema": "anima-hypergan-hndl-cohort-v3"
 }

@@ -6,8 +6,8 @@ import json
 from pathlib import Path
 import sys
 
-CORE_COMMIT = '4abc0eb03a4e3a84fc3e6d02734c13dc7e8ea231'
-PRODUCT_VERSION = '0.3.0a1'
+CORE_COMMIT = 'a794e3b4a8813b012f2c4faa3da82b78d4a90214'
+PRODUCT_VERSION = '0.3.0a2'
 
 
 def _digest(value):
@@ -61,7 +61,7 @@ def verify_cohort():
     manifest_path = Path(__file__).with_name('cohort.json')
     manifest = json.loads(manifest_path.read_text())
     if (manifest['schema'], manifest['product_version'], manifest['core']['commit']) != (
-            'anima-hypergan-hndl-cohort-v2', PRODUCT_VERSION, CORE_COMMIT):
+            'anima-hypergan-hndl-cohort-v3', PRODUCT_VERSION, CORE_COMMIT):
         raise ValueError('Anima HNDL cohort manifest contradicts the binding')
     core = distribution('particle-sliders-core')
     if core.version != manifest['core']['version']:
