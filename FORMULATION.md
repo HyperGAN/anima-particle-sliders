@@ -86,8 +86,13 @@ The original adult character catalog separates 12 training characters, four deve
 
 These are final-budget experimental checkpoints. They were not selected as the best checkpoint by perceptual quality. Strengths above one extrapolate beyond training and can change clothing, pose, setting, or composition. The measured 1,600-update runs did not establish convergence. Training traces, normalization provenance, checkpoint hashes, and development measurements accompany the weights.
 
-## Shared algorithm implementation
+## Historical shared algorithm implementation
 
-Routing, the global-mix critic, paired losses, the particle regularizer, the noise schedule, and the ordinary-LoRA solver live in [particle-sliders-core](https://github.com/HyperGAN/particle-sliders/tree/a119ca1ecd3d5d6c437065839d22739b04f2f4d8/packages/particle-sliders-core). `requirements.txt` pins commit `a119ca1ecd3d5d6c437065839d22739b04f2f4d8`. Training imports `winning_formulation` and calls `require()` on the training config after setting generator learning rate $2\times10^{-5}$. Architecture is `gmix`. The formulation overlay is provisional `particle-gmix-1600-v2` until ParticleGAN #38 crowns a full-board winner.
+This section describes the released gmix cohort. `core.lock.json` preserves
+historical core0.3.0 and its original installer note. In this source checkout,
+the current lifecycle's dependency authority is `pyproject.toml`, not that
+historical note. See [installation cohorts](INSTALL-COHORTS.md).
+
+Routing, the global-mix critic, paired losses, the particle regularizer, the noise schedule, and the ordinary-LoRA solver live in [particle-sliders-core](https://github.com/HyperGAN/particle-sliders/tree/a119ca1ecd3d5d6c437065839d22739b04f2f4d8/packages/particle-sliders-core). `requirements-legacy.txt` pins commit `a119ca1ecd3d5d6c437065839d22739b04f2f4d8`. Training imports `winning_formulation` and calls `require()` on the training config after setting generator learning rate $2\times10^{-5}$. Architecture is `gmix`. The formulation overlay is provisional `particle-gmix-1600-v2` until ParticleGAN #38 crowns a full-board winner.
 
 Anima keeps the Hub id `ntc-ai/anima-particle-sliders`, the Comfy class in `comfy_particle.py`, the Candlelit and Moonlit surfaces, and the published sample cards. `core.lock.json` records this pin. It does not treat file hashes from the retired `mikkel/sliders-conceptmod` `concept-slider-core` package as the source of truth. Runtime identity hashes `particle_sliders.reference`. Published checkpoints still record the earlier runtime hash in `configs/anima/released-identity.json`; loaders accept that historical identity when the converted model matches. [Winning formulation](https://github.com/HyperGAN/particle-sliders/blob/a119ca1ecd3d5d6c437065839d22739b04f2f4d8/docs/winning-formulation.md).

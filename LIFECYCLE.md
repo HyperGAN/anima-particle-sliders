@@ -1,4 +1,15 @@
-# Anima image sessions: proposed new cohort
+# Anima image sessions
+
+The current source installer is Anima 0.3.0 with core 0.12.0 and official
+ParticleGAN 0.9.4. The registered `anima` backend and explicit `PG09Trainer`
+continue to use the shared game and actual routed particle bank; the shared
+engine selects the versioned 0.9.4 recipe and rejects older training packets.
+See [PG094-ADOPTION.md](PG094-ADOPTION.md) for the exact pin and current checks.
+CPU-only lifecycle gates and native sampler/pretrained qualification limits
+remain in force. The following sections preserve the earlier 0.8.1 adoption
+history and describe the unchanged product API.
+
+## Previous core 0.8.1 cohort
 
 This draft targets the reviewed core 0.8.1 pin
 `32f6830f6402e85aa77b6631db64fcbbb2131f6b`; see `CORE081-ADOPTION.md` for
@@ -19,7 +30,7 @@ The new `anima-particle-sliders` distribution registers backend `anima` in
 the ParticleGAN dependency and GAN math. There is no reverse product import or
 copied GAN objective, regularizer, prior, optimizer or stepping loop.
 
-`requirements.txt`, `core.lock.json`, `requirements-pg09.txt` and
+`requirements-legacy.txt`, `core.lock.json`, `requirements-pg09.txt` and
 `core.pg09.lock.json` retain their original historical pins and qualification
 states. Select one isolated new environment for this proposal. Do not install
 the historical dependency selections with this package or retarget active runs.

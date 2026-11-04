@@ -14,6 +14,12 @@ def test_comfy_archive_contains_validation_and_imports_in_isolated_python(tmp_pa
     archive = tmp_path / 'comfyui/anima-particle-sliders.zip'
     with zipfile.ZipFile(archive) as file:
         assert 'anima-particle-sliders/lumen_studio/checkpoint_validation.py' in file.namelist()
+        legacy = Path(__file__).resolve().parents[1] / 'requirements-legacy.txt'
+        assert file.read('anima-particle-sliders/requirements.txt') == legacy.read_bytes()
+        assert file.read('anima-particle-sliders/requirements-legacy.txt') == legacy.read_bytes()
+        cohorts = legacy.with_name('INSTALL-COHORTS.md')
+        assert file.read('anima-particle-sliders/INSTALL-COHORTS.md') == cohorts.read_bytes()
+        assert b'a119ca1ecd3d5d6c437065839d22739b04f2f4d8' in legacy.read_bytes()
         file.extractall(tmp_path / 'extract')
     plugin = tmp_path / 'extract/anima-particle-sliders'
     shared_src = Path(particle_sliders.__file__).resolve().parents[1]

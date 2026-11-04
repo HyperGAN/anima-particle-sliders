@@ -1,6 +1,10 @@
+[Current and historical installation cohorts](INSTALL-COHORTS.md).
+
 For the common session interface, see [LIFECYCLE.md](LIFECYCLE.md).
 
-Common lifecycle draft: **32 selected CPU checks passed** on the tested runtime below. See [publication and qualification status](PUBLICATION-STATUS.md); native/pretrained limits remain explicit.
+The current source installer uses **Anima 0.3.0 / Particle Sliders core 0.12.0 /
+ParticleGAN 0.9.4**. See [current adoption and verification](PG094-ADOPTION.md)
+and [publication and qualification status](PUBLICATION-STATUS.md).
 
 # Anima Particle Sliders
 
@@ -10,8 +14,8 @@ The explicit new PG0.9 training API and its CPU qualification are documented
 in [PG09_TRAINING.md](PG09_TRAINING.md). Archived reproduction and Studio
 training commands refuse before runtime or cache work. Historical Game
 helpers remain available for explicit CPU fixtures. The optional hashed
-`requirements-pg09.txt` selects the proposed 0.6.0/PG0.9.1 wheel pair;
-`core.pg09.lock.json` records its exact candidate commit and review status.
+`requirements-pg09.txt` and `core.pg09.lock.json` preserve the historical
+0.6.0/PG0.9.1 wheel candidate; use `requirements.txt` for the current source.
 
 ## Samples
 
@@ -419,9 +423,14 @@ The original adult character catalog separates 12 training characters, four deve
 
 These are final-budget experimental checkpoints. They were not selected as the best checkpoint by perceptual quality. Strengths above one extrapolate beyond training and can change clothing, pose, setting, or composition. The measured 1,600-update runs did not establish convergence. Training traces, normalization provenance, checkpoint hashes, and development measurements accompany the weights.
 
-### Shared algorithm implementation
+### Historical shared algorithm implementation
 
-Routing, the global-mix critic, paired losses, the particle regularizer, the noise schedule, and the ordinary-LoRA solver live in [particle-sliders-core](https://github.com/HyperGAN/particle-sliders/tree/a119ca1ecd3d5d6c437065839d22739b04f2f4d8/packages/particle-sliders-core). `requirements.txt` pins commit `a119ca1ecd3d5d6c437065839d22739b04f2f4d8`. Training imports `winning_formulation` and calls `require()` on the training config after setting generator learning rate \\(2\\times10^{-5}\\). Architecture is `gmix`. The formulation overlay is provisional `particle-gmix-1600-v2` until ParticleGAN #38 crowns a full-board winner.
+This section describes the released gmix cohort. `core.lock.json` is its preserved
+core0.3.0 record, not the current packaged lifecycle dependency. The current
+source product is Anima0.3.0/core0.12.0/PG0.9.4; its installer is `pyproject.toml`.
+See [installation cohorts](INSTALL-COHORTS.md) for the separate HNDL prerelease.
+
+Routing, the global-mix critic, paired losses, the particle regularizer, the noise schedule, and the ordinary-LoRA solver live in [particle-sliders-core](https://github.com/HyperGAN/particle-sliders/tree/a119ca1ecd3d5d6c437065839d22739b04f2f4d8/packages/particle-sliders-core). `requirements-legacy.txt` pins commit `a119ca1ecd3d5d6c437065839d22739b04f2f4d8`. Training imports `winning_formulation` and calls `require()` on the training config after setting generator learning rate \\(2\\times10^{-5}\\). Architecture is `gmix`. The formulation overlay is provisional `particle-gmix-1600-v2` until ParticleGAN #38 crowns a full-board winner.
 
 Anima keeps the Hub id `ntc-ai/anima-particle-sliders`, the Comfy class in `comfy_particle.py`, the Candlelit and Moonlit surfaces, and the published sample cards. `core.lock.json` records this pin. It does not treat file hashes from the retired `mikkel/sliders-conceptmod` `concept-slider-core` package as the source of truth. Runtime identity hashes `particle_sliders.reference`. Published checkpoints still record the earlier runtime hash in `configs/anima/released-identity.json`; loaders accept that historical identity when the converted model matches. [Winning formulation](https://github.com/HyperGAN/particle-sliders/blob/a119ca1ecd3d5d6c437065839d22739b04f2f4d8/docs/winning-formulation.md).
 

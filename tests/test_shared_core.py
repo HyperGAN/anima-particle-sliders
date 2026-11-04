@@ -22,8 +22,8 @@ def test_winning_formulation_is_gmix_and_pinned():
     assert stamp.architecture_id == "gmix"
     assert stamp.formulation_id == "particle-gmix-1600-v2"
     assert stamp.spec["noise_hold_ratio"] == 1.3
-    assert PIN in (ROOT / "requirements.txt").read_text()
-    assert "concept-slider-core" not in (ROOT / "requirements.txt").read_text()
+    assert PIN in (ROOT / "requirements-legacy.txt").read_text()
+    assert "concept-slider-core" not in (ROOT / "requirements-legacy.txt").read_text()
     lock = json.loads((ROOT / "core.lock.json").read_text())
     assert lock["repository"] == "https://github.com/HyperGAN/particle-sliders"
     assert lock["commit"] == "a119ca1ecd3d5d6c437065839d22739b04f2f4d8"

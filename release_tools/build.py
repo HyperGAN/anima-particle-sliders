@@ -41,13 +41,15 @@ def copy(source,dest):
 
 
 def package_plugin(out):
-    plugin=['__init__.py','comfy_particle.py','particle_io.py','requirements.txt','core.lock.json','COMFYUI.md','LICENSE','ANIMA-LICENSE.md','NOTICE',
+    plugin=['__init__.py','comfy_particle.py','particle_io.py','requirements.txt','requirements-legacy.txt','core.lock.json','COMFYUI.md','INSTALL-COHORTS.md','HNDL-CANDIDATE.md','HNDL-CPU.md','CLEAN-INSTALL-CPU.md','ACCELERATE-ADVISORY.md','LICENSE','ANIMA-LICENSE.md','NOTICE',
         'lumen_studio/__init__.py','lumen_studio/particles.py','lumen_studio/contracts.py','lumen_studio/alpha_adapter.py',
         'lumen_studio/checkpoint_validation.py','single_particle.py',
         'lumen_studio/vendor/__init__.py','lumen_studio/vendor/reference.py','lumen_studio/vendor/LICENSE','lumen_studio/vendor/provenance.json']
     zpath=out/'comfyui/anima-particle-sliders.zip';zpath.parent.mkdir(exist_ok=True)
     with zipfile.ZipFile(zpath,'w',zipfile.ZIP_DEFLATED) as z:
-        for name in plugin:z.write(ROOT/name,'anima-particle-sliders/'+name)
+        for name in plugin:
+            source = ROOT / ('requirements-legacy.txt' if name == 'requirements.txt' else name)
+            z.write(source, 'anima-particle-sliders/' + name)
 
 
 def comparison(images,path):
@@ -120,7 +122,7 @@ def main():
 
 [Public source and training reproduction]({GITHUB}) · [Every sample and checkpoint](catalog.json) · [File hashes](release-manifest.json) · [Related YuE2 release](https://huggingface.co/ntc-ai/yue2-particle-sliders).
 
-The reusable algorithms come from the [pinned particle-sliders core](https://github.com/HyperGAN/particle-sliders/tree/a119ca1ecd3d5d6c437065839d22739b04f2f4d8/packages/particle-sliders-core). This Anima repository pins that commit and owns Hub ids, Comfy class names, prompt cards, sampling, and model-surface keys.
+The historical release algorithms come from the [pinned particle-sliders core](https://github.com/HyperGAN/particle-sliders/tree/a119ca1ecd3d5d6c437065839d22739b04f2f4d8/packages/particle-sliders-core). The preserved historical installer pins that commit; the current source checkout's lifecycle dependency is defined by pyproject.toml. Anima owns Hub ids, Comfy class names, prompt cards, sampling, and model-surface keys.
 
 ## Distilled comparisons
 
@@ -167,13 +169,13 @@ tags:
 '''
     (out/'README.md').write_text(yaml+card)
     # The same samples-first card is useful from GitHub; Hub-local paths become absolute.
-    github=card
+    github='[Current and historical installation cohorts](INSTALL-COHORTS.md).\n\n'+card
     for local in ('catalog.json','release-manifest.json'):
         github=github.replace(']('+local+')',']('+WEB+'/blob/main/'+local+')')
     github=github.replace('## Get the adapters','<a id="comfyui"></a>\n\n## Get the adapters')
     (ROOT/'README.md').write_text(github)
-    for name in ('FORMULATION.md','DISTILLATION.md','REPRODUCE.md','COMFYUI.md','ANIMA-LICENSE.md','NOTICE','LICENSE','core.lock.json','requirements.txt'):
-        copy(ROOT/name,out/name)
+    for name in ('FORMULATION.md','DISTILLATION.md','REPRODUCE.md','COMFYUI.md','ANIMA-LICENSE.md','NOTICE','LICENSE','core.lock.json','requirements.txt','requirements-legacy.txt','INSTALL-COHORTS.md','HNDL-CANDIDATE.md','HNDL-CPU.md','CLEAN-INSTALL-CPU.md','ACCELERATE-ADVISORY.md'):
+        copy(ROOT / ('requirements-legacy.txt' if name == 'requirements.txt' else name), out/name)
     for path in (ROOT/'validation').glob('*.json'):copy(path,out/'validation'/path.name)
     copy(ROOT/'data/release-samples.json',out/'data/release-samples.json')
     for name in ('train','dev'):copy(ROOT/f'data/{name}.json',out/f'data/{name}.json')

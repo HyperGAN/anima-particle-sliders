@@ -4,6 +4,12 @@ import json
 from pathlib import Path
 import subprocess
 import sys
+import pytest
+
+# This immutable wheel pair is retained for reproducing the original 0.6.0
+# candidate, not the current source installer. Never rewrite its provenance.
+pytestmark = pytest.mark.skipif(version('particle-sliders-core') != '0.6.0',
+    reason='historical core 0.6.0 wheel-cohort checks require their original environment')
 
 ROOT = Path(__file__).resolve().parents[1]
 
