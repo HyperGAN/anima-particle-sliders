@@ -79,6 +79,13 @@ package identities record the new source cohort without upgrading those
 native qualification claims. No package/model publication or deployment is
 part of this source update.
 
+In particular, the `Core 0.8.1 source proposal` text in
+`lumen_studio.lifecycle` is historical qualification wording, not the active
+dependency version. That shared file is also hashed by the preserved HNDL
+0.3.0a2 source cohort. Relabeling it would invalidate that cohort's exact-source
+checks. Read the canonical `pyproject.toml`, installed package metadata and
+this document for the current core0.12.0 / PG0.9.4 dependency identity.
+
 ## Merged shared-command refresh
 
 After shared PR161 merged, the canonical pin was advanced to `ddb41423bcefc1fe76cd94d0f9b367353b3ea137`. It retains the PG094 upgrade and includes the new training dispatcher and isolated execution APIs. The installed 73-check native-bank suite and 111-check packaging/compatibility suite both passed again against this exact VCS origin; the 50-package dependency check is clean. Historical source cohorts and native qualification limits are unchanged.
