@@ -1,12 +1,19 @@
 {
-  "backend": "anima",
-  "cohort": "anima-new-owned-run",
-  "options": {
-    "steps": 128,
-    "device": "cpu",
-    "model_dir": "/path/to/staged/model",
-    "cache_dir": "/path/to/local/cache",
-    "cache_index_sha256": "REPLACE_WITH_CACHE_SHA256",
-    "variation": "wild-hair"
+  "schema": "particle-slider-train-v1",
+  "profile": "training_profile.json",
+  "training": {
+    "backend": "anima",
+    "cohort": "anima-new-owned-run",
+    "options": {
+      "steps": 128,
+      "device": "cpu",
+      "model_dir": "/path/to/staged/model",
+      "cache_dir": "/path/to/local/cache",
+      "cache_index_sha256": "REPLACE_WITH_CACHE_SHA256",
+      "variation": "wild-hair"
+    }
+  },
+  "execution": {
+    "runner": "local"
   }
 }
