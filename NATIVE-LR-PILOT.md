@@ -1,6 +1,6 @@
 # Native PG094 learning-rate pilot
 
-`scripts/anima_pg094_lr_pilot.py` runs the current real, frozen Turbo v1.1
+`scripts/anima_pg094_lr_pilot_v2.py` runs the current real, frozen Turbo v1.1
 runtime and actual routed particle bank with official PG094 loss, BISPF,
 SBNP and DualNorm. It accepts explicit base rates and holds the public critic
 and prior multipliers at 1.5 and 2.5. New configuration options `lr`,
@@ -18,12 +18,12 @@ before accelerator updates. It verifies that training and heldout characters
 are disjoint; heldout fields never update weights or normalization.
 
 ```sh
-CUDA_VISIBLE_DEVICES=0 OMP_NUM_THREADS=4 python -u scripts/anima_pg094_lr_pilot.py \
+CUDA_VISIBLE_DEVICES=0 OMP_NUM_THREADS=4 python -u scripts/anima_pg094_lr_pilot_v2.py \
   --model-dir /local/anima-turbo-v1.1 \
   --historical-targets /local/original-targets \
   --output /local/new-experiments/anima-pg094-lr \
-  --lrs .00012 .0012 .004 .012 --steps 32 --shards 2 --eval-rows 12 \
-  --max-memory-gib 18 --render
+  --lrs .000003 .00001 .00003 --fixed-d-lr .018 --fixed-prior-lr .03 \
+  --steps 32 --shards 2 --eval-rows 12 --max-memory-gib 8
 ```
 
 The shared game owns every update and exact optimizer/RNG checkpoint. The
@@ -47,6 +47,12 @@ matched native rendering window, after training unloads. It uses heldout cached
 prompt embeddings, loads only the transformer, scheduler and decoder, and
 creates neutral, positive-teacher and half/full-strength EMA views with matched
 seed/sampler and image hashes. No critic or optimizer is constructed.
+
+The original `anima_pg094_lr_pilot.py` remains a replayable exploratory
+harness. Its coupled rates did not establish suitable native defaults. V2
+adds heldout checkpoints, a quality stop, and exact next-update tensor/state
+and metric comparison across a fresh midpoint trainer reconstruction.
+Use a separate admitted decoder window for matched rendering.
 
 The common lifecycle's prior CPU-only gate remains separate from this explicit,
 fresh-teacher native experiment admission. Historical cohorts retain their
