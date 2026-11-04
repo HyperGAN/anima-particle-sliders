@@ -22,6 +22,7 @@ from .cache import TargetCache, save_tensor_file
 from .contracts import atomic_json, digest, file_hash
 from .particles import ParticleAdapter
 from .provenance import cache_runtime_compatibility
+from .learning_rates import recipe_learning_rates
 
 
 class CachedResponses:
@@ -239,7 +240,9 @@ class PG09Trainer:
 
     def __init__(self, runtime, cache, directory, variation, *, seed=7, batch_size=2,
                  total_steps=100, response_scale=1., sigma=1., critic_width=32,
-                 native_admission=None):
+                 native_admission=None, lr=None, d_lr_mult=None, prior_lr_mult=None):
+        learning_rates = recipe_learning_rates(lr=lr, d_lr_mult=d_lr_mult,
+                                               prior_lr_mult=prior_lr_mult)
         self.runtime, self.variation = runtime, variation
         self.directory = Path(directory)
         self.responses = CachedResponses(cache, runtime, variation)
@@ -262,7 +265,7 @@ class PG09Trainer:
                 particles=self.adapter.particles, preset='bispf_optimized',
                 response_domain='continuous_field', batch_size=batch_size, seed=seed,
                 total_steps=total_steps, response_scale=response_scale, sigma=sigma,
-                sampling='balanced')
+                sampling='balanced', recipe_overrides=learning_rates)
             self.directory.mkdir(parents=True, exist_ok=True)
             if (self.directory / 'pg09-resume.pt').exists():
                 self.restore(self.directory / 'pg09-resume.pt')

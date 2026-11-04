@@ -15,6 +15,7 @@ from particle_sliders.lifecycle import (
 )
 
 from particle_sliders.inference import InferenceBackend, InferenceBinding, native_identity
+from .learning_rates import recipe_learning_rates
 
 
 CAPABILITIES = Capabilities(
@@ -25,7 +26,7 @@ CAPABILITIES = Capabilities(
 )
 _OPTIONS = {'cache_dir', 'cache_index_sha256', 'model_dir', 'variation', 'device',
             'base_precision', 'steps', 'batch', 'seed', 'ema_decay', 'response_scale',
-            'sigma', 'critic_width'}
+            'sigma', 'critic_width', 'lr', 'd_lr_mult', 'prior_lr_mult'}
 
 
 def validate_runtime(options):
@@ -169,6 +170,8 @@ class NativeOwner:
 def validate(options):
     """Allocation-free checks, including gates before native imports/loading."""
     validate_runtime(options)
+    recipe_learning_rates(**{name: options.get(name)
+                             for name in ('lr', 'd_lr_mult', 'prior_lr_mult')})
     if set(options) - _OPTIONS:
         raise ValueError('unknown Anima session option: ' + ', '.join(sorted(set(options) - _OPTIONS)))
     variation = options.get('variation')
@@ -240,7 +243,9 @@ def prepare(options, *, runtime=None):
             response_domain='continuous_field', sampling='balanced',
             batch_size=options.get('batch', 2), seed=options.get('seed', 7),
             total_steps=options.get('steps', 4),
-            response_scale=options.get('response_scale', 1.), sigma=options.get('sigma', 1.))
+            response_scale=options.get('response_scale', 1.), sigma=options.get('sigma', 1.),
+            recipe_overrides=recipe_learning_rates(**{name: options.get(name)
+                for name in ('lr', 'd_lr_mult', 'prior_lr_mult')}))
         specification = NATIVE_BACKEND.specification(backend, model_identity=runtime.identity,
             protocol=PROTOCOL, configuration=dict(variation=options['variation'], base_precision='bfloat16',
                 latent_channels=int(runtime.transformer.config.in_channels),
