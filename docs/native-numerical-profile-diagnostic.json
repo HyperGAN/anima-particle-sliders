@@ -1,0 +1,42 @@
+{
+  "schema": "anima-native-resume-diagnostic-v1",
+  "frozen_product_source": "e4944dca8614d3c701066dd107baafa8e8103c97",
+  "torch": "2.13.0+cu126",
+  "deterministic": true,
+  "tf32": false,
+  "cublas_workspace": ":4096:8",
+  "sdpa": {
+    "flash": false,
+    "memory_efficient": false,
+    "math": true
+  },
+  "initial_network_sha256": "d4ad2c1b94f362a0c7f4a8c39d1d82d8397c935131cf0280c29ecf3797adb141",
+  "initial_critic_sha256": "6aafc70381a8bd6dbb362bcffbe57c967abab071a8df22cd58a4709be1e3d6b7",
+  "initial_rng_sha256": "7b6bb5ae4917df7395efd75661540fd282f78869a4eafd465166d719f2a398d2",
+  "status": "complete",
+  "peak_allocated_gib": 4.625462055206299,
+  "scope": "short real native CUDA execution-profile diagnostic; not LR/quality qualification",
+  "receipt_sha256": "f0c3fe8e3071f88b8d729c875f84c715e38c9703b284ca3cb0c4f417058360e6",
+  "probe_source_sha256": "0af354724b9cee73db78f56f14b4e8925a9b7d2ddeda9a090d9f54753ad76eaa",
+  "comparisons": [
+    {
+      "left": "fresh-a",
+      "right": "fresh-b",
+      "pre_diff": 0,
+      "post_diff": 0,
+      "metric_diff": 0,
+      "g_gradient_diff": 0,
+      "d_gradient_diff": 0
+    },
+    {
+      "left": "continuous",
+      "right": "fresh-a",
+      "pre_diff": 0,
+      "post_diff": 0,
+      "metric_diff": 0,
+      "g_gradient_diff": 0,
+      "d_gradient_diff": 0
+    }
+  ],
+  "source_note": "New explicit product numerical-profile/cache-binding implementation requires its own current-source qualification. No historical packet rebound."
+}

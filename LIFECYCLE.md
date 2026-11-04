@@ -13,6 +13,9 @@ is part of the shared resumable identity; changing a rate requires a new cohort.
 The common JSON CLI consumes these exact options without a second set of defaults.
 These upstream defaults are not a claim of tuned native Anima learning rates.
 See [NATIVE-LR-PILOT.md](NATIVE-LR-PILOT.md) for the bounded native experiment.
+The direct native trainer additionally supports an explicit cache-bound
+`numerical_profile`; its new deterministic math profile requires activation
+before CUDA startup. Common lifecycle accelerator/render gates remain separate.
 CPU-only lifecycle gates and native sampler/pretrained qualification limits
 remain in force. The following sections preserve the earlier 0.8.1 adoption
 history and describe the unchanged product API.
