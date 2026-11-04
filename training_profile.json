@@ -1,0 +1,21 @@
+{
+  "schema": "particle-slider-profile-v1",
+  "name": "anima-source",
+  "product": "anima-particle-sliders",
+  "config_kind": "session",
+  "backend": "anima",
+  "interface": "image",
+  "status": "source_only",
+  "runtime": {
+    "python": "python3"
+  },
+  "capabilities": {
+    "resume": true,
+    "periodic_checkpoint": true,
+    "check": true
+  },
+  "default_checkpoint_every": 32,
+  "evidence": "lumen_studio/lifecycle.py",
+  "status_reason": "PG 0.9.1 with a real bank; this lifecycle currently admits CPU only. Existing published controls use a historical gmix recipe.",
+  "source_revision": "c018f32759f49a05c2360a04b4a83924a6851913"
+}
