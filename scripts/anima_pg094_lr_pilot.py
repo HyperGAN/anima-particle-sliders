@@ -86,6 +86,10 @@ def main():
         raise ValueError('at least two steps/shards/evaluation rows required')
     if any(not math.isfinite(lr) or lr <= 0 for lr in args.lrs):
         raise ValueError('positive finite learning rates required')
+    for name in ('fixed_d_lr','fixed_prior_lr','max_memory_gib'):
+        value = getattr(args,name)
+        if value is not None and (not math.isfinite(value) or value <= 0):
+            raise ValueError(name+' must be finite and positive')
     args.output.mkdir(parents=True, exist_ok=True)
     def global_memory_guard():
         while True:
@@ -244,6 +248,12 @@ def main():
                     initial_critic_sha256=_hash(initial['critic']),
                     initial_rng_sha256=_hash({name:initial[name] for name in
                         ('streams','model_cpu_rng','model_cuda_rng')}))
+                candidate['optimizer_groups_at_step_zero'] = [
+                    dict(role=('prior' if any(parameter is trainer.adapter.particles
+                                              for parameter in group['params']) else role),
+                         lr=group['lr'], parameter_count=sum(p.numel() for p in group['params']))
+                    for role, optimizer in (('g',trainer.game.opt_g),('d',trainer.game.opt_d))
+                    for group in optimizer.param_groups]
                 if args.identity_only:
                     candidate['status']='identity-only'
                     continue

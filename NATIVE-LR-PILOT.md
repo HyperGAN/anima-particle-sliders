@@ -36,6 +36,18 @@ are errors. The output `report.json` is provisional screening evidence; the
 small character subset, one seed and short update budget do not establish a
 model-wide recommended LR or qualify common native sampler/render interfaces.
 
+The base-rate grid is a coupled G/D/P screen. `--fixed-d-lr` and
+`--fixed-prior-lr` hold those absolute rates while screening generator rates;
+their multipliers are calculated as absolute/base. Each new confirmation
+attempt captures an immutable actual step-zero packet and network, critic,
+RNG, configuration and recipe hashes before updates, plus actual optimizer
+group learning rates. Run from a fixed, read-only complete source snapshot.
+`scripts/anima_pg094_lr_render.py` provides a separate portable-artifact-only
+matched native rendering window, after training unloads. It uses heldout cached
+prompt embeddings, loads only the transformer, scheduler and decoder, and
+creates neutral, positive-teacher and half/full-strength EMA views with matched
+seed/sampler and image hashes. No critic or optimizer is constructed.
+
 The common lifecycle's prior CPU-only gate remains separate from this explicit,
 fresh-teacher native experiment admission. Historical cohorts retain their
 original source and optimizer identities. No published weights are replaced.
