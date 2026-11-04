@@ -4,44 +4,22 @@
 executes `particle_sliders.pg09.ConditionalPG09` with the public
 `bispf_optimized` recipe and `particle_sliders.pg09_backends.AnimaRuntimeResponseAdapter`.
 The product contains no PG0.9 loss, optimizer, constraint or sampler copy.
-ParticleGAN must match the exact version and verified source profile required
-by the proposed installed shared package. `core.pg09.lock.json` binds the
-available local frozen 0.6.0 candidate at commit
-`cdfb80a76b882b4b73861b12f555263bd64ffeb7` and official PG0.9.1.
-Product code review is pending after Ada withheld clearance on the previous
-`b8572b3` head. The exact local wheel exists and its source is a public draft;
-shared publication/adoption is still on hold, and the clean main-based
-reconstruction remains publication-blocked. Review of the exact installable
-dependency remains required. Native runtime/cache qualification has not been
-performed or admitted. These are separate gates. Existing admitted PG0.9.0
-cohorts are a separate source lineage; this proposal does not retarget them
-and does not support PG0.10.
-Its source is staged on the public `audit/shared-core-contracts-20261017` branch.
+The current source package pins core 0.12.0 at
+`8ffca928550f97fdb9713151ca3023fc71e77e2c` and exact official ParticleGAN 0.9.4.
+Install it from a new environment with `python -m pip install -r requirements.txt`.
+The same dependency is declared in `pyproject.toml`. The shared engine verifies
+installed ParticleGAN source bytes, uses its non-saturating BISPF recipe, SBNP
+prior, zero-momentum DualNorm and constant effective learning rates. Anima passes
+its genuine native velocity geometry and actual routed particle bank.
+See [PG094-ADOPTION.md](PG094-ADOPTION.md) for current checks and limits.
 
-`requirements-pg09.txt` pins both exact wheel versions and SHA256 hashes.
-In a new isolated environment whose runtime dependencies are already supplied,
-install from the coordinator's verified wheel directory:
-
-```bash
-python -m pip install --no-index --find-links /verified/wheelhouse \
-  --no-deps --require-hashes --force-reinstall \
-  --report /path/to/new-env/pg09-install-report.json -r requirements-pg09.txt
-```
-
-The core wheel SHA256 is
-`4abc83988fdeb6d7478de830e7ee8ec5d9bd99c20d52f89e4ce594d50dfd39a3`.
-The official ParticleGAN wheel SHA256 is
-`b01b7957169cb3de45887e22b4d525fd54071577e1de58089707cf05fe6992ec`.
-Keep the installation report in the new environment prefix. Version-and-hash
-wheelhouse installs may omit `direct_url.json`; the source-free provenance test
-accepts the report's exact archive hashes alongside installed source hashes.
-
-The lock records code review, package availability/publication and runtime
-qualification separately; no field claims approval. Release artifact
-publication/adoption, fresh Ada review and coordinator-owned native
-qualification remain gates. The historical `requirements-legacy.txt` and
-`core.lock.json` retain the earlier 0.3.0 reproduction dependency, which does
-not supply this PG09 API. Do not install both dependency selections together.
+The separate `requirements-pg09.txt` / `core.pg09.lock.json` pair is retained
+unchanged for historical core0.6.0 / PG0.9.1 reproduction. It is not the current
+installer. Its source hashes, review state and publication holds describe that
+historical candidate only. The `requirements-legacy.txt` / `core.lock.json` pair
+similarly preserves the earlier gmix cohort. Never combine those environments
+or relabel their checkpoints as PG0.9.4. The separate HyperGAN/HNDL candidate
+retains its own exact core pin and source admission.
 
 Runtime loading, GPU admission and scheduling belong to the external
 coordinator. After that coordinator has admitted and loaded the frozen

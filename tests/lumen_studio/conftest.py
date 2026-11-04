@@ -8,7 +8,7 @@ from lumen_studio.cache import TargetCache, save_tensor_file
 from lumen_studio.contracts import atomic_json, digest, file_hash
 from lumen_studio.particles import Mixer
 
-torch.set_num_threads(2)
+torch.set_num_threads(1)
 
 
 class TinyTransformer(nn.Module):

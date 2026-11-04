@@ -1,4 +1,4 @@
-"""Installed core 0.8.1 qualification; tiny random Cosmos, no pretrained loads."""
+"""Native lifecycle regressions, including current PG; no pretrained loads."""
 from collections import OrderedDict
 from copy import deepcopy
 from dataclasses import replace
@@ -93,7 +93,7 @@ def test_raw_and_ema_native_inference_without_cache_or_training(tmp_path, monkey
             for method in ('train', 'step', 'checkpoint', 'restore'):
                 with pytest.raises(UnsupportedOperation):
                     getattr(native, method)()
-            assert native.manifest['origin']['pg_version'] == '0.9.1'
+            assert native.manifest['origin']['pg_version'] == '0.9.4'
         assert not loaded[-1].mixer.adapters and not loaded[-1].mixer.handles
         assert not hasattr(loaded[-1], 'pipe')
     assert torch.equal(rng, torch.get_rng_state())

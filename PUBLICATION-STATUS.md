@@ -1,5 +1,13 @@
 # Publication and qualification status
 
+The current source update moves the default package to Anima 0.3.0, core
+0.12.0 and official ParticleGAN 0.9.4. Its exact dependency, verification and
+remaining limits are recorded in [PG094-ADOPTION.md](PG094-ADOPTION.md).
+This is a source migration for review, not a model or package publication.
+The six released controls keep their original training provenance and loaders.
+
+## Historical core 0.8.1 qualification
+
 This source is proposed through [the existing draft PR](https://github.com/HyperGAN/anima-particle-sliders/pull/5).
 Its qualified candidate is `c24005bb45e901b7343e0f06d64b93b8259fc021`; tested runtime is
 `5ecda1b5f4b5960bc1a25f05f5ac2923ede16fb4`. The publication follow-up changes Markdown

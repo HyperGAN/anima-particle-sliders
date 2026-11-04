@@ -1,18 +1,18 @@
 # Installation cohorts
 
-The current packaged lifecycle uses `particle-sliders-core` 0.8.1 at
-`32f6830f6402e85aa77b6631db64fcbbb2131f6b` with exact official ParticleGAN `0.9.1`.
+The current Anima 0.3.0 packaged lifecycle uses `particle-sliders-core` 0.12.0 at
+`8ffca928550f97fdb9713151ca3023fc71e77e2c` with exact official ParticleGAN `0.9.4`.
 Install from this repository root with `python -m pip install -r requirements.txt`.
 The requirements entry delegates to `pyproject.toml`, so the two install paths
 resolve the same immutable shared core. No unpublished PyPI core release is assumed.
 
-The default installer's move from historical core 0.3.0/a119 to the local project
-is intentional: it resolves the pre-existing conflict with the core 0.8.1
-pyproject. `core.lock.json` stays byte-identical as a historical core 0.3.0 record;
+The default installer selects the current package rather than the historical
+core 0.3.0/a119 or the previous core 0.8.1/PG0.9.1 package.
+`core.lock.json` stays byte-identical as a historical core 0.3.0 record;
 its embedded `requirements.txt` source-of-truth note applies to the historical
 ZIP, whose requirements still contain those original bytes. It does not describe
-the current source checkout. Package versions are distinct labels: stable Anima
-product 0.2.0, historical shared core 0.3.0, current shared core 0.8.1, and opt-in
+the current source checkout. Package versions are distinct labels: current Anima
+product 0.3.0, historical shared core 0.3.0, current shared core 0.12.0, and opt-in
 Anima product 0.3.0a2 with exact shared core 0.12.0/a794.
 
 `requirements-legacy.txt` preserves the previous installer verbatim for historical
@@ -22,9 +22,9 @@ legacy requirements and the packaged lifecycle in one environment, or repoint a
 historical lock to newer bytes. The product runtime still verifies its own
 canonical source map; a successful installation alone does not qualify execution.
 
-This repairs installation consistency. It does not adopt core 0.11.0/PG 0.9.3 or
-PG 0.9.4, migrate checkpoints, qualify pretrained/GPU output, or enable refused
-continuous-response/render operations. Those require distinct reviewed cohorts.
+The current installer adopts PG 0.9.4; it does not migrate checkpoints, qualify
+pretrained/GPU output, or enable refused render operations. Current verification
+and artifact boundaries are in [PG094-ADOPTION.md](PG094-ADOPTION.md).
 
 The native extra declares torchvision, required by the pinned Cosmos model
 implementation. CPU fixture verification pairs torch2.14.1+cpu with
@@ -33,8 +33,8 @@ Declaring torchvision was intentional because the pinned Cosmos import path
 requires it. Pip must choose a compatible torch/torchvision pair; the later clean
 CPU receipt also verifies official Torch2.6/torchvision0.21 together.
 
-Keep this PG 0.9.1 environment separate from core 0.11.0/PG 0.9.3 and
-HyperGAN develop, which currently requires PG 0.9.4/HNDL 0.10.
+Keep this PG 0.9.4 environment separate from historical PG0.9.1 environments.
+The HyperGAN/HNDL opt-in profile remains a separately installed product cohort.
 These Git dependency wheels are for source installation, not a PyPI release.
 
 The historical Comfy ZIP and Hub release intentionally expose the preserved
@@ -47,7 +47,7 @@ run the current installer from its extracted root, exactly as for a checkout.
 The wheel contains runtime code and configuration; it does not install the
 repository's release/publication commands as executable entry points.
 
-## Preparing a later shared-core cohort
+## Separate HyperGAN/HNDL cohort
 
 The separate [Anima HyperGAN/HNDL candidate](HNDL-CANDIDATE.md) implements the
 bounded product binding and build path. It does not change the default installer.
@@ -57,7 +57,8 @@ The jointly tested public shared candidate is core 0.12.0 at
 develop `5f368a3770cf5bdae0448995c9f76e29af8049f7` / HNDL 0.10.0. The separate
 product prerelease 0.3.0a2/profile v3 has passed bounded installed CPU contracts and clean
 base/native-extra installation. Pretrained/GPU execution and image rendering
-remain unqualified; the default stays on the supported prior environment.
+remain unqualified. The default 0.3.0 package now uses core0.12/PG0.9.4 with
+the original product critic; this opt-in candidate retains its exact a794 source.
 
 Prepare that adoption in another environment and branch. Record the exact core
 source manifest and wheel provenance, then run the installed product's cache,
