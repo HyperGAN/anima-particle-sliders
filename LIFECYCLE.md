@@ -5,6 +5,14 @@ ParticleGAN 0.9.4. The registered `anima` backend and explicit `PG09Trainer`
 continue to use the shared game and actual routed particle bank; the shared
 engine selects the versioned 0.9.4 recipe and rejects older training packets.
 See [PG094-ADOPTION.md](PG094-ADOPTION.md) for the exact pin and current checks.
+Both `PG09Trainer(..., lr=..., d_lr_mult=..., prior_lr_mult=...)` and common
+session configuration options accept the same explicit positive learning rates.
+Omitting a value preserves the official `bispf_optimized` recipe (base `0.012`,
+critic multiplier `1.5`, particle-prior multiplier `2.5`). The resolved recipe
+is part of the shared resumable identity; changing a rate requires a new cohort.
+The common JSON CLI consumes these exact options without a second set of defaults.
+These upstream defaults are not a claim of tuned native Anima learning rates.
+See [NATIVE-LR-PILOT.md](NATIVE-LR-PILOT.md) for the bounded native experiment.
 CPU-only lifecycle gates and native sampler/pretrained qualification limits
 remain in force. The following sections preserve the earlier 0.8.1 adoption
 history and describe the unchanged product API.
