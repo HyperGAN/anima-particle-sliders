@@ -23,6 +23,7 @@ from .contracts import atomic_json, digest, file_hash
 from .particles import ParticleAdapter
 from .provenance import cache_runtime_compatibility
 from .learning_rates import recipe_learning_rates
+from .numerical_profiles import require_numerical_profile
 
 
 class CachedResponses:
@@ -33,7 +34,7 @@ class CachedResponses:
     seed, definition ID or character ID is presented to the critic.
     """
 
-    def __init__(self, cache, runtime, variation):
+    def __init__(self, cache, runtime, variation, *, numerical_profile=None):
         self.runtime = runtime
         runtime_identity = deepcopy(runtime.identity)
         self._num_train_timesteps = float(runtime.pipe.scheduler.config.num_train_timesteps)
@@ -41,6 +42,15 @@ class CachedResponses:
             raise ValueError('PG09 requires a finite positive native timestep scale')
         approved_index = deepcopy(cache.index)
         identity = approved_index['identity']
+        self._numerical_profile = numerical_profile
+        if numerical_profile is not None:
+            if runtime.device.type != 'cuda':
+                raise ValueError('Anima native numerical profile requires an admitted CUDA runtime')
+            profile = require_numerical_profile(numerical_profile)
+            if identity.get('numerical_profile') != profile:
+                raise ValueError('Anima teacher cache numerical profile differs; regenerate teachers')
+        elif identity.get('numerical_profile') is not None:
+            raise ValueError('Anima teacher cache requires its explicit numerical_profile')
         if identity.get('split') != 'train' or identity.get('variation') != variation:
             raise ValueError('PG09 requires the matching training cache')
         if len(cache) < 2:
@@ -105,6 +115,9 @@ class CachedResponses:
         return deepcopy(self._identity)
 
     def _guard_index(self):
+        if self._numerical_profile is not None:
+            if require_numerical_profile(self._numerical_profile) != self._index['identity']['numerical_profile']:
+                raise ValueError('Anima numerical profile changed after cache admission')
         if self._cache.index != self._index or self._cache.offsets != self._offsets:
             raise ValueError('PG09 frozen cache identity or record ordering changed')
         try:
@@ -240,12 +253,13 @@ class PG09Trainer:
 
     def __init__(self, runtime, cache, directory, variation, *, seed=7, batch_size=2,
                  total_steps=100, response_scale=1., sigma=1., critic_width=32,
-                 native_admission=None, lr=None, d_lr_mult=None, prior_lr_mult=None):
+                 native_admission=None, lr=None, d_lr_mult=None, prior_lr_mult=None,
+                 numerical_profile=None):
         learning_rates = recipe_learning_rates(lr=lr, d_lr_mult=d_lr_mult,
                                                prior_lr_mult=prior_lr_mult)
         self.runtime, self.variation = runtime, variation
         self.directory = Path(directory)
-        self.responses = CachedResponses(cache, runtime, variation)
+        self.responses = CachedResponses(cache, runtime, variation, numerical_profile=numerical_profile)
         self._frozen_identity = self.responses.identity()
         self._native_admission, self._native_admitted = native_admission, False
         if runtime.device.type != 'cpu' and not callable(native_admission):
@@ -313,6 +327,8 @@ class PG09Trainer:
         frozen_index = self._frozen_identity['index']
         normalization = dict(method='pg09-native-field-scalar-scale',
             response_scale=self.game.response_scale, cache_fingerprint=frozen_index['fingerprint'])
+        if self.responses._numerical_profile is not None:
+            normalization['numerical_profile'] = deepcopy(frozen_index['identity']['numerical_profile'])
         sha = self.adapter.export(path, model_identity=self._frozen_identity['runtime'],
             normalization=normalization,
             manifest_hash=frozen_index['identity']['manifest_sha256'], step=self.step)

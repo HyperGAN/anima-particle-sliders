@@ -1,6 +1,6 @@
 # Native PG094 learning-rate pilot
 
-`scripts/anima_pg094_lr_pilot_v2.py` runs the current real, frozen Turbo v1.1
+`scripts/anima_pg094_lr_pilot_v3.py` runs the current real, frozen Turbo v1.1
 runtime and actual routed particle bank with official PG094 loss, BISPF,
 SBNP and DualNorm. It accepts explicit base rates and holds the public critic
 and prior multipliers at 1.5 and 2.5. New configuration options `lr`,
@@ -18,7 +18,7 @@ before accelerator updates. It verifies that training and heldout characters
 are disjoint; heldout fields never update weights or normalization.
 
 ```sh
-CUDA_VISIBLE_DEVICES=0 OMP_NUM_THREADS=4 python -u scripts/anima_pg094_lr_pilot_v2.py \
+CUDA_VISIBLE_DEVICES=0 OMP_NUM_THREADS=4 python -u scripts/anima_pg094_lr_pilot_v3.py \
   --model-dir /local/anima-turbo-v1.1 \
   --historical-targets /local/original-targets \
   --output /local/new-experiments/anima-pg094-lr \
@@ -53,6 +53,28 @@ harness. Its coupled rates did not establish suitable native defaults. V2
 adds heldout checkpoints, a quality stop, and exact next-update tensor/state
 and metric comparison across a fresh midpoint trainer reconstruction.
 Use a separate admitted decoder window for matched rendering.
+
+V3 explicitly activates `deterministic-math-cuda-v1` before Torch/CUDA startup:
+CUBLAS workspace `:4096:8`, strict deterministic algorithms, TF32 disabled,
+cuDNN benchmark disabled/deterministic enabled, and only math SDPA enabled.
+This is a combined execution profile, not attribution to an individual switch.
+The process settings and profile implementation hash are included in each
+fresh teacher cache identity and rechecked before native response access.
+`PG09Trainer(..., numerical_profile='deterministic-math-cuda-v1')` requires this
+explicit matching cache/process contract. A cache with that contract cannot
+be silently consumed through the unspecified legacy profile. Defaults do not
+activate or change numerical settings. Old source-bound packets remain with
+their original cohort; no settings are rebound onto historical checkpoints.
+
+The earlier flash/default native replay differed in generator tensors despite
+identical prestate, samples, native flags and scalar metrics. Under the new
+combined profile a fresh real native two-update path and split one-plus-one
+path had exactly equal full states, gradients and metrics at 4.626GiB peak.
+That short diagnostic does not establish long-budget LR or image quality.
+V3 regenerates teacher fields under its own profile, ranks raw heldout error,
+retains EMA as a diagnostic, and exports both raw and EMA portable weights.
+Use `scripts/anima_pg094_lr_render_v2.py` in a separately admitted decoder
+window; it verifies the cache and artifact numerical profile before rendering.
 
 The common lifecycle's prior CPU-only gate remains separate from this explicit,
 fresh-teacher native experiment admission. Historical cohorts retain their
