@@ -107,6 +107,6 @@ def test_candidate_native_dependencies_preserve_the_current_model_cohort():
     default = tomllib.loads((ROOT / 'pyproject.toml').read_text())
     candidate = tomllib.loads((ROOT / 'cohorts/hypergan-hndl/pyproject.toml').read_text())
     assert candidate['project']['optional-dependencies']['native'] == default['project']['optional-dependencies']['native']
-    assert '8ffca928550f97fdb9713151ca3023fc71e77e2c' in default['project']['dependencies'][-1]
+    assert 'ddb41423bcefc1fe76cd94d0f9b367353b3ea137' in default['project']['dependencies'][-1]
     assert default['project']['version'] == '0.3.0'
     assert candidate['project']['version'] == '0.3.0a2'

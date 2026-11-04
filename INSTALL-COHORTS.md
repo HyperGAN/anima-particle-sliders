@@ -1,7 +1,7 @@
 # Installation cohorts
 
 The current Anima 0.3.0 packaged lifecycle uses `particle-sliders-core` 0.12.0 at
-`8ffca928550f97fdb9713151ca3023fc71e77e2c` with exact official ParticleGAN `0.9.4`.
+`ddb41423bcefc1fe76cd94d0f9b367353b3ea137` with exact official ParticleGAN `0.9.4`.
 Install from this repository root with `python -m pip install -r requirements.txt`.
 The requirements entry delegates to `pyproject.toml`, so the two install paths
 resolve the same immutable shared core. No unpublished PyPI core release is assumed.

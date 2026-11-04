@@ -1,7 +1,7 @@
 # Current Anima source: ParticleGAN 0.9.4
 
 The default Anima **0.3.0** installer now selects shared core **0.12.0** at
-`8ffca928550f97fdb9713151ca3023fc71e77e2c`, which requires official
+`ddb41423bcefc1fe76cd94d0f9b367353b3ea137`, which requires official
 **particlegan==0.9.4**. Both `pip install .` and
 `pip install -r requirements.txt` resolve that exact public Git commit.
 Python >=3.11 and setuptools >=84.2.1 remain required; the native extra now
@@ -78,3 +78,7 @@ retain their original qualification labels; this document and installed
 package identities record the new source cohort without upgrading those
 native qualification claims. No package/model publication or deployment is
 part of this source update.
+
+## Merged shared-command refresh
+
+After shared PR161 merged, the canonical pin was advanced to `ddb41423bcefc1fe76cd94d0f9b367353b3ea137`. It retains the PG094 upgrade and includes the new training dispatcher and isolated execution APIs. The installed 73-check native-bank suite and 111-check packaging/compatibility suite both passed again against this exact VCS origin; the 50-package dependency check is clean. Historical source cohorts and native qualification limits are unchanged.

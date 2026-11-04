@@ -5,7 +5,7 @@ executes `particle_sliders.pg09.ConditionalPG09` with the public
 `bispf_optimized` recipe and `particle_sliders.pg09_backends.AnimaRuntimeResponseAdapter`.
 The product contains no PG0.9 loss, optimizer, constraint or sampler copy.
 The current source package pins core 0.12.0 at
-`8ffca928550f97fdb9713151ca3023fc71e77e2c` and exact official ParticleGAN 0.9.4.
+`ddb41423bcefc1fe76cd94d0f9b367353b3ea137` and exact official ParticleGAN 0.9.4.
 Install it from a new environment with `python -m pip install -r requirements.txt`.
 The same dependency is declared in `pyproject.toml`. The shared engine verifies
 installed ParticleGAN source bytes, uses its non-saturating BISPF recipe, SBNP
