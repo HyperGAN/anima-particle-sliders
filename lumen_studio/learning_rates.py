@@ -1,4 +1,4 @@
-"""Explicit PG094 learning rates shared by the API and configured sessions."""
+"""Explicit PG095 learning rates shared by the API and configured sessions."""
 import math
 
 

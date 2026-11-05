@@ -1,3 +1,5 @@
+**Historical PG0.9.4 adoption.** The current installer is [PG0.9.5](PG095-ADOPTION.md); the evidence and pins below retain their original meaning.
+
 # Current Anima source: ParticleGAN 0.9.4
 
 The default Anima **0.3.0** installer now selects shared core **0.12.0** at

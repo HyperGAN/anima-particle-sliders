@@ -77,6 +77,9 @@ def parse_args():
 
 
 def main():
+    from particle_sliders.pg09 import PG_VERSION
+    if PG_VERSION != '0.9.4':
+        raise RuntimeError('Historical PG094 pilot requires its original pinned source environment; use a new PG095 cohort')
     args = parse_args()
     import torch
     from lumen_studio.cache import TargetCache, save_tensor_file

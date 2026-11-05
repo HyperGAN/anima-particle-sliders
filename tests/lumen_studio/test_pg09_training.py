@@ -85,7 +85,7 @@ def test_native_bank_shared_pg09_exact_resume_and_inference_export(tmp_path):
     trainer = PG09Trainer(runtime, cache, tmp_path / 'run', 'finalform', total_steps=4, critic_width=8)
     assert type(trainer.game) is ConditionalPG09
     assert type(trainer.backend) is AnimaRuntimeResponseAdapter
-    assert PG_VERSION == '0.9.4'
+    assert PG_VERSION == '0.9.5'
     assert trainer.game.recipe.loss == 'non_saturating'
     assert trainer.game.recipe.critic_formulation == 'bispf'
     assert trainer.game.recipe.prior_regularizer == 'sbnp'

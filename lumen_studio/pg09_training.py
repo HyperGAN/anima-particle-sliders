@@ -13,7 +13,7 @@ from pathlib import Path
 import torch
 from torch import nn
 
-from particle_sliders.pg09 import ConditionalPG09
+from particle_sliders.pg095 import ConditionalPG095 as ConditionalPG09
 from particle_sliders.pg09_backends import (
     AnimaRuntimeResponseAdapter, PreparedResponse, ResponseRow,
 )
@@ -255,6 +255,8 @@ class PG09Trainer:
                  total_steps=100, response_scale=1., sigma=1., critic_width=32,
                  native_admission=None, lr=None, d_lr_mult=None, prior_lr_mult=None,
                  numerical_profile=None):
+        from .core_source import verify_core
+        verify_core()
         learning_rates = recipe_learning_rates(lr=lr, d_lr_mult=d_lr_mult,
                                                prior_lr_mult=prior_lr_mult)
         self.runtime, self.variation = runtime, variation

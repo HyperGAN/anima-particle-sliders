@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "anima-particle-sliders"
-version = "0.3.0"
+version = "0.4.0"
 description = "Anima Turbo product adapter for the Particle Sliders image lifecycle"
 readme = "LIFECYCLE.md"
 requires-python = ">=3.11"
@@ -13,7 +13,7 @@ license-files = ["LICENSE", "NOTICE", "ANIMA-LICENSE.md"]
 dependencies = [
   "safetensors>=0.4,<1",
   "packaging>=24",
-  "particle-sliders-core @ git+https://github.com/HyperGAN/particle-sliders.git@ddb41423bcefc1fe76cd94d0f9b367353b3ea137#subdirectory=packages/particle-sliders-core",
+  "particle-sliders-core @ git+https://github.com/HyperGAN/particle-sliders.git@3dd672a7f9b8c169daef90fd63e4bb42b9ddc423#subdirectory=packages/particle-sliders-core",
 ]
 
 [project.optional-dependencies]
@@ -39,4 +39,4 @@ namespaces = true
 
 [tool.setuptools.package-data]
 "configs.anima" = ["*.json", "requirements.lock", "candidates/*.json"]
-lumen_studio = ["static/*", "vendor/LICENSE", "vendor/provenance.json"]
+lumen_studio = ["core095-source.json", "static/*", "vendor/LICENSE", "vendor/provenance.json"]

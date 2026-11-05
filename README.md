@@ -1,9 +1,11 @@
+**Current source: core 0.13.0 / ParticleGAN 0.9.5.** See [PG095 adoption](PG095-ADOPTION.md). The PG0.9.4 and earlier sections below describe retained historical cohorts; use their original environments for those artifacts.
+
 [Current and historical installation cohorts](INSTALL-COHORTS.md).
 
 For the common session interface, see [LIFECYCLE.md](LIFECYCLE.md).
 
-The current source installer uses **Anima 0.3.0 / Particle Sliders core 0.12.0 /
-ParticleGAN 0.9.4**. See [current adoption and verification](PG094-ADOPTION.md)
+The current source installer uses **Anima 0.4.0 / Particle Sliders core 0.13.0 /
+ParticleGAN 0.9.5**. See [current adoption and verification](PG095-ADOPTION.md)
 and [publication and qualification status](PUBLICATION-STATUS.md).
 
 # Anima Particle Sliders
