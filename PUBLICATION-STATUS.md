@@ -2,11 +2,14 @@
 
 # Publication and qualification status
 
-The current source update moves the default package to Anima 0.3.0, core
-0.12.0 and official ParticleGAN 0.9.4. Its exact dependency, verification and
-remaining limits are recorded in [PG094-ADOPTION.md](PG094-ADOPTION.md).
-This is a source migration for review, not a model or package publication.
-The six released controls keep their original training provenance and loaders.
+The current source is Anima 0.4.0, core 0.13.0 and official ParticleGAN 0.9.5.
+See [PG095 adoption](PG095-ADOPTION.md) for its exact fresh-source boundary.
+The [native512 LR measurement](NATIVE-LR-PG095.md) completed source-qualified
+training, continuation, native RAW replay and independent saved-field audit.
+The best-tested development-selected G=1e-5 measured held-out RAW
+1.0649726878176227, above OFF=1. It establishes no held-out improvement.
+This scoped result does not change package defaults, common lifecycle capability
+gates, or the six showcased controls and their historical training provenance.
 
 ## Historical core 0.8.1 qualification
 

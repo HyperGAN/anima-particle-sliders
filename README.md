@@ -6,7 +6,10 @@ For the common session interface, see [LIFECYCLE.md](LIFECYCLE.md).
 
 The current source installer uses **Anima 0.4.0 / Particle Sliders core 0.13.0 /
 ParticleGAN 0.9.5**. See [current adoption and verification](PG095-ADOPTION.md)
-and [publication and qualification status](PUBLICATION-STATUS.md).
+and [publication and qualification status](PUBLICATION-STATUS.md). The
+[current native512 LR measurement](NATIVE-LR-PG095.md) is development-selected
+and held-out-measured: RAW 1.0649726878176227 versus OFF=1, with no held-out
+improvement established.
 
 # Anima Particle Sliders
 

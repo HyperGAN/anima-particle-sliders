@@ -1,0 +1,12 @@
+{
+  "steps": 128,
+  "batch": 2,
+  "seed": 7,
+  "critic_width": 32,
+  "response_scale": 1.0,
+  "sigma": 1.0,
+  "ema_decay": null,
+  "lr": 1e-05,
+  "d_lr_mult": 5399.999999999999,
+  "prior_lr_mult": 3000.0
+}

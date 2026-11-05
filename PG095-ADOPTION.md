@@ -17,8 +17,12 @@ rebound or rewritten. The core rejects PG0.9.4 checkpoint identities.
 Previous PG0.9.4 and earlier native proofs, learning-rate searches, recommendations,
 weights and source locks remain historical and require their original pinned
 environments. They are **not PG0.9.5 calibration evidence**. CPU update/resume,
-export and source-refusal checks establish software contracts only. Pretrained
-PG0.9.5 training and held-out rate confirmation have not run.
+export and source-refusal checks establish software contracts only. A fresh
+PG0.9.5 native512 experiment has now completed: see the [scoped learning-rate
+measurement](NATIVE-LR-PG095.md). Its development-selected G=1e-5 measured
+held-out RAW 1.0649726878176227 versus OFF=1; no held-out improvement is claimed.
+That evidence covers the explicit coordinator-admitted native trainer and RAW
+response route, without changing common lifecycle CPU/render gates.
 
 For new rate searches, use held-out RAW teacher/student relative squared error
 as the sole ranking and confirmation metric: cast operands to FP64 before

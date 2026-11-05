@@ -1,0 +1,228 @@
+{
+  "schema": "anima-pg095-native512-measured-learning-rates-v1",
+  "status": "BEST_TESTED_DEVELOPMENT_SELECTED_HELDOUT_MEASURED",
+  "date_UTC": "2026-11-05",
+  "tested_product_commit": "fa0f7076b7c723d53080343f8adc3a99b64b744d",
+  "tested_product_version": "0.4.0",
+  "core_commit": "3dd672a7f9b8c169daef90fd63e4bb42b9ddc423",
+  "core_version": "0.13.0",
+  "ParticleGAN": "0.9.5",
+  "ParticleGAN_wheel_sha256": "c1c0de7a635ac1b1634ba158eed050b6f6aed993e01f9b463435430c77d846ae",
+  "ParticleGAN_source_profile": "release-0.9.5",
+  "actual_versions": {
+    "torch": "2.13.0+cu126",
+    "diffusers": "0.40.0.dev0",
+    "transformers": "5.15.0",
+    "numpy": "2.5.2",
+    "particle-sliders-core": "0.13.0",
+    "particlegan": "0.9.5",
+    "anima-particle-sliders": "0.4.0"
+  },
+  "model_identity": {
+    "model": "circlestone-labs/Anima:turbo-v1.1",
+    "sha256": "eb5520f293d42a19df9242d8d442d5d2068e5121620814418c2b50a97de0552f",
+    "identity_schema": "portable-model-v1",
+    "environment_sha256": "55ac97305e688c56d4a2908243b020e999cf101a05b1cf7e5a3e2c48d4a4d7ba",
+    "runtime_sha256": "0b0dfc97ba76a99ed3f5313695e89e5802ece8e1db4470443a9705692ae579c3"
+  },
+  "scope": {
+    "model": "circlestone-labs/Anima:turbo-v1.1",
+    "variation": "candlelit",
+    "native_image_size": [
+      512,
+      512
+    ],
+    "latent_shape": [
+      1,
+      16,
+      1,
+      64,
+      64
+    ],
+    "base_precision": "bfloat16",
+    "response_and_trainable_precision": "float32",
+    "embedding_shape": [
+      1,
+      512,
+      1024
+    ],
+    "embedding_precision": "bfloat16",
+    "adapter_rank": 8,
+    "particle_bank_shape": [
+      128,
+      4
+    ],
+    "batch_size": 2,
+    "seed": 7,
+    "declared_schedule_horizon": 128,
+    "EMA": false,
+    "numerical_profile": {
+      "schema": "anima-native-numerical-profile-v1",
+      "name": "deterministic-math-cuda-v1",
+      "flags": {
+        "cublas_workspace": ":4096:8",
+        "deterministic": true,
+        "warn_only": false,
+        "tf32_matmul": false,
+        "tf32_cudnn": false,
+        "cudnn_benchmark": false,
+        "cudnn_deterministic": true,
+        "flash_sdp": false,
+        "memory_efficient_sdp": false,
+        "math_sdp": true,
+        "cudnn_sdp": false
+      },
+      "implementation_sha256": "c11b11d48b3e5536c3726d3f5afb05cc60d8774d94d13ebf90b57cd2ee85def2"
+    }
+  },
+  "selected_actual_rates": {
+    "g": {
+      "value": 1e-05,
+      "hex": "0x1.4f8b588e368f1p-17"
+    },
+    "d": {
+      "value": 0.05399999999999999,
+      "hex": "0x1.ba5e353f7ced8p-5"
+    },
+    "prior": {
+      "value": 0.030000000000000002,
+      "hex": "0x1.eb851eb851eb9p-6"
+    }
+  },
+  "explicit_recipe_options": "configs/anima/pg095-native512-best-tested.options.json",
+  "development_scores32": [
+    {
+      "G": 1e-06,
+      "completed_steps": 32,
+      "RAW_primary": 0.975247842493776
+    },
+    {
+      "G": 3e-06,
+      "completed_steps": 32,
+      "RAW_primary": 0.9356771346281453
+    },
+    {
+      "G": 1e-05,
+      "completed_steps": 32,
+      "RAW_primary": 0.8172587901035525
+    },
+    {
+      "G": 3e-05,
+      "completed_steps": 32,
+      "RAW_primary": 0.8993422321566498
+    },
+    {
+      "G": 0.0001,
+      "completed_steps": 32,
+      "RAW_primary": 0.8370187316394356
+    },
+    {
+      "G": 0.0003,
+      "completed_steps": 32,
+      "RAW_primary": 1.584595754303189
+    }
+  ],
+  "matched_development_scores64": [
+    {
+      "G": 1e-06,
+      "completed_steps": 64,
+      "RAW_primary": 0.9583045106250359
+    },
+    {
+      "G": 3e-06,
+      "completed_steps": 64,
+      "RAW_primary": 0.868846797736529
+    },
+    {
+      "G": 1e-05,
+      "completed_steps": 64,
+      "RAW_primary": 0.7339753759110534
+    },
+    {
+      "G": 0.0001,
+      "completed_steps": 64,
+      "RAW_primary": 0.79757146744406
+    }
+  ],
+  "selected_development128": 0.7648770712839992,
+  "independent_heldout_RAW": 1.0649726878176227,
+  "heldout_OFF_reference": 1.0,
+  "heldout_relative_difference_from_OFF": 0.06497268781762267,
+  "heldout_improvement_established": false,
+  "heldout_examples": 12,
+  "heldout_fields": 120,
+  "heldout_valid_examples": 12,
+  "heldout_excluded_examples": 0,
+  "metric": "Operands FP64 before subtraction; pool all10positions inside each example; equal mean of teacher-valid examples. No epsilon; fixed teacher-only membership; all student values finite.",
+  "known_completed_optimizer_calls": 386,
+  "logical_candidate_updates": 384,
+  "proof_duplicate_calls": 2,
+  "earlier_unconfirmed_inflight_call": "Original cell2 interruption possibly entered step38; never counted as a completed update.",
+  "final_optimizer_calls": 0,
+  "actual_final_exit0_reaped": true,
+  "independent_savedfield_audit_exact": true,
+  "heldout_not_used_to_choose_or_retune_rate": true,
+  "checkpoint_export_native_RAW_OFF_base_RNG_checks": true,
+  "qualification_scope": "Explicit coordinator-admitted PG09Trainer/current095 native response and public native RAW adapter. Common lifecycle CPU/render capability gates and published showcase weights remain unchanged.",
+  "not_established": [
+    "Heldout improvement over OFF",
+    "Global optimality over all rates or training budgets",
+    "Transfer to other concepts, data, numerical profiles or geometries",
+    "New render/media or historical release qualification"
+  ],
+  "preserved_failures": [
+    "Earlier resource-preempted cell2 retains its actual37-step journal and exact38..64 continuation.",
+    "F3 CPU validator omitted two metadata labels; all40 actual tensors/score were proved exact before a metadata-only correction.",
+    "F4 packaging omitted the nested final095 package: authorized final text read occurred, but no conditioning/teacher/student field was produced. F5 restored exact already-reviewed helper bytes; final access qualification was reused."
+  ],
+  "receipts": {
+    "scientific_plan": {
+      "local_path": "/mnt/nvme/sliders/experiments/lr-standardization-20261104/anima/pg095-primary128-v1/opportunistic-execution-v2/plan-opportunistic-v2.json",
+      "sha256": "004deb05704ade6854597da8c7efe0d67a0adc34158d6f4be94e64d5827f770c"
+    },
+    "native_two_update_and_resume_proof": {
+      "local_path": "/mnt/nvme/sliders/experiments/lr-standardization-20261104/anima/pg095-primary128-v1/proof-qualification-v1.json",
+      "sha256": "6978726456cb44fbb626fffcbb374124f1062c4ac67d7286405a11cf4672824d"
+    },
+    "original_selection32": {
+      "local_path": "/mnt/nvme/sliders/experiments/lr-standardization-20261104/anima/pg095-primary128-v1/selection32.json",
+      "sha256": "114cce3b836ec21d8a1032c4f1e4537d5d207b8296c4233b9373c5537111795d"
+    },
+    "original_selection64": {
+      "local_path": "/mnt/nvme/sliders/experiments/lr-standardization-20261104/anima/pg095-primary128-v1/selection64.json",
+      "sha256": "94a88c23cb1d1fb8652d0d6722747a049d946a07f8f4fc55dab395d12981af10"
+    },
+    "lower_rate_plan": {
+      "local_path": "/mnt/nvme/sliders/experiments/lr-standardization-20261104/anima/pg095-primary128-v1/lower-g-extension-v3/plan-extension-v3.json",
+      "sha256": "adebaa5347dbb5f1088346ea77fe6c6168a3a348f7ac2151edfb3ba8f3d59ca1"
+    },
+    "ultimate_allfour64_selection": {
+      "local_path": "/mnt/nvme/sliders/experiments/lr-standardization-20261104/anima/pg095-primary128-v1/lower-g-extension-v3/selection64-ultimate.json",
+      "sha256": "b2f2866a50a284594dde55261d86fb6b8accc6c43b29cb236e1bcab57e7680db"
+    },
+    "selected128_completion": {
+      "local_path": "/mnt/nvme/sliders/experiments/lr-standardization-20261104/anima/pg095-primary128-v1/outputs/train-0-128/supervisor-result.json",
+      "sha256": "b54bdad1b34cae248962fb35ebca92775fe33c2bbd963c6ec5d9588a5e07cf3b"
+    },
+    "selected128_qualification": {
+      "local_path": "/mnt/nvme/sliders/experiments/lr-standardization-20261104/anima/pg095-primary128-v1/final-metadata-validator-v4/selected128-qualified-v4.json",
+      "sha256": "936ed42705452defee00717e03672f1cdf43eb8d7b1cd29555fb9d206e54278b"
+    },
+    "final_source_plan": {
+      "local_path": "/mnt/nvme/sliders/experiments/lr-standardization-20261104/anima/pg095-primary128-v1/final-package-closure-v5/plan-v5.json",
+      "sha256": "97695c7aeac8f8c47db57cdd68907f0aa6b899aa016968363caaabec0bd48dec"
+    },
+    "final_completion": {
+      "local_path": "/mnt/nvme/sliders/experiments/lr-standardization-20261104/anima/pg095-primary128-v1/final-package-closure-v5/outputs/final-first/supervisor-result.json",
+      "sha256": "36886e173d5643adfcf16cde9a0a5b824cb1b53c61db61e959bf4a8f6b385bd5"
+    },
+    "final_worker_result": {
+      "local_path": "/mnt/nvme/sliders/experiments/lr-standardization-20261104/anima/pg095-primary128-v1/final-package-closure-v5/outputs/final-first/worker/worker-result.json",
+      "sha256": "86ade788b0c1db3d71f6b8f3c9a0069f22c046a30402667fa7a5b9577d91a35c"
+    },
+    "independent_savedfield_audit": {
+      "local_path": "/mnt/nvme/sliders/experiments/lr-standardization-20261104/anima/pg095-primary128-v1/final-package-closure-v5/independent-final-field-audit-v1/audit.json",
+      "sha256": "d3779b3bd8cb8ecb7c3d1184668586eae8ae954d5e1e8b6eb5a1ccdda83a95f3"
+    }
+  }
+}
