@@ -1,3 +1,5 @@
+**Historical PG0.9.4 pilot.** Its scripts, caches and results are retained for reproduction under their original pins. They do not calibrate PG0.9.5; see [current source](PG095-ADOPTION.md).
+
 # Native PG094 learning-rate pilot
 
 `scripts/anima_pg094_lr_pilot_v3.py` runs the current real, frozen Turbo v1.1

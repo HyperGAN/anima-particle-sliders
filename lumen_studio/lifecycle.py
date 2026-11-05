@@ -21,7 +21,7 @@ from .learning_rates import recipe_learning_rates
 CAPABILITIES = Capabilities(
     'routed_particle_gan', render=False, strength_min=0., strength_max=1.,
     base_precisions=('bfloat16',), render_outputs=(),
-    qualification='Core 0.8.1 source proposal; prior 0.7 CPU receipts are historical',
+    qualification='PG0.9.5 CPU software cohort; pretrained qualification requires fresh source-bound runs',
     unavailable_reasons=(('render', 'Anima native sampler/decoder parity remains unqualified'),),
 )
 _OPTIONS = {'cache_dir', 'cache_index_sha256', 'model_dir', 'variation', 'device',
@@ -30,6 +30,8 @@ _OPTIONS = {'cache_dir', 'cache_index_sha256', 'model_dir', 'variation', 'device
 
 
 def validate_runtime(options):
+    from .core_source import verify_core
+    verify_core()
     if options.get('device', 'cpu') != 'cpu':
         raise UnsupportedOperation('Anima lifecycle requires CPU; native accelerator admission remains unqualified')
     if options.get('base_precision', 'bfloat16') != 'bfloat16':
@@ -221,7 +223,7 @@ def prepare(options, *, runtime=None):
     """Own construction; common core owns stepping, packets and observation."""
     validate(options)
     import torch
-    from particle_sliders.pg09 import ConditionalPG09
+    from particle_sliders.pg095 import ConditionalPG095 as ConditionalPG09
     from .cache import TargetCache
     from .pg09_training import CachedResponses, NativeFieldCritic
 

@@ -18,6 +18,9 @@ from anima_pg094_lr_pilot import load_response_runtime
 
 
 def main():
+    from particle_sliders.pg09 import PG_VERSION
+    if PG_VERSION != '0.9.4':
+        raise RuntimeError('Historical PG094 pilot requires its original pinned source environment; use a new PG095 cohort')
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--model-dir', type=Path, required=True)
     parser.add_argument('--heldout-cache', type=Path, required=True)

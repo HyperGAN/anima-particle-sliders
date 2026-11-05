@@ -1,0 +1,35 @@
+{
+  "schema": "pg095-product-cpu-migration-checks-v1",
+  "core_commit": "3dd672a7f9b8c169daef90fd63e4bb42b9ddc423",
+  "core_version": "0.13.0",
+  "pg_version": "0.9.5",
+  "pg_profile": "release-0.9.5",
+  "environment": "isolated per-product owned core and PG installs; read-only Torch dependency spine",
+  "torch": "2.9.1+cu128",
+  "diffusers": "0.36.0",
+  "transformers": "4.57.1",
+  "CUDA_VISIBLE_DEVICES": "",
+  "native_models_loaded": false,
+  "native_GPU_or_LR_calibration_claimed": false,
+  "tests": {
+    "anima": {
+      "tests": 69,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 10.195,
+      "log_sha256": "0f8a32919d111fba987826b0380f912e9c0973d8670c1c398dd4804535424811"
+    }
+  },
+  "pip_check": "No broken requirements found",
+  "historical_artifacts_preserved": true,
+  "additional_packaging_checks": {
+    "passed": 3,
+    "scope": "sdist, wheel, retained standalone historical HNDL builder and plugin"
+  },
+  "additional_source_checks": {
+    "passed": 4,
+    "scope": "current installed source identity and historical PG094 pilot entry refusal before argument/model work",
+    "log_sha256": "98473117d0364dacd457d4f3b4d645cbd44b4756bdae6a1ee111b5f7856e9f01"
+  }
+}

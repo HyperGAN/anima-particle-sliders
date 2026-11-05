@@ -1,3 +1,5 @@
+**Current source: core 0.13.0 / ParticleGAN 0.9.5.** See [PG095 adoption](PG095-ADOPTION.md). The PG0.9.4 and earlier sections below describe retained historical cohorts; use their original environments for those artifacts.
+
 # Publication and qualification status
 
 The current source update moves the default package to Anima 0.3.0, core
