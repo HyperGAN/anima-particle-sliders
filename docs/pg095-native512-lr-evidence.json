@@ -177,52 +177,52 @@
   ],
   "receipts": {
     "scientific_plan": {
-      "local_path": "/mnt/nvme/sliders/experiments/lr-standardization-20261104/anima/pg095-primary128-v1/opportunistic-execution-v2/plan-opportunistic-v2.json",
-      "sha256": "004deb05704ade6854597da8c7efe0d67a0adc34158d6f4be94e64d5827f770c"
+      "sha256": "004deb05704ade6854597da8c7efe0d67a0adc34158d6f4be94e64d5827f770c",
+      "logical_name": "anima-pg095-primary128/opportunistic-execution-v2/plan-opportunistic-v2.json"
     },
     "native_two_update_and_resume_proof": {
-      "local_path": "/mnt/nvme/sliders/experiments/lr-standardization-20261104/anima/pg095-primary128-v1/proof-qualification-v1.json",
-      "sha256": "6978726456cb44fbb626fffcbb374124f1062c4ac67d7286405a11cf4672824d"
+      "sha256": "6978726456cb44fbb626fffcbb374124f1062c4ac67d7286405a11cf4672824d",
+      "logical_name": "anima-pg095-primary128/proof-qualification-v1.json"
     },
     "original_selection32": {
-      "local_path": "/mnt/nvme/sliders/experiments/lr-standardization-20261104/anima/pg095-primary128-v1/selection32.json",
-      "sha256": "114cce3b836ec21d8a1032c4f1e4537d5d207b8296c4233b9373c5537111795d"
+      "sha256": "114cce3b836ec21d8a1032c4f1e4537d5d207b8296c4233b9373c5537111795d",
+      "logical_name": "anima-pg095-primary128/selection32.json"
     },
     "original_selection64": {
-      "local_path": "/mnt/nvme/sliders/experiments/lr-standardization-20261104/anima/pg095-primary128-v1/selection64.json",
-      "sha256": "94a88c23cb1d1fb8652d0d6722747a049d946a07f8f4fc55dab395d12981af10"
+      "sha256": "94a88c23cb1d1fb8652d0d6722747a049d946a07f8f4fc55dab395d12981af10",
+      "logical_name": "anima-pg095-primary128/selection64.json"
     },
     "lower_rate_plan": {
-      "local_path": "/mnt/nvme/sliders/experiments/lr-standardization-20261104/anima/pg095-primary128-v1/lower-g-extension-v3/plan-extension-v3.json",
-      "sha256": "adebaa5347dbb5f1088346ea77fe6c6168a3a348f7ac2151edfb3ba8f3d59ca1"
+      "sha256": "adebaa5347dbb5f1088346ea77fe6c6168a3a348f7ac2151edfb3ba8f3d59ca1",
+      "logical_name": "anima-pg095-primary128/lower-g-extension-v3/plan-extension-v3.json"
     },
     "ultimate_allfour64_selection": {
-      "local_path": "/mnt/nvme/sliders/experiments/lr-standardization-20261104/anima/pg095-primary128-v1/lower-g-extension-v3/selection64-ultimate.json",
-      "sha256": "b2f2866a50a284594dde55261d86fb6b8accc6c43b29cb236e1bcab57e7680db"
+      "sha256": "b2f2866a50a284594dde55261d86fb6b8accc6c43b29cb236e1bcab57e7680db",
+      "logical_name": "anima-pg095-primary128/lower-g-extension-v3/selection64-ultimate.json"
     },
     "selected128_completion": {
-      "local_path": "/mnt/nvme/sliders/experiments/lr-standardization-20261104/anima/pg095-primary128-v1/outputs/train-0-128/supervisor-result.json",
-      "sha256": "b54bdad1b34cae248962fb35ebca92775fe33c2bbd963c6ec5d9588a5e07cf3b"
+      "sha256": "b54bdad1b34cae248962fb35ebca92775fe33c2bbd963c6ec5d9588a5e07cf3b",
+      "logical_name": "anima-pg095-primary128/outputs/train-0-128/supervisor-result.json"
     },
     "selected128_qualification": {
-      "local_path": "/mnt/nvme/sliders/experiments/lr-standardization-20261104/anima/pg095-primary128-v1/final-metadata-validator-v4/selected128-qualified-v4.json",
-      "sha256": "936ed42705452defee00717e03672f1cdf43eb8d7b1cd29555fb9d206e54278b"
+      "sha256": "936ed42705452defee00717e03672f1cdf43eb8d7b1cd29555fb9d206e54278b",
+      "logical_name": "anima-pg095-primary128/final-metadata-validator-v4/selected128-qualified-v4.json"
     },
     "final_source_plan": {
-      "local_path": "/mnt/nvme/sliders/experiments/lr-standardization-20261104/anima/pg095-primary128-v1/final-package-closure-v5/plan-v5.json",
-      "sha256": "97695c7aeac8f8c47db57cdd68907f0aa6b899aa016968363caaabec0bd48dec"
+      "sha256": "97695c7aeac8f8c47db57cdd68907f0aa6b899aa016968363caaabec0bd48dec",
+      "logical_name": "anima-pg095-primary128/final-package-closure-v5/plan-v5.json"
     },
     "final_completion": {
-      "local_path": "/mnt/nvme/sliders/experiments/lr-standardization-20261104/anima/pg095-primary128-v1/final-package-closure-v5/outputs/final-first/supervisor-result.json",
-      "sha256": "36886e173d5643adfcf16cde9a0a5b824cb1b53c61db61e959bf4a8f6b385bd5"
+      "sha256": "36886e173d5643adfcf16cde9a0a5b824cb1b53c61db61e959bf4a8f6b385bd5",
+      "logical_name": "anima-pg095-primary128/final-package-closure-v5/outputs/final-first/supervisor-result.json"
     },
     "final_worker_result": {
-      "local_path": "/mnt/nvme/sliders/experiments/lr-standardization-20261104/anima/pg095-primary128-v1/final-package-closure-v5/outputs/final-first/worker/worker-result.json",
-      "sha256": "86ade788b0c1db3d71f6b8f3c9a0069f22c046a30402667fa7a5b9577d91a35c"
+      "sha256": "86ade788b0c1db3d71f6b8f3c9a0069f22c046a30402667fa7a5b9577d91a35c",
+      "logical_name": "anima-pg095-primary128/final-package-closure-v5/outputs/final-first/worker/worker-result.json"
     },
     "independent_savedfield_audit": {
-      "local_path": "/mnt/nvme/sliders/experiments/lr-standardization-20261104/anima/pg095-primary128-v1/final-package-closure-v5/independent-final-field-audit-v1/audit.json",
-      "sha256": "d3779b3bd8cb8ecb7c3d1184668586eae8ae954d5e1e8b6eb5a1ccdda83a95f3"
+      "sha256": "d3779b3bd8cb8ecb7c3d1184668586eae8ae954d5e1e8b6eb5a1ccdda83a95f3",
+      "logical_name": "anima-pg095-primary128/final-package-closure-v5/independent-final-field-audit-v1/audit.json"
     }
   }
 }
