@@ -9,7 +9,11 @@ ParticleGAN 0.9.5**. See [current adoption and verification](PG095-ADOPTION.md)
 and [publication and qualification status](PUBLICATION-STATUS.md). The
 [current native512 LR measurement](NATIVE-LR-PG095.md) is development-selected
 and held-out-measured: RAW 1.0649726878176227 versus OFF=1, with no held-out
-improvement established.
+improvement established. New ParticleGAN sessions explicitly set
+`ema_decay=None` and use RAW training/evaluation/export/inference; no EMA
+averaging, comparison or selection is recommended. Legacy `Trainer.use_ema`
+and the published EMA showcase snapshots below belong to historical routes,
+not the current PG0.9.5 training path.
 
 # Anima Particle Sliders
 
@@ -411,7 +415,7 @@ Noise follows the shared stamp. It starts at \\(\\max(\\mathrm{edit\\ RMS}/0.28,
 
 The published Anima weights were trained with an absolute noise hold of 1.0. That published schedule disagrees with the stamp's `noise_hold_ratio` of 1.3. New training uses the stamp. This repository does not keep a separate noise schedule. Generator learning rate \\(2\\times10^{-5}\\) remains an Anima model surface.
 
-### Released recipe and evidence
+### Historical released recipe and evidence
 
 | Setting | Value |
 |---|---|

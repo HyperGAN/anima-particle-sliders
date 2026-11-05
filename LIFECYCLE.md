@@ -65,6 +65,11 @@ the factory still owns every training component. Borrowed runtime adapters,
 mixes and checkpoint settings are preserved, while session-owned attachments
 are removed on close or setup failure. No checkpoint is discovered implicitly.
 
+Current ParticleGAN sessions set `ema_decay=None` and use RAW weights for
+training, evaluation, export and inference. Do not add EMA averaging,
+comparisons or selection. Historical published EMA snapshots and their legacy
+loaders retain their original provenance.
+
 Example configuration for a future separately admitted CPU run:
 
 ```python
@@ -77,13 +82,13 @@ config = SessionConfig('anima', 'new-anima-image-v1-cohort',
     model_dir='/already/staged/anima-turbo-v1.1', cache_dir=str(cache),
     cache_index_sha256=sha256((cache / 'index.json').read_bytes()).hexdigest(),
     variation='finalform', device='cpu', base_precision='bfloat16',
-    steps=4, batch=2, seed=7, critic_width=32, ema_decay=.9)
+    steps=4, batch=2, seed=7, critic_width=32, ema_decay=None)
 with open_session(config) as session:
     session.train(stop_after=2, on_step=hypergan_observer)
     session.checkpoint('new-run/training.pt')
 with open_session(config, resume='new-run/training.pt') as session:
     session.train()  # Original four-update budget, not four additional updates.
-    session.export('new-run/adapter.pt', selection='ema')
+    session.export('new-run/adapter.pt', selection='raw')
 with open_session(config, artifact='new-run/adapter.pt', operation='evaluate') as session:
     velocity = session.evaluate(index=0, seed=11, strength=.5)
 ```
