@@ -4,11 +4,14 @@
 
 The current source is Anima 0.4.0, core 0.13.0 and official ParticleGAN 0.9.5.
 See [PG095 adoption](PG095-ADOPTION.md) for its exact fresh-source boundary.
-The [native512 LR measurement](NATIVE-LR-PG095.md) completed source-qualified
-training, continuation, native RAW replay and independent saved-field audit.
-The best-tested development-selected G=1e-5 measured held-out RAW
-1.0649726878176227, above OFF=1. It establishes no held-out improvement.
-This scoped result does not change package defaults, common lifecycle capability
+The current [finished-output choice](docs/finished-output-learning-rates.md)
+uses existing Candlelit C2 G=0.00075 RAW960: best of three scored saved arms on
+four examined DEV cases, mean intended-effect ON−OFF gain 0.0038009807467460632.
+It is not a complete four-arm comparison or independently confirmed recipe;
+no further C3 or fresh confirmation is required. The [older native512 SSE
+measurement](NATIVE-LR-PG095.md), including G=1e-5 and held-out RAW
+1.0649726878176227 above OFF=1, retains its original diagnostic scope.
+These records do not change package defaults, common lifecycle capability
 gates, or the six showcased controls and their historical training provenance.
 
 ## Historical core 0.8.1 qualification

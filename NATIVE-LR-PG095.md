@@ -1,13 +1,18 @@
-# PG0.9.5 native512 learning-rate measurement
+# Historical PG0.9.5 native512 teacher-response SSE measurement
+
+Current use follows the [Candlelit C2 RAW960 finished-output choice](docs/finished-output-learning-rates.md).
+The older screen below used a different batch, horizon and objective. Its
+numbers, options preset and source receipts remain unchanged; they are
+diagnostics, not the current LR selector or a request to repeat the search.
 
 **Best-tested development-selected setting: G=1e-5, D=0.05399999999999999,
 P=0.030000000000000002, with a declared 128-update horizon.** Independent
 held-out RAW relative SSE was **1.0649726878176227**, compared with OFF=1.
-This is a source/mechanics-qualified measurement and a scoped reproduction
-recommendation. It establishes **no held-out improvement over OFF**.
+This was a source/mechanics-qualified historical measurement. It establishes
+**no held-out improvement over OFF** under that diagnostic.
 
-Use it as a measured starting hypothesis for this exact cohort, rather than a
-claim of a generally better LR. Defaults and existing released slider weights
+This setting belongs to the historical cohort, not the current best-tested
+finished-output recommendation. Defaults and existing released slider weights
 are unchanged. The [machine-readable evidence](docs/pg095-native512-lr-evidence.json)
 records exact source pins, actual rate bits, results and retained receipt hashes.
 
@@ -31,12 +36,13 @@ no PG0.9.4/earlier checkpoint or teacher result was relabeled.
   trajectories, giving 12 examples and 120 fields. All 12 had nonzero teacher
   energy; none were excluded.
 
-The sole metric promotes student, neutral and positive teacher operands to
-FP64 **before subtraction**, pools SSE and teacher-edit energy within each
-example, then averages examples equally. Teacher-only zero-energy exclusions
-are frozen before adapter application; there is no epsilon denominator, and
-nonfinite students cannot remove examples. Preservation and media are not LR
-ranking or confirmation requirements.
+The historical screen's metric promoted student, neutral and positive teacher operands to
+FP64 **before subtraction**, pooled SSE and teacher-edit energy within each
+example, then averaged examples equally. Teacher-only zero-energy exclusions
+were frozen before adapter application; there was no epsilon denominator, and
+nonfinite students could not remove examples. Current rate selection instead
+uses one equal-case mean intended-effect ON−OFF score in finished outputs.
+SSE, preservation and generic beauty cannot select, reject or break ties.
 
 ## Equal-budget search and held-out measurement
 
@@ -72,11 +78,12 @@ reproduced the reported score exactly. Final evaluation performed zero updates.
 Source/observer failures and the resource interruption remain in the evidence;
 none were replaced with a successful native claim.
 
-## Explicit options and API
+## Historical options and API
 
 [The options overlay](configs/anima/pg095-native512-best-tested.options.json)
-contains ordinary common-session option keys. Merge it with your own newly
-verified model/cache/cohort configuration; it is not a complete runnable session.
+contains the historical common-session option keys; it is not a complete
+runnable session or the current rate choice. Its original reproduction scope
+requires its own verified model/cache/cohort configuration.
 It sets `steps=128`, `batch=2`, `seed=7`, and disables EMA. Its LR multipliers
 resolve to these exact binary64 products:
 
