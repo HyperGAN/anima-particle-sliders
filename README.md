@@ -6,10 +6,14 @@ For the common session interface, see [LIFECYCLE.md](LIFECYCLE.md).
 
 The current source installer uses **Anima 0.4.0 / Particle Sliders core 0.13.0 /
 ParticleGAN 0.9.5**. See [current adoption and verification](PG095-ADOPTION.md)
-and [publication and qualification status](PUBLICATION-STATUS.md). The
-[current native512 LR measurement](NATIVE-LR-PG095.md) is development-selected
-and held-out-measured: RAW 1.0649726878176227 versus OFF=1, with no held-out
-improvement established. New ParticleGAN sessions explicitly set
+and [publication and qualification status](PUBLICATION-STATUS.md). The current
+[finished-output rate choice](docs/finished-output-learning-rates.md) is
+**Candlelit C2: G=0.00075, RAW960**, best of three scored saved arms on four
+examined DEV cases (mean intended-effect ON−OFF gain 0.0038009807467460632).
+This is a scoped best-tested choice; no further C3 comparison or fresh
+confirmation is required. The [earlier teacher-response SSE measurement](NATIVE-LR-PG095.md)
+remains historical diagnostic evidence and does not select the current rate.
+Defaults and published showcase weights are unchanged. New ParticleGAN sessions explicitly set
 `ema_decay=None` and use RAW training/evaluation/export/inference; no EMA
 averaging, comparison or selection is recommended. Legacy `Trainer.use_ema`
 and the published EMA showcase snapshots below belong to historical routes,

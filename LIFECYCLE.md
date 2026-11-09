@@ -1,5 +1,13 @@
 **Current source: core 0.13.0 / ParticleGAN 0.9.5.** See [PG095 adoption](PG095-ADOPTION.md). The PG0.9.4 and earlier sections below describe retained historical cohorts; use their original environments for those artifacts.
 
+Current rate guidance is the scoped [Candlelit C2 RAW960 choice](docs/finished-output-learning-rates.md).
+The registered `anima` factory remains CPU-only with rendering disabled. Its
+common configuration accepts `lr`, `d_lr_mult`, `prior_lr_mult` and
+`ema_decay=None`; these option names do not enable generic native GPU training.
+The separately admitted native route is the explicit `PG09Trainer`, whose
+constructor accepts the three scalar rate keywords, not an `ema_decay` keyword.
+Reuse the original native evidence and RAW weights without repeating the search.
+
 # Anima image sessions
 
 The current source installer is Anima 0.3.0 with core 0.12.0 and official

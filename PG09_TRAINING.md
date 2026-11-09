@@ -1,5 +1,12 @@
 **Current source: core 0.13.0 / ParticleGAN 0.9.5.** See [PG095 adoption](PG095-ADOPTION.md). The PG0.9.4 and earlier sections below describe retained historical cohorts; use their original environments for those artifacts.
 
+For current rate use, see [Candlelit C2 RAW960](docs/finished-output-learning-rates.md):
+G=0.00075, `d_lr_mult=24.000000000000004`, `prior_lr_mult=40.0`, batch8,
+declared horizon1600. RAW960 is the saved comparison endpoint, not a new
+960-update horizon. This is a scoped choice among three scored DEV arms, not
+an instruction to rerun them. The API example below describes caller-owned
+runtime/cache admission; the generic common factory remains CPU-only.
+
 # Explicit ParticleGAN 0.9 training
 
 `lumen_studio.pg09_training.PG09Trainer` is the new training entrypoint. It

@@ -1,0 +1,106 @@
+{
+  "schema": "documented-finished-output-LR-decision-v1",
+  "product_id": "anima-particle-sliders",
+  "as_of": "2026-11-09",
+  "selection_metric": "Equal-case mean intended-effect intensity ON minus matched OFF in finished outputs",
+  "teacher_SSE_used_for_selection": false,
+  "preservation_beauty_confidence_or_completion_tiebreak": false,
+  "prospective_ema_decay": null,
+  "source_rate_pack_SHA256": "d06a3585ef9b3aaccfffe6352beb419b289c860c49c96a8df30c9459dda4a573",
+  "status": "best_tested_selected_from_existing_intended_effect_scores",
+  "rate_overrides": {
+    "lr": 0.00075,
+    "d_lr_mult": 24.000000000000004,
+    "prior_lr_mult": 40.0,
+    "ema_decay": null
+  },
+  "existing_historical_recipe": null,
+  "final_effect_confirmed": false,
+  "concept": "Candlelit",
+  "best_tested_control_id": "C2",
+  "actual_rates": {
+    "G": 0.00075,
+    "D": 0.018000000000000002,
+    "bank": 0.03
+  },
+  "comparison_updates": 960,
+  "comparison_cases": 4,
+  "comparison_arms": 3,
+  "planned_arms": 4,
+  "horizon": 1600,
+  "batch": 8,
+  "mean_effect_gain": 0.0038009807467460632,
+  "per_case_gains": {
+    "candlelit-dev-00-seed29001": 0.007858852545420328,
+    "candlelit-dev-00-seed29027": 0.0027804101506869,
+    "candlelit-dev-01-seed29001": 0.004058803121248881,
+    "candlelit-dev-01-seed29027": 0.0005058571696281433
+  },
+  "all_candidate_means": [
+    {
+      "control_id": "C0",
+      "G": 2.9296875e-06,
+      "mean_gain": 0.0018655452877283096
+    },
+    {
+      "control_id": "C1",
+      "G": 4.6875e-05,
+      "mean_gain": 0.0030342315634091697
+    },
+    {
+      "control_id": "C2",
+      "G": 0.00075,
+      "mean_gain": 0.0038009807467460632
+    }
+  ],
+  "result": {
+    "artifact_id": "result.json",
+    "bytes": 70140,
+    "sha256": "c5a401eb36a41258f45e4427e6a78933d442f4e8642b367c7821ed133c81d653"
+  },
+  "Root_terminal": {
+    "artifact_id": "root-actual-terminal-reap-resource0-v2.json",
+    "bytes": 8886,
+    "sha256": "e5368a5ada6b04c39ffb48e6e6359f9a4099596a4ee82d2dc36efbf581533d6f"
+  },
+  "meaning_result": {
+    "artifact_id": "meaning-result.json",
+    "bytes": 4012,
+    "sha256": "f9e75a8c22e7fafe57f5e6bc8528ba774d9cc094827d09883d82a8059254ad10"
+  },
+  "meaning_direction_gain": 0.01619240641593933,
+  "meaning_direction_only_not_general_validity": true,
+  "measurement_kind": "FROZEN_MODEL_INSTRUMENT_NOT_HUMAN",
+  "scope": "Best tested among three completed Candlelit C0/C1/C2 RAW960 arms on four examined DEV cases only; C3 has one separately retained damaged preview; no further C3 or fresh confirmation is required. Fixed D0.018000000000000002/P0.03, batch8/h1600, native512/10steps/CFG1 with original cached CPU-BF16 conditioning. Not a complete four-arm selection, confirmed recipe, unseen holdout, universal optimum or product-default change. Old seed42, Wild Hair and pilot evidence remain separate.",
+  "all_four_examined_cases_retained_at_equal_weight": true,
+  "new_training_updates": 0,
+  "completed_search_reused": true,
+  "C3_RAW": null,
+  "C3_score": null,
+  "full_four_arm_comparison_complete": false,
+  "product_default_changed": false,
+  "next_step": "Use existing Candlelit C2 G0.00075 RAW960, the best of the three scored arms. Keep all old scores and the separate damaged C3 preview; no further C3 or fresh confirmation runs are required.",
+  "selected_for_use": true,
+  "additional_fresh_confirmation_required": false,
+  "usage": "Documentation metadata and exact option literals only; not a complete training configuration, artifact loader, changed package default, or instruction to replay completed training.",
+  "portability": "Original model, captured native source, paired conditioning/cache, RAW checkpoint and media are separately managed and are not bundled by this documentation. Evidence artifacts are identified by basename, byte count and SHA256; these are not download locations.",
+  "native_render_profile": {
+    "width": 512,
+    "height": 512,
+    "steps": 10,
+    "guidance": 1.0,
+    "conditioning": "Original cached CPU-BF16 conditioning"
+  },
+  "api_scope": {
+    "common_backend": "anima",
+    "generic_factory_device": "cpu",
+    "generic_render": false,
+    "native_trainer": "lumen_studio.pg09_training.PG09Trainer",
+    "native_rate_keywords": [
+      "lr",
+      "d_lr_mult",
+      "prior_lr_mult"
+    ],
+    "native_trainer_accepts_ema_decay_keyword": false
+  }
+}
