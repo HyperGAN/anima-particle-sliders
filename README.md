@@ -4,6 +4,8 @@
 
 For the common session interface, see [LIFECYCLE.md](LIFECYCLE.md).
 
+For an explicit new-cohort initialization policy, see [opt-in fresh initialization](docs/explicit-fresh-initialization.md).
+
 The current source installer uses **Anima 0.4.0 / Particle Sliders core 0.13.0 /
 ParticleGAN 0.9.5**. See [current adoption and verification](PG095-ADOPTION.md)
 and [publication and qualification status](PUBLICATION-STATUS.md). The current
