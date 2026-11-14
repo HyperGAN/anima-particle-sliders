@@ -1,3 +1,5 @@
+> **Calculated memory planning:** training **72 GiB VRAM / 24 GiB host RAM** (768×768, B=2, BF16 frozen; FP32 adapter/critic); sampling **20 GiB VRAM / 24 GiB host RAM** (768×768). See [MEMORY.md](MEMORY.md) for checkpointed/phase variants, attention fallback and exact limits. These are conservative calculated budgets, not measured peaks.
+
 **Current source: core 0.13.0 / ParticleGAN 0.9.5.** See [PG095 adoption](PG095-ADOPTION.md). The PG0.9.4 and earlier sections below describe retained historical cohorts; use their original environments for those artifacts.
 
 [Current and historical installation cohorts](INSTALL-COHORTS.md).
