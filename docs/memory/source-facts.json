@@ -1,0 +1,532 @@
+{
+  "schema": "slider-memory-source-facts-v1",
+  "date": "2026-11-14",
+  "calculation_only": true,
+  "models_constructed": 0,
+  "framework_imports": 0,
+  "GPU_operations": 0,
+  "model": "circlestone-labs/Anima",
+  "revision": "f973fc41ec7545364ac9776c2440285f43ff2a30",
+  "frozen_weights": [
+    {
+      "path": "split_files/diffusion_models/anima-turbo-v1.1.safetensors",
+      "size": 4182230656,
+      "lfs_sha256": "fba11953276b57edf59d1dc4f1857ac05aa079c56f982b4d7c20298d57d3f7eb"
+    },
+    {
+      "path": "split_files/text_encoders/qwen_3_06b_base.safetensors",
+      "size": 1192135096,
+      "lfs_sha256": "cd2a512003e2f9f3cd3c32a9c3573f820bb28c940f73c57b1ddaa983d9223eba"
+    },
+    {
+      "path": "split_files/vae/qwen_image_vae.safetensors",
+      "size": 253806246,
+      "lfs_sha256": "a70580f0213e67967ee9c95f05bb400e8fb08307e017a924bf3441223e023d1f"
+    }
+  ],
+  "parameter_derivation": "The turbo source DiT file also contains its conditioner. The three exact original file sizes bound all four loaded BF16 components; do not add the Base text_conditioner file a second time. The captured Base Diffusers Cosmos config supplies the matching 28-layer/2048-width topology, not a claim that Base and Turbo weights match.",
+  "trainable": {
+    "parameters": 8373153,
+    "FP32_weights_bytes": 33492612,
+    "gradient_bytes": 33492612,
+    "persistent_momentum_or_Adam_tensor_bytes": 0,
+    "optimizer_transient_allowance_bytes": 435465776,
+    "optimizer_transient_formula": "48*A + 32MiB; FP32 protected normals/directions, FP64 promoted normals/displacements and small-matrix SVD/Gram workspace; conservative simultaneous allowance"
+  },
+  "trainable_derivation": "28 × [8×(4×4096+2×4096+2×3072) + 8×6476] +512 bank +40,737 critic = 8,373,153",
+  "metadata": [
+    {
+      "repository": "circlestone-labs/Anima",
+      "requested_revision": "f973fc41ec7545364ac9776c2440285f43ff2a30",
+      "resolved_revision": "f973fc41ec7545364ac9776c2440285f43ff2a30",
+      "repository_metadata_sha256": "2a590e4b070e9158b70786f708f03bc76afd3e397fe1bb0bc9e3ed9e7bb06e5c",
+      "weight_files": [
+        {
+          "path": "split_files/diffusion_models/anima-aesthetic-v1.0.safetensors",
+          "size": 4182230656,
+          "lfs_sha256": "368aad0a7bdf33ed1571f4664466e0f25768ed8dc7d706697af46ab8c183bf41"
+        },
+        {
+          "path": "split_files/diffusion_models/anima-aesthetic-v1.0b.safetensors",
+          "size": 4182230656,
+          "lfs_sha256": "49d1e23b9a7415ac56f4719017570a5f8d295184faba578e07fe76f41bee0fcc"
+        },
+        {
+          "path": "split_files/diffusion_models/anima-aesthetic-v1.1.safetensors",
+          "size": 4182230656,
+          "lfs_sha256": "3c1868387a3a1ff504bbb87c33678321965ead381fcf87afbd0264daa600c082"
+        },
+        {
+          "path": "split_files/diffusion_models/anima-base-v1.0.safetensors",
+          "size": 4182218328,
+          "lfs_sha256": "bd43b7cffe1ed1153d9c41e7beb2f18cb1273eafbaa3af3edd6a173dc90a006e"
+        },
+        {
+          "path": "split_files/diffusion_models/anima-preview.safetensors",
+          "size": 4182218360,
+          "lfs_sha256": "41fa7b78613dfe0d888b3647f70c7fb8cdfda2ff177e78d2e16e06dc810d9dcc"
+        },
+        {
+          "path": "split_files/diffusion_models/anima-preview2.safetensors",
+          "size": 4182218360,
+          "lfs_sha256": "a21ff6807e31cbd2e6e7f24de07921b3190cd832819389f6b6b27e3a04e82f57"
+        },
+        {
+          "path": "split_files/diffusion_models/anima-preview3-base.safetensors",
+          "size": 4182218360,
+          "lfs_sha256": "14fffe8ad5116cd73b9a4696f6a89d7e5f6efdd24b2e4785603aa891a9b2295b"
+        },
+        {
+          "path": "split_files/diffusion_models/anima-turbo-v1.0.safetensors",
+          "size": 4182230656,
+          "lfs_sha256": "c0b905034510750a505d21aa96c81718f4ffcc500777318421f58a88636e2174"
+        },
+        {
+          "path": "split_files/diffusion_models/anima-turbo-v1.1.safetensors",
+          "size": 4182230656,
+          "lfs_sha256": "fba11953276b57edf59d1dc4f1857ac05aa079c56f982b4d7c20298d57d3f7eb"
+        },
+        {
+          "path": "split_files/text_encoders/qwen_3_06b_base.safetensors",
+          "size": 1192135096,
+          "lfs_sha256": "cd2a512003e2f9f3cd3c32a9c3573f820bb28c940f73c57b1ddaa983d9223eba"
+        },
+        {
+          "path": "split_files/vae/qwen_image_vae.safetensors",
+          "size": 253806246,
+          "lfs_sha256": "a70580f0213e67967ee9c95f05bb400e8fb08307e017a924bf3441223e023d1f"
+        }
+      ],
+      "configs": {},
+      "indexes": {}
+    },
+    {
+      "repository": "circlestone-labs/Anima-Base-v1.0-Diffusers",
+      "requested_revision": "073c3a9db359c31ad0e8aa268d15775473c2176c",
+      "resolved_revision": "073c3a9db359c31ad0e8aa268d15775473c2176c",
+      "repository_metadata_sha256": "705cf8577ca8649acfff45e0297806b05683a2f6b00f7c54cae836b4736ee64d",
+      "weight_files": [
+        {
+          "path": "text_conditioner/diffusion_pytorch_model.safetensors",
+          "size": 269339400,
+          "lfs_sha256": "fdcf606524892e35b270b96fc8bbd8d77e615ab882675a049f6e7c2ff6b71da3"
+        },
+        {
+          "path": "text_encoder/model.safetensors",
+          "size": 1192133232,
+          "lfs_sha256": "75e8db94adb374b61baca3d898fc2c0d5086d20689a96d4e74576546433a0526"
+        },
+        {
+          "path": "transformer/diffusion_pytorch_model.safetensors",
+          "size": 3912877104,
+          "lfs_sha256": "81dc5915fc3c3b170684534ca11ed6c535ddea5658793a801fac53b8d5281065"
+        },
+        {
+          "path": "vae/diffusion_pytorch_model.safetensors",
+          "size": 253806966,
+          "lfs_sha256": "0c8bc8b758c649abef9ea407b95408389a3b2f610d0d10fcb054fe171d0a8344"
+        }
+      ],
+      "configs": {
+        "transformer/config.json": {
+          "URL": "https://huggingface.co/circlestone-labs/Anima-Base-v1.0-Diffusers/resolve/073c3a9db359c31ad0e8aa268d15775473c2176c/transformer/config.json",
+          "bytes": 728,
+          "sha256": "bf42ca1e331067f70063e7596d33869095bf360bfb5fd3ff4cd5a36b95632aa9",
+          "value": {
+            "_class_name": "CosmosTransformer3DModel",
+            "_diffusers_version": "0.39.0.dev0",
+            "adaln_lora_dim": 256,
+            "attention_head_dim": 128,
+            "concat_padding_mask": true,
+            "controlnet_block_every_n": null,
+            "crossattn_proj_in_channels": 1024,
+            "encoder_hidden_states_channels": 1024,
+            "extra_pos_embed_type": null,
+            "img_context_dim_in": null,
+            "img_context_dim_out": 2048,
+            "img_context_num_tokens": 256,
+            "in_channels": 16,
+            "max_size": [
+              128,
+              240,
+              240
+            ],
+            "mlp_ratio": 4.0,
+            "num_attention_heads": 16,
+            "num_layers": 28,
+            "out_channels": 16,
+            "patch_size": [
+              1,
+              2,
+              2
+            ],
+            "rope_scale": [
+              1.0,
+              4.0,
+              4.0
+            ],
+            "text_embed_dim": 1024,
+            "use_crossattn_projection": false
+          }
+        },
+        "text_encoder/config.json": {
+          "URL": "https://huggingface.co/circlestone-labs/Anima-Base-v1.0-Diffusers/resolve/073c3a9db359c31ad0e8aa268d15775473c2176c/text_encoder/config.json",
+          "bytes": 1409,
+          "sha256": "84d477d57a20538af60eb43d1d119cdf0f86fc3ca756f3458394955ec83b016a",
+          "value": {
+            "architectures": [
+              "Qwen3Model"
+            ],
+            "attention_bias": false,
+            "attention_dropout": 0.0,
+            "bos_token_id": null,
+            "dtype": "bfloat16",
+            "eos_token_id": null,
+            "head_dim": 128,
+            "hidden_act": "silu",
+            "hidden_size": 1024,
+            "initializer_range": 0.02,
+            "intermediate_size": 3072,
+            "layer_types": [
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention"
+            ],
+            "max_position_embeddings": 32768,
+            "max_window_layers": 28,
+            "model_type": "qwen3",
+            "num_attention_heads": 16,
+            "num_hidden_layers": 28,
+            "num_key_value_heads": 8,
+            "pad_token_id": null,
+            "rms_norm_eps": 1e-06,
+            "rope_parameters": {
+              "rope_theta": 1000000.0,
+              "rope_type": "default"
+            },
+            "sliding_window": null,
+            "tie_word_embeddings": false,
+            "transformers_version": "5.7.0",
+            "use_cache": true,
+            "use_sliding_window": false,
+            "vocab_size": 151936
+          }
+        },
+        "vae/config.json": {
+          "URL": "https://huggingface.co/circlestone-labs/Anima-Base-v1.0-Diffusers/resolve/073c3a9db359c31ad0e8aa268d15775473c2176c/vae/config.json",
+          "bytes": 753,
+          "sha256": "f9917414da358ab86f0f5b53975015d74fa4fc2973a7dc6a5b1bea5cf2592798",
+          "value": {
+            "_class_name": "AutoencoderKLQwenImage",
+            "_diffusers_version": "0.39.0.dev0",
+            "attn_scales": [],
+            "base_dim": 96,
+            "dim_mult": [
+              1,
+              2,
+              4,
+              4
+            ],
+            "dropout": 0.0,
+            "input_channels": 3,
+            "latents_mean": [
+              -0.7571,
+              -0.7089,
+              -0.9113,
+              0.1075,
+              -0.1745,
+              0.9653,
+              -0.1517,
+              1.5508,
+              0.4134,
+              -0.0715,
+              0.5517,
+              -0.3632,
+              -0.1922,
+              -0.9497,
+              0.2503,
+              -0.2921
+            ],
+            "latents_std": [
+              2.8184,
+              1.4541,
+              2.3275,
+              2.6558,
+              1.2196,
+              1.7708,
+              2.6052,
+              2.0743,
+              3.2687,
+              2.1526,
+              2.8652,
+              1.5579,
+              1.6382,
+              1.1253,
+              2.8251,
+              1.916
+            ],
+            "num_res_blocks": 2,
+            "temperal_downsample": [
+              false,
+              true,
+              true
+            ],
+            "z_dim": 16
+          }
+        }
+      },
+      "indexes": {}
+    }
+  ],
+  "source_citations": [
+    "configs/anima/model.lock.json",
+    "lumen_studio/backends/anima.py",
+    "lumen_studio/particles.py",
+    "lumen_studio/pg09_training.py"
+  ],
+  "profiles": [
+    {
+      "operation": "Train 768px default no checkpointing",
+      "gpu_count": 1,
+      "calculated_VRAM_per_GPU_GiB": 72,
+      "calculated_host_RAM_GiB": 24,
+      "geometry": "768×768",
+      "batch_graphs": 2,
+      "text_token_bound": 512,
+      "checkpointing": false,
+      "attention": "memory-efficient SDPA (flash/efficient; no dense fallback)",
+      "resident_frozen_bytes": 5628171998,
+      "activation_allowance_bytes": 51673825280,
+      "trainable_and_optimizer_peak_bytes": 502451000,
+      "other_GPU_allowance_bytes": 134217728,
+      "GPU_subtotal_bytes": 57938666006,
+      "host_loading_and_cache_subtotal_bytes": 16512316476,
+      "runtime_headroom": "GPU: 25% subtotal +2GiB; host:25% subtotal +4GiB; final ceil4GiB",
+      "notes": "One cached native response per row; total cached rows≤128. Native batch is1; up to2 PG graphs are retained.",
+      "activation_envelope_inputs": {
+        "D": 2048,
+        "I": 8192,
+        "H": 16,
+        "L": 28,
+        "N": 2816,
+        "B": 2,
+        "scalar_bytes": 4,
+        "checkpointed": false,
+        "dense_fallback": false
+      },
+      "precision": "BF16 frozen; FP32 adapter/critic",
+      "quantization_metadata_bytes": 0,
+      "activation_allowance_model": "Conservative planning envelope; linear transformer terms plus explicit dense fallback, text/KV or decode/pixel allowance as recorded in profile notes. Not measured or a formal peak guarantee."
+    },
+    {
+      "operation": "Train 768px explicit checkpointing",
+      "gpu_count": 1,
+      "calculated_VRAM_per_GPU_GiB": 20,
+      "calculated_host_RAM_GiB": 24,
+      "geometry": "768×768",
+      "batch_graphs": 2,
+      "text_token_bound": 512,
+      "checkpointing": true,
+      "attention": "memory-efficient SDPA (flash/efficient; no dense fallback)",
+      "resident_frozen_bytes": 5628171998,
+      "activation_allowance_bytes": 8858370048,
+      "trainable_and_optimizer_peak_bytes": 502451000,
+      "other_GPU_allowance_bytes": 134217728,
+      "GPU_subtotal_bytes": 15123210774,
+      "host_loading_and_cache_subtotal_bytes": 16512316476,
+      "runtime_headroom": "GPU: 25% subtotal +2GiB; host:25% subtotal +4GiB; final ceil4GiB",
+      "notes": "One cached native response per row; total cached rows≤128. Native batch is1; up to2 PG graphs are retained.",
+      "activation_envelope_inputs": {
+        "D": 2048,
+        "I": 8192,
+        "H": 16,
+        "L": 28,
+        "N": 2816,
+        "B": 2,
+        "scalar_bytes": 4,
+        "checkpointed": true,
+        "dense_fallback": false
+      },
+      "precision": "BF16 frozen; FP32 adapter/critic",
+      "quantization_metadata_bytes": 0,
+      "activation_allowance_model": "Conservative planning envelope; linear transformer terms plus explicit dense fallback, text/KV or decode/pixel allowance as recorded in profile notes. Not measured or a formal peak guarantee."
+    },
+    {
+      "operation": "Train 768px dense fallback",
+      "gpu_count": 1,
+      "calculated_VRAM_per_GPU_GiB": 204,
+      "calculated_host_RAM_GiB": 24,
+      "geometry": "768×768",
+      "batch_graphs": 2,
+      "text_token_bound": 512,
+      "checkpointing": false,
+      "attention": "dense math fallback",
+      "resident_frozen_bytes": 5628171998,
+      "activation_allowance_bytes": 165356240896,
+      "trainable_and_optimizer_peak_bytes": 502451000,
+      "other_GPU_allowance_bytes": 134217728,
+      "GPU_subtotal_bytes": 171621081622,
+      "host_loading_and_cache_subtotal_bytes": 16512316476,
+      "runtime_headroom": "GPU: 25% subtotal +2GiB; host:25% subtotal +4GiB; final ceil4GiB",
+      "notes": "Conservative fallback allowance if automatic SDPA chooses math; this is not a practical fit recommendation.",
+      "activation_envelope_inputs": {
+        "D": 2048,
+        "I": 8192,
+        "H": 16,
+        "L": 28,
+        "N": 2816,
+        "B": 2,
+        "scalar_bytes": 4,
+        "checkpointed": false,
+        "dense_fallback": true
+      },
+      "precision": "BF16 frozen; FP32 adapter/critic",
+      "quantization_metadata_bytes": 0,
+      "activation_allowance_model": "Conservative planning envelope; linear transformer terms plus explicit dense fallback, text/KV or decode/pixel allowance as recorded in profile notes. Not measured or a formal peak guarantee."
+    },
+    {
+      "operation": "Render 768px",
+      "gpu_count": 1,
+      "calculated_VRAM_per_GPU_GiB": 20,
+      "calculated_host_RAM_GiB": 24,
+      "geometry": "768×768",
+      "batch_graphs": 1,
+      "text_token_bound": 512,
+      "checkpointing": false,
+      "attention": "memory-efficient SDPA (flash/efficient; no dense fallback)",
+      "resident_frozen_bytes": 5628171998,
+      "activation_allowance_bytes": 7247757312,
+      "trainable_and_optimizer_peak_bytes": 33492612,
+      "other_GPU_allowance_bytes": 134217728,
+      "GPU_subtotal_bytes": 13043639650,
+      "host_loading_and_cache_subtotal_bytes": 16512316476,
+      "runtime_headroom": "GPU: 25% subtotal +2GiB; host:25% subtotal +4GiB; final ceil4GiB",
+      "notes": "10 Euler steps, CFG1; VAE untiled. Eight full-resolution FP32 feature maps at384 channels conservatively cover decode intermediates.",
+      "activation_envelope_inputs": {
+        "D": 2048,
+        "I": 8192,
+        "H": 16,
+        "L": 28,
+        "N": 2816,
+        "B": 1,
+        "scalar_bytes": 4,
+        "checkpointed": false,
+        "dense_fallback": false
+      },
+      "precision": "BF16 frozen; FP32 adapter/critic",
+      "quantization_metadata_bytes": 0,
+      "activation_allowance_model": "Conservative planning envelope; linear transformer terms plus explicit dense fallback, text/KV or decode/pixel allowance as recorded in profile notes. Not measured or a formal peak guarantee."
+    },
+    {
+      "operation": "Render 1536px",
+      "gpu_count": 1,
+      "calculated_VRAM_per_GPU_GiB": 44,
+      "calculated_host_RAM_GiB": 24,
+      "geometry": "1536×1536",
+      "batch_graphs": 1,
+      "text_token_bound": 512,
+      "checkpointing": false,
+      "attention": "memory-efficient SDPA (flash/efficient; no dense fallback)",
+      "resident_frozen_bytes": 5628171998,
+      "activation_allowance_bytes": 28991029248,
+      "trainable_and_optimizer_peak_bytes": 33492612,
+      "other_GPU_allowance_bytes": 134217728,
+      "GPU_subtotal_bytes": 34786911586,
+      "host_loading_and_cache_subtotal_bytes": 16512316476,
+      "runtime_headroom": "GPU: 25% subtotal +2GiB; host:25% subtotal +4GiB; final ceil4GiB",
+      "notes": "10 Euler steps, CFG1; VAE untiled. Eight full-resolution FP32 feature maps at384 channels conservatively cover decode intermediates.",
+      "activation_envelope_inputs": {
+        "D": 2048,
+        "I": 8192,
+        "H": 16,
+        "L": 28,
+        "N": 9728,
+        "B": 1,
+        "scalar_bytes": 4,
+        "checkpointed": false,
+        "dense_fallback": false
+      },
+      "precision": "BF16 frozen; FP32 adapter/critic",
+      "quantization_metadata_bytes": 0,
+      "activation_allowance_model": "Conservative planning envelope; linear transformer terms plus explicit dense fallback, text/KV or decode/pixel allowance as recorded in profile notes. Not measured or a formal peak guarantee."
+    }
+  ],
+  "repository": "anima-particle-sliders",
+  "optimizer_source_facts": [
+    {
+      "version": "0.9.5",
+      "source_file": "recipes.py",
+      "bytes": 104250,
+      "sha256": "4f86c1a5c029916e73c834ebea4aae3bd5502dde8f10628e5a99a23f7e60242c"
+    },
+    {
+      "version": "0.9.5",
+      "source_file": "optim/dualnorm.py",
+      "bytes": 56768,
+      "sha256": "8e57be915dc8be44aaff2ac2f7ad39fbb2a7c610d77340e9f13e895974bf173c"
+    },
+    {
+      "version": "0.9.5",
+      "source_file": "optim/direction_blend.py",
+      "bytes": 4011,
+      "sha256": "84982277f0559e68aceea6d1c5ee60129c1e1972bebf61ca47dfa38b8611a1fb"
+    },
+    {
+      "version": "0.9.5",
+      "source_file": "optim/constraint_geometry.py",
+      "bytes": 9142,
+      "sha256": "e51a90df05857bd986ff097a6d266bd22cefa93a0d545a6fb25d58b42775ce4c"
+    }
+  ],
+  "KV_or_recurrent_state": {
+    "type": "conservative returned text KV",
+    "bytes": 58720256,
+    "formula": "2*28*8*512*128*2; within the larger encode/decode phase allowance"
+  },
+  "cache_limits": {
+    "max_rows": 128,
+    "max_cached_prompts": 256,
+    "field_shape": [
+      1,
+      16,
+      1,
+      96,
+      96
+    ],
+    "FP32_fields_per_row": 3,
+    "prompt_hidden": [
+      1,
+      512,
+      1024
+    ],
+    "prompt_bytes_per_element": 2,
+    "FP32_row_tensor_bytes": 226492416,
+    "prompt_embedding_bytes": 268435456,
+    "host_cache_formula": "max_rows*3*product(field_shape)*4 +max_cached_prompts*product(prompt_hidden)*prompt_bytes_per_element; native masks/indices included in loader/cache reserve"
+  }
+}
