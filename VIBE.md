@@ -45,13 +45,15 @@ ordinary text-model list omits them. On November 17, 2026, that catalog listed
 Liquid D1 as `liquid/d1`, with `image_input: false` and text-only state. D1 can
 score text but cannot serve as this finished-image judge on the advertised
 NanoGPT route. It also returns decisions rather than generating prompt text.
-Check the live catalog's capabilities before choosing `$VIBE_JUDGE_MODEL`.
+The current image-capable Jev lookup is `typesafe/jev-1.14`, through NanoGPT.
+The `typesafe/jev-latest` alias currently advertises text-only input. Check the
+live catalog's capabilities before changing the explicit image judge.
 
 ```sh
 anima-vibe \
   --vibe 'fantasy RPG final boss, imposing antagonist silhouette, epic battle scene' \
   --model-dir /path/to/pinned/anima-turbo \
-  --prompt-model "$VIBE_PROMPT_MODEL" --judge-model "$VIBE_JUDGE_MODEL" \
+  --prompt-model "$VIBE_PROMPT_MODEL" --judge-model typesafe/jev-1.14 \
   --out runs/final-boss-vibe --device cuda:0 \
   --pool-size 8 --replace 4 --best-of 3 --rounds 4
 ```
@@ -70,6 +72,9 @@ graph, model, rubric, native sampler and source identities bind the collection.
 The default rubric measures visible intended-effect intensity, not beauty or
 preservation. Nanoodle's one-based score is normalized to 0–1; its full typed
 distribution is retained. Missing or invalid measurements fail explicitly.
+NanoGPT independently rounds its reported score and probabilities to two
+decimals; the adapter allows only the resulting bounded rounding discrepancy
+and keeps the reported score, original response and validation diagnostics.
 
 Increase `--rounds` with the same arguments to extend collection. Completed
 proposals, images and judgments are reused, including partial-round receipts.
@@ -119,12 +124,11 @@ Offline tests cover adaptive replacement, best-of-N selection, matched seeds,
 strict score parsing, interruption/resume, media integrity, real Nanoodle graph
 execution with injected HTTP, and admission of the resulting manifest by the
 existing cache entrypoint. They use explicit render/judge fixtures. Actual live
-requests reached NanoGPT: prompt generation and an explicit `liquid/d1` text
-decision probe returned HTTP401 with `invalid_api_key`. The D1 probe used the
-documented `https://api.nano-gpt.com/api/v1/decisions` endpoint. These responses
-occurred before model inference and do not establish a Jev or D1 model failure.
-An earlier direct TypeSafe probe returned HTTP402 with a no-credits billing
-error; direct TypeSafe is no longer the default route.
+requests now authenticate through NanoGPT after loading a fresh environment
+key. `typesafe/jev-latest` returned a typed text decision, and
+`typesafe/jev-1.14` returned a measured judgment for the native positive image.
+The earlier HTTP401 responses came from a stale inherited environment key;
+they do not establish a model failure. Direct TypeSafe is not used.
 
 A bounded native probe rendered one manual neutral/final-boss pair at 512×512,
 seed 741901, using the unchanged pinned Anima base with no attached adapter.
