@@ -181,8 +181,9 @@ def main(argv=None):
     parser.add_argument('--vibe', required=True)
     parser.add_argument('--model-dir', type=Path, required=True)
     parser.add_argument('--prompt-model', required=True, help='Nanoodle text-generation model ID')
-    parser.add_argument('--judge-model', required=True, help='explicit image-capable Jev model, e.g. jev-latest')
-    parser.add_argument('--judge-provider', choices=('typesafe', 'nanogpt'), default='typesafe')
+    parser.add_argument('--judge-model', required=True, help='explicit image-capable decision-model ID')
+    parser.add_argument('--judge-provider', choices=('nanogpt', 'typesafe'), default='nanogpt',
+                        help='decision API provider (default: nanogpt)')
     parser.add_argument('--prompt-workflow', type=Path, help='override model-specific Context -> Pairs graph')
     parser.add_argument('--score-workflow', type=Path, help='override Criterion + Image -> judge graph')
     parser.add_argument('--out', type=Path, required=True)

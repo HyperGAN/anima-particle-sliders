@@ -2,8 +2,8 @@
 
 The opt-in `anima-vibe --vibe` path collects training data without editing the
 catalog config files. A Nanoodle text workflow proposes matched neutral/positive
-prompts. Frozen Anima renders N matched outputs per pair. An image-capable Jev
-score workflow judges the finished images against your fixed criterion. Higher
+prompts. Frozen Anima renders N matched outputs per pair. An image-capable NanoGPT
+decision workflow judges the finished images against your fixed criterion. Higher
 mean positive-minus-neutral scores keep a prompt in the pool; weaker prompts are
 replaced by new proposals informed by the saved results.
 
@@ -34,20 +34,24 @@ For local development, install the companion
 and this product with `--no-deps -e`; the native environment's existing exact
 core pin remains the source of truth.
 
-Keep `NANOGPT_API_KEY` and `TYPESAFE_API_KEY` in the environment. Choose a current
-NanoGPT text-generation model and a TypeSafe **Jev** model. The default
-`--judge-provider typesafe` runs Nanoodle's Decide node through a transport to
-TypeSafe's official `/v1/systemone` API, converting inline images into documented
-asset placeholders. Each credential is sent only to its own provider. An
-authenticated model-list request verified `jev-latest` and `jev-preview` during
-implementation. `--judge-provider nanogpt` is available for an explicitly
-verified NanoGPT decision-model route; no model ID is guessed or substituted.
+Keep `NANOGPT_API_KEY` in the environment. Choose a current NanoGPT
+text-generation model and an image-capable decision model. The default
+`--judge-provider nanogpt` runs Nanoodle's Decide node through NanoGPT's
+`/api/v1/decisions` endpoint. This path does not use a TypeSafe key or make
+direct TypeSafe requests. No model ID is guessed or substituted.
+
+NanoGPT lists decision models separately at `/api/v1/decision-models`; its
+ordinary text-model list omits them. On November 17, 2026, that catalog listed
+Liquid D1 as `liquid/d1`, with `image_input: false` and text-only state. D1 can
+score text but cannot serve as this finished-image judge on the advertised
+NanoGPT route. It also returns decisions rather than generating prompt text.
+Check the live catalog's capabilities before choosing `$VIBE_JUDGE_MODEL`.
 
 ```sh
 anima-vibe \
   --vibe 'fantasy RPG final boss, imposing antagonist silhouette, epic battle scene' \
   --model-dir /path/to/pinned/anima-turbo \
-  --prompt-model "$VIBE_PROMPT_MODEL" --judge-model jev-latest \
+  --prompt-model "$VIBE_PROMPT_MODEL" --judge-model "$VIBE_JUDGE_MODEL" \
   --out runs/final-boss-vibe --device cuda:0 \
   --pool-size 8 --replace 4 --best-of 3 --rounds 4
 ```
@@ -115,9 +119,12 @@ Offline tests cover adaptive replacement, best-of-N selection, matched seeds,
 strict score parsing, interruption/resume, media integrity, real Nanoodle graph
 execution with injected HTTP, and admission of the resulting manifest by the
 existing cache entrypoint. They use explicit render/judge fixtures. Actual live
-requests reached both providers: NanoGPT rejected prompt generation with HTTP401,
-and TypeSafe rejected the image judgment with HTTP402. These are credential/account
-blockers, not successful model measurements.
+requests reached NanoGPT: prompt generation and an explicit `liquid/d1` text
+decision probe returned HTTP401 with `invalid_api_key`. The D1 probe used the
+documented `https://api.nano-gpt.com/api/v1/decisions` endpoint. These responses
+occurred before model inference and do not establish a Jev or D1 model failure.
+An earlier direct TypeSafe probe returned HTTP402 with a no-credits billing
+error; direct TypeSafe is no longer the default route.
 
 A bounded native probe rendered one manual neutral/final-boss pair at 512×512,
 seed 741901, using the unchanged pinned Anima base with no attached adapter.
@@ -126,4 +133,4 @@ owned PID and its NVML entry were absent. Measured peaks were 7044 MiB NVML and
 4,552,081,408 bytes host RSS, within GPU 20 GiB/allocator 19 GiB/RSS 24 GiB caps and live
 GPU 5 GiB/host 47 GiB floors. The pair remains explicitly unscored, and produced no
 training updates. This verifies the native render route; a live adaptive
-Nanoodle/Jev collection and qualified frozen-target preparation remain unverified.
+Nanoodle collection and qualified frozen-target preparation remain unverified.
