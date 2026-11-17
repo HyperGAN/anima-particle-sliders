@@ -11,7 +11,8 @@ For a final-boss creator, start with a criterion such as:
 `fantasy RPG final boss, imposing antagonist silhouette, epic battle scene`.
 The workflow supplies concrete subjects and cues rather than using this same
 sentence for every teacher. Each positive prompt keeps its neutral subject and
-scene. This is adaptive curation, not a measured quality improvement yet.
+scene. Curation scores do not by themselves establish a trained adapter's effect;
+a completed scoped training result is recorded below.
 
 ## Source setup
 
@@ -155,3 +156,38 @@ floors, with measured peaks of 7066MiB NVML and 3,163,910,144 bytes RSS.
 This demonstrates working collection, adaptive retention, resume and qualified
 target preparation; it does not establish trained-slider quality or held-out
 generalization.
+
+## Completed native training: final-boss vibe
+
+A separately identified, captured **ParticleGAN0.10 EMPF** run reused that
+completed collection and its160 native fields, then completed **256 actual
+updates**, batch2/seed1, with RAW weights and `ema_decay=None`. The original
+public PG0.9.5 trainer, defaults and saved cohorts retain their source identities.
+This CLI still collects/prepares data; it does not silently launch that separate
+training profile.
+
+| RAW checkpoint | Mean intended-effect ON1 minus matched OFF0 |
+| --- | ---: |
+| 64 | 0.4675 |
+| 128 | 0.48041666666666666 |
+| 192 | **0.5033333333333334** |
+| 256 | 0.45875 |
+
+**RAW192 is the unique maximum** across the four declared quarters. Each value
+equally averages the same eight matched training cases. All16 OFF/ON
+catastrophic-only checks pass at every quarter. Beauty, preservation, teacher
+SSE and confidence are not selectors. This is not unseen confirmation or a new
+learning-rate optimum. The provisional reference rates were G0.00075,
+D0.009000000000000001 and bank0.03; completed LR work was reused.
+
+An independent archive-byte audit verifies all256 FULL hashes, embedded update
+counts, journals, original initialization receipts and actual regularizer calls.
+All4,033 RAW payloads match FULL at each quarter. Exact continuation through
+resource-floor stops repeated no completed updates. A fresh original CUDA
+backbone then loaded selected RAW192 through `ParticleAdapter.load_export` and
+reproduced case0's native512 PNG exactly, with no training, new effect judgment
+or official fresh initialization. The public reader file is byte-identical to
+the captured reader used in this proof.
+
+[Compact hashes, values and verification scope](docs/vibe-native256-verification.json).
+Weights remain local; this source draft makes no public weight-release claim.
