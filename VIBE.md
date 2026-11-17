@@ -55,6 +55,8 @@ anima-vibe \
 Rendering and target preparation use CUDA only, with no model offload. Native
 resource admission/leases remain the caller's responsibility, as for Anima's
 existing native APIs. No GPU work is started by `--help` or manifest validation.
+`--resolution` must be a multiple of 64 within Anima's native 512–1536 range;
+unsupported sizes are rejected before model identity reads or allocation.
 
 `--prompt-workflow FILE` and `--score-workflow FILE` replace the supplied
 model-specific Nanoodle graphs. The proposal graph accepts `Context` and returns
@@ -115,5 +117,13 @@ execution with injected HTTP, and admission of the resulting manifest by the
 existing cache entrypoint. They use explicit render/judge fixtures. Actual live
 requests reached both providers: NanoGPT rejected prompt generation with HTTP401,
 and TypeSafe rejected the image judgment with HTTP402. These are credential/account
-blockers, not successful model measurements. A live Anima + Nanoodle + Jev
-collection and native target/training run remain unverified.
+blockers, not successful model measurements.
+
+A bounded native probe rendered one manual neutral/final-boss pair at 512×512,
+seed 741901, using the unchanged pinned Anima base with no attached adapter.
+Both PNG hashes and dimensions were verified after exact process reap; the
+owned PID and its NVML entry were absent. Measured peaks were 7044 MiB NVML and
+4,552,081,408 bytes host RSS, within GPU 20 GiB/allocator 19 GiB/RSS 24 GiB caps and live
+GPU 5 GiB/host 47 GiB floors. The pair remains explicitly unscored, and produced no
+training updates. This verifies the native render route; a live adaptive
+Nanoodle/Jev collection and qualified frozen-target preparation remain unverified.

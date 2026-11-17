@@ -43,8 +43,8 @@ class AnimaVibe:
     def __init__(self, model_dir, workflows, *, device='cuda:0', resolution=512, runtime=None):
         if not device.startswith('cuda:'):
             raise ValueError('vibe rendering and target preparation require CUDA; no CPU model math/offload')
-        if type(resolution) is not int or resolution < 256 or resolution % 64:
-            raise ValueError('resolution must be a multiple of 64, at least 256')
+        if type(resolution) is not int or not 512 <= resolution <= 1536 or resolution % 64:
+            raise ValueError('resolution must be a multiple of 64 within Anima\'s native 512–1536 range')
         self.model_dir, self.workflows = Path(model_dir).resolve(), workflows
         self.device, self.resolution, self.runtime = device, resolution, runtime
         from .provenance import model_identity

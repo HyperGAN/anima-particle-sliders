@@ -69,6 +69,12 @@ def test_no_cpu_rendering(tmp_path):
         AnimaVibe(tmp_path, Workflows(), device='cpu', runtime=Runtime())
 
 
+@pytest.mark.parametrize('resolution', [256, 448, 513, 1600, 2048, True])
+def test_resolution_refuses_before_model_identity_or_loading(tmp_path, resolution):
+    with pytest.raises(ValueError, match='native 512–1536'):
+        AnimaVibe(tmp_path / 'missing-model', Workflows(), resolution=resolution)
+
+
 def test_no_qualified_outputs_is_explicit(tmp_path):
     workflows = Workflows()
     workflows.score = lambda *a, **kw: {'score': 0.2}
