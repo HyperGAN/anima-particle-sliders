@@ -136,5 +136,22 @@ Both PNG hashes and dimensions were verified after exact process reap; the
 owned PID and its NVML entry were absent. Measured peaks were 7044 MiB NVML and
 4,552,081,408 bytes host RSS, within GPU 20 GiB/allocator 19 GiB/RSS 24 GiB caps and live
 GPU 5 GiB/host 47 GiB floors. The pair remains explicitly unscored, and produced no
-training updates. This verifies the native render route; a live adaptive
-Nanoodle collection and qualified frozen-target preparation remain unverified.
+training updates. This original probe verifies the native render route.
+
+A subsequent live run completed four adaptive rounds with a pool of two prompt
+pairs, one replacement per round and two matched seeds per pair. NanoGPT
+`openai/gpt-5-mini` proposed five distinct pairs over time; `typesafe/jev-1.14`
+judged all 32 native finished images. All 36 cloud requests returned HTTP200.
+The strongest prior prompt survived each replacement, and a completed resume
+replayed zero calls. Eight contexts qualified at the unchanged 0.75 threshold,
+and native target preparation wrote and verified eight shards / 160 records,
+covering both frozen trajectories and all ten positions. Every PNG and target
+shard hash was checked after exact exit0/reap and owned PID/NVML absence.
+
+The live run preserved the exact core0.13/PG0.9.5 closure and frozen base, used
+no adapters or EMA, and performed zero training updates. It ran under the same
+20GiB GPU / 19GiB allocator / 24GiB RSS caps and live 5GiB GPU / 47GiB host
+floors, with measured peaks of 7066MiB NVML and 3,163,910,144 bytes RSS.
+This demonstrates working collection, adaptive retention, resume and qualified
+target preparation; it does not establish trained-slider quality or held-out
+generalization.
