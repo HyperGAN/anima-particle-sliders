@@ -17,6 +17,7 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+vibe = ["particle-sliders-vibe[nanoodle] @ git+https://github.com/HyperGAN/particle-sliders.git@2c2952514b8de84262c5034a3567b003a64c06f0#subdirectory=packages/particle-sliders-vibe"]
 native = [
   "numpy>=1.26", "pillow>=13.0.0,<14", "torchvision>=0.21,<1", "accelerate==1.14.0",
   "transformers==5.15.0", "huggingface-hub==1.27.0",
@@ -25,6 +26,10 @@ native = [
 
 [project.entry-points."particle_sliders.image_backends"]
 anima = "lumen_studio.lifecycle:BACKEND"
+
+[project.scripts]
+anima-vibe = "lumen_studio.vibe:main"
+anima-vibe-targets = "lumen_studio.vibe:prepare_main"
 
 [project.entry-points."particle_sliders.inference_backends"]
 anima = "lumen_studio.lifecycle:NATIVE_BACKEND"
