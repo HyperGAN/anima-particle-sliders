@@ -27,20 +27,17 @@ def main():
         if (staged / 'anima_hndl').exists():
             shutil.rmtree(staged / 'anima_hndl')
         shutil.copytree(Path(__file__).with_name('anima_hndl'), staged / 'anima_hndl')
-        # Canonical LR development must not silently retarget the already locked
-        # HNDL cohort. Reconstruct its exact original product closure; changed
-        # canonical files have byte-identical snapshots, and newly added files
-        # never leak into this independent historical distribution.
+        # Stage only the verified current package contents. The frozen
+        # product snapshot remains in source archives for historical reproduction.
         cohort = json.loads((staged / 'anima_hndl/cohort.json').read_text())
         for package in ('lumen_studio', 'configs/anima'):
             shutil.rmtree(staged / package)
         for name, expected in cohort['product_files'].items():
-            snapshot = Path(__file__).with_name('frozen_product') / name
-            source = snapshot if snapshot.is_file() else root / name
+            source = root / name
             if name.startswith('anima_hndl/'):
                 source = Path(__file__).with_name('anima_hndl') / name.removeprefix('anima_hndl/')
             if hashlib.sha256(source.read_bytes()).hexdigest() != expected:
-                raise ValueError('Historical HNDL source differs from its locked bytes: ' + name)
+                raise ValueError('HNDL source differs from its locked bytes: ' + name)
             target = staged / name
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(source, target)

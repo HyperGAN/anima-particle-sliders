@@ -2,7 +2,7 @@
 
 LEGACY_TRAINING_MESSAGE = (
     "Historical gmix native training dispatch is unavailable. "
-    "Use the explicit externally admitted lumen_studio.pg09_training.PG09Trainer "
+    "Use the explicit externally admitted lumen_studio.engine_training.EngineTrainer "
     "after review of the exact installed shared package and native cache lineage. "
     "Legacy EMA, pilot, microbatch and resume protocols are not PG09 protocols."
 )

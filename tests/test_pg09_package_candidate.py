@@ -66,10 +66,10 @@ for package, expected in [('particle-sliders-core', lock['wheel_sha256']),
         assert len(records) == 1, package
         archive = records[0]['download_info']['archive_info']
     assert archive['hashes']['sha256'] == expected, package
-from particle_sliders.pg09 import ConditionalPG09, validate_pg09_domain
-from particle_sliders.pg09_backends import AnimaRuntimeResponseAdapter
-import lumen_studio.pg09_training as binding
-assert binding.ConditionalPG09 is ConditionalPG09
+from particle_sliders.engine import ConditionalParticleGAN, validate_pg09_domain
+from lumen_studio.response_binding import AnimaRuntimeResponseAdapter
+import lumen_studio.engine_training as binding
+assert binding.ConditionalParticleGAN is ConditionalParticleGAN
 assert binding.AnimaRuntimeResponseAdapter is AnimaRuntimeResponseAdapter
 domain = validate_pg09_domain((1,4,1,2,2), response_domain='continuous_field')
 assert domain['pg_source_profile'] == 'release'
@@ -80,7 +80,7 @@ assert not any('particle-sliders-audit' in p or 'particle-sliders-core-pin' in p
 import torch
 assert not torch.cuda.is_initialized()
 print(json.dumps(dict(package=version('particle-sliders-core'), pg=version('particlegan'),
-    core=ConditionalPG09.__module__, adapter=AnimaRuntimeResponseAdapter.__module__,
+    core=ConditionalParticleGAN.__module__, adapter=AnimaRuntimeResponseAdapter.__module__,
     site=str(site), domain=domain, cuda_initialized=False), sort_keys=True))
 '''
     result = subprocess.run([sys.executable, '-I', '-c', code, str(ROOT)],
@@ -88,4 +88,4 @@ print(json.dumps(dict(package=version('particle-sliders-core'), pg=version('part
     assert result.returncode == 0, result.stdout + result.stderr
     receipt = json.loads(result.stdout)
     assert receipt['cuda_initialized'] is False
-    assert receipt['core'] == 'particle_sliders.pg09'
+    assert receipt['core'] == 'particle_sliders.engine'

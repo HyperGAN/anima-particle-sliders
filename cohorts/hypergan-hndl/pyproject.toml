@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "anima-particle-sliders"
-version = "0.3.0a2"
+version = "0.4.0a1"
 description = "Anima Turbo product adapter for the Particle Sliders image lifecycle"
 readme = "HNDL-CANDIDATE.md"
 requires-python = ">=3.11"
@@ -12,8 +12,10 @@ license = "MIT"
 license-files = ["LICENSE", "NOTICE", "ANIMA-LICENSE.md"]
 dependencies = [
   "safetensors>=0.4,<1",
+  "hndl==0.10.0",
+  "hypergan @ git+https://github.com/HyperGAN/HyperGAN.git@5f368a3770cf5bdae0448995c9f76e29af8049f7",
   "packaging>=24",
-  "particle-sliders-core[hypergan-hndl] @ git+https://github.com/HyperGAN/particle-sliders.git@a794e3b4a8813b012f2c4faa3da82b78d4a90214#subdirectory=packages/particle-sliders-core",
+  "particle-sliders-core @ git+https://github.com/HyperGAN/particle-sliders.git@c13890f8e2a1ecf1dc8eb9f2a37f9187cb9fea78#subdirectory=packages/particle-sliders-core",
 ]
 
 [project.optional-dependencies]
@@ -34,10 +36,10 @@ py-modules = ["particle_io", "single_particle", "comfy_particle"]
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["lumen_studio*", "configs.anima*", "anima_hndl*"]
+include = ["lumen_studio", "lumen_studio.*", "configs.anima*", "anima_hndl*"]
 namespaces = true
 
 [tool.setuptools.package-data]
 "configs.anima" = ["*.json", "requirements.lock", "candidates/*.json"]
-lumen_studio = ["static/*", "vendor/LICENSE", "vendor/provenance.json"]
-anima_hndl = ["cohort.json"]
+lumen_studio = ["engine-source.json", "static/*", "vendor/LICENSE", "vendor/provenance.json"]
+anima_hndl = ["*.json", "*.hndl"]

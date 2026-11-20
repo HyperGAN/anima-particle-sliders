@@ -12,17 +12,17 @@ import tempfile
 import torch
 
 from particle_sliders.lifecycle import native_cleanup
-from particle_sliders.pg09_backends import AnimaRuntimeResponseAdapter
-from particle_sliders.pg095 import ConditionalPG095
+from lumen_studio.response_binding import AnimaRuntimeResponseAdapter
+from particle_sliders.engine import ConditionalParticleGAN
 from lumen_studio.core_source import verify_core
 from lumen_studio.learning_rates import recipe_learning_rates
 from lumen_studio.particles import ParticleAdapter
-from lumen_studio.pg09_training import PG09Trainer, CachedResponses, NativeFieldCritic
+from lumen_studio.engine_training import EngineTrainer, CachedResponses, NativeFieldCritic
 from . import PROFILE
 from . import policy
 
-FULL_SCHEMA = 'anima-explicit-fresh95-v2-FULL'
-RAW_SCHEMA = 'anima-explicit-fresh95-v2-native-RAW-sidecar'
+FULL_SCHEMA = 'anima-explicit-scoped-v2-FULL'
+RAW_SCHEMA = 'anima-explicit-scoped-v2-native-RAW-sidecar'
 
 
 def canonical(value):
@@ -37,12 +37,13 @@ def source_record(path):
 
 def source_identity():
     # The old full core closure is independently enforced by verify_core().
-    from lumen_studio import particles, pg09_training
-    from particle_sliders import pg09_backends, pg09, lifecycle
+    from lumen_studio import particles, engine_training, response_binding
+    from particle_sliders import backends, engine, lifecycle
     return {name: source_record(module.__file__) for name, module in (
         ('fresh_training', __import__(__name__, fromlist=['__file__'])),
-        ('fresh_policy', policy), ('particles', particles), ('pg09_training', pg09_training),
-        ('pg09_backends', pg09_backends), ('pg09', pg09), ('lifecycle', lifecycle))}
+        ('fresh_policy', policy), ('particles', particles), ('engine_training', engine_training),
+        ('backends', backends), ('engine', engine), ('lifecycle', lifecycle),
+        ('response_binding', response_binding))}
 
 
 @dataclass(frozen=True)
@@ -194,10 +195,10 @@ class Attachment:
         self.closed, self.closing = True, False
 
 
-class FreshTrainer(PG09Trainer):
+class FreshTrainer(EngineTrainer):
     """Versioned explicit new cohort; inherited update keeps original PG formula.
 
-    No call to PG09Trainer.__init__: that historical entry auto-restores a bare
+    No call to EngineTrainer.__init__: that historical entry auto-restores a bare
     packet after constructing a game. Here intent and FULL metadata are resolved
     before any added adapter/critic, and initialization precedes optimizers.
     """
@@ -269,7 +270,7 @@ class FreshTrainer(PG09Trainer):
             original = self._attachment.attach(self.adapter)
             self.backend = ReceiptBackend(original, self.initialization, self.sources)
             # This is the first optimizer construction, after fresh scoped init.
-            self.game = ConditionalPG095(self.backend, self.responses, critic,
+            self.game = ConditionalParticleGAN(self.backend, self.responses, critic,
                 particles=self.adapter.particles, preset='bispf_optimized',
                 response_domain='continuous_field', batch_size=batch_size, seed=seed,
                 total_steps=total_steps, response_scale=response_scale, sigma=sigma,
@@ -316,12 +317,12 @@ class FreshTrainer(PG09Trainer):
     def export(self, path):
         # Reuse original native export law/normalization and RAW state format.
         path = Path(path)
-        if any(p.exists() for p in (path, path.with_suffix('.pg09.json'), path.with_suffix('.fresh95.json'))):
+        if any(p.exists() for p in (path, path.with_suffix('.engine.json'), path.with_suffix('.scoped.json'))):
             raise FileExistsError('new RAW and sidecar paths required')
         sha = super().export(path)
         # The original native exporter owns format/math; this new API also
         # makes its RAW and original sidecar durable before publishing ours.
-        for artifact in (path, path.with_suffix('.pg09.json')):
+        for artifact in (path, path.with_suffix('.engine.json')):
             with artifact.open('rb') as stream:
                 os.fsync(stream.fileno())
         sidecar = dict(schema=RAW_SCHEMA, profile=PROFILE, sources=deepcopy(self.sources),
@@ -330,7 +331,7 @@ class FreshTrainer(PG09Trainer):
             model_identity=deepcopy(self._frozen_identity['runtime']),
             cache_identity=deepcopy(self._frozen_identity), selection='raw', ema_decay=None,
             historical_LR_measurement_transferred=False, quality_qualified=False)
-        write_json(Path(path).with_suffix('.fresh95.json'), sidecar)
+        write_json(Path(path).with_suffix('.scoped.json'), sidecar)
         return file_pin(path)
 
     def close(self):

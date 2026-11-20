@@ -5,9 +5,9 @@ import subprocess
 import sys
 import pytest
 
-from lumen_studio.pg09_training import CachedResponses
+from lumen_studio.engine_training import CachedResponses
 from lumen_studio.numerical_profiles import NAME,activate_numerical_profile,require_numerical_profile
-from test_pg09_training import cache_fixture,runtime_fixture
+from test_engine_training import cache_fixture,runtime_fixture
 
 
 def test_profile_activation_in_isolated_cpu_process_sets_strict_flags():

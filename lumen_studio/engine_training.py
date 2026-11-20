@@ -13,10 +13,10 @@ from pathlib import Path
 import torch
 from torch import nn
 
-from particle_sliders.pg095 import ConditionalPG095 as ConditionalPG09
-from particle_sliders.pg09_backends import (
-    AnimaRuntimeResponseAdapter, PreparedResponse, ResponseRow,
-)
+from particle_sliders.engine import ConditionalParticleGAN
+from particle_sliders.backends import PreparedResponse, ResponseRow
+
+from lumen_studio.response_binding import AnimaRuntimeResponseAdapter
 
 from .cache import TargetCache, save_tensor_file
 from .contracts import atomic_json, digest, file_hash
@@ -91,7 +91,7 @@ class CachedResponses:
             if (input_hash != self._index['input_fingerprint']
                     or digest(dict(input=input_hash, shards=self._index['shards'])) != self._index['fingerprint']):
                 raise ValueError('PG09 target index fingerprint differs from its shard manifest')
-        self._identity = dict(schema='anima-pg09-cache-v1', index=deepcopy(self._index),
+        self._identity = dict(schema='anima-engine-cache-v1', index=deepcopy(self._index),
             runtime=runtime_identity, teacher_runtime_compatibility=self.compatibility,
             native_timestep_scale=self._num_train_timesteps,
             cache_implementation_sha256=file_hash(Path(__file__).with_name('cache.py')),
@@ -244,7 +244,7 @@ class NativeFieldCritic(nn.Module):
         return self.logits(torch.cat((field, self.context(condition)), dim=1)).squeeze(-1)
 
 
-class PG09Trainer:
+class EngineTrainer:
     """Callable training entrypoint for an already admitted and loaded runtime.
 
     It never loads a model, launches a GPU job or dispatches coordinator work.
@@ -277,14 +277,14 @@ class PG09Trainer:
         runtime.mixer.add(variation, self.adapter)
         try:
             self.backend = AnimaRuntimeResponseAdapter(runtime, self.adapter, variation)
-            self.game = ConditionalPG09(self.backend, self.responses, critic,
+            self.game = ConditionalParticleGAN(self.backend, self.responses, critic,
                 particles=self.adapter.particles, preset='bispf_optimized',
                 response_domain='continuous_field', batch_size=batch_size, seed=seed,
                 total_steps=total_steps, response_scale=response_scale, sigma=sigma,
                 sampling='balanced', recipe_overrides=learning_rates)
             self.directory.mkdir(parents=True, exist_ok=True)
-            if (self.directory / 'pg09-resume.pt').exists():
-                self.restore(self.directory / 'pg09-resume.pt')
+            if (self.directory / 'engine-resume.pt').exists():
+                self.restore(self.directory / 'engine-resume.pt')
         except BaseException:
             self.close()
             raise
@@ -310,12 +310,12 @@ class PG09Trainer:
         admitted = self._native_admission(deepcopy(request))
         if admitted is not True:
             raise ValueError('External native admission must verify exact model/cache teacher parity')
-        atomic_json(self.directory / 'pg09-admission.json', dict(request, external_admission=True))
+        atomic_json(self.directory / 'engine-admission.json', dict(request, external_admission=True))
         self._native_admitted = True
 
     def save(self):
         """Save the shared core's exact optimizer/sampler/constraint/RNG packet."""
-        save_tensor_file(self.directory / 'pg09-resume.pt', self.game.state_dict())
+        save_tensor_file(self.directory / 'engine-resume.pt', self.game.state_dict())
 
     def restore(self, path):
         packet = torch.load(path, map_location='cpu', weights_only=True)
@@ -327,14 +327,14 @@ class PG09Trainer:
         self.responses.identity()  # Reject changes to the frozen index/order.
         config = self.game.state_dict()['config']  # Reject incomplete failed updates before writing.
         frozen_index = self._frozen_identity['index']
-        normalization = dict(method='pg09-native-field-scalar-scale',
+        normalization = dict(method='native-field-scalar-scale',
             response_scale=self.game.response_scale, cache_fingerprint=frozen_index['fingerprint'])
         if self.responses._numerical_profile is not None:
             normalization['numerical_profile'] = deepcopy(frozen_index['identity']['numerical_profile'])
         sha = self.adapter.export(path, model_identity=self._frozen_identity['runtime'],
             normalization=normalization,
             manifest_hash=frozen_index['identity']['manifest_sha256'], step=self.step)
-        atomic_json(path.with_suffix('.pg09.json'), dict(schema='anima-pg09-export-v1',
+        atomic_json(path.with_suffix('.engine.json'), dict(schema='anima-engine-export-v1',
             sha256=sha, weights='live', completed_steps=self.step,
             objective=config['objective'],
             shared_training_config_sha256=digest(config),
