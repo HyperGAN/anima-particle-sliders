@@ -62,7 +62,7 @@ config = SessionConfig('anima', caller_declared_cohort, **options)
 This only shows accepted option placement. The registered `anima` factory is
 **CPU-only with rendering disabled**; it does not expose a generic native GPU
 reproduction command. The separately admitted native
-[`PG09Trainer`](../lumen_studio/pg09_training.py) accepts `lr`, `d_lr_mult` and
+[`EngineTrainer`](../lumen_studio/engine_training.py) accepts `lr`, `d_lr_mult` and
 `prior_lr_mult` as constructor keywords, with `total_steps=1600` and
 `batch_size=8` for this schedule. It does **not** accept an `ema_decay` keyword;
 retain its RAW-only shared game without adding EMA. Runtime, verified cache,

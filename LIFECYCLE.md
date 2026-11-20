@@ -1,34 +1,18 @@
-**Current source: core 0.13.0 / ParticleGAN 0.9.5.** See [PG095 adoption](PG095-ADOPTION.md). The PG0.9.4 and earlier sections below describe retained historical cohorts; use their original environments for those artifacts.
-
-Current rate guidance is the scoped [Candlelit C2 RAW960 choice](docs/finished-output-learning-rates.md).
-The registered `anima` factory remains CPU-only with rendering disabled. Its
-common configuration accepts `lr`, `d_lr_mult`, `prior_lr_mult` and
-`ema_decay=None`; these option names do not enable generic native GPU training.
-The separately admitted native route is the explicit `PG09Trainer`, whose
-constructor accepts the three scalar rate keywords, not an `ema_decay` keyword.
-Reuse the original native evidence and RAW weights without repeating the search.
-
 # Anima image sessions
 
-The current source installer is Anima 0.3.0 with core 0.12.0 and official
-ParticleGAN 0.9.4. The registered `anima` backend and explicit `PG09Trainer`
-continue to use the shared game and actual routed particle bank; the shared
-engine selects the versioned 0.9.4 recipe and rejects older training packets.
-See [PG094-ADOPTION.md](PG094-ADOPTION.md) for the exact pin and current checks.
-Both `PG09Trainer(..., lr=..., d_lr_mult=..., prior_lr_mult=...)` and common
-session configuration options accept the same explicit positive learning rates.
-Omitting a value preserves the official `bispf_optimized` recipe (base `0.012`,
-critic multiplier `1.5`, particle-prior multiplier `2.5`). The resolved recipe
-is part of the shared resumable identity; changing a rate requires a new cohort.
-The common JSON CLI consumes these exact options without a second set of defaults.
-These upstream defaults are not a claim of tuned native Anima learning rates.
-See [NATIVE-LR-PILOT.md](NATIVE-LR-PILOT.md) for the bounded native experiment.
-The direct native trainer additionally supports an explicit cache-bound
-`numerical_profile`; its new deterministic math profile requires activation
-before CUDA startup. Common lifecycle accelerator/render gates remain separate.
-CPU-only lifecycle gates and native sampler/pretrained qualification limits
-remain in force. The following sections preserve the earlier 0.8.1 adoption
-history and describe the unchanged product API.
+Anima 0.4.0 installs core 0.15.1 and ParticleGAN 0.11.0. The registered
+`anima` backend is CPU-only and supports training and numerical response.
+The separately admitted native training API is
+`lumen_studio.engine_training.EngineTrainer`.
+
+Both entry points accept positive `lr`, `d_lr_mult` and `prior_lr_mult`.
+Omitted rates use the existing explicit `bispf_optimized` recipe. The
+resolved recipe and runtime source are included in checkpoint identity.
+Use `ema_decay=None` in common session options and select RAW for inference.
+
+See [scoped initialization](docs/explicit-fresh-initialization.md) for fresh
+runs and exact resume. Earlier artifacts use their original checkout and
+dependency pins.
 
 ## Previous core 0.8.1 cohort
 

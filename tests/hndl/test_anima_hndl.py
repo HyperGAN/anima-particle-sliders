@@ -1,6 +1,7 @@
 """Installed opt-in HyperGAN/HNDL cohort; tiny CPU models, no pretrained loads."""
 from copy import deepcopy
 from importlib.metadata import version
+from importlib.util import find_spec
 import json
 from pathlib import Path
 import shutil
@@ -11,17 +12,17 @@ import pytest
 import torch
 from torch import nn
 
-if version('particle-sliders-core') != '0.12.0':
-    pytest.skip('separate core0.12/HNDL0.10 candidate environment required', allow_module_level=True)
+if find_spec('anima_hndl') is None:
+    pytest.skip('separate installed Anima HNDL candidate environment required', allow_module_level=True)
 
 from particle_sliders.inference import open_inference
 from particle_sliders.lifecycle import CheckpointError, SessionConfig, UnsupportedOperation, open_session
-from particle_sliders.pg09 import _hash, validate_pg09_domain
+from particle_sliders.engine import _hash, validate_engine_domain
 from anima_hndl import lifecycle as candidate
 from lumen_studio.particles import Branch
-from lumen_studio.pg09_training import NativeFieldCritic
+from lumen_studio.engine_training import NativeFieldCritic
 from test_image_lifecycle import configuration
-from test_pg09_training import equal, runtime_fixture as legacy_runtime_fixture
+from test_engine_training import equal, runtime_fixture as legacy_runtime_fixture
 from test_input_admission import stage_model_admission_fixture, stage_owned_runtime as staged_model
 
 
@@ -94,7 +95,7 @@ def test_actual_patch_critic_output_and_penalty_second_derivative_parity(spatial
 
 def config_for(tmp_path, runtime):
     old = configuration(tmp_path, runtime)
-    return SessionConfig('anima-hndl', 'anima-hypergan-hndl-v3-cpu', **old.options)
+    return SessionConfig('anima-hndl', 'anima-hypergan-hndl-v4-cpu', **old.options)
 
 
 def test_candidate_and_shared_core_import_from_installed_wheels():
@@ -103,7 +104,7 @@ def test_candidate_and_shared_core_import_from_installed_wheels():
         assert Path(module.__file__).resolve().is_relative_to(Path(sys.prefix).resolve())
 
 
-def test_real_shared_session_resume_ownership_ema_and_native_only_inference(tmp_path, monkeypatch):
+def test_real_shared_session_resume_ownership_and_native_only_inference(tmp_path, monkeypatch):
     runtime = runtime_fixture()
     config = config_for(tmp_path, runtime)
     frozen = deepcopy(runtime.transformer.state_dict())
@@ -120,8 +121,8 @@ def test_real_shared_session_resume_ownership_ema_and_native_only_inference(tmp_
         session.train(stop_after=2)
         assert not torch.equal(bank, adapter.particles)
         packet = session.checkpoint(tmp_path / 'training.pt')
-        assert session.game.state_dict()['config']['pg_version'] == '0.9.4'
-        assert 'hypergan-hndl-v3' in json.dumps(packet, default=str)
+        assert session.game.state_dict()['config']['pg_version'] == '0.11.0'
+        assert 'hypergan-hndl-v4' in json.dumps(packet, default=str)
         before = session.checkpoint()
         bad = deepcopy(before)
         bad['manifest']['config']['cohort'] = 'historical-anima-cohort'
@@ -145,9 +146,9 @@ def test_real_shared_session_resume_ownership_ema_and_native_only_inference(tmp_
         assert torch.equal(session.evaluate(strength=0.), base)
         expected_inference = {}
         raw = deepcopy(session.game.network.state_dict())
-        for selection in ('raw', 'ema'):
+        for selection in ('raw',):
             session.export_inference(tmp_path / (selection + '.pt'), selection=selection)
-            session.game.network.load_state_dict(raw if selection == 'raw' else session.ema.values)
+            session.game.network.load_state_dict(raw)
             expected_inference[selection] = session.evaluate(strength=.5)
             session.game.network.load_state_dict(raw)
         expected_metrics = session.train()
@@ -167,10 +168,10 @@ def test_real_shared_session_resume_ownership_ema_and_native_only_inference(tmp_
     shutil.rmtree(config.options['cache_dir'])
     options, loaded = staged_model(tmp_path, monkeypatch)
     stage_model_admission_fixture(options['model_dir'], monkeypatch)
-    from particle_sliders.pg09 import ConditionalPG09
+    from particle_sliders.engine import ConditionalParticleGAN
     def forbidden(*args, **kwargs):
         pytest.fail('native-only inference constructed training state')
-    monkeypatch.setattr(ConditionalPG09, '__init__', forbidden)
+    monkeypatch.setattr(ConditionalParticleGAN, '__init__', forbidden)
     monkeypatch.setattr(candidate.NativeFieldCritic, '__init__', forbidden)
     wrong_shape = dict(request, latent=torch.zeros(1, 4, 1, 3, 2))
     with pytest.raises(ValueError, match='fixed H/W'):
@@ -178,7 +179,7 @@ def test_real_shared_session_resume_ownership_ema_and_native_only_inference(tmp_
                        operation='response', native_request=wrong_shape)
     assert not loaded
     inference_rng = torch.get_rng_state().clone()
-    for selection in ('raw', 'ema'):
+    for selection in ('raw',):
         with open_inference(tmp_path / (selection + '.pt'), options=options,
                             operation='response', native_request=request) as native:
             assert native.selection == selection
@@ -200,14 +201,14 @@ def test_real_shared_session_resume_ownership_ema_and_native_only_inference(tmp_
 def test_exact_builder_refusal_before_attachment_and_preserved_domain_guard(tmp_path, monkeypatch):
     runtime = runtime_fixture()
     config = config_for(tmp_path, runtime)
-    import particle_sliders.fibo_hndl as shared
+    from anima_hndl import fibo_hndl as shared
     original = shared._sha
     monkeypatch.setattr(shared, '_sha', lambda p: '0' * 64 if str(p).endswith('hndl_networks.py') else original(p))
     with pytest.raises(ValueError, match='builder closure'):
         open_session(config, runtime=runtime)
     assert not runtime.mixer.adapters and not runtime.mixer.handles
     with pytest.raises(ValueError, match='width >=170'):
-        validate_pg09_domain((1, 170), response_domain='continuous_vector')
+        validate_engine_domain((1, 170), response_domain='continuous_vector')
     runtime.mixer.close()
 
 
@@ -281,9 +282,9 @@ def test_candidate_accelerator_request_refuses_before_builder_or_model(tmp_path,
 
 
 @pytest.mark.parametrize('relative', ['lumen_studio/particles.py', 'lumen_studio/cache.py',
-                                    'lumen_studio/pg09_training.py', 'particle_sliders/recipe.py',
+                                    'lumen_studio/engine_training.py', 'particle_sliders/recipe.py',
                                     'configs/anima/candidates/dusk-v1.json',
-                                    'particle_sliders/pg094_release.json', 'particle_sliders/fibo_projection.hndl'])
+                                    'particle_sliders/engine_release.json', 'anima_hndl/fibo_projection.hndl'])
 def test_complete_installed_source_closure_rejects_actual_file_changes(relative):
     path = Path(sysconfig.get_paths()['purelib']) / relative
     original = path.read_bytes()

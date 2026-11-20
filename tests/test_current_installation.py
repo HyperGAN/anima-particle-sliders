@@ -10,7 +10,7 @@ from packaging.requirements import Requirement
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def test_current_installer_resolves_exact_public_core_and_pg095():
+def test_current_installer_resolves_exact_public_core_and_particlegan():
     project = tomllib.loads((ROOT / 'pyproject.toml').read_text())['project']
     dependency, = [Requirement(value) for value in project['dependencies']
                    if Requirement(value).name == 'particle-sliders-core']
@@ -19,23 +19,24 @@ def test_current_installer_resolves_exact_public_core_and_pg095():
     origin = json.loads(core.read_text('direct_url.json'))
     assert origin['vcs_info']['commit_id'] == commit
     assert origin['subdirectory'] == 'packages/particle-sliders-core'
-    assert core.version == '0.13.0'
+    assert core.version == '0.15.1'
     assert version('anima-particle-sliders') == project['version'] == '0.4.0'
-    assert version('particlegan') == '0.9.5'
-    from particle_sliders.pg09 import ConditionalPG09, PG_VERSION, PG_SOURCE_PROFILE
-    from particle_sliders.pg095 import ConditionalPG095
-    from lumen_studio.pg09_training import ConditionalPG09 as product_engine
-    assert product_engine is ConditionalPG09 is ConditionalPG095
-    assert (PG_VERSION, PG_SOURCE_PROFILE) == ('0.9.5', 'release-0.9.5')
+    assert version('particlegan') == '0.11.0'
+    from particle_sliders.engine import ConditionalParticleGAN, PG_VERSION, PG_SOURCE_PROFILE
+    from lumen_studio.engine_training import ConditionalParticleGAN as product_engine
+    assert product_engine is ConditionalParticleGAN
+    assert (PG_VERSION, PG_SOURCE_PROFILE) == ('0.11.0', 'release-0.11.0')
 
 
 def test_current_recursive_source_guard_and_old_profile_refusal():
     import pytest
     from lumen_studio.core_source import verify_core
     assert len(verify_core()) == 64
-    from particle_sliders.pg094 import ConditionalPG094
-    with pytest.raises(RuntimeError, match='pinned|0.9.4|rebind'):
-        ConditionalPG094(None, None, None)
+    from particle_sliders.engine import validate_engine_domain
+    with pytest.raises(ValueError, match='source profile'):
+        validate_engine_domain((1, 4, 1, 2, 2), response_domain='continuous_field',
+                               pg_source_profile='release-0.9.4')
+
 
 
 def test_current_receipt_tampering_refuses_before_runtime(tmp_path, monkeypatch):

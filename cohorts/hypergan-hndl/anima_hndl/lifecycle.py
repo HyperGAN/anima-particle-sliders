@@ -18,7 +18,7 @@ from torch import nn
 
 from particle_sliders.inference import InferenceBackend, InferenceBinding, native_identity
 from particle_sliders.lifecycle import Backend, Binding
-from particle_sliders.pg09_backends import AnimaRuntimeResponseAdapter
+from lumen_studio.response_binding import AnimaRuntimeResponseAdapter
 
 from lumen_studio import lifecycle as legacy
 from lumen_studio.particles import ARCHITECTURE
@@ -27,8 +27,8 @@ from .admission import verify_model_directory, verified_cache_index
 from .runtime import LocalTurboRuntime
 
 
-PROTOCOL = 'anima-hypergan-hndl-native-velocity-v3'
-PROFILE = 'anima-hypergan-hndl-v3'
+PROTOCOL = 'anima-hypergan-hndl-native-velocity-v4'
+PROFILE = 'anima-hypergan-hndl-v4'
 # Same local-patch architecture as NativeFieldCritic, authored through HNDL.
 # Unfold is native input geometry; the shared PG penalty still receives 5D fields.
 CRITIC_SOURCE = '''field = linear(patches, $width, name="field0")
@@ -49,7 +49,7 @@ def verified_builder():
     cohort = verify_cohort()
     # Reuse the common exact HNDL0.10/HyperGAN-develop source closure and clean
     # build provenance guard. No local builder, version override or fallback.
-    from particle_sliders.fibo_hndl import verified_builder as shared_builder
+    from .fibo_hndl import verified_builder as shared_builder
     builder, identity = shared_builder()
     identity = dict(identity, **cohort, product_profile=PROFILE,
         adapter_source_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
@@ -62,7 +62,7 @@ class Branch(nn.Module):
     def __init__(self, module, builder, identity):
         super().__init__()
         self.inputs, self.outputs = module.in_features, module.out_features
-        self.graph = builder(files('particle_sliders').joinpath('fibo_projection.hndl').read_text(),
+        self.graph = builder(files(__package__).joinpath('fibo_projection.hndl').read_text(),
             input_shape={'value': ['B', 1, self.inputs],
                          'particles': ['B', ARCHITECTURE['particles'], ARCHITECTURE['particle_dim']]},
             output_shape=['B', 1, self.outputs], parameters={'output_width': self.outputs})
@@ -176,9 +176,9 @@ def validate(options):
 
 def prepare(options, *, runtime=None):
     validate(options)
-    from particle_sliders.pg094 import ConditionalPG094, validate_pg09_domain
+    from particle_sliders.engine import ConditionalParticleGAN, validate_engine_domain
     from lumen_studio.cache import TargetCache
-    from lumen_studio.pg09_training import CachedResponses
+    from lumen_studio.engine_training import CachedResponses
     owner = NativeOwner(options, runtime)
     try:
         validate(options)  # Model loading must not silently change the frozen index.
@@ -189,13 +189,13 @@ def prepare(options, *, runtime=None):
         responses = CachedResponses(cache, owner.runtime, options['variation'])
         frozen = responses.identity()
         # Preserve actual native shape at admission and every penalty boundary.
-        validate_pg09_domain(responses.response_shape, response_domain='continuous_field')
+        validate_engine_domain(responses.response_shape, response_domain='continuous_field')
         with torch.random.fork_rng(devices=[]):
             torch.manual_seed(options.get('seed', 7))
             backend = owner.attach()
             critic = NativeFieldCritic(responses.response_shape[1], responses.embedding_width + 4,
                                       responses.response_shape[2:], options.get('critic_width', 32))
-        game = ConditionalPG094(backend, responses, critic, particles=owner.adapter.particles,
+        game = ConditionalParticleGAN(backend, responses, critic, particles=owner.adapter.particles,
             preset='bispf_optimized', response_domain='continuous_field', sampling='balanced',
             batch_size=options.get('batch', 2), seed=options.get('seed', 7),
             total_steps=options.get('steps', 4), response_scale=options.get('response_scale', 1.),

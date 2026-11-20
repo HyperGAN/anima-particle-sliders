@@ -1,3 +1,24 @@
+# Optional Anima HNDL backend
+
+The current isolated package `0.4.0a1` targets Particle Sliders core
+0.15.1 and ParticleGAN 0.11.0 with HNDL 0.10.0 and the pinned HyperGAN
+builder. Its backend name is `anima-hndl`.
+
+```sh
+python -m pip install 'setuptools>=84.2.1'
+python cohorts/hypergan-hndl/build.py --out dist-hndl
+python -m pip install 'dist-hndl/anima_particle_sliders-0.4.0a1-py3-none-any.whl[native]'
+python -m pip check
+```
+
+Use a separate environment from the default Anima distribution. The
+builder verifies locked package sources. Inference uses RAW artifacts and
+earlier checkpoint cohorts use their original revisions. The installed
+package has CPU fixture coverage. Native pretrained and GPU execution need
+their own qualification.
+
+## Earlier candidate record
+
 # Anima HyperGAN/HNDL candidate
 
 This separate source cohort uses the actual shared core 0.12/PG 0.9.4 game and

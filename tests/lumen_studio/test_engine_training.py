@@ -12,7 +12,7 @@ from lumen_studio.backends.anima import TurboRuntime
 from lumen_studio.cache import TargetCache, save_tensor_file
 from lumen_studio.contracts import atomic_json, digest, file_hash
 from lumen_studio.particles import Mixer, ParticleAdapter
-from lumen_studio.pg09_training import CachedResponses, PG09Trainer
+from lumen_studio.engine_training import CachedResponses, EngineTrainer
 
 
 @pytest.mark.parametrize('device,fixture', [('cuda:0', False), ('cuda:0', True), ('cpu', False)])
@@ -77,15 +77,15 @@ def equal(a, b):
 
 
 def test_native_bank_shared_pg09_exact_resume_and_inference_export(tmp_path):
-    from particle_sliders.pg09 import ConditionalPG09, PG_VERSION
-    from particle_sliders.pg09_backends import AnimaRuntimeResponseAdapter
+    from particle_sliders.engine import ConditionalParticleGAN, PG_VERSION
+    from lumen_studio.response_binding import AnimaRuntimeResponseAdapter
     runtime = runtime_fixture()
     cache = cache_fixture(tmp_path / 'cache', runtime)
     before = deepcopy(runtime.transformer.state_dict())
-    trainer = PG09Trainer(runtime, cache, tmp_path / 'run', 'finalform', total_steps=4, critic_width=8)
-    assert type(trainer.game) is ConditionalPG09
+    trainer = EngineTrainer(runtime, cache, tmp_path / 'run', 'finalform', total_steps=4, critic_width=8)
+    assert type(trainer.game) is ConditionalParticleGAN
     assert type(trainer.backend) is AnimaRuntimeResponseAdapter
-    assert PG_VERSION == '0.9.5'
+    assert PG_VERSION == '0.11.0'
     assert trainer.game.recipe.loss == 'non_saturating'
     assert trainer.game.recipe.critic_formulation == 'bispf'
     assert trainer.game.recipe.prior_regularizer == 'sbnp'
@@ -106,7 +106,7 @@ def test_native_bank_shared_pg09_exact_resume_and_inference_export(tmp_path):
         bank_grad = torch.autograd.grad(value.sum(), trainer.adapter.particles)[0]
     assert bank_grad.abs().sum() > 0
     trainer.save()
-    checkpoint = torch.load(tmp_path / 'run/pg09-resume.pt', weights_only=True)
+    checkpoint = torch.load(tmp_path / 'run/engine-resume.pt', weights_only=True)
     assert checkpoint['config']['pg_version'] == PG_VERSION == version('particlegan')
     assert checkpoint['config']['objective'] == 'g_adv+public_prior;d_adv+public_penalty'
     assert checkpoint['config']['response_domain'] == 'continuous_field'
@@ -124,7 +124,7 @@ def test_native_bank_shared_pg09_exact_resume_and_inference_export(tmp_path):
     expected_metrics = trainer.update()
     expected_state = trainer.game.state_dict()
     other_runtime = runtime_fixture()
-    resumed = PG09Trainer(other_runtime, cache, tmp_path / 'run', 'finalform', total_steps=4, critic_width=8)
+    resumed = EngineTrainer(other_runtime, cache, tmp_path / 'run', 'finalform', total_steps=4, critic_width=8)
     assert resumed.step == 2
     assert equal(expected_metrics, resumed.update())
     assert equal(expected_state, resumed.game.state_dict())
@@ -135,7 +135,7 @@ def test_native_bank_shared_pg09_exact_resume_and_inference_export(tmp_path):
     assert metadata['weights'] == 'live' and metadata['step'] == 2
     assert metadata['manifest_sha256'] == 'b' * 64
     assert metadata['normalization']['cache_fingerprint'] == trainer.responses.identity()['index']['fingerprint']
-    assert json.loads(export.with_suffix('.pg09.json').read_text())['weights'] == 'live'
+    assert json.loads(export.with_suffix('.engine.json').read_text())['weights'] == 'live'
     other_runtime.mixer.add('inference', native)
     with other_runtime.mixer.scales({'inference': 1.}):
         rec = cache[0]
@@ -196,13 +196,13 @@ def test_reject_corrupt_cache_even_when_original_verification_disabled(tmp_path)
 def test_resume_rejects_recipe_change_and_unhooks_failed_binding(tmp_path):
     runtime = runtime_fixture()
     cache = cache_fixture(tmp_path / 'cache', runtime)
-    trainer = PG09Trainer(runtime, cache, tmp_path / 'run', 'finalform', total_steps=4, critic_width=8)
+    trainer = EngineTrainer(runtime, cache, tmp_path / 'run', 'finalform', total_steps=4, critic_width=8)
     trainer.update()
     trainer.save()
     trainer.close()
     assert 'finalform' not in runtime.mixer.adapters
     with pytest.raises(ValueError, match='checkpoint objective, recipe'):
-        PG09Trainer(runtime, cache, tmp_path / 'run', 'finalform', total_steps=5, critic_width=8)
+        EngineTrainer(runtime, cache, tmp_path / 'run', 'finalform', total_steps=5, critic_width=8)
     assert 'finalform' not in runtime.mixer.adapters
     assert 'finalform' not in runtime.mixer.strengths
     runtime.mixer.close()
@@ -228,7 +228,7 @@ def test_provider_contains_cache_shard_paths(tmp_path, kind):
 
 def test_external_native_admission_requires_exact_teacher_parity(tmp_path):
     # Exercise admission with a device descriptor only; no CUDA allocation.
-    trainer = PG09Trainer.__new__(PG09Trainer)
+    trainer = EngineTrainer.__new__(EngineTrainer)
     trainer.runtime = SimpleNamespace(device=torch.device('cuda:0'))
     trainer.responses = SimpleNamespace(response_shape=(1, 4, 1, 2, 2))
     trainer.directory = tmp_path
@@ -237,10 +237,10 @@ def test_external_native_admission_requires_exact_teacher_parity(tmp_path):
     trainer._native_admission = lambda request: False
     with pytest.raises(ValueError, match='teacher parity'):
         trainer._admit_native_update()
-    assert not trainer._native_admitted and not (tmp_path / 'pg09-admission.json').exists()
+    assert not trainer._native_admitted and not (tmp_path / 'engine-admission.json').exists()
     trainer._native_admission = lambda request: True
     trainer._admit_native_update()
-    proof = json.loads((tmp_path / 'pg09-admission.json').read_text())
+    proof = json.loads((tmp_path / 'engine-admission.json').read_text())
     assert proof['external_admission'] and proof['cache_fingerprint'] == 'a' * 64
     assert not torch.cuda.is_initialized()
 
@@ -248,7 +248,7 @@ def test_external_native_admission_requires_exact_teacher_parity(tmp_path):
 def test_public_cache_snapshots_cannot_mutate_the_frozen_response_law(tmp_path):
     runtime = runtime_fixture()
     cache = cache_fixture(tmp_path / 'cache', runtime)
-    trainer = PG09Trainer(runtime, cache, tmp_path / 'run', 'finalform', total_steps=2, critic_width=8)
+    trainer = EngineTrainer(runtime, cache, tmp_path / 'run', 'finalform', total_steps=2, critic_width=8)
     provider = trainer.responses
     original = provider[0]
     original_conditions = provider.conditions(torch.tensor([0, 1]))
