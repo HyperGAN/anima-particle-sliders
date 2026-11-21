@@ -26,6 +26,21 @@ python -m release_tools.infer \
 For an OFF comparison, replay at `--strength 0`. For the constant ON comparison,
 omit `--step-gains` and use `--strength 1`.
 
+## Final Boss RAW192
+
+Use early strength at nominal 2/3 for the tested Final Boss RAW192 checkpoint
+on Anima Turbo v1.1 at 512 × 512 with ten native Euler intervals and CFG 1.
+The four held-out cases averaged +0.34333 Final Boss intensity over matched
+OFF, compared with +0.18833 at equal-dose constant strength and +0.34083
+at constant strength 1. Early improved three of four cases over strength 1.
+All 16 images passed the integrity check. An independent CUDA render
+reproduced all four early PNGs byte for byte.
+
+With the exact RAW192 export, pass `--strength 0.6666666666666666` and the
+ten relative gains recorded in the evidence. Match the native sigma grid in
+the render sidecar before using the result as a replay.
+[Checkpoint, gains and per-case evidence](final-boss-raw192-scheduled-strength.json)
+
 ## Apply it to another Anima slider
 
 Use the saved RAW adapter. Resolve the gains from that render's native noise
