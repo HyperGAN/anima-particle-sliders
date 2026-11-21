@@ -6,9 +6,9 @@ The routed-particle implementation and fitting algorithm come from the pinned
 [particle-sliders-core](https://github.com/HyperGAN/particle-sliders/tree/a119ca1ecd3d5d6c437065839d22739b04f2f4d8/packages/particle-sliders-core).
 `requirements-legacy.txt` installs that historical core0.3.0 commit.
 `core.lock.json` is its preserved historical record; its original
-`requirements.txt` note applies to the historical release archive. The source
-checkout's current stable dependency authority is `pyproject.toml` (product0.2.0,
-core0.8.1); see [installation cohorts](INSTALL-COHORTS.md).
+`requirements.txt` note applies to the historical release archive. Use the
+original checkout pinned below for these commands. See
+[installation cohorts](INSTALL-COHORTS.md) for current installations.
 The historical lock records the old pin and
 does not hash the retired `concept-slider-core` tree. Training calls
 `winning_formulation().require(...)` after overlaying the Anima generator
@@ -30,6 +30,7 @@ The release was run on an RTX A6000 using Python 3.12.13 and the complete pinned
 ```bash
 git clone https://github.com/HyperGAN/anima-particle-sliders.git
 cd anima-particle-sliders
+git checkout --detach 791a80a4f38a9b8cb096d719b6758a79325bd7d2
 uv venv .venv-anima --python 3.12.13
 uv pip sync --python .venv-anima/bin/python configs/anima/requirements.lock \
   --extra-index-url https://download.pytorch.org/whl/cu126

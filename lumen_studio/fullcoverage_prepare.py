@@ -13,7 +13,7 @@ from .coverage import (compile_coverage, field_metadata, validate_field_membersh
                        validate_index, require_production_rate_coverage,
                        freeze_teacher_membership)
 
-CORE = "ec1161f5d74481be3540cb0dfa63d0e8f8b54e90"
+CORE = "507168a241e237fc3d5f1032a8137196fa3c3562"
 CPU_PROFILE = "anima-native-CPU-BF16-conditioning-v1"
 
 
