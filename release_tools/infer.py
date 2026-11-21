@@ -7,7 +7,7 @@ ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
 from lumen_studio import execution
 from lumen_studio.backends.anima import TurboRuntime
-from lumen_studio.alpha_adapter import AlphaParticleAdapter
+from lumen_studio.alpha_adapter import read_metadata
 from single_particle import adapter_class
 from lumen_studio.contracts import file_hash
 from release_tools.distill import attach_lora
@@ -38,6 +38,8 @@ def main():
             gains = step_gains(json.loads(args.step_gains), args.steps, args.strength)
         except ValueError as error:
             parser.error(str(error))
+        if read_metadata(args.adapter).get("weights") != "live":
+            parser.error("Scheduled rendering requires a RAW particle adapter")
     runtime=TurboRuntime(args.model,'cuda:0')
     handles=[]
     try:
