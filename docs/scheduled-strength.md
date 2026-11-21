@@ -127,3 +127,38 @@ results from the captured ParticleGAN 0.10.0 runtime. The measured early
 profile above remains the recommended Candlelit profile. Refit and calibrate
 for a different adapter or native grid.
 [Fitted values, native grid and per-case evidence](candlelit-raw256-activation-gates.json) · [Right Token, Right Time](https://arxiv.org/html/2611.18274v1#A2)
+
+### Render the measured Candlelit CFP setting
+
+Use Anima Turbo v1.1 and the exact Candlelit RAW256 adapter identified in the
+evidence. The following opt-in command reads the fitted direction, calibrated
+threshold, nominal strength and render dimensions directly from the study.
+CFP uses the native activation projection and needs only the image render
+seed. Set `ANIMA_MODEL`, `RAW_ADAPTER`, `PROMPT` and `CASE_SEED` for your render.
+
+```sh
+evidence=docs/candlelit-raw256-activation-gates.json
+test "$(sha256sum "$RAW_ADAPTER" | cut -d' ' -f1)" = "$(jq -er .checkpoint_sha256 "$evidence")" &&
+jq -e '{method:"cfp", parameter:.verified_calibration.cfp.parameter,
+        direction:.fitted_native_probe.direction}' "$evidence" > candlelit-cfp-plan.json &&
+python -m release_tools.infer \
+  --model "$ANIMA_MODEL" --adapter "$RAW_ADAPTER" --format particles \
+  --prompt "$PROMPT" --seed "$CASE_SEED" \
+  --width "$(jq -er .profile.width "$evidence")" \
+  --height "$(jq -er .profile.height "$evidence")" \
+  --steps "$(jq -er '.profile.sigmas | length - 1' "$evidence")" \
+  --strength "$(jq -er .profile.nominal_on_strength "$evidence")" \
+  --gate-plan candlelit-cfp-plan.json --output candlelit-cfp.png
+```
+
+The resulting JSON sidecar records the plan, the gate decisions and the
+effective strength for every step. Check the adapter, base model and native
+sigma grid against the studied profile before comparing the rendered output
+with its archived counterpart.
+
+```sh
+jq -e --slurpfile study "$evidence" \
+  '.adapter_sha256 == $study[0].checkpoint_sha256 and
+   .model_identity.sha256 == $study[0].profile.base_sha256 and
+   .sigmas == $study[0].profile.sigmas' candlelit-cfp.json
+```
