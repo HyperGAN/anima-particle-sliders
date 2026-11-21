@@ -187,6 +187,7 @@ tests/lumen_studio/test_audits.py
 tests/lumen_studio/test_candidates.py
 tests/lumen_studio/test_contracts.py
 tests/lumen_studio/test_convergence.py
+tests/lumen_studio/test_engine_consumer_history.py
 tests/lumen_studio/test_engine_training.py
 tests/lumen_studio/test_game.py
 tests/lumen_studio/test_image_lifecycle.py
@@ -195,7 +196,6 @@ tests/lumen_studio/test_inference_controls.py
 tests/lumen_studio/test_learning_rates.py
 tests/lumen_studio/test_legacy_dispatch_ordering.py
 tests/lumen_studio/test_numerical_profiles.py
-tests/lumen_studio/test_pg09_consumer_history.py
 tests/lumen_studio/test_runtime.py
 tests/lumen_studio/test_sampling.py
 tests/lumen_studio/test_studio.py

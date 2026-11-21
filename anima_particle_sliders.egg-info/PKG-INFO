@@ -89,7 +89,7 @@ branch with a synthetic loader; native staged weight loading remains untested.
 Public strength support is finite [0,1]. Base precision is BF16, all generator
 and critic trainables FP32. Native geometry is `[1,C,1,H,W]`; evaluation returns
 velocities. Conditioning, exact routed bank ownership, native time normalization,
-balanced sampling and `bispf_optimized` remain as in the explicit PG09 trainer.
+balanced sampling and `bispf_optimized` remain as in the explicit ParticleGAN trainer.
 Other devices, signed/out-of-range strengths, reference images and rendering
 are rejected before model allocation through the public preflight.
 

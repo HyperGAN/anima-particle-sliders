@@ -63,7 +63,7 @@ This profile's text-state allowance is **58,720,256 bytes** (0.055 GiB): conserv
 - [configs/anima/model.lock.json](configs/anima/model.lock.json)
 - [lumen_studio/backends/anima.py](lumen_studio/backends/anima.py)
 - [lumen_studio/particles.py](lumen_studio/particles.py)
-- [lumen_studio/pg09_training.py](lumen_studio/pg09_training.py)
+- [lumen_studio/engine_training.py](lumen_studio/engine_training.py)
 - [Captured architecture, published file/index sizes and arithmetic](docs/memory/source-facts.json) retains exact model revisions, metadata SHA256s and direct Hugging Face config URLs. No weights were downloaded or opened for this calculation.
 - Optimizer facts: the archived ParticleGAN release `recipes.py` (`bcap`/`bispf_optimized`, lines1435–1451), `optim/dualnorm.py` momentum/state branch, and `optim/direction_blend.py` FP64 normals. These are part of the dependency selected by the repository's existing core lock; their source facts are recorded in the combined calculation report.
 
