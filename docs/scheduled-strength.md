@@ -49,3 +49,52 @@ or scheduler, resolve the gains on the new grid. Compare early, late and
 constant renders on matched cases and use the profile with the highest mean
 intended-effect gain. Check catastrophic output separately.
 [Particle Sliders schedule guide](https://github.com/HyperGAN/particle-sliders/blob/main/docs/strength-schedules.md)
+
+## Calibrate activation-dependent strength
+
+Anima can allocate the saved RAW particle adapter's nominal strength with CFP,
+CLABS or the matched random control from Particle Sliders core. At each native
+Euler interval, read the current latent as the denoiser will receive it and
+average each BF16 input channel across the single image's spatial positions
+using an FP32 reduction. The shared signed projection and gate act on that
+channel vector before the one CFG 1 conditioned denoiser call. A firing uses
+the nominal RAW adapter strength and an inactive interval uses exact OFF.
+This adapts the papers' allocation equations to the Anima particle residual.
+The fired Anima edit uses the routed particle adapter. The paper applies a rank-one
+addition to a language-model residual.
+
+After calibration, pass its JSON plan and the explicit nominal strength:
+
+```sh
+python -m release_tools.infer \
+  --model "$ANIMA_MODEL" --adapter "$RAW_ADAPTER" --format particles \
+  --prompt "$PROMPT" --seed "$CASE_SEED" --width "$WIDTH" --height "$HEIGHT" \
+  --steps "$NATIVE_STEPS" --strength "$CALIBRATED_STRENGTH" \
+  --gate-plan "$CALIBRATED_GATE_JSON" --output "$OUTPUT_PNG"
+```
+
+The plan requires `method` and `parameter`. Supply the unit `direction` fitted
+in Anima latent channel space for `cfp` or `clabs`. In CFP `parameter` is the
+calibrated alignment threshold. In CLABS it is the calibrated bias. CLABS also
+requires `gate_seed` and a `clabs` object containing measured `mean` and `std`
+and the declared `epsilon`, `setpoint`, `proportional_gain`, `integral_gain`
+and `beta`. For `random`, set `parameter` to the matched firing rate and pass
+its `gate_seed`. The gate owns one state per render. The sidecar records the
+plan and its SHA-256, fired intervals, probabilities, effective strengths,
+and realized dose `sum((sigma[i] - sigma[i+1]) * effective_strength[i])`.
+An activation-plan render at strength zero replays OFF without gate steps.
+
+Fit the direction on independent concept-positive and neutral trajectories for
+this exact input signal. The saved Candlelit teacher cache supplies paired
+positive and neutral prompt trajectories and stored latents for planning the
+fitting split. Bind the SAE and direction to the chosen latent channel signal,
+model source, conditioning, geometry and sigma grid. Use a separate active
+calibration split to estimate the projection statistics, match the declared
+budget with the shared bisection helper, and select the admissible strength.
+Keep the archived Candlelit and Final Boss matched cases for scoring beginning
+with the saved OFF and fixed-schedule results. Compare finished-output mean
+intended-effect ON minus OFF at matched dose and check catastrophic output
+separately. The saved evidence has fixed-profile gains. The native CFP and
+CLABS gains are unmeasured pending a fitted direction and an active calibration
+run on independent cases.
+[Paper equations and the shared calibration procedure](https://github.com/HyperGAN/particle-sliders/blob/b1f780decc516808cfd3019d5e5b674457161f86/docs/strength-schedules.md#activation-dependent-steering)
