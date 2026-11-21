@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 import sys
 
-CORE_COMMIT = '507168a241e237fc3d5f1032a8137196fa3c3562'
+CORE_COMMIT = 'b1f780decc516808cfd3019d5e5b674457161f86'
 PRODUCT_VERSION = '0.4.0a1'
 
 

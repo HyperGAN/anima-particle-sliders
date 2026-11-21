@@ -5,7 +5,7 @@ import json
 from pathlib import Path
 
 LOCK = Path(__file__).with_name('engine-source.json')
-COMMIT = '507168a241e237fc3d5f1032a8137196fa3c3562'
+COMMIT = 'b1f780decc516808cfd3019d5e5b674457161f86'
 
 
 def verify_core():

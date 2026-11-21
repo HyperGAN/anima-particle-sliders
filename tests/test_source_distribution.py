@@ -84,7 +84,7 @@ def test_sdist_preserves_installers_locks_and_release_inputs(tmp_path):
         core, = [dep for dep in dependencies if dep.name == 'particle-sliders-core']
         assert core.extras == set()
         assert core.url == ('git+https://github.com/HyperGAN/particle-sliders.git@'
-                            '507168a241e237fc3d5f1032a8137196fa3c3562#subdirectory=packages/particle-sliders-core')
+                            'b1f780decc516808cfd3019d5e5b674457161f86#subdirectory=packages/particle-sliders-core')
         assert 'anima-hndl = anima_hndl.lifecycle:BACKEND' in entrypoints
         assert '\nanima = ' not in entrypoints
         assert 'anima_hndl/cohort.json' in file.namelist()

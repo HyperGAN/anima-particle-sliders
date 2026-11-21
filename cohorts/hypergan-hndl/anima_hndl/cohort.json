@@ -1,8 +1,8 @@
 {
   "core": {
-    "commit": "507168a241e237fc3d5f1032a8137196fa3c3562",
+    "commit": "b1f780decc516808cfd3019d5e5b674457161f86",
     "qualified_wheel_sha256": [
-      "4356ce2ef50b75860a86b324585b7d16885a9dc18d87e41a88f919f5efac4136"
+      "dc68232a73cc606143980768f91ffd640f1c8e1cff089b9f6a65ee82b3b90a8d"
     ],
     "version": "0.15.2"
   },
@@ -14,6 +14,7 @@
     "adapter_activation.py": "7acdafc2ade5a17158af82533e667c9d031774d7f9fecaefee545760d20b53cf",
     "adapter_attachment.py": "596326bd31eb52dd403d2436cc1be771eaaf501b4661ab49379a5311e21408ed",
     "adapter_loading.py": "e676e5c8c5cf1c95bc00b8cec4fffe813b5c963cbc41b62df97fa86e15431c80",
+    "adaptive_steering.py": "5fc2a5256a935eca9cecc365d9ac62e5e94cdc375d2ab33c5dc26eb344241814",
     "audio.py": "9621c7969eb52fd6dd05c4c384477f53830d810e12ca14130b532cce267f2cfd",
     "backends.py": "383ff6ea3d8ceedbda1c3ff881a41a14c9f5c023188f684d2016206e13ef7256",
     "bispf_game.py": "0bd13cf0728b42023babbc5df160d8951659bb81784e081fd94d05ed876d622d",
@@ -54,6 +55,7 @@
     "parameter_search/runner.py": "81e4564523565023f4766adf4b57745cc03260365325d5a8b88d15a5b65e00ff",
     "parameter_search/space.py": "a3a26082abc04a910dd87f52f7f59c80c10c3191e39e9ec19ff549fa4c3944a0",
     "peft_scaling.py": "bdb9bdb8b77bfb785658542d48cd4fa04969320898fa83ed30e8d33bcef9640e",
+    "prompt_steering.py": "67ee03066e255fe105735820b0edba53757d943b93239b1279de707d23dbae59",
     "provenance.json": "efd60e615dc247b531dfb01a0be5728edcd7e442a9b6b888b848e716273ab45a",
     "provenance_sources/slider_targets.py.txt": "bdc9fba47ba9d4e3b2c8b6f3660eaa89d71c2f9067d06f2a1c2b14908af54fa8",
     "readout_critic.py": "b83322a2ef2192ac3693fe136d019259c7fd8bf26fba25bb254931ba25462a57",
@@ -76,7 +78,7 @@
     "anima_hndl/fibo_projection.hndl": "b5efac1cfb0c597e5d6e0839af6077ff36dec916901bfa254be78db9f691c086",
     "anima_hndl/lifecycle.py": "7a16a8296918641a18c9b32908a568e1d60ba6af60e70cabd5972de18f8049b3",
     "anima_hndl/runtime.py": "814a7dfcf6b324c6760d4b616881ccab695f0f1b3d8372d9f5ed7bee92964387",
-    "anima_hndl/source_validation.py": "cb1cc9c9cc05fa40538044172a3d83a1bdf5b8be14eccf5bc58f3442e1621fff",
+    "anima_hndl/source_validation.py": "df4a98d41de3dac64ef1c804de0a6dd604bafc7ecea0d47235540be5df074ae7",
     "comfy_particle.py": "73c7015d729261e6f1ad12ec094de2dd05955a3b7a269df2695cfdf59ebbb925",
     "configs/anima/candidates/dusk-v1.json": "799edbc56ac7126d108322a7d673fbded4099b533c0e47ad8f13b9587f6f0f36",
     "configs/anima/candidates/dusk-v2.json": "f7efaa7adbf56f51c02fdc8a7d93b19180141ac1da79ba01e3016a0f9c008fd1",
@@ -109,9 +111,9 @@
     "lumen_studio/contracts.py": "8c6aec68e41871469bcf1b68984c1234b7d83763746aa0814fb48cbd98964912",
     "lumen_studio/convergence.py": "f7410249f21bedb99b3cc8f452f50f93a92d58aad82012add841da4691fa965e",
     "lumen_studio/coordinator.py": "88b34cb79fb9e4d649f0645d031c91b85d0a79726d528590a20b499f96abf88a",
-    "lumen_studio/core_source.py": "0b3d7963fc0c40ed5e7a02867684add6821f13b499f76612d222aba1143af053",
+    "lumen_studio/core_source.py": "7ffcf5c2f8a54d8ee9c993baf4168500f8864189a0f4a1a40a9c49e8e330cbe5",
     "lumen_studio/dataset.py": "225482b88673fb0d98ec3541119312a750d706049a8455b0b83a81558699f804",
-    "lumen_studio/engine-source.json": "44678ec60a812ff34956cb22f8ed8bdd447c8c708cb4cd4540a3cf5079bfc196",
+    "lumen_studio/engine-source.json": "d0115412ead4cc0925c23d1cae0414e4bd740e4e44ff43dbc4fb6c5a6858aa18",
     "lumen_studio/engine_training.py": "8e31e25615006704f2267c6faf7f2c9510fbca1525743e224bde5f405f6c40ce",
     "lumen_studio/execution.py": "aa131f1ca7b39e9a9eeeb1024e7604aacab5b741f71dff03801541baa9714481",
     "lumen_studio/game.py": "802ba0706a465aaa3d269064f3deb494e275cc89d4d793eb207856c937ac3ab5",

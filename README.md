@@ -12,7 +12,7 @@ training, evaluation, export and inference.
 - [Scoped initialization](docs/explicit-fresh-initialization.md)
 - [Optional HNDL backend](HNDL-CANDIDATE.md)
 - [Saved Candlelit C2 RAW960 results](docs/finished-output-learning-rates.md)
-- [Scheduled slider strength](docs/scheduled-strength.md) for the measured Candlelit RAW256 and Final Boss RAW192 profiles.
+- [Scheduled slider strength](docs/scheduled-strength.md) for the measured Candlelit RAW256 and Final Boss RAW192 profiles and opt-in activation-dependent calibration.
 
 Saved checkpoints and previously published showcase files retain their original
 source and dependency profiles.
