@@ -21,7 +21,7 @@ from .learning_rates import recipe_learning_rates
 CAPABILITIES = Capabilities(
     'routed_particle_gan', render=False, strength_min=0., strength_max=1.,
     base_precisions=('bfloat16',), render_outputs=(),
-    qualification='ParticleGAN 0.11.0 CPU software cohort; pretrained qualification requires fresh source-bound runs',
+    qualification='ParticleGAN 0.11.1 CPU software cohort; pretrained qualification requires fresh source-bound runs',
     unavailable_reasons=(('render', 'Anima native sampler/decoder parity remains unqualified'),),
 )
 _OPTIONS = {'cache_dir', 'cache_index_sha256', 'model_dir', 'variation', 'device',

@@ -29,15 +29,13 @@ def test_sdist_preserves_installers_locks_and_release_inputs(tmp_path):
     with tarfile.open(archive) as file:
         file.extractall(extracted, filter='data')
     unpacked, = extracted.iterdir()
-    # A source archive must retain the actual installers and immutable evidence,
-    # rather than only a README pointing to files absent from the archive.
-    for name in ('requirements.txt', 'requirements-legacy.txt', 'requirements-pg09.txt',
-                 'core.lock.json', 'core.pg09.lock.json', 'INSTALL-COHORTS.md',
+    # The installed source archive must contain both current build entry points.
+    for name in ('requirements.txt', 'requirements-legacy.txt',
+                 'core.lock.json', 'INSTALL-COHORTS.md',
                  'CORE081-CPU.md', 'PUBLICATION-STATUS.md', 'pytest.ini', '__init__.py',
                  'ACCELERATE-ADVISORY.md', 'CLEAN-INSTALL-CPU.md', 'MODERN-CORE-A794.md',
                  'release_tools/build.py', 'data/release-samples.json',
                  'cohorts/hypergan-hndl/build.py', 'cohorts/hypergan-hndl/pyproject.toml',
-                 'cohorts/hypergan-hndl/check_legacy_packet.py',
                  'cohorts/hypergan-hndl/anima_hndl/admission.py',
                  'cohorts/hypergan-hndl/anima_hndl/runtime.py',
                  'tests/hndl/test_anima_hndl.py', 'tests/hndl/test_loading_advisory.py',
@@ -87,7 +85,7 @@ def test_sdist_preserves_installers_locks_and_release_inputs(tmp_path):
         core, = [dep for dep in dependencies if dep.name == 'particle-sliders-core']
         assert core.extras == set()
         assert core.url == ('git+https://github.com/HyperGAN/particle-sliders.git@'
-                            'c13890f8e2a1ecf1dc8eb9f2a37f9187cb9fea78#subdirectory=packages/particle-sliders-core')
+                            'ec1161f5d74481be3540cb0dfa63d0e8f8b54e90#subdirectory=packages/particle-sliders-core')
         assert 'anima-hndl = anima_hndl.lifecycle:BACKEND' in entrypoints
         assert '\nanima = ' not in entrypoints
         assert 'anima_hndl/cohort.json' in file.namelist()
@@ -107,6 +105,6 @@ def test_candidate_native_dependencies_preserve_the_current_model_cohort():
     default = tomllib.loads((ROOT / 'pyproject.toml').read_text())
     candidate = tomllib.loads((ROOT / 'cohorts/hypergan-hndl/pyproject.toml').read_text())
     assert candidate['project']['optional-dependencies']['native'] == default['project']['optional-dependencies']['native']
-    assert 'c13890f8e2a1ecf1dc8eb9f2a37f9187cb9fea78' in default['project']['dependencies'][-1]
+    assert 'ec1161f5d74481be3540cb0dfa63d0e8f8b54e90' in default['project']['dependencies'][-1]
     assert default['project']['version'] == '0.4.0'
     assert candidate['project']['version'] == '0.4.0a1'

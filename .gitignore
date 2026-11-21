@@ -11,3 +11,6 @@ __pycache__/
 *.pt
 *.pth
 *.sqlite3*
+
+/build/
+/*.egg-info/

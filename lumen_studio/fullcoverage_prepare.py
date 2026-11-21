@@ -13,7 +13,7 @@ from .coverage import (compile_coverage, field_metadata, validate_field_membersh
                        validate_index, require_production_rate_coverage,
                        freeze_teacher_membership)
 
-CORE = "c13890f8e2a1ecf1dc8eb9f2a37f9187cb9fea78"
+CORE = "ec1161f5d74481be3540cb0dfa63d0e8f8b54e90"
 CPU_PROFILE = "anima-native-CPU-BF16-conditioning-v1"
 
 
@@ -47,9 +47,9 @@ def prepare_fullcoverage(runtime, manifests, directory, *, variation,
     _require(callable(owner_check) and callable(admission),
              "actual owner and source-bound admission callbacks required")
     _require(source_authority.get("core_commit") == CORE
-             and source_authority.get("PG") == "0.11.0"
-             and source_authority.get("core_version") == "0.15.1",
-             "exact official core0.13/ParticleGAN 0.11.0 authority required")
+             and source_authority.get("PG") == "0.11.1"
+             and source_authority.get("core_version") == "0.15.2",
+             "exact core 0.15.2 / ParticleGAN 0.11.1 authority required")
     _require(source_authority.get("session_weight_EMA") is None
              and source_authority.get("materialized_EMA_shadows") is False
              and source_authority.get("selection") == "raw",
@@ -75,8 +75,8 @@ def prepare_fullcoverage(runtime, manifests, directory, *, variation,
     from .numerical_profiles import NAME, require_numerical_profile
     from particle_sliders.engine import PG_VERSION, PG_SOURCE_PROFILE
     verify_core()
-    _require((PG_VERSION, PG_SOURCE_PROFILE) == ("0.11.0", "release-0.11.0"),
-             "actual installed official ParticleGAN 0.11.0 source differs")
+    _require((PG_VERSION, PG_SOURCE_PROFILE) == ("0.11.1", "release-0.11.1"),
+             "actual installed official ParticleGAN 0.11.1 source differs")
     _require(require_numerical_profile(NAME) == native_profile,
              "actual fresh native numerical profile differs")
     _require(not runtime.mixer.adapters and not runtime.mixer.handles,

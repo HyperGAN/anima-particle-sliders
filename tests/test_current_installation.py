@@ -19,13 +19,13 @@ def test_current_installer_resolves_exact_public_core_and_particlegan():
     origin = json.loads(core.read_text('direct_url.json'))
     assert origin['vcs_info']['commit_id'] == commit
     assert origin['subdirectory'] == 'packages/particle-sliders-core'
-    assert core.version == '0.15.1'
+    assert core.version == '0.15.2'
     assert version('anima-particle-sliders') == project['version'] == '0.4.0'
-    assert version('particlegan') == '0.11.0'
+    assert version('particlegan') == '0.11.1'
     from particle_sliders.engine import ConditionalParticleGAN, PG_VERSION, PG_SOURCE_PROFILE
     from lumen_studio.engine_training import ConditionalParticleGAN as product_engine
     assert product_engine is ConditionalParticleGAN
-    assert (PG_VERSION, PG_SOURCE_PROFILE) == ('0.11.0', 'release-0.11.0')
+    assert (PG_VERSION, PG_SOURCE_PROFILE) == ('0.11.1', 'release-0.11.1')
 
 
 def test_current_recursive_source_guard_and_old_profile_refusal():
@@ -35,7 +35,7 @@ def test_current_recursive_source_guard_and_old_profile_refusal():
     from particle_sliders.engine import validate_engine_domain
     with pytest.raises(ValueError, match='source profile'):
         validate_engine_domain((1, 4, 1, 2, 2), response_domain='continuous_field',
-                               pg_source_profile='release-0.9.4')
+                               pg_source_profile='release-99.0.0')
 
 
 
@@ -43,21 +43,9 @@ def test_current_receipt_tampering_refuses_before_runtime(tmp_path, monkeypatch)
     import pytest
     from lumen_studio import core_source, lifecycle
     receipt = json.loads(core_source.LOCK.read_text())
-    receipt['pg_version'] = '0.9.4'
+    receipt['pg_version'] = '99.0.0'
     path = tmp_path / 'wrong-source.json'
     path.write_text(json.dumps(receipt))
     monkeypatch.setattr(core_source, 'LOCK', path)
     with pytest.raises(ValueError, match='contradicts'):
         lifecycle.validate_runtime({})
-
-
-def test_historical_pilots_refuse_new_engine_before_argument_or_model_work(monkeypatch):
-    import importlib.util
-    import pytest
-    monkeypatch.syspath_prepend(str(ROOT / 'scripts'))
-    for path in (ROOT / 'scripts').glob('anima_pg094*.py'):
-        spec = importlib.util.spec_from_file_location('historical_' + path.stem, path)
-        module = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(module)
-        with pytest.raises(RuntimeError, match='Historical PG094'):
-            module.main()

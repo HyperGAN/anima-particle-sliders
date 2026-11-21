@@ -1,4 +1,4 @@
-"""Real tiny Cosmos architecture, native product bank and released PG0.9 on CPU."""
+"""Real tiny Cosmos architecture, native product bank and the current ParticleGAN release on CPU."""
 from copy import deepcopy
 from importlib.metadata import version
 import json
@@ -85,7 +85,7 @@ def test_native_bank_shared_pg09_exact_resume_and_inference_export(tmp_path):
     trainer = EngineTrainer(runtime, cache, tmp_path / 'run', 'finalform', total_steps=4, critic_width=8)
     assert type(trainer.game) is ConditionalParticleGAN
     assert type(trainer.backend) is AnimaRuntimeResponseAdapter
-    assert PG_VERSION == '0.11.0'
+    assert PG_VERSION == '0.11.1'
     assert trainer.game.recipe.loss == 'non_saturating'
     assert trainer.game.recipe.critic_formulation == 'bispf'
     assert trainer.game.recipe.prior_regularizer == 'sbnp'
@@ -188,7 +188,7 @@ def test_reject_corrupt_cache_even_when_original_verification_disabled(tmp_path)
     with (tmp_path / 'cache/0.pt').open('ab') as file:
         file.write(b'corruption')
     cache = TargetCache(tmp_path / 'cache', verify=False)
-    with pytest.raises(ValueError, match='Corrupt PG09 target shard'):
+    with pytest.raises(ValueError, match='Corrupt ParticleGAN target shard'):
         CachedResponses(cache, runtime, 'finalform')
     runtime.mixer.close()
 
@@ -301,7 +301,7 @@ def test_selected_shard_changes_fail_without_changing_frozen_identity(tmp_path, 
             os.utime(path, ns=(before.st_atime_ns, before.st_mtime_ns))
         actual = torch.load(path, weights_only=True)
         assert actual['fingerprint'] == old_fingerprint and actual['records'][0]['positive'].shape == old_shape
-    with pytest.raises(ValueError, match='PG09 frozen target shard'):
+    with pytest.raises(ValueError, match='ParticleGAN frozen target shard'):
         if access == 'response':
             provider[selected]
         else:
@@ -387,7 +387,7 @@ def test_shard_replaced_during_lazy_load_is_rejected_before_lru_commit(tmp_path,
             save_tensor_file(path, replacement)
         return data
     monkeypatch.setattr(torch, 'load', replace_after_load)
-    with pytest.raises(ValueError, match='PG09 frozen target shard changed'):
+    with pytest.raises(ValueError, match='ParticleGAN frozen target shard changed'):
         provider[1]
     assert '1.pt' not in provider.cache.shards
     runtime.mixer.close()

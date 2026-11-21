@@ -1,4 +1,4 @@
-"""Disk resume contracts through Anima's real Cosmos/PG09 consumer binding."""
+"""Disk resume contracts through Anima's real Cosmos/ParticleGAN consumer binding."""
 from copy import deepcopy
 
 import pytest
@@ -15,7 +15,7 @@ from test_engine_training import cache_fixture, equal, runtime_fixture
 @pytest.fixture(scope='module')
 def started_consumer(tmp_path_factory):
     """Restore a step-one disk packet into a distinct, live step-two consumer."""
-    directory = tmp_path_factory.mktemp('anima-pg09-history')
+    directory = tmp_path_factory.mktemp('anima-engine-history')
     runtime = runtime_fixture()
     cache = cache_fixture(directory / 'cache', runtime)
     trainer = EngineTrainer(runtime, cache, directory / 'run', 'finalform',
@@ -120,7 +120,7 @@ def sparse_adam_consumer(tmp_path_factory):
                 score = score + self.optional * response.flatten(1).mean(1)
             return score
 
-    directory = tmp_path_factory.mktemp('anima-pg09-sparse-adam-clock')
+    directory = tmp_path_factory.mktemp('anima-engine-sparse-adam-clock')
     runtime = runtime_fixture()
     cache = cache_fixture(directory / 'cache', runtime)
     # Supply a conditional critic at construction; the production default
