@@ -21,7 +21,7 @@ from .learning_rates import recipe_learning_rates
 CAPABILITIES = Capabilities(
     'routed_particle_gan', render=False, strength_min=0., strength_max=1.,
     base_precisions=('bfloat16',), render_outputs=(),
-    qualification='PG0.9.5 CPU software cohort; pretrained qualification requires fresh source-bound runs',
+    qualification='ParticleGAN 0.11.0 CPU software cohort; pretrained qualification requires fresh source-bound runs',
     unavailable_reasons=(('render', 'Anima native sampler/decoder parity remains unqualified'),),
 )
 _OPTIONS = {'cache_dir', 'cache_index_sha256', 'model_dir', 'variation', 'device',
@@ -76,7 +76,7 @@ class NativeOwner:
     def attach(self):
         # Training controls the seed context across bank AND critic construction.
         import torch
-        from particle_sliders.pg09_backends import AnimaRuntimeResponseAdapter
+        from lumen_studio.response_binding import AnimaRuntimeResponseAdapter
         from .particles import ParticleAdapter
         self.adapter = ParticleAdapter(self.runtime.transformer).to(device='cpu', dtype=torch.float32)
         self.attachment_started = True
@@ -172,6 +172,8 @@ class NativeOwner:
 def validate(options):
     """Allocation-free checks, including gates before native imports/loading."""
     validate_runtime(options)
+    if options.get("ema_decay") is not None:
+        raise ValueError("Anima requires RAW weights with ema_decay=None")
     recipe_learning_rates(**{name: options.get(name)
                              for name in ('lr', 'd_lr_mult', 'prior_lr_mult')})
     if set(options) - _OPTIONS:
@@ -223,9 +225,9 @@ def prepare(options, *, runtime=None):
     """Own construction; common core owns stepping, packets and observation."""
     validate(options)
     import torch
-    from particle_sliders.pg095 import ConditionalPG095 as ConditionalPG09
+    from particle_sliders.engine import ConditionalParticleGAN
     from .cache import TargetCache
-    from .pg09_training import CachedResponses, NativeFieldCritic
+    from .engine_training import CachedResponses, NativeFieldCritic
 
     owner = NativeOwner(options, runtime)
     try:
@@ -240,7 +242,7 @@ def prepare(options, *, runtime=None):
             backend = owner.attach()
             critic = NativeFieldCritic(responses.response_shape[1],
                 responses.embedding_width + 4, options.get('critic_width', 32)).to(dtype=torch.float32)
-        game = ConditionalPG09(backend, responses, critic,
+        game = ConditionalParticleGAN(backend, responses, critic,
             particles=owner.adapter.particles, preset='bispf_optimized',
             response_domain='continuous_field', sampling='balanced',
             batch_size=options.get('batch', 2), seed=options.get('seed', 7),
@@ -276,6 +278,8 @@ NATIVE_CAPABILITIES = Capabilities('routed_particle_gan', render=False,
 
 def validate_inference(options, specification):
     validate_runtime(options)
+    if options.get("ema_decay") is not None:
+        raise ValueError("Anima requires RAW weights with ema_decay=None")
     if set(options) - {'model_dir', 'device', 'base_precision'}:
         raise ValueError('native inference accepts only local model_dir/device/base_precision; no training cache')
     directory = options.get('model_dir')

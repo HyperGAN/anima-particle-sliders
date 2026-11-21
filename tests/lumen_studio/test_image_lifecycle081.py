@@ -14,10 +14,10 @@ import torch
 
 from particle_sliders.inference import open_inference
 from particle_sliders.lifecycle import CheckpointError, UnsupportedOperation, open_session
-from particle_sliders.pg09 import _hash
+from particle_sliders.engine import _hash
 from lumen_studio import lifecycle
 from test_image_lifecycle import configuration
-from test_pg09_training import equal, runtime_fixture
+from test_engine_training import equal, runtime_fixture
 
 
 def staged_model(tmp_path, monkeypatch, decorate=None):
@@ -37,12 +37,12 @@ def staged_model(tmp_path, monkeypatch, decorate=None):
 
 
 def ban_training_construction(monkeypatch):
-    from particle_sliders.pg09 import ConditionalPG09
+    from particle_sliders.engine import ConditionalParticleGAN
     from lumen_studio.cache import TargetCache
-    from lumen_studio.pg09_training import CachedResponses, NativeFieldCritic
+    from lumen_studio.engine_training import CachedResponses, NativeFieldCritic
     def forbidden(*args, **kwargs):
         pytest.fail('native-only inference constructed training/cache/critic state')
-    for cls in (ConditionalPG09, TargetCache, CachedResponses, NativeFieldCritic):
+    for cls in (ConditionalParticleGAN, TargetCache, CachedResponses, NativeFieldCritic):
         monkeypatch.setattr(cls, '__init__', forbidden)
 
 
@@ -56,7 +56,7 @@ def request_from(session):
                 timestep=float(row.timestep))
 
 
-def test_raw_and_ema_native_inference_without_cache_or_training(tmp_path, monkeypatch):
+def test_raw_native_inference_without_cache_or_training(tmp_path, monkeypatch):
     runtime = runtime_fixture()
     config = configuration(tmp_path, runtime)
     artifacts, expected = {}, {}
@@ -65,16 +65,18 @@ def test_raw_and_ema_native_inference_without_cache_or_training(tmp_path, monkey
         request = request_from(session)
         before = session.checkpoint()
         raw = deepcopy(session.game.network.state_dict())
-        for selection in ('raw', 'ema'):
+        for selection in ('raw',):
             path = tmp_path / (selection + '.pt')
             artifacts[selection] = session.export_inference(path, selection=selection)
-            session.game.network.load_state_dict(raw if selection == 'raw' else session.ema.values)
+            session.game.network.load_state_dict(raw)
             expected[selection] = session.evaluate(strength=.5)
             session.game.network.load_state_dict(raw)
-        assert not equal(artifacts['raw']['network'], artifacts['ema']['network'])
+        assert equal(artifacts['raw']['network'], raw)
+        with pytest.raises(ValueError, match='raw current weights'):
+            session.export_inference(tmp_path / 'refused.pt', selection='ema')
         assert equal(before, session.checkpoint())
-        assert 'cache_dir' not in json.dumps(artifacts['ema']['specification'])
-        assert 'critic' not in artifacts['ema'] and 'payload' not in artifacts['ema']
+        assert 'cache_dir' not in json.dumps(artifacts['raw']['specification'])
+        assert 'critic' not in artifacts['raw'] and 'payload' not in artifacts['raw']
         with runtime.mixer.scales({}):
             base = runtime.predict(request['latent'], request['timestep'], request['embedding'])
     runtime.mixer.close()
@@ -82,7 +84,7 @@ def test_raw_and_ema_native_inference_without_cache_or_training(tmp_path, monkey
     options, loaded = staged_model(tmp_path, monkeypatch)
     ban_training_construction(monkeypatch)
     rng = torch.get_rng_state().clone()
-    for selection in ('raw', 'ema'):
+    for selection in ('raw',):
         with open_inference(tmp_path / (selection + '.pt'), options=options,
                             operation='response', native_request=request) as native:
             assert native.selection == selection
@@ -93,7 +95,7 @@ def test_raw_and_ema_native_inference_without_cache_or_training(tmp_path, monkey
             for method in ('train', 'step', 'checkpoint', 'restore'):
                 with pytest.raises(UnsupportedOperation):
                     getattr(native, method)()
-            assert native.manifest['origin']['pg_version'] == '0.9.5'
+            assert native.manifest['origin']['pg_version'] == '0.11.0'
         assert not loaded[-1].mixer.adapters and not loaded[-1].mixer.handles
         assert not hasattr(loaded[-1], 'pipe')
     assert torch.equal(rng, torch.get_rng_state())
@@ -113,7 +115,7 @@ def test_staged_accelerator_preflight_before_rng_or_load(tmp_path, monkeypatch):
     runtime.mixer.close()
 
 
-def test_before_update_rejection_preserves_state_ema_rng_and_observer(tmp_path):
+def test_before_update_rejection_preserves_state_rng_and_observer(tmp_path):
     runtime = runtime_fixture()
     config = configuration(tmp_path, runtime)
     with open_session(config, runtime=runtime) as session:
@@ -304,6 +306,6 @@ def test_installed_legacy_cli_refuses_before_side_effects(tmp_path, monkeypatch,
     cli = importlib.import_module('lumen_studio.__main__')
     root = tmp_path / 'untouched'
     monkeypatch.setattr(sys, 'argv', ['lumen_studio', '--root', str(root), command, 'candlelit'])
-    with pytest.raises(RuntimeError, match='PG09Trainer'):
+    with pytest.raises(RuntimeError, match='EngineTrainer'):
         cli.main()
     assert not root.exists()

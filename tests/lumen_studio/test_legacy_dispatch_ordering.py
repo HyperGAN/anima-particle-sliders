@@ -67,7 +67,7 @@ def guarded_surfaces(monkeypatch):
 
 def expect_unavailable(action, surfaces, root):
     before = dict(os.environ)
-    with pytest.raises(RuntimeError, match='PG09Trainer') as caught:
+    with pytest.raises(RuntimeError, match='EngineTrainer') as caught:
         action()
     assert 'Historical' in str(caught.value)
     assert surfaces.effects == []
@@ -160,13 +160,13 @@ def test_training_api_rejects_before_store_or_cache_reads_and_maps_to_http409(tm
     monkeypatch.setattr(api, 'Path', GuardPath)
     endpoint = next(route.endpoint for route in app.routes
                     if getattr(route, 'path', None) == '/api/training/runs' and 'POST' in route.methods)
-    with pytest.raises(RuntimeError, match='PG09Trainer') as caught:
+    with pytest.raises(RuntimeError, match='EngineTrainer') as caught:
         endpoint(api.TrainingRequest(variation='candlelit', until=1600))
     assert effects == []
     handler = app.exception_handlers[type(caught.value)]
     response = asyncio.run(handler(None, caught.value))
     assert response.status_code == 409
-    assert 'PG09Trainer' in json.loads(response.body)['detail']
+    assert 'EngineTrainer' in json.loads(response.body)['detail']
     monkeypatch.undo()
     assert store.runs() == before
     assert not torch.cuda.is_initialized()
@@ -220,7 +220,7 @@ def test_worker_fails_legacy_runs_inside_lease_and_preserves_inference_dispatch(
             assert lease_active[0]
             events.append('legacy.reject')
             assert ident == 'legacy' and status == 'failed' and step == 17
-            assert 'PG09Trainer' in error
+            assert 'EngineTrainer' in error
             self.rows[0].update(status=status, step=step, error=error)
 
     worker = coordinator.Coordinator.__new__(coordinator.Coordinator)

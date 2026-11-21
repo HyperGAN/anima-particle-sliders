@@ -39,7 +39,7 @@ def main():
             pilot_rows=rows, pilot_seeds=getattr(a, "pilot_" + split + "_seed"))
     if not set(contracts["train"]["characters"]).isdisjoint(contracts["dev"]["characters"]):
         raise ValueError("train/development character overlap")
-    atomic_json(a.out, dict(schema="anima-pg095-fullcoverage-preparation-plan-v1",
+    atomic_json(a.out, dict(schema="anima-engine-fullcoverage-preparation-plan-v1",
         status="METADATA_ONLY_NO_NATIVE_ADMISSION", mode=a.mode, contracts=contracts,
         production_rate_eligible=a.mode == "production",
         session_weight_EMA=None, materialized_EMA_shadows=False, selection="raw",

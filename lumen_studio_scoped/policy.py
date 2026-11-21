@@ -1,6 +1,6 @@
 """Explicit opt-in fresh-components policy; Source-only, not executed.
 
-Use the already admitted public PG0.9.5 API, not a runtime/core upgrade.
+Use the already admitted public ParticleGAN 0.11.0 API, not a runtime/core upgrade.
 Only down matrices receive host-scale QR; declared banks receive R2Normal.
 Every other owned parameter is explicitly KEEP.  Original model modules,
 Parameter objects, forward methods and optimizer ownership remain untouched.
@@ -19,8 +19,8 @@ from torch import nn
 from particlegan import init as pg_init
 
 INIT_SHA256 = "3534ff23efa413cdf8b4125b91e0d30671d873b3e2958547d4e744b750454b9b"
-SCHEMA = "product-owned-PG095-downQR-bankR2-KEEP-fresh-initialization-v1"
-MARKER = "_fresh_PG095_initialization_receipt_sha256"
+SCHEMA = "product-owned-ParticleGAN 0.11.0-downQR-bankR2-KEEP-fresh-initialization-v1"
+MARKER = "_fresh_ParticleGAN 0.11.0_initialization_receipt_sha256"
 POLICIES = {"anima": "anima-fresh-downQR-sqrt5-bankR2std1-otherKEEP-v1"}
 
 
@@ -83,7 +83,7 @@ def policies(product, adapter, critic, *, particles=None, iris_profile=None):
     if product != "anima" or iris_profile is not None:
         raise ValueError("this explicit versioned entry is Anima only")
     from lumen_studio.particles import ParticleAdapter
-    from lumen_studio.pg09_training import NativeFieldCritic
+    from lumen_studio.engine_training import NativeFieldCritic
     if type(adapter) is not ParticleAdapter or type(critic) is not NativeFieldCritic:
         raise ValueError("exact original Anima adapter and critic classes required")
     rows, by_id, storages = [], {}, set()
@@ -132,8 +132,8 @@ def initialize(product, adapter, critic, *, construction, options, seed, source_
             or not isinstance(optimizers, (tuple, list)) or len(optimizers) != 0 or type(seed) is not int or not 0 <= seed < 2**63
             or not isinstance(source_identity, dict) or not source_identity):
         raise ValueError("truthful fresh construction before optimizers required; resume/inference never initialize")
-    if metadata.version("particlegan") != "0.9.5" or source_record(pg_init.__file__)["sha256"] != INIT_SHA256:
-        raise ValueError("exact already admitted PG0.9.5 initializer Source required")
+    if metadata.version("particlegan") != "0.11.0" or source_record(pg_init.__file__)["sha256"] != INIT_SHA256:
+        raise ValueError("exact already admitted ParticleGAN 0.11.0 initializer Source required")
     rows = policies(product, adapter, critic, particles=particles, iris_profile=iris_profile)
     policy = POLICIES[product]
     before = [tensor_sha(row["parameter"]) for row in rows]

@@ -25,7 +25,7 @@ class InferenceOwner(Attachment):
         if not isinstance(raw, Checkpoint) or file_pin(raw.path) != raw:
             raise ValueError('exact native RAW whole-file pin required')
         verify_core()
-        sidecar = json.loads(Path(raw.path).with_suffix('.fresh95.json').read_text())
+        sidecar = json.loads(Path(raw.path).with_suffix('.scoped.json').read_text())
         if (sidecar.get('schema') != RAW_SCHEMA or sidecar.get('profile') != PROFILE
                 or sidecar.get('native_RAW_sha256') != raw.sha256
                 or sidecar.get('sources') != source_identity()

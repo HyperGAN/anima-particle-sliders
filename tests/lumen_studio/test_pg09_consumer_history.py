@@ -5,11 +5,11 @@ import pytest
 import torch
 from torch import nn
 
-from lumen_studio import pg09_training
+from lumen_studio import engine_training
 from lumen_studio.cache import save_tensor_file
-from lumen_studio.pg09_training import PG09Trainer
+from lumen_studio.engine_training import EngineTrainer
 
-from test_pg09_training import cache_fixture, equal, runtime_fixture
+from test_engine_training import cache_fixture, equal, runtime_fixture
 
 
 @pytest.fixture(scope='module')
@@ -18,7 +18,7 @@ def started_consumer(tmp_path_factory):
     directory = tmp_path_factory.mktemp('anima-pg09-history')
     runtime = runtime_fixture()
     cache = cache_fixture(directory / 'cache', runtime)
-    trainer = PG09Trainer(runtime, cache, directory / 'run', 'finalform',
+    trainer = EngineTrainer(runtime, cache, directory / 'run', 'finalform',
                           total_steps=5, critic_width=8)
     trainer.update()
     packet = trainer.game.state_dict()
@@ -68,17 +68,17 @@ def test_started_consumer_rejects_corrupt_optimizer_history_atomically(
 
 @pytest.mark.parametrize('phase', ['g', 'd'])
 def test_product_native_public_bispf_consumer_rejects_negative_adam_moment_atomically(tmp_path, phase):
-    from particle_sliders.pg09 import ConditionalPG09
+    from particle_sliders.engine import ConditionalParticleGAN
 
     runtime = runtime_fixture()
     cache = cache_fixture(tmp_path / 'cache', runtime)
-    trainer = PG09Trainer(runtime, cache, tmp_path / 'run', 'finalform',
+    trainer = EngineTrainer(runtime, cache, tmp_path / 'run', 'finalform',
                           total_steps=3, critic_width=8)
     try:
         # exp_avg_sq is absent from the product's default optimized law. Use
         # the public original BISPF/Adam preset with the actual product bank,
         # backend, native Cosmos fields and critic to exercise real moments.
-        trainer.game = ConditionalPG09(trainer.backend, trainer.responses,
+        trainer.game = ConditionalParticleGAN(trainer.backend, trainer.responses,
             trainer.game.critic, particles=trainer.adapter.particles,
             preset='bispf', response_domain='continuous_field',
             batch_size=2, seed=7, total_steps=3, sampling='balanced')
@@ -106,9 +106,9 @@ def test_product_native_public_bispf_consumer_rejects_negative_adam_moment_atomi
 @pytest.fixture(scope='module')
 def sparse_adam_consumer(tmp_path_factory):
     """Earn a sparse D clock through actual native-field updates, without edits."""
-    from particle_sliders.pg09 import ConditionalPG09
+    from particle_sliders.engine import ConditionalParticleGAN
 
-    class PartiallyUsedCritic(pg09_training.NativeFieldCritic):
+    class PartiallyUsedCritic(engine_training.NativeFieldCritic):
         def __init__(self, *args, **kwargs):
             super().__init__(*args, **kwargs)
             self.optional = nn.Parameter(torch.ones(1))
@@ -127,10 +127,10 @@ def sparse_adam_consumer(tmp_path_factory):
     # preset/interface is unchanged. Original public BISPF owns real Adam
     # moments and is supplemental to the optimized product-law coverage.
     with pytest.MonkeyPatch.context() as patch:
-        patch.setattr(pg09_training, 'NativeFieldCritic', PartiallyUsedCritic)
-        trainer = PG09Trainer(runtime, cache, directory / 'run', 'finalform',
+        patch.setattr(engine_training, 'NativeFieldCritic', PartiallyUsedCritic)
+        trainer = EngineTrainer(runtime, cache, directory / 'run', 'finalform',
                               total_steps=4, critic_width=8)
-    trainer.game = ConditionalPG09(trainer.backend, trainer.responses,
+    trainer.game = ConditionalParticleGAN(trainer.backend, trainer.responses,
         trainer.game.critic, particles=trainer.adapter.particles,
         preset='bispf', response_domain='continuous_field',
         batch_size=2, seed=7, total_steps=4, sampling='balanced')
@@ -207,7 +207,7 @@ def test_consumer_requires_optimizer_history_schema_atomically(tmp_path, started
 def test_initial_empty_consumer_disk_resume_then_actual_update(tmp_path):
     runtime = runtime_fixture()
     cache = cache_fixture(tmp_path / 'cache', runtime)
-    trainer = PG09Trainer(runtime, cache, tmp_path / 'run', 'finalform',
+    trainer = EngineTrainer(runtime, cache, tmp_path / 'run', 'finalform',
                           total_steps=3, critic_width=8)
     resumed = other_runtime = None
     try:
@@ -222,7 +222,7 @@ def test_initial_empty_consumer_disk_resume_then_actual_update(tmp_path):
         expected = trainer.game.state_dict()
         other_runtime = runtime_fixture()
         # Constructor uses the consumer's disk restore, not a direct core fixture.
-        resumed = PG09Trainer(other_runtime, cache, tmp_path / 'run', 'finalform',
+        resumed = EngineTrainer(other_runtime, cache, tmp_path / 'run', 'finalform',
                               total_steps=3, critic_width=8)
         assert equal(initial, resumed.game.state_dict())
         assert equal(metrics, resumed.update())
@@ -238,7 +238,7 @@ def test_initial_empty_consumer_disk_resume_then_actual_update(tmp_path):
 
 
 def test_genuinely_unused_critic_history_survives_consumer_resume(tmp_path, monkeypatch):
-    class CriticWithUnusedParameter(pg09_training.NativeFieldCritic):
+    class CriticWithUnusedParameter(engine_training.NativeFieldCritic):
         def __init__(self, *args, **kwargs):
             super().__init__(*args, **kwargs)
             self.unused = nn.Parameter(torch.ones(2))
@@ -246,10 +246,10 @@ def test_genuinely_unused_critic_history_survives_consumer_resume(tmp_path, monk
     # The public core permits a critic trainable which receives no gradient.
     # Supply that critic through the real product constructor; neither the
     # optimizer history, its schema nor completed-step counts are fabricated.
-    monkeypatch.setattr(pg09_training, 'NativeFieldCritic', CriticWithUnusedParameter)
+    monkeypatch.setattr(engine_training, 'NativeFieldCritic', CriticWithUnusedParameter)
     runtime = runtime_fixture()
     cache = cache_fixture(tmp_path / 'cache', runtime)
-    trainer = PG09Trainer(runtime, cache, tmp_path / 'run', 'finalform',
+    trainer = EngineTrainer(runtime, cache, tmp_path / 'run', 'finalform',
                           total_steps=3, critic_width=8)
     resumed = other_runtime = None
     try:
@@ -266,7 +266,7 @@ def test_genuinely_unused_critic_history_survives_consumer_resume(tmp_path, monk
         metrics = trainer.update()
         expected = trainer.game.state_dict()
         other_runtime = runtime_fixture()
-        resumed = PG09Trainer(other_runtime, cache, tmp_path / 'run', 'finalform',
+        resumed = EngineTrainer(other_runtime, cache, tmp_path / 'run', 'finalform',
                               total_steps=3, critic_width=8)
         assert equal(packet, resumed.game.state_dict())
         assert equal(metrics, resumed.update())

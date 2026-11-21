@@ -24,11 +24,12 @@ to a reviewed companion source commit, without requiring a PyPI release:
 python -m pip install '/path/to/anima-particle-sliders[vibe]'
 ```
 
-The add-on installs `particle_sliders_vibe` outside the original core's source
-closure. It does not depend on a newer core or modify the pinned PG0.9.5 training
-cohort. Latest Particle Sliders can also dispatch generic product workflows using
-`particle-slider collect`; the standalone `particle-slider-vibe` command works
-alongside older pinned cores.
+This checkout uses the current core 0.15.1 and ParticleGAN 0.11.0 pins
+described in [LIFECYCLE.md](LIFECYCLE.md). The `particle_sliders_vibe` add-on
+has its own source identity and also works with the archived core. This
+checkout exposes collection through `anima-vibe`. The shared core's generic
+`particle-slider collect` command requires a core checkout containing the
+[companion change](https://github.com/HyperGAN/particle-sliders/pull/208).
 
 For local development, install the companion
 `/path/to/particle-sliders/packages/particle-sliders-vibe[nanoodle]` source first
@@ -84,7 +85,7 @@ before choosing `--retry-pending`. Nanoodle itself does not currently guarantee
 server-side idempotency for these IDs. All prior outputs and losing prompts are
 retained, and no existing training run is reset.
 
-## Prepare targets and train
+## Prepare frozen targets
 
 For each prompt, the manifest keeps the best context whose finished positive
 image scores at least **0.75** and strictly above its matched neutral image.
@@ -113,11 +114,10 @@ frozen trajectories, both responses at every shared state, all ten positions,
 and native model/sampler identity checks. Each new snapshot gets its own cache
 identity. Existing target caches and all completed LR work stay unchanged.
 
-Use the resulting `TargetCache` and manifest `variation` with Anima's admitted
-PG0.9.5 trainer API, following [PG09_TRAINING.md](PG09_TRAINING.md) and its native
-admission/initialization requirements. Collection is deliberately before that
-training step. The CLI does not silently launch training or change the existing
-trainer's parameters. Fresh training must use raw weights and `ema_decay=None`.
+Collection and target preparation finish at the cache. For fresh training in
+the current checkout, [see the native admission and training API](LIFECYCLE.md).
+Validate target provenance and use RAW weights with `ema_decay=None`. The
+historical CUDA proof below applies to the original runtime and cache identity.
 
 ## Verification scope
 
@@ -162,9 +162,8 @@ generalization.
 A separately identified, captured **ParticleGAN0.10 EMPF** run reused that
 completed collection and its160 native fields, then completed **256 actual
 updates**, batch2/seed1, with RAW weights and `ema_decay=None`. The original
-public PG0.9.5 trainer, defaults and saved cohorts retain their source identities.
-This CLI still collects/prepares data; it does not silently launch that separate
-training profile.
+PG0.9.5 dependencies and saved checkpoints belong to the
+[original source checkout](https://github.com/HyperGAN/anima-particle-sliders/tree/cf5a4d7679ab98fcb6896a08a76fd2baae332190).
 
 | RAW checkpoint | Mean intended-effect ON1 minus matched OFF0 |
 | --- | ---: |
@@ -190,4 +189,4 @@ or official fresh initialization. The public reader file is byte-identical to
 the captured reader used in this proof.
 
 [Compact hashes, values and verification scope](docs/vibe-native256-verification.json).
-Weights remain local; this source draft makes no public weight-release claim.
+The audited weights remain local.

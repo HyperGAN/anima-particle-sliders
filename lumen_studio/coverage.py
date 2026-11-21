@@ -1,4 +1,4 @@
-"""Pure metadata coverage contracts for fresh production PG0.9.5 cohorts.
+"""Pure metadata coverage contracts for fresh production ParticleGAN 0.11.0 cohorts.
 
 The historical two-shard pilot remains reproducible. It cannot satisfy this
 production contract or publish a production learning-rate recommendation.
@@ -63,7 +63,7 @@ def compile_coverage(manifest, variation, *, mode="production", pilot_rows=None,
               for r in selected for s in seeds[r["id"]]]
     fields = [[s["row"], s["seed"], path, position]
               for s in shards for path in PATHS for position in POSITIONS]
-    result = dict(schema="anima-pg095-declared-coverage-v1", mode=mode,
+    result = dict(schema="anima-engine-declared-coverage-v1", mode=mode,
         production_rate_eligible=(mode == "production"), split=manifest["split"],
         variation=variation, manifest_sha256=manifest["sha256"],
         row_ids=[r["id"] for r in selected],
@@ -80,7 +80,7 @@ def compile_coverage(manifest, variation, *, mode="production", pilot_rows=None,
 
 
 def validate_contract(contract):
-    _require(contract.get("schema") == "anima-pg095-declared-coverage-v1",
+    _require(contract.get("schema") == "anima-engine-declared-coverage-v1",
              "unknown coverage schema")
     _require(digest({k: v for k, v in contract.items() if k != "sha256"})
              == contract.get("sha256"), "coverage checksum differs")

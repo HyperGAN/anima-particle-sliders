@@ -85,7 +85,6 @@ def test_frozen_base_and_exact_resume(tiny, tmp_path):
     trainer.save()
     expected_log = trainer.update()
     expected = copy.deepcopy(trainer.adapter.state_dict())
-    ema = copy.deepcopy(trainer.ema)
     for name, value in tiny.transformer.state_dict().items():
         assert torch.equal(value, before[name])
     assert expected_log["particle_gan_grad_norm"] > 0
@@ -97,7 +96,6 @@ def test_frozen_base_and_exact_resume(tiny, tmp_path):
     assert actual_log["g_rows"] == expected_log["g_rows"]
     for k, v in resumed.adapter.state_dict().items():
         assert torch.equal(v, expected[k]), k
-        assert torch.equal(resumed.ema[k], ema[k]), k
 
 
 def test_microbatch_update_parity(tmp_path):

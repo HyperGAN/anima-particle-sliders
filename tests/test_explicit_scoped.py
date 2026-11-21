@@ -15,9 +15,9 @@ from lumen_studio.backends.anima import TurboRuntime
 from lumen_studio.cache import TargetCache, save_tensor_file
 from lumen_studio.contracts import atomic_json, digest, file_hash
 from lumen_studio.particles import Mixer
-from lumen_studio.pg09_training import NativeFieldCritic
-from lumen_studio_fresh95 import open_training, open_inference
-from lumen_studio_fresh95 import policy, training
+from lumen_studio.engine_training import NativeFieldCritic
+from lumen_studio_scoped import open_training, open_inference
+from lumen_studio_scoped import policy, training
 
 
 def runtime_fixture():
@@ -90,7 +90,7 @@ def cleanup_fault_fixture(monkeypatch):
             stub._attachment = owner
             with pytest.raises(RuntimeError):
                 stub.update()
-            from lumen_studio_fresh95.inference import InferenceOwner
+            from lumen_studio_scoped.inference import InferenceOwner
             with pytest.raises(RuntimeError):
                 with InferenceOwner.scaled(owner, .5):
                     raise AssertionError('closing owner yielded native inference')
@@ -120,7 +120,7 @@ def test_new_fresh_policy_precedes_optimizers_and_keeps_identities(tmp_path, mon
         for name in ('gradient_checkpointing', '_gradient_checkpointing_func')})
         for m in runtime.transformer.modules()]
     seen = {}
-    original_initialize, original_game = policy.initialize, training.ConditionalPG095
+    original_initialize, original_game = policy.initialize, training.ConditionalParticleGAN
 
     def initialize(*args, **kwargs):
         adapter, critic = args[1:3]
@@ -139,7 +139,7 @@ def test_new_fresh_policy_precedes_optimizers_and_keeps_identities(tmp_path, mon
         return original_game(backend, responses, critic, **kwargs)
 
     monkeypatch.setattr(policy, 'initialize', initialize)
-    monkeypatch.setattr(training, 'ConditionalPG095', game)
+    monkeypatch.setattr(training, 'ConditionalParticleGAN', game)
     trainer = open_training(**arguments(runtime, cache, tmp_path / 'entry'))
     try:
         assert seen['before_optimizer'] and seen['before_ids'] == seen['after_ids']

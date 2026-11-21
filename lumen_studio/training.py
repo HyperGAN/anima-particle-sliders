@@ -1,5 +1,4 @@
 """Resumable update-boundary trainer; runtime allocations owned by coordinator."""
-from contextlib import contextmanager
 from concurrent.futures import ThreadPoolExecutor
 import copy
 import json
@@ -14,7 +13,7 @@ from .cache import TargetCache, fit_normalization, save_tensor_file
 from .contracts import atomic_json, digest, file_hash
 from .game import HORIZON, Game, RECIPE, STAMP, TRAINING_CONFIG
 from .metrics import make_fixtures, measure, residual_breakdown
-from .particles import ParticleAdapter, init_ema, update_ema
+from .particles import ParticleAdapter
 from .execution import DETERMINISM
 
 ENGINE_FILES = ("training.py", "game.py", "cache.py", "metrics.py", "execution.py")
@@ -26,7 +25,7 @@ class Trainer:
         if runtime.device.type != "cpu" or legacy_cpu_fixture is not True:
             raise RuntimeError(
                 "Historical gmix training is disabled outside explicit CPU software fixtures. "
-                "Use the externally admitted lumen_studio.pg09_training.PG09Trainer "
+                "Use the externally admitted lumen_studio.engine_training.EngineTrainer "
                 "with the reviewed installed particle-sliders package."
             )
         self.runtime, self.cache = runtime, cache
@@ -69,7 +68,6 @@ class Trainer:
         self.adapter = ParticleAdapter(runtime.transformer).to(runtime.device)
         runtime.mixer.add(variation, self.adapter)
         self.game = Game(self.adapter, self.normalization, len(cache), seed, microbatch)
-        self.ema = init_ema(self.adapter)
         self.step = 0
         self.best_residual = None
         self.positions = [i % 10 for i in range(len(cache))]
@@ -126,7 +124,6 @@ class Trainer:
         with self.runtime.mixer.scales({self.variation: 1.}):
             result = self.game.update(self.predict_residual, self.positions, self.step + 1, self.prefetch)
         self.step += 1
-        update_ema(self.ema, self.adapter)
         result["seconds"] = time.monotonic() - start
         with (self.directory / "updates.jsonl").open("a") as f:
             f.write(json.dumps(result) + "\n")
@@ -134,22 +131,13 @@ class Trainer:
             self.save(snapshot=True)
         return result
 
-    @contextmanager
-    def use_ema(self):
-        live = {k: v.detach().clone() for k, v in self.adapter.state_dict().items()}
-        self.adapter.load_state_dict(self.ema)
-        try:
-            yield
-        finally:
-            self.adapter.load_state_dict(live)
-
     @torch.no_grad()
     def probe(self):
         start = time.monotonic()
         if self.dev_cache is None:
             raise ValueError("Development cache required")
         students, teachers, scales, records = [], [], [], []
-        with self.use_ema(), self.runtime.mixer.scales({self.variation: 1.}):
+        with self.runtime.mixer.scales({self.variation: 1.}):
             for index in self.dev_indices:
                 rec = self.dev_cache[index]
                 pred = self.runtime.predict(rec["latent"].to(self.runtime.device), rec["timestep"], rec["embedding"])
@@ -168,7 +156,7 @@ class Trainer:
 
     def save(self, snapshot=False):
         state = dict(identity=self.identity, step=self.step, adapter=self.adapter.state_dict(),
-            ema=self.ema, game=self.game.state_dict(), best_residual=self.best_residual,
+            game=self.game.state_dict(), best_residual=self.best_residual,
             torch_rng=torch.get_rng_state(), cuda_rng=(torch.cuda.get_rng_state(self.runtime.device)
                 if self.runtime.device.type == "cuda" else None), random_rng=random.getstate(),
             numpy_rng=dict(name=np.random.get_state()[0], keys=np.random.get_state()[1].tolist(),
@@ -176,11 +164,11 @@ class Trainer:
         save_tensor_file(self.directory / "resume.pt", state)
         if snapshot:
             save_tensor_file(self.directory / f"state-{self.step:06}.pt", state)
-            path = self.directory / f"ema-{self.step:06}.safetensors"
+            path = self.directory / f"raw-{self.step:06}.safetensors"
             if not path.exists():
                 self.adapter.export(path, model_identity=self.runtime.identity,
                     normalization=self.normalization["provenance"],
-                    manifest_hash=self.cache.index["identity"]["manifest_sha256"], step=self.step, ema=self.ema)
+                    manifest_hash=self.cache.index["identity"]["manifest_sha256"], step=self.step)
 
     def restore(self, path):
         # Adam's non-capturable step counters must remain on CPU. Loading the
@@ -189,8 +177,9 @@ class Trainer:
         saved = torch.load(path, map_location="cpu", weights_only=True)
         if saved["identity"] != self.identity:
             raise ValueError("Resume identity mismatch")
+        if "ema" in saved:
+            raise ValueError("Use the original revision for historical fixture checkpoints")
         self.adapter.load_state_dict(saved["adapter"])
-        self.ema = {k: v.to(self.runtime.device) for k, v in saved["ema"].items()}
         self.game.load_state_dict(saved["game"])
         self.step, self.best_residual = saved["step"], saved["best_residual"]
         # A probe may commit after the periodic state save but before a crash.
@@ -220,7 +209,7 @@ class Trainer:
         path = self.directory / "resume.pt"
 
         def capture():
-            return copy.deepcopy(dict(adapter=self.adapter.state_dict(), ema=self.ema,
+            return copy.deepcopy(dict(adapter=self.adapter.state_dict(),
                 game=self.game.state_dict(), gradients={k: p.grad for k, p in self.adapter.named_parameters()}))
 
         def equal(a, b):
@@ -256,11 +245,11 @@ class Trainer:
                 {k: v for k, v in second.items() if k != "seconds"})
             self.restore(path)
             records = [self.cache[i] for i in range(10)]
-            with self.use_ema(), self.runtime.mixer.scales({self.variation: 1.}), torch.no_grad():
+            with self.runtime.mixer.scales({self.variation: 1.}), torch.no_grad():
                 predictions = [self.runtime.predict(r["latent"].to(self.runtime.device), r["timestep"],
                                r["embedding"]).cpu() for r in records]
             exported = ParticleAdapter(self.runtime.transformer).to(self.runtime.device)
-            exported.load_export(self.directory / f"ema-{step:06}.safetensors", model_identity=self.runtime.identity)
+            exported.load_export(self.directory / f"raw-{step:06}.safetensors", model_identity=self.runtime.identity)
             exported.eval().requires_grad_(False)
             self.runtime.mixer.adapters[self.variation] = exported
             try:

@@ -7,10 +7,10 @@ import pytest
 import torch
 
 from particle_sliders.lifecycle import CheckpointError, SessionConfig, UnsupportedOperation, open_session
-from particle_sliders.pg09 import _hash
+from particle_sliders.engine import _hash
 from lumen_studio import lifecycle
 from lumen_studio.particles import ParticleAdapter
-from test_pg09_training import cache_fixture, equal, runtime_fixture
+from test_engine_training import cache_fixture, equal, runtime_fixture
 
 
 @pytest.fixture(autouse=True)
@@ -29,7 +29,7 @@ def configuration(tmp_path, runtime):
         cache_dir=str(cache.directory),
         cache_index_sha256=hashlib.sha256((cache.directory / 'index.json').read_bytes()).hexdigest(),
         variation='finalform', device='cpu', base_precision='bfloat16',
-        steps=4, batch=2, seed=7, critic_width=8, ema_decay=.9)
+        steps=4, batch=2, seed=7, critic_width=8, ema_decay=None)
     return config
 
 
@@ -44,7 +44,7 @@ def assert_cpu():
     assert not torch.cuda.is_initialized()
 
 
-def test_exact_split_resume_ema_coverage_and_inference(tmp_path):
+def test_exact_split_resume_raw_coverage_and_inference(tmp_path):
     runtime = runtime_fixture()
     config = configuration(tmp_path, runtime)
     frozen = deepcopy(runtime.transformer.state_dict())
@@ -54,7 +54,7 @@ def test_exact_split_resume_ema_coverage_and_inference(tmp_path):
         initial_bank = session.game.prior.z.detach().clone()
         session.train(stop_after=2)
         packet = session.checkpoint(tmp_path / 'training.pt')
-        exported = session.export(tmp_path / 'ema.pt', selection='ema')
+        exported = session.export(tmp_path / 'raw.pt', selection='raw')
         assert not torch.equal(initial_bank, session.game.prior.z)
         expected_metrics = session.train()
         expected = session.checkpoint()
@@ -65,7 +65,7 @@ def test_exact_split_resume_ema_coverage_and_inference(tmp_path):
         assert equal(packet, resumed.checkpoint())
         assert equal(expected_metrics, resumed.train())
         assert equal(expected, resumed.checkpoint())
-    with open_session(config, artifact=tmp_path / 'ema.pt', operation='evaluate', runtime=other) as inference:
+    with open_session(config, artifact=tmp_path / 'raw.pt', operation='evaluate', runtime=other) as inference:
         assert inference.inference_only
         response = inference.evaluate(strength=.5)
         assert response.shape == (1, 4, 1, 2, 2) and torch.isfinite(response).all()
@@ -99,8 +99,7 @@ def test_observation_zero_fractional_rng_modes_and_invalid_restore(tmp_path):
             if kind == 'checksum':
                 bad['sha256'] = '0' * 64
             elif kind == 'ema':
-                key = next(iter(bad['payload']['ema']['values']))
-                bad['payload']['ema']['values'][key] = torch.zeros(1)
+                bad['payload']['ema']['values'] = {'unexpected': torch.zeros(1)}
             else:
                 bad['manifest']['config']['cohort'] = 'different'
             if kind != 'checksum':
@@ -153,13 +152,13 @@ def test_setup_and_update_failure_cleanup(tmp_path, monkeypatch):
     config = configuration(tmp_path, runtime)
     runtime.transformer.enable_gradient_checkpointing()
     before = checkpoint_settings(runtime.transformer)
-    from particle_sliders import pg09_backends
-    original = pg09_backends.AnimaRuntimeResponseAdapter
+    from lumen_studio import response_binding
+    original = response_binding.AnimaRuntimeResponseAdapter
     def fail_binding(*args):
         original(*args)
         raise RuntimeError('injected setup failure')
     with monkeypatch.context() as scoped:
-        scoped.setattr(pg09_backends, 'AnimaRuntimeResponseAdapter', fail_binding)
+        scoped.setattr(response_binding, 'AnimaRuntimeResponseAdapter', fail_binding)
         with pytest.raises(RuntimeError, match='injected setup failure'):
             lifecycle.BACKEND.open(config, runtime=runtime)
     assert not runtime.mixer.adapters and not runtime.mixer.handles

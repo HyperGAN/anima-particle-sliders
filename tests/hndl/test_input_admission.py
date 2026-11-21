@@ -172,7 +172,7 @@ def test_fifo_descriptor_open_is_bounded_and_refused(tmp_path):
 
 def test_verify_false_reader_cannot_bypass_candidate_content_hashes(tmp_path, monkeypatch):
     from test_anima_hndl import config_for
-    from test_pg09_training import runtime_fixture, equal
+    from test_engine_training import runtime_fixture, equal
     from particle_sliders.lifecycle import open_session
     runtime = runtime_fixture()
     config = config_for(tmp_path, runtime)
@@ -191,7 +191,7 @@ def test_verify_false_reader_cannot_bypass_candidate_content_hashes(tmp_path, mo
 
 def test_index_replacement_between_admission_and_reader_is_refused(tmp_path, monkeypatch):
     from test_anima_hndl import config_for
-    from test_pg09_training import runtime_fixture
+    from test_engine_training import runtime_fixture
     from lumen_studio.cache import TargetCache
     from particle_sliders.lifecycle import open_session
     runtime = runtime_fixture()

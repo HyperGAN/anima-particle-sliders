@@ -1,42 +1,21 @@
 > **Calculated memory planning:** training **72 GiB VRAM / 24 GiB host RAM** (768×768, B=2, BF16 frozen; FP32 adapter/critic); sampling **20 GiB VRAM / 24 GiB host RAM** (768×768). See [MEMORY.md](MEMORY.md) for checkpointed/phase variants, attention fallback and exact limits. These are conservative calculated budgets, not measured peaks.
 
-**Current source: core 0.13.0 / ParticleGAN 0.9.5.** See [PG095 adoption](PG095-ADOPTION.md). The PG0.9.4 and earlier sections below describe retained historical cohorts; use their original environments for those artifacts.
-
-[Current and historical installation cohorts](INSTALL-COHORTS.md).
-
-For the common session interface, see [LIFECYCLE.md](LIFECYCLE.md).
-
-For an explicit new-cohort initialization policy, see [opt-in fresh initialization](docs/explicit-fresh-initialization.md).
-
-For adaptive best-of-N data collection with Nanoodle and Jev, see the opt-in
-[`anima-vibe --vibe` path](VIBE.md). It exports a separate training-data manifest
-while preserving existing core source pins. Live Anima/Jev qualification is pending.
-
-The current source installer uses **Anima 0.4.0 / Particle Sliders core 0.13.0 /
-ParticleGAN 0.9.5**. See [current adoption and verification](PG095-ADOPTION.md)
-and [publication and qualification status](PUBLICATION-STATUS.md). The current
-[finished-output rate choice](docs/finished-output-learning-rates.md) is
-**Candlelit C2: G=0.00075, RAW960**, best of three scored saved arms on four
-examined DEV cases (mean intended-effect ON−OFF gain 0.0038009807467460632).
-This is a scoped best-tested choice; no further C3 comparison or fresh
-confirmation is required. The [earlier teacher-response SSE measurement](NATIVE-LR-PG095.md)
-remains historical diagnostic evidence and does not select the current rate.
-Defaults and published showcase weights are unchanged. New ParticleGAN sessions explicitly set
-`ema_decay=None` and use RAW training/evaluation/export/inference; no EMA
-averaging, comparison or selection is recommended. Legacy `Trainer.use_ema`
-and the published EMA showcase snapshots below belong to historical routes,
-not the current PG0.9.5 training path.
-
 # Anima Particle Sliders
 
-**Bad Intent, Final Form, Afterimage, Moonlit, Candlelit, Dusk for Anima Turbo v1.1.** Original Particle adapters and ordinary LoRA Distills, with strength stored in each file’s alpha.
+**Bad Intent, Final Form, Afterimage, Moonlit, Candlelit, Dusk for Anima Turbo v1.1.** Original particle adapters and ordinary LoRA distills, with strength stored in each file’s alpha.
 
-The explicit new PG0.9 training API and its CPU qualification are documented
-in [PG09_TRAINING.md](PG09_TRAINING.md). Archived reproduction and Studio
-training commands refuse before runtime or cache work. Historical Game
-helpers remain available for explicit CPU fixtures. The optional hashed
-`requirements-pg09.txt` and `core.pg09.lock.json` preserve the historical
-0.6.0/PG0.9.1 wheel candidate; use `requirements.txt` for the current source.
+Install Anima 0.4.0 from this checkout to use Particle Sliders core 0.15.1
+and ParticleGAN 0.11.0. New sessions use `ema_decay=None` and RAW
+training, evaluation, export and inference.
+
+- [Common sessions and direct training](LIFECYCLE.md)
+- [Scoped initialization](docs/explicit-fresh-initialization.md)
+- [Optional HNDL backend](HNDL-CANDIDATE.md)
+- [Adaptive `anima-vibe` collection and frozen targets](VIBE.md)
+- [Saved Candlelit C2 RAW960 results](docs/finished-output-learning-rates.md)
+
+Saved checkpoints and previously published showcase files retain their original
+source and dependency profiles.
 
 ## Samples
 

@@ -4,10 +4,10 @@ from copy import deepcopy
 import pytest
 
 from lumen_studio.learning_rates import recipe_learning_rates
-from lumen_studio.pg09_training import PG09Trainer
+from lumen_studio.engine_training import EngineTrainer
 from particle_sliders.lifecycle import CheckpointError, SessionConfig
 from test_image_lifecycle import configuration
-from test_pg09_training import cache_fixture, equal, runtime_fixture
+from test_engine_training import cache_fixture, equal, runtime_fixture
 
 
 @pytest.mark.parametrize('value', [0, -1, True, float('nan'), float('inf'), '0.01'])
@@ -22,14 +22,14 @@ def test_direct_api_and_common_configuration_resolve_identical_lrs(tmp_path):
     runtime = runtime_fixture()
     cache = cache_fixture(tmp_path / 'direct-cache', runtime)
     settings = dict(lr=.001, d_lr_mult=1.5, prior_lr_mult=2.5)
-    trainer = PG09Trainer(runtime, cache, tmp_path / 'direct', 'finalform',
+    trainer = EngineTrainer(runtime, cache, tmp_path / 'direct', 'finalform',
                          total_steps=4, critic_width=8, **settings)
     recipe = deepcopy(trainer.game.state_dict()['config']['recipe'])
     trainer.update()
     trainer.save()
     trainer.close()
     with pytest.raises(ValueError, match='config|identity|signature|checkpoint'):
-        PG09Trainer(runtime, cache, tmp_path / 'direct', 'finalform',
+        EngineTrainer(runtime, cache, tmp_path / 'direct', 'finalform',
                     total_steps=4, critic_width=8, **dict(settings, lr=.002))
     config = configuration(tmp_path, runtime)
     config = SessionConfig(config.backend, config.cohort, **dict(config.options, **settings))
