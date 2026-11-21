@@ -180,7 +180,7 @@ def test_verify_false_reader_cannot_bypass_candidate_content_hashes(tmp_path, mo
     (Path(config.options['cache_dir']) / '0.pt').write_bytes(b'own corrupt shard fixture')
     monkeypatch.setattr(candidate.NativeOwner, 'attach', lambda *a: pytest.fail('corrupt shard reached attachment'))
     try:
-        with pytest.raises(ValueError, match='Corrupt PG09 target shard'):
+        with pytest.raises(ValueError, match='Corrupt ParticleGAN target shard'):
             open_session(config, runtime=runtime)
         assert equal(before, runtime.transformer.state_dict())
         assert torch.equal(rng, torch.get_rng_state())

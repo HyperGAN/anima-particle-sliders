@@ -1,0 +1,17 @@
+{
+  "schema": 1,
+  "id": "dusk-v3",
+  "label": "Dusk",
+  "status": "draft",
+  "description": "Amber light and violet shade with matched neutral lighting geometry and wording.",
+  "definitions": [
+    {"split": "train", "lighting": "soft amber light, soft violet shadows", "neutral_lighting": "soft white light, soft gray shadows"},
+    {"split": "train", "lighting": "amber side lighting, violet ambient shadows", "neutral_lighting": "white side lighting, gray ambient shadows"},
+    {"split": "train", "lighting": "subdued amber illumination, gentle violet shade", "neutral_lighting": "subdued white illumination, gentle gray shade"},
+    {"split": "train", "lighting": "diffuse amber highlights, soft violet shadow areas", "neutral_lighting": "diffuse white highlights, soft gray shadow areas"},
+    {"split": "train", "lighting": "dim amber lighting, cool violet shadows", "neutral_lighting": "dim white lighting, cool gray shadows"},
+    {"split": "train", "lighting": "gentle amber illumination, muted violet shadows", "neutral_lighting": "gentle white illumination, muted gray shadows"},
+    {"split": "eval", "lighting": "soft golden light, pale purple shadow", "neutral_lighting": "soft white light, pale gray shadow"},
+    {"split": "eval", "lighting": "muted honey-colored illumination, lavender shade", "neutral_lighting": "muted white illumination, gray shade"}
+  ]
+}

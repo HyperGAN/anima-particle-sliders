@@ -1,0 +1,48 @@
+{
+  "model": "circlestone-labs/Anima:turbo-v1.1",
+  "repo": "circlestone-labs/Anima",
+  "revision": "f973fc41ec7545364ac9776c2440285f43ff2a30",
+  "diffusers_revision": "d5baa4fb548294f47dbca49890abd4b291204c60",
+  "tokenizer_repo": "circlestone-labs/Anima-Base-v1.0-Diffusers",
+  "tokenizer_revision": "073c3a9db359c31ad0e8aa268d15775473c2176c",
+  "source_files": {
+    "split_files/diffusion_models/anima-turbo-v1.1.safetensors": "fba11953276b57edf59d1dc4f1857ac05aa079c56f982b4d7c20298d57d3f7eb",
+    "split_files/text_encoders/qwen_3_06b_base.safetensors": "cd2a512003e2f9f3cd3c32a9c3573f820bb28c940f73c57b1ddaa983d9223eba",
+    "split_files/vae/qwen_image_vae.safetensors": "a70580f0213e67967ee9c95f05bb400e8fb08307e017a924bf3441223e023d1f"
+  },
+  "converter": {
+    "convert_cosmos_to_diffusers.py": "9651cea76cd9e8528968858593e10832278c7fcb3d762f16d44dc5572b3752ff",
+    "convert_anima_to_diffusers.py": "aa806278cb19658aa4eb33f15f57e09f7fb5bc47795ac711860cfc888344e0dc"
+  },
+  "defaults": {
+    "steps": 10,
+    "cfg": 1,
+    "width": 768,
+    "height": 768,
+    "scheduler": "FlowMatchEulerDiscreteScheduler",
+    "shift": 3.0
+  },
+  "prefix_normalization": {
+    "removed": "model.diffusion_model.",
+    "replacement": "net.",
+    "sha256": "d184f9ad85a5895f979c8533331bc67c7d323b4c3899cac77a4bd9f1b4ebdedd"
+  },
+  "environment_sha256": "c9f5aefe61670869fc22ccdc0205dc4d87b524734b0e723b4f95e99e3b122090",
+  "files": {
+    "modular_model_index.json": "a325d07672b851759eb1853154eb0853297c4c50d5ffaaa43b72b7baed6b51c1",
+    "scheduler/scheduler_config.json": "93a76af54e9bf61d77f8a12f02afd3c16536d9208f0ae2ab31d0e544ee1098f3",
+    "t5_tokenizer/tokenizer.json": "2432e8aa83414a69884a5cbd54a68f528c042d1f30780affbefcbb85091f022e",
+    "t5_tokenizer/tokenizer_config.json": "3b5e68830ffc0f92ddf95b0e3994991c27926e38ead3575a9a5c0e0d6e90140d",
+    "text_conditioner/config.json": "6fb3d8bbe161f89df13974fd58e8b76a46d2a727485f08256937471d6b0fd0d8",
+    "text_conditioner/diffusion_pytorch_model.safetensors": "e69d265cf14b82b2a8a2f111e0f19f8b7ea801877b38a6d6c21d11601d2d98c9",
+    "text_encoder/config.json": "0b43d63634ccb7302835fab2f92fc3fc2f4ebd7ac7021ab65361fcce1b6e0f55",
+    "text_encoder/model.safetensors": "75e8db94adb374b61baca3d898fc2c0d5086d20689a96d4e74576546433a0526",
+    "tokenizer/chat_template.jinja": "44d5f08f3f72b837eaad09f13a54c1f9f4eb58d75240334548b7fd52a5437fa5",
+    "tokenizer/tokenizer.json": "476870a1f2fb6f6a2759a6ede2383bf9d5d738f17844563b65c91965b722ae09",
+    "tokenizer/tokenizer_config.json": "6b589ccd67dac34cfd9e274864e34c819309cec98d99bb76aa1e13faf217d03e",
+    "transformer/config.json": "c8906e2e321d858553e5f5812606fcc8aad4e352d748b741c20ccadda483cc80",
+    "transformer/diffusion_pytorch_model.safetensors": "b93b881571adb400da301a50b1447c978f9a6152ca42fa8bddf49f6ae7f45998",
+    "vae/config.json": "70686d409adbdaba4ad92a240d0af287aea743e857b5f489533dc55c4529068e",
+    "vae/diffusion_pytorch_model.safetensors": "0c8bc8b758c649abef9ea407b95408389a3b2f610d0d10fcb054fe171d0a8344"
+  }
+}

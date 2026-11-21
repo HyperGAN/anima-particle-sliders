@@ -1,4 +1,4 @@
-"""Anima native response binding adapted from Particle Sliders core 0.15.1 (MIT)."""
+"""Anima native response binding adapted from Particle Sliders core 0.15.2 (MIT)."""
 import torch
 
 from particle_sliders.backends import AdapterParameters, FrozenResponseAdapter, bind_native_gradient_checkpointing

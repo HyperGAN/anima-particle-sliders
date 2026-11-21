@@ -27,8 +27,7 @@ def main():
         if (staged / 'anima_hndl').exists():
             shutil.rmtree(staged / 'anima_hndl')
         shutil.copytree(Path(__file__).with_name('anima_hndl'), staged / 'anima_hndl')
-        # Stage only the verified current package contents. The frozen
-        # product snapshot remains in source archives for historical reproduction.
+        # Stage only the verified current package contents.
         cohort = json.loads((staged / 'anima_hndl/cohort.json').read_text())
         for package in ('lumen_studio', 'configs/anima'):
             shutil.rmtree(staged / package)

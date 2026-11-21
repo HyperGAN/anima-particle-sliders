@@ -1,0 +1,5 @@
+[particle_sliders.image_backends]
+anima = lumen_studio.lifecycle:BACKEND
+
+[particle_sliders.inference_backends]
+anima = lumen_studio.lifecycle:NATIVE_BACKEND

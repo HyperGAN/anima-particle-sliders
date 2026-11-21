@@ -1,4 +1,4 @@
-"""Explicit Anima PG0.9 training binding; GPU/runtime admission stays external.
+"""Explicit Anima ParticleGAN training binding; GPU/runtime admission stays external.
 
 The product owns its frozen runtime, cache, critic architecture and routed
 adapter. The installed particle_sliders package owns every GAN update,
@@ -39,7 +39,7 @@ class CachedResponses:
         runtime_identity = deepcopy(runtime.identity)
         self._num_train_timesteps = float(runtime.pipe.scheduler.config.num_train_timesteps)
         if not math.isfinite(self._num_train_timesteps) or self._num_train_timesteps <= 0:
-            raise ValueError('PG09 requires a finite positive native timestep scale')
+            raise ValueError('ParticleGAN requires a finite positive native timestep scale')
         approved_index = deepcopy(cache.index)
         identity = approved_index['identity']
         self._numerical_profile = numerical_profile
@@ -52,9 +52,9 @@ class CachedResponses:
         elif identity.get('numerical_profile') is not None:
             raise ValueError('Anima teacher cache requires its explicit numerical_profile')
         if identity.get('split') != 'train' or identity.get('variation') != variation:
-            raise ValueError('PG09 requires the matching training cache')
+            raise ValueError('ParticleGAN requires the matching training cache')
         if len(cache) < 2:
-            raise ValueError('PG09 requires at least two frozen response rows')
+            raise ValueError('ParticleGAN requires at least two frozen response rows')
         self.compatibility = cache_runtime_compatibility(
             getattr(runtime, 'model_dir', None), identity['model'], runtime_identity,
             approved_index['fingerprint'])
@@ -66,31 +66,31 @@ class CachedResponses:
             relative = Path(shard['path'])
             path = (root / relative).resolve()
             if relative.is_absolute() or '..' in relative.parts or not path.is_relative_to(root):
-                raise ValueError('PG09 target shard path escapes the cache directory')
+                raise ValueError('ParticleGAN target shard path escapes the cache directory')
             with path.open('rb') as file:
                 before = self._file_identity(os.fstat(file.fileno()))
                 if (root / relative).resolve() != path or self._file_identity(path.stat()) != before:
-                    raise ValueError('PG09 target shard changed during verification: ' + shard['path'])
+                    raise ValueError('ParticleGAN target shard changed during verification: ' + shard['path'])
                 if self._hash_open_file(file) != shard['sha256']:
-                    raise ValueError('Corrupt PG09 target shard: ' + shard['path'])
+                    raise ValueError('Corrupt ParticleGAN target shard: ' + shard['path'])
                 if (self._file_identity(os.fstat(file.fileno())) != before
                         or (root / relative).resolve() != path or self._file_identity(path.stat()) != before):
-                    raise ValueError('PG09 target shard changed during verification: ' + shard['path'])
+                    raise ValueError('ParticleGAN target shard changed during verification: ' + shard['path'])
             self._shard_files[shard['path']] = dict(path=path, stat=before, sha256=shard['sha256'])
         # Own a private verified reader. A caller changing its mutable cached
         # records/offsets/index cannot silently change this game's frozen law.
         if type(cache.max_shards) is not int or cache.max_shards < 1:
-            raise ValueError('PG09 cache requires a positive bounded shard capacity')
+            raise ValueError('ParticleGAN cache requires a positive bounded shard capacity')
         self._cache = TargetCache(root, verify=False, max_shards=cache.max_shards)
         if self._cache.index != approved_index:
-            raise ValueError('PG09 target cache index differs from its committed bytes')
+            raise ValueError('ParticleGAN target cache index differs from its committed bytes')
         self._index = deepcopy(self._cache.index)
         self._offsets = deepcopy(self._cache.offsets)
         if 'input_fingerprint' in self._index:
             input_hash = digest(self._index['identity'])
             if (input_hash != self._index['input_fingerprint']
                     or digest(dict(input=input_hash, shards=self._index['shards'])) != self._index['fingerprint']):
-                raise ValueError('PG09 target index fingerprint differs from its shard manifest')
+                raise ValueError('ParticleGAN target index fingerprint differs from its shard manifest')
         self._identity = dict(schema='anima-engine-cache-v1', index=deepcopy(self._index),
             runtime=runtime_identity, teacher_runtime_compatibility=self.compatibility,
             native_timestep_scale=self._num_train_timesteps,
@@ -119,14 +119,14 @@ class CachedResponses:
             if require_numerical_profile(self._numerical_profile) != self._index['identity']['numerical_profile']:
                 raise ValueError('Anima numerical profile changed after cache admission')
         if self._cache.index != self._index or self._cache.offsets != self._offsets:
-            raise ValueError('PG09 frozen cache identity or record ordering changed')
+            raise ValueError('ParticleGAN frozen cache identity or record ordering changed')
         try:
             runtime_changed = (self.runtime.identity != self._identity['runtime']
                 or float(self.runtime.pipe.scheduler.config.num_train_timesteps) != self._num_train_timesteps)
         except (AttributeError, TypeError, ValueError) as exc:
-            raise ValueError('PG09 runtime identity or native timestep scale changed') from exc
+            raise ValueError('ParticleGAN runtime identity or native timestep scale changed') from exc
         if runtime_changed:
-            raise ValueError('PG09 runtime identity or native timestep scale changed')
+            raise ValueError('ParticleGAN runtime identity or native timestep scale changed')
 
     @staticmethod
     def _file_identity(stat):
@@ -141,11 +141,11 @@ class CachedResponses:
         named = self._cache.directory / key
         try:
             if named.resolve() != expected['path'] or self._file_identity(named.stat()) != expected['stat']:
-                raise ValueError('PG09 frozen target shard changed: ' + key)
+                raise ValueError('ParticleGAN frozen target shard changed: ' + key)
             if file is not None and self._file_identity(os.fstat(file.fileno())) != expected['stat']:
-                raise ValueError('PG09 frozen target shard changed: ' + key)
+                raise ValueError('ParticleGAN frozen target shard changed: ' + key)
         except OSError as exc:
-            raise ValueError('PG09 frozen target shard unavailable or changed: ' + key) from exc
+            raise ValueError('ParticleGAN frozen target shard unavailable or changed: ' + key) from exc
         return expected['path']
 
     def _read_record(self, index):
@@ -158,16 +158,16 @@ class CachedResponses:
                 with path.open('rb') as file:
                     self._check_shard_file(key, file)
                     if self._hash_open_file(file) != self._shard_files[key]['sha256']:
-                        raise ValueError('Corrupt PG09 target shard: ' + key)
+                        raise ValueError('Corrupt ParticleGAN target shard: ' + key)
                     self._check_shard_file(key, file)
                     file.seek(0)
                     data = torch.load(file, map_location='cpu', weights_only=True)
                     self._check_shard_file(key, file)
                 self._check_shard_file(key)
             except OSError as exc:
-                raise ValueError('PG09 frozen target shard unavailable or changed: ' + key) from exc
+                raise ValueError('ParticleGAN frozen target shard unavailable or changed: ' + key) from exc
             if data['fingerprint'] != self._index.get('input_fingerprint', self._index['fingerprint']):
-                raise ValueError('Shard identity differs from frozen PG09 cache')
+                raise ValueError('Shard identity differs from frozen ParticleGAN cache')
             self._cache.shards[key] = data
             if len(self._cache.shards) > self._cache.max_shards:
                 self._cache.shards.popitem(last=False)
@@ -180,21 +180,21 @@ class CachedResponses:
 
     def _validate(self, record):
         if len(self.response_shape) != 5 or self.response_shape[0] != 1 or self.response_shape[2] != 1:
-            raise ValueError('Anima PG09 requires genuine native [1,C,1,H,W] fields')
+            raise ValueError('Anima ParticleGAN requires genuine native [1,C,1,H,W] fields')
         for name in ('latent', 'positive', 'neutral'):
             value = record[name]
             if tuple(value.shape) != self.response_shape or value.requires_grad or not torch.isfinite(value).all():
-                raise ValueError('PG09 cache has a malformed native ' + name)
+                raise ValueError('ParticleGAN cache has a malformed native ' + name)
         embedding = record['embedding']
         if (embedding.ndim != 3 or embedding.shape[0] != 1 or embedding.shape[1] < 1
                 or embedding.shape[-1] != self.embedding_width or embedding.requires_grad
                 or not torch.isfinite(embedding).all()):
-            raise ValueError('PG09 requires frozen finite neutral token embeddings')
+            raise ValueError('ParticleGAN requires frozen finite neutral token embeddings')
         timestep = float(record['timestep'])
         if not 0 <= timestep <= self._time_scale():
-            raise ValueError('PG09 cache time must be a native scheduler timestep')
+            raise ValueError('ParticleGAN cache time must be a native scheduler timestep')
         if record['trajectory'] not in ('neutral', 'positive') or not 0 <= record['position'] < 10:
-            raise ValueError('PG09 cache path or denoise position is invalid')
+            raise ValueError('ParticleGAN cache path or denoise position is invalid')
 
     def _time_scale(self):
         return self._num_train_timesteps
@@ -224,7 +224,7 @@ class CachedResponses:
 
 
 class NativeFieldCritic(nn.Module):
-    """Conditional local-patch critic with released PG0.9-compatible weights.
+    """Conditional local-patch critic with official ParticleGAN-compatible weights.
 
     Anima has one time plane. Unfolding only inside the critic retains native
     fields at the PG penalty boundary; the public DualNorm optimizer sees
@@ -265,9 +265,9 @@ class EngineTrainer:
         self._frozen_identity = self.responses.identity()
         self._native_admission, self._native_admitted = native_admission, False
         if runtime.device.type != 'cpu' and not callable(native_admission):
-            raise ValueError('Native PG09 updates require an external admission callback with verified teacher parity')
+            raise ValueError('Native ParticleGAN updates require an external admission callback with verified teacher parity')
         if variation in runtime.mixer.adapters:
-            raise ValueError('PG09 requires its own adapter name in the admitted runtime')
+            raise ValueError('ParticleGAN requires its own adapter name in the admitted runtime')
         devices = [runtime.device.index or 0] if runtime.device.type == 'cuda' else []
         with torch.random.fork_rng(devices=devices):
             torch.manual_seed(seed)

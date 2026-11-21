@@ -4,8 +4,8 @@
 
 **Bad Intent, Final Form, Afterimage, Moonlit, Candlelit, Dusk for Anima Turbo v1.1.** Original particle adapters and ordinary LoRA distills, with strength stored in each file’s alpha.
 
-Install Anima 0.4.0 from this checkout to use Particle Sliders core 0.15.1
-and ParticleGAN 0.11.0. New sessions use `ema_decay=None` and RAW
+Install Anima 0.4.0 from this checkout to use Particle Sliders core 0.15.2
+and ParticleGAN 0.11.1. New sessions use `ema_decay=None` and RAW
 training, evaluation, export and inference.
 
 - [Common sessions and direct training](LIFECYCLE.md)
@@ -427,7 +427,7 @@ These are final-budget experimental checkpoints. They were not selected as the b
 
 This section describes the released gmix cohort. `core.lock.json` is its preserved
 core0.3.0 record, not the current packaged lifecycle dependency. The current
-source product is Anima0.3.0/core0.12.0/PG0.9.4; its installer is `pyproject.toml`.
+historical source product and installer are preserved in the archived checkout.
 See [installation cohorts](INSTALL-COHORTS.md) for the separate HNDL prerelease.
 
 Routing, the global-mix critic, paired losses, the particle regularizer, the noise schedule, and the ordinary-LoRA solver live in [particle-sliders-core](https://github.com/HyperGAN/particle-sliders/tree/a119ca1ecd3d5d6c437065839d22739b04f2f4d8/packages/particle-sliders-core). `requirements-legacy.txt` pins commit `a119ca1ecd3d5d6c437065839d22739b04f2f4d8`. Training imports `winning_formulation` and calls `require()` on the training config after setting generator learning rate \\(2\\times10^{-5}\\). Architecture is `gmix`. The formulation overlay is provisional `particle-gmix-1600-v2` until ParticleGAN #38 crowns a full-board winner.
@@ -437,3 +437,5 @@ Anima keeps the Hub id `ntc-ai/anima-particle-sliders`, the Comfy class in `comf
 ## License
 
 The adapters are derivatives of [CircleStone Anima](https://huggingface.co/circlestone-labs/Anima) and are distributed under the [CircleStone Labs Non-Commercial License](ANIMA-LICENSE.md). Rights are granted directly by CircleStone Labs LLC. See [NOTICE](NOTICE). Independently authored source code is MIT; vendored reference code retains its included license. This is an independent ntc-ai release.
+
+Earlier training environments, packaging checks and LR reproduction scripts remain available in the [archived source](https://github.com/HyperGAN/anima-particle-sliders/tree/791a80a4f38a9b8cb096d719b6758a79325bd7d2).

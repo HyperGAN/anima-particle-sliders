@@ -1,0 +1,49 @@
+{
+  "schema": 1,
+  "id": "dusk-v5",
+  "label": "Dusk",
+  "status": "draft",
+  "description": "Amber/violet color shifts relative to explicitly matched warm/cool light geometry; bare wording remains a held-out test.",
+  "definitions": [
+    {
+      "split": "train",
+      "lighting": "dual lighting, amber light from the left, violet fill light from the right",
+      "neutral_lighting": "dual lighting, warm light from the left, cool fill light from the right"
+    },
+    {
+      "split": "train",
+      "lighting": "soft amber key light, soft violet fill light, low-key lighting",
+      "neutral_lighting": "soft warm key light, soft cool fill light, low-key lighting"
+    },
+    {
+      "split": "train",
+      "lighting": "amber side light, violet ambient illumination, soft shadows",
+      "neutral_lighting": "warm side light, cool ambient illumination, soft shadows"
+    },
+    {
+      "split": "train",
+      "lighting": "amber directional lighting, violet reflected light, subdued lighting",
+      "neutral_lighting": "warm directional lighting, cool reflected light, subdued lighting"
+    },
+    {
+      "split": "train",
+      "lighting": "amber rim light, soft violet frontal illumination, dim lighting",
+      "neutral_lighting": "warm rim light, soft cool frontal illumination, dim lighting"
+    },
+    {
+      "split": "train",
+      "lighting": "diffuse amber light from the left, dim violet light from the right",
+      "neutral_lighting": "diffuse warm light from the left, dim cool light from the right"
+    },
+    {
+      "split": "eval",
+      "lighting": "amber highlights with soft violet fill in the shade",
+      "neutral_lighting": "warm highlights with soft cool fill in the shade"
+    },
+    {
+      "split": "eval",
+      "lighting": "amber oblique illumination balanced by violet ambient light",
+      "neutral_lighting": "warm oblique illumination balanced by cool ambient light"
+    }
+  ]
+}

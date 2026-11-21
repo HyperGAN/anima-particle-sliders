@@ -121,7 +121,7 @@ def test_real_shared_session_resume_ownership_and_native_only_inference(tmp_path
         session.train(stop_after=2)
         assert not torch.equal(bank, adapter.particles)
         packet = session.checkpoint(tmp_path / 'training.pt')
-        assert session.game.state_dict()['config']['pg_version'] == '0.11.0'
+        assert session.game.state_dict()['config']['pg_version'] == '0.11.1'
         assert 'hypergan-hndl-v4' in json.dumps(packet, default=str)
         before = session.checkpoint()
         bad = deepcopy(before)

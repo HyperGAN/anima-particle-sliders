@@ -1,0 +1,68 @@
+{
+  "schema": 1,
+  "id": "uncanny-v1",
+  "label": "Uncanny",
+  "status": "experimental",
+  "description": "Intense psychological horror: an eager gaze, emotional mismatch, oppressive proximity and a sense that something is wrong. No gore.",
+  "edit_scope": "expression_pose_framing_atmosphere",
+  "identity_preservation": false,
+  "content": "adult characters, fully clothed, non-graphic psychological horror",
+  "definitions": [
+    {
+      "split": "train",
+      "expression": "unnaturally wide unblinking eyes, small focused pupils, an eager smile that is slightly too broad, looking down directly at the viewer",
+      "pose": "leaning forward over the viewer, chin lowered, shoulders relaxed, face held very still",
+      "framing": "close-up portrait, low-angle view from below, face looming close to the camera, slightly off-center composition",
+      "atmosphere": "psychological horror, unsettling anticipation, oppressive intimacy, stark chiaroscuro, narrow light across the eyes, deep shadows around the face, ordinary surroundings falling into darkness"
+    },
+    {
+      "split": "train",
+      "expression": "a warmly welcoming smile paired with cold unblinking eyes, fixed pupils, a look of patient and inappropriate delight",
+      "pose": "standing perfectly still, head tilted slightly to one side, looking directly at the viewer",
+      "framing": "head-and-shoulders portrait, slightly canted camera, tight asymmetric framing",
+      "atmosphere": "intense psychological horror, emotional mismatch, uncanny stillness, deep charcoal shadows, a small hard light on the face, the darkness behind the figure feels impossibly deep"
+    },
+    {
+      "split": "train",
+      "expression": "eyes opened too wide beneath lowered brows, tiny bright catchlights, a restrained eager grin, intensely watching the viewer",
+      "pose": "bending slightly toward the camera, head lowered while maintaining direct eye contact",
+      "framing": "tight portrait from below, forehead close to the upper frame, intrusive proximity",
+      "atmosphere": "unsettling psychological horror, quiet malevolent delight, threatening patience, harsh oblique illumination, one cheek swallowed by shadow, muted cold colors"
+    },
+    {
+      "split": "train",
+      "expression": "a delighted asymmetric smile, wide intent eyes that never seem to blink, eager recognition directed at the viewer",
+      "pose": "leaning into the viewer's space, face turned slightly while the eyes track the camera",
+      "framing": "extreme close-up, tilted low camera angle, one eye much closer to the lens, part of the face cropped by the frame",
+      "atmosphere": "psychological horror, invasive closeness, something subtly wrong with the perspective, low-key lighting, a hard glint in the eyes, black shadow at the edge of the face"
+    },
+    {
+      "split": "train",
+      "expression": "a small polite smile, unusually wide watchful eyes, fixed pupils, an incongruously pleased and expectant expression",
+      "pose": "standing motionless facing the viewer, chin tipped downward, shoulders level",
+      "framing": "upper-body portrait seen from below, figure filling the frame, empty space squeezed to one side",
+      "atmosphere": "deeply unsettling psychological horror, oppressive silence, uncanny anticipation, pale desaturated light, dense black shadows, familiar surroundings made ominous"
+    },
+    {
+      "split": "train",
+      "expression": "an eager almost-laughing smile that stops at the mouth, intensely focused unsmiling eyes, small pupils, looking down at the viewer",
+      "pose": "standing over the low camera, head angled down, upper body inclined forward",
+      "framing": "close portrait from a very low viewpoint, foreshortened shoulders, face dominating the composition",
+      "atmosphere": "intense psychological horror, wrong emotional timing, predatory eagerness, severe side lighting, deep eye-socket shadows with sharp catchlights, restrained color"
+    },
+    {
+      "split": "eval",
+      "expression": "a look of pleased recognition held a moment too long, eyes far too alert, a smile that feels rehearsed rather than friendly",
+      "pose": "inclining toward the observer, head slightly bowed, gaze locked on the lens",
+      "framing": "intimate face portrait viewed from below, uncomfortably close and off balance",
+      "atmosphere": "an atmosphere of psychological dread, frightening familiarity, silent anticipation, a sliver of illumination against enveloping darkness"
+    },
+    {
+      "split": "eval",
+      "expression": "bright expectant eyes and an inappropriately joyful grin, a fixed penetrating stare directed downward at the observer",
+      "pose": "hovering close above the camera, unnervingly motionless, shoulders loose",
+      "framing": "cropped close-up from an oblique low angle, oppressive facial proximity",
+      "atmosphere": "uncanny psychological terror, the feeling of being noticed by something pretending to be familiar, hard facial highlights, hollow shadows, a quietly wrong atmosphere"
+    }
+  ]
+}

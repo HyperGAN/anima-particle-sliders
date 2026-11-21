@@ -1,0 +1,49 @@
+{
+  "schema": 1,
+  "id": "dusk-v4",
+  "label": "Dusk",
+  "status": "draft",
+  "description": "Amber and violet illumination with paired neutral light directions and contrast.",
+  "definitions": [
+    {
+      "split": "train",
+      "lighting": "dual lighting, amber light from the left, violet fill light from the right",
+      "neutral_lighting": "dual lighting, white light from the left, white fill light from the right"
+    },
+    {
+      "split": "train",
+      "lighting": "soft amber key light, soft violet fill light, low-key lighting",
+      "neutral_lighting": "soft white key light, soft white fill light, low-key lighting"
+    },
+    {
+      "split": "train",
+      "lighting": "amber side light, violet ambient illumination, soft shadows",
+      "neutral_lighting": "white side light, white ambient illumination, soft shadows"
+    },
+    {
+      "split": "train",
+      "lighting": "amber directional lighting, violet reflected light, subdued lighting",
+      "neutral_lighting": "white directional lighting, white reflected light, subdued lighting"
+    },
+    {
+      "split": "train",
+      "lighting": "amber rim light, soft violet frontal illumination, dim lighting",
+      "neutral_lighting": "white rim light, soft white frontal illumination, dim lighting"
+    },
+    {
+      "split": "train",
+      "lighting": "diffuse amber light from the left, dim violet light from the right",
+      "neutral_lighting": "diffuse white light from the left, dim white light from the right"
+    },
+    {
+      "split": "eval",
+      "lighting": "amber highlights with soft violet fill in the shade",
+      "neutral_lighting": "white highlights with soft white fill in the shade"
+    },
+    {
+      "split": "eval",
+      "lighting": "amber oblique illumination balanced by violet ambient light",
+      "neutral_lighting": "white oblique illumination balanced by white ambient light"
+    }
+  ]
+}

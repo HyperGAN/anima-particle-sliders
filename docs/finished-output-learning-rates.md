@@ -67,7 +67,7 @@ reproduction command. The separately admitted native
 `batch_size=8` for this schedule. It does **not** accept an `ema_decay` keyword;
 retain its RAW-only shared game without adding EMA. Runtime, verified cache,
 numerical profile and native admission remain explicit caller dependencies;
-see [the trainer API](../PG09_TRAINING.md) and [lifecycle limits](../LIFECYCLE.md).
+see [the trainer API](https://github.com/HyperGAN/anima-particle-sliders/blob/791a80a4f38a9b8cb096d719b6758a79325bd7d2/PG09_TRAINING.md) and [lifecycle limits](../LIFECYCLE.md).
 This scalar mapping alone cannot reproduce the captured native cohort.
 
 The original native source/model, conditioning/cache, RAW checkpoint and media
@@ -79,7 +79,7 @@ must not overwrite an existing run.
 
 ## Historical diagnostic screen
 
-The earlier [PG0.9.5 native512 SSE study](../NATIVE-LR-PG095.md) used batch2,
+The earlier [archived native512 SSE study](https://github.com/HyperGAN/anima-particle-sliders/blob/791a80a4f38a9b8cb096d719b6758a79325bd7d2/NATIVE-LR-PG095.md) used batch2,
 horizon128 and a teacher-response objective. Its G=1e-5 options preset, source
 pins, held-out score and reports stay unchanged as historical diagnostics.
 They do not supersede the finished-output choice above or require another
