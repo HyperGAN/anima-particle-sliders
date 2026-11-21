@@ -94,7 +94,36 @@ budget with the shared bisection helper, and select the admissible strength.
 Keep the archived Candlelit and Final Boss matched cases for scoring beginning
 with the saved OFF and fixed-schedule results. Compare finished-output mean
 intended-effect ON minus OFF at matched dose and check catastrophic output
-separately. The saved evidence has fixed-profile gains. The native CFP and
-CLABS gains are unmeasured pending a fitted direction and an active calibration
-run on independent cases.
+separately.
 [Paper equations and the shared calibration procedure](https://github.com/HyperGAN/particle-sliders/blob/b1f780decc516808cfd3019d5e5b674457161f86/docs/strength-schedules.md#activation-dependent-steering)
+
+### Candlelit RAW256 native gate study
+
+A tied one-sparse autoencoder learned a 32-feature dictionary from 384 paired
+Candlelit and neutral native trajectories. The ten most enriched positive
+features determined the direction using the shared core. A separate 12-case
+live calibration targeted the paper’s 50% intervention rate. The fitted CFP
+threshold fired on 60 of 120 intervals. The fitted CLABS bias fired on 61 of
+120, within one interval of the target. CLABS used the paper’s controller gains
+and normalization measured on the calibration OFF trajectories.
+
+These results cover six held-out Turbo v1.1 renders at 512 × 512, CFG 1 and
+ten native FlowMatch Euler intervals. Each gate fired at the archived RAW256
+adapter’s nominal strength of 1. Each constant control matched that gate’s
+realized sigma-integrated strength on the same case. All six archived OFF
+images reproduced byte for byte. Each reported gain is the equal-case mean
+Candlelit intensity of the finished image minus its matched OFF score.
+
+| Allocation | Gate gain | Matched constant gain | Cases ahead | Held-out firing |
+| --- | ---: | ---: | ---: | ---: |
+| CFP | +0.003817 | +0.000802 | 5/6 | 22/60 |
+| CLABS | +0.003469 | +0.000948 | 5/6 | 23/60 |
+| Random | +0.002596 | +0.002189 | 3/6 | 32/60 |
+
+All 36 gated and constant outputs and the six matched OFFs passed the
+independent categorical integrity check. Realized dose varied across the
+gates, so compare each row with its own constant. These are scoped research
+results from the captured ParticleGAN 0.10.0 runtime. The measured early
+profile above remains the recommended Candlelit profile. Refit and calibrate
+for a different adapter or native grid.
+[Fitted values, native grid and per-case evidence](candlelit-raw256-activation-gates.json) · [Right Token, Right Time](https://arxiv.org/html/2611.18274v1#A2)
