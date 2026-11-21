@@ -11,6 +11,7 @@ from lumen_studio.alpha_adapter import AlphaParticleAdapter
 from single_particle import adapter_class
 from lumen_studio.contracts import file_hash
 from release_tools.distill import attach_lora
+from release_tools.scheduled_render import render_scheduled, step_gains
 
 
 def main():
@@ -21,12 +22,22 @@ def main():
     parser.add_argument('--prompt',required=True)
     parser.add_argument('--seed',type=int,default=42)
     parser.add_argument('--strength',type=float,default=1.)
+    parser.add_argument('--step-gains',
+                        help='JSON list of particle strength multipliers in denoising order')
     parser.add_argument('--width',type=int,default=768)
     parser.add_argument('--height',type=int,default=768)
     parser.add_argument('--steps',type=int,choices=[8,10,12],default=10)
     parser.add_argument('--output',type=Path,required=True)
     args=parser.parse_args()
     if not 0<=args.strength<=5: parser.error('Strength must be between 0 and 5')
+    gains = None
+    if args.step_gains is not None:
+        if args.format != 'particles':
+            parser.error('Step gains apply to a routed particle adapter')
+        try:
+            gains = step_gains(json.loads(args.step_gains), args.steps, args.strength)
+        except ValueError as error:
+            parser.error(str(error))
     runtime=TurboRuntime(args.model,'cuda:0')
     handles=[]
     try:
@@ -38,11 +49,20 @@ def main():
             runtime.mixer.strengths={'release':args.strength}
         else:
             handles=attach_lora(runtime.transformer,args.adapter,args.strength)
-        image=runtime.render(args.prompt,args.seed,args.width,args.height,args.steps)
+        schedule = {}
+        if gains is None:
+            image=runtime.render(args.prompt,args.seed,args.width,args.height,args.steps)
+        else:
+            image, schedule = render_scheduled(
+                runtime, args.prompt, args.seed, args.width, args.height, args.steps, gains
+            )
         args.output.parent.mkdir(parents=True,exist_ok=True)
         image.save(args.output)
         record={k:str(v) if isinstance(v,Path) else v for k,v in vars(args).items()}
+        del record["step_gains"]
         record.update(adapter_sha256=file_hash(args.adapter),model_identity=runtime.identity,cfg=1.)
+        if gains is not None:
+            record.update(schedule, step_gains=gains)
         args.output.with_suffix('.json').write_text(json.dumps(record,indent=2)+'\n')
     finally:
         for h in handles:h.remove()
