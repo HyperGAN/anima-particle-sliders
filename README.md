@@ -11,6 +11,7 @@ training, evaluation, export and inference.
 - [Common sessions and direct training](LIFECYCLE.md)
 - [Scoped initialization](docs/explicit-fresh-initialization.md)
 - [Optional HNDL backend](HNDL-CANDIDATE.md)
+- [Adaptive `anima-vibe` collection and frozen targets](VIBE.md)
 - [Saved Candlelit C2 RAW960 results](docs/finished-output-learning-rates.md)
 
 Saved checkpoints and previously published showcase files retain their original

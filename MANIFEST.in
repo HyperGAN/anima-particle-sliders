@@ -11,3 +11,5 @@ recursive-include scripts *.py
 recursive-include data *.json
 recursive-include validation *.json
 recursive-include cohorts *.py *.toml *.json *.hndl
+
+include docs/vibe-native256-verification.json
