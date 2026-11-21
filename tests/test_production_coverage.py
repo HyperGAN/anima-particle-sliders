@@ -127,7 +127,7 @@ class ProductionCoverage(unittest.TestCase):
                 return dict(profile=CPU_PROFILE, CPU_encoder_unloaded=True)
             def pair(self, row):
                 raise AssertionError("no conditioning payload access before admission")
-        authority = dict(core_commit=CORE, core_version="0.13.0", PG="99.0.0",
+        authority = dict(core_commit=CORE, core_version="0.15.2", PG="0.11.1",
                          session_weight_EMA=None, materialized_EMA_shadows=False, selection="raw")
         with tempfile.TemporaryDirectory() as tmp:
             out = Path(tmp) / "unadmitted"

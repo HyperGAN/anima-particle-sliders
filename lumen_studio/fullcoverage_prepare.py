@@ -49,7 +49,7 @@ def prepare_fullcoverage(runtime, manifests, directory, *, variation,
     _require(source_authority.get("core_commit") == CORE
              and source_authority.get("PG") == "0.11.1"
              and source_authority.get("core_version") == "0.15.2",
-             "exact official core0.13/ParticleGAN 0.11.1 authority required")
+             "exact core 0.15.2 / ParticleGAN 0.11.1 authority required")
     _require(source_authority.get("session_weight_EMA") is None
              and source_authority.get("materialized_EMA_shadows") is False
              and source_authority.get("selection") == "raw",
