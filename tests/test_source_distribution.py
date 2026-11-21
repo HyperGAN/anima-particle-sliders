@@ -30,7 +30,7 @@ def test_sdist_preserves_installers_locks_and_release_inputs(tmp_path):
         file.extractall(extracted, filter='data')
     unpacked, = extracted.iterdir()
     # The installed source archive must contain both current build entry points.
-    for name in ('requirements.txt', 'requirements-legacy.txt',
+    for name in ('requirements.txt', 'requirements-comfy.txt', 'requirements-legacy.txt',
                  'core.lock.json', 'INSTALL-COHORTS.md',
                  'CORE081-CPU.md', 'PUBLICATION-STATUS.md', 'pytest.ini', '__init__.py',
                  'ACCELERATE-ADVISORY.md', 'CLEAN-INSTALL-CPU.md', 'MODERN-CORE-A794.md',
@@ -67,9 +67,8 @@ def test_sdist_preserves_installers_locks_and_release_inputs(tmp_path):
         assert 'lumen_studio/hndl_lifecycle.py' not in file.namelist()
         assert not any(name.startswith('anima_hndl/') for name in file.namelist())
     with zipfile.ZipFile(output / 'comfyui/anima-particle-sliders.zip') as file:
-        legacy = (ROOT / 'requirements-legacy.txt').read_bytes()
-        for name in ('requirements.txt', 'requirements-legacy.txt'):
-            assert file.read('anima-particle-sliders/' + name) == legacy
+        expected = (ROOT / 'requirements-comfy.txt').read_bytes()
+        assert file.read('anima-particle-sliders/requirements.txt') == expected
     # The independent build manifest must also work from only the sdist.
     candidate_wheels = tmp_path / 'candidate-wheels'
     result = subprocess.run([sys.executable, '-I', 'cohorts/hypergan-hndl/build.py',
@@ -85,7 +84,7 @@ def test_sdist_preserves_installers_locks_and_release_inputs(tmp_path):
         core, = [dep for dep in dependencies if dep.name == 'particle-sliders-core']
         assert core.extras == set()
         assert core.url == ('git+https://github.com/HyperGAN/particle-sliders.git@'
-                            'ec1161f5d74481be3540cb0dfa63d0e8f8b54e90#subdirectory=packages/particle-sliders-core')
+                            '507168a241e237fc3d5f1032a8137196fa3c3562#subdirectory=packages/particle-sliders-core')
         assert 'anima-hndl = anima_hndl.lifecycle:BACKEND' in entrypoints
         assert '\nanima = ' not in entrypoints
         assert 'anima_hndl/cohort.json' in file.namelist()
@@ -105,6 +104,9 @@ def test_candidate_native_dependencies_preserve_the_current_model_cohort():
     default = tomllib.loads((ROOT / 'pyproject.toml').read_text())
     candidate = tomllib.loads((ROOT / 'cohorts/hypergan-hndl/pyproject.toml').read_text())
     assert candidate['project']['optional-dependencies']['native'] == default['project']['optional-dependencies']['native']
-    assert 'ec1161f5d74481be3540cb0dfa63d0e8f8b54e90' in default['project']['dependencies'][-1]
+    core, = [dep for dep in default['project']['dependencies']
+             if Requirement(dep).name == 'particle-sliders-core']
+    assert core in candidate['project']['dependencies']
+    assert core in (ROOT / 'requirements-comfy.txt').read_text().splitlines()
     assert default['project']['version'] == '0.4.0'
     assert candidate['project']['version'] == '0.4.0a1'

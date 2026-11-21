@@ -41,14 +41,14 @@ def copy(source,dest):
 
 
 def package_plugin(out):
-    plugin=['__init__.py','comfy_particle.py','particle_io.py','requirements.txt','requirements-legacy.txt','core.lock.json','COMFYUI.md','INSTALL-COHORTS.md','HNDL-CANDIDATE.md','HNDL-CPU.md','CLEAN-INSTALL-CPU.md','ACCELERATE-ADVISORY.md','LICENSE','ANIMA-LICENSE.md','NOTICE',
+    plugin=['__init__.py','comfy_particle.py','particle_io.py','requirements.txt','COMFYUI.md','INSTALL-COHORTS.md','HNDL-CANDIDATE.md','HNDL-CPU.md','CLEAN-INSTALL-CPU.md','ACCELERATE-ADVISORY.md','LICENSE','ANIMA-LICENSE.md','NOTICE',
         'lumen_studio/__init__.py','lumen_studio/particles.py','lumen_studio/contracts.py','lumen_studio/alpha_adapter.py',
         'lumen_studio/checkpoint_validation.py','single_particle.py',
         'lumen_studio/vendor/__init__.py','lumen_studio/vendor/reference.py','lumen_studio/vendor/LICENSE','lumen_studio/vendor/provenance.json']
     zpath=out/'comfyui/anima-particle-sliders.zip';zpath.parent.mkdir(exist_ok=True)
     with zipfile.ZipFile(zpath,'w',zipfile.ZIP_DEFLATED) as z:
         for name in plugin:
-            source = ROOT / ('requirements-legacy.txt' if name == 'requirements.txt' else name)
+            source = ROOT / ('requirements-comfy.txt' if name == 'requirements.txt' else name)
             z.write(source, 'anima-particle-sliders/' + name)
 
 
@@ -116,7 +116,7 @@ def main():
     for e in entries:
         card+=f"| {e['label']} | [Download]({RAW}{e['particle']}?download=true) | [Download]({RAW}{e['comfyui_lora']}?download=true) | [Download]({RAW}{e['native_lora']}?download=true) |\n"
     card+=f'''
-**Particles:** use the [ComfyUI particle plugin]({GITHUB}#comfyui), or the [native loader]({GITHUB}/blob/main/REPRODUCE.md). [Plugin ZIP]({RAW}comfyui/anima-particle-sliders.zip?download=true) · [ComfyUI setup]({GITHUB}/blob/main/COMFYUI.md).
+**Particles:** use the [ComfyUI particle plugin]({GITHUB}#comfyui), or the [native loader]({GITHUB}/blob/main/REPRODUCE.md). [Plugin ZIP]({RAW}comfyui/anima-particle-sliders.zip?download=true) · [Current ComfyUI setup]({GITHUB}/blob/main/COMFYUI.md).
 
 **Distilled LoRAs:** use standard **Load LoRA**, MODEL strength 1 and CLIP strength 0. These rank-8 linear approximations need no particle plugin. Compare their images below before choosing a format.
 
@@ -174,8 +174,8 @@ tags:
         github=github.replace(']('+local+')',']('+WEB+'/blob/main/'+local+')')
     github=github.replace('## Get the adapters','<a id="comfyui"></a>\n\n## Get the adapters')
     (ROOT/'README.md').write_text(github)
-    for name in ('FORMULATION.md','DISTILLATION.md','REPRODUCE.md','COMFYUI.md','ANIMA-LICENSE.md','NOTICE','LICENSE','core.lock.json','requirements.txt','requirements-legacy.txt','INSTALL-COHORTS.md','HNDL-CANDIDATE.md','HNDL-CPU.md','CLEAN-INSTALL-CPU.md','ACCELERATE-ADVISORY.md'):
-        copy(ROOT / ('requirements-legacy.txt' if name == 'requirements.txt' else name), out/name)
+    for name in ('FORMULATION.md','DISTILLATION.md','REPRODUCE.md','COMFYUI.md','ANIMA-LICENSE.md','NOTICE','LICENSE','core.lock.json','requirements.txt','requirements-comfy.txt','requirements-legacy.txt','INSTALL-COHORTS.md','HNDL-CANDIDATE.md','HNDL-CPU.md','CLEAN-INSTALL-CPU.md','ACCELERATE-ADVISORY.md'):
+        copy(ROOT / ('requirements-comfy.txt' if name == 'requirements.txt' else name), out/name)
     for path in (ROOT/'validation').glob('*.json'):copy(path,out/'validation'/path.name)
     copy(ROOT/'data/release-samples.json',out/'data/release-samples.json')
     for name in ('train','dev'):copy(ROOT/f'data/{name}.json',out/f'data/{name}.json')

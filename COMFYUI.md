@@ -4,15 +4,21 @@ Use **Anima Turbo v1.1** with its Qwen text encoder and VAE. These adapters are 
 
 ## Native particle sliders
 
-Use a current ComfyUI installation with Python 3.10 or newer. Install this repository as a custom node and restart ComfyUI:
+Use a current ComfyUI installation with Python 3.11 or newer. Install this repository as a custom node and restart ComfyUI:
 
 ```bash
 cd ComfyUI/custom_nodes
 git clone https://github.com/HyperGAN/anima-particle-sliders.git
-python -m pip install -r anima-particle-sliders/requirements-legacy.txt
+python -m pip install -r anima-particle-sliders/requirements-comfy.txt
 ```
 
-Use the Python executable belonging to your ComfyUI installation for the install command (including its embedded Python on portable installations). The plugin ZIP needs the same requirements install. This installs the pinned [particle-sliders-core](https://github.com/HyperGAN/particle-sliders/tree/a119ca1ecd3d5d6c437065839d22739b04f2f4d8/packages/particle-sliders-core) package. Comfy class names, Hub ids, and the Candlelit and Moonlit sample cards stay in this repository.
+Use the Python executable belonging to your ComfyUI installation, including
+its embedded Python on portable installations. The current source installs
+the same pinned core and ParticleGAN 0.11.1 as the default Anima package.
+ZIPs built from this checkout carry those dependencies in `requirements.txt`.
+The previously published Hub ZIP carries its original requirements. See the
+[historical installation guide](https://github.com/HyperGAN/anima-particle-sliders/blob/791a80a4f38a9b8cb096d719b6758a79325bd7d2/COMFYUI.md)
+when reproducing that bundle.
 
 Download [Bad Intent](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/weights/bad-intent-balanced-alpha.safetensors?download=true), [Candlelit](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/weights/candlelit-unit-alpha.safetensors?download=true) or [Moonlit](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/weights/moonlit-unit-alpha.safetensors?download=true) into `ComfyUI/models/loras/`. Update an existing plugin installation for the embedded-alpha format. Insert **Anima Particle Slider (ntc-ai)** between the diffusion model loader and your sampler:
 
@@ -50,4 +56,4 @@ Use standard **Load LoRA** with **MODEL strength 1**, **CLIP strength 0**, or **
 
 ## Verification scope
 
-[CPU integration evidence](validation/comfyui.json) records loading all three real particle files, all 224 projection mappings, exact native branch math, zero bypass, clone isolation, exception cleanup, and ordinary-LoRA loader acceptance. Public images were rendered in the pinned native Anima runtime. Full ComfyUI GPU image generation has not been validated in this release. ComfyUI and native sampling/text-conditioning details may produce different images from the same integer seed.
+The [published release’s CPU integration evidence](validation/comfyui.json) records loading all three real particle files, all 224 projection mappings, exact native branch math, zero bypass, clone isolation, exception cleanup, and ordinary-LoRA loader acceptance. Public images were rendered in the pinned native Anima runtime. Full ComfyUI GPU image generation has not been validated in this release. ComfyUI and native sampling/text-conditioning details may produce different images from the same integer seed.

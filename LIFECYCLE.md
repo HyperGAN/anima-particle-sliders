@@ -10,6 +10,10 @@ Omitted rates use the existing explicit `bispf_optimized` recipe. The
 resolved recipe and runtime source are included in checkpoint identity.
 Use `ema_decay=None` in common session options and select RAW for inference.
 
+The shared core also exposes EMPF as an explicit preset for clients such as
+Nova. For exact replay of packets created before that core update, use the
+[initial ParticleGAN 0.11.1 checkout](https://github.com/HyperGAN/anima-particle-sliders/tree/5ab590b30d17423652ff851fd1d8246cc364df89).
+
 See [scoped initialization](docs/explicit-fresh-initialization.md) for fresh
 runs and exact resume. Earlier artifacts use their original checkout and
 dependency pins.
