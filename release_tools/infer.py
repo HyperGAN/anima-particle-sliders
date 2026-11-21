@@ -45,7 +45,9 @@ def main():
     try:
         if args.format=='particles':
             adapter=adapter_class(args.adapter)(runtime.transformer).to(runtime.device)
-            adapter.load_export(args.adapter,model_identity=runtime.identity)
+            metadata = adapter.load_export(args.adapter, model_identity=runtime.identity)
+            if gains is not None and metadata.get("weights") != "live":
+                raise ValueError("Scheduled rendering requires a RAW particle adapter")
             adapter.requires_grad_(False).eval()
             runtime.mixer.add('release',adapter)
             runtime.mixer.strengths={'release':args.strength}
