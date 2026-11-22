@@ -221,3 +221,48 @@ profile's nominal strength.
 
 The archived results used frozen conditioning in the captured ParticleGAN
 0.10.0 runtime. Use that runtime and those cases for a native comparison.
+## Fitted prompt steering on native velocities
+
+`TurboRuntime.render_spsr` applies a fitted shared `PromptSteering` module
+once per native Euler interval. It pools the current 16-channel velocity
+field in FP32, evaluates the fitted coefficient, and adds the fitted
+direction times that coefficient before the original Euler step. The
+standalone intervention runs with the particle mixer at zero. It returns
+the issued coefficients, sigmas, and integrated coefficient for the render.
+[Steer Like the LLM](https://arxiv.org/abs/2605.03907)
+
+The Candlelit study used the captured Turbo v1.1 CUDA runtime, 512×512 images,
+and 10 Euler intervals. Its archived `probe-raw.pt` has SHA-256
+`374483b8da7444c763bcdf40d557f421cae8db80e34c5e4dd52050ef1a46be82`.
+The raw 16-channel fit used 384 prompt-paired native velocity trajectories
+and 5,760 completed probe updates. Use the originally archived prompt
+conditioning and seed when reproducing that study.
+
+```python
+from hashlib import file_digest
+from pathlib import Path
+
+import torch
+from particle_sliders.prompt_steering import PromptSteering
+
+with Path(probe_checkpoint).open("rb") as source:
+    expected = "374483b8da7444c763bcdf40d557f421cae8db80e34c5e4dd52050ef1a46be82"
+    if file_digest(source, "sha256").hexdigest() != expected:
+        raise ValueError("Use the fitted Candlelit S-PSR checkpoint")
+    source.seek(0)
+    checkpoint = torch.load(source, map_location="cpu", weights_only=True)
+steering = PromptSteering(runtime.channels).eval().requires_grad_(False)
+steering.load_state_dict(checkpoint["probe"], strict=True)
+steering.to(runtime.device)
+image, trace = runtime.render_spsr(
+    prompt, seed, steering=steering, width=512, height=512, steps=10,
+)
+```
+
+The archived study set its constant coefficient to 0.0784376747981228 from
+12 disjoint live calibration renders. Across six held-out images, S-PSR
+averaged +0.00068 over OFF and the calibrated constant averaged +0.00132.
+S-PSR led on two of six cases, and both arms passed independent integrity
+checks. The constant was calibrated across separate prompts, and the two
+arms used different realized doses on some held-out cases. Exact PNG
+reproduction uses the archived conditioning and numerical profile.

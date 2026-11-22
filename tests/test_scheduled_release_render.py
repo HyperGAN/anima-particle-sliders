@@ -85,6 +85,53 @@ def test_zero_strength_replays_off_across_scheduled_steps():
     assert schedule["effective_strengths"] == [0.0, 0.0]
 
 
+def test_fitted_spsr_uses_each_native_velocity_and_restores_mix(monkeypatch):
+    from particle_sliders.prompt_steering import PromptSteering
+
+    from lumen_studio.backends.anima import TurboRuntime
+    from lumen_studio.runtime import Cancelled
+
+    runtime = TurboRuntime.__new__(TurboRuntime)
+    runtime.device = torch.device("cpu")
+    runtime.channels = 2
+    runtime.mixer = Mixer()
+    steered = PromptSteering(2).eval().requires_grad_(False)
+    with torch.no_grad():
+        steered.probe.weight.copy_(torch.tensor([[1.0, 0.0]]))
+        steered.probe.bias.fill_(0.5)
+        steered.direction.weight.copy_(torch.tensor([[0.5, -1.0]]))
+
+    def predict(latent, timestep, embedding):
+        assert runtime.mixer.strengths == {}
+        return latent + latent.new_tensor([1.0, 3.0]).view(1, 2, 1, 1, 1)
+
+    monkeypatch.setattr(runtime, "predict", predict)
+    monkeypatch.setattr(runtime, "noise", lambda *_: torch.zeros(1, 2, 1, 1, 1))
+    monkeypatch.setattr(runtime, "encode", lambda prompt: prompt)
+    monkeypatch.setattr(runtime, "scheduler", lambda _: SimpleNamespace(
+        sigmas=torch.tensor([1.0, 0.25, 0.0]), timesteps=(1.0, 0.25)))
+    monkeypatch.setattr(runtime, "step", lambda scheduler, velocity, timestep, latent: latent + velocity)
+    monkeypatch.setattr(runtime, "decode", lambda latent: latent)
+
+    progress = []
+    image, trace = runtime.render_spsr("neutral", 7, steering=steered, steps=2, progress=progress.append)
+    assert image.flatten().tolist() == [6.125, 2.75]
+    assert trace == dict(sigmas=[1.0, 0.25, 0.0], coefficients=[1.5, 3.25], sigma_weighted_coefficient=1.9375)
+    assert progress == [0.5, 1.0]
+    assert runtime.mixer.strengths == {"candlelit": 1.0}
+
+    with pytest.raises(Cancelled):
+        runtime.render_spsr("neutral", 7, steering=steered, steps=2, cancelled=lambda: True)
+    assert runtime.mixer.strengths == {"candlelit": 1.0}
+
+    def predict_original(latent, timestep, embedding):
+        assert runtime.mixer.strengths == {"candlelit": 1.0}
+        return latent + latent.new_tensor([1.0, 3.0]).view(1, 2, 1, 1, 1)
+
+    monkeypatch.setattr(runtime, "predict", predict_original)
+    assert runtime.render("neutral", 7, steps=2).flatten().tolist() == [3.0, 9.0]
+
+
 class LatentRuntime(Runtime):
     dtype = torch.bfloat16
     channels = 2
