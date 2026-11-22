@@ -162,3 +162,62 @@ jq -e --slurpfile study "$evidence" \
    .model_identity.sha256 == $study[0].profile.base_sha256 and
    .sigmas == $study[0].profile.sigmas' candlelit-cfp.json
 ```
+
+### Render the measured Candlelit CLABS setting
+
+CLABS uses the fitted direction, live-calibrated bias and controller settings
+from the same study. On the six held-out cases it gained +0.003469 over OFF
+and +0.002520 over its equal-dose constant, with five of six cases ahead of
+that constant. It fired on 61 of 120 calibration intervals and 23 of 60
+held-out intervals.
+
+Use the same model and RAW256 export as the CFP example. For an archived
+case, supply its neutral `PROMPT` and native `CASE_SEED`. Set `CACHED_CASE`
+to its original frozen conditioning shard. The study seeded the CLABS
+random number generator with the first 64 bits of that shard's SHA-256.
+The image noise seed is a separate input.
+
+```sh
+evidence=docs/candlelit-raw256-activation-gates.json
+test "$(sha256sum "$RAW_ADAPTER" | cut -d' ' -f1)" = "$(jq -er .checkpoint_sha256 "$evidence")" &&
+python - "$evidence" "$CACHED_CASE" > candlelit-clabs-plan.json <<'PY'
+from hashlib import file_digest
+import json
+from pathlib import Path
+import sys
+
+study = json.loads(Path(sys.argv[1]).read_bytes())
+with Path(sys.argv[2]).open("rb") as case:
+    gate_seed = int(file_digest(case, "sha256").hexdigest()[:16], 16)
+print(json.dumps({
+    "method": "clabs",
+    "parameter": study["verified_calibration"]["clabs"]["parameter"],
+    "direction": study["fitted_native_probe"]["direction"],
+    "gate_seed": gate_seed,
+    "clabs": study["clabs_parameters"],
+}))
+PY
+```
+
+Run the inference command from the CFP example with `--gate-plan
+candlelit-clabs-plan.json --output candlelit-clabs.png`, then run the
+same identity and sigma checks on `candlelit-clabs.json`. To render that
+case's constant, omit the gate plan and use strength equal to the sidecar's
+`sigma_weighted_strength` divided by the difference between the first and
+last native sigmas.
+
+For the original held-out cases, check the sidecar's `effective_strengths`
+against these measured masks in denoising order. Each 1 applies the
+profile's nominal strength.
+
+| Frozen case | Image noise seed | CLABS mask | Matched constant strength |
+| --- | ---: | --- | ---: |
+| `candlelit-dev-00` | 29001 | `1111000000` | 0.1818181872367859 |
+| `candlelit-dev-01` | 29001 | `1110000000` | 0.12500005960464478 |
+| `candlelit-dev-02` | 29001 | `1111000000` | 0.1818181872367859 |
+| `candlelit-dev-03` | 29027 | `1111100000` | 0.25 |
+| `candlelit-dev-04` | 29027 | `1111000000` | 0.1818181872367859 |
+| `candlelit-dev-05` | 29001 | `1101000000` | 0.13374114036560059 |
+
+The archived results used frozen conditioning in the captured ParticleGAN
+0.10.0 runtime. Use that runtime and those cases for a native comparison.
