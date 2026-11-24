@@ -46,6 +46,8 @@ The quarter-check question gave mean Jev gains of **+0.526** for the two-cue ave
 
 Each cue-timing recipe replaces 36 of the 120 teacher fields. The replacement moves the edit by an average of **22.0%** of its original L2 norm at the first three positions and **16.8%** at the last three. The source and replacement fields have matched L2 norms. [Teacher field distances by position](final-boss-raw192/ablations/cue-field-distances.json)
 
+The public capture command reproduced all **360** archived fields for the early-cue, late-cue, and two-cue-average recipes in fresh CUDA runs. [Source verification](final-boss-raw192/ablations/cue-native-source-verification.json)
+
 ## Update-144 preview
 
 At shared early α 2/3, early cues scored **9.78**, the two-cue average **9.55**, late cues **8.92**, and soft foreground weighting **7.75**. All four passed the structural checks. Early cues led on three cases. The two-cue average led on seamstress and tied early cues for mean Boss distinction gain (**+0.200**). Its higher mean damage (**0.329** versus **0.289**) contributed to a lower adjusted score. [Matched originals and renders](final-boss-raw192/ablations/cue-timing-raw144-matched.jpg) · [Per-case scores](final-boss-raw192/ablations/cue-timing-raw144-scores.json)
