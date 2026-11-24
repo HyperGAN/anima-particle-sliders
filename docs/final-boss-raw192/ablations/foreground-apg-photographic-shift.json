@@ -1,0 +1,202 @@
+{
+  "scope": "Auxiliary Jev judgment on four matched images at each checkpoint.",
+  "gains": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.6444445235641115,
+    0.3333333333333333,
+    0.3333333333333333
+  ],
+  "state": "Image_1 is an original anime illustration. Image_2 is an edited version. Compare rendering medium using the visible character. Use linework, shading, skin texture, and finish. Ignore costume, facial expression, composition, and which image you prefer.",
+  "rubric": {
+    "photographic_shift": {
+      "type": "noul",
+      "instructions": "How far has Image_2 moved from drawn anime illustration toward a photographic rendering of the character, relative to Image_1? 0 means the rendering medium is still clearly anime. 0.5 means anime and photographic treatments are mixed. 1 means the character looks like a photograph."
+    }
+  },
+  "checkpoints": {
+    "48": {
+      "soft-floor45": {
+        "mean_photographic_shift": 0.265,
+        "cases": [
+          {
+            "case": "archivist",
+            "off_sha256": "356413c7d85b7405c8ad15d520ba188fdab64b1805d5140758f61221d704bbd1",
+            "on_sha256": "cf03008493b2017519ff625deeca74ab44ba2cd88db24f54fd069c373197b335",
+            "photographic_shift": 0.31
+          },
+          {
+            "case": "bookkeeper",
+            "off_sha256": "e891f6ea6fbdf921858d1e349fbe4f08c2df9b89045363fb55cf4dafa3064fa4",
+            "on_sha256": "7610c3ad79c3f7523df3b853424923caf7081854e6af6a65905b54e76dac7856",
+            "photographic_shift": 0.28
+          },
+          {
+            "case": "botanist",
+            "off_sha256": "21af6f3fbc2798373e25ef77b57d3aa11de44ef6536fbfa7cd41298ebbe4d606",
+            "on_sha256": "c33d87e2418fac8ca9541c268e6107e35be4528d1ee2e9a22059fbfce423989a",
+            "photographic_shift": 0.25
+          },
+          {
+            "case": "seamstress",
+            "off_sha256": "4a53b469861b66c0e414f89dd0774224b71d13d630d789f89bba80799bb55eac",
+            "on_sha256": "f2ca6187cd99ef61744f9ebb3cd8218304b27cada50b88ef09c3096f941708a3",
+            "photographic_shift": 0.22
+          }
+        ]
+      },
+      "strong-boss-45-mix35": {
+        "mean_photographic_shift": 0.355,
+        "cases": [
+          {
+            "case": "archivist",
+            "off_sha256": "356413c7d85b7405c8ad15d520ba188fdab64b1805d5140758f61221d704bbd1",
+            "on_sha256": "fa82c7af71ff7136d16b3025323f8e420bd3352a28a0a84e6ffbb6860c964b32",
+            "photographic_shift": 0.28
+          },
+          {
+            "case": "bookkeeper",
+            "off_sha256": "e891f6ea6fbdf921858d1e349fbe4f08c2df9b89045363fb55cf4dafa3064fa4",
+            "on_sha256": "7a50b11472aac6d4e95cb683d2f727a145ca23ad6efbd7588c804fe3fe5c97b7",
+            "photographic_shift": 0.24
+          },
+          {
+            "case": "botanist",
+            "off_sha256": "21af6f3fbc2798373e25ef77b57d3aa11de44ef6536fbfa7cd41298ebbe4d606",
+            "on_sha256": "60a8581389349e96ff654ebe8140cfbfbf28acb5ee60b56b0f511b13b4c4ffe0",
+            "photographic_shift": 0.51
+          },
+          {
+            "case": "seamstress",
+            "off_sha256": "4a53b469861b66c0e414f89dd0774224b71d13d630d789f89bba80799bb55eac",
+            "on_sha256": "49f5a538577a8fd2104022124065b149355b030b45811321cc6929fa36d47a0e",
+            "photographic_shift": 0.39
+          }
+        ]
+      },
+      "foreground-apg-floor45": {
+        "mean_photographic_shift": 0.755,
+        "cases": [
+          {
+            "case": "archivist",
+            "off_sha256": "356413c7d85b7405c8ad15d520ba188fdab64b1805d5140758f61221d704bbd1",
+            "on_sha256": "3e57e7dbf46859affb2d8a28f24499ce396b43ac8fa99c46c2b3a4b5ba596d01",
+            "photographic_shift": 0.75
+          },
+          {
+            "case": "bookkeeper",
+            "off_sha256": "e891f6ea6fbdf921858d1e349fbe4f08c2df9b89045363fb55cf4dafa3064fa4",
+            "on_sha256": "4bfa81992b462eb313376cd7ecfc8038e350bda6e7a7974fffd3d58f45b08e82",
+            "photographic_shift": 0.66
+          },
+          {
+            "case": "botanist",
+            "off_sha256": "21af6f3fbc2798373e25ef77b57d3aa11de44ef6536fbfa7cd41298ebbe4d606",
+            "on_sha256": "bc06e7bb53645828ed64dcc2ae1e6a12a05a53a25cba5a03aa17a404a815eb3d",
+            "photographic_shift": 0.78
+          },
+          {
+            "case": "seamstress",
+            "off_sha256": "4a53b469861b66c0e414f89dd0774224b71d13d630d789f89bba80799bb55eac",
+            "on_sha256": "fc58fe02d5487a5e4deb791077eab2ce7c2a3b4de2555255ebc361f60c6a310a",
+            "photographic_shift": 0.83
+          }
+        ]
+      }
+    },
+    "96": {
+      "soft-floor45": {
+        "mean_photographic_shift": 0.27249999999999996,
+        "cases": [
+          {
+            "case": "archivist",
+            "off_sha256": "356413c7d85b7405c8ad15d520ba188fdab64b1805d5140758f61221d704bbd1",
+            "on_sha256": "ed785fe1d8459cdb37dee9e85f7b2585db8c951dd83fe62b3fc56196c45a2c1f",
+            "photographic_shift": 0.27
+          },
+          {
+            "case": "bookkeeper",
+            "off_sha256": "e891f6ea6fbdf921858d1e349fbe4f08c2df9b89045363fb55cf4dafa3064fa4",
+            "on_sha256": "7e6a22928d1bb4b085014a164def8d328b34717649621f5d0c4506966490a2c9",
+            "photographic_shift": 0.29
+          },
+          {
+            "case": "botanist",
+            "off_sha256": "21af6f3fbc2798373e25ef77b57d3aa11de44ef6536fbfa7cd41298ebbe4d606",
+            "on_sha256": "d0da9ecde1deb3832f637efe314ca94fac6e34f3e49107898437f12f5bce1a1c",
+            "photographic_shift": 0.29
+          },
+          {
+            "case": "seamstress",
+            "off_sha256": "4a53b469861b66c0e414f89dd0774224b71d13d630d789f89bba80799bb55eac",
+            "on_sha256": "6ad9e31fecd5e43ed74fb6e3ec2b4c2074d26a0eac9f558e9b9367304ce0b1eb",
+            "photographic_shift": 0.24
+          }
+        ]
+      },
+      "strong-boss-45-mix35": {
+        "mean_photographic_shift": 0.2775,
+        "cases": [
+          {
+            "case": "archivist",
+            "off_sha256": "356413c7d85b7405c8ad15d520ba188fdab64b1805d5140758f61221d704bbd1",
+            "on_sha256": "19f96de69ae5f756fd821f0a50100cfed6548efecde0833bc57596ff1e027ddf",
+            "photographic_shift": 0.23
+          },
+          {
+            "case": "bookkeeper",
+            "off_sha256": "e891f6ea6fbdf921858d1e349fbe4f08c2df9b89045363fb55cf4dafa3064fa4",
+            "on_sha256": "85fcfaf36d0a2b826bba8ec2d636f01e657b5da4cb91f43257235a233500fa45",
+            "photographic_shift": 0.29
+          },
+          {
+            "case": "botanist",
+            "off_sha256": "21af6f3fbc2798373e25ef77b57d3aa11de44ef6536fbfa7cd41298ebbe4d606",
+            "on_sha256": "24799a31ccc4f0f9e2434f2bbfd57d4dddce28845ac31cda4f3316396ebde976",
+            "photographic_shift": 0.31
+          },
+          {
+            "case": "seamstress",
+            "off_sha256": "4a53b469861b66c0e414f89dd0774224b71d13d630d789f89bba80799bb55eac",
+            "on_sha256": "b55f433466dfd131316014ea7e3ee0d035c3235ddb0e5521fe1f4a7eb72d36f2",
+            "photographic_shift": 0.28
+          }
+        ]
+      },
+      "foreground-apg-floor45": {
+        "mean_photographic_shift": 0.3775,
+        "cases": [
+          {
+            "case": "archivist",
+            "off_sha256": "356413c7d85b7405c8ad15d520ba188fdab64b1805d5140758f61221d704bbd1",
+            "on_sha256": "155e41e96b939567bf0835f29a2a57325e5f1a3f5153777efc5b07a4d53a7ec6",
+            "photographic_shift": 0.27
+          },
+          {
+            "case": "bookkeeper",
+            "off_sha256": "e891f6ea6fbdf921858d1e349fbe4f08c2df9b89045363fb55cf4dafa3064fa4",
+            "on_sha256": "31f5a257fc31262d766521bba20b8e12d2f352731f8529f9c6eba439515c29c5",
+            "photographic_shift": 0.26
+          },
+          {
+            "case": "botanist",
+            "off_sha256": "21af6f3fbc2798373e25ef77b57d3aa11de44ef6536fbfa7cd41298ebbe4d606",
+            "on_sha256": "b16c02493a2f4424607b8064120654cb809a3dfce238db64a010d7c2faef9503",
+            "photographic_shift": 0.71
+          },
+          {
+            "case": "seamstress",
+            "off_sha256": "4a53b469861b66c0e414f89dd0774224b71d13d630d789f89bba80799bb55eac",
+            "on_sha256": "6dda8473b98e2e03a4116ad5baf21c1e5131f2412967631f253295d60b891827",
+            "photographic_shift": 0.27
+          }
+        ]
+      }
+    }
+  }
+}

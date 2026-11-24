@@ -8,7 +8,7 @@
 
 **What earns a high score.** The slider should make the subject visibly read as a Final Boss while keeping the image coherent. An edit with zero Boss gain scores zero. Visible damage lowers the score even when the Boss effect is strong. [Scoring and comparison protocol](#comparing-a-new-run) · [Jev rubrics](final-boss-raw192/rubrics.json)
 
-**Latest challengers.** Matched ordinary attire scored **19.86** on the eight-case RAW192 leaderboard, the all-step percentile filter scored **19.52**, and the early-position filter scored **17.30**. Subject APG scored **1.55** at update 48 and is still training. The scheduled frozen-teacher fit has started. [Percentile filtering](#percentile-filtered-teacher-edits) · [Subject APG](#adaptive-projected-guidance-on-the-subject) · [Frozen-teacher trajectory](#scheduled-frozen-teacher-trajectory)
+**Latest challengers.** Matched ordinary attire scored **19.86** on the eight-case RAW192 leaderboard, the all-step percentile filter scored **19.52**, and the early-position filter scored **17.30**. Subject APG reached update 96 and scored **2.25** on four cases. The scheduled frozen-teacher fit is running. [Percentile filtering](#percentile-filtered-teacher-edits) · [Subject APG](#adaptive-projected-guidance-on-the-subject) · [Frozen-teacher trajectory](#scheduled-frozen-teacher-trajectory)
 
 ## Training techniques
 
@@ -202,6 +202,10 @@ Adaptive Projected Guidance associates oversaturation at high classifier-free gu
 On all 120 archived fields, the exterior target stayed bit for bit identical and edit norms matched within a relative error of 4 × 10⁻⁹. The projection moved the target by an average of 23.1% of its edit norm. The largest mean shift was 43.1% at the second denoising position. CUDA capture verified all 120 original states and exterior targets, and the four native teacher field rechecks passed. [Archived-field audit and native capture](final-boss-raw192/ablations/foreground-apg-field-audit.json)
 
 At update 48, APG passed all four structural checks and scored **1.55** at shared early α 2/3. Soft foreground weighting scored **2.34**, and the stronger-cue control scored **3.74**. The APG renders shifted toward a photographic style across all four cases. Weaker Boss distinction cost **1.01** points relative to soft foreground weighting, and differences in visible damage added **0.22** points. Archivist accounted for the largest score drop. [Matched RAW48 renders](final-boss-raw192/ablations/foreground-apg-raw48-matched.jpg) · [Per-case scores](final-boss-raw192/ablations/foreground-apg-raw48-scores.json)
+
+At update 96, APG passed all four structural checks and scored **2.25** against **5.73** for soft foreground weighting. It trailed on all four cases, with Bookkeeper accounting for the largest drop. Weaker Boss distinction cost **3.15** points and additional damage cost **0.33**. The stronger-cue control's diagnostic score was **4.05**, with Botanist's structural check unmeasured. [Matched RAW96 renders](final-boss-raw192/ablations/foreground-apg-raw96-matched.jpg) · [Per-case scores and structural checks](final-boss-raw192/ablations/foreground-apg-raw96-scores.json)
+
+An auxiliary Jev check measured the shift toward photographic rendering on a 0–1 scale. The APG mean dropped from **0.76** at update 48 to **0.38** at update 96. Soft foreground weighting averaged **0.27** at each checkpoint. Botanist remained the most photographic APG case at update 96 (**0.71**). [Question, matched image digests, and per-case judgments](final-boss-raw192/ablations/foreground-apg-photographic-shift.json)
 
 ## Two-step teacher contrast
 
