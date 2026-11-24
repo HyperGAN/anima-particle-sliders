@@ -403,6 +403,88 @@
           }
         }
       }
+    },
+    "144": {
+      "archivist": {
+        "off": {
+          "sha256": "356413c7d85b7405c8ad15d520ba188fdab64b1805d5140758f61221d704bbd1",
+          "edges": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        "on": {
+          "sha256": "308ce4d181cc7856ec667ea19110c7c229972fea41e2c8abb7276ff011f8da5e",
+          "edges": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        }
+      },
+      "bookkeeper": {
+        "off": {
+          "sha256": "e891f6ea6fbdf921858d1e349fbe4f08c2df9b89045363fb55cf4dafa3064fa4",
+          "edges": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        "on": {
+          "sha256": "936672c32a00108042e3bba8b93a135d6c8b030d6199f3646be8c0e98165ee6c",
+          "edges": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        }
+      },
+      "botanist": {
+        "off": {
+          "sha256": "21af6f3fbc2798373e25ef77b57d3aa11de44ef6536fbfa7cd41298ebbe4d606",
+          "edges": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        "on": {
+          "sha256": "edf8079f40cde3ebdd42f6c0f48a660f35fd5f3fdc42b06408f64df4a18b3366",
+          "edges": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        }
+      },
+      "seamstress": {
+        "off": {
+          "sha256": "4a53b469861b66c0e414f89dd0774224b71d13d630d789f89bba80799bb55eac",
+          "edges": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        "on": {
+          "sha256": "86814670350dcb37c19eb62b2e77eae0b64b6efee242690776b0ec3fc7db8efa",
+          "edges": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        }
+      }
     }
   }
 }

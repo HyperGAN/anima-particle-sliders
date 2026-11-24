@@ -8,7 +8,7 @@
 
 **What earns a high score.** The slider should make the subject visibly read as a Final Boss while keeping the image coherent. An edit with zero Boss gain scores zero. Visible damage lowers the score even when the Boss effect is strong. [Scoring and comparison protocol](#comparing-a-new-run) · [Jev rubrics](final-boss-raw192/rubrics.json)
 
-**Latest challengers.** Matched ordinary attire scored **19.86** on the eight-case RAW192 leaderboard, the all-step percentile filter scored **19.52**, and the early-position filter scored **17.30**. Subject APG scored **8.03** at shared constant strength. Its shared early aggregate is unmeasured. Frozen-teacher trajectories scored **2.30** on the four-case RAW48 panel, close to the same-step soft foreground control at **2.34**. [Subject APG](#adaptive-projected-guidance-on-the-subject) · [Frozen-teacher trajectory](#scheduled-frozen-teacher-trajectory) · [Paired exterior targets](#paired-contexts-outside-the-subject)
+**Latest challengers.** Middle exposure reached **11.04** on the four-case RAW144 preview, ahead of soft foreground weighting at **7.75**. Frozen-teacher RAW96 is unmeasured because Archivist's structural check was inconclusive. On the eight-case RAW192 leaderboard, matched ordinary attire scored **19.86** and the all-step percentile filter scored **19.52**. [Middle exposure](#denoising-position-exposure) · [Frozen-teacher trajectory](#scheduled-frozen-teacher-trajectory) · [Matched ordinary attire](#matched-ordinary-attire)
 
 ## Training techniques
 
@@ -152,6 +152,8 @@ At RAW48 the middle arm passed all four structural checks and scored **0.89** at
 
 At RAW96 the middle arm passed all four structural checks and scored **9.75**, ahead of soft foreground weighting at **5.73** and behind the two-cue average at **10.34**. Compared with soft foreground weighting, mean Boss gain rose from **0.125** to **0.160** and mean image damage fell from **0.315** to **0.220**. The largest gains were on Botanist and Archivist. Bookkeeper acquired horizontal white borders and scored **10.22**, below the soft foreground result of **11.40**. The stronger-cue control's structural result for Botanist remained unmeasured. [Four matched cases](final-boss-raw192/ablations/exposure-middle-raw96-matched.jpg) · [Per-case scores and RAW digests](final-boss-raw192/ablations/exposure-middle-raw96-scores.json)
 
+At RAW144 the middle arm passed all four structural checks and scored **11.04**. Soft foreground weighting scored **7.75**, the two-cue average **9.55**, and the in-scene costume blend **12.13**. Relative to soft foreground weighting, larger Boss gains contributed **1.46** points and lower damage contributed **1.83** points. Archivist improved from **6.68** to **16.00**. Bookkeeper's white borders cleared, and its score rose to **11.86**. Seamstress trailed the other three recipes. [Four matched cases](final-boss-raw192/ablations/exposure-middle-raw144-matched.jpg) · [Per-case scores and RAW digests](final-boss-raw192/ablations/exposure-middle-raw144-scores.json) · [Margin measurements](final-boss-raw192/ablations/frame-padding-audit.json)
+
 ## Regional stronger cues
 
 The 35% stronger-cue recipe moved an average of **16.9%** of its squared change from the baseline into locations outside the subject matte. Blended Diffusion preserves the surrounding image by applying edits locally at successive denoising steps. This training adaptation applies that idea to the added cue in each frozen teacher field. It keeps the soft-foreground edit unchanged outside the allowed region. It also matches both the total baseline edit norm and the distance from the baseline to the whole-field stronger cue. [Blended Diffusion](https://arxiv.org/abs/2111.14818) · [Field audit and recipe](final-boss-raw192/ablations/regional-cue-protocol.json)
@@ -213,6 +215,8 @@ Jensen and Sadat cached trajectories generated with classifier-free guidance to 
 CUDA capture matched **66** control fields bit for bit and produced **54** observations at different states. Native admission replayed all six guided paths and rechecked four fields against the frozen teacher. [Native capture evidence](final-boss-raw192/ablations/guided-teacher-native-verification.json)
 
 At RAW48, all four structural checks passed. Frozen-teacher training scored **2.30** at shared early α 2/3, compared with **2.34** for soft foreground weighting and **3.74** for the stronger-cue blend. Bookkeeper and Seamstress improved relative to soft foreground weighting, while Archivist accounted for the largest drop. [Four matched cases](final-boss-raw192/ablations/guided-teacher-raw48-matched.jpg) · [Per-case scores and RAW digests](final-boss-raw192/ablations/guided-teacher-raw48-scores.json)
+
+At RAW96, Archivist's structural review was inconclusive, leaving the aggregate unmeasured. The four-case diagnostic score was **6.34**, compared with qualified scores of **5.73** for soft foreground weighting and **10.34** for the two-cue average. Seamstress scored **8.92** and shifted to a wider shot. The other three cases trailed soft foreground weighting. [Four matched cases](final-boss-raw192/ablations/guided-teacher-raw96-matched.jpg) · [Per-case scores and RAW digests](final-boss-raw192/ablations/guided-teacher-raw96-scores.json)
 
 ## Adaptive projected guidance on the subject
 
