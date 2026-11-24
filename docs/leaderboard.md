@@ -8,7 +8,7 @@
 
 **What earns a high score.** The slider should make the subject visibly read as a Final Boss while keeping the image coherent. An edit with zero Boss gain scores zero. Visible damage lowers the score even when the Boss effect is strong. [Scoring and comparison protocol](#comparing-a-new-run) · [Jev rubrics](final-boss-raw192/rubrics.json)
 
-**Latest challengers.** Middle exposure reached **11.04** on the four-case RAW144 preview, ahead of soft foreground weighting at **7.75**. Frozen-teacher RAW96 is unmeasured because Archivist's structural check was inconclusive. On the eight-case RAW192 leaderboard, matched ordinary attire scored **19.86** and the all-step percentile filter scored **19.52**. [Middle exposure](#denoising-position-exposure) · [Frozen-teacher trajectory](#scheduled-frozen-teacher-trajectory) · [Matched ordinary attire](#matched-ordinary-attire)
+**Latest challengers.** Middle exposure finished RAW192 at **16.28** shared early and **6.21** shared constant. The four-case preview advantage at RAW144 gave way to weaker Boss distinction at RAW192. Frozen-teacher RAW96 is unmeasured because Archivist's structural check was inconclusive. [Middle exposure](#denoising-position-exposure) · [Frozen-teacher trajectory](#scheduled-frozen-teacher-trajectory)
 
 ## Training techniques
 
@@ -28,7 +28,8 @@ The ranking uses the best measured variant of each technique after 192 updates w
 | 10 | In-scene costume cue blend, 35% | 17.53 | 12.08 | [Training comparison and renders](#in-scene-costume-prompts) |
 | 11 | Soft foreground weighting plus a 35% blend of two averaged cues | 17.34 | 8.08 | [Anima comparison](#two-cue-average-at-update-192), related [cue diversification #313](https://github.com/HyperGAN/particle-sliders/pull/313) |
 | 12 | Percentile-filtered blend at the first three teacher positions | 17.30 | 7.74 | [Anima comparison](#percentile-filtered-teacher-edits), based on [SEGA](https://arxiv.org/html/2301.12247) |
-| 13 | Train on adapter rollout states, 0.45 floor | 11.61 | 5.49 | Local Anima experiment, related [rollout protocol #246](https://github.com/HyperGAN/particle-sliders/pull/246) |
+| 13 | Extra training exposure at the middle four denoising positions | 16.28 | 6.21 | [Anima comparison](#denoising-position-exposure), informed by [Perception Prioritized Training](https://arxiv.org/abs/2204.00227) and [Min-SNR](https://arxiv.org/abs/2303.09556) |
+| 14 | Train on adapter rollout states, 0.45 floor | 11.61 | 5.49 | Local Anima experiment, related [rollout protocol #246](https://github.com/HyperGAN/particle-sliders/pull/246) |
 | — | Four qualified costume teachers and two soft-foreground contexts | Unmeasured | 10.84 | [Matched renders and diagnostic scores](#costume-teachers-at-update-192) |
 | — | Soft foreground weighting with subject APG | Unmeasured | 8.03 | [Matched renders and per-case scores](#adaptive-projected-guidance-on-the-subject) |
 
@@ -154,6 +155,10 @@ At RAW96 the middle arm passed all four structural checks and scored **9.75**, a
 
 At RAW144 the middle arm passed all four structural checks and scored **11.04**. Soft foreground weighting scored **7.75**, the two-cue average **9.55**, and the in-scene costume blend **12.13**. Relative to soft foreground weighting, larger Boss gains contributed **1.46** points and lower damage contributed **1.83** points. Archivist improved from **6.68** to **16.00**. Bookkeeper's white borders cleared, and its score rose to **11.86**. Seamstress trailed the other three recipes. [Four matched cases](final-boss-raw192/ablations/exposure-middle-raw144-matched.jpg) · [Per-case scores and RAW digests](final-boss-raw192/ablations/exposure-middle-raw144-scores.json) · [Margin measurements](final-boss-raw192/ablations/frame-padding-audit.json)
 
+At RAW192 on the four-case screen, the middle arm passed all structural checks and scored **12.33**. Soft foreground weighting scored **19.16**, stronger cues **21.41**, and the in-scene costume blend **19.22**. Compared with soft foreground weighting, weaker Boss gains accounted for **8.52** points of loss and lower damage recovered **1.69** points. Bookkeeper had the largest drop. [Four matched cases](final-boss-raw192/ablations/exposure-middle-raw192-screen-matched.jpg) · [Per-case scores and RAW digests](final-boss-raw192/ablations/exposure-middle-raw192-screen-scores.json)
+
+On the eight-case RAW192 panel, middle exposure scored **16.28** against soft foreground weighting's **25.66** at shared early strength, and **6.21** against the stronger-cue blend's **16.90** at constant strength. It passed both sets of structural checks and trailed the respective control on every case. Weaker Boss gains cost **6.34** points at early strength and **7.88** at constant strength. More visible damage cost another **3.04** and **2.80** points respectively. The completed checkpoint matched the declared sampler counts, including **222 of 384** generator presentations at positions 3–6. [Matched early renders](final-boss-raw192/ablations/exposure-middle-raw192-early-matched.jpg) · [Matched constant renders](final-boss-raw192/ablations/exposure-middle-raw192-constant-matched.jpg) · [Both scores](final-boss-raw192/ablations/exposure-middle-raw192-scores.json) · [Trained sampler counts](final-boss-raw192/ablations/exposure-middle-trained-counts.json)
+
 ## Regional stronger cues
 
 The 35% stronger-cue recipe moved an average of **16.9%** of its squared change from the baseline into locations outside the subject matte. Blended Diffusion preserves the surrounding image by applying edits locally at successive denoising steps. This training adaptation applies that idea to the added cue in each frozen teacher field. It keeps the soft-foreground edit unchanged outside the allowed region. It also matches both the total baseline edit norm and the distance from the baseline to the whole-field stronger cue. [Blended Diffusion](https://arxiv.org/abs/2111.14818) · [Field audit and recipe](final-boss-raw192/ablations/regional-cue-protocol.json)
@@ -253,6 +258,8 @@ Across the six archived starting states, the two-step contrast moved the target 
 Paired contexts scored **22.23** at shared early strength. Combining their archived per-case image-damage scores with the incumbent's Boss gains yields **26.91** in an arithmetic check, versus the incumbent's measured **25.66**. The paired-context recipe's own Boss gains yield **21.12** when combined with the incumbent's image-damage scores. The check motivates using paired contexts outside the subject while keeping the incumbent's subject target. The new recipe still needs a native training and render comparison. [Per-case arithmetic](final-boss-raw192/ablations/shared-early-factor-substitution.json)
 
 At each shared teacher state, the recipe takes the paired-context direction where the area-resampled matte is at most 0.01 and uses the incumbent's exterior edit norm. All **120** archived fields kept the incumbent's subject targets exactly. The exterior substitution moved the field by **6.85%** of its full edit norm on average. The largest relative change in edit norm was **3.52 × 10⁻⁸**. [Field audit](final-boss-raw192/ablations/paired-exterior-field-audit.json) · [Exact prompts](final-boss-raw192/ablations/paired-exterior-prompts.json) · [Capture and native admission](final-boss-raw192/README.md#paired-contexts-outside-the-subject)
+
+The CUDA capture confirmed the subject and edit-norm checks on all 120 fields. The native teacher independently reproduced four sampled fields. The fit began on GPU 1 after middle exposure's evaluation. [Native admission evidence](final-boss-raw192/ablations/paired-exterior-native-admission.json)
 
 ## Match the wardrobe to the framing
 

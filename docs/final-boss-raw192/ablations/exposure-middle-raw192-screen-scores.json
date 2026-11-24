@@ -1,0 +1,249 @@
+{
+  "score_scale": "0\u20131",
+  "scope": "Four matched development cases. Preview of the leaderboard objective.",
+  "step": 192,
+  "profile": "early",
+  "alpha": 0.6666666666666666,
+  "gains": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.6444445235641115,
+    0.3333333333333333,
+    0.3333333333333333
+  ],
+  "methods": {
+    "soft-floor45": {
+      "status": "measured",
+      "quarter_check_gain": 0.7166666666666667,
+      "means": {
+        "boss_gain": 0.3675,
+        "image_damage": 0.26583333333333337,
+        "adjusted_score": 0.19155991666674999
+      },
+      "cases": [
+        {
+          "case": "archivist",
+          "off_sha256": "356413c7d85b7405c8ad15d520ba188fdab64b1805d5140758f61221d704bbd1",
+          "on_sha256": "96065c8f65c2a3e9db860a5a79316f8b1f7f6e4dba6e8e3c76b8a37644cb40b6",
+          "integrity": "pass",
+          "boss_off": 0.06,
+          "boss_on": 0.35,
+          "boss_gain": 0.29,
+          "image_damage": 0.30333333333333334,
+          "adjusted_score": 0.140749888889
+        },
+        {
+          "case": "bookkeeper",
+          "off_sha256": "e891f6ea6fbdf921858d1e349fbe4f08c2df9b89045363fb55cf4dafa3064fa4",
+          "on_sha256": "cea99d61e1648ae9a0e1cf5a9d29f604c7d4537d6fbc137961424732693a8eae",
+          "integrity": "pass",
+          "boss_off": 0.08,
+          "boss_on": 0.54,
+          "boss_gain": 0.46,
+          "image_damage": 0.17333333333333334,
+          "adjusted_score": 0.314353777778
+        },
+        {
+          "case": "botanist",
+          "off_sha256": "21af6f3fbc2798373e25ef77b57d3aa11de44ef6536fbfa7cd41298ebbe4d606",
+          "on_sha256": "e0450d087f797b6195073d250e5efdc1a4b9efd8bb55d12d26f984c9e1ce0880",
+          "integrity": "pass",
+          "boss_off": 0.07,
+          "boss_on": 0.25,
+          "boss_gain": 0.18,
+          "image_damage": 0.18000000000000002,
+          "adjusted_score": 0.121032
+        },
+        {
+          "case": "seamstress",
+          "off_sha256": "4a53b469861b66c0e414f89dd0774224b71d13d630d789f89bba80799bb55eac",
+          "on_sha256": "a8c895cf704bad026e71af7deff6c9c55d1ffb5da1de81d12db30a4af12850d9",
+          "integrity": "pass",
+          "boss_off": 0.06,
+          "boss_on": 0.6,
+          "boss_gain": 0.54,
+          "image_damage": 0.4066666666666667,
+          "adjusted_score": 0.190104
+        }
+      ],
+      "milestone_sha256": "d3dc793cb550939ea7d6c848c6a0a45a8e5c94fdde6dd785a40e4565177f0029",
+      "raw_sha256": "5ada5db653b1ebfe543075ed52ad47e1118cfa975fee86ab4f132eb5d793c92b"
+    },
+    "strong-boss-45-mix35": {
+      "status": "measured",
+      "quarter_check_gain": 0.7758333333333334,
+      "means": {
+        "boss_gain": 0.345,
+        "image_damage": 0.205,
+        "adjusted_score": 0.21414149999999998
+      },
+      "cases": [
+        {
+          "case": "archivist",
+          "off_sha256": "356413c7d85b7405c8ad15d520ba188fdab64b1805d5140758f61221d704bbd1",
+          "on_sha256": "0646dce2742677ebca019921fe47b73d86b654d7f450396b04cfa1622aabb8b1",
+          "integrity": "pass",
+          "boss_off": 0.06,
+          "boss_on": 0.4,
+          "boss_gain": 0.34,
+          "image_damage": 0.17,
+          "adjusted_score": 0.234226
+        },
+        {
+          "case": "bookkeeper",
+          "off_sha256": "e891f6ea6fbdf921858d1e349fbe4f08c2df9b89045363fb55cf4dafa3064fa4",
+          "on_sha256": "6686b1f30a64fb964836e63b7292fd278e8df5e13801d52f3f7e147b5796c6e9",
+          "integrity": "pass",
+          "boss_off": 0.08,
+          "boss_on": 0.37,
+          "boss_gain": 0.29,
+          "image_damage": 0.19999999999999998,
+          "adjusted_score": 0.1856
+        },
+        {
+          "case": "botanist",
+          "off_sha256": "21af6f3fbc2798373e25ef77b57d3aa11de44ef6536fbfa7cd41298ebbe4d606",
+          "on_sha256": "ea1268eafcf7bf5fd1ca94edab11c46dd3d4387da7d11fcde09a6fa99e086e18",
+          "integrity": "pass",
+          "boss_off": 0.07,
+          "boss_on": 0.31,
+          "boss_gain": 0.24,
+          "image_damage": 0.18999999999999997,
+          "adjusted_score": 0.157464
+        },
+        {
+          "case": "seamstress",
+          "off_sha256": "4a53b469861b66c0e414f89dd0774224b71d13d630d789f89bba80799bb55eac",
+          "on_sha256": "e203c4452bfea05be57482fb070e0fafce8c2eb3edfda4f63749308ff117d06e",
+          "integrity": "pass",
+          "boss_off": 0.06,
+          "boss_on": 0.57,
+          "boss_gain": 0.51,
+          "image_damage": 0.26,
+          "adjusted_score": 0.279276
+        }
+      ],
+      "milestone_sha256": "aa5324137e241c185dac737d3a286f5b2f7031c47871591572e391d461e956c6",
+      "raw_sha256": "b38a4bf77621806c74fdab17f6de64cd17d4e144ad88844b2ce7026bfd1c2d57"
+    },
+    "scene-grounded35": {
+      "status": "measured",
+      "quarter_check_gain": 0.6749999999999999,
+      "means": {
+        "boss_gain": 0.3125,
+        "image_damage": 0.22083333333333333,
+        "adjusted_score": 0.19216383333325
+      },
+      "cases": [
+        {
+          "case": "archivist",
+          "off_sha256": "356413c7d85b7405c8ad15d520ba188fdab64b1805d5140758f61221d704bbd1",
+          "on_sha256": "9c2911612759ae2038e8855eb27a6e24d039c0a43f50838c8f32fd579c37ddc7",
+          "integrity": "pass",
+          "boss_off": 0.06,
+          "boss_on": 0.32,
+          "boss_gain": 0.26,
+          "image_damage": 0.18000000000000002,
+          "adjusted_score": 0.174824
+        },
+        {
+          "case": "bookkeeper",
+          "off_sha256": "e891f6ea6fbdf921858d1e349fbe4f08c2df9b89045363fb55cf4dafa3064fa4",
+          "on_sha256": "472cf1ab525e3c153f4431f57fe80e365f0391795e6a2d0c4bfdb96bcad268f9",
+          "integrity": "pass",
+          "boss_off": 0.08,
+          "boss_on": 0.38,
+          "boss_gain": 0.3,
+          "image_damage": 0.18333333333333335,
+          "adjusted_score": 0.200083333333
+        },
+        {
+          "case": "botanist",
+          "off_sha256": "21af6f3fbc2798373e25ef77b57d3aa11de44ef6536fbfa7cd41298ebbe4d606",
+          "on_sha256": "3a2a4f4721929c0d8fefa82c1224b07ac30cd3fe58844099cb1324b72f351045",
+          "integrity": "pass",
+          "boss_off": 0.07,
+          "boss_on": 0.29,
+          "boss_gain": 0.21999999999999997,
+          "image_damage": 0.3,
+          "adjusted_score": 0.1078
+        },
+        {
+          "case": "seamstress",
+          "off_sha256": "4a53b469861b66c0e414f89dd0774224b71d13d630d789f89bba80799bb55eac",
+          "on_sha256": "379fb6b545049cb2f22888ba64366d0a79e57b04bf646bfae3c1b21622404b37",
+          "integrity": "pass",
+          "boss_off": 0.06,
+          "boss_on": 0.53,
+          "boss_gain": 0.47000000000000003,
+          "image_damage": 0.22,
+          "adjusted_score": 0.285948
+        }
+      ],
+      "milestone_sha256": "eb9dc8981155ff89f2246c58fa2fd2f5a4d3a5b8dbbb6a3d2cab9cf5bfc7a551",
+      "raw_sha256": "6a42ffcd1b4837aacf0ec77e0c7a028eedb4ae10b9ad35bdf9196dfbfd777655"
+    },
+    "exposure-middle4": {
+      "status": "measured",
+      "quarter_check_gain": 0.6333333333333333,
+      "means": {
+        "boss_gain": 0.2125,
+        "image_damage": 0.23500000000000001,
+        "adjusted_score": 0.123269
+      },
+      "cases": [
+        {
+          "case": "archivist",
+          "off_sha256": "356413c7d85b7405c8ad15d520ba188fdab64b1805d5140758f61221d704bbd1",
+          "on_sha256": "9d680be2556358cd4d3f4452106471016f618cba291c0d93417bda5effb5620d",
+          "integrity": "pass",
+          "boss_off": 0.06,
+          "boss_on": 0.22,
+          "boss_gain": 0.16,
+          "image_damage": 0.20666666666666667,
+          "adjusted_score": 0.100700444444
+        },
+        {
+          "case": "bookkeeper",
+          "off_sha256": "e891f6ea6fbdf921858d1e349fbe4f08c2df9b89045363fb55cf4dafa3064fa4",
+          "on_sha256": "32e26c1d913d4b866e9b5f26bfadc5490a48e64e4e5c6e9adee4381a8342fdff",
+          "integrity": "pass",
+          "boss_off": 0.08,
+          "boss_on": 0.26,
+          "boss_gain": 0.18,
+          "image_damage": 0.27,
+          "adjusted_score": 0.095922
+        },
+        {
+          "case": "botanist",
+          "off_sha256": "21af6f3fbc2798373e25ef77b57d3aa11de44ef6536fbfa7cd41298ebbe4d606",
+          "on_sha256": "3531c07c6def75481c8de8c0e1e418615a2db8ad1b976e25d907846191e185ca",
+          "integrity": "pass",
+          "boss_off": 0.07,
+          "boss_on": 0.24,
+          "boss_gain": 0.16999999999999998,
+          "image_damage": 0.21333333333333335,
+          "adjusted_score": 0.105203555556
+        },
+        {
+          "case": "seamstress",
+          "off_sha256": "4a53b469861b66c0e414f89dd0774224b71d13d630d789f89bba80799bb55eac",
+          "on_sha256": "60549f17e44c8906dbe5c07c74797e74e36bb7ba8a054f14ae8909a6f6c02fd8",
+          "integrity": "pass",
+          "boss_off": 0.06,
+          "boss_on": 0.4,
+          "boss_gain": 0.34,
+          "image_damage": 0.25,
+          "adjusted_score": 0.19125
+        }
+      ],
+      "milestone_sha256": "243401f9df5cc9084ebed6939394821ed6ff344708f576495e055e531fc5e731",
+      "raw_sha256": "165674682dacfd8d86cc8791328af09614f15aa692023afa6c882a1085d50623"
+    }
+  }
+}

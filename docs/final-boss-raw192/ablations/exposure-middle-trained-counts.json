@@ -1,0 +1,38 @@
+{
+  "recipe": "exposure-middle4",
+  "step": 192,
+  "ema_decay": null,
+  "sampling": "balanced",
+  "rows": 168,
+  "full_checkpoint_sha256": "8ab3064f0ddb4267e6cf61358a21bafbd4c122899202ae31b0aadcc6ceed4de8",
+  "raw_checkpoint_sha256": "165674682dacfd8d86cc8791328af09614f15aa692023afa6c882a1085d50623",
+  "g_and_d_presentation_counts_match_declared_sampler": true,
+  "by_position": {
+    "d": [
+      28,
+      29,
+      28,
+      58,
+      56,
+      55,
+      50,
+      26,
+      27,
+      27
+    ],
+    "g": [
+      28,
+      26,
+      26,
+      57,
+      56,
+      52,
+      57,
+      26,
+      26,
+      30
+    ]
+  },
+  "lane_terminal_sha256": "92202a05b5dcdba09ab0c71db74247ba5b88c03c093fe97aca1d71a496e1212b",
+  "review_sha256": "47cb9f61cb25368d81d47569b610aee14e7c1fba5a7fa13a81a9d9312e88a2ad"
+}
