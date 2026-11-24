@@ -151,6 +151,12 @@ The 35% stronger cue improves the constant-strength score and changes the traini
 
 The candidate starts from the 35% stronger-cue target. It caps the magnitude of the exterior projection at the soft-foreground baseline for that exact field and preserves the exterior edit norm. The stronger cue's foreground values match bit for bit in all 120 archived fields. The full edit changed by **1.0%** of its original norm on average, with 19 fields left intact. The native cache is ready, with checksums verified for all six shards. The shared RAW192 comparison is queued. [Exact rule and checks](final-boss-raw192/ablations/exterior-nuisance-cap-audit.json)
 
+## Wavelet correction to the exterior cue
+
+Frequency-Aware Denoising Score separates wavelet bands to control which parts of an editing signal can change. This Anima adaptation starts from the 35% stronger cue and subtracts the coarse wavelet component of the change outside the subject matte, measured relative to soft foreground weighting. It restores the original exterior edit norm and keeps the stronger cue's foreground values bit for bit. [Frequency-Aware Denoising Score, §3.1](https://openaccess.thecvf.com/content/CVPR2025/papers/Ren_FDS_Frequency-Aware_Denoising_Score_for_Text-Guided_Latent_Diffusion_Image_Editing_CVPR_2025_paper.pdf) · [Capture source and command](final-boss-raw192/README.md#wavelet-exterior-cue)
+
+Across **120** archived fields, the correction removed an average of **95.8%** of the added coarse exterior energy and changed the total edit by **3.2%** of its original norm. Restricting the whole-field cue to the middle wavelet band preserved less of its direction and raised the share of cue energy outside the matte from **16.9%** to **21.6%**. The exterior-only recipe is declared for the shared RAW192 comparison. [Field audit](final-boss-raw192/ablations/wavelet-exterior-field-audit.json)
+
 ## Structural stops
 
 The 35% cue blend that kept only components with matching signs across its two alternate cue edits stopped at update 48. The bookkeeper render collapsed to a texture and scored 0.83 on Jev’s unreadable-image check. Training stopped before update 49. [Saved RAW48 render](final-boss-raw192/ablations/diverse-consensus35-raw48-bookkeeper.png) · [Consensus research](https://github.com/HyperGAN/particle-sliders/pull/315)

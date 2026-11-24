@@ -116,3 +116,12 @@ for recipe in matched-attire35 regional-attire35; do
     --model "$ANIMA_MODEL" --out "targets/$recipe"
 done
 ```
+
+## Wavelet exterior cue
+
+This recipe subtracts the level-three Daubechies 4 approximation of the added exterior cue. It preserves the stronger subject target and the full edit norm. [Wavelet source](../../release_tools/final_boss_wavelet.py) · [Field audit](ablations/wavelet-exterior-field-audit.json)
+
+```sh
+python -m release_tools.final_boss_targets wavelet-exterior35 \
+  --model "$ANIMA_MODEL" --out targets/wavelet-exterior35
+```

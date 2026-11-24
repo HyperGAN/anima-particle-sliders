@@ -7,6 +7,7 @@ import pytest
 import torch
 
 from release_tools.final_boss_targets import RECIPES, STEPS, capture_row, edited_target, final_target
+from release_tools.final_boss_wavelet import low_band
 
 
 STUDY = Path(__file__).resolve().parents[1] / "docs/final-boss-raw192"
@@ -68,6 +69,29 @@ def test_regional_attire_preserves_the_stronger_cue_exterior_at_matched_dose():
     assert torch.equal(localized[matte == 0], baseline[matte == 0])
     torch.testing.assert_close((localized - neutral).norm(), (baseline - neutral).norm())
     torch.testing.assert_close((localized - baseline).norm(), (matched - baseline).norm())
+
+
+def test_wavelet_exterior_keeps_the_stronger_foreground_and_reduces_coarse_exterior_energy():
+    runtime = SimpleNamespace(predict=lambda latent, timestep, embedding: embedding)
+    generator = torch.Generator().manual_seed(21)
+    shape = (1, 1, 1, 64, 64)
+    neutral = torch.randn(shape, generator=generator)
+    positive = neutral + torch.randn(shape, generator=generator)
+    explicit = positive + torch.linspace(-1, 1, 64).expand(shape)
+    matte = torch.zeros_like(neutral)
+    matte[..., 16:48, 16:48] = 1
+    weight = 0.45 + 0.55 * matte
+    foreground = matte > 0.01
+
+    baseline = final_target(runtime, None, 0, neutral, positive, weight, 0., ())
+    stronger = final_target(runtime, None, 0, neutral, positive, weight, 0.35, (explicit,))
+    wavelet = final_target(runtime, None, 0, neutral, positive, weight, 0.35, (explicit,), wavelet_matte=matte)
+
+    assert torch.equal(wavelet[foreground], stronger[foreground])
+    torch.testing.assert_close((wavelet - neutral).norm(), (stronger - neutral).norm())
+    filtered = torch.where(foreground, 0., (wavelet - baseline).double())
+    source = torch.where(foreground, 0., (stronger - baseline).double())
+    assert low_band(filtered, 3).norm() < low_band(source, 3).norm()
 
 
 def test_new_cue_recipes_reuse_trajectories_and_apply_the_declared_contrast():

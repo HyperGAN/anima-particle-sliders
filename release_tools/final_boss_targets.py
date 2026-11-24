@@ -11,6 +11,7 @@ from torch.nn import functional as F
 
 from lumen_studio.cache import TargetCache, save_tensor_file
 from lumen_studio.contracts import atomic_json, digest, file_hash
+from release_tools.final_boss_wavelet import coarse_exterior_target
 
 
 STUDY = Path(__file__).resolve().parents[1] / "docs/final-boss-raw192"
@@ -20,11 +21,12 @@ RESOLUTION = 512
 STEPS = 10
 REGIONAL_RADII = {"regional-cue-matte": 0, "regional-cue-dilated2": 2, "regional-attire35": 0}
 MATCHED_ATTIRE = ("matched-attire35", "regional-attire35")
+WAVELET_EXTERIOR = "wavelet-exterior35"
 PERCENTILE_POSITIONS = {"sega-early35": (0, 1, 2), "sega-all35": tuple(range(STEPS))}
 RECIPES = {"prompt-only": (1.0, 0.0), "soft-floor45": (0.45, 0.0),
            "strong-boss-45-mix35": (0.45, 0.35), "strong-cues-early3": (0.45, 0.35),
            "strong-cues-late3": (0.45, 0.35), "diverse-mean35": (0.45, 0.35),
-           "matched-attire35": (0.45, 0.35),
+           "matched-attire35": (0.45, 0.35), WAVELET_EXTERIOR: (0.45, 0.35),
            **dict.fromkeys(REGIONAL_RADII, (0.45, 0.35)),
            **dict.fromkeys(PERCENTILE_POSITIONS, (0.45, 0.0))}
 CUE_POSITIONS = {"strong-cues-early3": (0, 1, 2), "strong-cues-late3": (7, 8, 9)}
@@ -141,7 +143,7 @@ def teacher_cues(runtime, row, recipe):
 
 
 def final_target(runtime, latent, timestep, neutral, positive, weight, cue_mix, cue_embeddings,
-                 *, regional=None, percentile_active=None, matched_attire=False):
+                 *, regional=None, percentile_active=None, matched_attire=False, wavelet_matte=None):
     # Preserve the rounding of the original full-frame capture.
     positive = neutral + (positive - neutral)
     if weight is None:
@@ -154,6 +156,9 @@ def final_target(runtime, latent, timestep, neutral, positive, weight, cue_mix, 
         target = matched_attire_target(neutral, positive, stronger, ordinary, weight, cue_mix)
     else:
         target = edited_target(neutral, positive, weight, cue_mix, *cues)
+    if wavelet_matte is not None:
+        baseline = edited_target(neutral, positive, weight, 0.)
+        return coarse_exterior_target(neutral, baseline, target, wavelet_matte <= 0.01)
     if regional is None:
         return target
     matte, radius = regional
@@ -173,6 +178,7 @@ def capture_row(runtime, row, matte_path, recipe):
     weight = floor + (1 - floor) * matte if matte is not None else None
     regional = (matte, REGIONAL_RADII[recipe]) if recipe in REGIONAL_RADII else None
     matched_attire = recipe in MATCHED_ATTIRE
+    wavelet_matte = matte if recipe == WAVELET_EXTERIOR else None
     n_scheduler, p_scheduler = runtime.scheduler(STEPS), runtime.scheduler(STEPS)
     records = {"neutral": [], "positive": []}
     for position, timestep in enumerate(n_scheduler.timesteps):
@@ -187,7 +193,7 @@ def capture_row(runtime, row, matte_path, recipe):
             percentile_active = None if percentile_positions is None else position in percentile_positions
             target = final_target(runtime, latent, timestep, base, positive_field, weight, cue_mix,
                                   active, regional=regional, percentile_active=percentile_active,
-                                  matched_attire=matched_attire)
+                                  matched_attire=matched_attire, wavelet_matte=wavelet_matte)
             records[track].append(dict(position=position, timestep=float(timestep), trajectory=track,
                                        latent=latent.cpu().clone(), neutral=base.cpu().clone(),
                                        positive=target.cpu().clone()))
@@ -252,12 +258,13 @@ def verify_native(runtime, cache, request, fixture=FIXTURE):
             matte = subject_matte(matte_path, latent.shape[-2:], runtime.device) if floor < 1 else None
             weight = floor + (1 - floor) * matte if matte is not None else None
             regional = (matte, REGIONAL_RADII[recipe]) if recipe in REGIONAL_RADII else None
+            wavelet_matte = matte if recipe == WAVELET_EXTERIOR else None
             position = record["position"]
             cues = teacher_cues(runtime, row, recipe) if position in cue_positions else ()
             percentile_active = None if percentile_positions is None else position in percentile_positions
             target = final_target(runtime, latent, timestep, neutral, positive, weight, cue_mix,
                                   cues, regional=regional, percentile_active=percentile_active,
-                                  matched_attire=matched_attire)
+                                  matched_attire=matched_attire, wavelet_matte=wavelet_matte)
             if not (torch.equal(neutral.cpu(), record["neutral"]) and torch.equal(target.cpu(), record["positive"])):
                 return False
     return True
