@@ -300,20 +300,22 @@ def test_new_cue_recipes_reuse_trajectories_and_apply_the_declared_contrast():
                  for recipe in GROUNDED_COSTUME}
     assert teacher_rows(STUDY / "training-pairs.json", GROUNDED_WAVELET) == teacher_rows(
         STUDY / "training-pairs.json", "scene-grounded35")
-    recipes = ("soft-floor45", "strong-boss-45-mix35", "strong-cues-early3", "strong-cues-late3", "diverse-mean35",
+    recipes = ("soft-floor45", "strong-boss-45-mix35", "strong-cues-early3", "strong-cues-middle4",
+               "strong-cues-late3", "diverse-mean35",
                "sega-early35", "sega-all35", *GROUNDED_COSTUME)
     rows = [row | {"grounded_positive": "other", "grounded_schedule": schedules[recipe]}
             if recipe in GROUNDED_COSTUME else row for recipe in recipes]
     captures = [capture_row(runtime, source, matte, recipe)["records"]
                 for source, recipe in zip(rows, recipes, strict=True)]
     for index, fields in enumerate(zip(*captures, strict=True)):
-        control, explicit, first, final, averaged, percentile_early, percentile_all, *grounded = fields
+        control, explicit, first, middle, final, averaged, percentile_early, percentile_all, *grounded = fields
         step = index % STEPS
         for field in fields:
             assert field["position"] == step and field["trajectory"] == control["trajectory"]
             assert torch.equal(field["latent"], control["latent"])
             assert torch.equal(field["neutral"], control["neutral"])
         assert torch.equal(first["positive"], (explicit if step < 3 else control)["positive"])
+        assert torch.equal(middle["positive"], (explicit if 3 <= step < 7 else control)["positive"])
         assert torch.equal(final["positive"], (explicit if step >= 7 else control)["positive"])
         assert torch.equal(percentile_early["positive"], (percentile_all if step < 3 else control)["positive"])
         assert not torch.equal(percentile_all["positive"], control["positive"])

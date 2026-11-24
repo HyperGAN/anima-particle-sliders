@@ -1,0 +1,27 @@
+{
+  "recipe": "strong-cues-middle4",
+  "control": "soft-floor45",
+  "donor": "strong-boss-45-mix35",
+  "data_scope": "Retain both frozen trajectories, prompts, seeds, mattes, weights, and per-field edit norm.",
+  "positions": [
+    3,
+    4,
+    5,
+    6
+  ],
+  "training_fields": 120,
+  "stronger_fields": 48,
+  "base_fields": 72,
+  "parent_cache_fingerprints": [
+    "8e28e58e797016219e5f0a0dbbaacccdc37eafaa25468b83ef954bfb2e90e120",
+    "7feebb6e2fedbbd9e90a9ab377687093647c69b9797158252121c601f2872445"
+  ],
+  "max_relative_edit_norm_error": 1.4477601406603924e-07,
+  "mean_relative_edit_direction_shift": 0.19090141068369101,
+  "mean_relative_shift_by_position": {
+    "3": 0.22717183774323615,
+    "4": 0.19355323274359973,
+    "5": 0.17654841472691893,
+    "6": 0.1663321575210092
+  }
+}

@@ -36,18 +36,19 @@ ANCHORED_APG = "anchored-apg-early35"
 APG_POSITIONS = {FOREGROUND_APG: tuple(range(STEPS)), ANCHORED_APG: (0, 1, 2)}
 LOOKAHEAD_EARLY = "lookahead-early3"
 LOOKAHEAD_POSITIONS = (0, 1, 2)
+MIDDLE_CUES = "strong-cues-middle4"
 PERCENTILE_POSITIONS = {"sega-early35": (0, 1, 2), "sega-all35": tuple(range(STEPS))}
 RECIPES = {"prompt-only": (1.0, 0.0), "soft-floor45": (0.45, 0.0),
            GUIDED_TEACHER: (0.45, 0.0), FOREGROUND_APG: (0.45, 0.0), LOOKAHEAD_EARLY: (0.45, 0.0),
            ANCHORED_APG: (0.45, 0.35),
            "strong-boss-45-mix35": (0.45, 0.35), "strong-cues-early3": (0.45, 0.35),
-           "strong-cues-late3": (0.45, 0.35), "diverse-mean35": (0.45, 0.35),
+           MIDDLE_CUES: (0.45, 0.35), "strong-cues-late3": (0.45, 0.35), "diverse-mean35": (0.45, 0.35),
            "matched-attire35": (0.45, 0.35), WAVELET_EXTERIOR: (0.45, 0.35),
            **dict.fromkeys(GROUNDED_RECIPES, (0.45, 0.35)),
            **dict.fromkeys(SPLIT_CUES, (0.45, 0.35)),
            **dict.fromkeys(REGIONAL_RADII, (0.45, 0.35)),
            **dict.fromkeys(PERCENTILE_POSITIONS, (0.45, 0.0))}
-CUE_POSITIONS = {"strong-cues-early3": (0, 1, 2), "strong-cues-late3": (7, 8, 9)}
+CUE_POSITIONS = {"strong-cues-early3": (0, 1, 2), MIDDLE_CUES: (3, 4, 5, 6), "strong-cues-late3": (7, 8, 9)}
 
 
 def subject_matte(path, shape, device):
@@ -332,6 +333,8 @@ def verify_native(runtime, cache, request, fixture=FIXTURE):
     projection_positions = APG_POSITIONS.get(recipe, ())
     sigmas = runtime.scheduler(STEPS).sigmas if projection_positions else None
     indices = (1, 19, 42, 117) if recipe in CUE_POSITIONS or percentile_positions else (3, 19, 46, 117)
+    if recipe == MIDDLE_CUES:
+        indices = (4, 16, 42, 117)
     if recipe in (LOOKAHEAD_EARLY, ANCHORED_APG):
         indices = (1, 12, 46, 117)
     with runtime.mixer.scales({}):
