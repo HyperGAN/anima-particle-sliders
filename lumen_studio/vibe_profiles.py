@@ -77,10 +77,15 @@ ANIME = VibeProfile(
     family_minimum=.40,
 )
 
+FINAL_BOSS_NEUTRAL_MAX = .35
+
 FINAL_BOSS = VibeProfile(
     "Final Boss",
-    "Each neutral describes a figure or creature in a distinct, single in-world scene. "
-    "Describe their appearance, pose and surroundings while leaving their role open.",
+    "Each neutral shows one ordinary adult in everyday clothes doing a recognizable activity. "
+    "Describe the person's appearance, pose and surroundings in one continuous shot. "
+    "The neutral character is a civilian with a plain silhouette, without armor, regalia, weapons, "
+    "monstrous features or an imposing antagonist role. In the positive prompt, keep the same person, "
+    "pose, framing, setting and lighting, and convey Final Boss through a distinctive costume and silhouette.",
     score_question(
         "How strongly does the main character visibly read as a formidable final video-game boss "
         "from their own costume, accessories, expression or silhouette? Ignore the setting, lighting, "

@@ -75,6 +75,13 @@ class AnimaVibe:
             self.runtime = None
 
 
+def neutral_score_limit(identity):
+    limit = identity.get('max_neutral_score', 1.0)
+    if type(limit) not in (int, float) or not 0 <= limit <= 1:
+        raise ValueError('max_neutral_score must be in [0,1]')
+    return limit
+
+
 def training_manifest(collection, *, min_score=0.75):
     """Only qualified best-of-N contexts become targets; all attempts stay saved."""
     from particle_sliders_vibe import SCHEMA as COLLECTION_SCHEMA, file_digest
@@ -83,12 +90,14 @@ def training_manifest(collection, *, min_score=0.75):
         raise ValueError('expected a vibe collection')
     if type(min_score) not in (int, float) or not 0 <= min_score <= 1:
         raise ValueError('min_score must be in [0,1]')
+    max_neutral_score = neutral_score_limit(collection['identity'])
     variation = 'vibe-' + digest(collection['identity'])[:16]
     rows = []
     for round_ in collection['rounds']:
         for candidate in round_['ranking']:
             qualified = [case for case in candidate['cases'] if case['gain'] > 0
-                         and case['positive']['judgment']['score'] >= min_score]
+                         and case['positive']['judgment']['score'] >= min_score
+                         and case['neutral']['judgment']['score'] <= max_neutral_score]
             if not qualified:
                 continue
             case = max(qualified, key=lambda c: c['gain'])
@@ -124,6 +133,7 @@ def validate_manifest(manifest):
             or manifest['criterion'] != manifest['collection_identity']['vibe']
             or manifest['variation'] != 'vibe-' + digest(manifest['collection_identity'])[:16]):
         raise ValueError('vibe manifest criterion/identity changed')
+    max_neutral_score = neutral_score_limit(manifest['collection_identity'])
     for row in manifest['rows']:
         if (any(not isinstance(row.get(k), str) or not row[k].strip() for k in ('neutral', 'positive'))
                 or row['neutral'] == row['positive']):
@@ -139,7 +149,7 @@ def validate_manifest(manifest):
         if (row['split'] != 'train' or row['variation'] != manifest['variation']
                 or row['neutral'] != selected['prompt']['neutral'] or row['positive'] != selected['prompt']['positive']
                 or row['seeds'] != [selected['seed']] or type(selected['seed']) is not int or not 0 <= selected['seed'] < 2**63
-                or positive < manifest['min_score'] or positive <= neutral
+                or positive < manifest['min_score'] or positive <= neutral or neutral > max_neutral_score
                 or selected['gain'] != positive - neutral):
             raise ValueError('vibe row differs from its qualifying context')
 

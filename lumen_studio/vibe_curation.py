@@ -7,12 +7,12 @@ from pathlib import Path
 from threading import Lock
 
 from .contracts import atomic_json, digest, file_hash
-from .vibe import training_manifest
+from .vibe import neutral_score_limit, training_manifest
 from .vibe_observer import IMAGE_STATE, PAIR_STATE, decision_values, image_questions, observe
 from .vibe_portfolio import (
     FAMILY_LIMIT, distinct_finish, exclude_duplicates, finish_score, observed_family, pair_audit, select,
 )
-from .vibe_profiles import FINAL_BOSS, yes_no
+from .vibe_profiles import FINAL_BOSS, FINAL_BOSS_NEUTRAL_MAX, yes_no
 from .vibe_target_search import read
 
 
@@ -29,7 +29,7 @@ def prompts(profile, proposal):
     }
 
 
-def curate_round(product, profile, proposals, index, args, root, call):
+def curate_round(product, profile, proposals, index, args, root, call, *, max_neutral_score=1.0):
     rendered = []
     for proposal in proposals:
         case = digest(proposal["neutral"])
@@ -96,7 +96,11 @@ def curate_round(product, profile, proposals, index, args, root, call):
     with ThreadPoolExecutor(max_workers=6) as workers:
         for rows in workers.map(measure_case, rendered):
             by_case[rows[0]["case"]].extend(rows)
-        groups = list(by_case.values())
+        eligible_by_case = {
+            case: [row for row in group if row["neutral"]["judgment"]["score"] <= max_neutral_score]
+            for case, group in by_case.items()
+        }
+        groups = list(eligible_by_case.values())
         chosen = select(groups, FAMILY_LIMIT, allow_partial=True)
         chosen, proof, repairs = exclude_duplicates(
             groups, chosen, lambda rows: pair_audit(rows, compare, workers),
@@ -110,7 +114,10 @@ def curate_round(product, profile, proposals, index, args, root, call):
         case = digest(proposal["neutral"])
         row = selected.get(case)
         fitness = row["finish_gain"] if row and (case in credited or row["finish_gain"] < 0) else 0
-        ranking.append(dict(prompt=proposal, case=case, fitness=fitness))
+        entry = dict(prompt=proposal, case=case, fitness=fitness)
+        if max_neutral_score < 1:
+            entry["neutral_eligible"] = bool(eligible_by_case[case])
+        ranking.append(entry)
     ranking.sort(key=lambda row: -row["fitness"])
     return dict(index=index, ranking=ranking, selected=chosen, alternatives=by_case, pair_audit=proof,
                 repairs=repairs, distinct_finish=metric)
@@ -130,6 +137,9 @@ def collect_portfolio(product, profile, args):
                     best_of=args.best_of, seed=args.seed, judge=args.judge_model, provider=args.judge_provider,
                     engine={name: file_digest(Path(__file__).with_name(name)) for name in
                             ("vibe_curation.py", "vibe_portfolio.py", "vibe_profiles.py", "vibe_observer.py")})
+    if profile is FINAL_BOSS:
+        identity["max_neutral_score"] = FINAL_BOSS_NEUTRAL_MAX
+    max_neutral_score = neutral_score_limit(identity)
     path = root / "portfolio.json"
     with collection_lock(root):
         if path.exists():
@@ -144,7 +154,8 @@ def collect_portfolio(product, profile, args):
         call = partial(_call, root, retry_pending=args.retry_pending)
         for index in range(len(state["rounds"]), args.rounds):
             history = [{"index": row["index"], "ranking": row["ranking"]} for row in state["rounds"]]
-            retained = history[-1]["ranking"][:args.pool_size - args.replace] if history else []
+            previous = history[-1]["ranking"] if history else []
+            retained = [row for row in previous if row.get("neutral_eligible", True)][:args.pool_size - args.replace]
             scenes = [row["prompt"] for row in retained]
             slots = dict(profile.subject_slots) or {"scene": ""}
             kinds = list(slots)
@@ -164,7 +175,8 @@ def collect_portfolio(product, profile, args):
                 scenes.extend(prompt_pair(pair) | {"kind": kind} for pair in proposals)
             if len({pair["neutral"] for pair in scenes}) != len(scenes):
                 raise ValueError("The proposer returned duplicate neutral scenes")
-            result = curate_round(product, profile, scenes, index, args, root, call)
+            result = curate_round(product, profile, scenes, index, args, root, call,
+                                  max_neutral_score=max_neutral_score)
             state["rounds"].append(result)
             atomic_json(path, state)
     return state

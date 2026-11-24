@@ -41,6 +41,14 @@ a second proposal. Each round keeps stronger scenes and replaces up to
 and raw effect threshold. Both profiles render native prompt variants so the
 existing cache builder can replay the exact selected prompts and seeds.
 
+Final Boss proposals start from ordinary adults in everyday clothing. The positive
+prompt keeps the same person, setting, pose, framing, and lighting, and changes the
+character's costume and silhouette. Jev's raw Boss rating for the neutral image
+must be **0.35 or lower**. At the default **0.75** target threshold, this gives a
+raw Boss gain of at least **0.40**. Subsequent rounds replace scenes whose neutral
+renders all miss that ceiling. The manifest records the ceiling for target-cache
+validation. Existing manifests retain their recorded qualification rules.
+
 On two fresh panels of eight automatically proposed scenes each, the new
 selector and rewrite pass improved distinct finish and the second effect
 read. Scores below are on a 100-point scale.

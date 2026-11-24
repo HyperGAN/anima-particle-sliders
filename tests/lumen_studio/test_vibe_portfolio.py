@@ -4,7 +4,8 @@ from pathlib import Path
 
 import pytest
 
-from lumen_studio import vibe_cli, vibe_curation
+from lumen_studio import vibe_cli, vibe_curation, vibe_rewrite
+from lumen_studio.contracts import digest
 from lumen_studio.vibe import validate_manifest
 from lumen_studio.vibe_observer import decision_values
 from lumen_studio.vibe_portfolio import distinct_finish, exclude_duplicates, select
@@ -42,8 +43,12 @@ def test_pair_repair_respects_family_limit_and_never_fills_with_unknown():
     assert proof["pairs"][0]["mean"] == .1 and len(repairs) == 1
 
 
-@pytest.mark.parametrize("concept,profile", [("1990s anime", ANIME), ("final boss", FINAL_BOSS)])
-def test_named_vibe_cli_saves_audited_teachers_and_resumes(tmp_path, monkeypatch, concept, profile):
+@pytest.mark.parametrize("concept,profile,boss_like_neutral", [
+    ("1990s anime", ANIME, False),
+    ("final boss", FINAL_BOSS, False),
+    ("final boss", FINAL_BOSS, True),
+])
+def test_named_vibe_cli_saves_audited_teachers_and_resumes(tmp_path, monkeypatch, concept, profile, boss_like_neutral):
     pytest.importorskip("particle_sliders_vibe")
     pytest.importorskip("nanoodle")
     assert profile_for(concept) is profile
@@ -60,6 +65,8 @@ def test_named_vibe_cli_saves_audited_teachers_and_resumes(tmp_path, monkeypatch
             actions["propose"] += 1
             assert profile.scene_instruction in vibe
             scenes = [f"A distinct in-world scene {len(history)}-{actions['propose']}-{i}" for i in range(count)]
+            if boss_like_neutral and not history:
+                scenes[0] += " with a boss-like neutral"
             return [dict(neutral=scene, positive=scene + ". Unusual finished treatment.") for scene in scenes]
 
         def render(self, prompt, seed, directory, *, request_id):
@@ -83,6 +90,8 @@ def test_named_vibe_cli_saves_audited_teachers_and_resumes(tmp_path, monkeypatch
         for name, question in questions.items():
             if question["type"] == "score":
                 score = 3 if name in {"effect", "usable"} and "continuous shot" in prompt else 0
+                if name == "effect" and "boss-like neutral" in prompt and "continuous shot" not in prompt:
+                    score = 2
                 answers[name] = dict(type="score", score=score, probabilities={str(i): int(i == score) for i in range(4)})
             elif question["type"] == "choice":
                 tag = next((key for key, cue in profile.families.items() if cue.casefold() in prompt), "unclassified")
@@ -97,29 +106,54 @@ def test_named_vibe_cli_saves_audited_teachers_and_resumes(tmp_path, monkeypatch
 
     monkeypatch.setattr(vibe_cli, "AnimaVibe", Native)
     monkeypatch.setattr(vibe_curation, "observe", judge)
+    if boss_like_neutral:
+        def rewrite_fixture(profile, scenes, *_):
+            assert all("boss-like neutral" not in row["neutral"] for row in scenes)
+            return {row["id"]: row["neutral"] + ". A continuous shot." for row in scenes}
+        monkeypatch.setattr(vibe_rewrite, "rewrite_batch", rewrite_fixture)
     output = tmp_path / "run"
     cli = ["--vibe", concept, "--out", str(output), "--model-dir", str(tmp_path), "--prompt-model", "fixture",
            "--judge-model", "fixture", "--pool-size", "3", "--replace", "1", "--best-of", "1"]
     assert vibe_cli.main(cli) == 0
     state = json.loads((output / "portfolio.json").read_text())
     chosen = state["rounds"][0]
-    assert len(chosen["selected"]) == 3 and len(chosen["pair_audit"]["pairs"]) == 3 and actions["pair"] == 6
+    count = 2 if boss_like_neutral else 3
+    assert len(chosen["selected"]) == count and len(chosen["pair_audit"]["pairs"]) == count * (count - 1) // 2
+    if not boss_like_neutral:
+        assert actions["pair"] == 6
+        counts = [sum(row["observed_family"] == family for row in chosen["selected"])
+                  for family in {row["observed_family"] for row in chosen["selected"]}]
+        assert sorted(counts) == [1, 2]
     if profile is ANIME:
         assert {row["prompt"]["kind"] for row in chosen["ranking"]} == {"environment", "object", "animal"}
-    assert chosen["distinct_finish"]["gain"] == 1 and chosen["pair_audit"]["near_duplicates"] == 0
-    assert sorted(len([r for r in chosen["selected"] if r["observed_family"] == look])
-                  for look in {r["observed_family"] for r in chosen["selected"]}) == [1, 2]
+    assert chosen["distinct_finish"]["gain"] == pytest.approx(count / 3)
+    assert chosen["pair_audit"]["near_duplicates"] == 0
+    if boss_like_neutral:
+        rejected = next(row for row in chosen["ranking"] if "boss-like neutral" in row["prompt"]["neutral"])
+        assert not rejected["neutral_eligible"]
+        assert any(row["positive"]["judgment"]["score"] == 1 and row["finish_gain"] > 0
+                   for row in chosen["alternatives"][rejected["case"]])
     manifests = list((output / "training").glob("*/manifest.json"))
     assert len(manifests) == 1
     manifest = json.loads(manifests[0].read_text())
     validate_manifest(manifest)
-    assert len(manifest["rows"]) == 3
+    assert len(manifest["rows"]) == count
+    if boss_like_neutral:
+        assert all("boss-like neutral" not in row["neutral"] for row in manifest["rows"])
+        selected = manifest["rows"][0]["selection"]
+        selected["neutral"]["judgment"]["score"] = .55
+        selected["gain"] = selected["positive"]["judgment"]["score"] - .55
+        manifest["sha256"] = digest({key: value for key, value in manifest.items() if key != "sha256"})
+        with pytest.raises(ValueError, match="qualifying context"):
+            validate_manifest(manifest)
     snapshot = actions.copy()
     assert vibe_cli.main(cli) == 0 and actions == snapshot
     assert vibe_cli.main(cli + ["--rounds", "2"]) == 0
     next_state = json.loads((output / "portfolio.json").read_text())
     assert len(next_state["rounds"]) == 2 and next_state["rounds"][0] == chosen
     assert len(list((output / "training").glob("*/manifest.json"))) == 2
+    if boss_like_neutral:
+        assert all(row["neutral_eligible"] for row in next_state["rounds"][1]["ranking"])
 
 
 def test_legacy_output_uses_original_entrypoint(tmp_path, monkeypatch):

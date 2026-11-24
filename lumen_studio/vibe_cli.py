@@ -3,7 +3,7 @@ import argparse
 import json
 from pathlib import Path
 
-from .vibe import AnimaVibe, main as free_text_main, workflow_graphs
+from .vibe import AnimaVibe, main as free_text_main, neutral_score_limit, workflow_graphs
 from .vibe_curation import collect_portfolio, portfolio_manifest
 from .vibe_profiles import profile_for
 from .vibe_teacher_selection import best_teacher_round, select_collection
@@ -51,7 +51,7 @@ def main(argv=None):
             state, profile, args.out, product=product, writer_model=args.prompt_model, minimum=args.min_score,
             retry_pending=args.retry_pending,
         )
-        result = best_teacher_round(rounds, args.min_score)
+        result = best_teacher_round(rounds, args.min_score, max_neutral_score=neutral_score_limit(state["identity"]))
         summary = dict(portfolio=str(args.out.resolve() / "portfolio.json"), distinct_finish=result["distinct_finish"],
                        near_duplicates=result["pair_audit"]["near_duplicates"], selection="raw",
                        selected_round=result["index"] + 1, completed_rounds=len(state["rounds"]),

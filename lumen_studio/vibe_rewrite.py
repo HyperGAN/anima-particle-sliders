@@ -46,17 +46,23 @@ def rewrite_batch(profile, scenes, writer_model, judge_model, provider, call):
     return rewritten
 
 
-def augment_round(round_, picked, profile, product, root, call, *, writer_model, judge_model, provider):
+def augment_round(round_, picked, profile, product, root, call, *, writer_model, judge_model, provider,
+                  max_neutral_score=1.0):
     families = tuple(profile.families)
     selected = {row["case"]: row for row in picked["selected"]}
     references = {}
     scenes = []
     for i, (case, group) in enumerate(round_["alternatives"].items()):
-        reference = selected.get(case) or min(group, key=lambda row: row["seed"])
+        eligible = [row for row in group if row["neutral"]["judgment"]["score"] <= max_neutral_score]
+        if not eligible:
+            continue
+        reference = selected.get(case) or min(eligible, key=lambda row: row["seed"])
         label = f"scene-{i+1}"
         cue = profile.families[families[i % len(families)]]
         references[label] = reference
         scenes.append(dict(id=label, neutral=reference["neutral"]["output"]["prompt"], treatment=cue))
+    if not scenes:
+        raise RewriteUnavailable("No neutral images meet the teacher score limit")
     rewrites = rewrite_batch(profile, scenes, writer_model, judge_model, provider, call)
     pending = []
     for scene in scenes:
