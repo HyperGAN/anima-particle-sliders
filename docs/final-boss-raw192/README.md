@@ -125,3 +125,14 @@ This recipe subtracts the level-three Daubechies 4 approximation of the added ex
 python -m release_tools.final_boss_targets wavelet-exterior35 \
   --model "$ANIMA_MODEL" --out targets/wavelet-exterior35
 ```
+
+## In-scene costume cues
+
+All three captures use the original neutral and positive trajectories. The fixed blend uses the in-scene costume cue at 35% throughout. The taper uses the position-specific weights from the study. The wavelet recipe applies the exterior correction to the fixed blend. The capture binds the exact original prompt pair and matte before adding the third prompt. [Prompts and weights](ablations/grounded-training-prompts.json) · [Leaderboard results](../leaderboard.md#in-scene-costume-prompts) · [Capture source](../../release_tools/final_boss_targets.py)
+
+```sh
+for recipe in scene-grounded35 scene-grounded-taper35 scene-grounded-wavelet35; do
+  python -m release_tools.final_boss_targets "$recipe" \
+    --model "$ANIMA_MODEL" --out "targets/$recipe"
+done
+```

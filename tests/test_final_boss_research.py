@@ -6,7 +6,9 @@ from types import SimpleNamespace
 import pytest
 import torch
 
-from release_tools.final_boss_targets import RECIPES, STEPS, capture_row, edited_target, final_target
+from release_tools.final_boss_targets import (
+    GROUNDED_COSTUME, GROUNDED_WAVELET, RECIPES, STEPS, capture_row, edited_target, final_target, teacher_rows,
+)
 from release_tools.final_boss_wavelet import low_band
 
 
@@ -118,11 +120,18 @@ def test_new_cue_recipes_reuse_trajectories_and_apply_the_declared_contrast():
     row = {"id": "fixture", "seed": 1, "neutral": "plain", "positive": "boss",
            "explicit_positive": "specific", "alternate_positive": "other"}
     matte = STUDY / "mattes/bridge.png"
+    schedules = {recipe: teacher_rows(STUDY / "training-pairs.json", recipe)[0]["grounded_schedule"]
+                 for recipe in GROUNDED_COSTUME}
+    assert teacher_rows(STUDY / "training-pairs.json", GROUNDED_WAVELET) == teacher_rows(
+        STUDY / "training-pairs.json", "scene-grounded35")
     recipes = ("soft-floor45", "strong-boss-45-mix35", "strong-cues-early3", "strong-cues-late3", "diverse-mean35",
-               "sega-early35", "sega-all35")
-    captures = [capture_row(runtime, row, matte, recipe)["records"] for recipe in recipes]
+               "sega-early35", "sega-all35", *GROUNDED_COSTUME)
+    rows = [row | {"grounded_positive": "other", "grounded_schedule": schedules[recipe]}
+            if recipe in GROUNDED_COSTUME else row for recipe in recipes]
+    captures = [capture_row(runtime, source, matte, recipe)["records"]
+                for source, recipe in zip(rows, recipes, strict=True)]
     for index, fields in enumerate(zip(*captures, strict=True)):
-        control, explicit, first, final, averaged, percentile_early, percentile_all = fields
+        control, explicit, first, final, averaged, percentile_early, percentile_all, *grounded = fields
         step = index % STEPS
         for field in fields:
             assert field["position"] == step and field["trajectory"] == control["trajectory"]
@@ -142,3 +151,8 @@ def test_new_cue_recipes_reuse_trajectories_and_apply_the_declared_contrast():
         expected = expected * ((pure - neutral).norm() / expected.norm())
         torch.testing.assert_close(averaged["positive"] - neutral, expected)
         torch.testing.assert_close((percentile_all["positive"] - neutral).norm(), control_edit.norm())
+        for recipe, captured in zip(GROUNDED_COSTUME, grounded, strict=True):
+            weight = control_edit / (pure - neutral)
+            cue = runtime.predict(control["latent"], step, runtime.encode("other"))
+            expected = edited_target(neutral, pure, weight, schedules[recipe][step], cue)
+            torch.testing.assert_close(captured["positive"], expected)

@@ -21,12 +21,17 @@ RESOLUTION = 512
 STEPS = 10
 REGIONAL_RADII = {"regional-cue-matte": 0, "regional-cue-dilated2": 2, "regional-attire35": 0}
 MATCHED_ATTIRE = ("matched-attire35", "regional-attire35")
+GROUNDED_COSTUME = ("scene-grounded35", "scene-grounded-taper35")
 WAVELET_EXTERIOR = "wavelet-exterior35"
+GROUNDED_WAVELET = "scene-grounded-wavelet35"
+GROUNDED_RECIPES = (*GROUNDED_COSTUME, GROUNDED_WAVELET)
+WAVELET_RECIPES = (WAVELET_EXTERIOR, GROUNDED_WAVELET)
 PERCENTILE_POSITIONS = {"sega-early35": (0, 1, 2), "sega-all35": tuple(range(STEPS))}
 RECIPES = {"prompt-only": (1.0, 0.0), "soft-floor45": (0.45, 0.0),
            "strong-boss-45-mix35": (0.45, 0.35), "strong-cues-early3": (0.45, 0.35),
            "strong-cues-late3": (0.45, 0.35), "diverse-mean35": (0.45, 0.35),
            "matched-attire35": (0.45, 0.35), WAVELET_EXTERIOR: (0.45, 0.35),
+           **dict.fromkeys(GROUNDED_RECIPES, (0.45, 0.35)),
            **dict.fromkeys(REGIONAL_RADII, (0.45, 0.35)),
            **dict.fromkeys(PERCENTILE_POSITIONS, (0.45, 0.0))}
 CUE_POSITIONS = {"strong-cues-early3": (0, 1, 2), "strong-cues-late3": (7, 8, 9)}
@@ -117,6 +122,19 @@ def row_metadata(row):
 
 def teacher_rows(fixture, recipe):
     rows = json.loads(fixture.read_text())["pairs"]
+    if recipe in GROUNDED_RECIPES:
+        study = json.loads((fixture.parent / "ablations/grounded-training-prompts.json").read_text())
+        prompts = {row["id"]: row for row in study["rows"]}
+        schedule = study["mix_by_position"]["scene-grounded35" if recipe == GROUNDED_WAVELET else recipe]
+        if (len(prompts) != len(study["rows"]) or set(prompts) != {row["id"] for row in rows}
+                or len(schedule) != STEPS or not all(0 < strength <= 1 for strength in schedule)
+                or study["background_floor"] != RECIPES[recipe][0]
+                or any((prompts[row["id"]]["neutral"], prompts[row["id"]]["generic_positive"],
+                        prompts[row["id"]]["foreground_matte_sha256"]) != (
+                            row["neutral"], row["positive"], row["matte"]["sha256"]) for row in rows)):
+            raise ValueError("Grounded costume cues must share the recorded teacher pairs, mattes, and ten positions")
+        return [row | {"grounded_positive": prompts[row["id"]]["in_scene_costume"],
+                       "grounded_schedule": schedule} for row in rows]
     if recipe in MATCHED_ATTIRE:
         prompts = json.loads((fixture.parent / "ablations/matched-attire-prompts.json").read_text())["prompts"]
         if (set(prompts) != {row["id"] for row in rows}
@@ -134,7 +152,7 @@ def teacher_rows(fixture, recipe):
 def teacher_cues(runtime, row, recipe):
     if not RECIPES[recipe][1]:
         return ()
-    keys = ("explicit_positive",)
+    keys = ("grounded_positive",) if recipe in GROUNDED_RECIPES else ("explicit_positive",)
     if recipe in MATCHED_ATTIRE:
         keys += ("ordinary_attire",)
     elif recipe == "diverse-mean35":
@@ -169,6 +187,7 @@ def final_target(runtime, latent, timestep, neutral, positive, weight, cue_mix, 
 
 def capture_row(runtime, row, matte_path, recipe):
     floor, cue_mix = RECIPES[recipe]
+    cue_schedule = row["grounded_schedule"] if recipe in GROUNDED_RECIPES else (cue_mix,) * STEPS
     neutral, positive = (runtime.encode(row[key]) for key in ("neutral", "positive"))
     cues = teacher_cues(runtime, row, recipe)
     cue_positions = CUE_POSITIONS.get(recipe, range(STEPS))
@@ -178,7 +197,7 @@ def capture_row(runtime, row, matte_path, recipe):
     weight = floor + (1 - floor) * matte if matte is not None else None
     regional = (matte, REGIONAL_RADII[recipe]) if recipe in REGIONAL_RADII else None
     matched_attire = recipe in MATCHED_ATTIRE
-    wavelet_matte = matte if recipe == WAVELET_EXTERIOR else None
+    wavelet_matte = matte if recipe in WAVELET_RECIPES else None
     n_scheduler, p_scheduler = runtime.scheduler(STEPS), runtime.scheduler(STEPS)
     records = {"neutral": [], "positive": []}
     for position, timestep in enumerate(n_scheduler.timesteps):
@@ -191,7 +210,7 @@ def capture_row(runtime, row, matte_path, recipe):
         for track, latent, base, positive_field in (("neutral", n, vn, vp), ("positive", p, vnp, vpp)):
             active = cues if position in cue_positions else ()
             percentile_active = None if percentile_positions is None else position in percentile_positions
-            target = final_target(runtime, latent, timestep, base, positive_field, weight, cue_mix,
+            target = final_target(runtime, latent, timestep, base, positive_field, weight, cue_schedule[position],
                                   active, regional=regional, percentile_active=percentile_active,
                                   matched_attire=matched_attire, wavelet_matte=wavelet_matte)
             records[track].append(dict(position=position, timestep=float(timestep), trajectory=track,
@@ -258,11 +277,12 @@ def verify_native(runtime, cache, request, fixture=FIXTURE):
             matte = subject_matte(matte_path, latent.shape[-2:], runtime.device) if floor < 1 else None
             weight = floor + (1 - floor) * matte if matte is not None else None
             regional = (matte, REGIONAL_RADII[recipe]) if recipe in REGIONAL_RADII else None
-            wavelet_matte = matte if recipe == WAVELET_EXTERIOR else None
+            wavelet_matte = matte if recipe in WAVELET_RECIPES else None
             position = record["position"]
             cues = teacher_cues(runtime, row, recipe) if position in cue_positions else ()
             percentile_active = None if percentile_positions is None else position in percentile_positions
-            target = final_target(runtime, latent, timestep, neutral, positive, weight, cue_mix,
+            strength = row["grounded_schedule"][position] if recipe in GROUNDED_RECIPES else cue_mix
+            target = final_target(runtime, latent, timestep, neutral, positive, weight, strength,
                                   cues, regional=regional, percentile_active=percentile_active,
                                   matched_attire=matched_attire, wavelet_matte=wavelet_matte)
             if not (torch.equal(neutral.cpu(), record["neutral"]) and torch.equal(target.cpu(), record["positive"])):
