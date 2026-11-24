@@ -1,0 +1,435 @@
+{
+  "scoring_version": "final-boss-distinction-v1",
+  "raw_sha256": "efa9277eef8c455e2cddcf6862f8c4cb9e8cbc6697a75fc09abbc15ac8c05b9f",
+  "cache_sha256": "03a5ad7c0306e39df0db4f40b93c89d9e3266fbc8f8ff504bbf7f4fb83c31557",
+  "cases": [
+    "ranger",
+    "smith",
+    "stationer",
+    "ferryman",
+    "watchmaker",
+    "guide",
+    "guard",
+    "violinist"
+  ],
+  "settings": [
+    {
+      "alpha": 0.6666666666666666,
+      "profile": "early",
+      "gains": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        0.6444445235641115,
+        0.3333333333333333,
+        0.3333333333333333
+      ],
+      "status": "pass",
+      "cases": {
+        "ranger": {
+          "boss_distinction": 0.12,
+          "original_boss_distinction": 0.06,
+          "image_breakage": 0.2966666666666667,
+          "boss_effect": 0.06,
+          "final_boss_score": 5.1288192e-05,
+          "on_sha256": "2e3008f66fe89e60a6561dccf9deb8db66b5a5b162083a5e32a9a3bc70ae1920",
+          "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c",
+          "integrity": "pass"
+        },
+        "smith": {
+          "boss_distinction": 0.09,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.27666666666666667,
+          "boss_effect": 0.009999999999999995,
+          "final_boss_score": 3.814208999999998e-06,
+          "on_sha256": "defef015978db0819c393122d327ad0499b3e36dccdb580d569c106dc376855c",
+          "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245",
+          "integrity": "pass"
+        },
+        "stationer": {
+          "boss_distinction": 0.14,
+          "original_boss_distinction": 0.09,
+          "image_breakage": 0.21666666666666667,
+          "boss_effect": 0.05000000000000002,
+          "final_boss_score": 8.418744444444449e-05,
+          "on_sha256": "952b89e39e868fb632092220370331da22e79f6ff6ad7f248ef4a3010f71ec8d",
+          "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339",
+          "integrity": "pass"
+        },
+        "ferryman": {
+          "boss_distinction": 0.17,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.2333333333333333,
+          "boss_effect": 0.06000000000000001,
+          "final_boss_score": 0.0001732651333333334,
+          "on_sha256": "10f4dabca60e7f3151cba3d745bf6cbe62522dc21ed9dd16f671d2d2e6d7a711",
+          "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b",
+          "integrity": "pass"
+        },
+        "watchmaker": {
+          "boss_distinction": 0.22,
+          "original_boss_distinction": 0.07,
+          "image_breakage": 0.25,
+          "boss_effect": 0.15,
+          "final_boss_score": 0.0008984249999999999,
+          "on_sha256": "a1338ba3547bc38631c2a04cdc4220312325ae413d0befc6e00d7f271e3c2d1d",
+          "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8",
+          "integrity": "pass"
+        },
+        "guide": {
+          "boss_distinction": 0.08,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.2333333333333333,
+          "boss_effect": 0,
+          "final_boss_score": 0.0,
+          "on_sha256": "83fe81af3bad221d0fe76d6a44802e24229c7448de9ae6f334da3d10d15ef31f",
+          "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa",
+          "integrity": "pass"
+        },
+        "guard": {
+          "boss_distinction": 0.14,
+          "original_boss_distinction": 0.07,
+          "image_breakage": 0.2966666666666667,
+          "boss_effect": 0.07,
+          "final_boss_score": 9.50177075555556e-05,
+          "on_sha256": "cda8ed432830a25cdccc4392b4b631e4db249d6be375d184745e8250b0a21022",
+          "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5",
+          "integrity": "pass"
+        },
+        "violinist": {
+          "boss_distinction": 0.21,
+          "original_boss_distinction": 0.09,
+          "image_breakage": 0.37666666666666665,
+          "boss_effect": 0.12,
+          "final_boss_score": 0.0003529512030127542,
+          "on_sha256": "f4249b2091c3ca7c666b68c514c229036fe8477c3adb52d79300435fd8691490",
+          "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50",
+          "integrity": "pass"
+        }
+      },
+      "means": {
+        "boss_distinction": 0.14625,
+        "boss_effect": 0.065,
+        "image_breakage": 0.2725,
+        "final_boss_score": 0.00020736861116826095
+      },
+      "follow_up_review_sha256": "58d739cd9d7458a805cec42e243568b25494842a0ae948a1f0b4744bb405ffa9"
+    },
+    {
+      "alpha": 0.95,
+      "profile": "early",
+      "gains": [
+        1.4249999999999998,
+        1.4249999999999998,
+        1.4249999999999998,
+        1.4249999999999998,
+        1.4249999999999998,
+        1.4249999999999998,
+        1.4249999999999998,
+        0.9183334460788589,
+        0.475,
+        0.475
+      ],
+      "status": "pass",
+      "means": {
+        "boss_distinction": 0.135,
+        "boss_effect": 0.05375,
+        "image_breakage": 0.295,
+        "final_boss_score": 0.00012060828131175976
+      },
+      "cases": {
+        "ranger": {
+          "boss_distinction": 0.12,
+          "original_boss_distinction": 0.06,
+          "image_breakage": 0.33666666666666667,
+          "boss_effect": 0.06,
+          "integrity": "pass",
+          "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c",
+          "on_sha256": "c09ffd3acdaf0caf578fa050088fb8422582d394851f0706d29f066c13045318"
+        },
+        "smith": {
+          "boss_distinction": 0.1,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.29,
+          "boss_effect": 0.020000000000000004,
+          "integrity": "pass",
+          "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245",
+          "on_sha256": "9df98129abeeb1889cd0f22a8828e3927785a42964bac7d159bac639661af1c1"
+        },
+        "stationer": {
+          "boss_distinction": 0.11,
+          "original_boss_distinction": 0.09,
+          "image_breakage": 0.26,
+          "boss_effect": 0.020000000000000004,
+          "integrity": "pass",
+          "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339",
+          "on_sha256": "36ae3d02743a1e4ac46d751a79d1d1211978c4c38d1ae930f53e6157b6fa39b3"
+        },
+        "ferryman": {
+          "boss_distinction": 0.11,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.32666666666666666,
+          "boss_effect": 0,
+          "integrity": "pass",
+          "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b",
+          "on_sha256": "b385e9904be5094e4af7ce818aa48d45c39081e7320e8f6227bfed26eda20f16"
+        },
+        "watchmaker": {
+          "boss_distinction": 0.18,
+          "original_boss_distinction": 0.07,
+          "image_breakage": 0.2866666666666667,
+          "boss_effect": 0.10999999999999999,
+          "integrity": "pass",
+          "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8",
+          "on_sha256": "06c09ad5af2f8e6fb3703970096f21d50ca157914ce95a22cfb1485347447057"
+        },
+        "guide": {
+          "boss_distinction": 0.09,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.20666666666666667,
+          "boss_effect": 0.009999999999999995,
+          "integrity": "pass",
+          "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa",
+          "on_sha256": "9900851d222a09b1671d54921e6a4556943d7a4c73e544e7526ca7a6fd6d3194"
+        },
+        "guard": {
+          "boss_distinction": 0.17,
+          "original_boss_distinction": 0.07,
+          "image_breakage": 0.29333333333333333,
+          "boss_effect": 0.1,
+          "integrity": "pass",
+          "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5",
+          "on_sha256": "47e60157ddd7ccbc2c77a1eee1c8c73d8139ac3fab0b4dcb9cd6c35ae9a5fabb"
+        },
+        "violinist": {
+          "boss_distinction": 0.2,
+          "original_boss_distinction": 0.09,
+          "image_breakage": 0.36000000000000004,
+          "boss_effect": 0.11000000000000001,
+          "integrity": "pass",
+          "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50",
+          "on_sha256": "dfb8b60d2d707c0a3f90fd51d3b8a5a4d6752937e137a0deac8999098c5be54b"
+        }
+      }
+    },
+    {
+      "alpha": 1.2,
+      "profile": "early",
+      "gains": [
+        1.7999999999999998,
+        1.7999999999999998,
+        1.7999999999999998,
+        1.7999999999999998,
+        1.7999999999999998,
+        1.7999999999999998,
+        1.7999999999999998,
+        1.1600001424154007,
+        0.6,
+        0.6
+      ],
+      "status": "pass",
+      "means": {
+        "boss_distinction": 0.15125,
+        "boss_effect": 0.07,
+        "image_breakage": 0.2808333333333333,
+        "final_boss_score": 0.00016187593891638533
+      },
+      "cases": {
+        "ranger": {
+          "boss_distinction": 0.14,
+          "original_boss_distinction": 0.06,
+          "image_breakage": 0.22666666666666668,
+          "boss_effect": 0.08000000000000002,
+          "integrity": "pass",
+          "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c",
+          "on_sha256": "7677fc6623521bd2e8971bdfd610244fb2873cb36aa4954b9ff26ee84e6d219f"
+        },
+        "smith": {
+          "boss_distinction": 0.09,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.29333333333333333,
+          "boss_effect": 0.009999999999999995,
+          "integrity": "pass",
+          "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245",
+          "on_sha256": "4aea7c1d46feadc7dcec24c3736a945a17f3c58d166d4b33237cf32eebc7b751"
+        },
+        "stationer": {
+          "boss_distinction": 0.17,
+          "original_boss_distinction": 0.09,
+          "image_breakage": 0.24333333333333332,
+          "boss_effect": 0.08000000000000002,
+          "integrity": "pass",
+          "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339",
+          "on_sha256": "bda707b7d6fdfcf7a287c2064b4bd54bf98a4925cae9a64f62afa0dc04867750"
+        },
+        "ferryman": {
+          "boss_distinction": 0.18,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.37000000000000005,
+          "boss_effect": 0.06999999999999999,
+          "integrity": "pass",
+          "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b",
+          "on_sha256": "31bced73d7a8e0de471274c0eb7715e2af7e56bfca2af2a46574c26d351becf4"
+        },
+        "watchmaker": {
+          "boss_distinction": 0.15,
+          "original_boss_distinction": 0.07,
+          "image_breakage": 0.30333333333333334,
+          "boss_effect": 0.07999999999999999,
+          "integrity": "pass",
+          "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8",
+          "on_sha256": "9dee3adf4674718949e5d8f51ac7d958dfb083ff6b9e1e3908c1850a3b210642"
+        },
+        "guide": {
+          "boss_distinction": 0.1,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.18333333333333335,
+          "boss_effect": 0.020000000000000004,
+          "integrity": "pass",
+          "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa",
+          "on_sha256": "deeda822f03c0164fca7b69561cca3db57b8f05cb40b5cd92286020b366d4a84"
+        },
+        "guard": {
+          "boss_distinction": 0.18,
+          "original_boss_distinction": 0.07,
+          "image_breakage": 0.26,
+          "boss_effect": 0.10999999999999999,
+          "integrity": "pass",
+          "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5",
+          "on_sha256": "285f5aa542afd89b6be63080d3abca873427b4177d108711cc9e35ebaa41afab"
+        },
+        "violinist": {
+          "boss_distinction": 0.2,
+          "original_boss_distinction": 0.09,
+          "image_breakage": 0.3666666666666667,
+          "boss_effect": 0.11000000000000001,
+          "integrity": "pass",
+          "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50",
+          "on_sha256": "25fd193fa3537c2f4577c4f8b4e92247aa7c3af98780dcdde76cca7101aa0820"
+        }
+      }
+    },
+    {
+      "alpha": 1.45,
+      "profile": "early",
+      "gains": [
+        2.175,
+        2.175,
+        2.175,
+        2.175,
+        2.175,
+        2.175,
+        2.175,
+        1.4016668387519426,
+        0.725,
+        0.725
+      ],
+      "status": "pass",
+      "means": {
+        "boss_distinction": 0.15375,
+        "boss_effect": 0.0725,
+        "image_breakage": 0.325,
+        "final_boss_score": 0.00013243130802642885
+      },
+      "cases": {
+        "ranger": {
+          "boss_distinction": 0.12,
+          "original_boss_distinction": 0.06,
+          "image_breakage": 0.33666666666666667,
+          "boss_effect": 0.06,
+          "integrity": "pass",
+          "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c",
+          "on_sha256": "a7990e7a285beacaf72ae48bc1b1527acb9fcaaac2588f0d4c246a81a13f75c0"
+        },
+        "smith": {
+          "boss_distinction": 0.12,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.31,
+          "boss_effect": 0.039999999999999994,
+          "integrity": "pass",
+          "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245",
+          "on_sha256": "a2bd09bdfa3c4e885d391a1071d08a24fe8b029c321a20f6fb0074bd970d3f30"
+        },
+        "stationer": {
+          "boss_distinction": 0.16,
+          "original_boss_distinction": 0.09,
+          "image_breakage": 0.2333333333333333,
+          "boss_effect": 0.07,
+          "integrity": "pass",
+          "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339",
+          "on_sha256": "5939bc8f1f0601a58d5b9586dc9bdd3185e0f3cf3c042a54a3087aa4e0fd91be"
+        },
+        "ferryman": {
+          "boss_distinction": 0.19,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.37999999999999995,
+          "boss_effect": 0.08,
+          "integrity": "pass",
+          "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b",
+          "on_sha256": "8582c4473c579ac859f9d3a8b88a5fcb0a07064db96a946729845ceb99bec8dc"
+        },
+        "watchmaker": {
+          "boss_distinction": 0.14,
+          "original_boss_distinction": 0.07,
+          "image_breakage": 0.33666666666666667,
+          "boss_effect": 0.07,
+          "integrity": "pass",
+          "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8",
+          "on_sha256": "8ccd6657bb8e44b1f5a773263287a82d2b294d1838b1c6a0019f23f955995697"
+        },
+        "guide": {
+          "boss_distinction": 0.13,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.2966666666666667,
+          "boss_effect": 0.05,
+          "integrity": "pass",
+          "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa",
+          "on_sha256": "7d2cf349cd38df995c17fb5f85bfefc9ceba50f7d33143fcd3306ad5bdaf034b"
+        },
+        "guard": {
+          "boss_distinction": 0.18,
+          "original_boss_distinction": 0.07,
+          "image_breakage": 0.33,
+          "boss_effect": 0.10999999999999999,
+          "integrity": "pass",
+          "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5",
+          "on_sha256": "bbbd4aee7886f114b5114f9092c82eb6cb3b7dbf97cea9f1f99b2aeb34bc5d06"
+        },
+        "violinist": {
+          "boss_distinction": 0.19,
+          "original_boss_distinction": 0.09,
+          "image_breakage": 0.37666666666666665,
+          "boss_effect": 0.1,
+          "integrity": "pass",
+          "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50",
+          "on_sha256": "7ae3c93c75e310c34ca26e67822573ba171a2235b11d0f8dd5994bcabcba3d22"
+        }
+      }
+    }
+  ],
+  "teacher_diagnostic": {
+    "portfolio_neutral_count": 8,
+    "candidate_count": 64,
+    "neutral_boss_min": 0.53,
+    "neutral_boss_max": 0.88,
+    "neutral_boss_scores": [
+      0.6033333333333334,
+      0.8733333333333334,
+      0.88,
+      0.53,
+      0.73,
+      0.75,
+      0.77,
+      0.8566666666666666
+    ]
+  },
+  "native_replay": {
+    "velocity_change_ratio": 0.1067015528678894,
+    "case": "ranger",
+    "matched_on_image_sha256": "2e3008f66fe89e60a6561dccf9deb8db66b5a5b162083a5e32a9a3bc70ae1920"
+  }
+}
