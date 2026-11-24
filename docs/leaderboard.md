@@ -34,6 +34,7 @@ Training ranks compare RAW192 checkpoints from stock ParticleGAN on the same eig
 | 16 | Whole-image scene and lighting projection, 0.65 floor | 2.01 | 1.26 | [Nuisance deflation #254](https://github.com/HyperGAN/particle-sliders/pull/254) |
 | 17 | In-scene costume cue blend, 35% | 1.89 | 1.13 | [Training comparison and renders](#in-scene-costume-prompts) |
 | 18 | Train on adapter rollout states, 0.45 floor | 0.82 | 0.06 | [Rollout protocol #246](https://github.com/HyperGAN/particle-sliders/pull/246) |
+| 19 | Shared main-selected teacher set with a second qualified noise seed in 40 of 100 fields | 0.02 | 0.01 | [Anima comparison](#second-noise-seed-on-the-shared-teacher-set), [Concept Sliders](https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/05660.pdf) |
 | — | Four qualified costume teachers and two soft-foreground contexts | Unmeasured | 0.70 | [Matched renders and diagnostic scores](#costume-teachers-at-update-192) |
 | — | Soft foreground weighting with subject APG | Unmeasured | 0.16 | [Matched renders and per-case scores](#adaptive-projected-guidance-on-the-subject) |
 
@@ -51,7 +52,7 @@ Across 17 qualified RAW192 recipes at shared early strength, Guide reached **10.
 
 The incumbent's saved strength sweep shows different responses across cases. At the confirmed early α 0.95, Smith rose from **13.20** to **32.69** and Stationer from **19.82** to **38.68**, relative to shared early α 2/3. Guide rose from **10.04** to **11.43**. At constant α 1.240625, Guide reached **23.46** with a Boss gain of **0.31** and image damage of **0.13**. That setting averaged **31.15** across eight cases, versus **33.71** at early α 0.95. The higher constant setting improved Guide and Watchmaker while weakening Smith, Stationer, and Violinist. All three settings replay the same RAW checkpoint. [Matched strength samples](final-boss-raw192/ablations/soft-floor45-strength-case-audit.jpg) · [Ten qualified settings and exact gains](final-boss-raw192/ablations/soft-floor45-strength-case-audit.json)
 
-The two-seed trial tests whether greater variation in training states improves these uneven results. It crosses a second frozen noise seed into the neutral and positive tracks at alternating positions. The target remains soft foreground weighting with a 0.45 floor, and the fit uses the same 120 slots and 192 stock ParticleGAN updates as the incumbent. Concept Sliders samples new initial noise during training. This trial adapts that idea to fixed, replayable Anima fields. Native capture is queued. [Concept Sliders](https://arxiv.org/abs/2311.12092) · [Reference trainer](https://github.com/rohitgandikota/sliders/blob/main/trainscripts/textsliders/train_lora.py)
+The two-seed trial tests whether greater variation in training states improves these uneven results. It crosses a second frozen noise seed into the neutral and positive tracks at alternating positions. The target remains soft foreground weighting with a 0.45 floor, and the fit uses the same 120 slots and 192 stock ParticleGAN updates as the incumbent. Concept Sliders samples new initial noise during training. This trial adapts that idea to fixed, replayable Anima fields. It stopped unscored at update 23 of 192 when training restarted on the teacher selection merged to main. The idea was repeated on the shared teacher set. [Result on the shared teacher set](#second-noise-seed-on-the-shared-teacher-set) · [Concept Sliders](https://arxiv.org/abs/2311.12092) · [Reference trainer](https://github.com/rohitgandikota/sliders/blob/main/trainscripts/textsliders/train_lora.py)
 
 ## Update-48 preview
 
@@ -92,6 +93,37 @@ The cache takes 48 teacher fields from the full stronger blend and 72 from soft 
 ## Two-cue average at update 192
 
 The two-cue average completed 192 updates and passed the structural checks at both strengths. At shared early α 2/3 it scored **17.34**, **8.32** points behind soft foreground weighting. It trailed on all eight development cases. Weaker Boss distinction accounted for **4.32** lost points and greater image damage **4.00**. Ranger and watchmaker had the largest declines. The four-case update-96 lead did not carry through to the full comparison. [Eight matched renders](final-boss-raw192/ablations/two-cue-average-raw192-matched.jpg) · [Both strengths and per-case scores](final-boss-raw192/ablations/two-cue-average-raw192-scores.json) · [Training source and commands](final-boss-raw192/README.md#source-for-the-trained-targets)
+
+## Second noise seed on the shared teacher set
+
+Concept Sliders draws fresh initial noise at every training iteration. Native Anima training instead replays a frozen cache of teacher fields captured at one noise seed per scene. This trial adds a second seed to that cache to give the adapter more varied training states. It uses the shared teacher set selected on main: 5 scenes × 20 fields at seed 31237, taken verbatim from `prepare_targets`. In each scene with a qualified second seed, the neutral trajectory's odd positions and the positive trajectory's even positions come from that seed. Seeds 31238, 31239 and 31240 were tried in that fixed order. A seed qualified under main's `qualifies(row, 0.75)` rule and a second judge read. Knight, tree and colossus took 31238, insect took 31239, and wyrm kept its original fields, so 40 of the 100 fields come from a second seed. Training used stock ParticleGAN EMPF updates with seed 1, batch 2, 192 updates, lr 0.00075, `d_lr_mult` 12, `prior_lr_mult` 40, RAW weights and `ema_decay=None`. [Concept Sliders](https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/05660.pdf) · [Reference trainer](https://github.com/rohitgandikota/sliders/blob/main/trainscripts/textsliders/train_lora.py) · [Cache, gate and per-case scores](final-boss-raw192/ablations/shared-seed-split-raw192-scores.json)
+
+The matched control is the stock run on the same 100 unsplit fields from the separate shared-teacher study, with the same options, initialization seed, prompts, sampler and gains. It differs from the seed split only in the 40 crossed fields. Its readings are cited unchanged from that study. The slider-off Boss readings are identical in both arms. The control's early α 2/3 setting is unmeasured in its own study because Jev left violinist's structural check unresolved and no Boss readings were recorded, so there is no matched early comparison.
+
+Under the current leaderboard score, the seed split scored **0.02** at shared early α 2/3 and **0.01** at shared constant α 0.6375. The stock control scored **0.01** at constant strength (0.0133 versus 0.0138 before rounding). Mean Boss distinction was **0.143** early and **0.140** constant for the seed split and **0.129** for stock at constant, against **0.081** with the slider off. The leaderboard recipes above reach 0.35–0.51 at early α 2/3. The run was declared and tuned with the harness score `max(0, Boss_ON − Boss_OFF) × (1 − image_damage)²`, averaged over the eight cases and multiplied by 100. On that score the seed split scored **3.27** early and **3.10** constant, against **2.51** for stock at constant strength. Each cell below gives Boss distinction ON, image damage and the harness case score.
+
+| Case | Boss OFF | Stock, constant 0.6375 | Seed split, constant 0.6375 | Seed split, early 2/3 |
+| --- | ---: | ---: | ---: | ---: |
+| Ranger | 0.06 | 0.12 · 0.26 · 3.26 | 0.14 · 0.24 · 4.62 | 0.14 · 0.25 · 4.54 |
+| Smith | 0.08 | 0.07 · 0.35 · 0.00 | 0.11 · 0.39 · 1.12 | 0.12 · 0.40 · 1.42 |
+| Stationer | 0.09 | 0.12 · 0.30 · 1.48 | 0.17 · 0.28 · 4.19 | 0.13 · 0.22 · 2.43 |
+| Ferryman | 0.11 | 0.15 · 0.26 · 2.19 | 0.12 · 0.26 · 0.55 | 0.13 · 0.16 · 1.42 |
+| Watchmaker | 0.07 | 0.22 · 0.30 · 7.42 | 0.15 · 0.27 · 4.26 | 0.15 · 0.26 · 4.38 |
+| Guide | 0.08 | 0.07 · 0.21 · 0.00 | 0.09 · 0.28 · 0.52 | 0.08 · 0.23 · 0.00 |
+| Guard | 0.07 | 0.13 · 0.35 · 2.56 | 0.19 · 0.22 · 7.36 | 0.22 · 0.24 · 8.66 |
+| Violinist | 0.09 | 0.15 · 0.27 · 3.17 | 0.15 · 0.39 · 2.21 | 0.17 · 0.36 · 3.31 |
+| Mean | 0.081 | 0.129 · 0.288 · 2.51 | 0.140 · 0.290 · 3.10 | 0.143 · 0.264 · 3.27 |
+| Current leaderboard score | | 0.01 | 0.01 | 0.02 |
+
+At constant strength the seed split led on five cases and stock on three under both scores. On the harness score the paired difference averaged **+0.59** points with a per-case standard deviation of **2.52**, a standard error of **0.89**. Guard (+4.80) and watchmaker (−3.16) moved it most. On the current score the difference averaged −0.0005 points. Both arms have one initialization seed, and the difference is within noise.
+
+Neither arm shows a Boss costume, armor, headpiece or silhouette on any case. The visible changes are small: darker clothing on guard and wider framing on watchmaker in both arms, and a wider stationer view in the seed split. All of the seed split's structural checks passed at updates 48, 96, 144 and 192 and on all eight cases at both shared strengths. The quarter checks are a training diagnostic, not a ranking. On the four screening cases at early α 2/3, mean gain under the quarter-check question was **+0.096**, **+0.123**, **+0.127** and **+0.120** for the seed split and **+0.123**, **+0.117**, **+0.154** and **+0.143** for stock at updates 48, 96, 144 and 192. [Eight matched cases at both strengths](final-boss-raw192/ablations/shared-seed-split-raw192-matched.jpg) · [Per-case scores, structural checks and quarter checks](final-boss-raw192/ablations/shared-seed-split-raw192-scores.json)
+
+The pre-declared edit-strength gate required each teacher position's pooled second-seed to first-seed ratio to fall within 0.85–1.15. It stopped the arm with no admissible candidate. Zero-indexed positions 2, 5, 7 and 9 measured 0.845, 0.725, 0.698 and 0.841. Before any training update, the gate was amended to apply the same bounds to the overall ratio. An independent review found the amendment defensible. It also found the second-seed fields systematically weaker: 0.900 overall as a geometric mean and 0.922 norm-weighted, 0.725 and 0.698 at positions 5 and 7, and 0.82 for colossus. The whole crossed cache carries 0.968 of the shared cache's total edit norm. A weaker teacher is therefore an alternative explanation for any difference between the arms. The seed split trained on a GPU shared with other jobs across 12 launch attempts with exact resume; one update interrupted before it completed was set aside and recomputed from the last saved checkpoint.
+
+An earlier run of the same idea on the original six prompt pairs stopped at update 23 of 192 when training restarted on the new teacher selection. It has no score and is not ranked. Its qualification step found that four of six first-choice second seeds failed the original teacher admission checks.
+
+Neither arm produces a Boss character on the shared teacher set at the shared strengths. The seed split does not separate from stock. It is not a candidate for confirmation or alpha tuning.
 
 ## Qualified teacher targets
 
