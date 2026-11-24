@@ -1,0 +1,33 @@
+{
+  "recipe": "guided-teacher-floor45",
+  "capture": {
+    "matched_teacher_inputs": 120,
+    "exact_control_fields": 66,
+    "guided_states": 54,
+    "baseline_cache": "8e28e58e797016219e5f0a0dbbaacccdc37eafaa25468b83ef954bfb2e90e120",
+    "cache": "26835adb19d7ea4f372cc89ac3b57c48f030dc5875509144792059195d7c8bf8"
+  },
+  "native_admission": {
+    "passed": true,
+    "input_fields_checked": 120,
+    "request": {
+      "model_identity": {
+        "model": "circlestone-labs/Anima:turbo-v1.1",
+        "sha256": "eb5520f293d42a19df9242d8d442d5d2068e5121620814418c2b50a97de0552f",
+        "identity_schema": "portable-model-v1",
+        "environment_sha256": "55ac97305e688c56d4a2908243b020e999cf101a05b1cf7e5a3e2c48d4a4d7ba",
+        "runtime_sha256": "0b0dfc97ba76a99ed3f5313695e89e5802ece8e1db4470443a9705692ae579c3"
+      },
+      "cache_fingerprint": "26835adb19d7ea4f372cc89ac3b57c48f030dc5875509144792059195d7c8bf8",
+      "response_shape": [
+        1,
+        16,
+        1,
+        64,
+        64
+      ]
+    }
+  },
+  "guided_trajectories_replayed": 6,
+  "teacher_fields_rechecked": 4
+}
