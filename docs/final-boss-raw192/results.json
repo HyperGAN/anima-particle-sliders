@@ -1,0 +1,3174 @@
+{
+  "objective": {
+    "primary": "mean per-case Final Boss effect adjusted for visible breakage",
+    "effect": "nonnegative matched ON minus OFF Boss distinction",
+    "readability_multiplier": "(1 - Jev image breakage severity)^2",
+    "tiebreak_average": [
+      "identity",
+      "scene",
+      "lighting",
+      "framing",
+      "coherence"
+    ]
+  },
+  "training": {
+    "batch_size": 2,
+    "critic_width": 32,
+    "ema_decay": null,
+    "learning_rates": {
+      "d_lr_mult": 12.0,
+      "lr": 0.00075,
+      "prior_lr_mult": 40.0
+    },
+    "numerical_profile": null,
+    "response_scale": 1.0,
+    "seed": 1,
+    "sigma": 1.0,
+    "total_steps": 192,
+    "variation": "character-final-boss"
+  },
+  "base_model": {
+    "model": "circlestone-labs/Anima:turbo-v1.1",
+    "sha256": "eb5520f293d42a19df9242d8d442d5d2068e5121620814418c2b50a97de0552f",
+    "identity_schema": "portable-model-v1",
+    "environment_sha256": "55ac97305e688c56d4a2908243b020e999cf101a05b1cf7e5a3e2c48d4a4d7ba",
+    "runtime_sha256": "0b0dfc97ba76a99ed3f5313695e89e5802ece8e1db4470443a9705692ae579c3"
+  },
+  "sigmas": [
+    1.0,
+    0.964285671710968,
+    0.9230769872665405,
+    0.8749999403953552,
+    0.8181818127632141,
+    0.75,
+    0.6666666865348816,
+    0.5625,
+    0.4285714626312256,
+    0.25,
+    0.0
+  ],
+  "cases": [
+    {
+      "label": "ranger",
+      "seed": 552242,
+      "prompt": "Anime illustration. Waist-up eye-level portrait of one adult man with wavy blond hair, wearing a russet hiking jacket, standing naturally facing the viewer. Background: alpine cable-car station with a green numbered post, metal railings and snow in the distance. Lighting: bright midday mountain light. Show the surroundings clearly."
+    },
+    {
+      "label": "smith",
+      "seed": 552243,
+      "prompt": "Anime illustration. Waist-up eye-level portrait of one adult woman with a straight gray bob, wearing a denim apron, standing naturally facing the viewer. Background: historical stone smithy with an old iron anvil and tools hanging from a wooden rack. Lighting: steady warm light from the hinged brass wall lamps. Show the surroundings clearly."
+    },
+    {
+      "label": "stationer",
+      "seed": 552244,
+      "prompt": "Anime illustration. Waist-up eye-level portrait of one adult man with short black curls, wearing a brown cardigan, standing naturally facing the viewer. Background: covered town square with orange awnings, terracotta pavement and a blue souvenir sign. Lighting: cool early evening light with street lanterns. Show the surroundings clearly."
+    },
+    {
+      "label": "ferryman",
+      "seed": 553302,
+      "prompt": "Anime illustration. Eye-level half-body portrait of one adult man with gray hair and a short beard, standing naturally facing the viewer. Background: covered ferry pier with a red railing and mooring rope. Lighting: clear morning sunlight. Keep the surrounding setting clearly visible."
+    },
+    {
+      "label": "watchmaker",
+      "seed": 553304,
+      "prompt": "Anime illustration. Eye-level half-body portrait of one older man with wavy white hair, standing naturally facing the viewer. Background: watch repair shop with brass clocks and a cream workbench. Lighting: steady warm lamp light. Keep the surrounding setting clearly visible."
+    },
+    {
+      "label": "guide",
+      "seed": 553305,
+      "prompt": "Anime illustration. Eye-level half-body portrait of one adult woman with dark brown curls and dark skin, standing naturally facing the viewer. Background: sandstone trail shelter with a wooden map board and distant dunes. Lighting: bright late-afternoon daylight. Keep the surrounding setting clearly visible."
+    },
+    {
+      "label": "guard",
+      "seed": 553306,
+      "prompt": "Anime illustration. Eye-level half-body portrait of one adult man with short black hair and round glasses, standing naturally facing the viewer. Background: quiet tiled vestibule with green lockers and a white enamel sign. Lighting: neutral fluorescent light. Keep the surrounding setting clearly visible."
+    },
+    {
+      "label": "violinist",
+      "seed": 553308,
+      "prompt": "Anime illustration. Eye-level half-body portrait of one adult man with straight shoulder-length brown hair, standing naturally facing the viewer. Background: concert hall anteroom with two burgundy chairs and a gilded mirror. Lighting: low warm evening lamp light. Keep the surrounding setting clearly visible."
+    }
+  ],
+  "methods": {
+    "prompt-only": {
+      "step": 192,
+      "raw_sha256": "aa8d6020e355e44d4c8cde3193fb32856e71fc9fd7ca7016ad596fe8474ef11d",
+      "fixed_strength": {
+        "status": "pass",
+        "alpha": 0.6666666666666666,
+        "profile": "early",
+        "gains": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.6444445235641115,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "means": {
+          "final_score": 0.183217430555,
+          "boss_effect": 0.30375,
+          "image_breakage": 0.23083333333333333
+        },
+        "cases": {
+          "ranger": {
+            "boss_distinction": 0.3,
+            "original_boss_distinction": 0.09,
+            "scene": 0.38,
+            "lighting": 0.38,
+            "image_breakage": 0.30333333333333334,
+            "final_score": 0.101922333333,
+            "integrity": "pass",
+            "on_sha256": "8c1983381f278fbfee710a1944a5ae5c22c4f9813ce5b4b36f01206ffe0be8d6",
+            "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+          },
+          "smith": {
+            "boss_distinction": 0.26,
+            "original_boss_distinction": 0.07,
+            "scene": 0.69,
+            "lighting": 0.49,
+            "image_breakage": 0.2733333333333333,
+            "final_score": 0.100328444444,
+            "integrity": "pass",
+            "on_sha256": "3f85be65155ce776789832ddf68cd8f9b62748c0f2bc81b762f67ed82ff326e6",
+            "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+          },
+          "stationer": {
+            "boss_distinction": 0.57,
+            "original_boss_distinction": 0.12,
+            "scene": 0.38,
+            "lighting": 0.55,
+            "image_breakage": 0.24333333333333332,
+            "final_score": 0.257645,
+            "integrity": "pass",
+            "on_sha256": "15944f94d51f082b8b29984e2312ee19a46b73ebcc77454fa239f71f0a275166",
+            "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+          },
+          "ferryman": {
+            "boss_distinction": 0.32,
+            "original_boss_distinction": 0.12,
+            "scene": 0.22,
+            "lighting": 0.2,
+            "image_breakage": 0.22,
+            "final_score": 0.12168,
+            "integrity": "pass",
+            "on_sha256": "3c284333a6232db02a5177c48c30007fa397a6d1336427d005bfc61b62c6135d",
+            "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+          },
+          "watchmaker": {
+            "boss_distinction": 0.38,
+            "original_boss_distinction": 0.1,
+            "scene": 0.51,
+            "lighting": 0.55,
+            "image_breakage": 0.22333333333333336,
+            "final_score": 0.168899111111,
+            "integrity": "pass",
+            "on_sha256": "506b19ce33bdaafff6a6625d956cecbd3a337863d0b13eec569fccaa2afd3494",
+            "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+          },
+          "guide": {
+            "boss_distinction": 0.17,
+            "original_boss_distinction": 0.08,
+            "scene": 0.33,
+            "lighting": 0.49,
+            "image_breakage": 0.21,
+            "final_score": 0.056169,
+            "integrity": "pass",
+            "on_sha256": "a7a1a5ddab6aea703468af76dcb14ee5cd72e3f79661200d9e6acb7e621efac0",
+            "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+          },
+          "guard": {
+            "boss_distinction": 0.72,
+            "original_boss_distinction": 0.07,
+            "scene": 0.49,
+            "lighting": 0.33,
+            "image_breakage": 0.20666666666666667,
+            "final_score": 0.409095555556,
+            "integrity": "pass",
+            "on_sha256": "ae8de48d3093f2f15414a79cf5440f7e7743b4900a17543a1eaf028d88a37a22",
+            "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+          },
+          "violinist": {
+            "boss_distinction": 0.44,
+            "original_boss_distinction": 0.08,
+            "scene": 0.31,
+            "lighting": 0.24,
+            "image_breakage": 0.16666666666666666,
+            "final_score": 0.25,
+            "integrity": "pass",
+            "on_sha256": "7045e646771c164454d6e6181df69cb0714de35b9b5118313dd91dcf6a61ac67",
+            "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+          }
+        }
+      },
+      "matched_constant": {
+        "status": "unmeasured",
+        "alpha": 0.6375,
+        "profile": "constant",
+        "gains": [
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375
+        ],
+        "means": {
+          "final_score": null,
+          "boss_effect": null,
+          "image_breakage": null
+        },
+        "cases": {
+          "ranger": {
+            "boss_distinction": null,
+            "original_boss_distinction": null,
+            "scene": 0.72,
+            "lighting": 0.41,
+            "image_breakage": null,
+            "final_score": null,
+            "integrity": "pass",
+            "on_sha256": "2e69874a6d290f485ccc916a6cf496f0745d59a21609d80f9d2e63e4f66f70cf",
+            "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+          },
+          "smith": {
+            "boss_distinction": null,
+            "original_boss_distinction": null,
+            "scene": 0.61,
+            "lighting": 0.55,
+            "image_breakage": null,
+            "final_score": null,
+            "integrity": "unmeasured",
+            "on_sha256": "7a8e878abb11feb0d3ecd4468ffcd951d8688b69f6a033698cb2b958746e6f32",
+            "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+          },
+          "stationer": {
+            "boss_distinction": null,
+            "original_boss_distinction": null,
+            "scene": 0.61,
+            "lighting": 0.41,
+            "image_breakage": null,
+            "final_score": null,
+            "integrity": "pass",
+            "on_sha256": "1d17745d31e6b4354e115b60aa3cc38963bddea25b9a4654def07eb4704bf0f1",
+            "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+          },
+          "ferryman": {
+            "boss_distinction": null,
+            "original_boss_distinction": null,
+            "scene": 0.52,
+            "lighting": 0.37,
+            "image_breakage": null,
+            "final_score": null,
+            "integrity": "pass",
+            "on_sha256": "0ea54e4b368c5f7fe32e792a31152fc7c3cd2ad9652c32ef4d82d15db92cf67f",
+            "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+          },
+          "watchmaker": {
+            "boss_distinction": null,
+            "original_boss_distinction": null,
+            "scene": 0.66,
+            "lighting": 0.49,
+            "image_breakage": null,
+            "final_score": null,
+            "integrity": "pass",
+            "on_sha256": "f73e97e48ae08ffd5cf4b8af1e149eadf6ff8e60fd10829eb37973d9debccded",
+            "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+          },
+          "guide": {
+            "boss_distinction": null,
+            "original_boss_distinction": null,
+            "scene": 0.42,
+            "lighting": 0.57,
+            "image_breakage": null,
+            "final_score": null,
+            "integrity": "pass",
+            "on_sha256": "1d2121023dfe2a3657885cc9443005066dac9723c38c85fd1a07d0a185e392d5",
+            "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+          },
+          "guard": {
+            "boss_distinction": null,
+            "original_boss_distinction": null,
+            "scene": 0.72,
+            "lighting": 0.32,
+            "image_breakage": null,
+            "final_score": null,
+            "integrity": "pass",
+            "on_sha256": "f1545ef25149cbe834f7ff1e27d886ccf518f8817b815e3827921951afcdc121",
+            "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+          },
+          "violinist": {
+            "boss_distinction": null,
+            "original_boss_distinction": null,
+            "scene": 0.63,
+            "lighting": 0.35,
+            "image_breakage": null,
+            "final_score": null,
+            "integrity": "pass",
+            "on_sha256": "c96aeb95952f84f085cb5ced2253087136b983d26015c5baefc43d7d283426cc",
+            "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+          }
+        }
+      }
+    },
+    "incumbent": {
+      "step": 192,
+      "raw_sha256": "9387394b64c7199b5f0e2a3f545485f9501813b365c883b91babb02b97607739",
+      "fixed_strength": {
+        "status": "pass",
+        "alpha": 0.6666666666666666,
+        "profile": "early",
+        "gains": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.6444445235641115,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "means": {
+          "final_score": 0.178319388889,
+          "boss_effect": 0.32,
+          "image_breakage": 0.25333333333333335
+        },
+        "cases": {
+          "ranger": {
+            "boss_distinction": 0.26,
+            "original_boss_distinction": 0.09,
+            "scene": 0.64,
+            "lighting": 0.39,
+            "image_breakage": 0.25,
+            "final_score": 0.095625,
+            "integrity": "pass",
+            "on_sha256": "1c61f83595a5e837386fb41078aa50c4f212cd48727a46961e978ef98a8734c6",
+            "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+          },
+          "smith": {
+            "boss_distinction": 0.27,
+            "original_boss_distinction": 0.07,
+            "scene": 0.77,
+            "lighting": 0.66,
+            "image_breakage": 0.3433333333333333,
+            "final_score": 0.086242222222,
+            "integrity": "pass",
+            "on_sha256": "d7bc3489b8512bf167517ed9992398ab02dd73a11b11bb67b201d8f61b08a7da",
+            "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+          },
+          "stationer": {
+            "boss_distinction": 0.37,
+            "original_boss_distinction": 0.12,
+            "scene": 0.5,
+            "lighting": 0.34,
+            "image_breakage": 0.22666666666666668,
+            "final_score": 0.149511111111,
+            "integrity": "pass",
+            "on_sha256": "728945b285dd8cb52e1dcb728378f6c925b5f7d5faf384439f9ef9e6cdbcf29f",
+            "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+          },
+          "ferryman": {
+            "boss_distinction": 0.55,
+            "original_boss_distinction": 0.12,
+            "scene": 0.42,
+            "lighting": 0.3,
+            "image_breakage": 0.20666666666666667,
+            "final_score": 0.270632444444,
+            "integrity": "pass",
+            "on_sha256": "41b5b8f489bda5a82d4e954b5121e67f5990264b938e57d93cd59e8f02975245",
+            "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+          },
+          "watchmaker": {
+            "boss_distinction": 0.58,
+            "original_boss_distinction": 0.1,
+            "scene": 0.37,
+            "lighting": 0.35,
+            "image_breakage": 0.21,
+            "final_score": 0.299568,
+            "integrity": "pass",
+            "on_sha256": "44dcd99f95e40b34225436620fcc4d34f2052db4117228cc96aa4392416f4bab",
+            "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+          },
+          "guide": {
+            "boss_distinction": 0.19,
+            "original_boss_distinction": 0.08,
+            "scene": 0.76,
+            "lighting": 0.58,
+            "image_breakage": 0.19666666666666666,
+            "final_score": 0.070987888889,
+            "integrity": "pass",
+            "on_sha256": "03cf948e5ad1b85f46c793d511c9440cfbd9a1fcf3691bc78380b10990cac0bd",
+            "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+          },
+          "guard": {
+            "boss_distinction": 0.65,
+            "original_boss_distinction": 0.07,
+            "scene": 0.46,
+            "lighting": 0.36,
+            "image_breakage": 0.3,
+            "final_score": 0.2842,
+            "integrity": "pass",
+            "on_sha256": "37a407441b2dc730c2c8e2428b1a491c44846d2f733ae06c09376c78ed10f389",
+            "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+          },
+          "violinist": {
+            "boss_distinction": 0.42,
+            "original_boss_distinction": 0.08,
+            "scene": 0.51,
+            "lighting": 0.2,
+            "image_breakage": 0.29333333333333333,
+            "final_score": 0.169788444444,
+            "integrity": "pass",
+            "on_sha256": "1f2f877fd1ab8c902de3c1b622e6210da29d9c715c9b69baeb69fdc51a56b8ce",
+            "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+          }
+        }
+      },
+      "matched_constant": {
+        "status": "pass",
+        "alpha": 0.6375,
+        "profile": "constant",
+        "gains": [
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375
+        ],
+        "means": {
+          "final_score": 0.113015972222,
+          "boss_effect": 0.21375,
+          "image_breakage": 0.27041666666666664
+        },
+        "cases": {
+          "ranger": {
+            "boss_distinction": 0.32,
+            "original_boss_distinction": 0.09,
+            "scene": 0.63,
+            "lighting": 0.33,
+            "image_breakage": 0.27999999999999997,
+            "final_score": 0.119232,
+            "integrity": "pass",
+            "on_sha256": "1efd13d4fdc56259a6759aea704ab462574edc21a82e24c919ba0e033ad17bc6",
+            "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+          },
+          "smith": {
+            "boss_distinction": 0.18,
+            "original_boss_distinction": 0.07,
+            "scene": 0.68,
+            "lighting": 0.62,
+            "image_breakage": 0.3566666666666667,
+            "final_score": 0.045526555556,
+            "integrity": "pass",
+            "on_sha256": "859960f5696fd5c4f2655a2bbaf6f77c72cef098688dc9f9455cd3c914aa288a",
+            "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+          },
+          "stationer": {
+            "boss_distinction": 0.24,
+            "original_boss_distinction": 0.12,
+            "scene": 0.45,
+            "lighting": 0.44,
+            "image_breakage": 0.18333333333333335,
+            "final_score": 0.080033333333,
+            "integrity": "pass",
+            "on_sha256": "784bbbe1a71dd814a5d8e08a6bd241d28cbf02765ee2a4427e7ea1bf6dde37cb",
+            "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+          },
+          "ferryman": {
+            "boss_distinction": 0.38,
+            "original_boss_distinction": 0.12,
+            "scene": 0.35,
+            "lighting": 0.44,
+            "image_breakage": 0.24333333333333332,
+            "final_score": 0.148861555556,
+            "integrity": "pass",
+            "on_sha256": "b27b28c8417fc064237df5a27bcb756c901da6eff61f35ad14ff67f3aeafc297",
+            "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+          },
+          "watchmaker": {
+            "boss_distinction": 0.46,
+            "original_boss_distinction": 0.1,
+            "scene": 0.72,
+            "lighting": 0.45,
+            "image_breakage": 0.2333333333333333,
+            "final_score": 0.2116,
+            "integrity": "pass",
+            "on_sha256": "2c24f9fdb2345f04c944cfda39b77cb4288436149b8103a7bed9c835e4f18840",
+            "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+          },
+          "guide": {
+            "boss_distinction": 0.15,
+            "original_boss_distinction": 0.08,
+            "scene": 0.67,
+            "lighting": 0.67,
+            "image_breakage": 0.24333333333333332,
+            "final_score": 0.040078111111,
+            "integrity": "pass",
+            "on_sha256": "c9296aa8428b052f40c377254814e3e0ccfc8d63a7a6114df23487da35743ea5",
+            "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+          },
+          "guard": {
+            "boss_distinction": 0.45,
+            "original_boss_distinction": 0.07,
+            "scene": 0.59,
+            "lighting": 0.38,
+            "image_breakage": 0.33666666666666667,
+            "final_score": 0.167204222222,
+            "integrity": "pass",
+            "on_sha256": "07987c8678ac98201d06d3948da6cb5cdb5ee5193a8169dd183658dcd7769f54",
+            "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+          },
+          "violinist": {
+            "boss_distinction": 0.26,
+            "original_boss_distinction": 0.08,
+            "scene": 0.72,
+            "lighting": 0.21,
+            "image_breakage": 0.2866666666666667,
+            "final_score": 0.091592,
+            "integrity": "pass",
+            "on_sha256": "b24e111226e632836e267d1d9319dd17cd64edc6085755bfd41df858437fc76f",
+            "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+          }
+        }
+      }
+    },
+    "soft-contexts-45-blend50": {
+      "step": 192,
+      "raw_sha256": "63dced21c5c0a081cf99d3386e69d724a6f8597593392b922766e0dac7f85221",
+      "fixed_strength": {
+        "status": "pass",
+        "alpha": 0.6666666666666666,
+        "profile": "early",
+        "gains": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.6444445235641115,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "means": {
+          "final_score": 0.214133958333,
+          "boss_effect": 0.35625,
+          "image_breakage": 0.22166666666666668
+        },
+        "cases": {
+          "ranger": {
+            "boss_distinction": 0.36,
+            "original_boss_distinction": 0.09,
+            "scene": 0.67,
+            "lighting": 0.45,
+            "image_breakage": 0.25,
+            "final_score": 0.151875,
+            "integrity": "pass",
+            "on_sha256": "d75d3526d47e46e93a2f4757685f04ea2d90d35316b636b07047dd6d0d494d6a",
+            "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+          },
+          "smith": {
+            "boss_distinction": 0.37,
+            "original_boss_distinction": 0.07,
+            "scene": 0.54,
+            "lighting": 0.61,
+            "image_breakage": 0.26,
+            "final_score": 0.16428,
+            "integrity": "pass",
+            "on_sha256": "abb2ad65f9262a6892b17ecffc399793d29cc9166c30dd81d83f0c9055446239",
+            "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+          },
+          "stationer": {
+            "boss_distinction": 0.43,
+            "original_boss_distinction": 0.12,
+            "scene": 0.3,
+            "lighting": 0.24,
+            "image_breakage": 0.18333333333333335,
+            "final_score": 0.206752777778,
+            "integrity": "pass",
+            "on_sha256": "0aca083ca540d223cdcc366b46682580a0b02895e958a3aaf6863856af743970",
+            "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+          },
+          "ferryman": {
+            "boss_distinction": 0.41,
+            "original_boss_distinction": 0.12,
+            "scene": 0.37,
+            "lighting": 0.31,
+            "image_breakage": 0.25333333333333335,
+            "final_score": 0.161678222222,
+            "integrity": "pass",
+            "on_sha256": "79567093294e300e5a3537c518b2ef3cdf2f9e6709727270c823ca46511e005a",
+            "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+          },
+          "watchmaker": {
+            "boss_distinction": 0.64,
+            "original_boss_distinction": 0.1,
+            "scene": 0.61,
+            "lighting": 0.44,
+            "image_breakage": 0.18999999999999997,
+            "final_score": 0.354294,
+            "integrity": "pass",
+            "on_sha256": "4a2f8663244867f205538f7f6f79e210d573f663672dc3a21e50351cc3c3be88",
+            "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+          },
+          "guide": {
+            "boss_distinction": 0.2,
+            "original_boss_distinction": 0.08,
+            "scene": 0.69,
+            "lighting": 0.67,
+            "image_breakage": 0.18000000000000002,
+            "final_score": 0.080688,
+            "integrity": "pass",
+            "on_sha256": "6effa02b5077bf55fa2475a99fed132c932565cc405d9c1def1fbd3473a5816b",
+            "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+          },
+          "guard": {
+            "boss_distinction": 0.72,
+            "original_boss_distinction": 0.07,
+            "scene": 0.63,
+            "lighting": 0.41,
+            "image_breakage": 0.26333333333333336,
+            "final_score": 0.352740555556,
+            "integrity": "pass",
+            "on_sha256": "dc27a4db3a30edda5a87071dd1584a8f87d6a26f7a055dfdcecf1f0323cc6588",
+            "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+          },
+          "violinist": {
+            "boss_distinction": 0.45,
+            "original_boss_distinction": 0.08,
+            "scene": 0.73,
+            "lighting": 0.34,
+            "image_breakage": 0.19333333333333333,
+            "final_score": 0.240763111111,
+            "integrity": "pass",
+            "on_sha256": "886358b6971c9a4cb523b18e1940c3b5617a4bd34fcee5e6792eabb2ceade50f",
+            "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+          }
+        }
+      },
+      "matched_constant": {
+        "status": "pass",
+        "alpha": 0.6375,
+        "profile": "constant",
+        "gains": [
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375
+        ],
+        "means": {
+          "final_score": 0.114033,
+          "boss_effect": 0.2125,
+          "image_breakage": 0.2520833333333333
+        },
+        "cases": {
+          "ranger": {
+            "boss_distinction": 0.19,
+            "original_boss_distinction": 0.09,
+            "scene": 0.43,
+            "lighting": 0.4,
+            "image_breakage": 0.24333333333333332,
+            "final_score": 0.057254444444,
+            "integrity": "pass",
+            "on_sha256": "31c02473a498b75ec6426341dc996b11db4f7f33807e3d7b8ddc5f3a82814aa0",
+            "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+          },
+          "smith": {
+            "boss_distinction": 0.19,
+            "original_boss_distinction": 0.07,
+            "scene": 0.74,
+            "lighting": 0.51,
+            "image_breakage": 0.2966666666666667,
+            "final_score": 0.059361333333,
+            "integrity": "pass",
+            "on_sha256": "5e53f29ae9abbdcbc89a48dcdbb3ec9bfeefcb38d2cd0669d1fb14d0f8f8514a",
+            "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+          },
+          "stationer": {
+            "boss_distinction": 0.35,
+            "original_boss_distinction": 0.12,
+            "scene": 0.43,
+            "lighting": 0.6,
+            "image_breakage": 0.17666666666666667,
+            "final_score": 0.155911888889,
+            "integrity": "pass",
+            "on_sha256": "85267ac0fd157c8975d29fc96291f9d6ddd262d10395538ddfd50fcea2e17c81",
+            "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+          },
+          "ferryman": {
+            "boss_distinction": 0.43,
+            "original_boss_distinction": 0.12,
+            "scene": 0.57,
+            "lighting": 0.49,
+            "image_breakage": 0.20333333333333334,
+            "final_score": 0.196750111111,
+            "integrity": "pass",
+            "on_sha256": "dbae68e2af5e53696b93883b68479c0aa9058138a73978d1e8cab180c3dcc2ae",
+            "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+          },
+          "watchmaker": {
+            "boss_distinction": 0.31,
+            "original_boss_distinction": 0.1,
+            "scene": 0.42,
+            "lighting": 0.44,
+            "image_breakage": 0.26,
+            "final_score": 0.114996,
+            "integrity": "pass",
+            "on_sha256": "d6ac8fdb77ea4787d5bd24b0f39f1d59c2b5265fb2c2863bff189962ad477a87",
+            "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+          },
+          "guide": {
+            "boss_distinction": 0.16,
+            "original_boss_distinction": 0.08,
+            "scene": 0.71,
+            "lighting": 0.69,
+            "image_breakage": 0.18999999999999997,
+            "final_score": 0.052488,
+            "integrity": "pass",
+            "on_sha256": "d5bf3f2ba26b5638dd5f5e0e1512436efca5bf11cc8128f36d8ab6485525335e",
+            "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+          },
+          "guard": {
+            "boss_distinction": 0.52,
+            "original_boss_distinction": 0.07,
+            "scene": 0.65,
+            "lighting": 0.48,
+            "image_breakage": 0.39999999999999997,
+            "final_score": 0.162,
+            "integrity": "pass",
+            "on_sha256": "24ceb5e59825efd3b600647ec7af18433c6193eac4be8382dff46bc2510fa7e6",
+            "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+          },
+          "violinist": {
+            "boss_distinction": 0.28,
+            "original_boss_distinction": 0.08,
+            "scene": 0.82,
+            "lighting": 0.29,
+            "image_breakage": 0.24666666666666667,
+            "final_score": 0.113502222222,
+            "integrity": "pass",
+            "on_sha256": "7ae3b19ea67e04b0e3ec3775a3d7bb25d181b0961c211400d49f91455e211acb",
+            "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+          }
+        }
+      }
+    },
+    "soft-contexts-65-blend50": {
+      "step": 192,
+      "raw_sha256": "accc34e8418073049d1429db30187be261b3e6b5c6f41cd0f0c7c20c30ad3915",
+      "fixed_strength": {
+        "status": "pass",
+        "alpha": 0.6666666666666666,
+        "profile": "early",
+        "gains": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.6444445235641115,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "means": {
+          "final_score": 0.222261638889,
+          "boss_effect": 0.3475,
+          "image_breakage": 0.195
+        },
+        "cases": {
+          "ranger": {
+            "boss_distinction": 0.38,
+            "original_boss_distinction": 0.09,
+            "scene": 0.71,
+            "lighting": 0.49,
+            "image_breakage": 0.22999999999999998,
+            "final_score": 0.171941,
+            "integrity": "pass",
+            "on_sha256": "0f3b58d71a81d414d4970cf5c4cae94de7f03d7bfe185e240017710e45e9883d",
+            "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+          },
+          "smith": {
+            "boss_distinction": 0.37,
+            "original_boss_distinction": 0.07,
+            "scene": 0.64,
+            "lighting": 0.63,
+            "image_breakage": 0.25333333333333335,
+            "final_score": 0.167253333333,
+            "integrity": "pass",
+            "on_sha256": "36831cc549ae70faedab0d28fb8188e00c261a71d8b12adcb8ea0f80835a348d",
+            "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+          },
+          "stationer": {
+            "boss_distinction": 0.49,
+            "original_boss_distinction": 0.12,
+            "scene": 0.37,
+            "lighting": 0.4,
+            "image_breakage": 0.13999999999999999,
+            "final_score": 0.273652,
+            "integrity": "pass",
+            "on_sha256": "14fb0ee5d566608991cd760e0e32c5fa53f5a6bcfb969f8763e4991486eca671",
+            "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+          },
+          "ferryman": {
+            "boss_distinction": 0.45,
+            "original_boss_distinction": 0.12,
+            "scene": 0.22,
+            "lighting": 0.43,
+            "image_breakage": 0.20666666666666667,
+            "final_score": 0.207694666667,
+            "integrity": "pass",
+            "on_sha256": "21dd4ecf0dbc7e10fee929ecc568e3b8bfbb78c14a482f226cfab5e82d57bc5a",
+            "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+          },
+          "watchmaker": {
+            "boss_distinction": 0.64,
+            "original_boss_distinction": 0.1,
+            "scene": 0.69,
+            "lighting": 0.6,
+            "image_breakage": 0.19666666666666666,
+            "final_score": 0.348486,
+            "integrity": "pass",
+            "on_sha256": "bb8794b2b16178e3ae358c7e65fb1593ee7cbe3dfb61755e01a3445aea2da1df",
+            "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+          },
+          "guide": {
+            "boss_distinction": 0.2,
+            "original_boss_distinction": 0.08,
+            "scene": 0.14,
+            "lighting": 0.27,
+            "image_breakage": 0.14666666666666667,
+            "final_score": 0.087381333333,
+            "integrity": "pass",
+            "on_sha256": "eacaa3235e51fd6181820f6f099c945e933b4ec2d40b62770656deb034d75558",
+            "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+          },
+          "guard": {
+            "boss_distinction": 0.65,
+            "original_boss_distinction": 0.07,
+            "scene": 0.5,
+            "lighting": 0.36,
+            "image_breakage": 0.22999999999999998,
+            "final_score": 0.343882,
+            "integrity": "pass",
+            "on_sha256": "d61524fa6b44de7103da0cd0d78d0c887bb138898633fb08a75b6ef2b4fc5209",
+            "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+          },
+          "violinist": {
+            "boss_distinction": 0.33,
+            "original_boss_distinction": 0.08,
+            "scene": 0.5,
+            "lighting": 0.3,
+            "image_breakage": 0.15666666666666665,
+            "final_score": 0.177802777778,
+            "integrity": "pass",
+            "on_sha256": "76787431e26e90cd0355d8cc9d4f434c36845a7df9048b88afd6daf8a1f5db22",
+            "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+          }
+        }
+      },
+      "matched_constant": {
+        "status": "pass",
+        "alpha": 0.6375,
+        "profile": "constant",
+        "gains": [
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375
+        ],
+        "means": {
+          "final_score": 0.115786125,
+          "boss_effect": 0.2025,
+          "image_breakage": 0.2520833333333333
+        },
+        "cases": {
+          "ranger": {
+            "boss_distinction": 0.32,
+            "original_boss_distinction": 0.09,
+            "scene": 0.74,
+            "lighting": 0.48,
+            "image_breakage": 0.21333333333333335,
+            "final_score": 0.142334222222,
+            "integrity": "pass",
+            "on_sha256": "21ee2ab0c6cc947cd9b361a1f8048d734c3348aa0c798f15296266cd97dceffe",
+            "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+          },
+          "smith": {
+            "boss_distinction": 0.16,
+            "original_boss_distinction": 0.07,
+            "scene": 0.74,
+            "lighting": 0.55,
+            "image_breakage": 0.31,
+            "final_score": 0.042849,
+            "integrity": "pass",
+            "on_sha256": "7a703a68e97d456b8e0cfaef386706a1ce7bbf2c9722a5e55986b2da2b24a18f",
+            "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+          },
+          "stationer": {
+            "boss_distinction": 0.29,
+            "original_boss_distinction": 0.12,
+            "scene": 0.47,
+            "lighting": 0.49,
+            "image_breakage": 0.18333333333333335,
+            "final_score": 0.113380555556,
+            "integrity": "pass",
+            "on_sha256": "ed474c11bfa8b6536f992131d2ab9229ded14c403289918287d7e7070d33d603",
+            "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+          },
+          "ferryman": {
+            "boss_distinction": 0.37,
+            "original_boss_distinction": 0.12,
+            "scene": 0.62,
+            "lighting": 0.53,
+            "image_breakage": 0.21666666666666667,
+            "final_score": 0.153402777778,
+            "integrity": "pass",
+            "on_sha256": "081d8724398a8fb9c2f2f736df04cc9c37106dc9f28f0b6d666a2913cd345564",
+            "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+          },
+          "watchmaker": {
+            "boss_distinction": 0.45,
+            "original_boss_distinction": 0.1,
+            "scene": 0.61,
+            "lighting": 0.61,
+            "image_breakage": 0.24666666666666667,
+            "final_score": 0.198628888889,
+            "integrity": "pass",
+            "on_sha256": "02ca967338fd86b3188e5cce13414b508566718d00e696b5bf55d5f450c51446",
+            "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+          },
+          "guide": {
+            "boss_distinction": 0.2,
+            "original_boss_distinction": 0.08,
+            "scene": 0.18,
+            "lighting": 0.38,
+            "image_breakage": 0.26333333333333336,
+            "final_score": 0.065121333333,
+            "integrity": "pass",
+            "on_sha256": "0a2fe9770a385ef4e49c0a6ed8d9faa25deeaab90ee26fe9f055153e317457a7",
+            "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+          },
+          "guard": {
+            "boss_distinction": 0.34,
+            "original_boss_distinction": 0.07,
+            "scene": 0.75,
+            "lighting": 0.64,
+            "image_breakage": 0.26666666666666666,
+            "final_score": 0.1452,
+            "integrity": "pass",
+            "on_sha256": "a9dd548be06e9ead7e6eb92b7696ac305fe1f593891c4b33e29913420db897a8",
+            "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+          },
+          "violinist": {
+            "boss_distinction": 0.22,
+            "original_boss_distinction": 0.08,
+            "scene": 0.65,
+            "lighting": 0.28,
+            "image_breakage": 0.31666666666666665,
+            "final_score": 0.065372222222,
+            "integrity": "pass",
+            "on_sha256": "fea9faedc9ddb1386b1fe3faa5ec443b91d12db58956e7e9065fdf14a3239384",
+            "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+          }
+        }
+      }
+    },
+    "soft-floor45": {
+      "step": 192,
+      "raw_sha256": "5ada5db653b1ebfe543075ed52ad47e1118cfa975fee86ab4f132eb5d793c92b",
+      "fixed_strength": {
+        "status": "pass",
+        "alpha": 0.6666666666666666,
+        "profile": "early",
+        "gains": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.6444445235641115,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "means": {
+          "final_score": 0.256589361111,
+          "boss_effect": 0.4225,
+          "image_breakage": 0.21375
+        },
+        "cases": {
+          "ranger": {
+            "boss_distinction": 0.53,
+            "original_boss_distinction": 0.09,
+            "scene": 0.63,
+            "lighting": 0.51,
+            "image_breakage": 0.19999999999999998,
+            "final_score": 0.2816,
+            "integrity": "pass",
+            "on_sha256": "74abb2636b46aadc8c8f14c9c106eb4621e78d41b2048a5860adf55965df325e",
+            "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+          },
+          "smith": {
+            "boss_distinction": 0.32,
+            "original_boss_distinction": 0.07,
+            "scene": 0.6,
+            "lighting": 0.69,
+            "image_breakage": 0.2733333333333333,
+            "final_score": 0.132011111111,
+            "integrity": "pass",
+            "on_sha256": "2e59aee56e794987762e1e37a9671691c2606a59a4f6b6dfeb103f1cd29bb2f6",
+            "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+          },
+          "stationer": {
+            "boss_distinction": 0.41,
+            "original_boss_distinction": 0.12,
+            "scene": 0.51,
+            "lighting": 0.42,
+            "image_breakage": 0.17333333333333334,
+            "final_score": 0.198179555556,
+            "integrity": "pass",
+            "on_sha256": "1f11f6bdc1a0c4fabc5e993992ad6f75a1bab472408fa6b06539ae2d920f3f52",
+            "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+          },
+          "ferryman": {
+            "boss_distinction": 0.64,
+            "original_boss_distinction": 0.12,
+            "scene": 0.36,
+            "lighting": 0.44,
+            "image_breakage": 0.21333333333333335,
+            "final_score": 0.321799111111,
+            "integrity": "pass",
+            "on_sha256": "d93e26b5721fa3791ef5f19955840e521fe8b9db0b31ab7a410e216b958f823b",
+            "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+          },
+          "watchmaker": {
+            "boss_distinction": 0.74,
+            "original_boss_distinction": 0.1,
+            "scene": 0.54,
+            "lighting": 0.44,
+            "image_breakage": 0.21,
+            "final_score": 0.399424,
+            "integrity": "pass",
+            "on_sha256": "c26a0b5a8c782e658b9ac9a8fed60d7cb6cf4bbded852ef68b3aab709e06eab9",
+            "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+          },
+          "guide": {
+            "boss_distinction": 0.22,
+            "original_boss_distinction": 0.08,
+            "scene": 0.39,
+            "lighting": 0.42,
+            "image_breakage": 0.15333333333333335,
+            "final_score": 0.100358222222,
+            "integrity": "pass",
+            "on_sha256": "6a6979baf73d8f283dcf8956eaa87eab622eb3cdad44b6c9ae9823c7124df517",
+            "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+          },
+          "guard": {
+            "boss_distinction": 0.8,
+            "original_boss_distinction": 0.07,
+            "scene": 0.71,
+            "lighting": 0.35,
+            "image_breakage": 0.26333333333333336,
+            "final_score": 0.396154777778,
+            "integrity": "pass",
+            "on_sha256": "7403f3b7c39f90d55a67da5be9c4f8ab2268db9c7b9934607c9fb6417929ad56",
+            "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+          },
+          "violinist": {
+            "boss_distinction": 0.45,
+            "original_boss_distinction": 0.08,
+            "scene": 0.62,
+            "lighting": 0.37,
+            "image_breakage": 0.22333333333333336,
+            "final_score": 0.223188111111,
+            "integrity": "pass",
+            "on_sha256": "ed95163041eb4c90e92a6ce66b131ed58aa6f061cd0690e3ae94ca9d55c0a923",
+            "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+          }
+        }
+      },
+      "matched_constant": {
+        "status": "pass",
+        "alpha": 0.6375,
+        "profile": "constant",
+        "gains": [
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375
+        ],
+        "means": {
+          "final_score": 0.130613416667,
+          "boss_effect": 0.215,
+          "image_breakage": 0.22208333333333333
+        },
+        "cases": {
+          "ranger": {
+            "boss_distinction": 0.19,
+            "original_boss_distinction": 0.09,
+            "scene": 0.47,
+            "lighting": 0.48,
+            "image_breakage": 0.22333333333333336,
+            "final_score": 0.060321111111,
+            "integrity": "pass",
+            "on_sha256": "93da8de408aed4e8ae3e54fb5d40d7594e590a43816e6208d1bfd7645928f5bc",
+            "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+          },
+          "smith": {
+            "boss_distinction": 0.17,
+            "original_boss_distinction": 0.07,
+            "scene": 0.54,
+            "lighting": 0.6,
+            "image_breakage": 0.31,
+            "final_score": 0.04761,
+            "integrity": "pass",
+            "on_sha256": "ed2349592f7df313d4866b96688e802a9581c144f9b3955eac4fd27453d7509a",
+            "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+          },
+          "stationer": {
+            "boss_distinction": 0.32,
+            "original_boss_distinction": 0.12,
+            "scene": 0.46,
+            "lighting": 0.44,
+            "image_breakage": 0.15,
+            "final_score": 0.1445,
+            "integrity": "pass",
+            "on_sha256": "95cb338c1dcc5291e78f1e6932421bdc50651210936625094fce67578b3dc5b6",
+            "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+          },
+          "ferryman": {
+            "boss_distinction": 0.44,
+            "original_boss_distinction": 0.12,
+            "scene": 0.66,
+            "lighting": 0.5,
+            "image_breakage": 0.15,
+            "final_score": 0.2312,
+            "integrity": "pass",
+            "on_sha256": "5d97c9be2c43227cebc623fb4f8771ee8ce2b85ca835387a34db69f28a516035",
+            "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+          },
+          "watchmaker": {
+            "boss_distinction": 0.32,
+            "original_boss_distinction": 0.1,
+            "scene": 0.53,
+            "lighting": 0.46,
+            "image_breakage": 0.23666666666666666,
+            "final_score": 0.128189111111,
+            "integrity": "pass",
+            "on_sha256": "abfbd092133fd035de4220001387ce1c16bd56c358b9c9e060b7f0c57873d51b",
+            "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+          },
+          "guide": {
+            "boss_distinction": 0.13,
+            "original_boss_distinction": 0.08,
+            "scene": 0.37,
+            "lighting": 0.4,
+            "image_breakage": 0.17,
+            "final_score": 0.034445,
+            "integrity": "pass",
+            "on_sha256": "476e2899cc6f0f5d131e759d677fc3c059c0ed59a2a926354a164744b84fecd6",
+            "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+          },
+          "guard": {
+            "boss_distinction": 0.61,
+            "original_boss_distinction": 0.07,
+            "scene": 0.65,
+            "lighting": 0.35,
+            "image_breakage": 0.25333333333333335,
+            "final_score": 0.301056,
+            "integrity": "pass",
+            "on_sha256": "c251d0477b2538034c9407cea217c8dcbfda0650c1341efaf4f08c8388d2700a",
+            "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+          },
+          "violinist": {
+            "boss_distinction": 0.27,
+            "original_boss_distinction": 0.08,
+            "scene": 0.78,
+            "lighting": 0.31,
+            "image_breakage": 0.2833333333333333,
+            "final_score": 0.097586111111,
+            "integrity": "pass",
+            "on_sha256": "71fdab2b84298680c6cd7dd74be2da499279898663b49489724562c04fda7d25",
+            "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+          }
+        }
+      }
+    },
+    "soft-floor80": {
+      "step": 192,
+      "raw_sha256": "07eb59a80e10097e259c1322ce1c4931323302aac4dd4c3edc5832ca525f3867",
+      "fixed_strength": {
+        "status": "fail",
+        "alpha": 0.6666666666666666,
+        "profile": "early",
+        "gains": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.6444445235641115,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "means": {
+          "final_score": null,
+          "boss_effect": null,
+          "image_breakage": null
+        },
+        "cases": {
+          "ranger": {
+            "boss_distinction": null,
+            "original_boss_distinction": null,
+            "scene": 0.52,
+            "lighting": 0.37,
+            "image_breakage": null,
+            "final_score": null,
+            "integrity": "pass",
+            "on_sha256": "544a25c2fd34aba80ac88026eafeb13e4ab7ff8c604e43a1d91c59bcfd4c5d5a",
+            "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+          },
+          "smith": {
+            "boss_distinction": null,
+            "original_boss_distinction": null,
+            "scene": 0.64,
+            "lighting": 0.64,
+            "image_breakage": null,
+            "final_score": null,
+            "integrity": "pass",
+            "on_sha256": "c1534af5341f4d651c47e42308e2ea95b28c79404fb8aa62b62fffd9027b16b3",
+            "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+          },
+          "stationer": {
+            "boss_distinction": null,
+            "original_boss_distinction": null,
+            "scene": 0.39,
+            "lighting": 0.45,
+            "image_breakage": null,
+            "final_score": null,
+            "integrity": "pass",
+            "on_sha256": "8ad32f4b1200afc4075bb394a4b7b3ed3dcf22de7458cb402d03aa274eb19bfc",
+            "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+          },
+          "ferryman": {
+            "boss_distinction": null,
+            "original_boss_distinction": null,
+            "scene": 0.4,
+            "lighting": 0.36,
+            "image_breakage": null,
+            "final_score": null,
+            "integrity": "pass",
+            "on_sha256": "dee394f282cd7ac982d10a2e164a4a1b91de110a256ae41ad00678fc78c8c867",
+            "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+          },
+          "watchmaker": {
+            "boss_distinction": null,
+            "original_boss_distinction": null,
+            "scene": 0.59,
+            "lighting": 0.4,
+            "image_breakage": null,
+            "final_score": null,
+            "integrity": "fail",
+            "on_sha256": "d85f09d138806178e8bc2fc6965a83eea25879e85968a673a375cddcc758003b",
+            "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+          },
+          "guide": {
+            "boss_distinction": null,
+            "original_boss_distinction": null,
+            "scene": 0.28,
+            "lighting": 0.36,
+            "image_breakage": null,
+            "final_score": null,
+            "integrity": "pass",
+            "on_sha256": "8bccb3b6a8a8854dfb30bf52e10554af06bc9012597914006a56cb057949f5e9",
+            "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+          },
+          "guard": {
+            "boss_distinction": null,
+            "original_boss_distinction": null,
+            "scene": 0.47,
+            "lighting": 0.25,
+            "image_breakage": null,
+            "final_score": null,
+            "integrity": "pass",
+            "on_sha256": "324b5b9833f2138dad4d195c979db4531422f4167f89999d1e8c7eae8bcd2d03",
+            "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+          },
+          "violinist": {
+            "boss_distinction": null,
+            "original_boss_distinction": null,
+            "scene": 0.32,
+            "lighting": 0.19,
+            "image_breakage": null,
+            "final_score": null,
+            "integrity": "pass",
+            "on_sha256": "ecaa773fd9ca72b3e6681232c3fd74335e9d569a7cb67e496d1c3f25b51d9414",
+            "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+          }
+        }
+      },
+      "matched_constant": {
+        "status": "fail",
+        "alpha": 0.6375,
+        "profile": "constant",
+        "gains": [
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375
+        ],
+        "means": {
+          "final_score": null,
+          "boss_effect": null,
+          "image_breakage": null
+        },
+        "cases": {
+          "ranger": {
+            "boss_distinction": null,
+            "original_boss_distinction": null,
+            "scene": 0.61,
+            "lighting": 0.47,
+            "image_breakage": null,
+            "final_score": null,
+            "integrity": "pass",
+            "on_sha256": "1083d371129125af42415d8761d25b4b65ff5040d78aabdf8f32e6545084a6e0",
+            "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+          },
+          "smith": {
+            "boss_distinction": null,
+            "original_boss_distinction": null,
+            "scene": 0.66,
+            "lighting": 0.62,
+            "image_breakage": null,
+            "final_score": null,
+            "integrity": "pass",
+            "on_sha256": "540cfd30b12631d6aa46e17fcf1d73855d50d97e40768019a1b24230f4518137",
+            "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+          },
+          "stationer": {
+            "boss_distinction": null,
+            "original_boss_distinction": null,
+            "scene": 0.66,
+            "lighting": 0.41,
+            "image_breakage": null,
+            "final_score": null,
+            "integrity": "pass",
+            "on_sha256": "b5068cd19bbff23bd00999ef6206c4d55b4784684d725c122e0c8a9632d174e0",
+            "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+          },
+          "ferryman": {
+            "boss_distinction": null,
+            "original_boss_distinction": null,
+            "scene": 0.68,
+            "lighting": 0.34,
+            "image_breakage": null,
+            "final_score": null,
+            "integrity": "pass",
+            "on_sha256": "78054d3f2d0808c0b908320c0dace5e9a6f0cc69701b4e23678bede3df5c7105",
+            "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+          },
+          "watchmaker": {
+            "boss_distinction": null,
+            "original_boss_distinction": null,
+            "scene": 0.57,
+            "lighting": 0.42,
+            "image_breakage": null,
+            "final_score": null,
+            "integrity": "fail",
+            "on_sha256": "8f61240c48715d70f55f62e6dce986df0699ec9145d200aa9d9ef515cf8607cb",
+            "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+          },
+          "guide": {
+            "boss_distinction": null,
+            "original_boss_distinction": null,
+            "scene": 0.7,
+            "lighting": 0.66,
+            "image_breakage": null,
+            "final_score": null,
+            "integrity": "pass",
+            "on_sha256": "d9f39f22c9b393bbacf1498aa8c7ad429c68b75898134d8a44853560c8b14689",
+            "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+          },
+          "guard": {
+            "boss_distinction": null,
+            "original_boss_distinction": null,
+            "scene": 0.57,
+            "lighting": 0.25,
+            "image_breakage": null,
+            "final_score": null,
+            "integrity": "pass",
+            "on_sha256": "eba215e5912afbef48062934a3ecc256066223bd29b00f7b9f032a7254d8b43d",
+            "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+          },
+          "violinist": {
+            "boss_distinction": null,
+            "original_boss_distinction": null,
+            "scene": 0.45,
+            "lighting": 0.33,
+            "image_breakage": null,
+            "final_score": null,
+            "integrity": "pass",
+            "on_sha256": "982878fba254f7ca75a5c50f1ddefd7b9f0f28478d7d3276ee327c66dd8cdde5",
+            "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+          }
+        }
+      }
+    },
+    "soft-projection-65-blend50": {
+      "step": 192,
+      "raw_sha256": "e1eb9702f775aefe837e21b1b34f17043c69e6a73fef6692e0b22d580b66f9c8",
+      "fixed_strength": {
+        "status": "pass",
+        "alpha": 0.6666666666666666,
+        "profile": "early",
+        "gains": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.6444445235641115,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "means": {
+          "final_score": 0.187374416667,
+          "boss_effect": 0.29375,
+          "image_breakage": 0.20375
+        },
+        "cases": {
+          "ranger": {
+            "boss_distinction": 0.29,
+            "original_boss_distinction": 0.09,
+            "scene": 0.71,
+            "lighting": 0.56,
+            "image_breakage": 0.18666666666666668,
+            "final_score": 0.132302222222,
+            "integrity": "pass",
+            "on_sha256": "2a879844ff756aa2cc3138faef3d58b72ea40e77abc975d7f080f72baa835db9",
+            "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+          },
+          "smith": {
+            "boss_distinction": 0.24,
+            "original_boss_distinction": 0.07,
+            "scene": 0.69,
+            "lighting": 0.72,
+            "image_breakage": 0.32,
+            "final_score": 0.078608,
+            "integrity": "pass",
+            "on_sha256": "b412995183ca4d3c498b231f6e7112789036cf08c5160c0b5830e51985a7ac55",
+            "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+          },
+          "stationer": {
+            "boss_distinction": 0.5,
+            "original_boss_distinction": 0.12,
+            "scene": 0.54,
+            "lighting": 0.35,
+            "image_breakage": 0.18666666666666668,
+            "final_score": 0.251374222222,
+            "integrity": "pass",
+            "on_sha256": "9da8050d4931d747f3bed18091baf4cb547974dc0f4d1693a622501e0d7d2fd3",
+            "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+          },
+          "ferryman": {
+            "boss_distinction": 0.41,
+            "original_boss_distinction": 0.12,
+            "scene": 0.37,
+            "lighting": 0.43,
+            "image_breakage": 0.15333333333333335,
+            "final_score": 0.207884888889,
+            "integrity": "pass",
+            "on_sha256": "be6c373deecfe4b83419bafae7397d58f722cb709e8be231bdeb1eeda5317af5",
+            "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+          },
+          "watchmaker": {
+            "boss_distinction": 0.44,
+            "original_boss_distinction": 0.1,
+            "scene": 0.53,
+            "lighting": 0.46,
+            "image_breakage": 0.19666666666666666,
+            "final_score": 0.219417111111,
+            "integrity": "pass",
+            "on_sha256": "df4e1b7e095e689926bd9ba09bbcf66eb6ed938354fe91b37d9183e2bd44a29d",
+            "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+          },
+          "guide": {
+            "boss_distinction": 0.19,
+            "original_boss_distinction": 0.08,
+            "scene": 0.4,
+            "lighting": 0.36,
+            "image_breakage": 0.16666666666666666,
+            "final_score": 0.076388888889,
+            "integrity": "pass",
+            "on_sha256": "09ac7ac39312bda4699d8065369e4bae5bd370dbe182dd46cf68b0d145f90045",
+            "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+          },
+          "guard": {
+            "boss_distinction": 0.62,
+            "original_boss_distinction": 0.07,
+            "scene": 0.33,
+            "lighting": 0.3,
+            "image_breakage": 0.22,
+            "final_score": 0.33462,
+            "integrity": "pass",
+            "on_sha256": "9da41e5878a54ed403c0f03c7e291aa69fac5c64db53bee10da7aa7286ed8240",
+            "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+          },
+          "violinist": {
+            "boss_distinction": 0.39,
+            "original_boss_distinction": 0.08,
+            "scene": 0.19,
+            "lighting": 0.28,
+            "image_breakage": 0.19999999999999998,
+            "final_score": 0.1984,
+            "integrity": "pass",
+            "on_sha256": "4bca6b1fc3e87a495444b49ec4039aa388574bd4392fa4bcfe4790159155cf86",
+            "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+          }
+        }
+      },
+      "matched_constant": {
+        "status": "pass",
+        "alpha": 0.6375,
+        "profile": "constant",
+        "gains": [
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375
+        ],
+        "means": {
+          "final_score": 0.137168388889,
+          "boss_effect": 0.235,
+          "image_breakage": 0.23625000000000002
+        },
+        "cases": {
+          "ranger": {
+            "boss_distinction": 0.29,
+            "original_boss_distinction": 0.09,
+            "scene": 0.67,
+            "lighting": 0.43,
+            "image_breakage": 0.25,
+            "final_score": 0.1125,
+            "integrity": "pass",
+            "on_sha256": "7136b7ba3684b0e1cff88631f9114b22a9f68ce366fd52542b6c0c03059e7181",
+            "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+          },
+          "smith": {
+            "boss_distinction": 0.18,
+            "original_boss_distinction": 0.07,
+            "scene": 0.75,
+            "lighting": 0.56,
+            "image_breakage": 0.3,
+            "final_score": 0.0539,
+            "integrity": "pass",
+            "on_sha256": "2cf9c13099b208d863fa98d307a81f589b83b3c5dfbbfa02c8521628e4c3b0d1",
+            "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+          },
+          "stationer": {
+            "boss_distinction": 0.29,
+            "original_boss_distinction": 0.12,
+            "scene": 0.79,
+            "lighting": 0.7,
+            "image_breakage": 0.21333333333333335,
+            "final_score": 0.105203555556,
+            "integrity": "pass",
+            "on_sha256": "1051969be604dfc3d090605740d3eeeaa00714a510263ac9e744e06822b96108",
+            "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+          },
+          "ferryman": {
+            "boss_distinction": 0.36,
+            "original_boss_distinction": 0.12,
+            "scene": 0.65,
+            "lighting": 0.49,
+            "image_breakage": 0.19333333333333333,
+            "final_score": 0.156170666667,
+            "integrity": "pass",
+            "on_sha256": "e3c42801f3044517749d7845f61466391d8170c11e37cf15eb81c417b410efd2",
+            "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+          },
+          "watchmaker": {
+            "boss_distinction": 0.6,
+            "original_boss_distinction": 0.1,
+            "scene": 0.57,
+            "lighting": 0.58,
+            "image_breakage": 0.22666666666666668,
+            "final_score": 0.299022222222,
+            "integrity": "pass",
+            "on_sha256": "450976b5ce965d5e05e2c69a9d8587078ab712e161d68604c081ba4a6dfff51f",
+            "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+          },
+          "guide": {
+            "boss_distinction": 0.19,
+            "original_boss_distinction": 0.08,
+            "scene": 0.51,
+            "lighting": 0.46,
+            "image_breakage": 0.21333333333333335,
+            "final_score": 0.068072888889,
+            "integrity": "pass",
+            "on_sha256": "50c71e2a388490370fb9062805bdec979794f827194dda81c98de3e78bff71b8",
+            "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+          },
+          "guard": {
+            "boss_distinction": 0.47,
+            "original_boss_distinction": 0.07,
+            "scene": 0.68,
+            "lighting": 0.38,
+            "image_breakage": 0.2733333333333333,
+            "final_score": 0.211217777778,
+            "integrity": "pass",
+            "on_sha256": "90eb700351f1fe6c11c6a3a84c6c59a18c7a03b0728a99350b909ae986781b28",
+            "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+          },
+          "violinist": {
+            "boss_distinction": 0.23,
+            "original_boss_distinction": 0.08,
+            "scene": 0.49,
+            "lighting": 0.26,
+            "image_breakage": 0.22,
+            "final_score": 0.09126,
+            "integrity": "pass",
+            "on_sha256": "547058081050300025ce669d2442c9fe927c8dfea6f5da4c45292c3d7d1b8394",
+            "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+          }
+        }
+      }
+    },
+    "soft45-adapter-rollout": {
+      "step": 192,
+      "raw_sha256": "df22cd78ce09f21694a9de893fffd7fb617d17bdf0021d4578eaec9fcc2275ea",
+      "fixed_strength": {
+        "status": "pass",
+        "alpha": 0.6666666666666666,
+        "profile": "early",
+        "gains": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.6444445235641115,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "means": {
+          "final_score": 0.116070458333,
+          "boss_effect": 0.255,
+          "image_breakage": 0.31958333333333333
+        },
+        "cases": {
+          "ranger": {
+            "boss_distinction": 0.27,
+            "original_boss_distinction": 0.09,
+            "scene": 0.62,
+            "lighting": 0.34,
+            "image_breakage": 0.3233333333333333,
+            "final_score": 0.082418,
+            "integrity": "pass",
+            "on_sha256": "1b36b603305ea62505c0dec04a436e5f7786a8802a1ff4f5c1d178b2120c5897",
+            "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+          },
+          "smith": {
+            "boss_distinction": 0.26,
+            "original_boss_distinction": 0.07,
+            "scene": 0.48,
+            "lighting": 0.4,
+            "image_breakage": 0.33666666666666667,
+            "final_score": 0.083602111111,
+            "integrity": "pass",
+            "on_sha256": "8c9d0884904a978145d4d7b99856c129c24b7aed647a71ed4a63137e1c3c0d65",
+            "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+          },
+          "stationer": {
+            "boss_distinction": 0.33,
+            "original_boss_distinction": 0.12,
+            "scene": 0.54,
+            "lighting": 0.49,
+            "image_breakage": 0.23666666666666666,
+            "final_score": 0.122362333333,
+            "integrity": "pass",
+            "on_sha256": "56dd42650b57f07546c18e494d493ba187ba00f7bd8921e45db1168b1859fef9",
+            "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+          },
+          "ferryman": {
+            "boss_distinction": 0.27,
+            "original_boss_distinction": 0.12,
+            "scene": 0.38,
+            "lighting": 0.24,
+            "image_breakage": 0.31666666666666665,
+            "final_score": 0.070041666667,
+            "integrity": "pass",
+            "on_sha256": "8a66941315c91b03282f87069edcdc25a0af9ea94a8bff359e3f0164b2ac5c09",
+            "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+          },
+          "watchmaker": {
+            "boss_distinction": 0.48,
+            "original_boss_distinction": 0.1,
+            "scene": 0.42,
+            "lighting": 0.42,
+            "image_breakage": 0.45,
+            "final_score": 0.11495,
+            "integrity": "pass",
+            "on_sha256": "c0928b034e4172633a7494a4e6c58f1b908c260facfb5cd49aefe7ac9eede109",
+            "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+          },
+          "guide": {
+            "boss_distinction": 0.19,
+            "original_boss_distinction": 0.08,
+            "scene": 0.35,
+            "lighting": 0.4,
+            "image_breakage": 0.22999999999999998,
+            "final_score": 0.065219,
+            "integrity": "pass",
+            "on_sha256": "2694fee02d95e060c6f9624af7084b544fe0c119de832a8f35c167f281100dcb",
+            "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+          },
+          "guard": {
+            "boss_distinction": 0.54,
+            "original_boss_distinction": 0.07,
+            "scene": 0.73,
+            "lighting": 0.29,
+            "image_breakage": 0.2333333333333333,
+            "final_score": 0.276255555556,
+            "integrity": "pass",
+            "on_sha256": "c49255a6f1ebe3fa06ae78a8ba630d0a6806c8c6d0c2417d9a9178afb61c1939",
+            "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+          },
+          "violinist": {
+            "boss_distinction": 0.43,
+            "original_boss_distinction": 0.08,
+            "scene": 0.41,
+            "lighting": 0.17,
+            "image_breakage": 0.43,
+            "final_score": 0.113715,
+            "integrity": "pass",
+            "on_sha256": "6abd9ef0134bdaaaa6a4353c8616f1f251d21f9136b72e193d10fcf54ad6f993",
+            "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+          }
+        }
+      },
+      "matched_constant": {
+        "status": "pass",
+        "alpha": 0.6375,
+        "profile": "constant",
+        "gains": [
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375
+        ],
+        "means": {
+          "final_score": 0.054925541667,
+          "boss_effect": 0.11625,
+          "image_breakage": 0.3091666666666667
+        },
+        "cases": {
+          "ranger": {
+            "boss_distinction": 0.2,
+            "original_boss_distinction": 0.09,
+            "scene": 0.64,
+            "lighting": 0.34,
+            "image_breakage": 0.24666666666666667,
+            "final_score": 0.062426222222,
+            "integrity": "pass",
+            "on_sha256": "f0a7638bb992652cfe41746cfefd23cd767a9469e01a2b81d19428ecb2eccf80",
+            "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+          },
+          "smith": {
+            "boss_distinction": 0.2,
+            "original_boss_distinction": 0.07,
+            "scene": 0.54,
+            "lighting": 0.5,
+            "image_breakage": 0.41333333333333333,
+            "final_score": 0.044743111111,
+            "integrity": "pass",
+            "on_sha256": "3b6d47b5b6fde23b2c7645bf6fd1655e7f3e15074ac50578d07d9b3c99ce007e",
+            "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+          },
+          "stationer": {
+            "boss_distinction": 0.22,
+            "original_boss_distinction": 0.12,
+            "scene": 0.57,
+            "lighting": 0.51,
+            "image_breakage": 0.23666666666666666,
+            "final_score": 0.058267777778,
+            "integrity": "pass",
+            "on_sha256": "29d1dea3b4f6525dead3ad1a424921a96fd1028befa02cf5e9e19b94612c2bce",
+            "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+          },
+          "ferryman": {
+            "boss_distinction": 0.19,
+            "original_boss_distinction": 0.12,
+            "scene": 0.43,
+            "lighting": 0.31,
+            "image_breakage": 0.3066666666666667,
+            "final_score": 0.033649777778,
+            "integrity": "pass",
+            "on_sha256": "7c6457d6b65611125add6c8ee15d2c363c5d1de94592bb66b4330c4bb9b8f0af",
+            "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+          },
+          "watchmaker": {
+            "boss_distinction": 0.24,
+            "original_boss_distinction": 0.1,
+            "scene": 0.6,
+            "lighting": 0.45,
+            "image_breakage": 0.41333333333333333,
+            "final_score": 0.048184888889,
+            "integrity": "pass",
+            "on_sha256": "bd0e63d57088b542b4046435823662c93d48e53c7bbb045e37cea3339c895b89",
+            "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+          },
+          "guide": {
+            "boss_distinction": 0.13,
+            "original_boss_distinction": 0.08,
+            "scene": 0.52,
+            "lighting": 0.46,
+            "image_breakage": 0.2866666666666667,
+            "final_score": 0.025442222222,
+            "integrity": "pass",
+            "on_sha256": "46408edaa13dbff708b9776c35b8880e0f762a34dfd687673d23995eaf9e407d",
+            "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+          },
+          "guard": {
+            "boss_distinction": 0.2,
+            "original_boss_distinction": 0.07,
+            "scene": 0.72,
+            "lighting": 0.25,
+            "image_breakage": 0.26333333333333336,
+            "final_score": 0.070548111111,
+            "integrity": "pass",
+            "on_sha256": "c4c32ca0efedcc316b73b3fb7c8e50f32ab1f4a47df11dd28fcd30dd2df4af84",
+            "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+          },
+          "violinist": {
+            "boss_distinction": 0.28,
+            "original_boss_distinction": 0.08,
+            "scene": 0.57,
+            "lighting": 0.18,
+            "image_breakage": 0.3066666666666667,
+            "final_score": 0.096142222222,
+            "integrity": "pass",
+            "on_sha256": "e9274d1105a71297dd8cd92cae256c8e77703409c51b308b14c1ff4ee247acb6",
+            "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+          }
+        }
+      }
+    },
+    "soft45-background-orthogonal": {
+      "step": 192,
+      "raw_sha256": "2500b7dda70205b331386cf1a44cc0238ab70c7c66f494df938c512ac0df1fdb",
+      "fixed_strength": {
+        "status": "pass",
+        "alpha": 0.6666666666666666,
+        "profile": "early",
+        "gains": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.6444445235641115,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "means": {
+          "final_score": 0.222224347222,
+          "boss_effect": 0.4075,
+          "image_breakage": 0.25125
+        },
+        "cases": {
+          "ranger": {
+            "boss_distinction": 0.42,
+            "original_boss_distinction": 0.09,
+            "scene": 0.46,
+            "lighting": 0.37,
+            "image_breakage": 0.25,
+            "final_score": 0.185625,
+            "integrity": "pass",
+            "on_sha256": "78e39253b56de16a0dc033d8bf99f6f58de597009fd4ea3ac00749ebcc85b9d2",
+            "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+          },
+          "smith": {
+            "boss_distinction": 0.55,
+            "original_boss_distinction": 0.07,
+            "scene": 0.63,
+            "lighting": 0.69,
+            "image_breakage": 0.38999999999999996,
+            "final_score": 0.178608,
+            "integrity": "pass",
+            "on_sha256": "87f36c2530ed22edcfe59add14f9c59e3a0f15e77351c0272840a9fd635eb4af",
+            "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+          },
+          "stationer": {
+            "boss_distinction": 0.43,
+            "original_boss_distinction": 0.12,
+            "scene": 0.59,
+            "lighting": 0.54,
+            "image_breakage": 0.21,
+            "final_score": 0.193471,
+            "integrity": "pass",
+            "on_sha256": "d94f5a2e8a597f86d5d88ac56e3bd8f5f910ace9c56b46fe021c8a14ffe56c71",
+            "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+          },
+          "ferryman": {
+            "boss_distinction": 0.65,
+            "original_boss_distinction": 0.12,
+            "scene": 0.45,
+            "lighting": 0.34,
+            "image_breakage": 0.22333333333333336,
+            "final_score": 0.319701888889,
+            "integrity": "pass",
+            "on_sha256": "2b53fdb4bdef96afcc9ef35288a2571bd99f7adaf36c45c42108d74f475ab688",
+            "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+          },
+          "watchmaker": {
+            "boss_distinction": 0.69,
+            "original_boss_distinction": 0.1,
+            "scene": 0.53,
+            "lighting": 0.35,
+            "image_breakage": 0.29333333333333333,
+            "final_score": 0.294632888889,
+            "integrity": "pass",
+            "on_sha256": "5a35444a640cb90777dc72f689e76c616651a2edbdfb0755297b89863cc51d59",
+            "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+          },
+          "guide": {
+            "boss_distinction": 0.2,
+            "original_boss_distinction": 0.08,
+            "scene": 0.63,
+            "lighting": 0.44,
+            "image_breakage": 0.15333333333333335,
+            "final_score": 0.086021333333,
+            "integrity": "pass",
+            "on_sha256": "5222721a6804bda79edefc12879ef909de3afe753f3d54474fec53c54b9f5ac4",
+            "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+          },
+          "guard": {
+            "boss_distinction": 0.59,
+            "original_boss_distinction": 0.07,
+            "scene": 0.62,
+            "lighting": 0.43,
+            "image_breakage": 0.21666666666666667,
+            "final_score": 0.319077777778,
+            "integrity": "pass",
+            "on_sha256": "893440b3b740906f8e44a2987e3e1e2fa0a651041314de6b15ced5e1141ff56e",
+            "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+          },
+          "violinist": {
+            "boss_distinction": 0.46,
+            "original_boss_distinction": 0.08,
+            "scene": 0.55,
+            "lighting": 0.33,
+            "image_breakage": 0.2733333333333333,
+            "final_score": 0.200656888889,
+            "integrity": "pass",
+            "on_sha256": "28f86916353eac2b8d5f0c516d80e195f5f4ae87912ec6eeaa0b9185f1044cb8",
+            "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+          }
+        }
+      },
+      "matched_constant": {
+        "status": "pass",
+        "alpha": 0.6375,
+        "profile": "constant",
+        "gains": [
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375
+        ],
+        "means": {
+          "final_score": 0.115129222222,
+          "boss_effect": 0.2125,
+          "image_breakage": 0.2579166666666667
+        },
+        "cases": {
+          "ranger": {
+            "boss_distinction": 0.19,
+            "original_boss_distinction": 0.09,
+            "scene": 0.59,
+            "lighting": 0.57,
+            "image_breakage": 0.23666666666666666,
+            "final_score": 0.058267777778,
+            "integrity": "pass",
+            "on_sha256": "1c07dc521cae441b5274580abe175071699765efff6405951ffdb51bfc99305e",
+            "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+          },
+          "smith": {
+            "boss_distinction": 0.17,
+            "original_boss_distinction": 0.07,
+            "scene": 0.78,
+            "lighting": 0.63,
+            "image_breakage": 0.32,
+            "final_score": 0.04624,
+            "integrity": "pass",
+            "on_sha256": "8beb83c250ace406bf0790d3c18e037c3e7122cb5a6ab1daffdf89910982aacf",
+            "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+          },
+          "stationer": {
+            "boss_distinction": 0.2,
+            "original_boss_distinction": 0.12,
+            "scene": 0.48,
+            "lighting": 0.47,
+            "image_breakage": 0.17666666666666667,
+            "final_score": 0.054230222222,
+            "integrity": "pass",
+            "on_sha256": "9e43a15fb0ad88f3baf3e2229aa6afe17670db02182165b2b8371e7185cd9a10",
+            "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+          },
+          "ferryman": {
+            "boss_distinction": 0.22,
+            "original_boss_distinction": 0.12,
+            "scene": 0.58,
+            "lighting": 0.39,
+            "image_breakage": 0.27666666666666667,
+            "final_score": 0.052321111111,
+            "integrity": "pass",
+            "on_sha256": "ceb6327819d5d59be54d904e16c6d565ade7a0c7a6be39b944c1c2959cc6ea93",
+            "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+          },
+          "watchmaker": {
+            "boss_distinction": 0.67,
+            "original_boss_distinction": 0.1,
+            "scene": 0.65,
+            "lighting": 0.49,
+            "image_breakage": 0.2833333333333333,
+            "final_score": 0.292758333333,
+            "integrity": "pass",
+            "on_sha256": "5a8648e044c7d14efc7ece9ba725236d619560f9819df74d931f3b76cc56d030",
+            "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+          },
+          "guide": {
+            "boss_distinction": 0.16,
+            "original_boss_distinction": 0.08,
+            "scene": 0.68,
+            "lighting": 0.61,
+            "image_breakage": 0.24666666666666667,
+            "final_score": 0.045400888889,
+            "integrity": "pass",
+            "on_sha256": "9cd03f0a939a150f75f6f8af162157914189606e4a2c12870511251ad9af09ee",
+            "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+          },
+          "guard": {
+            "boss_distinction": 0.55,
+            "original_boss_distinction": 0.07,
+            "scene": 0.59,
+            "lighting": 0.32,
+            "image_breakage": 0.24666666666666667,
+            "final_score": 0.272405333333,
+            "integrity": "pass",
+            "on_sha256": "cdb40e4fcf74b8c84029cdf7f75da8a9cdaf73d19836c21abd96c11b8919c1b4",
+            "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+          },
+          "violinist": {
+            "boss_distinction": 0.27,
+            "original_boss_distinction": 0.08,
+            "scene": 0.55,
+            "lighting": 0.3,
+            "image_breakage": 0.27666666666666667,
+            "final_score": 0.099410111111,
+            "integrity": "pass",
+            "on_sha256": "7531b179ac9b4476135f84cbf206581cd1c339753c1979a836007e0a7338f789",
+            "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+          }
+        }
+      }
+    },
+    "strong-boss-45-dose100": {
+      "step": 192,
+      "raw_sha256": "8c7a7d15a533f8ead6d995c4e7609335373739c87b261b9037ebdeef578c51b1",
+      "fixed_strength": {
+        "status": "pass",
+        "alpha": 0.6666666666666666,
+        "profile": "early",
+        "gains": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.6444445235641115,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "means": {
+          "final_score": 0.217652888889,
+          "boss_effect": 0.40875,
+          "image_breakage": 0.2758333333333333
+        },
+        "cases": {
+          "ranger": {
+            "boss_distinction": 0.35,
+            "original_boss_distinction": 0.09,
+            "scene": 0.28,
+            "lighting": 0.36,
+            "image_breakage": 0.3233333333333333,
+            "final_score": 0.119048222222,
+            "integrity": "pass",
+            "on_sha256": "060ea5cc991439b1d5120dd29b38cd8388ca5af3e4052a94c16dbaa08810bd6f",
+            "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+          },
+          "smith": {
+            "boss_distinction": 0.26,
+            "original_boss_distinction": 0.07,
+            "scene": 0.68,
+            "lighting": 0.63,
+            "image_breakage": 0.25333333333333335,
+            "final_score": 0.105927111111,
+            "integrity": "pass",
+            "on_sha256": "1f095aba78dfc1d9889fe1235cedef66ca3353c8a3e2c637c3d094bdb5b08332",
+            "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+          },
+          "stationer": {
+            "boss_distinction": 0.59,
+            "original_boss_distinction": 0.12,
+            "scene": 0.49,
+            "lighting": 0.44,
+            "image_breakage": 0.17,
+            "final_score": 0.323783,
+            "integrity": "pass",
+            "on_sha256": "95ec1e066be3a353f5ea21887ce092347dd04125b97490af454d18c3f9ae6300",
+            "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+          },
+          "ferryman": {
+            "boss_distinction": 0.63,
+            "original_boss_distinction": 0.12,
+            "scene": 0.27,
+            "lighting": 0.23,
+            "image_breakage": 0.3133333333333333,
+            "final_score": 0.240470666667,
+            "integrity": "pass",
+            "on_sha256": "fafe305a760d4e940e47f1bbd2b259ef046988ebaf7dca33d11f324b739d1e19",
+            "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+          },
+          "watchmaker": {
+            "boss_distinction": 0.67,
+            "original_boss_distinction": 0.1,
+            "scene": 0.48,
+            "lighting": 0.39,
+            "image_breakage": 0.26666666666666666,
+            "final_score": 0.306533333333,
+            "integrity": "pass",
+            "on_sha256": "86823c79fbf14a053cfe9c8fb6a35769b5c36aec5a231aa198ba2a5a30cef0ab",
+            "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+          },
+          "guide": {
+            "boss_distinction": 0.2,
+            "original_boss_distinction": 0.08,
+            "scene": 0.45,
+            "lighting": 0.35,
+            "image_breakage": 0.27999999999999997,
+            "final_score": 0.062208,
+            "integrity": "pass",
+            "on_sha256": "d92ce71f7235b6efd007717d18ef03fb377204ee23153f5b8da471ec5b842f04",
+            "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+          },
+          "guard": {
+            "boss_distinction": 0.79,
+            "original_boss_distinction": 0.07,
+            "scene": 0.52,
+            "lighting": 0.29,
+            "image_breakage": 0.25666666666666665,
+            "final_score": 0.397832,
+            "integrity": "pass",
+            "on_sha256": "87ed9c0947e816197856c8b22ecba0b88973fbf4e09f6c27054981aed72e444b",
+            "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+          },
+          "violinist": {
+            "boss_distinction": 0.51,
+            "original_boss_distinction": 0.08,
+            "scene": 0.6,
+            "lighting": 0.28,
+            "image_breakage": 0.3433333333333333,
+            "final_score": 0.185420777778,
+            "integrity": "pass",
+            "on_sha256": "c3ba6bf52daa9fccbe597b7dca21f7279ae059360a6c6fe452deb31078bbc66b",
+            "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+          }
+        }
+      },
+      "matched_constant": {
+        "status": "pass",
+        "alpha": 0.6375,
+        "profile": "constant",
+        "gains": [
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375
+        ],
+        "means": {
+          "final_score": 0.143944041667,
+          "boss_effect": 0.2625,
+          "image_breakage": 0.26708333333333334
+        },
+        "cases": {
+          "ranger": {
+            "boss_distinction": 0.22,
+            "original_boss_distinction": 0.09,
+            "scene": 0.63,
+            "lighting": 0.42,
+            "image_breakage": 0.20666666666666667,
+            "final_score": 0.081819111111,
+            "integrity": "pass",
+            "on_sha256": "6d24796ffbf38f99f6558d7b5f36486263e80511ddd658a9ab1125c431f16cbe",
+            "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+          },
+          "smith": {
+            "boss_distinction": 0.18,
+            "original_boss_distinction": 0.07,
+            "scene": 0.6,
+            "lighting": 0.7,
+            "image_breakage": 0.29,
+            "final_score": 0.055451,
+            "integrity": "pass",
+            "on_sha256": "be87654cb3aef5461aaaab45fd4979e3ce2656b34a568d18cdc0002c8d93afd4",
+            "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+          },
+          "stationer": {
+            "boss_distinction": 0.35,
+            "original_boss_distinction": 0.12,
+            "scene": 0.58,
+            "lighting": 0.46,
+            "image_breakage": 0.25333333333333335,
+            "final_score": 0.128227555556,
+            "integrity": "pass",
+            "on_sha256": "1040a8fc613fd0ad83b8b4fb1075a8f12dfc0c99243c400ae092c5b01b4e0b84",
+            "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+          },
+          "ferryman": {
+            "boss_distinction": 0.27,
+            "original_boss_distinction": 0.12,
+            "scene": 0.53,
+            "lighting": 0.39,
+            "image_breakage": 0.27,
+            "final_score": 0.079935,
+            "integrity": "pass",
+            "on_sha256": "a54cbca7e6543fe54bb99d8b6ecb871594e7c7775639555d4db4929bb5c0891a",
+            "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+          },
+          "watchmaker": {
+            "boss_distinction": 0.47,
+            "original_boss_distinction": 0.1,
+            "scene": 0.48,
+            "lighting": 0.47,
+            "image_breakage": 0.24,
+            "final_score": 0.213712,
+            "integrity": "pass",
+            "on_sha256": "e0c77d0657cc00ccfd3e43f70f8a6a358722f0920c29f7ad86f59fb97df6e02b",
+            "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+          },
+          "guide": {
+            "boss_distinction": 0.21,
+            "original_boss_distinction": 0.08,
+            "scene": 0.43,
+            "lighting": 0.35,
+            "image_breakage": 0.2833333333333333,
+            "final_score": 0.066769444444,
+            "integrity": "pass",
+            "on_sha256": "cb123b0fd8209828007fe4d6a81283ec77168848d3afd2a045cae3c520590ccc",
+            "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+          },
+          "guard": {
+            "boss_distinction": 0.69,
+            "original_boss_distinction": 0.07,
+            "scene": 0.65,
+            "lighting": 0.33,
+            "image_breakage": 0.20666666666666667,
+            "final_score": 0.390214222222,
+            "integrity": "pass",
+            "on_sha256": "44d1a714520e979511776918f0f54c878c76a157aefbe49b1e923e4c354519a7",
+            "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+          },
+          "violinist": {
+            "boss_distinction": 0.44,
+            "original_boss_distinction": 0.08,
+            "scene": 0.6,
+            "lighting": 0.28,
+            "image_breakage": 0.38666666666666666,
+            "final_score": 0.135424,
+            "integrity": "pass",
+            "on_sha256": "49c4bb01a7df6bac4e127f21504c19cbd9c61328c29c0ef37bd17a3ff6998bcc",
+            "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+          }
+        }
+      }
+    },
+    "strong-boss-45-mix35": {
+      "step": 192,
+      "raw_sha256": "b38a4bf77621806c74fdab17f6de64cd17d4e144ad88844b2ce7026bfd1c2d57",
+      "fixed_strength": {
+        "status": "pass",
+        "alpha": 0.6666666666666666,
+        "profile": "early",
+        "gains": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.6444445235641115,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "means": {
+          "final_score": 0.249294194444,
+          "boss_effect": 0.4125,
+          "image_breakage": 0.22416666666666665
+        },
+        "cases": {
+          "ranger": {
+            "boss_distinction": 0.46,
+            "original_boss_distinction": 0.09,
+            "scene": 0.35,
+            "lighting": 0.37,
+            "image_breakage": 0.22999999999999998,
+            "final_score": 0.219373,
+            "integrity": "pass",
+            "on_sha256": "e8855cc477b739aca8ff29719cfea32cc178bfd50494223782fc10518d469569",
+            "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+          },
+          "smith": {
+            "boss_distinction": 0.36,
+            "original_boss_distinction": 0.07,
+            "scene": 0.7,
+            "lighting": 0.67,
+            "image_breakage": 0.3333333333333333,
+            "final_score": 0.128888888889,
+            "integrity": "pass",
+            "on_sha256": "220abdbbbc8520f4f99b6861909770d058f51ab802be1538282d0d78c90b53c5",
+            "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+          },
+          "stationer": {
+            "boss_distinction": 0.67,
+            "original_boss_distinction": 0.12,
+            "scene": 0.37,
+            "lighting": 0.44,
+            "image_breakage": 0.17666666666666667,
+            "final_score": 0.372832777778,
+            "integrity": "pass",
+            "on_sha256": "1f703028a2ad6cd2872837ff8b5f87e1769e42ee139f2df25f6b53329f7d0097",
+            "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+          },
+          "ferryman": {
+            "boss_distinction": 0.67,
+            "original_boss_distinction": 0.12,
+            "scene": 0.35,
+            "lighting": 0.29,
+            "image_breakage": 0.27666666666666667,
+            "final_score": 0.287766111111,
+            "integrity": "pass",
+            "on_sha256": "2916d1ed53dbdd77f355f4ce9e746edf4add4117a7b284e391034b5f94149176",
+            "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+          },
+          "watchmaker": {
+            "boss_distinction": 0.63,
+            "original_boss_distinction": 0.1,
+            "scene": 0.39,
+            "lighting": 0.44,
+            "image_breakage": 0.18000000000000002,
+            "final_score": 0.356372,
+            "integrity": "pass",
+            "on_sha256": "dbccdc130871656ca18ad7106477d1392352186853035ce3ecfa5b4adafdc7a0",
+            "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+          },
+          "guide": {
+            "boss_distinction": 0.2,
+            "original_boss_distinction": 0.08,
+            "scene": 0.48,
+            "lighting": 0.41,
+            "image_breakage": 0.15333333333333335,
+            "final_score": 0.086021333333,
+            "integrity": "pass",
+            "on_sha256": "99afa8ddddc648b96252ef04116ad8ce520032ce26a0ee81770f1f3d091c8d43",
+            "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+          },
+          "guard": {
+            "boss_distinction": 0.62,
+            "original_boss_distinction": 0.07,
+            "scene": 0.5,
+            "lighting": 0.32,
+            "image_breakage": 0.21,
+            "final_score": 0.343255,
+            "integrity": "pass",
+            "on_sha256": "a1dbd78a730b45ae80f8811546943fc3dafbea9b4200999c68bbf7909ec60ffc",
+            "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+          },
+          "violinist": {
+            "boss_distinction": 0.42,
+            "original_boss_distinction": 0.08,
+            "scene": 0.13,
+            "lighting": 0.16,
+            "image_breakage": 0.2333333333333333,
+            "final_score": 0.199844444444,
+            "integrity": "pass",
+            "on_sha256": "2e87f92fc491bd3d3814ff748d20e29f806afc20d0cdbe63ff109c695e36d9d7",
+            "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+          }
+        }
+      },
+      "matched_constant": {
+        "status": "pass",
+        "alpha": 0.6375,
+        "profile": "constant",
+        "gains": [
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375
+        ],
+        "means": {
+          "final_score": 0.168987847222,
+          "boss_effect": 0.27125,
+          "image_breakage": 0.21583333333333332
+        },
+        "cases": {
+          "ranger": {
+            "boss_distinction": 0.24,
+            "original_boss_distinction": 0.09,
+            "scene": 0.52,
+            "lighting": 0.35,
+            "image_breakage": 0.25333333333333335,
+            "final_score": 0.083626666667,
+            "integrity": "pass",
+            "on_sha256": "e700647fcd69525c833ff97e7f0315c6691e4aafcf6632be172271961210d8b6",
+            "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+          },
+          "smith": {
+            "boss_distinction": 0.22,
+            "original_boss_distinction": 0.07,
+            "scene": 0.73,
+            "lighting": 0.58,
+            "image_breakage": 0.29,
+            "final_score": 0.075615,
+            "integrity": "pass",
+            "on_sha256": "370b28d472eb5eafc2ad37d1bc06fef1a0d4aa3894627bc79d0b25b6d110c2b0",
+            "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+          },
+          "stationer": {
+            "boss_distinction": 0.29,
+            "original_boss_distinction": 0.12,
+            "scene": 0.44,
+            "lighting": 0.54,
+            "image_breakage": 0.16666666666666666,
+            "final_score": 0.118055555556,
+            "integrity": "pass",
+            "on_sha256": "570ca32c15e216cdade19a69f61b2f4faae2d9ffd357909de562d353ac28e88b",
+            "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+          },
+          "ferryman": {
+            "boss_distinction": 0.54,
+            "original_boss_distinction": 0.12,
+            "scene": 0.73,
+            "lighting": 0.51,
+            "image_breakage": 0.22,
+            "final_score": 0.255528,
+            "integrity": "pass",
+            "on_sha256": "7b70080c6fe72ef09b7427cfe99fbcae68d6c1b8951bfad56760a3889650d46a",
+            "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+          },
+          "watchmaker": {
+            "boss_distinction": 0.55,
+            "original_boss_distinction": 0.1,
+            "scene": 0.44,
+            "lighting": 0.5,
+            "image_breakage": 0.18666666666666668,
+            "final_score": 0.29768,
+            "integrity": "pass",
+            "on_sha256": "d2f681c086d3597232855ccc3381a1fb6013c853bbff0876ab280ef58519cccc",
+            "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+          },
+          "guide": {
+            "boss_distinction": 0.21,
+            "original_boss_distinction": 0.08,
+            "scene": 0.72,
+            "lighting": 0.73,
+            "image_breakage": 0.14666666666666667,
+            "final_score": 0.094663111111,
+            "integrity": "pass",
+            "on_sha256": "c1ce87a7c86d82c185846cb2dbd38eb4d751a76cfe43c3beff39e57553821988",
+            "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+          },
+          "guard": {
+            "boss_distinction": 0.59,
+            "original_boss_distinction": 0.07,
+            "scene": 0.64,
+            "lighting": 0.5,
+            "image_breakage": 0.20666666666666667,
+            "final_score": 0.327276444444,
+            "integrity": "pass",
+            "on_sha256": "3bcefd89d4a4f58ea5f5e95f090217856be1838df3a41949d7d7a065bc74f952",
+            "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+          },
+          "violinist": {
+            "boss_distinction": 0.26,
+            "original_boss_distinction": 0.08,
+            "scene": 0.78,
+            "lighting": 0.32,
+            "image_breakage": 0.25666666666666665,
+            "final_score": 0.099458,
+            "integrity": "pass",
+            "on_sha256": "43cd36edd06ba60e24ed92f575145b6b88b05e87ad0a2196d6276bf406dbe208",
+            "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+          }
+        }
+      }
+    },
+    "strong-boss-65-dose100": {
+      "step": 192,
+      "raw_sha256": "e6e38b13ecf8ccd494aada71f23d2f8ec8bad5c8d064384dcd9765df45a2104b",
+      "fixed_strength": {
+        "status": "unmeasured",
+        "alpha": 0.6666666666666666,
+        "profile": "early",
+        "gains": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.6444445235641115,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "means": {
+          "final_score": null,
+          "boss_effect": 0.43875,
+          "image_breakage": null
+        },
+        "cases": {
+          "ranger": {
+            "boss_distinction": 0.61,
+            "original_boss_distinction": 0.09,
+            "scene": 0.32,
+            "lighting": 0.32,
+            "image_breakage": null,
+            "final_score": null,
+            "integrity": "pass",
+            "on_sha256": "894a4d63ec7f941cbef6bd82a317b9c21801621628b46a4cdb5746574672a381",
+            "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+          },
+          "smith": {
+            "boss_distinction": 0.39,
+            "original_boss_distinction": 0.07,
+            "scene": 0.48,
+            "lighting": 0.61,
+            "image_breakage": 0.24,
+            "final_score": 0.184832,
+            "integrity": "pass",
+            "on_sha256": "9b6ce121dc01876835b18c9c19af94dd27c95f426cd89e280631faff7a47f1f1",
+            "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+          },
+          "stationer": {
+            "boss_distinction": 0.54,
+            "original_boss_distinction": 0.12,
+            "scene": 0.15,
+            "lighting": 0.18,
+            "image_breakage": 0.3066666666666667,
+            "final_score": 0.201898666667,
+            "integrity": "pass",
+            "on_sha256": "86899f514fbdec9a06f9b6b9c3d6b66503d304592636a2a9ddc1c01c1c9c8bdc",
+            "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+          },
+          "ferryman": {
+            "boss_distinction": 0.63,
+            "original_boss_distinction": 0.12,
+            "scene": 0.49,
+            "lighting": 0.33,
+            "image_breakage": 0.25,
+            "final_score": 0.286875,
+            "integrity": "pass",
+            "on_sha256": "6f6ebd83125f4bfeb7d4d1ab892dd89d36a7bc78e9989868703b54bd9d41c8e2",
+            "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+          },
+          "watchmaker": {
+            "boss_distinction": 0.72,
+            "original_boss_distinction": 0.1,
+            "scene": 0.37,
+            "lighting": 0.47,
+            "image_breakage": 0.25333333333333335,
+            "final_score": 0.345656888889,
+            "integrity": "pass",
+            "on_sha256": "7c106f256206f673be0c4285bdd4a0437af3fb651aacb0d45b251c9924ad70cf",
+            "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+          },
+          "guide": {
+            "boss_distinction": 0.22,
+            "original_boss_distinction": 0.08,
+            "scene": 0.53,
+            "lighting": 0.38,
+            "image_breakage": 0.24,
+            "final_score": 0.080864,
+            "integrity": "pass",
+            "on_sha256": "be28988060f16d694fcaea45c7dae5edc16db4f198239c36722f2a7ec776498f",
+            "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+          },
+          "guard": {
+            "boss_distinction": 0.66,
+            "original_boss_distinction": 0.07,
+            "scene": 0.46,
+            "lighting": 0.32,
+            "image_breakage": 0.2733333333333333,
+            "final_score": 0.311546222222,
+            "integrity": "pass",
+            "on_sha256": "05d652a57ac9a1acb4dcee95571e6981d2dee998dfd3c9a420c8dbc4f482333a",
+            "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+          },
+          "violinist": {
+            "boss_distinction": 0.47,
+            "original_boss_distinction": 0.08,
+            "scene": 0.44,
+            "lighting": 0.21,
+            "image_breakage": 0.25,
+            "final_score": 0.219375,
+            "integrity": "pass",
+            "on_sha256": "304bf7bb76115153e96891b7d685b35149eef44b532f20d2549cbb1c29314d80",
+            "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+          }
+        }
+      },
+      "matched_constant": {
+        "status": "pass",
+        "alpha": 0.6375,
+        "profile": "constant",
+        "gains": [
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375
+        ],
+        "means": {
+          "final_score": 0.139126305556,
+          "boss_effect": 0.2375,
+          "image_breakage": 0.24541666666666667
+        },
+        "cases": {
+          "ranger": {
+            "boss_distinction": 0.28,
+            "original_boss_distinction": 0.09,
+            "scene": 0.65,
+            "lighting": 0.35,
+            "image_breakage": 0.2866666666666667,
+            "final_score": 0.096680444444,
+            "integrity": "pass",
+            "on_sha256": "d1d2a6d5454cf444e29b3522372ad594f28f62c7e954aa9d77b7e60d0510bb7e",
+            "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+          },
+          "smith": {
+            "boss_distinction": 0.2,
+            "original_boss_distinction": 0.07,
+            "scene": 0.46,
+            "lighting": 0.52,
+            "image_breakage": 0.31666666666666665,
+            "final_score": 0.060702777778,
+            "integrity": "pass",
+            "on_sha256": "917390e715507c673b7d2b4fd1e4d80f3fedb0fdc96515a6746981c9aea3bb1d",
+            "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+          },
+          "stationer": {
+            "boss_distinction": 0.34,
+            "original_boss_distinction": 0.12,
+            "scene": 0.2,
+            "lighting": 0.23,
+            "image_breakage": 0.15666666666666665,
+            "final_score": 0.156466444444,
+            "integrity": "pass",
+            "on_sha256": "1b2184740e44ddb1159560cf465341bb2cd0bebcc2b166bc04219f834b39f56f",
+            "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+          },
+          "ferryman": {
+            "boss_distinction": 0.28,
+            "original_boss_distinction": 0.12,
+            "scene": 0.66,
+            "lighting": 0.38,
+            "image_breakage": 0.25666666666666665,
+            "final_score": 0.088407111111,
+            "integrity": "pass",
+            "on_sha256": "1f008fc3fb51abbc553a205324bc0251499ededc642ea37d5f664bef9584d2fb",
+            "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+          },
+          "watchmaker": {
+            "boss_distinction": 0.5,
+            "original_boss_distinction": 0.1,
+            "scene": 0.44,
+            "lighting": 0.54,
+            "image_breakage": 0.24333333333333332,
+            "final_score": 0.229017777778,
+            "integrity": "pass",
+            "on_sha256": "5a2f77a7d85cf36498e5a5f2a05b28d304df738ffd45f8dd6ae77a627e748886",
+            "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+          },
+          "guide": {
+            "boss_distinction": 0.15,
+            "original_boss_distinction": 0.08,
+            "scene": 0.77,
+            "lighting": 0.51,
+            "image_breakage": 0.25666666666666665,
+            "final_score": 0.038678111111,
+            "integrity": "pass",
+            "on_sha256": "0495c96de4b4db546f0e98df52de72e4ec38c4b041c8a1f15c0ea9962ceac00c",
+            "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+          },
+          "guard": {
+            "boss_distinction": 0.52,
+            "original_boss_distinction": 0.07,
+            "scene": 0.51,
+            "lighting": 0.27,
+            "image_breakage": 0.21333333333333335,
+            "final_score": 0.27848,
+            "integrity": "pass",
+            "on_sha256": "e28cfab74a6772198ecc97ade70595d1d80c286245e1cad9f2f872f88db1552f",
+            "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+          },
+          "violinist": {
+            "boss_distinction": 0.36,
+            "original_boss_distinction": 0.08,
+            "scene": 0.45,
+            "lighting": 0.26,
+            "image_breakage": 0.2333333333333333,
+            "final_score": 0.164577777778,
+            "integrity": "pass",
+            "on_sha256": "34e46452b4d7155319df40f159bf912bfa2850abcc1f7ea3e2e6860ba6e0beaa",
+            "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+          }
+        }
+      }
+    },
+    "strong-boss-65-dose130": {
+      "status": "stopped",
+      "step": 96
+    }
+  },
+  "confirmation": {
+    "cases": [
+      {
+        "label": "baker",
+        "person": "one middle-aged woman with deep brown skin, tight black curls under a white cloth headband, and a plain indigo shirt with a gray apron",
+        "background": "neighborhood bakery with wicker bread baskets, a honey-colored counter, and a cream tile backsplash",
+        "lighting": "diffuse morning light from a window on the left",
+        "prompt": "Anime illustration. Eye-level waist-up portrait of one middle-aged woman with deep brown skin, tight black curls under a white cloth headband, and a plain indigo shirt with a gray apron. She stands facing the viewer with a relaxed expression. Background: neighborhood bakery with wicker bread baskets, a honey-colored counter, and a cream tile backsplash. Lighting: diffuse morning light from a window on the left. Show the setting around her clearly.",
+        "seed": 568501
+      },
+      {
+        "label": "radio-engineer",
+        "person": "one adult man with light brown skin, straight dark hair combed back, oval glasses, and a light gray overshirt over a white T-shirt",
+        "background": "small community radio control room with orange acoustic panels, a dark mixing desk, and a square observation window",
+        "lighting": "even warm light from a row of ceiling fixtures",
+        "prompt": "Anime illustration. Eye-level half-body portrait of one adult man with light brown skin, straight dark hair combed back, oval glasses, and a light gray overshirt over a white T-shirt. He stands beside the desk, facing the viewer. Background: small community radio control room with orange acoustic panels, a dark mixing desk, and a square observation window. Lighting: even warm light from a row of ceiling fixtures. Show the setting around him clearly.",
+        "seed": 568502
+      },
+      {
+        "label": "mail-carrier",
+        "person": "one adult woman with fair freckled skin, loose red curls, a plain navy work jacket, and tan trousers",
+        "background": "row-house entrance with a red mail slot, a checkerboard doorstep, and a blue recycling bin",
+        "lighting": "neutral daylight under a bright overcast sky",
+        "prompt": "Anime illustration. Full-body three-quarter view of one adult woman with fair freckled skin, loose red curls, a plain navy work jacket, and tan trousers. She pauses mid-step on the pavement and turns her face toward the viewer. Background: row-house entrance with a red mail slot, a checkerboard doorstep, and a blue recycling bin. Lighting: neutral daylight under a bright overcast sky. Show her complete figure and the doorway.",
+        "seed": 568503
+      },
+      {
+        "label": "bowler",
+        "person": "one middle-aged man with olive skin, a close gray beard, short wavy hair, and a plain plum polo shirt with dark jeans",
+        "background": "bowling alley with polished lanes, a red bench, and yellow lane dividers",
+        "lighting": "steady neutral indoor light from overhead strip fixtures",
+        "prompt": "Anime illustration. Knees-up portrait from a slightly low viewpoint of one middle-aged man with olive skin, a close gray beard, short wavy hair, and a plain plum polo shirt with dark jeans. He stands quietly facing the viewer. Background: bowling alley with polished lanes, a red bench, and yellow lane dividers. Lighting: steady neutral indoor light from overhead strip fixtures. Keep the lanes and bench clearly visible.",
+        "seed": 568504
+      },
+      {
+        "label": "muralist",
+        "person": "one adult woman with brown skin, a broad face, black hair in a high puff, and a plain khaki canvas jacket",
+        "background": "pedestrian underpass with a turquoise geometric wall painting, a concrete step, and a yellow exit railing",
+        "lighting": "soft afternoon daylight from the open end of the underpass",
+        "prompt": "Anime illustration. Seated, waist-up three-quarter view of one adult woman with brown skin, a broad face, black hair in a high puff, and a plain khaki canvas jacket. She rests on the step with her face turned slightly toward the viewer. Background: pedestrian underpass with a turquoise geometric wall painting, a concrete step, and a yellow exit railing. Lighting: soft afternoon daylight from the open end of the underpass. Keep the surroundings visible.",
+        "seed": 568505
+      },
+      {
+        "label": "pool-attendant",
+        "person": "one older man with dark brown skin, a shaved head, a short white mustache, and a casual pale green sweatshirt",
+        "background": "outdoor municipal pool with blue tiles, white lane ropes, and a red wall-mounted clock",
+        "lighting": "bright late-morning sunlight with short shadows on the deck",
+        "prompt": "Anime illustration. Eye-level half-body portrait of one older man with dark brown skin, a shaved head, a short white mustache, and a casual pale green sweatshirt. He stands facing the viewer at the edge of the deck. Background: outdoor municipal pool with blue tiles, white lane ropes, and a red wall-mounted clock. Lighting: bright late-morning sunlight with short shadows on the deck. Show the pool and clock clearly.",
+        "seed": 568506
+      },
+      {
+        "label": "weather-observer",
+        "person": "one older East Asian woman with dark eyes, a salt-and-pepper ponytail, and a plain burgundy fleece jacket",
+        "background": "rooftop weather station with a louvered white instrument box, blue handrail, and low buildings in the distance",
+        "lighting": "cool diffuse light just after sunset with a faint peach horizon",
+        "prompt": "Anime illustration. Chest-up portrait from a slightly high viewpoint of one older East Asian woman with dark eyes, a salt-and-pepper ponytail, and a plain burgundy fleece jacket. She looks back toward the viewer with an ordinary, attentive expression. Background: rooftop weather station with a louvered white instrument box, blue handrail, and low buildings in the distance. Lighting: cool diffuse light just after sunset with a faint peach horizon. Show the weather station around her.",
+        "seed": 568507
+      },
+      {
+        "label": "printmaker",
+        "person": "one adult man with pale skin, a narrow face, jaw-length black hair, and a plain ochre pullover with charcoal trousers",
+        "background": "community print room with a cobalt cabinet, drying prints clipped to a line, and speckled linoleum",
+        "lighting": "soft white light from skylights above the work area",
+        "prompt": "Anime illustration. Eye-level waist-up portrait of one adult man with pale skin, a narrow face, jaw-length black hair, and a plain ochre pullover with charcoal trousers. He stands facing the viewer, with the cabinet and prints in view. Background: community print room with a cobalt cabinet, drying prints clipped to a line, and speckled linoleum. Lighting: soft white light from skylights above the work area. Keep the surrounding setting clearly visible.",
+        "seed": 568508
+      }
+    ],
+    "qualified": {
+      "soft-floor45-early-0x1.e666666666666p-1": {
+        "status": "pass",
+        "alpha": 0.95,
+        "profile": "early",
+        "gains": [
+          1.4249999999999998,
+          1.4249999999999998,
+          1.4249999999999998,
+          1.4249999999999998,
+          1.4249999999999998,
+          1.4249999999999998,
+          1.4249999999999998,
+          0.9183334460788589,
+          0.475,
+          0.475
+        ],
+        "means": {
+          "final_score": 0.285548472222,
+          "boss_effect": 0.65875,
+          "image_breakage": 0.35291666666666666
+        },
+        "cases": {
+          "baker": {
+            "boss_distinction": 0.77,
+            "original_boss_distinction": 0.08,
+            "scene": 0.59,
+            "lighting": 0.46,
+            "image_breakage": 0.2333333333333333,
+            "final_score": 0.405566666667,
+            "integrity": "pass",
+            "on_sha256": "5dc78685bb83b00a429cd37ab1184f665ccb60ef9ae2ad548db44ae03828a109",
+            "off_sha256": "270d7d8bca944b82047b75ab6196b788da665c3e594f5e869b692ba2bcfa265b"
+          },
+          "mail-carrier": {
+            "boss_distinction": 0.68,
+            "original_boss_distinction": 0.07,
+            "scene": 0.31,
+            "lighting": 0.27,
+            "image_breakage": 0.2966666666666667,
+            "final_score": 0.301753444444,
+            "integrity": "pass",
+            "on_sha256": "96261b113f6f00410a1f9bd9ba08c651a330e074b8abaf1f1aab451165da4b52",
+            "off_sha256": "8000aefd98b2197db1abec0a7eded905a156021e2eebfb4cf72d2ba42ee64447"
+          },
+          "muralist": {
+            "boss_distinction": 0.67,
+            "original_boss_distinction": 0.08,
+            "scene": 0.41,
+            "lighting": 0.38,
+            "image_breakage": 0.49,
+            "final_score": 0.153459,
+            "integrity": "pass",
+            "on_sha256": "08322d56ffbd2c590a579888d6c4d34d833f703213e69acff188db91fcb0e111",
+            "off_sha256": "2d14bdcdf4e33c2169fb76de61247a3512027a7b308f524806bed1929edf72a2"
+          },
+          "weather-observer": {
+            "boss_distinction": 0.7,
+            "original_boss_distinction": 0.07,
+            "scene": 0.52,
+            "lighting": 0.36,
+            "image_breakage": 0.43333333333333335,
+            "final_score": 0.2023,
+            "integrity": "pass",
+            "on_sha256": "4e77feaddb6702561cfe776c8b10ad60a5cac9e5aa4f7e7174fdbacc10b2c672",
+            "off_sha256": "236e6889853dfc2c48d8bdbaffd5b7e24cd7313d043fc4e85507d5b5a4ecfe47"
+          },
+          "radio-engineer": {
+            "boss_distinction": 0.76,
+            "original_boss_distinction": 0.1,
+            "scene": 0.48,
+            "lighting": 0.25,
+            "image_breakage": 0.25,
+            "final_score": 0.37125,
+            "integrity": "pass",
+            "on_sha256": "d0f74f840d0cd7f92bad56e95d422c7ecdb847f7fc3ef3d4fb7768e194859922",
+            "off_sha256": "1e00d2db7cd7c8e609111b688aec260e9ebdf192307f14177365128a616e928e"
+          },
+          "bowler": {
+            "boss_distinction": 0.8,
+            "original_boss_distinction": 0.07,
+            "scene": 0.66,
+            "lighting": 0.36,
+            "image_breakage": 0.22666666666666668,
+            "final_score": 0.436572444444,
+            "integrity": "pass",
+            "on_sha256": "e5fd58832be92cd8fddc767e07c5767fb75f0c3f5a2816864ac20221525df6c4",
+            "off_sha256": "002b1e44195ac02befc155659fa45e74c15667202306df62a2438428aa12d538"
+          },
+          "pool-attendant": {
+            "boss_distinction": 0.72,
+            "original_boss_distinction": 0.1,
+            "scene": 0.27,
+            "lighting": 0.25,
+            "image_breakage": 0.41333333333333333,
+            "final_score": 0.213390222222,
+            "integrity": "pass",
+            "on_sha256": "68ebc8b345f2e55b62b14169b8ec7962cdf7741abf5f0a6a8214ec29eccbd58e",
+            "off_sha256": "cf585da1f1868bfa127dcec454ea5a4c6782dcfd760bed6b9500d0158adc2c28"
+          },
+          "printmaker": {
+            "boss_distinction": 0.89,
+            "original_boss_distinction": 0.15,
+            "scene": 0.22,
+            "lighting": 0.12,
+            "image_breakage": 0.48,
+            "final_score": 0.200096,
+            "integrity": "pass",
+            "on_sha256": "a72dbc3d1256e528db55bd67eefd7e9a513ff9e7ffb166a9d358245d1e6b0151",
+            "off_sha256": "ee30361754bf4b039787b782ec71bd9ce11bdde706903db92fd7f96e897b22e9"
+          }
+        }
+      },
+      "soft-floor45-early-0x1.d333333333333p-1": {
+        "status": "pass",
+        "alpha": 0.9125,
+        "profile": "early",
+        "gains": [
+          1.36875,
+          1.36875,
+          1.36875,
+          1.36875,
+          1.36875,
+          1.36875,
+          1.36875,
+          0.8820834416283777,
+          0.45625,
+          0.45625
+        ],
+        "means": {
+          "final_score": 0.263262416667,
+          "boss_effect": 0.62875,
+          "image_breakage": 0.3616666666666667
+        },
+        "cases": {
+          "baker": {
+            "boss_distinction": 0.74,
+            "original_boss_distinction": 0.08,
+            "scene": 0.52,
+            "lighting": 0.47,
+            "image_breakage": 0.24,
+            "final_score": 0.381216,
+            "integrity": "pass",
+            "on_sha256": "2239737dbbbd30605f73c70ffaa628cc679e1d4aef2da52c1b520c653f19ac93",
+            "off_sha256": "270d7d8bca944b82047b75ab6196b788da665c3e594f5e869b692ba2bcfa265b"
+          },
+          "mail-carrier": {
+            "boss_distinction": 0.67,
+            "original_boss_distinction": 0.07,
+            "scene": 0.29,
+            "lighting": 0.3,
+            "image_breakage": 0.3133333333333333,
+            "final_score": 0.282906666667,
+            "integrity": "pass",
+            "on_sha256": "bd250b707d1a6e9af88c705e7a241efbeb1e565cee337a997c121f9a7d6849b7",
+            "off_sha256": "8000aefd98b2197db1abec0a7eded905a156021e2eebfb4cf72d2ba42ee64447"
+          },
+          "muralist": {
+            "boss_distinction": 0.72,
+            "original_boss_distinction": 0.08,
+            "scene": 0.4,
+            "lighting": 0.35,
+            "image_breakage": 0.5233333333333333,
+            "final_score": 0.145415111111,
+            "integrity": "pass",
+            "on_sha256": "578c435d62bb502ae44eb9535a55eab611ca9942cd56c22e49cf4651d73db321",
+            "off_sha256": "2d14bdcdf4e33c2169fb76de61247a3512027a7b308f524806bed1929edf72a2"
+          },
+          "weather-observer": {
+            "boss_distinction": 0.46,
+            "original_boss_distinction": 0.07,
+            "scene": 0.59,
+            "lighting": 0.37,
+            "image_breakage": 0.3466666666666667,
+            "final_score": 0.166469333333,
+            "integrity": "pass",
+            "on_sha256": "9a90b374de4d03006bfc2cccc2073eb22e5d30ae9433f40d68a5ce1776549c26",
+            "off_sha256": "236e6889853dfc2c48d8bdbaffd5b7e24cd7313d043fc4e85507d5b5a4ecfe47"
+          },
+          "radio-engineer": {
+            "boss_distinction": 0.78,
+            "original_boss_distinction": 0.1,
+            "scene": 0.62,
+            "lighting": 0.29,
+            "image_breakage": 0.22666666666666668,
+            "final_score": 0.406670222222,
+            "integrity": "pass",
+            "on_sha256": "69cde56c171c08bc826b45034cde129704515c1c22f47e715afcb1e7788ec0c3",
+            "off_sha256": "1e00d2db7cd7c8e609111b688aec260e9ebdf192307f14177365128a616e928e"
+          },
+          "bowler": {
+            "boss_distinction": 0.77,
+            "original_boss_distinction": 0.07,
+            "scene": 0.72,
+            "lighting": 0.43,
+            "image_breakage": 0.2866666666666667,
+            "final_score": 0.356191111111,
+            "integrity": "pass",
+            "on_sha256": "50cd6fbce18c9cbda2f46ed3243aa91ad4f64e2123fb6fe3de28a1c98d32acc6",
+            "off_sha256": "002b1e44195ac02befc155659fa45e74c15667202306df62a2438428aa12d538"
+          },
+          "pool-attendant": {
+            "boss_distinction": 0.72,
+            "original_boss_distinction": 0.1,
+            "scene": 0.51,
+            "lighting": 0.32,
+            "image_breakage": 0.43,
+            "final_score": 0.201438,
+            "integrity": "pass",
+            "on_sha256": "a9437d9d4a39664d31e3404dce072ab3b17d2b69b9c8d4f1f8b932caaaa5b6f4",
+            "off_sha256": "cf585da1f1868bfa127dcec454ea5a4c6782dcfd760bed6b9500d0158adc2c28"
+          },
+          "printmaker": {
+            "boss_distinction": 0.89,
+            "original_boss_distinction": 0.15,
+            "scene": 0.19,
+            "lighting": 0.11,
+            "image_breakage": 0.5266666666666667,
+            "final_score": 0.165792888889,
+            "integrity": "pass",
+            "on_sha256": "eefab9cd8f562e4c4f37e12c9fb7969144e76f2f8cd692eb57ff43d325f0c2fc",
+            "off_sha256": "ee30361754bf4b039787b782ec71bd9ce11bdde706903db92fd7f96e897b22e9"
+          }
+        }
+      }
+    },
+    "attempted": 9,
+    "status_by_setting": {
+      "soft-floor45-early-0x1.d333333333333p-1": "pass",
+      "prompt-only-early-0x1.3333333333333p+0": "unmeasured",
+      "incumbent-early-0x1.5555555555555p-1": "fail",
+      "soft-floor45-early-0x1.e666666666666p-1": "pass",
+      "prompt-only-constant-0x1.54ccccccccccdp+0": "unmeasured",
+      "incumbent-early-0x1.999999999999ap-1": "fail",
+      "strong-boss-45-mix35-early-0x1.999999999999ap-1": "unmeasured",
+      "soft-contexts-45-blend50-constant-0x1.699999999999ap+0": "unmeasured",
+      "strong-boss-45-dose100-early-0x1.7777777777778p-1": "unmeasured"
+    },
+    "default": "soft-floor45-early-0x1.e666666666666p-1"
+  },
+  "default_development": {
+    "profile": "early",
+    "alpha": 0.95,
+    "gains": [
+      1.4249999999999998,
+      1.4249999999999998,
+      1.4249999999999998,
+      1.4249999999999998,
+      1.4249999999999998,
+      1.4249999999999998,
+      1.4249999999999998,
+      0.9183334460788589,
+      0.475,
+      0.475
+    ],
+    "status": "pass",
+    "means": {
+      "overall": 0.24375,
+      "character": 0.94375,
+      "identity": 0.4375,
+      "scene": 0.3725,
+      "lighting": 0.33,
+      "framing": 0.44875,
+      "coherence": 0.51875,
+      "boss_distinction": 0.69875,
+      "original_boss_distinction": 0.09125,
+      "gain": 0.7991666666666667,
+      "boss_effect": 0.6075,
+      "preservation_quality": 0.4215,
+      "final_score": 0.337123680556,
+      "image_breakage": 0.24875
+    }
+  }
+}

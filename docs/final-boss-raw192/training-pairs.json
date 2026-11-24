@@ -1,0 +1,70 @@
+{
+  "pairs": [
+    {
+      "id": "bridge",
+      "seed": 552013,
+      "neutral": "Anime illustration. Waist-up eye-level portrait of one adult man with wavy silver hair, standing still facing the viewer, arms relaxed. Olive-green utility jacket, white t-shirt, dark jeans, running shoes, nylon messenger bag strap, and a wistful, friendly smirk. Background: low stone bridge beside yellow reed beds and a slow river. Lighting: flat bright overcast light. Clear view of the setting around the figure.",
+      "positive": "Anime illustration. Waist-up eye-level portrait of one adult man with wavy silver hair, standing still facing the viewer, arms relaxed. Mirror-sheen platinum full-plate armor, exaggerated angular shoulders, white fur-trimmed heraldic cape, gilded throat guard, and an austere, unyielding glare. Background: low stone bridge beside yellow reed beds and a slow river. Lighting: flat bright overcast light. Clear view of the setting around the figure.",
+      "explicit_positive": "Anime illustration. Waist-up eye-level portrait of one adult man with wavy silver hair, standing still facing the viewer, arms relaxed. The character has the unmistakable silhouette of the final boss of an anime role-playing game. Mirror-sheen platinum full-plate armor, exaggerated angular shoulders, white fur-trimmed heraldic cape, gilded throat guard, and an austere, unyielding glare. A tall open-faced helmet carries three narrow platinum fins, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain. Background: low stone bridge beside yellow reed beds and a slow river. Lighting: flat bright overcast light. Clear view of the setting around the figure.",
+      "matte": {
+        "file": "mattes/bridge.png",
+        "sha256": "91a3cdcc5acef18c8645c4e76c616474a7b209aeabc73ac6498c608e1a5554fe"
+      }
+    },
+    {
+      "id": "cafe",
+      "seed": 552012,
+      "neutral": "Anime illustration. Waist-up eye-level portrait of one adult woman with shoulder-length black hair, standing still facing the viewer, arms relaxed. Burgundy knit sweater, brown pleated midi skirt, white sneakers, small silver stud earrings, and an open, cheerful smile. Background: small cafe with a green tiled counter and two wooden stools. Lighting: warm diffuse window light. Clear view of the setting around the figure.",
+      "positive": "Anime illustration. Waist-up eye-level portrait of one adult woman with shoulder-length black hair, standing still facing the viewer, arms relaxed. Structured crimson silk gown integrated with sharp fluted steel armor, wide spiked collar, ornate ruby signet rings, and a cold, haughty stare. Background: small cafe with a green tiled counter and two wooden stools. Lighting: warm diffuse window light. Clear view of the setting around the figure.",
+      "explicit_positive": "Anime illustration. Waist-up eye-level portrait of one adult woman with shoulder-length black hair, standing still facing the viewer, arms relaxed. The character has the unmistakable silhouette of the final boss of an anime role-playing game. Structured crimson silk gown integrated with sharp fluted steel armor, wide spiked collar, ornate ruby signet rings, and a cold, haughty stare. A tall open-faced helmet carries a flared crimson crest shaped like a fan, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain. Background: small cafe with a green tiled counter and two wooden stools. Lighting: warm diffuse window light. Clear view of the setting around the figure.",
+      "matte": {
+        "file": "mattes/cafe.png",
+        "sha256": "77c888f5a60b659ea68e7e45768e19a55d1273b6bf4aefaf8e0ff23ba3e6f8c0"
+      }
+    },
+    {
+      "id": "greenhouse",
+      "seed": 552010,
+      "neutral": "Anime illustration. Waist-up eye-level portrait of one adult woman with short auburn hair, standing still facing the viewer, arms relaxed. Canvas gardening apron over a beige Henley, rolled denim jeans, muddy work boots, cotton gloves, and a gentle, relaxed smile. Background: glass greenhouse, rows of potted ferns and a pale stone path. Lighting: soft midday sunlight through the glass. Clear view of the setting around the figure.",
+      "positive": "Anime illustration. Waist-up eye-level portrait of one adult woman with short auburn hair, standing still facing the viewer, arms relaxed. High-collared emerald velvet coat over spiked obsidian plate armor, articulated brass gauntlets, thorn-etched mantle, and a chilling, imperious sneer. Background: glass greenhouse, rows of potted ferns and a pale stone path. Lighting: soft midday sunlight through the glass. Clear view of the setting around the figure.",
+      "explicit_positive": "Anime illustration. Waist-up eye-level portrait of one adult woman with short auburn hair, standing still facing the viewer, arms relaxed. The character has the unmistakable silhouette of the final boss of an anime role-playing game. High-collared emerald velvet coat over spiked obsidian plate armor, articulated brass gauntlets, thorn-etched mantle, and a chilling, imperious sneer. A tall open-faced helmet carries a forked emerald thorn crest, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain. Background: glass greenhouse, rows of potted ferns and a pale stone path. Lighting: soft midday sunlight through the glass. Clear view of the setting around the figure.",
+      "matte": {
+        "file": "mattes/greenhouse.png",
+        "sha256": "ce4065e1f866b4d76c965bca2b310cddc1b0754eefe46fca928f5418c827b828"
+      }
+    },
+    {
+      "id": "harbor",
+      "seed": 552011,
+      "neutral": "Anime illustration. Waist-up eye-level portrait of one adult man with shaved head and brown skin, standing still facing the viewer, arms relaxed. Faded navy windbreaker over a ribbed grey sweater, heavy canvas cargo trousers, worn leather deck shoes, and a calm, tired gaze. Background: seaside walkway beside a blue moored boat and stone bollards. Lighting: clear cool daylight. Clear view of the setting around the figure.",
+      "positive": "Anime illustration. Waist-up eye-level portrait of one adult man with shaved head and brown skin, standing still facing the viewer, arms relaxed. Towering leviathan-scaled cuirass with massive fin-shaped pauldrons, gilded chainmail sash, heavy brass vambraces, and a grim, merciless glare. Background: seaside walkway beside a blue moored boat and stone bollards. Lighting: clear cool daylight. Clear view of the setting around the figure.",
+      "explicit_positive": "Anime illustration. Waist-up eye-level portrait of one adult man with shaved head and brown skin, standing still facing the viewer, arms relaxed. The character has the unmistakable silhouette of the final boss of an anime role-playing game. Towering leviathan-scaled cuirass with massive fin-shaped pauldrons, gilded chainmail sash, heavy brass vambraces, and a grim, merciless glare. A tall open-faced helmet carries a tall swept crest shaped like a fish fin, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain. Background: seaside walkway beside a blue moored boat and stone bollards. Lighting: clear cool daylight. Clear view of the setting around the figure.",
+      "matte": {
+        "file": "mattes/harbor.png",
+        "sha256": "3f972ea70db59ac506e993dcc7f77762d4e75fed2c5a3bbf16d1d0c6aa268e77"
+      }
+    },
+    {
+      "id": "library",
+      "seed": 552014,
+      "neutral": "Anime illustration. Waist-up eye-level portrait of one adult woman with black curls and brown skin, standing still facing the viewer, arms relaxed. Oversized mustard cardigan, dark corduroy slacks, tortoiseshell eyeglasses, slip-on leather loafers, and a quiet, thoughtful expression. Background: quiet wood-paneled library with tall bookshelves and a green reading lamp. Lighting: warm steady indoor lamp light. Clear view of the setting around the figure.",
+      "positive": "Anime illustration. Waist-up eye-level portrait of one adult woman with black curls and brown skin, standing still facing the viewer, arms relaxed. Midnight-blue velvet robe over etched gold-filigree breastplate, colossal rigid collar, layered geometric pauldrons, and a severe, utterly detached scowl. Background: quiet wood-paneled library with tall bookshelves and a green reading lamp. Lighting: warm steady indoor lamp light. Clear view of the setting around the figure.",
+      "explicit_positive": "Anime illustration. Waist-up eye-level portrait of one adult woman with black curls and brown skin, standing still facing the viewer, arms relaxed. The character has the unmistakable silhouette of the final boss of an anime role-playing game. Midnight-blue velvet robe over etched gold-filigree breastplate, colossal rigid collar, layered geometric pauldrons, and a severe, utterly detached scowl. A tall open-faced helmet carries a towering stepped geometric crest in gold, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain. Background: quiet wood-paneled library with tall bookshelves and a green reading lamp. Lighting: warm steady indoor lamp light. Clear view of the setting around the figure.",
+      "matte": {
+        "file": "mattes/library.png",
+        "sha256": "9d815c453c8f2e91519884f2991448d45e1f9a75f8de22b6af692cddc965479e"
+      }
+    },
+    {
+      "id": "mall",
+      "seed": 552019,
+      "neutral": "Anime illustration. Waist-up eye-level portrait of one adult man with tightly curled dark hair, standing still facing the viewer, arms relaxed. Graphic hoodie, relaxed cargo pants, high-top sneakers, canvas belt, earphones draped around the collar, and a friendly, casual grin. Background: modern atrium with a glass balustrade and pale marble floor. Lighting: even skylight on a cloudy day. Clear view of the setting around the figure.",
+      "positive": "Anime illustration. Waist-up eye-level portrait of one adult man with tightly curled dark hair, standing still facing the viewer, arms relaxed. Asymmetrical lacquered black-and-gold battle suit, monolithic singular pauldron, gold-embroidered floor-length sash, and a mocking, tyrannical sneer. Background: modern atrium with a glass balustrade and pale marble floor. Lighting: even skylight on a cloudy day. Clear view of the setting around the figure.",
+      "explicit_positive": "Anime illustration. Waist-up eye-level portrait of one adult man with tightly curled dark hair, standing still facing the viewer, arms relaxed. The character has the unmistakable silhouette of the final boss of an anime role-playing game. Asymmetrical lacquered black-and-gold battle suit, monolithic singular pauldron, gold-embroidered floor-length sash, and a mocking, tyrannical sneer. A tall open-faced helmet carries an asymmetric lacquered black-and-gold crest, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain. Background: modern atrium with a glass balustrade and pale marble floor. Lighting: even skylight on a cloudy day. Clear view of the setting around the figure.",
+      "matte": {
+        "file": "mattes/mall.png",
+        "sha256": "0c842feef6349790639fa81d7ef1bdd204078b00cc3b218017c92bb871e4542a"
+      }
+    }
+  ]
+}
