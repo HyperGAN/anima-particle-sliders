@@ -6,10 +6,11 @@ from types import SimpleNamespace
 import pytest
 import torch
 
+from release_tools.final_boss_apg import project_subject_target
 from release_tools.final_boss_cues import ARMOR_CREST_START, ROLE_AFTER_COSTUME, ROLE_BEFORE_COSTUME
 from release_tools.final_boss_targets import (
-    GROUNDED_COSTUME, GROUNDED_WAVELET, GUIDED_TEACHER, RECIPES, STEPS, capture_row, edited_target, final_target,
-    subject_matte, teacher_rows, verify_guided_trajectory,
+    FOREGROUND_APG, GROUNDED_COSTUME, GROUNDED_WAVELET, GUIDED_TEACHER, RECIPES, STEPS, capture_row,
+    edited_target, final_target, subject_matte, teacher_rows, verify_guided_trajectory,
 )
 from release_tools.final_boss_wavelet import low_band
 
@@ -96,6 +97,24 @@ def test_wavelet_exterior_keeps_the_stronger_foreground_and_reduces_coarse_exter
     filtered = torch.where(foreground, 0., (wavelet - baseline).double())
     source = torch.where(foreground, 0., (stronger - baseline).double())
     assert low_band(filtered, 3).norm() < low_band(source, 3).norm()
+
+
+def test_foreground_apg_removes_the_clean_latent_component_at_fixed_dose():
+    neutral = torch.tensor([[[[[0.25, 0.5, 0.625]]]]])
+    positive = torch.tensor([[[[[2.0, 1.75, 1.25]]]]])
+    sigma = 0.75
+    latent = sigma * positive + torch.tensor([[[[[1.0, 0., 7.0]]]]])
+    matte = torch.tensor([[[[[1.0, 0.7, 0.]]]]])
+    weight = 0.45 + 0.55 * matte
+    assert RECIPES[FOREGROUND_APG] == RECIPES["soft-floor45"]
+    baseline = final_target(None, latent, 0, neutral, positive, weight, 0., ())
+    target = final_target(None, latent, 0, neutral, positive, weight, 0., (), subject_projection=(matte, sigma))
+    assert target[..., 0].item() == neutral[..., 0].item()
+    assert target[..., 1].item() > baseline[..., 1].item()
+    assert torch.equal(target[..., -1], baseline[..., -1])
+    torch.testing.assert_close((target - neutral).norm(), (baseline - neutral).norm())
+    with pytest.raises(ValueError, match="Degenerate conditional clean-latent axis"):
+        project_subject_target(sigma * positive, sigma, neutral, positive, baseline, matte)
 
 
 def test_split_cues_keep_the_original_teacher_text_and_each_recorded_insertion():

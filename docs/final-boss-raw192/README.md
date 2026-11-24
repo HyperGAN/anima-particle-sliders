@@ -156,3 +156,12 @@ The guided recipe starts the second trajectory at the same seed noise and runs t
 python -m release_tools.final_boss_targets guided-teacher-floor45 \
   --model "$ANIMA_MODEL" --out targets/guided-teacher-floor45
 ```
+
+## Adaptive projected guidance on the subject
+
+The conditional clean prediction for Anima's flow sampler is `latent − sigma × conditional_velocity`. For each archived training state, the foreground APG recipe projects the soft-foreground edit away from this axis inside the subject matte and restores the original interior edit norm. It keeps the original teacher trajectories and exterior target values. [APG and the rectified-flow derivation](https://arxiv.org/html/2410.02416v2) · [Projection source](../../release_tools/final_boss_apg.py) · [Archived-field audit](ablations/foreground-apg-field-audit.json)
+
+```sh
+python -m release_tools.final_boss_targets foreground-apg-floor45 \
+  --model "$ANIMA_MODEL" --out targets/foreground-apg-floor45
+```

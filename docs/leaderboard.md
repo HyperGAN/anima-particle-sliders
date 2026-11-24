@@ -184,6 +184,12 @@ The 35% cue blend that kept only components with matching signs across its two a
 
 Jensen and Sadat cached trajectories generated with classifier-free guidance to reduce the gap between training and inference. This Anima adaptation makes the second training trajectory follow the frozen teacher's 0.45-floor foreground edit at the shared early schedule. It retains the original neutral trajectory and computes the same full teacher target at every visited state. The fit uses the same 120 records, prompts, seeds, and stock ParticleGAN setup. The earlier adapter-rollout arm used a trained adapter to generate its states and scored 11.61 at RAW192. The frozen-teacher recipe awaits native evaluation. [Paper and trajectory algorithm](https://arxiv.org/html/2503.07274v1#S4.SS1) · [Pinned schedule and capture](final-boss-raw192/README.md#scheduled-frozen-teacher-trajectory)
 
+## Adaptive projected guidance on the subject
+
+Adaptive Projected Guidance associates oversaturation at high classifier-free guidance with the part of the guidance update parallel to the conditional clean prediction. This training adaptation removes that component inside the subject matte from the soft-foreground teacher edit. It restores the original edit norm within the matte and preserves the exterior teacher target exactly. The 192-update fit tests whether this direction produces a clearer Boss at shared strength. [APG, §4 and Appendix B](https://arxiv.org/html/2410.02416v2) · [Capture command and source](final-boss-raw192/README.md#adaptive-projected-guidance-on-the-subject)
+
+On all 120 archived fields, the exterior target stayed bit for bit identical and edit norms matched within a relative error of 4 × 10⁻⁹. The projection moved the target by an average of 23.1% of its edit norm. The largest mean shift was 43.1% at the second denoising position. Finished renders await the native fit. [Archived-field audit](final-boss-raw192/ablations/foreground-apg-field-audit.json)
+
 ## Comparing a new run
 
 Compare the saved RAW checkpoint with the incumbent on the same prompts, seeds, sampler, and shared strengths. At 192 updates the early score to beat is **25.66**. The 35% cue blend sets the constant-strength comparison at **16.90**. Report tuned strength and its confirmation panel alongside the shared-strength comparison.
