@@ -1,0 +1,307 @@
+{
+  "development_cases": [
+    {
+      "label": "ranger",
+      "seed": 552242,
+      "prompt": "Anime illustration. Waist-up eye-level portrait of one adult man with wavy blond hair, wearing a russet hiking jacket, standing naturally facing the viewer. Background: alpine cable-car station with a green numbered post, metal railings and snow in the distance. Lighting: bright midday mountain light. Show the surroundings clearly."
+    },
+    {
+      "label": "smith",
+      "seed": 552243,
+      "prompt": "Anime illustration. Waist-up eye-level portrait of one adult woman with a straight gray bob, wearing a denim apron, standing naturally facing the viewer. Background: historical stone smithy with an old iron anvil and tools hanging from a wooden rack. Lighting: steady warm light from the hinged brass wall lamps. Show the surroundings clearly."
+    },
+    {
+      "label": "stationer",
+      "seed": 552244,
+      "prompt": "Anime illustration. Waist-up eye-level portrait of one adult man with short black curls, wearing a brown cardigan, standing naturally facing the viewer. Background: covered town square with orange awnings, terracotta pavement and a blue souvenir sign. Lighting: cool early evening light with street lanterns. Show the surroundings clearly."
+    },
+    {
+      "label": "ferryman",
+      "seed": 553302,
+      "prompt": "Anime illustration. Eye-level half-body portrait of one adult man with gray hair and a short beard, standing naturally facing the viewer. Background: covered ferry pier with a red railing and mooring rope. Lighting: clear morning sunlight. Keep the surrounding setting clearly visible."
+    },
+    {
+      "label": "watchmaker",
+      "seed": 553304,
+      "prompt": "Anime illustration. Eye-level half-body portrait of one older man with wavy white hair, standing naturally facing the viewer. Background: watch repair shop with brass clocks and a cream workbench. Lighting: steady warm lamp light. Keep the surrounding setting clearly visible."
+    },
+    {
+      "label": "guide",
+      "seed": 553305,
+      "prompt": "Anime illustration. Eye-level half-body portrait of one adult woman with dark brown curls and dark skin, standing naturally facing the viewer. Background: sandstone trail shelter with a wooden map board and distant dunes. Lighting: bright late-afternoon daylight. Keep the surrounding setting clearly visible."
+    },
+    {
+      "label": "guard",
+      "seed": 553306,
+      "prompt": "Anime illustration. Eye-level half-body portrait of one adult man with short black hair and round glasses, standing naturally facing the viewer. Background: quiet tiled vestibule with green lockers and a white enamel sign. Lighting: neutral fluorescent light. Keep the surrounding setting clearly visible."
+    },
+    {
+      "label": "violinist",
+      "seed": 553308,
+      "prompt": "Anime illustration. Eye-level half-body portrait of one adult man with straight shoulder-length brown hair, standing naturally facing the viewer. Background: concert hall anteroom with two burgundy chairs and a gilded mirror. Lighting: low warm evening lamp light. Keep the surrounding setting clearly visible."
+    }
+  ],
+  "controls": {
+    "fixed_strength": "soft-floor45",
+    "matched_constant": "strong-boss-45-mix35"
+  },
+  "objective": {
+    "primary": "mean per-case Final Boss effect adjusted for visible breakage",
+    "effect": "nonnegative matched ON minus OFF Boss distinction",
+    "readability_multiplier": "(1 - Jev image breakage severity)^2",
+    "tiebreak_average": [
+      "identity",
+      "scene",
+      "lighting",
+      "framing",
+      "coherence"
+    ]
+  },
+  "sigmas": [
+    1.0,
+    0.964285671710968,
+    0.9230769872665405,
+    0.8749999403953552,
+    0.8181818127632141,
+    0.75,
+    0.6666666865348816,
+    0.5625,
+    0.4285714626312256,
+    0.25,
+    0.0
+  ],
+  "recipes": {
+    "strong-cues-late3": {
+      "label": "Stronger cue targets at the last three teacher positions",
+      "status": "measured",
+      "step": 192,
+      "source_review_sha256": "36cd916cffcb0ebdeea8bd791c25f2a86272236025bd9c72ae2616cb242d3786",
+      "raw_sha256": "5229a44054f00e2fe849e32b75db155643eb0e46b503ed7bffb020d15381bc22",
+      "source_report_sha256": "e84a992652ee28db0300e1f84fd49612e48fc693bffa0bff0ee91c4168c09e3f",
+      "fixed_strength": {
+        "status": "pass",
+        "profile": "early",
+        "alpha": 0.6666666666666666,
+        "gains": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.6444445235641115,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "means": {
+          "final_score": 0.211956041667,
+          "boss_effect": 0.3575,
+          "image_breakage": 0.23333333333333334
+        },
+        "cases": {
+          "ranger": {
+            "boss_distinction": 0.37,
+            "original_boss_distinction": 0.08,
+            "scene": 0.69,
+            "lighting": 0.44,
+            "image_breakage": 0.30333333333333334,
+            "final_score": 0.140749888889,
+            "integrity": "pass",
+            "on_sha256": "8a1c6cea6e1c553fe4113c5f06a705f02137b1c947adc69a043b52960bb3a5eb",
+            "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+          },
+          "smith": {
+            "boss_distinction": 0.3,
+            "original_boss_distinction": 0.06,
+            "scene": 0.56,
+            "lighting": 0.61,
+            "image_breakage": 0.27999999999999997,
+            "final_score": 0.124416,
+            "integrity": "pass",
+            "on_sha256": "10c17434f6c5d84fd7927fe27d83ff320f7d3aed9d929dbd118dc4292600697f",
+            "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+          },
+          "stationer": {
+            "boss_distinction": 0.41,
+            "original_boss_distinction": 0.09,
+            "scene": 0.44,
+            "lighting": 0.4,
+            "image_breakage": 0.15333333333333335,
+            "final_score": 0.229390222222,
+            "integrity": "pass",
+            "on_sha256": "27dfcbd527e880cc335f48df53605103d1b7a48a81f2750f7ef6e81315f78186",
+            "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+          },
+          "ferryman": {
+            "boss_distinction": 0.4,
+            "original_boss_distinction": 0.11,
+            "scene": 0.39,
+            "lighting": 0.38,
+            "image_breakage": 0.22333333333333336,
+            "final_score": 0.174931222222,
+            "integrity": "pass",
+            "on_sha256": "199adfc15c453bfb8ad0291c6aa1aa31e0b6ceea78367832c1699c91b532136a",
+            "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+          },
+          "watchmaker": {
+            "boss_distinction": 0.7,
+            "original_boss_distinction": 0.08,
+            "scene": 0.58,
+            "lighting": 0.31,
+            "image_breakage": 0.19999999999999998,
+            "final_score": 0.3968,
+            "integrity": "pass",
+            "on_sha256": "991182d83351d9c4589a35d8ba518386763cc6342449f08c835e0dd88f2c8e1f",
+            "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+          },
+          "guide": {
+            "boss_distinction": 0.23,
+            "original_boss_distinction": 0.06,
+            "scene": 0.55,
+            "lighting": 0.64,
+            "image_breakage": 0.22,
+            "final_score": 0.103428,
+            "integrity": "pass",
+            "on_sha256": "cd2dff1090aea184cb05e3d59e515f321e7c1293f4b38b2404b8392870a466e0",
+            "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+          },
+          "guard": {
+            "boss_distinction": 0.63,
+            "original_boss_distinction": 0.09,
+            "scene": 0.56,
+            "lighting": 0.25,
+            "image_breakage": 0.27666666666666667,
+            "final_score": 0.282534,
+            "integrity": "pass",
+            "on_sha256": "e22432bfe24c35a136e8c611509b0cbd1a50dbbd875ca59bd9681cd7bc928f47",
+            "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+          },
+          "violinist": {
+            "boss_distinction": 0.48,
+            "original_boss_distinction": 0.09,
+            "scene": 0.55,
+            "lighting": 0.33,
+            "image_breakage": 0.21,
+            "final_score": 0.243399,
+            "integrity": "pass",
+            "on_sha256": "42016ec7e4e86a534b5d7355ade6f01bd407d68d54371dce2c23ce01a756554e",
+            "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+          }
+        }
+      },
+      "matched_constant": {
+        "status": "pass",
+        "profile": "constant",
+        "alpha": 0.6375,
+        "gains": [
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375
+        ],
+        "means": {
+          "final_score": 0.104070194444,
+          "boss_effect": 0.18375,
+          "image_breakage": 0.24833333333333335
+        },
+        "cases": {
+          "ranger": {
+            "boss_distinction": 0.21,
+            "original_boss_distinction": 0.08,
+            "scene": 0.55,
+            "lighting": 0.36,
+            "image_breakage": 0.26,
+            "final_score": 0.071188,
+            "integrity": "pass",
+            "on_sha256": "fb4a9c6114bfba0f3c9b977cba39cdbf68f409cfce6ad91223cf0ed0c46df052",
+            "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+          },
+          "smith": {
+            "boss_distinction": 0.17,
+            "original_boss_distinction": 0.06,
+            "scene": 0.61,
+            "lighting": 0.59,
+            "image_breakage": 0.3433333333333333,
+            "final_score": 0.047433222222,
+            "integrity": "pass",
+            "on_sha256": "dc590d25ac62274f2b9d75a0034ac66fc81aa43d2b524bb980b0a25e454393b9",
+            "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+          },
+          "stationer": {
+            "boss_distinction": 0.26,
+            "original_boss_distinction": 0.09,
+            "scene": 0.7,
+            "lighting": 0.47,
+            "image_breakage": 0.25,
+            "final_score": 0.095625,
+            "integrity": "pass",
+            "on_sha256": "d2c97e9682b234e160f6e9df223610fee22803513e259fc6c22bafe805bff183",
+            "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+          },
+          "ferryman": {
+            "boss_distinction": 0.23,
+            "original_boss_distinction": 0.11,
+            "scene": 0.43,
+            "lighting": 0.38,
+            "image_breakage": 0.22666666666666668,
+            "final_score": 0.071765333333,
+            "integrity": "pass",
+            "on_sha256": "ad324273a3d99b652bb2548a0285745d5dbfe05578077083f48689547608be5c",
+            "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+          },
+          "watchmaker": {
+            "boss_distinction": 0.3,
+            "original_boss_distinction": 0.08,
+            "scene": 0.52,
+            "lighting": 0.58,
+            "image_breakage": 0.21,
+            "final_score": 0.137302,
+            "integrity": "pass",
+            "on_sha256": "ad8fd73143a8f59c543d82fa8c7e0fe22cf1619164546780db4c95b1d67c365a",
+            "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+          },
+          "guide": {
+            "boss_distinction": 0.18,
+            "original_boss_distinction": 0.06,
+            "scene": 0.69,
+            "lighting": 0.65,
+            "image_breakage": 0.19666666666666666,
+            "final_score": 0.077441333333,
+            "integrity": "pass",
+            "on_sha256": "b2d4210e94f9a569d8a9b462a1ec69e557a68b86236c4c7073ae43023768f1d4",
+            "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+          },
+          "guard": {
+            "boss_distinction": 0.44,
+            "original_boss_distinction": 0.09,
+            "scene": 0.59,
+            "lighting": 0.51,
+            "image_breakage": 0.2966666666666667,
+            "final_score": 0.173137222222,
+            "integrity": "pass",
+            "on_sha256": "57e91f2834ad2858b79a7ec004bc5b95008908fa620d00226136da93dc97e653",
+            "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+          },
+          "violinist": {
+            "boss_distinction": 0.34,
+            "original_boss_distinction": 0.09,
+            "scene": 0.57,
+            "lighting": 0.3,
+            "image_breakage": 0.20333333333333334,
+            "final_score": 0.158669444444,
+            "integrity": "pass",
+            "on_sha256": "dc3dc3a592969c4bf42984116e1f1502a1653d1d6126baadc2f7e6a062bd8773",
+            "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+          }
+        }
+      }
+    }
+  }
+}

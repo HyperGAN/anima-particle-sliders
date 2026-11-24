@@ -8,7 +8,7 @@
 
 **What earns a high score.** The slider should make the subject visibly read as a Final Boss while keeping the image coherent. An edit with zero Boss gain scores zero. Visible damage lowers the score even when the Boss effect is strong. [Scoring and comparison protocol](#comparing-a-new-run) · [Jev rubrics](final-boss-raw192/rubrics.json)
 
-**Latest challengers.** Averaging two alternate cue directions led the four-case update-96 preview. Applying stronger cues to the final three teacher positions led the update-144 preview against the incumbent. Both eight-case RAW192 comparisons are pending. [Update-96 results](#update-96-preview) · [Update-144 results](#update-144-preview)
+**Latest challengers.** Averaging two alternate cue directions led the four-case update-96 preview. Stronger cues at the final three teacher positions finished at **21.20** on the eight-case RAW192 panel. Stronger cues at the first three positions are training. [Update-96 results](#update-96-preview) · [Completed late-cue comparison](#late-cues-at-update-192)
 
 ## Training techniques
 
@@ -20,8 +20,9 @@ The ranking uses the best measured variant of each technique after 192 updates w
 | 2 | Soft foreground weighting plus 35% stronger Boss cues | 24.93 | **16.90** | [Anima PR #31](https://github.com/HyperGAN/anima-particle-sliders/pull/31), related [teacher mixing #278](https://github.com/HyperGAN/particle-sliders/pull/278) |
 | 3 | Paired scene and lighting contexts, 50% blend, 0.65 floor | 22.23 | 11.58 | [Concept Sliders](https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/05660.pdf), related [contrast isolation #216](https://github.com/HyperGAN/particle-sliders/pull/216) |
 | 4 | Background-only scene and lighting projection, 0.45 floor | 22.22 | 11.51 | Local Anima adaptation of [nuisance deflation #254](https://github.com/HyperGAN/particle-sliders/pull/254) |
-| 5 | Whole-image scene and lighting projection, 0.65 floor | 18.74 | 13.72 | Local Anima adaptation of [nuisance deflation #254](https://github.com/HyperGAN/particle-sliders/pull/254) |
-| 6 | Train on adapter rollout states, 0.45 floor | 11.61 | 5.49 | Local Anima experiment, related [rollout protocol #246](https://github.com/HyperGAN/particle-sliders/pull/246) |
+| 5 | Stronger cues at the final three teacher positions | 21.20 | 10.41 | [Teacher timing adaptation and matched renders](#late-cues-at-update-192) |
+| 6 | Whole-image scene and lighting projection, 0.65 floor | 18.74 | 13.72 | Local Anima adaptation of [nuisance deflation #254](https://github.com/HyperGAN/particle-sliders/pull/254) |
+| 7 | Train on adapter rollout states, 0.45 floor | 11.61 | 5.49 | Local Anima experiment, related [rollout protocol #246](https://github.com/HyperGAN/particle-sliders/pull/246) |
 
 The prompt-only control scored **18.32** at shared early strength. Its constant result is unmeasured. The 35% cue blend gained **3.84 points** at constant strength over the default training recipe. It improved seven of eight matched cases at constant strength and one of eight at early strength. The 85% cue blend scored lower at both shared strengths. Each technique used one initialization seed. [All runs and per-case scores](final-boss-raw192/results.json)
 
@@ -46,6 +47,10 @@ Each cue-timing recipe replaces 36 of the 120 teacher fields. The replacement mo
 Late cues passed all four structural checks. The quarter-check question gave late cues **+0.453** mean gain and soft foreground weighting **+0.401** at the same early strength. [Four matched originals and renders](final-boss-raw192/ablations/late-cues-raw144-matched.jpg)
 
 Scoring those same renders with the leaderboard’s separate character and damage questions gave late cues **8.92** and soft foreground weighting **7.75**. Late cues had higher mean Boss distinction gain (**+0.183** versus **+0.168**) and slightly lower mean image damage (**0.287** versus **0.302**). Bookkeeper accounted for most of the score increase. Botanist and seamstress favored soft foreground weighting after the damage adjustment. [Per-case scores and matched image hashes](final-boss-raw192/ablations/late-cues-raw144-scores.json)
+
+## Late cues at update 192
+
+The late-cue recipe used the 35% stronger-cue teacher at the final three denoising positions and retained the soft-foreground teacher at the other seven. It completed 192 updates and passed the structural checks at both shared strengths. At early α 2/3 it finished **4.46 points** behind soft foreground weighting. It had weaker mean Boss distinction gain (**+0.358** versus **+0.423**) and more visible damage (**0.233** versus **0.214**). Stationer, guide, and violinist favored late cues. Ranger, ferryman, and guard accounted for most of the decline. [Eight matched renders](final-boss-raw192/ablations/late-cues-raw192-matched.jpg) · [Both strengths and per-case scores](final-boss-raw192/ablations/late-cues-raw192-scores.json) · [Timing research](https://arxiv.org/abs/2512.08486)
 
 ## Qualified teacher targets
 
