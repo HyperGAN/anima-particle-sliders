@@ -8,7 +8,7 @@
 
 **What earns a high score.** The slider should make the subject visibly read as a Final Boss while keeping the image coherent. An edit with zero Boss gain scores zero. Visible damage lowers the score even when the Boss effect is strong. [Scoring and comparison protocol](#comparing-a-new-run) · [Jev rubrics](final-boss-raw192/rubrics.json)
 
-**Latest challenger.** Applying stronger cues to the final three teacher positions leads the four-case Boss-gain check at update 144. Its full 192-update score with the image-damage penalty is pending. [Matched update-144 renders](#update-144-preview)
+**Latest challenger.** Applying stronger cues to the final three teacher positions led the four-case update-144 preview, **8.92** to **7.75** under the leaderboard rubric. The eight-case RAW192 comparison is pending. [Matched update-144 results](#update-144-preview)
 
 ## Training techniques
 
@@ -41,7 +41,9 @@ Each cue-timing recipe replaces 36 of the 120 teacher fields. The replacement mo
 
 ## Update-144 preview
 
-Late cues passed all four structural checks and reached **+0.453** mean Jev Boss gain at the shared early inference strength, compared with **+0.401** for soft foreground weighting at the same update. Late cues led on three cases, with the largest gain on bookkeeper (**+0.547** versus **+0.413**). The bookkeeper render also has heavier facial shadow. This preview measures Boss gain. The eight-case RAW192 comparison also scores visible image damage. [Four matched originals and renders](final-boss-raw192/ablations/late-cues-raw144-matched.jpg)
+Late cues passed all four structural checks. The quarter-check question gave late cues **+0.453** mean gain and soft foreground weighting **+0.401** at the same early strength. [Four matched originals and renders](final-boss-raw192/ablations/late-cues-raw144-matched.jpg)
+
+Scoring those same renders with the leaderboard’s separate character and damage questions gave late cues **8.92** and soft foreground weighting **7.75**. Late cues had higher mean Boss distinction gain (**+0.183** versus **+0.168**) and slightly lower mean image damage (**0.287** versus **0.302**). Bookkeeper accounted for most of the score increase. Botanist and seamstress favored soft foreground weighting after the damage adjustment. [Per-case scores and matched image hashes](final-boss-raw192/ablations/late-cues-raw144-scores.json)
 
 ## Structural stops
 
