@@ -1,0 +1,222 @@
+# Anima Final Boss RAW192
+
+The **Final Boss research default** is soft foreground weighting with a **0.45 background floor**, using the saved RAW192 particle adapter at **early α 0.95**. This setting scored **33.71** on the development panel and **28.55** on eight separate confirmation cases. Use the shared early α 2/3 comparison below when comparing training techniques.
+
+[Leaderboard summary](../leaderboard.md) · [Default manifest and exact per-step gains](default.json) · [Public RAW checkpoints](https://huggingface.co/ntc-ai/anima-final-boss-research) · [Per-case results and prompts](results.json)
+
+![Eight confirmation cases showing the same original, the default early 0.95 edit, and the early 0.9125 control](confirmed-default.jpg)
+
+## Training comparison
+
+Each scored row uses 192 stock ParticleGAN EMPF updates and eight matched cases at 512 × 512, ten native Euler steps, and CFG 1. The score is the equal-case mean of `max(0, Boss_ON − Boss_OFF) × (1 − image_damage)²`, shown on a 0–100 scale. Jev judges character design and visible damage separately. The structural check also runs at each quarter of training. [Jev rubrics](rubrics.json)
+
+This table covers the original control and dose comparisons. The results JSON includes the later matched ablations and their RAW fingerprints. [Current ranking](../leaderboard.md#training-techniques) · [Machine-readable scores](results.json)
+
+| Training target | Early α 2/3 | Constant α 0.6375 |
+| --- | ---: | ---: |
+| Soft foreground weighting, 0.45 background floor | **25.66** | 13.06 |
+| Soft foreground weighting plus 35% stronger cues | 24.93 | **16.90** |
+| Paired scene and lighting contexts, 50% blend, 0.65 floor | 22.23 | 11.58 |
+| Background-only scene and lighting projection, 0.45 floor | 22.22 | 11.51 |
+| Soft foreground weighting plus 85% stronger cues, 0.45 floor | 21.77 | 14.39 |
+| Paired scene and lighting contexts, 50% blend, 0.45 floor | 21.41 | 11.40 |
+| Whole-image scene and lighting projection, 0.65 floor | 18.74 | 13.72 |
+| Prompt-only control | 18.32 | Unmeasured |
+| Earlier soft foreground weighting, 0.65 floor | 17.83 | 11.30 |
+| Training on adapter rollout states, 0.45 floor | 11.61 | 5.49 |
+| Soft foreground weighting plus 85% stronger cues, 0.65 floor | Unmeasured | 13.91 |
+
+![Eight matched early-strength cases comparing the original, soft foreground weighting, stronger cues, and prompt-only](shared-early.jpg)
+
+[Matched constant-strength samples](shared-constant.jpg)
+
+The 35% blend raised the constant-strength score from **13.06 to 16.90**, and its early-strength score was **0.73** points below the shared early leader. The 0.80 background-floor arm failed the structural check at both shared strengths. A stronger 1.30 target-dose arm stopped at update 96 after a structural failure. Each technique was fit at one initialization seed. The eight additional cases confirm the selected default strength on the same checkpoint and have two qualified settings out of nine attempted.
+
+## Replay the default
+
+Run from the Anima checkout with the [pinned native environment](../../configs/anima/requirements.lock). Use the official converted Anima Turbo v1.1 model. If you need to prepare it, run `python -m release_tools.prepare_model --output "$ANIMA_MODEL"`.
+
+```sh
+python -m release_tools.final_boss_replay --model "$ANIMA_MODEL" --out final-boss.png
+```
+
+The command loads the revision-pinned RAW artifact and verifies its SHA-256. It renders the `baker` confirmation case by default. Use `--case ranger` for a development example or `--checkpoint` for a local copy of the same RAW artifact. The JSON beside the PNG records the prompt, seed, model identity, checkpoint digest, native sigma grid, and effective strengths. Current Anima source reproduced all eight default confirmation PNGs byte for byte on CUDA.
+
+## Source for the trained targets
+
+On each frozen neutral or positive trajectory state, subtract the neutral velocity from the generic positive velocity. Multiply that edit by `0.45 + 0.55 × foreground_matte`, restore its original L2 norm, and add it back to the neutral velocity. The cue blend first interpolates 35% toward a stronger positive contrast evaluated at the **same latent and timestep**. The capture source reproduced all 120 archived training fields exactly for each recipe. Each cache uses six prompt pairs, two trajectories, and ten steps per trajectory.
+
+[Target capture and native admission source](../../release_tools/final_boss_targets.py) · [Exact training prompts, seeds and pinned mattes](training-pairs.json) · [Default replay source](../../release_tools/final_boss_replay.py)
+
+```sh
+python -m release_tools.final_boss_targets --model "$ANIMA_MODEL" --out targets/soft-floor45
+python -m release_tools.final_boss_targets strong-boss-45-mix35 \
+  --model "$ANIMA_MODEL" --out targets/strong-boss-45-mix35
+```
+
+The timed recipes apply the 35% cue blend at positions 0–2, 3–6, or 7–9. The two-cue recipe averages the two positive-minus-neutral responses at each frozen state before taking the 35% blend. Each recipe uses the same soft foreground mask and restores the original per-field L2 norm. [Exact alternate prompts](ablations/two-cue-prompts.json) · [Leaderboard evidence](../leaderboard.md)
+
+```sh
+for recipe in strong-cues-early3 strong-cues-middle4 strong-cues-late3 diverse-mean35; do
+  python -m release_tools.final_boss_targets "$recipe" \
+    --model "$ANIMA_MODEL" --out "targets/$recipe"
+done
+```
+
+A fresh CUDA run reproduced all **360** archived fields for the early, late, and two-cue recipes. Matching fields included embeddings, latents, neutral and positive velocities, timesteps, and trajectory positions. Those three caches passed runtime admission. The middle recipe reuses 48 exact stronger-cue fields and 72 soft-foreground fields. [Native verification](ablations/cue-native-source-verification.json) · [Middle-position archive check](ablations/middle-cue-field-audit.json)
+
+Pass the resulting `TargetCache` to [scoped training](../explicit-fresh-initialization.md), with `variation="character-final-boss"` and `native_admission=lambda request: verify_native(runtime, cache, request)`. Keep the fit at `seed=1`, `batch_size=2`, `total_steps=192`, `response_scale=1`, `sigma=1`, `critic_width=32`, `lr=0.00075`, `d_lr_mult=12`, `prior_lr_mult=40`, and `ema_decay=None`. Use fresh scoped initialization for a new cohort. Save RAW at 48, 96, 144, and 192 and check the matched rendered images before continuing past each checkpoint. The recorded experiment used [this Anima source](https://github.com/HyperGAN/anima-particle-sliders/tree/c4b0e86e78670f21ffa5e7545b244d0f9e63cea6), [this core source](https://github.com/HyperGAN/particle-sliders/tree/507168a241e237fc3d5f1032a8137196fa3c3562), and ParticleGAN 0.11.1. Compare future cohorts on the same development cases at both shared strengths.
+
+Related research includes teacher mixing [#278](https://github.com/HyperGAN/particle-sliders/pull/278), [Concept Sliders](https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/05660.pdf) and contrast isolation [#216](https://github.com/HyperGAN/particle-sliders/pull/216), nuisance projection [#254](https://github.com/HyperGAN/particle-sliders/pull/254), and rollout comparison [#246](https://github.com/HyperGAN/particle-sliders/pull/246). The trained Anima recipes are native adaptations.
+
+## Denoising-position exposure
+
+Start with the soft-foreground capture above. The following builds each cache and records the expected per-position draws from the stock sampler. Pass the new cache to the same scoped training options and native verifier above. Validate the actual exposure counts in the completed FULL checkpoint and evaluate the corresponding RAW192 at both shared strengths. [Exposure source](../../release_tools/final_boss_exposure.py) · [Frozen protocol](ablations/phase-exposure-protocol.json)
+
+```sh
+for recipe in exposure-opening4 exposure-middle4; do
+  python -m release_tools.final_boss_exposure targets/soft-floor45 "$recipe" \
+    "targets/$recipe" --receipt "targets/$recipe-sampler.json"
+done
+```
+
+## Regional stronger cues
+
+The regional recipes keep both teacher trajectories and change the stronger cue only within the allowed mask. They match the baseline edit norm and the whole-field cue's distance from the baseline at each position. The target capture and native admission use the same parameters and matte in each recipe. [Regional target source](../../release_tools/final_boss_targets.py) · [Field checks and protocol](ablations/regional-cue-protocol.json)
+
+```sh
+for recipe in regional-cue-matte regional-cue-dilated2; do
+  python -m release_tools.final_boss_targets "$recipe" \
+    --model "$ANIMA_MODEL" --out "targets/$recipe"
+done
+```
+
+Independent CUDA capture matched the queued training targets bit for bit across both 120-field caches. Both recipes passed native admission. [CUDA verification](ablations/regional-cue-native-verification.json)
+
+## Percentile-filtered teacher targets
+
+These recipes retain both original trajectories. The active positions blend 35% of the norm-matched top 10% of the soft-foreground edit into the original dense edit and restore its per-field L2 norm. The command checks native admission on the saved cache. [Leaderboard comparison](../leaderboard.md#percentile-filtered-teacher-edits) · [Capture source](../../release_tools/final_boss_targets.py)
+
+```sh
+for recipe in sega-early35 sega-all35; do
+  python -m release_tools.final_boss_targets "$recipe" \
+    --model "$ANIMA_MODEL" --out "targets/$recipe"
+done
+```
+
+Independent CUDA capture reproduced all 120 archived fields for each recipe and both caches passed native admission. The verification used the published capture source at `d058517`. [CUDA verification](ablations/sega-native-verification.json) · [Verified source](https://github.com/HyperGAN/anima-particle-sliders/blob/d058517532d00098fed181c89eea2ac1b364ffc6/release_tools/final_boss_targets.py)
+
+## Matched ordinary attire
+
+The matched-attire recipes use the published stronger Boss prompt and its same-scene ordinary outfit reference. The regional variant blends the matched-reference change into the character region and preserves the stronger cue's exterior values. [Exact prompt pairs](ablations/matched-attire-prompts.json) · [Regional field audit](ablations/regional-attire-field-audit.json) · [Leaderboard](../leaderboard.md#matched-ordinary-attire)
+
+```sh
+for recipe in matched-attire35 regional-attire35; do
+  python -m release_tools.final_boss_targets "$recipe" \
+    --model "$ANIMA_MODEL" --out "targets/$recipe"
+done
+```
+
+## Wavelet exterior cue
+
+This recipe subtracts the level-three Daubechies 4 approximation of the added exterior cue. It preserves the stronger subject target and the full edit norm. [Wavelet source](../../release_tools/final_boss_wavelet.py) · [Field audit](ablations/wavelet-exterior-field-audit.json)
+
+```sh
+python -m release_tools.final_boss_targets wavelet-exterior35 \
+  --model "$ANIMA_MODEL" --out targets/wavelet-exterior35
+```
+
+## In-scene costume cues
+
+All three captures use the original neutral and positive trajectories. The fixed blend uses the in-scene costume cue at 35% throughout. The taper uses the position-specific weights from the study. The wavelet recipe applies the exterior correction to the fixed blend. The capture binds the exact original prompt pair and matte before adding the third prompt. [Prompts and weights](ablations/grounded-training-prompts.json) · [Leaderboard results](../leaderboard.md#in-scene-costume-prompts) · [Capture source](../../release_tools/final_boss_targets.py)
+
+```sh
+for recipe in scene-grounded35 scene-grounded-taper35 scene-grounded-wavelet35; do
+  python -m release_tools.final_boss_targets "$recipe" \
+    --model "$ANIMA_MODEL" --out "targets/$recipe"
+done
+```
+
+## Split role and crest cues
+
+The two recipes derive directly from the recorded stronger prompts. The role arm keeps their two antagonist sentences. The crest arm keeps the costume-specific helmet and crest sentence. Both retain every sentence in the original teacher prompt and apply the same 35% foreground-weighted blend. [Original prompt pairs](training-pairs.json) · [Prompt split source](../../release_tools/final_boss_cues.py) · [Leaderboard](../leaderboard.md#split-role-and-crest-cues)
+
+```sh
+for recipe in role-cue35 crest-cue35; do
+  python -m release_tools.final_boss_targets "$recipe" \
+    --model "$ANIMA_MODEL" --out "targets/$recipe"
+done
+```
+
+## Scheduled frozen-teacher trajectory
+
+The guided recipe starts the second trajectory at the same seed noise and runs the frozen Anima teacher at each visited state. It advances with neutral velocity plus the pinned early-schedule gain times the soft-foreground teacher contrast. Both trajectories store the full soft-foreground target. Native admission replays every guided path from noise and independently reconstructs four teacher fields. [Trajectory collection method, §4.1](https://arxiv.org/html/2503.07274v1#S4.SS1) · [Exact sigmas and gains](ablations/guided-teacher-trajectory-plan.json) · [Capture source](../../release_tools/final_boss_targets.py)
+
+```sh
+python -m release_tools.final_boss_targets guided-teacher-floor45 \
+  --model "$ANIMA_MODEL" --out targets/guided-teacher-floor45
+```
+
+## Adaptive projected guidance on the subject
+
+The conditional clean prediction for Anima's flow sampler is `latent − sigma × conditional_velocity`. For each archived training state, the foreground APG recipe projects the soft-foreground edit away from this axis inside the subject matte and restores the original interior edit norm. It keeps the original teacher trajectories and exterior target values. [APG and the rectified-flow derivation](https://arxiv.org/html/2410.02416v2) · [Projection source](../../release_tools/final_boss_apg.py) · [Archived-field audit](ablations/foreground-apg-field-audit.json)
+
+```sh
+python -m release_tools.final_boss_targets foreground-apg-floor45 \
+  --model "$ANIMA_MODEL" --out targets/foreground-apg-floor45
+```
+
+### Preserve the baseline component when projecting added cues
+
+The anchored recipe uses the generic Boss clean prediction as the projection axis. At positions 0–2, it sets the stronger cue's subject-parallel component to the value from soft foreground weighting and rescales the orthogonal component to recover the stronger cue's edit norm. Each exterior value and all 84 later teacher fields come from the 35% stronger-cue recipe. [Projection source](../../release_tools/final_boss_apg.py) · [Archived-field checks](ablations/anchored-apg-early-field-audit.json)
+
+```sh
+python -m release_tools.final_boss_targets anchored-apg-early35 \
+  --model "$ANIMA_MODEL" --out targets/anchored-apg-early35
+```
+
+## Paired contexts outside the subject
+
+The `paired-exterior-floor45` recipe uses the incumbent 0.45-floor target wherever the area-resampled matte exceeds 0.01. Elsewhere it uses the contrast direction from the 0.65-floor, 50% paired-context blend, scaled to the incumbent's exterior L2 norm. The paired contrast averages the same character change under the original scene and lighting, alternate matched lighting, and an alternate matched setting at each common latent and timestep. This adapts paired concept guidance to the exterior of the target. [Concept Sliders](https://arxiv.org/html/2311.12092v2#S4) · [Spatially localized diffusion edits](https://arxiv.org/abs/2111.14818) · [Exact paired prompts](ablations/paired-exterior-prompts.json)
+
+```sh
+python -m release_tools.final_boss_targets paired-exterior-floor45 \
+  --model "$ANIMA_MODEL" --out targets/paired-exterior-floor45
+```
+
+Capture regenerates the paired contexts with the native teacher and rechecks four fields before reporting success. The archive audit used the already captured targets on both original teacher paths. It verified all 120 subject targets and the unchanged edit norm. The finished-image comparison is pending. [Field audit](ablations/paired-exterior-field-audit.json) · [Training hypothesis](../leaderboard.md#paired-contexts-outside-the-subject)
+
+## Framing-matched wardrobe contrast
+
+The ordinary prompts in the original capture mention pants or a skirt and footwear. To test whether this wording teaches the slider to reframe the image, the new contrast omits those two phrases from each ordinary prompt. At every frozen latent and timestep, subtract the edited ordinary prompt's response from the original Boss response. Apply the incumbent matte and normalize to the original positive-minus-neutral edit norm. Add the result to the original neutral response. The stored embeddings, trajectory states, positive prompts, and 120 training fields retain the incumbent configuration. [Exact terms omitted](ablations/framing-matched-prompts.json) · [Original and Boss silhouettes](ablations/paired-foregrounds.jpg) · [Foreground audit source](../../release_tools/final_boss_matte_audit.py)
+
+```sh
+python -m release_tools.final_boss_targets framing-matched-floor45 \
+  --model "$ANIMA_MODEL" --out targets/framing-matched-floor45
+```
+
+Capture rechecks four target fields through the native Anima teacher. The RAW192 comparison is pending.
+
+To measure straight near-white margins in saved renders, use the pixel diagnostic. It reports the number of contiguous rows or columns from each edge that meet the recorded brightness threshold. [Diagnostic source](../../release_tools/final_boss_frame_padding.py) · [Saved audit](ablations/frame-padding-audit.json)
+
+```sh
+python -m release_tools.final_boss_frame_padding ordinary.png boss.png
+```
+
+## Late subject contrast
+
+The `late-subject-dose45` recipe starts from the incumbent's soft foreground target. It moves one percentage point of each frozen trajectory's subject edit energy from positions 3–6 to positions 7–9. The scales apply to the velocity contrast inside matte values above 0.01. Both the opening fields and the exterior values remain exact. The command replays the original teacher states, applies the audited scales, and checks four fields through the native teacher. [Exact scales and archived field audit](ablations/late-subject-dose-field-audit.json) · [Redistribution source](../../release_tools/final_boss_subject_dose.py)
+
+```sh
+python -m release_tools.final_boss_targets late-subject-dose45 \
+  --model "$ANIMA_MODEL" --out targets/late-subject-dose45
+```
+
+## Two-step teacher contrast
+
+At zero-indexed positions 0–2 of both original trajectories, this recipe advances the frozen neutral and Boss teachers separately from the current shared latent. It forms the sigma-weighted average of their contrasts over the two-step window. The fit still uses the original neutral velocity, foreground weighting, and instantaneous edit norm. There are 36 substituted targets across the same 120 fields. [MeanFlow paper](https://arxiv.org/abs/2505.13447) · [Two-step target source](../../release_tools/final_boss_lookahead.py)
+
+```sh
+python -m release_tools.final_boss_targets lookahead-early3 \
+  --model "$ANIMA_MODEL" --out targets/lookahead-early3
+```

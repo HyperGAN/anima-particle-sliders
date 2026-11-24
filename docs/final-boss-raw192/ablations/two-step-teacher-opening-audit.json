@@ -1,0 +1,39 @@
+{
+  "recipe": "lookahead-early3",
+  "comparison": "soft-floor45",
+  "source": "https://arxiv.org/abs/2505.13447",
+  "scope": "The neutral and positive tracks start at the same latent. This permits the start-position calculation directly from the archived teacher fields.",
+  "cache_fingerprint": "584407ffe55a9d5f426eb20a1ac7ed3c4a9ecdfde2b6ea3f9d3d333386dfceb2",
+  "windows_sigmas": [
+    1.0,
+    0.964285671710968,
+    0.9230769872665405
+  ],
+  "two_step_relative_target_movement_mean": 0.27367359355933235,
+  "fields": [
+    {
+      "scene": "bridge",
+      "relative_target_movement": 0.2765552671638326
+    },
+    {
+      "scene": "cafe",
+      "relative_target_movement": 0.31496782059218026
+    },
+    {
+      "scene": "greenhouse",
+      "relative_target_movement": 0.1949055488781755
+    },
+    {
+      "scene": "harbor",
+      "relative_target_movement": 0.28650570341203985
+    },
+    {
+      "scene": "library",
+      "relative_target_movement": 0.25682230376856363
+    },
+    {
+      "scene": "mall",
+      "relative_target_movement": 0.3122849175412024
+    }
+  ]
+}

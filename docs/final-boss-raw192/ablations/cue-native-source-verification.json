@@ -1,0 +1,44 @@
+{
+  "source_commit": "e365b0d9ad9071bde99d7d26959b70127aad5db1",
+  "source_sha256": "41fb5eb5786fb2fe91c6fa69b4b93c572f8d86e9ea6c7116bbfe1d9998755ef0",
+  "model": {
+    "model": "circlestone-labs/Anima:turbo-v1.1",
+    "sha256": "eb5520f293d42a19df9242d8d442d5d2068e5121620814418c2b50a97de0552f",
+    "identity_schema": "portable-model-v1",
+    "environment_sha256": "55ac97305e688c56d4a2908243b020e999cf101a05b1cf7e5a3e2c48d4a4d7ba",
+    "runtime_sha256": "0b0dfc97ba76a99ed3f5313695e89e5802ece8e1db4470443a9705692ae579c3"
+  },
+  "checks": "Verified matching embeddings, latents, neutral and positive velocities, timesteps and trajectory positions. Each cache also passed its public runtime admission checks.",
+  "total_fields": 360,
+  "methods": {
+    "diverse-mean35": {
+      "fields_verified": 120,
+      "cache": "352e1a45acb9aa5474d852525cdd10ec741d287ab892b49100d479926a1d0522",
+      "archive": "189691ecb20db887b65ed2e7b1481d78cf896edad46e90aff72295947153cb5f"
+    },
+    "strong-cues-early3": {
+      "fields_verified": 120,
+      "cache": "a8d4d3356aff41ed87477bd6535bc05cafd752e34b050e12a7e7233b263035e3",
+      "archive": "310d8e4f6bad989e26dce12a0f89e745fdff309a5b9a70c9268f8ff4116e6fd5"
+    },
+    "strong-cues-late3": {
+      "fields_verified": 120,
+      "cache": "8a08597ff60446a855e278826a44df9343aa586e6b5dd0c404efbc713b508781",
+      "archive": "15fce0c8b0484f184e690072a9ef5c003c2575b66fa4b5129d1e881b06885781"
+    }
+  },
+  "receipt_hashes": {
+    "diverse-mean35": {
+      "receipt_sha256": "52b568cede80520d8ce9f7bfd3f1cd28701d344c35f4b022a3e8edcb01512739",
+      "terminal_sha256": "04154b0c921268b149b4ddbf7f5dfc740580e7e39faae515bf51bacea7a5e079"
+    },
+    "strong-cues-early3": {
+      "receipt_sha256": "9bbf7a853f648b4ede1f47ea4c748ebacfd5577139b75a993c6ce518333462de",
+      "terminal_sha256": "4ced4add3f62ac7e3d24e96a55484c67d85bc5aaf83a7037bbce58aaf1440df9"
+    },
+    "strong-cues-late3": {
+      "receipt_sha256": "9bbf7a853f648b4ede1f47ea4c748ebacfd5577139b75a993c6ce518333462de",
+      "terminal_sha256": "4ced4add3f62ac7e3d24e96a55484c67d85bc5aaf83a7037bbce58aaf1440df9"
+    }
+  }
+}

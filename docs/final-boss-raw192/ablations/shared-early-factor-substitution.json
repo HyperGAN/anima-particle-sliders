@@ -1,0 +1,842 @@
+{
+  "checkpoint_updates": 192,
+  "matched_control": "soft-floor45",
+  "profile": "early",
+  "alpha": 0.6666666666666666,
+  "interpretation": "Arithmetic substitution between archived eight-case Jev measurements. Only observed is a measured slider score.",
+  "methods": {
+    "prompt-only": {
+      "means": {
+        "observed": 18.321743055555554,
+        "trial_boss_with_incumbent_image_damage": 18.43972361111111,
+        "incumbent_boss_with_trial_image_damage": 25.222348611111112
+      },
+      "cases": {
+        "ranger": {
+          "observed": 10.192233333333332,
+          "trial_boss_with_incumbent_image_damage": 13.440000000000003,
+          "incumbent_boss_with_trial_image_damage": 21.35515555555556
+        },
+        "smith": {
+          "observed": 10.032844444444445,
+          "trial_boss_with_incumbent_image_damage": 10.032844444444445,
+          "incumbent_boss_with_trial_image_damage": 13.20111111111111
+        },
+        "stationer": {
+          "observed": 25.764499999999998,
+          "trial_boss_with_incumbent_image_damage": 30.751999999999995,
+          "incumbent_boss_with_trial_image_damage": 16.60378888888889
+        },
+        "ferryman": {
+          "observed": 12.168000000000001,
+          "trial_boss_with_incumbent_image_damage": 12.376888888888889,
+          "incumbent_boss_with_trial_image_damage": 31.6368
+        },
+        "watchmaker": {
+          "observed": 16.88991111111111,
+          "trial_boss_with_incumbent_image_damage": 17.474800000000005,
+          "incumbent_boss_with_trial_image_damage": 38.605511111111106
+        },
+        "guide": {
+          "observed": 5.616900000000002,
+          "trial_boss_with_incumbent_image_damage": 6.451600000000002,
+          "incumbent_boss_with_trial_image_damage": 8.737400000000003
+        },
+        "guard": {
+          "observed": 40.90955555555555,
+          "trial_boss_with_incumbent_image_damage": 35.27405555555554,
+          "incumbent_boss_with_trial_image_damage": 45.94457777777778
+        },
+        "violinist": {
+          "observed": 25.000000000000004,
+          "trial_boss_with_incumbent_image_damage": 21.7156,
+          "incumbent_boss_with_trial_image_damage": 25.694444444444446
+        }
+      }
+    },
+    "incumbent": {
+      "means": {
+        "observed": 17.83193888888889,
+        "trial_boss_with_incumbent_image_damage": 19.37027777777778,
+        "incumbent_boss_with_trial_image_damage": 23.60317638888889
+      },
+      "cases": {
+        "ranger": {
+          "observed": 9.5625,
+          "trial_boss_with_incumbent_image_damage": 10.880000000000003,
+          "incumbent_boss_with_trial_image_damage": 24.750000000000004
+        },
+        "smith": {
+          "observed": 8.624222222222224,
+          "trial_boss_with_incumbent_image_damage": 10.560888888888888,
+          "incumbent_boss_with_trial_image_damage": 10.78027777777778
+        },
+        "stationer": {
+          "observed": 14.951111111111109,
+          "trial_boss_with_incumbent_image_damage": 17.084444444444443,
+          "incumbent_boss_with_trial_image_damage": 17.343288888888885
+        },
+        "ferryman": {
+          "observed": 27.06324444444445,
+          "trial_boss_with_incumbent_image_damage": 26.610311111111116,
+          "incumbent_boss_with_trial_image_damage": 32.727644444444444
+        },
+        "watchmaker": {
+          "observed": 29.956800000000005,
+          "trial_boss_with_incumbent_image_damage": 29.956800000000005,
+          "incumbent_boss_with_trial_image_damage": 39.942400000000006
+        },
+        "guide": {
+          "observed": 7.0987888888888895,
+          "trial_boss_with_incumbent_image_damage": 7.88528888888889,
+          "incumbent_boss_with_trial_image_damage": 9.034822222222225
+        },
+        "guard": {
+          "observed": 28.419999999999998,
+          "trial_boss_with_incumbent_image_damage": 31.47531111111111,
+          "incumbent_boss_with_trial_image_damage": 35.769999999999996
+        },
+        "violinist": {
+          "observed": 16.978844444444444,
+          "trial_boss_with_incumbent_image_damage": 20.509177777777776,
+          "incumbent_boss_with_trial_image_damage": 18.476977777777776
+        }
+      }
+    },
+    "soft-contexts-45-blend50": {
+      "means": {
+        "observed": 21.413395833333333,
+        "trial_boss_with_incumbent_image_damage": 21.518616666666667,
+        "incumbent_boss_with_trial_image_damage": 25.23346944444444
+      },
+      "cases": {
+        "ranger": {
+          "observed": 15.1875,
+          "trial_boss_with_incumbent_image_damage": 17.280000000000005,
+          "incumbent_boss_with_trial_image_damage": 24.750000000000004
+        },
+        "smith": {
+          "observed": 16.428,
+          "trial_boss_with_incumbent_image_damage": 15.841333333333333,
+          "incumbent_boss_with_trial_image_damage": 13.69
+        },
+        "stationer": {
+          "observed": 20.67527777777778,
+          "trial_boss_with_incumbent_image_damage": 21.18471111111111,
+          "incumbent_boss_with_trial_image_damage": 19.341388888888886
+        },
+        "ferryman": {
+          "observed": 16.167822222222217,
+          "trial_boss_with_incumbent_image_damage": 17.946488888888886,
+          "incumbent_boss_with_trial_image_damage": 28.99057777777777
+        },
+        "watchmaker": {
+          "observed": 35.42940000000001,
+          "trial_boss_with_incumbent_image_damage": 33.70140000000001,
+          "incumbent_boss_with_trial_image_damage": 41.99040000000001
+        },
+        "guide": {
+          "observed": 8.0688,
+          "trial_boss_with_incumbent_image_damage": 8.602133333333335,
+          "incumbent_boss_with_trial_image_damage": 9.413599999999999
+        },
+        "guard": {
+          "observed": 35.27405555555554,
+          "trial_boss_with_incumbent_image_damage": 35.27405555555554,
+          "incumbent_boss_with_trial_image_damage": 39.61547777777777
+        },
+        "violinist": {
+          "observed": 24.076311111111107,
+          "trial_boss_with_incumbent_image_damage": 22.31881111111111,
+          "incumbent_boss_with_trial_image_damage": 24.076311111111107
+        }
+      }
+    },
+    "soft-contexts-65-blend50": {
+      "means": {
+        "observed": 22.22616388888889,
+        "trial_boss_with_incumbent_image_damage": 21.120912500000003,
+        "incumbent_boss_with_trial_image_damage": 26.911808333333333
+      },
+      "cases": {
+        "ranger": {
+          "observed": 17.194100000000002,
+          "trial_boss_with_incumbent_image_damage": 18.560000000000006,
+          "incumbent_boss_with_trial_image_damage": 26.087600000000002
+        },
+        "smith": {
+          "observed": 16.725333333333328,
+          "trial_boss_with_incumbent_image_damage": 15.841333333333333,
+          "incumbent_boss_with_trial_image_damage": 13.937777777777773
+        },
+        "stationer": {
+          "observed": 27.365199999999998,
+          "trial_boss_with_incumbent_image_damage": 25.284977777777776,
+          "incumbent_boss_with_trial_image_damage": 21.448399999999996
+        },
+        "ferryman": {
+          "observed": 20.769466666666666,
+          "trial_boss_with_incumbent_image_damage": 20.421866666666666,
+          "incumbent_boss_with_trial_image_damage": 32.727644444444444
+        },
+        "watchmaker": {
+          "observed": 34.848600000000005,
+          "trial_boss_with_incumbent_image_damage": 33.70140000000001,
+          "incumbent_boss_with_trial_image_damage": 41.30204444444445
+        },
+        "guide": {
+          "observed": 8.738133333333334,
+          "trial_boss_with_incumbent_image_damage": 8.602133333333335,
+          "incumbent_boss_with_trial_image_damage": 10.19448888888889
+        },
+        "guard": {
+          "observed": 34.388200000000005,
+          "trial_boss_with_incumbent_image_damage": 31.47531111111111,
+          "incumbent_boss_with_trial_image_damage": 43.2817
+        },
+        "violinist": {
+          "observed": 17.78027777777778,
+          "trial_boss_with_incumbent_image_damage": 15.080277777777775,
+          "incumbent_boss_with_trial_image_damage": 26.314811111111116
+        }
+      }
+    },
+    "soft-floor45": {
+      "means": {
+        "observed": 25.65893611111111,
+        "trial_boss_with_incumbent_image_damage": 25.65893611111111,
+        "incumbent_boss_with_trial_image_damage": 25.65893611111111
+      },
+      "cases": {
+        "ranger": {
+          "observed": 28.16000000000001,
+          "trial_boss_with_incumbent_image_damage": 28.16000000000001,
+          "incumbent_boss_with_trial_image_damage": 28.16000000000001
+        },
+        "smith": {
+          "observed": 13.20111111111111,
+          "trial_boss_with_incumbent_image_damage": 13.20111111111111,
+          "incumbent_boss_with_trial_image_damage": 13.20111111111111
+        },
+        "stationer": {
+          "observed": 19.817955555555553,
+          "trial_boss_with_incumbent_image_damage": 19.817955555555553,
+          "incumbent_boss_with_trial_image_damage": 19.817955555555553
+        },
+        "ferryman": {
+          "observed": 32.17991111111111,
+          "trial_boss_with_incumbent_image_damage": 32.17991111111111,
+          "incumbent_boss_with_trial_image_damage": 32.17991111111111
+        },
+        "watchmaker": {
+          "observed": 39.942400000000006,
+          "trial_boss_with_incumbent_image_damage": 39.942400000000006,
+          "incumbent_boss_with_trial_image_damage": 39.942400000000006
+        },
+        "guide": {
+          "observed": 10.035822222222224,
+          "trial_boss_with_incumbent_image_damage": 10.035822222222224,
+          "incumbent_boss_with_trial_image_damage": 10.035822222222224
+        },
+        "guard": {
+          "observed": 39.61547777777777,
+          "trial_boss_with_incumbent_image_damage": 39.61547777777777,
+          "incumbent_boss_with_trial_image_damage": 39.61547777777777
+        },
+        "violinist": {
+          "observed": 22.31881111111111,
+          "trial_boss_with_incumbent_image_damage": 22.31881111111111,
+          "incumbent_boss_with_trial_image_damage": 22.31881111111111
+        }
+      }
+    },
+    "soft-projection-65-blend50": {
+      "means": {
+        "observed": 18.73744166666667,
+        "trial_boss_with_incumbent_image_damage": 17.91788888888889,
+        "incumbent_boss_with_trial_image_damage": 27.030461111111116
+      },
+      "cases": {
+        "ranger": {
+          "observed": 13.230222222222224,
+          "trial_boss_with_incumbent_image_damage": 12.800000000000002,
+          "incumbent_boss_with_trial_image_damage": 29.106488888888897
+        },
+        "smith": {
+          "observed": 7.8607999999999985,
+          "trial_boss_with_incumbent_image_damage": 8.976755555555556,
+          "incumbent_boss_with_trial_image_damage": 11.559999999999999
+        },
+        "stationer": {
+          "observed": 25.137422222222224,
+          "trial_boss_with_incumbent_image_damage": 25.968355555555554,
+          "incumbent_boss_with_trial_image_damage": 19.183822222222222
+        },
+        "ferryman": {
+          "observed": 20.78848888888889,
+          "trial_boss_with_incumbent_image_damage": 17.946488888888886,
+          "incumbent_boss_with_trial_image_damage": 37.275911111111114
+        },
+        "watchmaker": {
+          "observed": 21.94171111111111,
+          "trial_boss_with_incumbent_image_damage": 21.219400000000004,
+          "incumbent_boss_with_trial_image_damage": 41.30204444444445
+        },
+        "guide": {
+          "observed": 7.63888888888889,
+          "trial_boss_with_incumbent_image_damage": 7.88528888888889,
+          "incumbent_boss_with_trial_image_damage": 9.722222222222225
+        },
+        "guard": {
+          "observed": 33.46200000000001,
+          "trial_boss_with_incumbent_image_damage": 29.847277777777776,
+          "incumbent_boss_with_trial_image_damage": 44.4132
+        },
+        "violinist": {
+          "observed": 19.840000000000003,
+          "trial_boss_with_incumbent_image_damage": 18.69954444444444,
+          "incumbent_boss_with_trial_image_damage": 23.680000000000003
+        }
+      }
+    },
+    "soft45-adapter-rollout": {
+      "means": {
+        "observed": 11.607045833333334,
+        "trial_boss_with_incumbent_image_damage": 15.425722222222223,
+        "incumbent_boss_with_trial_image_damage": 19.364418055555557
+      },
+      "cases": {
+        "ranger": {
+          "observed": 8.241800000000003,
+          "trial_boss_with_incumbent_image_damage": 11.520000000000005,
+          "incumbent_boss_with_trial_image_damage": 20.14662222222223
+        },
+        "smith": {
+          "observed": 8.360211111111111,
+          "trial_boss_with_incumbent_image_damage": 10.032844444444445,
+          "incumbent_boss_with_trial_image_damage": 11.000277777777779
+        },
+        "stationer": {
+          "observed": 12.236233333333335,
+          "trial_boss_with_incumbent_image_damage": 14.350933333333336,
+          "incumbent_boss_with_trial_image_damage": 16.897655555555552
+        },
+        "ferryman": {
+          "observed": 7.004166666666667,
+          "trial_boss_with_incumbent_image_damage": 9.282666666666668,
+          "incumbent_boss_with_trial_image_damage": 24.281111111111112
+        },
+        "watchmaker": {
+          "observed": 11.495000000000001,
+          "trial_boss_with_incumbent_image_damage": 23.715800000000005,
+          "incumbent_boss_with_trial_image_damage": 19.360000000000003
+        },
+        "guide": {
+          "observed": 6.5219,
+          "trial_boss_with_incumbent_image_damage": 7.88528888888889,
+          "incumbent_boss_with_trial_image_damage": 8.300600000000001
+        },
+        "guard": {
+          "observed": 27.625555555555557,
+          "trial_boss_with_incumbent_image_damage": 25.505855555555552,
+          "incumbent_boss_with_trial_image_damage": 42.90777777777778
+        },
+        "violinist": {
+          "observed": 11.371500000000003,
+          "trial_boss_with_incumbent_image_damage": 21.112388888888887,
+          "incumbent_boss_with_trial_image_damage": 12.021300000000004
+        }
+      }
+    },
+    "soft45-background-orthogonal": {
+      "means": {
+        "observed": 22.22243472222222,
+        "trial_boss_with_incumbent_image_damage": 24.6268625,
+        "incumbent_boss_with_trial_image_damage": 23.730704166666666
+      },
+      "cases": {
+        "ranger": {
+          "observed": 18.562499999999996,
+          "trial_boss_with_incumbent_image_damage": 21.12,
+          "incumbent_boss_with_trial_image_damage": 24.750000000000004
+        },
+        "smith": {
+          "observed": 17.86080000000001,
+          "trial_boss_with_incumbent_image_damage": 25.346133333333338,
+          "incumbent_boss_with_trial_image_damage": 9.302500000000002
+        },
+        "stationer": {
+          "observed": 19.347100000000005,
+          "trial_boss_with_incumbent_image_damage": 21.18471111111111,
+          "incumbent_boss_with_trial_image_damage": 18.0989
+        },
+        "ferryman": {
+          "observed": 31.970188888888885,
+          "trial_boss_with_incumbent_image_damage": 32.79875555555555,
+          "incumbent_boss_with_trial_image_damage": 31.366977777777773
+        },
+        "watchmaker": {
+          "observed": 29.463288888888886,
+          "trial_boss_with_incumbent_image_damage": 36.82190000000001,
+          "incumbent_boss_with_trial_image_damage": 31.960177777777776
+        },
+        "guide": {
+          "observed": 8.602133333333335,
+          "trial_boss_with_incumbent_image_damage": 8.602133333333335,
+          "incumbent_boss_with_trial_image_damage": 10.035822222222224
+        },
+        "guard": {
+          "observed": 31.907777777777778,
+          "trial_boss_with_incumbent_image_damage": 28.219244444444442,
+          "incumbent_boss_with_trial_image_damage": 44.79361111111111
+        },
+        "violinist": {
+          "observed": 20.06568888888889,
+          "trial_boss_with_incumbent_image_damage": 22.922022222222218,
+          "incumbent_boss_with_trial_image_damage": 19.537644444444442
+        }
+      }
+    },
+    "strong-boss-45-dose100": {
+      "means": {
+        "observed": 21.765288888888893,
+        "trial_boss_with_incumbent_image_damage": 24.942422222222223,
+        "incumbent_boss_with_trial_image_damage": 22.068376388888893
+      },
+      "cases": {
+        "ranger": {
+          "observed": 11.904822222222226,
+          "trial_boss_with_incumbent_image_damage": 16.640000000000004,
+          "incumbent_boss_with_trial_image_damage": 20.14662222222223
+        },
+        "smith": {
+          "observed": 10.592711111111107,
+          "trial_boss_with_incumbent_image_damage": 10.032844444444445,
+          "incumbent_boss_with_trial_image_damage": 13.937777777777773
+        },
+        "stationer": {
+          "observed": 32.378299999999996,
+          "trial_boss_with_incumbent_image_damage": 32.11875555555555,
+          "incumbent_boss_with_trial_image_damage": 19.978099999999998
+        },
+        "ferryman": {
+          "observed": 24.047066666666673,
+          "trial_boss_with_incumbent_image_damage": 31.561066666666665,
+          "incumbent_boss_with_trial_image_damage": 24.518577777777782
+        },
+        "watchmaker": {
+          "observed": 30.653333333333343,
+          "trial_boss_with_incumbent_image_damage": 35.57370000000001,
+          "incumbent_boss_with_trial_image_damage": 34.417777777777786
+        },
+        "guide": {
+          "observed": 6.2208000000000006,
+          "trial_boss_with_incumbent_image_damage": 8.602133333333335,
+          "incumbent_boss_with_trial_image_damage": 7.257600000000001
+        },
+        "guard": {
+          "observed": 39.78320000000001,
+          "trial_boss_with_incumbent_image_damage": 39.072799999999994,
+          "incumbent_boss_with_trial_image_damage": 40.33574444444445
+        },
+        "violinist": {
+          "observed": 18.54207777777778,
+          "trial_boss_with_incumbent_image_damage": 25.938077777777774,
+          "incumbent_boss_with_trial_image_damage": 15.954811111111114
+        }
+      }
+    },
+    "strong-boss-45-mix35": {
+      "means": {
+        "observed": 24.92941944444445,
+        "trial_boss_with_incumbent_image_damage": 25.331425000000003,
+        "incumbent_boss_with_trial_image_damage": 25.555080555555556
+      },
+      "cases": {
+        "ranger": {
+          "observed": 21.9373,
+          "trial_boss_with_incumbent_image_damage": 23.680000000000003,
+          "incumbent_boss_with_trial_image_damage": 26.087600000000002
+        },
+        "smith": {
+          "observed": 12.88888888888889,
+          "trial_boss_with_incumbent_image_damage": 15.313288888888886,
+          "incumbent_boss_with_trial_image_damage": 11.111111111111112
+        },
+        "stationer": {
+          "observed": 37.28327777777778,
+          "trial_boss_with_incumbent_image_damage": 37.58577777777778,
+          "incumbent_boss_with_trial_image_damage": 19.658455555555555
+        },
+        "ferryman": {
+          "observed": 28.77661111111112,
+          "trial_boss_with_incumbent_image_damage": 34.03644444444445,
+          "incumbent_boss_with_trial_image_damage": 27.20697777777778
+        },
+        "watchmaker": {
+          "observed": 35.63719999999999,
+          "trial_boss_with_incumbent_image_damage": 33.07730000000001,
+          "incumbent_boss_with_trial_image_damage": 43.03359999999999
+        },
+        "guide": {
+          "observed": 8.602133333333335,
+          "trial_boss_with_incumbent_image_damage": 8.602133333333335,
+          "incumbent_boss_with_trial_image_damage": 10.035822222222224
+        },
+        "guard": {
+          "observed": 34.32550000000001,
+          "trial_boss_with_incumbent_image_damage": 29.847277777777776,
+          "incumbent_boss_with_trial_image_damage": 45.55930000000001
+        },
+        "violinist": {
+          "observed": 19.984444444444446,
+          "trial_boss_with_incumbent_image_damage": 20.509177777777776,
+          "incumbent_boss_with_trial_image_damage": 21.74777777777778
+        }
+      }
+    },
+    "strong-cues-late3": {
+      "means": {
+        "observed": 21.19560416666667,
+        "trial_boss_with_incumbent_image_damage": 21.844754166666668,
+        "incumbent_boss_with_trial_image_damage": 24.65429166666667
+      },
+      "cases": {
+        "ranger": {
+          "observed": 14.074988888888885,
+          "trial_boss_with_incumbent_image_damage": 18.560000000000002,
+          "incumbent_boss_with_trial_image_damage": 21.35515555555556
+        },
+        "smith": {
+          "observed": 12.4416,
+          "trial_boss_with_incumbent_image_damage": 12.673066666666667,
+          "incumbent_boss_with_trial_image_damage": 12.959999999999999
+        },
+        "stationer": {
+          "observed": 22.93902222222222,
+          "trial_boss_with_incumbent_image_damage": 21.868088888888884,
+          "incumbent_boss_with_trial_image_damage": 20.78848888888889
+        },
+        "ferryman": {
+          "observed": 17.493122222222222,
+          "trial_boss_with_incumbent_image_damage": 17.94648888888889,
+          "incumbent_boss_with_trial_image_damage": 31.366977777777773
+        },
+        "watchmaker": {
+          "observed": 39.68000000000001,
+          "trial_boss_with_incumbent_image_damage": 38.69420000000001,
+          "incumbent_boss_with_trial_image_damage": 40.96000000000001
+        },
+        "guide": {
+          "observed": 10.3428,
+          "trial_boss_with_incumbent_image_damage": 12.186355555555556,
+          "incumbent_boss_with_trial_image_damage": 8.517600000000002
+        },
+        "guard": {
+          "observed": 28.253400000000003,
+          "trial_boss_with_incumbent_image_damage": 29.304599999999997,
+          "incumbent_boss_with_trial_image_damage": 38.194411111111116
+        },
+        "violinist": {
+          "observed": 24.339900000000004,
+          "trial_boss_with_incumbent_image_damage": 23.52523333333333,
+          "incumbent_boss_with_trial_image_damage": 23.091700000000003
+        }
+      }
+    },
+    "strong-cues-early3": {
+      "means": {
+        "observed": 20.31860972222222,
+        "trial_boss_with_incumbent_image_damage": 25.009416666666667,
+        "incumbent_boss_with_trial_image_damage": 20.884556944444444
+      },
+      "cases": {
+        "ranger": {
+          "observed": 24.6895,
+          "trial_boss_with_incumbent_image_damage": 35.20000000000001,
+          "incumbent_boss_with_trial_image_damage": 19.7516
+        },
+        "smith": {
+          "observed": 10.032844444444445,
+          "trial_boss_with_incumbent_image_damage": 10.032844444444445,
+          "incumbent_boss_with_trial_image_damage": 13.20111111111111
+        },
+        "stationer": {
+          "observed": 22.369966666666663,
+          "trial_boss_with_incumbent_image_damage": 22.55146666666666,
+          "incumbent_boss_with_trial_image_damage": 19.658455555555555
+        },
+        "ferryman": {
+          "observed": 27.318044444444435,
+          "trial_boss_with_incumbent_image_damage": 30.323377777777775,
+          "incumbent_boss_with_trial_image_damage": 28.99057777777777
+        },
+        "watchmaker": {
+          "observed": 22.699288888888894,
+          "trial_boss_with_incumbent_image_damage": 34.94960000000001,
+          "incumbent_boss_with_trial_image_damage": 25.94204444444445
+        },
+        "guide": {
+          "observed": 8.288166666666667,
+          "trial_boss_with_incumbent_image_damage": 10.752666666666668,
+          "incumbent_boss_with_trial_image_damage": 7.735622222222224
+        },
+        "guard": {
+          "observed": 33.7747,
+          "trial_boss_with_incumbent_image_damage": 36.35941111111111,
+          "incumbent_boss_with_trial_image_damage": 36.7993
+        },
+        "violinist": {
+          "observed": 13.376366666666666,
+          "trial_boss_with_incumbent_image_damage": 19.90596666666666,
+          "incumbent_boss_with_trial_image_damage": 14.997744444444447
+        }
+      }
+    },
+    "diverse-mean35": {
+      "means": {
+        "observed": 17.336408333333335,
+        "trial_boss_with_incumbent_image_damage": 20.943306944444444,
+        "incumbent_boss_with_trial_image_damage": 21.262330555555558
+      },
+      "cases": {
+        "ranger": {
+          "observed": 6.935999999999999,
+          "trial_boss_with_incumbent_image_damage": 9.600000000000001,
+          "incumbent_boss_with_trial_image_damage": 20.3456
+        },
+        "smith": {
+          "observed": 10.21777777777778,
+          "trial_boss_with_incumbent_image_damage": 10.032844444444445,
+          "incumbent_boss_with_trial_image_damage": 13.444444444444448
+        },
+        "stationer": {
+          "observed": 16.031244444444443,
+          "trial_boss_with_incumbent_image_damage": 19.134577777777775,
+          "incumbent_boss_with_trial_image_damage": 16.60378888888889
+        },
+        "ferryman": {
+          "observed": 28.125,
+          "trial_boss_with_incumbent_image_damage": 30.94222222222222,
+          "incumbent_boss_with_trial_image_damage": 29.25
+        },
+        "watchmaker": {
+          "observed": 18.92047777777778,
+          "trial_boss_with_incumbent_image_damage": 26.836300000000005,
+          "incumbent_boss_with_trial_image_damage": 28.160711111111112
+        },
+        "guide": {
+          "observed": 9.282666666666666,
+          "trial_boss_with_incumbent_image_damage": 10.752666666666668,
+          "incumbent_boss_with_trial_image_damage": 8.663822222222223
+        },
+        "guard": {
+          "observed": 35.2336,
+          "trial_boss_with_incumbent_image_damage": 33.103344444444446,
+          "incumbent_boss_with_trial_image_damage": 42.1648
+        },
+        "violinist": {
+          "observed": 13.9445,
+          "trial_boss_with_incumbent_image_damage": 27.144499999999997,
+          "incumbent_boss_with_trial_image_damage": 11.465477777777776
+        }
+      }
+    },
+    "sega-all35": {
+      "means": {
+        "observed": 19.52414027777778,
+        "trial_boss_with_incumbent_image_damage": 20.06218888888889,
+        "incumbent_boss_with_trial_image_damage": 25.134372222222222
+      },
+      "cases": {
+        "ranger": {
+          "observed": 22.127644444444442,
+          "trial_boss_with_incumbent_image_damage": 23.680000000000003,
+          "incumbent_boss_with_trial_image_damage": 26.313955555555555
+        },
+        "smith": {
+          "observed": 9.583199999999998,
+          "trial_boss_with_incumbent_image_damage": 11.616977777777779,
+          "incumbent_boss_with_trial_image_damage": 10.889999999999997
+        },
+        "stationer": {
+          "observed": 12.32666666666667,
+          "trial_boss_with_incumbent_image_damage": 16.40106666666667,
+          "incumbent_boss_with_trial_image_damage": 14.89472222222222
+        },
+        "ferryman": {
+          "observed": 25.137422222222224,
+          "trial_boss_with_incumbent_image_damage": 23.516088888888888,
+          "incumbent_boss_with_trial_image_damage": 34.39857777777778
+        },
+        "watchmaker": {
+          "observed": 31.49280000000001,
+          "trial_boss_with_incumbent_image_damage": 29.95680000000001,
+          "incumbent_boss_with_trial_image_damage": 41.99040000000001
+        },
+        "guide": {
+          "observed": 9.185400000000001,
+          "trial_boss_with_incumbent_image_damage": 10.035822222222222,
+          "incumbent_boss_with_trial_image_damage": 9.185400000000003
+        },
+        "guard": {
+          "observed": 27.318044444444432,
+          "trial_boss_with_incumbent_image_damage": 26.591211111111104,
+          "incumbent_boss_with_trial_image_damage": 40.6983111111111
+        },
+        "violinist": {
+          "observed": 19.021944444444443,
+          "trial_boss_with_incumbent_image_damage": 18.69954444444444,
+          "incumbent_boss_with_trial_image_damage": 22.703611111111112
+        }
+      }
+    },
+    "matched-attire35": {
+      "means": {
+        "observed": 19.860904166666664,
+        "trial_boss_with_incumbent_image_damage": 21.1355625,
+        "incumbent_boss_with_trial_image_damage": 24.175426388888887
+      },
+      "cases": {
+        "ranger": {
+          "observed": 14.10666666666667,
+          "trial_boss_with_incumbent_image_damage": 15.360000000000003,
+          "incumbent_boss_with_trial_image_damage": 25.86222222222223
+        },
+        "smith": {
+          "observed": 13.499444444444443,
+          "trial_boss_with_incumbent_image_damage": 11.616977777777775,
+          "incumbent_boss_with_trial_image_damage": 15.340277777777779
+        },
+        "stationer": {
+          "observed": 27.24008888888889,
+          "trial_boss_with_incumbent_image_damage": 25.968355555555554,
+          "incumbent_boss_with_trial_image_damage": 20.78848888888889
+        },
+        "ferryman": {
+          "observed": 17.941333333333333,
+          "trial_boss_with_incumbent_image_damage": 18.56533333333333,
+          "incumbent_boss_with_trial_image_damage": 31.09831111111111
+        },
+        "watchmaker": {
+          "observed": 31.213200000000004,
+          "trial_boss_with_incumbent_image_damage": 35.57370000000001,
+          "incumbent_boss_with_trial_image_damage": 35.0464
+        },
+        "guide": {
+          "observed": 9.059299999999999,
+          "trial_boss_with_incumbent_image_damage": 12.186355555555556,
+          "incumbent_boss_with_trial_image_damage": 7.4606
+        },
+        "guard": {
+          "observed": 30.105599999999992,
+          "trial_boss_with_incumbent_image_damage": 29.304599999999997,
+          "incumbent_boss_with_trial_image_damage": 40.6983111111111
+        },
+        "violinist": {
+          "observed": 15.721599999999997,
+          "trial_boss_with_incumbent_image_damage": 20.509177777777776,
+          "incumbent_boss_with_trial_image_damage": 17.1088
+        }
+      }
+    },
+    "scene-grounded35": {
+      "means": {
+        "observed": 17.527854166666668,
+        "trial_boss_with_incumbent_image_damage": 18.428018055555555,
+        "incumbent_boss_with_trial_image_damage": 24.156509722222225
+      },
+      "cases": {
+        "ranger": {
+          "observed": 8.193011111111113,
+          "trial_boss_with_incumbent_image_damage": 12.160000000000002,
+          "incumbent_boss_with_trial_image_damage": 18.973288888888895
+        },
+        "smith": {
+          "observed": 10.853555555555554,
+          "trial_boss_with_incumbent_image_damage": 10.560888888888888,
+          "incumbent_boss_with_trial_image_damage": 13.566944444444443
+        },
+        "stationer": {
+          "observed": 12.236233333333331,
+          "trial_boss_with_incumbent_image_damage": 14.35093333333333,
+          "incumbent_boss_with_trial_image_damage": 16.897655555555552
+        },
+        "ferryman": {
+          "observed": 25.000000000000004,
+          "trial_boss_with_incumbent_image_damage": 22.278399999999998,
+          "incumbent_boss_with_trial_image_damage": 36.111111111111114
+        },
+        "watchmaker": {
+          "observed": 22.70591111111111,
+          "trial_boss_with_incumbent_image_damage": 26.836300000000005,
+          "incumbent_boss_with_trial_image_damage": 33.79484444444444
+        },
+        "guide": {
+          "observed": 8.81128888888889,
+          "trial_boss_with_incumbent_image_damage": 10.035822222222224,
+          "incumbent_boss_with_trial_image_damage": 8.81128888888889
+        },
+        "guard": {
+          "observed": 31.829100000000004,
+          "trial_boss_with_incumbent_image_damage": 27.676566666666663,
+          "incumbent_boss_with_trial_image_damage": 45.55930000000001
+        },
+        "violinist": {
+          "observed": 20.593733333333333,
+          "trial_boss_with_incumbent_image_damage": 23.52523333333333,
+          "incumbent_boss_with_trial_image_damage": 19.537644444444442
+        }
+      }
+    },
+    "sega-early35": {
+      "means": {
+        "observed": 17.301556944444446,
+        "trial_boss_with_incumbent_image_damage": 23.570508333333333,
+        "incumbent_boss_with_trial_image_damage": 18.69458611111111
+      },
+      "cases": {
+        "ranger": {
+          "observed": 15.727355555555555,
+          "trial_boss_with_incumbent_image_damage": 24.320000000000004,
+          "incumbent_boss_with_trial_image_damage": 18.210622222222224
+        },
+        "smith": {
+          "observed": 7.1415,
+          "trial_boss_with_incumbent_image_damage": 7.920666666666667,
+          "incumbent_boss_with_trial_image_damage": 11.902499999999998
+        },
+        "stationer": {
+          "observed": 26.998888888888892,
+          "trial_boss_with_incumbent_image_damage": 30.068622222222224,
+          "incumbent_boss_with_trial_image_damage": 17.79472222222222
+        },
+        "ferryman": {
+          "observed": 23.582399999999996,
+          "trial_boss_with_incumbent_image_damage": 31.561066666666665,
+          "incumbent_boss_with_trial_image_damage": 24.044799999999995
+        },
+        "watchmaker": {
+          "observed": 21.91080000000001,
+          "trial_boss_with_incumbent_image_damage": 35.57370000000001,
+          "incumbent_boss_with_trial_image_damage": 24.60160000000001
+        },
+        "guide": {
+          "observed": 3.4050666666666665,
+          "trial_boss_with_incumbent_image_damage": 4.301066666666667,
+          "incumbent_boss_with_trial_image_damage": 7.945155555555556
+        },
+        "guard": {
+          "observed": 25.50884444444445,
+          "trial_boss_with_incumbent_image_damage": 33.10334444444444,
+          "incumbent_boss_with_trial_image_damage": 30.526977777777784
+        },
+        "violinist": {
+          "observed": 14.137600000000003,
+          "trial_boss_with_incumbent_image_damage": 21.7156,
+          "incumbent_boss_with_trial_image_damage": 14.530311111111114
+        }
+      }
+    }
+  }
+}

@@ -1,11 +1,11 @@
-"""Admit the new ParticleGAN 0.11.0 cohort before runtime construction or attachment."""
+"""Admit the new ParticleGAN 0.11.1 cohort before runtime construction or attachment."""
 import hashlib
 from importlib.metadata import distribution, version
 import json
 from pathlib import Path
 
 LOCK = Path(__file__).with_name('engine-source.json')
-COMMIT = 'c13890f8e2a1ecf1dc8eb9f2a37f9187cb9fea78'
+COMMIT = 'b1f780decc516808cfd3019d5e5b674457161f86'
 
 
 def verify_core():
@@ -15,18 +15,18 @@ def verify_core():
     receipt = json.loads(LOCK.read_text())
     if (receipt['schema'], receipt['source_commit'], receipt['version'],
             receipt['pg_version'], receipt['pg_source_profile']) != (
-            'anima-engine-core-closure-v1', COMMIT, '0.15.1', '0.11.0', 'release-0.11.0'):
-        raise ValueError('Anima ParticleGAN 0.11.0 source receipt contradicts this cohort')
+            'anima-engine-core-closure-v1', COMMIT, '0.15.2', '0.11.1', 'release-0.11.1'):
+        raise ValueError('Anima ParticleGAN 0.11.1 source receipt contradicts this cohort')
     core = distribution('particle-sliders-core')
     origin = json.loads(core.read_text('direct_url.json') or '{}')
     if (core.version != receipt['version'] or version('particlegan') != receipt['pg_version']
-            or (PG_VERSION, PG_SOURCE_PROFILE) != ('0.11.0', 'release-0.11.0')
+            or (PG_VERSION, PG_SOURCE_PROFILE) != ('0.11.1', 'release-0.11.1')
             or receipt.get('namespaces') != ['concept_slider_core', 'particle_sliders']
             or (receipt.get('pg_source_commit'), receipt.get('pg_wheel_sha256')) != (PG_SOURCE_COMMIT, PG_WHEEL_SHA256)
             or origin.get('url') != 'https://github.com/HyperGAN/particle-sliders.git'
             or origin.get('vcs_info', {}).get('commit_id') != COMMIT
             or origin.get('subdirectory') != 'packages/particle-sliders-core'):
-        raise ValueError('Anima requires the exact new core/ParticleGAN 0.11.0 installed source cohort')
+        raise ValueError('Anima requires the exact new core/ParticleGAN 0.11.1 installed source cohort')
     root = Path(core.locate_file('')).resolve()
     if Path(particle_sliders.__file__).resolve() != root / 'particle_sliders/__init__.py':
         raise ValueError('Anima shared-core import is shadowed')

@@ -1,4 +1,4 @@
-"""Archived release recipe CLI; native training requires the explicit PG09 API."""
+"""Archived release recipe CLI; native training requires the explicit ParticleGAN API."""
 import argparse
 from pathlib import Path
 import sys

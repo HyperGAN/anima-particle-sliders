@@ -1,0 +1,778 @@
+{
+  "study": "Archived strength sweeps of the same soft foreground RAW192 adapter",
+  "recipe": "soft-floor45",
+  "raw_sha256": "5ada5db653b1ebfe543075ed52ad47e1118cfa975fee86ab4f132eb5d793c92b",
+  "source_tuning_sha256": "2b16712fcba2c4a679775438c6d69c6439bdd47ee9cdb95e120f6fb27b2cad00",
+  "settings": [
+    {
+      "profile": "early",
+      "alpha": 0.875,
+      "gains": [
+        1.3125,
+        1.3125,
+        1.3125,
+        1.3125,
+        1.3125,
+        1.3125,
+        1.3125,
+        0.8458334371778964,
+        0.4375,
+        0.4375
+      ],
+      "mean_adjusted_score": 0.301058319445,
+      "cases": {
+        "ranger": {
+          "boss_gain": 0.5800000000000001,
+          "image_damage": 0.32,
+          "adjusted_score": 0.268192,
+          "on_sha256": "69b2691de11a044084d8222b57a0e69def4dcbbb14f4fb0b92b899a1ce75fcc1",
+          "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+        },
+        "smith": {
+          "boss_gain": 0.33999999999999997,
+          "image_damage": 0.26333333333333336,
+          "adjusted_score": 0.1845104444444444,
+          "on_sha256": "81747f81c2459704660607926b9466b41b4cfeba94dac8ed83779f7cbf365c8d",
+          "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+        },
+        "stationer": {
+          "boss_gain": 0.62,
+          "image_damage": 0.25666666666666665,
+          "adjusted_score": 0.3425775555555556,
+          "on_sha256": "6e003f8d68cf1c899d2eab19efadaf0537a20311c1908ce8c563e7af339d8802",
+          "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+        },
+        "ferryman": {
+          "boss_gain": 0.67,
+          "image_damage": 0.18000000000000002,
+          "adjusted_score": 0.45050799999999996,
+          "on_sha256": "f11567fc4d512ef90a9fdd56a91eb1f53bc83dbdd1a332064901a9a6a134b89c",
+          "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+        },
+        "watchmaker": {
+          "boss_gain": 0.67,
+          "image_damage": 0.25666666666666665,
+          "adjusted_score": 0.3702047777777778,
+          "on_sha256": "ca81157844d143d2c24269abb00afd67c448fab6eefae6965e4aa903860a2de5",
+          "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+        },
+        "guide": {
+          "boss_gain": 0.15000000000000002,
+          "image_damage": 0.12666666666666668,
+          "adjusted_score": 0.11440666666666667,
+          "on_sha256": "285ec590514856cb28deea116ef82bae97fb8795955170ff3ba49d1c9b94bd39",
+          "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+        },
+        "guard": {
+          "boss_gain": 0.76,
+          "image_damage": 0.25666666666666665,
+          "adjusted_score": 0.41993377777777785,
+          "on_sha256": "c37338222718ee966b06a598c3d06ce1a4a3bf08a0b7ce89d6beb3e939e8ff4a",
+          "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+        },
+        "violinist": {
+          "boss_gain": 0.48000000000000004,
+          "image_damage": 0.26666666666666666,
+          "adjusted_score": 0.25813333333333344,
+          "on_sha256": "cbe648044e863a2793c03c3cb947701d3fc702cd5f379a4c559b3e5c2492e088",
+          "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+        }
+      }
+    },
+    {
+      "profile": "early",
+      "alpha": 0.95,
+      "gains": [
+        1.4249999999999998,
+        1.4249999999999998,
+        1.4249999999999998,
+        1.4249999999999998,
+        1.4249999999999998,
+        1.4249999999999998,
+        1.4249999999999998,
+        0.9183334460788589,
+        0.475,
+        0.475
+      ],
+      "mean_adjusted_score": 0.337123680556,
+      "cases": {
+        "ranger": {
+          "boss_gain": 0.61,
+          "image_damage": 0.20666666666666667,
+          "adjusted_score": 0.38392044444444445,
+          "on_sha256": "68b559012d04fdb704ef0a38808c741da534799e63bc12d8e7bfd830c0bb8d2b",
+          "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+        },
+        "smith": {
+          "boss_gain": 0.7,
+          "image_damage": 0.31666666666666665,
+          "adjusted_score": 0.3268611111111111,
+          "on_sha256": "4080c8af17b39265d1f31f5e04dc884692e35b64c0603f6e34460e5312c83fe4",
+          "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+        },
+        "stationer": {
+          "boss_gain": 0.7,
+          "image_damage": 0.25666666666666665,
+          "adjusted_score": 0.38678111111111113,
+          "on_sha256": "0a80b9f8c7243e35c269f335be32980e2b2f2c9659994d24de1976236d9d4636",
+          "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+        },
+        "ferryman": {
+          "boss_gain": 0.67,
+          "image_damage": 0.2333333333333333,
+          "adjusted_score": 0.39381111111111117,
+          "on_sha256": "8f4a244df5c902dc6c576728e2ea9e6328b1b95bb4bd61a4b6bc16e40aa2cef8",
+          "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+        },
+        "watchmaker": {
+          "boss_gain": 0.6,
+          "image_damage": 0.27666666666666667,
+          "adjusted_score": 0.3139266666666667,
+          "on_sha256": "3f0cf8739e764b9fe6e2969d908c7d13b10273669d11f197cf8fd63bfc621f4b",
+          "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+        },
+        "guide": {
+          "boss_gain": 0.16999999999999998,
+          "image_damage": 0.18000000000000002,
+          "adjusted_score": 0.11430799999999997,
+          "on_sha256": "02165e232a3633d7d6ca1e245165c6f03bfd192ab951472594d961f7d352a02c",
+          "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+        },
+        "guard": {
+          "boss_gain": 0.75,
+          "image_damage": 0.22999999999999998,
+          "adjusted_score": 0.444675,
+          "on_sha256": "62356f627339b197b7b2fd84bafbaf2308fe925a733bbef50aed5d074cb31ff5",
+          "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+        },
+        "violinist": {
+          "boss_gain": 0.66,
+          "image_damage": 0.29,
+          "adjusted_score": 0.332706,
+          "on_sha256": "1926cdd8baf7bf4cf8d4bea9345bac5bb415533a9e71c06f12179f56eff22b16",
+          "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+        }
+      }
+    },
+    {
+      "profile": "constant",
+      "alpha": 1.225,
+      "gains": [
+        1.225,
+        1.225,
+        1.225,
+        1.225,
+        1.225,
+        1.225,
+        1.225,
+        1.225,
+        1.225,
+        1.225
+      ],
+      "mean_adjusted_score": 0.312763166667,
+      "cases": {
+        "ranger": {
+          "boss_gain": 0.56,
+          "image_damage": 0.25333333333333335,
+          "adjusted_score": 0.31220622222222216,
+          "on_sha256": "d5b007e0b1500f3bc4be19d7ab1aba75ffc59fd5389ecd604574dcdfc4d21fde",
+          "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+        },
+        "smith": {
+          "boss_gain": 0.41,
+          "image_damage": 0.2733333333333333,
+          "adjusted_score": 0.2164982222222222,
+          "on_sha256": "c3662b4fcd27c565808550e717581d9a6a5034bb0d6a5cefa717f74603bf853d",
+          "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+        },
+        "stationer": {
+          "boss_gain": 0.58,
+          "image_damage": 0.25666666666666665,
+          "adjusted_score": 0.3204757777777778,
+          "on_sha256": "f214e7065d90a5c2447be32900893dbabaa20496849092a39ea9dc5255ad68db",
+          "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+        },
+        "ferryman": {
+          "boss_gain": 0.59,
+          "image_damage": 0.22,
+          "adjusted_score": 0.358956,
+          "on_sha256": "5dc3c244eefd2bac24910a72adbf44ca61d8057ecc16156825027f176063c07f",
+          "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+        },
+        "watchmaker": {
+          "boss_gain": 0.7000000000000001,
+          "image_damage": 0.24333333333333332,
+          "adjusted_score": 0.4007811111111112,
+          "on_sha256": "7edbd0fef4cf260c693cfd38abfc106a7f283ad436cbe79c0ed4c16c1993764a",
+          "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+        },
+        "guide": {
+          "boss_gain": 0.24,
+          "image_damage": 0.12333333333333334,
+          "adjusted_score": 0.18445066666666668,
+          "on_sha256": "07e3629081e1a96106f983f6b112d32915310db01f6d5bd64788f816263d73b2",
+          "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+        },
+        "guard": {
+          "boss_gain": 0.76,
+          "image_damage": 0.22999999999999998,
+          "adjusted_score": 0.450604,
+          "on_sha256": "01505d712548171d8dd99320a9475243fa57d5c1aac2788f020a7e7944e37aa4",
+          "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+        },
+        "violinist": {
+          "boss_gain": 0.48000000000000004,
+          "image_damage": 0.26666666666666666,
+          "adjusted_score": 0.25813333333333344,
+          "on_sha256": "2f5e22687e9004ba129cf090e5b5bf4223722885ce997c3ee5ee7fefa0279a32",
+          "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+        }
+      }
+    },
+    {
+      "profile": "constant",
+      "alpha": 1.240625,
+      "gains": [
+        1.240625,
+        1.240625,
+        1.240625,
+        1.240625,
+        1.240625,
+        1.240625,
+        1.240625,
+        1.240625,
+        1.240625,
+        1.240625
+      ],
+      "mean_adjusted_score": 0.311498263889,
+      "cases": {
+        "ranger": {
+          "boss_gain": 0.5900000000000001,
+          "image_damage": 0.34,
+          "adjusted_score": 0.25700399999999995,
+          "on_sha256": "3f8c1a7bd957faf86ecbeb2d275289865ddc6974c0c822996bb30f3483a86aec",
+          "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+        },
+        "smith": {
+          "boss_gain": 0.43,
+          "image_damage": 0.2866666666666667,
+          "adjusted_score": 0.21880311111111114,
+          "on_sha256": "155abf497ee8652b10175169436a3a8560e574ea3bd7a4c7da3f0500ed9d957e",
+          "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+        },
+        "stationer": {
+          "boss_gain": 0.61,
+          "image_damage": 0.30333333333333334,
+          "adjusted_score": 0.2960601111111111,
+          "on_sha256": "dfc6ea3b57eb9a17d71c64a8610eacf0b0ec6fb503a32d351b92401a3c538bed",
+          "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+        },
+        "ferryman": {
+          "boss_gain": 0.62,
+          "image_damage": 0.18666666666666668,
+          "adjusted_score": 0.41013688888888894,
+          "on_sha256": "4d868f508897ae75eebbc55679292a8ea20c492f95d1920230ac920cba96b2cb",
+          "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+        },
+        "watchmaker": {
+          "boss_gain": 0.6900000000000001,
+          "image_damage": 0.21,
+          "adjusted_score": 0.4306290000000001,
+          "on_sha256": "4660c81c7b36921bf030e1aec5ef64c7cbacc03a29d99b0340c03b484f33232a",
+          "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+        },
+        "guide": {
+          "boss_gain": 0.31,
+          "image_damage": 0.13,
+          "adjusted_score": 0.23463900000000001,
+          "on_sha256": "134b2d815355bfbfcfb298da71cd672e64c0d9a966d23cdd99e12eda14de7d5d",
+          "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+        },
+        "guard": {
+          "boss_gain": 0.77,
+          "image_damage": 0.24,
+          "adjusted_score": 0.44475200000000004,
+          "on_sha256": "73cc6a0ee1f8c733e18ac3cd30d84ce9b5c321affd56c00669a00f57e7193508",
+          "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+        },
+        "violinist": {
+          "boss_gain": 0.42,
+          "image_damage": 0.31,
+          "adjusted_score": 0.19996199999999995,
+          "on_sha256": "9f8e66b4dbd9e68c7fb94b6f402d1b7d18a68e8bce46f3d7596a6b4c6d44d333",
+          "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+        }
+      }
+    },
+    {
+      "profile": "late",
+      "alpha": 1.2875,
+      "gains": [
+        0.64375,
+        0.64375,
+        0.64375,
+        0.64375,
+        0.64375,
+        0.64375,
+        0.64375,
+        1.3304165138668098,
+        1.9312500000000001,
+        1.9312500000000001
+      ],
+      "mean_adjusted_score": 0.156314069444,
+      "cases": {
+        "ranger": {
+          "boss_gain": 0.15,
+          "image_damage": 0.2866666666666667,
+          "adjusted_score": 0.07632666666666668,
+          "on_sha256": "14f0570b2b960ad4e03eb04364a6192641e82c4965b6acd476608acc9765e621",
+          "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+        },
+        "smith": {
+          "boss_gain": 0.13,
+          "image_damage": 0.3933333333333333,
+          "adjusted_score": 0.04784577777777778,
+          "on_sha256": "f99050119d62272748b7a52b0aab0fb96661a1b806a7ebc0e1fa0e980ae0f12c",
+          "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+        },
+        "stationer": {
+          "boss_gain": 0.24,
+          "image_damage": 0.18000000000000002,
+          "adjusted_score": 0.16137599999999996,
+          "on_sha256": "a52092df15cac5e217a76e0058912447ed4f5ef2dd7e6135421274c168aff136",
+          "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+        },
+        "ferryman": {
+          "boss_gain": 0.44000000000000006,
+          "image_damage": 0.15666666666666665,
+          "adjusted_score": 0.312932888888889,
+          "on_sha256": "0baaed1223dcdb5dcdc0818d2fe888393d22aebe8ebc61b40ade04578494b2a7",
+          "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+        },
+        "watchmaker": {
+          "boss_gain": 0.21,
+          "image_damage": 0.21666666666666667,
+          "adjusted_score": 0.12885833333333332,
+          "on_sha256": "a57181dc4f58188f5e636c2a74275af330b4685934730b245dd931334fccf013",
+          "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+        },
+        "guide": {
+          "boss_gain": 0.11,
+          "image_damage": 0.20666666666666667,
+          "adjusted_score": 0.06923155555555556,
+          "on_sha256": "a07f4686d177f4459d5e10609fad2e8b9d1b862e66628b8a905fa8ec1501bffa",
+          "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+        },
+        "guard": {
+          "boss_gain": 0.6199999999999999,
+          "image_damage": 0.32,
+          "adjusted_score": 0.2866879999999999,
+          "on_sha256": "9d74e37ba5cf58d1dc83d7cb0e870372c2108d6e7c2b733dc692a49714778419",
+          "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+        },
+        "violinist": {
+          "boss_gain": 0.3,
+          "image_damage": 0.25333333333333335,
+          "adjusted_score": 0.16725333333333328,
+          "on_sha256": "e86e892c670afc8198e6153cb5bc0f85f99df466d0e7bc5c759eb50a3dbd2985",
+          "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+        }
+      }
+    },
+    {
+      "profile": "late",
+      "alpha": 1.225,
+      "gains": [
+        0.6125,
+        0.6125,
+        0.6125,
+        0.6125,
+        0.6125,
+        0.6125,
+        0.6125,
+        1.2658331879509452,
+        1.8375000000000001,
+        1.8375000000000001
+      ],
+      "mean_adjusted_score": 0.141514375,
+      "cases": {
+        "ranger": {
+          "boss_gain": 0.13,
+          "image_damage": 0.26666666666666666,
+          "adjusted_score": 0.06991111111111113,
+          "on_sha256": "22086b8f0d8f434beccae743a69f64ff1362fe625ffbefbdc75d6bf028cf15ee",
+          "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+        },
+        "smith": {
+          "boss_gain": 0.13,
+          "image_damage": 0.43,
+          "adjusted_score": 0.04223700000000001,
+          "on_sha256": "91232ea42dc33b501aa9e8550fdc860b54be4eab665fc62b2f1aa763dee2f8d3",
+          "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+        },
+        "stationer": {
+          "boss_gain": 0.2,
+          "image_damage": 0.17,
+          "adjusted_score": 0.13777999999999999,
+          "on_sha256": "4d49e7a12e8067c0ec3fc7cb6fe9a2ed0c858ca4f760eef9656b034acb7a9c58",
+          "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+        },
+        "ferryman": {
+          "boss_gain": 0.44000000000000006,
+          "image_damage": 0.16333333333333333,
+          "adjusted_score": 0.30800488888888894,
+          "on_sha256": "d68a170dcf93753f3df013552987ecaeeff184f3531ada0d45f80fe265a3631f",
+          "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+        },
+        "watchmaker": {
+          "boss_gain": 0.21,
+          "image_damage": 0.26,
+          "adjusted_score": 0.11499599999999999,
+          "on_sha256": "7e0b3caafdb06b2f12d6fab9c6527278ff10fbe876e0815a0672a3bf3a80e1ae",
+          "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+        },
+        "guide": {
+          "boss_gain": 0.11,
+          "image_damage": 0.18000000000000002,
+          "adjusted_score": 0.07396399999999999,
+          "on_sha256": "0fd7a33fce25b8f5897874dacc6f887d9fde96d894844ab5d191c7923e066dc3",
+          "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+        },
+        "guard": {
+          "boss_gain": 0.54,
+          "image_damage": 0.3566666666666667,
+          "adjusted_score": 0.223494,
+          "on_sha256": "c5becc906b10fed08bc046ba7d2bc14e26e81adbd8bf7322937392226df0cf7f",
+          "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+        },
+        "violinist": {
+          "boss_gain": 0.27999999999999997,
+          "image_damage": 0.24,
+          "adjusted_score": 0.16172799999999998,
+          "on_sha256": "7bc5db6c41befe42a72c9f20e3c382e9c4270917e4a2ec894b3afb35126b18c0",
+          "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+        }
+      }
+    },
+    {
+      "profile": "early",
+      "alpha": 0.6666666666666666,
+      "gains": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        0.6444445235641115,
+        0.3333333333333333,
+        0.3333333333333333
+      ],
+      "mean_adjusted_score": 0.256589361111,
+      "cases": {
+        "ranger": {
+          "boss_gain": 0.44000000000000006,
+          "image_damage": 0.19999999999999998,
+          "adjusted_score": 0.2816000000000001,
+          "on_sha256": "74abb2636b46aadc8c8f14c9c106eb4621e78d41b2048a5860adf55965df325e",
+          "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+        },
+        "smith": {
+          "boss_gain": 0.25,
+          "image_damage": 0.2733333333333333,
+          "adjusted_score": 0.1320111111111111,
+          "on_sha256": "2e59aee56e794987762e1e37a9671691c2606a59a4f6b6dfeb103f1cd29bb2f6",
+          "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+        },
+        "stationer": {
+          "boss_gain": 0.29,
+          "image_damage": 0.17333333333333334,
+          "adjusted_score": 0.19817955555555553,
+          "on_sha256": "1f11f6bdc1a0c4fabc5e993992ad6f75a1bab472408fa6b06539ae2d920f3f52",
+          "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+        },
+        "ferryman": {
+          "boss_gain": 0.52,
+          "image_damage": 0.21333333333333335,
+          "adjusted_score": 0.3217991111111111,
+          "on_sha256": "d93e26b5721fa3791ef5f19955840e521fe8b9db0b31ab7a410e216b958f823b",
+          "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+        },
+        "watchmaker": {
+          "boss_gain": 0.64,
+          "image_damage": 0.21,
+          "adjusted_score": 0.39942400000000006,
+          "on_sha256": "c26a0b5a8c782e658b9ac9a8fed60d7cb6cf4bbded852ef68b3aab709e06eab9",
+          "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+        },
+        "guide": {
+          "boss_gain": 0.14,
+          "image_damage": 0.15333333333333335,
+          "adjusted_score": 0.10035822222222224,
+          "on_sha256": "6a6979baf73d8f283dcf8956eaa87eab622eb3cdad44b6c9ae9823c7124df517",
+          "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+        },
+        "guard": {
+          "boss_gain": 0.73,
+          "image_damage": 0.26333333333333336,
+          "adjusted_score": 0.3961547777777777,
+          "on_sha256": "7403f3b7c39f90d55a67da5be9c4f8ab2268db9c7b9934607c9fb6417929ad56",
+          "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+        },
+        "violinist": {
+          "boss_gain": 0.37,
+          "image_damage": 0.22333333333333336,
+          "adjusted_score": 0.2231881111111111,
+          "on_sha256": "ed95163041eb4c90e92a6ce66b131ed58aa6f061cd0690e3ae94ca9d55c0a923",
+          "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+        }
+      }
+    },
+    {
+      "profile": "constant",
+      "alpha": 0.6375,
+      "gains": [
+        0.6375,
+        0.6375,
+        0.6375,
+        0.6375,
+        0.6375,
+        0.6375,
+        0.6375,
+        0.6375,
+        0.6375,
+        0.6375
+      ],
+      "mean_adjusted_score": 0.130613416667,
+      "cases": {
+        "ranger": {
+          "boss_gain": 0.1,
+          "image_damage": 0.22333333333333336,
+          "adjusted_score": 0.0603211111111111,
+          "on_sha256": "93da8de408aed4e8ae3e54fb5d40d7594e590a43816e6208d1bfd7645928f5bc",
+          "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+        },
+        "smith": {
+          "boss_gain": 0.1,
+          "image_damage": 0.31,
+          "adjusted_score": 0.04760999999999999,
+          "on_sha256": "ed2349592f7df313d4866b96688e802a9581c144f9b3955eac4fd27453d7509a",
+          "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+        },
+        "stationer": {
+          "boss_gain": 0.2,
+          "image_damage": 0.15,
+          "adjusted_score": 0.1445,
+          "on_sha256": "95cb338c1dcc5291e78f1e6932421bdc50651210936625094fce67578b3dc5b6",
+          "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+        },
+        "ferryman": {
+          "boss_gain": 0.32,
+          "image_damage": 0.15,
+          "adjusted_score": 0.2312,
+          "on_sha256": "5d97c9be2c43227cebc623fb4f8771ee8ce2b85ca835387a34db69f28a516035",
+          "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+        },
+        "watchmaker": {
+          "boss_gain": 0.22,
+          "image_damage": 0.23666666666666666,
+          "adjusted_score": 0.12818911111111111,
+          "on_sha256": "abfbd092133fd035de4220001387ce1c16bd56c358b9c9e060b7f0c57873d51b",
+          "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+        },
+        "guide": {
+          "boss_gain": 0.05,
+          "image_damage": 0.17,
+          "adjusted_score": 0.034444999999999996,
+          "on_sha256": "476e2899cc6f0f5d131e759d677fc3c059c0ed59a2a926354a164744b84fecd6",
+          "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+        },
+        "guard": {
+          "boss_gain": 0.54,
+          "image_damage": 0.25333333333333335,
+          "adjusted_score": 0.30105599999999993,
+          "on_sha256": "c251d0477b2538034c9407cea217c8dcbfda0650c1341efaf4f08c8388d2700a",
+          "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+        },
+        "violinist": {
+          "boss_gain": 0.19,
+          "image_damage": 0.2833333333333333,
+          "adjusted_score": 0.09758611111111111,
+          "on_sha256": "71fdab2b84298680c6cd7dd74be2da499279898663b49489724562c04fda7d25",
+          "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+        }
+      }
+    },
+    {
+      "profile": "constant",
+      "alpha": 1.1625,
+      "gains": [
+        1.1625,
+        1.1625,
+        1.1625,
+        1.1625,
+        1.1625,
+        1.1625,
+        1.1625,
+        1.1625,
+        1.1625,
+        1.1625
+      ],
+      "mean_adjusted_score": 0.298333888889,
+      "cases": {
+        "ranger": {
+          "boss_gain": 0.43000000000000005,
+          "image_damage": 0.21666666666666667,
+          "adjusted_score": 0.2638527777777778,
+          "on_sha256": "ee473199842f7535d34f20562cee83ae2a2a4f50049f5ed099c3aed784b9c0d4",
+          "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+        },
+        "smith": {
+          "boss_gain": 0.39,
+          "image_damage": 0.2833333333333333,
+          "adjusted_score": 0.20030833333333334,
+          "on_sha256": "8e843f4f5c5b3ef2047bdbc7b8b0699bfea499b5c61abdf0472484f73a4fde56",
+          "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+        },
+        "stationer": {
+          "boss_gain": 0.56,
+          "image_damage": 0.32666666666666666,
+          "adjusted_score": 0.2538915555555556,
+          "on_sha256": "8f7325eda4a6c6c0c73d1eb97daf09584c214799db34479c7e999e58ca984b09",
+          "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+        },
+        "ferryman": {
+          "boss_gain": 0.55,
+          "image_damage": 0.21,
+          "adjusted_score": 0.3432550000000001,
+          "on_sha256": "c6840e89d43d77bf611d128bd95086b7e1e85c5e464cf1ce1a51bd0c279bdf73",
+          "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+        },
+        "watchmaker": {
+          "boss_gain": 0.7100000000000001,
+          "image_damage": 0.21,
+          "adjusted_score": 0.44311100000000014,
+          "on_sha256": "20dd39ec0c2733213ae6728e2cc9905d45f9353200713540aaaba256c6fd142f",
+          "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+        },
+        "guide": {
+          "boss_gain": 0.18,
+          "image_damage": 0.13333333333333333,
+          "adjusted_score": 0.13520000000000001,
+          "on_sha256": "7fe5508cbddd491e3ead53c0a578821442c6c21cb59528b62e2183b649d3e9b1",
+          "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+        },
+        "guard": {
+          "boss_gain": 0.76,
+          "image_damage": 0.22,
+          "adjusted_score": 0.462384,
+          "on_sha256": "e8d11d61cf79a67335dab57015f1c90009f785212252acf62cecfcdefdd576a3",
+          "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+        },
+        "violinist": {
+          "boss_gain": 0.46,
+          "image_damage": 0.21333333333333335,
+          "adjusted_score": 0.28466844444444445,
+          "on_sha256": "6b6c16558de3184e521232271bc6ffd7ade3731cb5120de0f95719d4e48a161e",
+          "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+        }
+      }
+    },
+    {
+      "profile": "early",
+      "alpha": 0.9125,
+      "gains": [
+        1.36875,
+        1.36875,
+        1.36875,
+        1.36875,
+        1.36875,
+        1.36875,
+        1.36875,
+        0.8820834416283777,
+        0.45625,
+        0.45625
+      ],
+      "mean_adjusted_score": 0.324434277778,
+      "cases": {
+        "ranger": {
+          "boss_gain": 0.56,
+          "image_damage": 0.27,
+          "adjusted_score": 0.29842399999999997,
+          "on_sha256": "94727a321f00fdb92054b0280ee6a6adb5b683c67ee3971cdb4f789df5681bf4",
+          "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+        },
+        "smith": {
+          "boss_gain": 0.6799999999999999,
+          "image_damage": 0.35000000000000003,
+          "adjusted_score": 0.2872999999999999,
+          "on_sha256": "b56aba8d3c72bdcde188a3d64c72d2376caeb5b2012363711ba5d775c8128d40",
+          "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+        },
+        "stationer": {
+          "boss_gain": 0.6900000000000001,
+          "image_damage": 0.22999999999999998,
+          "adjusted_score": 0.40910100000000005,
+          "on_sha256": "2ebdb99b81c5846d85138d62e42c90f50720dcbebbeec532478802b458bb1cea",
+          "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+        },
+        "ferryman": {
+          "boss_gain": 0.68,
+          "image_damage": 0.22999999999999998,
+          "adjusted_score": 0.40317200000000003,
+          "on_sha256": "dfd7430240433cc09ec5730fc69bb04fd17ec3695db80eada992da9d83c703ce",
+          "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+        },
+        "watchmaker": {
+          "boss_gain": 0.64,
+          "image_damage": 0.27999999999999997,
+          "adjusted_score": 0.331776,
+          "on_sha256": "fe0fa26370de559bfab9b63e2df641c564c55852995c2a4f79c77dd416c99317",
+          "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+        },
+        "guide": {
+          "boss_gain": 0.16999999999999998,
+          "image_damage": 0.14666666666666667,
+          "adjusted_score": 0.1237902222222222,
+          "on_sha256": "1caea1d8c7fd56eda756587584a94d897634249a82a7acf05cb060ac506d5b27",
+          "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+        },
+        "guard": {
+          "boss_gain": 0.76,
+          "image_damage": 0.25,
+          "adjusted_score": 0.4275,
+          "on_sha256": "fd3938860a69211972e7f53799333cb66cb554af9cfd435e34fb725bf07136a9",
+          "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+        },
+        "violinist": {
+          "boss_gain": 0.5900000000000001,
+          "image_damage": 0.27,
+          "adjusted_score": 0.314411,
+          "on_sha256": "09458711fec2ba13dcd842cee9d3e556e64e36fcf46af3612f26bc4f7f898497",
+          "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+        }
+      }
+    }
+  ],
+  "figure_cases": [
+    "guide",
+    "smith",
+    "stationer",
+    "violinist"
+  ],
+  "figure_settings": [
+    {
+      "profile": "early",
+      "alpha": 0.6666666666666666
+    },
+    {
+      "profile": "early",
+      "alpha": 0.95
+    },
+    {
+      "profile": "constant",
+      "alpha": 1.240625
+    }
+  ]
+}

@@ -1,0 +1,195 @@
+{
+  "scope": "Separate effect and damage readings for the eight shared early-strength renders. One structural result is unresolved.",
+  "source_report_sha256": "18fd4d299be30679494d2e994ab2125a00902e157882aafe28e37cb6dc29b2b2",
+  "rubric_sha256": "19d57ace95185bf976b1f4ad1a1f2374c9c783b998dd644fe66a36eb64a4a35b",
+  "step": 192,
+  "profile": "early",
+  "alpha": 0.6666666666666666,
+  "gains": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.6444445235641115,
+    0.3333333333333333,
+    0.3333333333333333
+  ],
+  "qualification": "unmeasured",
+  "means": {
+    "boss_gain": 0.43625,
+    "image_damage": 0.29125,
+    "adjusted_score": 0.2147292083335
+  },
+  "cases": [
+    {
+      "case": "ranger",
+      "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c",
+      "on_sha256": "ce656f286e8e1adc7c76c65524f1644bbf4efaa9d660e858e2384f9b5885d966",
+      "boss_off": 0.09,
+      "boss_on": 0.71,
+      "boss_gain": 0.62,
+      "image_damage": 0.21666666666666667,
+      "adjusted_score": 0.380438888889,
+      "integrity": {
+        "status": "pass",
+        "checks": {
+          "no_readable_image": 0.05,
+          "split_or_duplication": 0.03,
+          "broken_structure": 0.37
+        }
+      },
+      "control_score": 0.2816
+    },
+    {
+      "case": "smith",
+      "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245",
+      "on_sha256": "bd334b0ae421947afe0982ca64671cb81ac776186c65533c31d92508aa465919",
+      "boss_off": 0.07,
+      "boss_on": 0.3,
+      "boss_gain": 0.23,
+      "image_damage": 0.3433333333333333,
+      "adjusted_score": 0.099178555556,
+      "integrity": {
+        "status": "pass",
+        "checks": {
+          "no_readable_image": 0.05,
+          "split_or_duplication": 0.03,
+          "broken_structure": 0.31
+        },
+        "structural_details": {
+          "accidental_parts": 0.31,
+          "accidental_face": 0.14,
+          "accidental_geometry": 0.16
+        }
+      },
+      "control_score": 0.132011111111
+    },
+    {
+      "case": "stationer",
+      "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339",
+      "on_sha256": "a74c26c02fe8409f8217122c58c2e44d3d44b234960c9696bddc66e46748b813",
+      "boss_off": 0.12,
+      "boss_on": 0.38,
+      "boss_gain": 0.26,
+      "image_damage": 0.21666666666666667,
+      "adjusted_score": 0.159538888889,
+      "integrity": {
+        "status": "pass",
+        "checks": {
+          "no_readable_image": 0.05,
+          "split_or_duplication": 0.03,
+          "broken_structure": 0.35
+        }
+      },
+      "control_score": 0.198179555556
+    },
+    {
+      "case": "ferryman",
+      "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b",
+      "on_sha256": "c585a974d8e72c538cfa610dbb0789d29ec85ddec544908719f8a3b341ec368b",
+      "boss_off": 0.12,
+      "boss_on": 0.62,
+      "boss_gain": 0.5,
+      "image_damage": 0.35333333333333333,
+      "adjusted_score": 0.209088888889,
+      "integrity": {
+        "status": "pass",
+        "checks": {
+          "no_readable_image": 0.06,
+          "split_or_duplication": 0.05,
+          "broken_structure": 0.37
+        }
+      },
+      "control_score": 0.321799111111
+    },
+    {
+      "case": "watchmaker",
+      "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8",
+      "on_sha256": "0d6c31344d181531444d9d2e826d7fe68533397a621d4f8ce2e5c4ea85921158",
+      "boss_off": 0.1,
+      "boss_on": 0.68,
+      "boss_gain": 0.58,
+      "image_damage": 0.37999999999999995,
+      "adjusted_score": 0.222952,
+      "integrity": {
+        "status": "pass",
+        "checks": {
+          "no_readable_image": 0.07,
+          "split_or_duplication": 0.09,
+          "broken_structure": 0.3
+        },
+        "structural_details": {
+          "accidental_parts": 0.24,
+          "accidental_face": 0.3,
+          "accidental_geometry": 0.18
+        }
+      },
+      "control_score": 0.399424
+    },
+    {
+      "case": "guide",
+      "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa",
+      "on_sha256": "1565ac18965f3b7c9bc953bc0d3b1c9e18ea77a6d9bab5aa9f7366f28198042f",
+      "boss_off": 0.08,
+      "boss_on": 0.32,
+      "boss_gain": 0.24,
+      "image_damage": 0.16333333333333333,
+      "adjusted_score": 0.168002666667,
+      "integrity": {
+        "status": "pass",
+        "checks": {
+          "no_readable_image": 0.04,
+          "split_or_duplication": 0.04,
+          "broken_structure": 0.25
+        }
+      },
+      "control_score": 0.100358222222
+    },
+    {
+      "case": "guard",
+      "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5",
+      "on_sha256": "89979b8bff8735dad42df91c5dce2c0f7253f86d8bb6b1fba247293a937cf476",
+      "boss_off": 0.07,
+      "boss_on": 0.63,
+      "boss_gain": 0.56,
+      "image_damage": 0.3233333333333333,
+      "adjusted_score": 0.256411555556,
+      "integrity": {
+        "status": "pass",
+        "checks": {
+          "no_readable_image": 0.07,
+          "split_or_duplication": 0.04,
+          "broken_structure": 0.38
+        }
+      },
+      "control_score": 0.396154777778
+    },
+    {
+      "case": "violinist",
+      "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50",
+      "on_sha256": "2ea55c38083e15571144b513176641a2312d122df9679aa0048cd66058801fe5",
+      "boss_off": 0.08,
+      "boss_on": 0.58,
+      "boss_gain": 0.5,
+      "image_damage": 0.3333333333333333,
+      "adjusted_score": 0.222222222222,
+      "integrity": {
+        "status": "unmeasured",
+        "checks": {
+          "no_readable_image": 0.06,
+          "split_or_duplication": 0.04,
+          "broken_structure": 0.65
+        },
+        "structural_details": {
+          "accidental_parts": 0.65,
+          "accidental_face": 0.23,
+          "accidental_geometry": 0.15
+        }
+      },
+      "control_score": 0.223188111111
+    }
+  ]
+}

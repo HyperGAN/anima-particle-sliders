@@ -1,0 +1,107 @@
+{
+  "recipe": "foreground-apg-floor45",
+  "source": "https://arxiv.org/html/2410.02416v2",
+  "parent_cache": "584407ffe55a9d5f426eb20a1ac7ed3c4a9ecdfde2b6ea3f9d3d333386dfceb2",
+  "baseline_cache": "8e28e58e797016219e5f0a0dbbaacccdc37eafaa25468b83ef954bfb2e90e120",
+  "analysis": "Apply the released projection function to the archived teacher fields. This audit uses cached tensors and does not run Anima or train a slider.",
+  "sigmas": [
+    1.0,
+    0.964285671710968,
+    0.9230769872665405,
+    0.8749999403953552,
+    0.8181818127632141,
+    0.75,
+    0.6666666865348816,
+    0.5625,
+    0.4285714626312256,
+    0.25,
+    0.0
+  ],
+  "fields": 120,
+  "fields_preserving_exterior_bitwise": 120,
+  "fields_moving_more_than_10_percent_of_edit_norm": 81,
+  "max_edit_norm_relative_error": 3.967186135156453e-09,
+  "max_subject_parallel_fraction_after_projection": 5.238235677352492e-09,
+  "relative_edit_movement": {
+    "mean": 0.23124025694079187,
+    "median": 0.24303379535919278,
+    "max": 0.6151778066399649
+  },
+  "by_position": [
+    {
+      "position": 0,
+      "fields": 12,
+      "mean_relative_edit_movement": 0.35380689361157774
+    },
+    {
+      "position": 1,
+      "fields": 12,
+      "mean_relative_edit_movement": 0.43106250464599577
+    },
+    {
+      "position": 2,
+      "fields": 12,
+      "mean_relative_edit_movement": 0.40886604079874317
+    },
+    {
+      "position": 3,
+      "fields": 12,
+      "mean_relative_edit_movement": 0.3668597170333235
+    },
+    {
+      "position": 4,
+      "fields": 12,
+      "mean_relative_edit_movement": 0.3019242558752482
+    },
+    {
+      "position": 5,
+      "fields": 12,
+      "mean_relative_edit_movement": 0.21003737994880226
+    },
+    {
+      "position": 6,
+      "fields": 12,
+      "mean_relative_edit_movement": 0.12505828782325348
+    },
+    {
+      "position": 7,
+      "fields": 12,
+      "mean_relative_edit_movement": 0.06620847742733565
+    },
+    {
+      "position": 8,
+      "fields": 12,
+      "mean_relative_edit_movement": 0.031526218866849344
+    },
+    {
+      "position": 9,
+      "fields": 12,
+      "mean_relative_edit_movement": 0.017052793376789544
+    }
+  ],
+  "native_capture": {
+    "matched_training_fields": 120,
+    "exact_exterior_fields": 120,
+    "changed_teacher_fields": 120,
+    "baseline_cache": "8e28e58e797016219e5f0a0dbbaacccdc37eafaa25468b83ef954bfb2e90e120",
+    "cache": "27a1570b66bfcd133cb04845f5c5006e730ab1577c54916191bd2f28012f6736",
+    "request": {
+      "model_identity": {
+        "model": "circlestone-labs/Anima:turbo-v1.1",
+        "sha256": "eb5520f293d42a19df9242d8d442d5d2068e5121620814418c2b50a97de0552f",
+        "identity_schema": "portable-model-v1",
+        "environment_sha256": "55ac97305e688c56d4a2908243b020e999cf101a05b1cf7e5a3e2c48d4a4d7ba",
+        "runtime_sha256": "0b0dfc97ba76a99ed3f5313695e89e5802ece8e1db4470443a9705692ae579c3"
+      },
+      "cache_fingerprint": "27a1570b66bfcd133cb04845f5c5006e730ab1577c54916191bd2f28012f6736",
+      "response_shape": [
+        1,
+        16,
+        1,
+        64,
+        64
+      ]
+    },
+    "native_field_rechecks_passed": 4
+  }
+}

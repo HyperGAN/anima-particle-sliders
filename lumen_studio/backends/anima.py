@@ -4,6 +4,7 @@ from __future__ import annotations
 from collections import OrderedDict
 import gc
 import json
+from math import isfinite
 from pathlib import Path
 
 import numpy as np
@@ -110,6 +111,10 @@ class TurboRuntime:
 
     @torch.no_grad()
     def render(self, prompt, seed, width=768, height=768, steps=10, progress=None, cancelled=None):
+        image, _ = self._render_euler(prompt, seed, width, height, steps, progress, cancelled)
+        return image
+
+    def _render_euler(self, prompt, seed, width, height, steps, progress, cancelled, edit_velocity=None):
         embedding = self.encode(prompt)
         latent = self.noise(seed, width, height)
         scheduler = self.scheduler(steps)
@@ -117,10 +122,53 @@ class TurboRuntime:
             if cancelled and cancelled():
                 raise Cancelled("Generation cancelled")
             velocity = self.predict(latent, timestep, embedding)
+            if edit_velocity is not None:
+                velocity = edit_velocity(velocity)
             latent = self.step(scheduler, velocity, timestep, latent)
             if progress:
                 progress((index + 1) / steps)
-        return self.decode(latent)
+        return self.decode(latent), scheduler
+
+    @torch.no_grad()
+    def render_spsr(self, prompt, seed, *, steering, width=768, height=768, steps=10,
+                    progress=None, cancelled=None):
+        """Apply a fitted S-PSR edit to the native velocity before each Euler update."""
+        from particle_sliders.prompt_steering import PromptSteering
+
+        if not isinstance(steering, PromptSteering) or steering.probe.in_features != self.channels:
+            raise ValueError("Anima S-PSR requires a fitted probe in native velocity channels")
+        device = steering.probe.weight.device
+        if (device.type != self.device.type or (self.device.index is not None and device != self.device)
+                or any(value.dtype != torch.float32 or value.device != device
+                       or not torch.isfinite(value).all() for value in steering.parameters())):
+            raise ValueError("The fitted S-PSR parameters must be finite FP32 tensors on the native device")
+
+        coefficients = []
+
+        def edit_velocity(velocity):
+            if (velocity.ndim != 5 or velocity.shape[1] != self.channels
+                    or velocity.device != device or not velocity.is_floating_point()):
+                raise ValueError("Expected the native Anima velocity field for the fitted S-PSR probe")
+            with torch.autocast(device_type=device.type, enabled=False):
+                pooled = velocity.mean(dim=(0, 2, 3, 4), dtype=torch.float32)
+                coefficient = steering.coefficients(pooled)
+                change = coefficient * steering.direction.weight[0]
+                edited = (velocity + change.view(1, -1, 1, 1, 1)).to(velocity.dtype)
+            applied = coefficient.item()
+            if not isfinite(applied) or not torch.isfinite(edited).all():
+                raise ValueError("Nonfinite Anima S-PSR edit")
+            coefficients.append(applied)
+            return edited
+
+        # The measured intervention edits the base velocity directly.
+        with self.mixer.scales({}):
+            image, scheduler = self._render_euler(
+                prompt, seed, width, height, steps, progress, cancelled, edit_velocity,
+            )
+        sigmas = scheduler.sigmas.tolist()
+        widths = (start - end for start, end in zip(sigmas, sigmas[1:]))
+        dose = sum(coefficient * width for coefficient, width in zip(coefficients, widths, strict=True))
+        return image, dict(sigmas=sigmas, coefficients=coefficients, sigma_weighted_coefficient=dose)
 
     def close(self):
         self.mixer.close()

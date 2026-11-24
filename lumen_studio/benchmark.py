@@ -1,4 +1,4 @@
-"""Archived gmix benchmark; no native dispatch under the PG09 proposal."""
+"""Archived gmix benchmark; no native dispatch under the ParticleGAN proposal."""
 from .training_policy import legacy_training_unavailable
 
 

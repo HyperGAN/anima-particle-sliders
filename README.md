@@ -4,8 +4,8 @@
 
 **Bad Intent, Final Form, Afterimage, Moonlit, Candlelit, Dusk for Anima Turbo v1.1.** Original particle adapters and ordinary LoRA distills, with strength stored in each file’s alpha.
 
-Install Anima 0.4.0 from this checkout to use Particle Sliders core 0.15.1
-and ParticleGAN 0.11.0. New sessions use `ema_decay=None` and RAW
+Install Anima 0.4.0 from this checkout to use Particle Sliders core 0.15.2
+and ParticleGAN 0.11.1. New sessions use `ema_decay=None` and RAW
 training, evaluation, export and inference.
 
 - [Common sessions and direct training](LIFECYCLE.md)
@@ -13,6 +13,8 @@ training, evaluation, export and inference.
 - [Optional HNDL backend](HNDL-CANDIDATE.md)
 - [Adaptive `anima-vibe` collection and frozen targets](VIBE.md)
 - [Saved Candlelit C2 RAW960 results](docs/finished-output-learning-rates.md)
+- [Scheduled slider strength](docs/scheduled-strength.md) for the measured Candlelit RAW256 and Final Boss RAW192 profiles and opt-in activation-dependent calibration.
+- [Final Boss research leaderboard](docs/leaderboard.md) with matched scores, the current default, and links to samples and source.
 
 Saved checkpoints and previously published showcase files retain their original
 source and dependency profiles.
@@ -306,7 +308,7 @@ These are development examples, not a final-test benchmark. Strength 1 is the ca
 | Candlelit | [Download](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/weights/candlelit-unit-alpha.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/distilled/comfyui/candlelit-unit-alpha.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/distilled/native/candlelit-unit-alpha.safetensors?download=true) |
 | Dusk | [Download](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/weights/dusk-unit-alpha.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/distilled/comfyui/dusk-unit-alpha.safetensors?download=true) | [Download](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/distilled/native/dusk-unit-alpha.safetensors?download=true) |
 
-**Particles:** use the [ComfyUI particle plugin](https://github.com/HyperGAN/anima-particle-sliders#comfyui) at strength **1.0**. Update the plugin for embedded-alpha files. [Plugin ZIP](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/comfyui/anima-particle-sliders.zip?download=true) · [Setup](https://github.com/HyperGAN/anima-particle-sliders/blob/main/COMFYUI.md).
+**Particles:** use the [ComfyUI particle plugin](https://github.com/HyperGAN/anima-particle-sliders#comfyui) at strength **1.0**. Update the plugin for embedded-alpha files. [Published release ZIP](https://huggingface.co/ntc-ai/anima-particle-sliders/resolve/main/comfyui/anima-particle-sliders.zip?download=true) · [Current setup](https://github.com/HyperGAN/anima-particle-sliders/blob/main/COMFYUI.md).
 
 **Distilled LoRAs:** use standard **Load LoRA**, **MODEL strength 1.0, CLIP strength 0**. No particle plugin is needed.
 
@@ -427,7 +429,7 @@ These are final-budget experimental checkpoints. They were not selected as the b
 
 This section describes the released gmix cohort. `core.lock.json` is its preserved
 core0.3.0 record, not the current packaged lifecycle dependency. The current
-source product is Anima0.3.0/core0.12.0/PG0.9.4; its installer is `pyproject.toml`.
+historical source product and installer are preserved in the archived checkout.
 See [installation cohorts](INSTALL-COHORTS.md) for the separate HNDL prerelease.
 
 Routing, the global-mix critic, paired losses, the particle regularizer, the noise schedule, and the ordinary-LoRA solver live in [particle-sliders-core](https://github.com/HyperGAN/particle-sliders/tree/a119ca1ecd3d5d6c437065839d22739b04f2f4d8/packages/particle-sliders-core). `requirements-legacy.txt` pins commit `a119ca1ecd3d5d6c437065839d22739b04f2f4d8`. Training imports `winning_formulation` and calls `require()` on the training config after setting generator learning rate \\(2\\times10^{-5}\\). Architecture is `gmix`. The formulation overlay is provisional `particle-gmix-1600-v2` until ParticleGAN #38 crowns a full-board winner.
@@ -437,3 +439,5 @@ Anima keeps the Hub id `ntc-ai/anima-particle-sliders`, the Comfy class in `comf
 ## License
 
 The adapters are derivatives of [CircleStone Anima](https://huggingface.co/circlestone-labs/Anima) and are distributed under the [CircleStone Labs Non-Commercial License](ANIMA-LICENSE.md). Rights are granted directly by CircleStone Labs LLC. See [NOTICE](NOTICE). Independently authored source code is MIT; vendored reference code retains its included license. This is an independent ntc-ai release.
+
+Earlier training environments, packaging checks and LR reproduction scripts remain available in the [archived source](https://github.com/HyperGAN/anima-particle-sliders/tree/791a80a4f38a9b8cb096d719b6758a79325bd7d2).

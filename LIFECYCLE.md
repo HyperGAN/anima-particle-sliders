@@ -1,6 +1,6 @@
 # Anima image sessions
 
-Anima 0.4.0 installs core 0.15.1 and ParticleGAN 0.11.0. The registered
+Anima 0.4.0 installs core 0.15.2 and ParticleGAN 0.11.1. The registered
 `anima` backend is CPU-only and supports training and numerical response.
 The separately admitted native training API is
 `lumen_studio.engine_training.EngineTrainer`.
@@ -10,40 +10,15 @@ Omitted rates use the existing explicit `bispf_optimized` recipe. The
 resolved recipe and runtime source are included in checkpoint identity.
 Use `ema_decay=None` in common session options and select RAW for inference.
 
+The shared core also exposes EMPF as an explicit preset for clients such as
+Nova. For exact replay of packets created before that core update, use the
+[initial ParticleGAN 0.11.1 checkout](https://github.com/HyperGAN/anima-particle-sliders/tree/5ab590b30d17423652ff851fd1d8246cc364df89).
+
 See [scoped initialization](docs/explicit-fresh-initialization.md) for fresh
 runs and exact resume. Earlier artifacts use their original checkout and
 dependency pins.
 
-## Previous core 0.8.1 cohort
-
-This draft targets the reviewed core 0.8.1 pin
-`32f6830f6402e85aa77b6631db64fcbbb2131f6b`; see `CORE081-ADOPTION.md` for
-source-only adoption and new native inference/hooks. The original 0.7.0
-`fd89e1c780ab5210cd1be98ec3b70977e6349379` cohort remains preserved.
-The proposal is based on draft PR5
-`4477716c8dbedd3a079e3299a1229adaaa2b407f`, preserving its existing shared
-PG09 trainer and early legacy-dispatch safeguards. It remains a draft and is
-unqualified for pretrained/native execution. A parent-scheduled bounded CPU slot
-passed six tiny Cosmos lifecycle checks at the prior 0.7.0 proposal, including
-from an extracted product wheel. Those results do not qualify this new 0.8.1
-adoption. A subsequent allocated slot qualified the unchanged 0.8.1 runtime
-with 32 installed/regression checks; see `CORE081-CPU.md`. See `LIFECYCLE-CPU.md` for scope,
-commands, resource receipts and retained initial harness failure.
-
-The new `anima-particle-sliders` distribution registers backend `anima` in
-`particle_sliders.image_backends`. It depends on Particle Sliders, which owns
-the ParticleGAN dependency and GAN math. There is no reverse product import or
-copied GAN objective, regularizer, prior, optimizer or stepping loop.
-
-`requirements-legacy.txt`, `core.lock.json`, `requirements-pg09.txt` and
-`core.pg09.lock.json` retain their original historical pins and qualification
-states. Select one isolated new environment for this proposal. Do not install
-the historical dependency selections with this package or retarget active runs.
-The exact tested shared commit is publicly reachable through merged common-core
-PR144 ancestry. This is a source draft, not a package release; see
-[publication and qualification status](PUBLICATION-STATUS.md).
-Existing native runtime environment checks remain authoritative; the optional
-`native` dependencies are not a qualified full environment lock.
+For historical reproduction, use the [original cohort checkout](https://github.com/HyperGAN/anima-particle-sliders/tree/791a80a4f38a9b8cb096d719b6758a79325bd7d2).
 
 ## Factory and operations
 
@@ -95,7 +70,7 @@ branch with a synthetic loader; native staged weight loading remains untested.
 Public strength support is finite [0,1]. Base precision is BF16, all generator
 and critic trainables FP32. Native geometry is `[1,C,1,H,W]`; evaluation returns
 velocities. Conditioning, exact routed bank ownership, native time normalization,
-balanced sampling and `bispf_optimized` remain as in the explicit PG09 trainer.
+balanced sampling and `bispf_optimized` remain as in the explicit ParticleGAN trainer.
 Other devices, signed/out-of-range strengths, reference images and rendering
 are rejected before model allocation through the public preflight.
 

@@ -1,0 +1,101 @@
+{
+  "scope": "Geometry audit of existing CUDA teacher fields. Candidate native recapture and training are pending.",
+  "probe": "Reconstruct the direction removed by the earlier exterior-only orthogonalization.",
+  "parents": {
+    "soft-floor45": "8e28e58e797016219e5f0a0dbbaacccdc37eafaa25468b83ef954bfb2e90e120",
+    "strong-boss-45-mix35": "7feebb6e2fedbbd9e90a9ab377687093647c69b9797158252121c601f2872445",
+    "soft45-background-orthogonal": "f1b4c6e0cc77a83a7b90fce6408e18ef739a5d6423472a2525d7749c76f349e8"
+  },
+  "exterior_matte_inclusive": 0.15,
+  "source_sha256": "2db411e033e26589b67a21f2e55c1bbbed78bdd656616c8b38cf12b244ffbd0a",
+  "summary": {
+    "verified_fields": 120,
+    "adjusted_fields": 101,
+    "exact_foreground_fields": 120,
+    "unchanged_full_fields": 19,
+    "original_nuisance_over_baseline_exterior_norm": 0.29140049749681807,
+    "mean_positive_excess_over_baseline_exterior_norm": 0.028623896652337184,
+    "mean_effective_change_over_stronger_edit_norm": 0.010370434851694992,
+    "max_effective_change_over_stronger_edit_norm": 0.10109282709529574,
+    "max_full_norm_relative_error": 7.461750994863792e-09
+  },
+  "method": "cap-extra-nuisance35",
+  "research": "https://arxiv.org/html/2606.29801v1#S3",
+  "target_rule": {
+    "reference": "soft-floor45",
+    "starting_edit": "strong-boss-45-mix35",
+    "nuisance_direction": "On the exterior support, subtract the projection of the baseline edit onto its previously orthogonalized counterpart, then normalize the difference.",
+    "bound": "Clip the starting edit's signed projection along that direction to the magnitude measured in the baseline. Retain the original field if the bound is already satisfied.",
+    "norm": "Keep the capped axial projection, then rescale the orthogonal component to restore the original stronger cue's exterior norm."
+  },
+  "by_position": [
+    {
+      "position": 0,
+      "fields": 12,
+      "adjusted": 8,
+      "mean_change_over_stronger_edit_norm": 0.020526437329793125
+    },
+    {
+      "position": 1,
+      "fields": 12,
+      "adjusted": 12,
+      "mean_change_over_stronger_edit_norm": 0.011945717076409783
+    },
+    {
+      "position": 2,
+      "fields": 12,
+      "adjusted": 11,
+      "mean_change_over_stronger_edit_norm": 0.011966379034898549
+    },
+    {
+      "position": 3,
+      "fields": 12,
+      "adjusted": 10,
+      "mean_change_over_stronger_edit_norm": 0.009083978709899574
+    },
+    {
+      "position": 4,
+      "fields": 12,
+      "adjusted": 11,
+      "mean_change_over_stronger_edit_norm": 0.010266920337926413
+    },
+    {
+      "position": 5,
+      "fields": 12,
+      "adjusted": 11,
+      "mean_change_over_stronger_edit_norm": 0.009199332709611499
+    },
+    {
+      "position": 6,
+      "fields": 12,
+      "adjusted": 9,
+      "mean_change_over_stronger_edit_norm": 0.005360862894431273
+    },
+    {
+      "position": 7,
+      "fields": 12,
+      "adjusted": 11,
+      "mean_change_over_stronger_edit_norm": 0.010368780098901029
+    },
+    {
+      "position": 8,
+      "fields": 12,
+      "adjusted": 8,
+      "mean_change_over_stronger_edit_norm": 0.008034416499372195
+    },
+    {
+      "position": 9,
+      "fields": 12,
+      "adjusted": 10,
+      "mean_change_over_stronger_edit_norm": 0.006951523825706479
+    }
+  ],
+  "training": {
+    "updates": 192,
+    "batch_size": 2,
+    "seed": 1,
+    "ema_decay": null,
+    "shared_early_alpha": 0.6666666666666666,
+    "shared_constant_alpha": 0.6375
+  }
+}

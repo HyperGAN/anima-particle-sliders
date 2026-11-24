@@ -13,7 +13,7 @@ license-files = ["LICENSE", "NOTICE", "ANIMA-LICENSE.md"]
 dependencies = [
   "safetensors>=0.4,<1",
   "packaging>=24",
-  "particle-sliders-core @ git+https://github.com/HyperGAN/particle-sliders.git@c13890f8e2a1ecf1dc8eb9f2a37f9187cb9fea78#subdirectory=packages/particle-sliders-core",
+  "particle-sliders-core @ git+https://github.com/HyperGAN/particle-sliders.git@b1f780decc516808cfd3019d5e5b674457161f86#subdirectory=packages/particle-sliders-core",
 ]
 
 [project.optional-dependencies]

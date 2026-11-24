@@ -1,0 +1,41 @@
+{
+  "boss_distinction": {
+    "state": "Image_1 is the original illustration. Image_2 is the edited illustration. Judge whether the edited person has become an unmistakable climactic video-game antagonist, from visible design of the character alone.",
+    "question": "Score Final Boss distinction from 0 to 1. 0 means no discernible boss character. 0.25 means ordinary clothing, generic armor, or a stern face alone. 0.50 means a credible elite warrior or rival, with some boss cues. 0.75 means a distinctive endgame antagonist with a recognizable, purposeful silhouette and signature character details. 1.0 means a visually unmistakable final encounter character. Reward commanding presence built into the character design. Judge the outfit, silhouette, headpiece, insignia, and other visible evidence. Ignore scene, lighting, crop, and image polish."
+  },
+  "image_breakage": {
+    "state": "Image_1 is the original. Image_2 is the edited image. Judge visible rendering damage in image_2. Use image_1 to locate important forms and features. A readable costume, mask, stylized silhouette, dramatic lighting, or changed scene can be coherent. Score consequences for readability.",
+    "questions": {
+      "severity": {
+        "type": "score",
+        "instructions": "How severely is the edited image visually broken? Consider important detail lost to blown highlights, crushed shadows, muddy colors, distorted forms, or accidental merges. Score damage visible in the focal subject or scene, including a localized defect that makes an important feature unreadable.",
+        "criteria": [
+          "Readable and coherent",
+          "Minor issue. Important forms remain easy to read",
+          "Major visible defect obscures an important focal form or scene region",
+          "Severe failure. Important forms or much of the composition are unreadable"
+        ]
+      },
+      "tones": {
+        "type": "score",
+        "instructions": "How much does extreme exposure, clipped highlights, crushed shadows, or muddy color erase important detail or separate forms in the edited image? Coherent shading and readable dark armor are valid.",
+        "criteria": [
+          "Readable and coherent",
+          "Minor issue. Important forms remain easy to read",
+          "Major visible defect obscures an important focal form or scene region",
+          "Severe failure. Important forms or much of the composition are unreadable"
+        ]
+      },
+      "geometry": {
+        "type": "score",
+        "instructions": "How much do malformed contours, accidental merges, extra parts, or distortion make the edited image's important forms unreadable? Coherent helmets, clothing and stylized shapes are valid.",
+        "criteria": [
+          "Readable and coherent",
+          "Minor issue. Important forms remain easy to read",
+          "Major visible defect obscures an important focal form or scene region",
+          "Severe failure. Important forms or much of the composition are unreadable"
+        ]
+      }
+    }
+  }
+}

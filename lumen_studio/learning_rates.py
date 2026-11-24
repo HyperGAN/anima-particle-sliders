@@ -1,4 +1,4 @@
-"""Explicit ParticleGAN 0.11.0 learning rates shared by the API and configured sessions."""
+"""Explicit ParticleGAN 0.11.1 learning rates shared by the API and configured sessions."""
 import math
 
 

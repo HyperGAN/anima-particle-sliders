@@ -1,5 +1,6 @@
 """Render a fixed-prompt particle or ordinary-LoRA sample."""
 import argparse
+from hashlib import sha256
 import json
 from pathlib import Path
 import sys
@@ -7,10 +8,11 @@ ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
 from lumen_studio import execution
 from lumen_studio.backends.anima import TurboRuntime
-from lumen_studio.alpha_adapter import AlphaParticleAdapter
+from lumen_studio.alpha_adapter import read_metadata
 from single_particle import adapter_class
 from lumen_studio.contracts import file_hash
 from release_tools.distill import attach_lora
+from release_tools.scheduled_render import LatentGatePlan, render_gated, render_scheduled, step_gains
 
 
 def main():
@@ -20,29 +22,74 @@ def main():
     parser.add_argument('--format',choices=['particles','lora'],default='particles')
     parser.add_argument('--prompt',required=True)
     parser.add_argument('--seed',type=int,default=42)
-    parser.add_argument('--strength',type=float,default=1.)
+    parser.add_argument('--strength',type=float)
+    schedule_args = parser.add_mutually_exclusive_group()
+    schedule_args.add_argument('--step-gains',
+                               help='JSON list of particle strength multipliers in denoising order')
+    schedule_args.add_argument('--gate-plan', type=Path,
+                               help='JSON plan for a calibrated Anima latent activation gate')
     parser.add_argument('--width',type=int,default=768)
     parser.add_argument('--height',type=int,default=768)
     parser.add_argument('--steps',type=int,choices=[8,10,12],default=10)
     parser.add_argument('--output',type=Path,required=True)
     args=parser.parse_args()
-    if not 0<=args.strength<=5: parser.error('Strength must be between 0 and 5')
+    if args.gate_plan is not None and args.strength is None:
+        parser.error('An activation gate requires an explicit --strength')
+    if args.strength is None:
+        args.strength = 1.0
+    if not 0 <= args.strength <= 5:
+        parser.error('Strength must be between 0 and 5')
+    gains = None
+    plan = None
+    scheduled = args.step_gains is not None or args.gate_plan is not None
+    if scheduled:
+        if args.format != 'particles':
+            parser.error('Scheduled strength applies to a routed particle adapter')
+        try:
+            if args.gate_plan is not None:
+                plan_bytes = args.gate_plan.read_bytes()
+                plan_record = json.loads(plan_bytes)
+                plan = LatentGatePlan(**plan_record)
+            else:
+                gains = step_gains(json.loads(args.step_gains), args.steps, args.strength)
+        except (OSError, TypeError, ValueError, RuntimeError, OverflowError) as error:
+            parser.error(str(error))
+        if read_metadata(args.adapter).get("weights") != "live":
+            parser.error("Scheduled rendering requires a RAW particle adapter")
     runtime=TurboRuntime(args.model,'cuda:0')
     handles=[]
     try:
         if args.format=='particles':
             adapter=adapter_class(args.adapter)(runtime.transformer).to(runtime.device)
-            adapter.load_export(args.adapter,model_identity=runtime.identity)
+            metadata = adapter.load_export(args.adapter, model_identity=runtime.identity)
+            if scheduled and metadata.get("weights") != "live":
+                raise ValueError("Scheduled rendering requires a RAW particle adapter")
             adapter.requires_grad_(False).eval()
             runtime.mixer.add('release',adapter)
             runtime.mixer.strengths={'release':args.strength}
         else:
             handles=attach_lora(runtime.transformer,args.adapter,args.strength)
-        image=runtime.render(args.prompt,args.seed,args.width,args.height,args.steps)
+        schedule = {}
+        if plan is not None:
+            image, schedule = render_gated(
+                runtime, args.prompt, args.seed, args.width, args.height, args.steps, plan,
+            )
+        elif gains is None:
+            image=runtime.render(args.prompt,args.seed,args.width,args.height,args.steps)
+        else:
+            image, schedule = render_scheduled(
+                runtime, args.prompt, args.seed, args.width, args.height, args.steps, gains
+            )
         args.output.parent.mkdir(parents=True,exist_ok=True)
         image.save(args.output)
         record={k:str(v) if isinstance(v,Path) else v for k,v in vars(args).items()}
+        del record["step_gains"], record["gate_plan"]
         record.update(adapter_sha256=file_hash(args.adapter),model_identity=runtime.identity,cfg=1.)
+        if gains is not None:
+            record.update(schedule, step_gains=gains)
+        if plan is not None:
+            record.update(schedule, activation_gate_plan=plan_record,
+                          activation_gate_plan_sha256=sha256(plan_bytes).hexdigest())
         args.output.with_suffix('.json').write_text(json.dumps(record,indent=2)+'\n')
     finally:
         for h in handles:h.remove()

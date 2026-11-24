@@ -1,0 +1,48 @@
+{
+  "recipe": "paired-exterior-floor45",
+  "cache_sha256": "8b8e03af7bd54989530e3b889e878738b3dae1b11d139fb771e1d233e0b62f00",
+  "capture_source_commit": "dea9a45db987351147045ddbf94770977ee4116f",
+  "parents": {
+    "soft-floor45": "8e28e58e797016219e5f0a0dbbaacccdc37eafaa25468b83ef954bfb2e90e120",
+    "soft-contexts-65-blend50": "b57fbb9795f4c2976c0df33d9af2e374e70e8095e9f6ce4c74b7169500ef1270"
+  },
+  "field_audit": {
+    "fields": 120,
+    "subject_equal": 120,
+    "max_relative_dose_error": 3.519833757792412e-08,
+    "mean_fraction_changed": 0.06854825633622208,
+    "mean_exterior_fraction_changed": 0.20822442147959067,
+    "mean_exterior_support": 0.690185546875
+  },
+  "native_replay": {
+    "passed": true,
+    "request": {
+      "model_identity": {
+        "model": "circlestone-labs/Anima:turbo-v1.1",
+        "sha256": "eb5520f293d42a19df9242d8d442d5d2068e5121620814418c2b50a97de0552f",
+        "identity_schema": "portable-model-v1",
+        "environment_sha256": "55ac97305e688c56d4a2908243b020e999cf101a05b1cf7e5a3e2c48d4a4d7ba",
+        "runtime_sha256": "0b0dfc97ba76a99ed3f5313695e89e5802ece8e1db4470443a9705692ae579c3"
+      },
+      "cache_fingerprint": "8b8e03af7bd54989530e3b889e878738b3dae1b11d139fb771e1d233e0b62f00",
+      "response_shape": [
+        1,
+        16,
+        1,
+        64,
+        64
+      ]
+    },
+    "field_indices": [
+      3,
+      19,
+      46,
+      117
+    ]
+  },
+  "receipt_digests": {
+    "native-archive-geometry.json": "1a5726a00e1b764d142c161b3f34aea7c7b1179df91c4e2370052a30a14cf74e",
+    "native-parity.json": "08210eb0d1131489a8420b6ac60c4f74d2aca5e76138cc1c10783cf0014cadff",
+    "index.json": "d53a027267d525d0dc20daff0f3ebae19b5e93bbaafd99f9f451dc72fd754dc6"
+  }
+}

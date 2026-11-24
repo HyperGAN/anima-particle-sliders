@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 import sys
 
-CORE_COMMIT = 'c13890f8e2a1ecf1dc8eb9f2a37f9187cb9fea78'
+CORE_COMMIT = 'b1f780decc516808cfd3019d5e5b674457161f86'
 PRODUCT_VERSION = '0.4.0a1'
 
 
@@ -65,7 +65,7 @@ def verify_cohort():
         raise ValueError('Anima HNDL cohort manifest contradicts the binding')
     core = distribution('particle-sliders-core')
     if core.version != manifest['core']['version']:
-        raise ValueError('Anima HNDL requires the exact core 0.15.1 candidate')
+        raise ValueError('Anima HNDL requires the exact core 0.15.2 candidate')
     provenance = json.loads(core.read_text('direct_url.json') or '{}')
     vcs = provenance.get('vcs_info', {})
     archive = provenance.get('archive_info', {}).get('hashes', {})

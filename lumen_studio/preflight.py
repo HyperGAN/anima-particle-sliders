@@ -1,4 +1,4 @@
-"""Archived gmix resume proof; prior proofs do not qualify PG09 training."""
+"""Archived gmix resume proof; prior proofs do not qualify ParticleGAN training."""
 from .training_policy import legacy_training_unavailable
 
 

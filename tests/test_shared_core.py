@@ -20,7 +20,7 @@ PIN = (
 def test_winning_formulation_is_gmix_and_pinned():
     stamp = winning_formulation()
     assert stamp.architecture_id == "gmix"
-    assert stamp.formulation_id == "particle-gmix-1600-v2"
+    assert stamp.formulation_id == "particle-gmix-1600-v2-raw"
     assert stamp.spec["noise_hold_ratio"] == 1.3
     assert PIN in (ROOT / "requirements-legacy.txt").read_text()
     assert "concept-slider-core" not in (ROOT / "requirements-legacy.txt").read_text()

@@ -1,0 +1,310 @@
+{
+  "scope": "Eight archived teacher confirmation cases. Frozen Anima. No fitted adapter or optimizer updates.",
+  "score_scale": "0–1",
+  "score": "Mean of max(0, Boss ON minus OFF) times (1 minus visible image damage) squared.",
+  "bound_rule": "For a missing damage judgment, assume the entire 0–1 damage range and keep the corresponding score bounds.",
+  "teacher_panel_sha256": "6a9bc64fbda495066b8a6a3401b11ee2ec0653255061eaa3e01562f1ac550e53",
+  "early_teacher_gains": [
+    1.55,
+    1.55,
+    1.45,
+    1.35,
+    1.15,
+    0.95,
+    0.75,
+    0.55,
+    0.4,
+    0.3
+  ],
+  "methods": {
+    "early": {
+      "status": "unmeasured",
+      "cases": [
+        {
+          "case": "lantern-maker",
+          "seed": 2912107,
+          "off_sha256": "1d4ba0a856debf78a3bfe6d3a3fd5d1270d74000e8878d88ec8224ec42a871fa",
+          "on_sha256": "89b2015918014f6bde8f508c7f27a44e2663ba8f9122dabd5750d76b0e90d831",
+          "boss_off": 0.1,
+          "boss_on": 0.76,
+          "boss_gain": 0.66,
+          "image_damage": 0.2333333333333333,
+          "adjusted_score": 0.387933333333
+        },
+        {
+          "case": "folded-cloth-vendor",
+          "seed": 2912149,
+          "off_sha256": "9fa5998c65e544bfb404adcb2b43ef0162eb8280c5028c270900d1637b0ea3c5",
+          "on_sha256": "828033cc5abcaebc57cc5aa3b9fbba771dacc565ebcf73a94a0eee8dc8b1acfa",
+          "boss_off": 0.06,
+          "boss_on": 0.69,
+          "boss_gain": 0.6299999999999999,
+          "image_damage": 0.3933333333333333,
+          "adjusted_score": 0.231868
+        },
+        {
+          "case": "green-tea-host",
+          "seed": 2912177,
+          "off_sha256": "71949712b3d7469e912bd50edd9c9ee2a27f7200ff9af9c272d56817f8ecdb44",
+          "on_sha256": "c8d54f943ad5d9bf99bf89679b5eff2f8607a3c65f4f85efb77fc5cd3337bbac",
+          "boss_off": 0.05,
+          "boss_on": 0.74,
+          "boss_gain": 0.69,
+          "image_damage": 0.27666666666666667,
+          "adjusted_score": 0.361015666667
+        },
+        {
+          "case": "pier-caretaker",
+          "seed": 2912201,
+          "off_sha256": "1a2a2b24d2113013a2d6d2d81e0bbbd6bb15324b63eb42b9647b37205ccc728e",
+          "on_sha256": "8ca39152cea14d1760d5e60c523a57342369875ab0fd48f985940e6a94b71071",
+          "boss_off": 0.09,
+          "boss_on": 0.78,
+          "boss_gain": 0.6900000000000001,
+          "image_damage": 0.35000000000000003,
+          "adjusted_score": 0.291525
+        },
+        {
+          "case": "ink-grinder",
+          "seed": 2912239,
+          "off_sha256": "02e3f22f8a0487723827d390e9c0417ffaef189c7b380df475d91292ebdf76a6",
+          "on_sha256": "bf9ea2593bd4ab7dc19f889936ff54713e64a9f99b29881e1aae60835a5967e5",
+          "boss_off": 0.06,
+          "boss_on": 0.57,
+          "boss_gain": 0.51,
+          "image_damage": 0.26333333333333336,
+          "adjusted_score": 0.276765666667
+        },
+        {
+          "case": "tram-dispatcher",
+          "seed": 2912261,
+          "off_sha256": "bd76be8d8fa45fe21be6f5cd1d277301ffcfeaa35ee43e9d36bf425d64fe03b6",
+          "on_sha256": "19cd0ca43b429d85f30528128661d066bf4dfb0c32562a0e5cc7eea280cdceb1",
+          "boss_off": 0.09,
+          "boss_on": 0.32,
+          "boss_gain": 0.23,
+          "image_damage": null,
+          "adjusted_score": null
+        },
+        {
+          "case": "shell-restorer",
+          "seed": 2912287,
+          "off_sha256": "02fcc04ebd2e5944304539d50671c57a13f2668731a9f0f4c4e845cef2342fbe",
+          "on_sha256": "3d0141be8f0631c25ca3823a5d15eeff606d62f472f8f2aec43252a66382aa48",
+          "boss_off": 0.09,
+          "boss_on": 0.82,
+          "boss_gain": 0.73,
+          "image_damage": 0.27999999999999997,
+          "adjusted_score": 0.378432
+        },
+        {
+          "case": "alpine-courier",
+          "seed": 2912329,
+          "off_sha256": "fc5774cc341efd0b0d345ae4bd8c54ef9dfd6785a3d5e3ceb93b870d1a8f305d",
+          "on_sha256": "bed5723cedefc63d2ceaf6e4fe4556da825a66c6e00ca76952436e42d1f0d600",
+          "boss_off": 0.08,
+          "boss_on": 0.81,
+          "boss_gain": 0.7300000000000001,
+          "image_damage": 0.22999999999999998,
+          "adjusted_score": 0.432817
+        }
+      ],
+      "means": null,
+      "score_bounds": [
+        0.295044583333375,
+        0.323794583333375
+      ],
+      "missing_damage_judgments": 1
+    },
+    "replace": {
+      "status": "measured",
+      "cases": [
+        {
+          "case": "lantern-maker",
+          "seed": 2912107,
+          "off_sha256": "1d4ba0a856debf78a3bfe6d3a3fd5d1270d74000e8878d88ec8224ec42a871fa",
+          "on_sha256": "f438c1d3aefc61633a7b1948e9ff56826dc0dabf283016e7d6d9f5458bb7edee",
+          "boss_off": 0.1,
+          "boss_on": 0.73,
+          "boss_gain": 0.63,
+          "image_damage": 0.27666666666666667,
+          "adjusted_score": 0.329623
+        },
+        {
+          "case": "folded-cloth-vendor",
+          "seed": 2912149,
+          "off_sha256": "9fa5998c65e544bfb404adcb2b43ef0162eb8280c5028c270900d1637b0ea3c5",
+          "on_sha256": "5ed8fd6c582cabdb6322563ce98bce79f4c03144bb436c6098179ce9b0eb4a29",
+          "boss_off": 0.06,
+          "boss_on": 0.63,
+          "boss_gain": 0.5700000000000001,
+          "image_damage": 0.24,
+          "adjusted_score": 0.329232
+        },
+        {
+          "case": "green-tea-host",
+          "seed": 2912177,
+          "off_sha256": "71949712b3d7469e912bd50edd9c9ee2a27f7200ff9af9c272d56817f8ecdb44",
+          "on_sha256": "2efc6a60f69a2855762f77826ff80e84852d76c32a990ce22a1f4922ee411f3b",
+          "boss_off": 0.05,
+          "boss_on": 0.75,
+          "boss_gain": 0.7,
+          "image_damage": 0.27,
+          "adjusted_score": 0.37303
+        },
+        {
+          "case": "pier-caretaker",
+          "seed": 2912201,
+          "off_sha256": "1a2a2b24d2113013a2d6d2d81e0bbbd6bb15324b63eb42b9647b37205ccc728e",
+          "on_sha256": "e280de0887d5f72e08f578c381dc97de5bb7898a726f5b9dfe45d1b9b589a53d",
+          "boss_off": 0.09,
+          "boss_on": 0.7,
+          "boss_gain": 0.61,
+          "image_damage": 0.43,
+          "adjusted_score": 0.198189
+        },
+        {
+          "case": "ink-grinder",
+          "seed": 2912239,
+          "off_sha256": "02e3f22f8a0487723827d390e9c0417ffaef189c7b380df475d91292ebdf76a6",
+          "on_sha256": "25626d1452029d3a27bb8f7336c904a3fd0ecbea7456d442154e5aa9b65d464f",
+          "boss_off": 0.06,
+          "boss_on": 0.31,
+          "boss_gain": 0.25,
+          "image_damage": 0.37333333333333335,
+          "adjusted_score": 0.098177777778
+        },
+        {
+          "case": "tram-dispatcher",
+          "seed": 2912261,
+          "off_sha256": "bd76be8d8fa45fe21be6f5cd1d277301ffcfeaa35ee43e9d36bf425d64fe03b6",
+          "on_sha256": "263331cc52039f91f4a6475fd2f8bfecf2a4132739c5b799c39775977748a6d2",
+          "boss_off": 0.09,
+          "boss_on": 0.36,
+          "boss_gain": 0.27,
+          "image_damage": 0.5066666666666667,
+          "adjusted_score": 0.065712
+        },
+        {
+          "case": "shell-restorer",
+          "seed": 2912287,
+          "off_sha256": "02fcc04ebd2e5944304539d50671c57a13f2668731a9f0f4c4e845cef2342fbe",
+          "on_sha256": "f54eee59b4d6cdbc37547cb94d7136d0e70a252403bd2dc6947b34ebbfa35e73",
+          "boss_off": 0.09,
+          "boss_on": 0.81,
+          "boss_gain": 0.7200000000000001,
+          "image_damage": 0.34,
+          "adjusted_score": 0.313632
+        },
+        {
+          "case": "alpine-courier",
+          "seed": 2912329,
+          "off_sha256": "fc5774cc341efd0b0d345ae4bd8c54ef9dfd6785a3d5e3ceb93b870d1a8f305d",
+          "on_sha256": "43d511e3714b9574ca460aa2950a8cdd4ce5686b38ce5758ac2ce1b96b6988fd",
+          "boss_off": 0.08,
+          "boss_on": 0.79,
+          "boss_gain": 0.7100000000000001,
+          "image_damage": 0.22333333333333336,
+          "adjusted_score": 0.428279888889
+        }
+      ],
+      "means": {
+        "boss_gain": 0.5575,
+        "image_damage": 0.3325,
+        "adjusted_score": 0.26698445833337503
+      },
+      "score_bounds": [
+        0.26698445833337503,
+        0.26698445833337503
+      ],
+      "missing_damage_judgments": 0
+    }
+  },
+  "planned_training_inputs": {
+    "method": "vibe-qualified4",
+    "cache": "6ad211e40b6baafa1bd3a3135bf58236634b4364312c07e55bedf51402605448",
+    "records": 120,
+    "exact_archive_records": 80,
+    "exact_anchor_records": 40,
+    "anchors": [
+      "bridge",
+      "cafe"
+    ],
+    "qualified_archive_replays": 8,
+    "norm_ratios": {
+      "neutral-0": 1.5279403574893338,
+      "neutral-1": 1.63198327590581,
+      "neutral-2": 1.840154271179543,
+      "neutral-3": 1.7277831266838324,
+      "neutral-4": 1.2356335835730927,
+      "neutral-5": 0.9926275176766634,
+      "neutral-6": 0.8430511208578197,
+      "neutral-7": 0.638935289600649,
+      "neutral-8": 0.35850087574733536,
+      "neutral-9": 0.2293194697671408,
+      "positive-0": 1.5279403574893338,
+      "positive-1": 1.7307974365702548,
+      "positive-2": 1.6195483167612215,
+      "positive-3": 1.1916017688373066,
+      "positive-4": 0.8700594368508475,
+      "positive-5": 0.7094211183941156,
+      "positive-6": 0.569931106814429,
+      "positive-7": 0.4516618246720254,
+      "positive-8": 0.3240804109185496,
+      "positive-9": 0.23760012307218648
+    },
+    "source_index_sha256": [
+      "3eeab399fca2673bc7ef9cd92b5ed6d4496378042349a15c87cc877279608c6b",
+      "0988e1e797466e90ef4a1f9b0924ea39a98a1e808b5d24c12b30d038334c436f"
+    ]
+  },
+  "admitted_training_cache": {
+    "cache_sha256": "0b8d58760c86918913d2abb44ef9333f20b5e98e2f1d532f4c1f4866dcf9cd0b",
+    "manifest_sha256": "4396814c9a5e5315fa00770f7f500a55994e533343e05a223aa6f2e6699aa418",
+    "exact_fields": 120,
+    "native_checks": [
+      {
+        "index": 3,
+        "row": "bridge",
+        "embedding": true,
+        "neutral": true,
+        "positive": true
+      },
+      {
+        "index": 33,
+        "row": "cafe",
+        "embedding": true,
+        "neutral": true,
+        "positive": true
+      },
+      {
+        "index": 40,
+        "row": "orchid-tender-early",
+        "embedding": true,
+        "neutral": true,
+        "positive": true
+      },
+      {
+        "index": 63,
+        "row": "clock-porter-replace",
+        "embedding": true,
+        "neutral": true,
+        "positive": true
+      },
+      {
+        "index": 89,
+        "row": "glass-seller-early",
+        "embedding": true,
+        "neutral": true,
+        "positive": true
+      },
+      {
+        "index": 117,
+        "row": "honey-keeper-explicit-early",
+        "embedding": true,
+        "neutral": true,
+        "positive": true
+      }
+    ]
+  }
+}

@@ -1,0 +1,138 @@
+{
+  "adapter": "Anima Final Boss RAW192",
+  "adapter_sha256": "ad958cd81f003be55c69fc9abf380d5937a0926c4245d180e70a1885cb26e8f7",
+  "adapter_bytes": 33739000,
+  "checkpoint_training_release": "ParticleGAN 0.10.0",
+  "weights": "raw",
+  "ema_decay": null,
+  "sampler": {
+    "name": "FlowMatchEulerDiscreteScheduler",
+    "native_steps": 10,
+    "geometry": [
+      512,
+      512
+    ],
+    "sigmas": [
+      1.0,
+      0.964285671710968,
+      0.9230769872665405,
+      0.8749999403953552,
+      0.8181818127632141,
+      0.75,
+      0.6666666865348816,
+      0.5625,
+      0.4285714626312256,
+      0.25,
+      0.0
+    ]
+  },
+  "qualified_profile": {
+    "name": "early",
+    "nominal_strength": 0.6666666666666666,
+    "effective_strength_per_interval": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      0.6444445235641115,
+      0.3333333333333333,
+      0.3333333333333333
+    ],
+    "relative_gain_per_interval": [
+      1.5,
+      1.5,
+      1.5,
+      1.5,
+      1.5,
+      1.5,
+      1.5,
+      0.9666667853461673,
+      0.5,
+      0.5
+    ]
+  },
+  "metric": "equal-case finished-output Final Boss intensity ON minus matched OFF",
+  "held_out_mean_effect_ON_minus_OFF": {
+    "constant_dose": 0.18833333333333332,
+    "constant1": 0.3408333333333333,
+    "early": 0.3433333333333334
+  },
+  "held_out_cases": [
+    {
+      "seed": 550001,
+      "effect_ON_minus_OFF": {
+        "constant_dose": 0.17333333333333326,
+        "constant1": 0.36,
+        "early": 0.3766666666666666
+      },
+      "PNG_SHA256": {
+        "off": "29c858fada2a2ac3e6d51892ec54049afb44d9eb15a6fea009e03b3a9d9a23fa",
+        "constant_dose": "443ae0c4984c55c3ef79f7c36a0ef92f34943e5b3c0c3dadedc3ef8b94b762f0",
+        "constant1": "c176623fa0498ee1fd0f69c91fafabf12c3298425ee17d49c1ea853493b9925a",
+        "early": "3c76bd763aee87ee631d1f52d487df26caf3438cc1d1e70fb6c2bf646143af89"
+      },
+      "independent_early_PNG_SHA256": "3c76bd763aee87ee631d1f52d487df26caf3438cc1d1e70fb6c2bf646143af89"
+    },
+    {
+      "seed": 550002,
+      "effect_ON_minus_OFF": {
+        "constant_dose": 0.1266666666666667,
+        "constant1": 0.38,
+        "early": 0.3833333333333333
+      },
+      "PNG_SHA256": {
+        "off": "23fce3c8f433b72803bfeeca4c466e5deb83c9aeb1a60483286e002ea51aa4d6",
+        "constant_dose": "c72a4dd618914ea8757e743b2d0b9f16415f7126157a8360797bab1e66785a9f",
+        "constant1": "30c5caff20201f036ac573887e7ec51e5e229dffe6fe674c4c8c07b38837a737",
+        "early": "215150e417dee1f431fec4b5b92f0a1097f69babe4c0a887dd0eef4658ba0be1"
+      },
+      "independent_early_PNG_SHA256": "215150e417dee1f431fec4b5b92f0a1097f69babe4c0a887dd0eef4658ba0be1"
+    },
+    {
+      "seed": 550003,
+      "effect_ON_minus_OFF": {
+        "constant_dose": 0.07666666666666666,
+        "constant1": 0.20000000000000007,
+        "early": 0.18333333333333346
+      },
+      "PNG_SHA256": {
+        "off": "9983006e1290dea00bfd7eeb0a01dab7a76312d1e1e02b6730a16007e57976a5",
+        "constant_dose": "ccd8dc0f994a735d6b88a502b1c33e7deccd696307458684ce1420baa83d08ac",
+        "constant1": "72506cd1feb61c80276fd643816f61caf7f37298ff1e6e2bee068fae031cd029",
+        "early": "787cbf5caf56e22dbb6c7745776c458e583cbb57933b4b78c41a775b45b01513"
+      },
+      "independent_early_PNG_SHA256": "787cbf5caf56e22dbb6c7745776c458e583cbb57933b4b78c41a775b45b01513"
+    },
+    {
+      "seed": 550004,
+      "effect_ON_minus_OFF": {
+        "constant_dose": 0.3766666666666667,
+        "constant1": 0.42333333333333334,
+        "early": 0.43000000000000005
+      },
+      "PNG_SHA256": {
+        "off": "6dcdc6375c80156b7c1ded9b6185a9717fbae16a95683feade77fe5e4209911c",
+        "constant_dose": "0302760a158db88fbc131456647977527b9dc35f584dfefbcd0648bf4c6a7a46",
+        "constant1": "4c151ecc71b4a7904de3c63a5ff155ea7b23a1af6a9a194804d3e6eb163409d7",
+        "early": "76efa06d9baf460c01fe8589a72a4ba5251c47b38370ac0e0773b893e86c15ad"
+      },
+      "independent_early_PNG_SHA256": "76efa06d9baf460c01fe8589a72a4ba5251c47b38370ac0e0773b893e86c15ad"
+    }
+  ],
+  "integrity": {
+    "passed": 16,
+    "total": 16
+  },
+  "independent_exact_early_PNGs": 4,
+  "source_manifest_sha256": "bf2a4280394cc7d6545f5ec4c869b31d3345692242b76ec1bb973b909f95a190",
+  "evidence_sha256": {
+    "measured_timing_groups": "d6b8c405cbc718cc789fdef6d08d519bddf61be505dc8d493e7032aeaed7f27e",
+    "heldout_score": "d34357fa439a8c1c9d7d2ea8fe427a8f0b3f5ba8081c63f7d5e849ba000e2fc5",
+    "saved_heldout_integrity": "8a1f6c828c640ede987f22f4c67f4b7489c996c4c290c5a2de874b2c73c2fd67",
+    "independent_replay": "e74f4e46feb5baec257c8c2d5c28d03975b8b68ae499441b7142efaaf3207601",
+    "guardian": "cb97433b0f722cf23024cdd4f0150f5fe7ae26348e71a54b48611824e8465129"
+  }
+}

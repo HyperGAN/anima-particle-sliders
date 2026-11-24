@@ -1,0 +1,186 @@
+{
+  "segmentation_model_sha256": "8d10d2f3bb75ae3b6d527c77944fc5e7dcd94b29809d47a739a7a728a912b491",
+  "segmentation_source_sha256": "c517987a7cccf25289ff929b4af4be9ac8a7145ad9f40458cdc742ac78c83982",
+  "rows": {
+    "bridge": {
+      "neutral_image": {
+        "sha256": "5b1478ed0d84b798648f48d54de0a1c029081a4f8f5c0ac4e0f3683dea1652c6",
+        "model": {
+          "model": "circlestone-labs/Anima:turbo-v1.1",
+          "sha256": "eb5520f293d42a19df9242d8d442d5d2068e5121620814418c2b50a97de0552f",
+          "identity_schema": "portable-model-v1",
+          "environment_sha256": "55ac97305e688c56d4a2908243b020e999cf101a05b1cf7e5a3e2c48d4a4d7ba",
+          "runtime_sha256": "0b0dfc97ba76a99ed3f5313695e89e5802ece8e1db4470443a9705692ae579c3"
+        }
+      },
+      "positive_image": {
+        "sha256": "b019dd959bfd03089e081dc12efce6c07e3d5ff9bb3370bb91f26bd8378c1156",
+        "model": {
+          "model": "circlestone-labs/Anima:turbo-v1.1",
+          "sha256": "eb5520f293d42a19df9242d8d442d5d2068e5121620814418c2b50a97de0552f",
+          "identity_schema": "portable-model-v1",
+          "environment_sha256": "55ac97305e688c56d4a2908243b020e999cf101a05b1cf7e5a3e2c48d4a4d7ba",
+          "runtime_sha256": "0b0dfc97ba76a99ed3f5313695e89e5802ece8e1db4470443a9705692ae579c3"
+        }
+      },
+      "original_matte_sha256": "91a3cdcc5acef18c8645c4e76c616474a7b209aeabc73ac6498c608e1a5554fe",
+      "positive_matte_sha256": "d152f61629c1e56448dd84cd76f3a542debe65d3ebf5edba1bad6c450dd77f11",
+      "original_coverage": 0.2863577599618949,
+      "positive_coverage": 0.6629275901644838,
+      "union_coverage": 0.6629275901644838,
+      "new_soft_mass": 0.37656983020258883,
+      "changed_core_fraction": 0.6613003456713403,
+      "core_iou": 0.33830109139812753
+    },
+    "cafe": {
+      "neutral_image": {
+        "sha256": "36438f67277f9e38b8d7265a4a236b7e368d6bb6604443d8b30fe657dbe192d6",
+        "model": {
+          "model": "circlestone-labs/Anima:turbo-v1.1",
+          "sha256": "eb5520f293d42a19df9242d8d442d5d2068e5121620814418c2b50a97de0552f",
+          "identity_schema": "portable-model-v1",
+          "environment_sha256": "55ac97305e688c56d4a2908243b020e999cf101a05b1cf7e5a3e2c48d4a4d7ba",
+          "runtime_sha256": "0b0dfc97ba76a99ed3f5313695e89e5802ece8e1db4470443a9705692ae579c3"
+        }
+      },
+      "positive_image": {
+        "sha256": "54bbae83b90cb7c3e4c4a64a96f26195ec8ac2f5904d6de1859d723f3e1249a7",
+        "model": {
+          "model": "circlestone-labs/Anima:turbo-v1.1",
+          "sha256": "eb5520f293d42a19df9242d8d442d5d2068e5121620814418c2b50a97de0552f",
+          "identity_schema": "portable-model-v1",
+          "environment_sha256": "55ac97305e688c56d4a2908243b020e999cf101a05b1cf7e5a3e2c48d4a4d7ba",
+          "runtime_sha256": "0b0dfc97ba76a99ed3f5313695e89e5802ece8e1db4470443a9705692ae579c3"
+        }
+      },
+      "original_matte_sha256": "77c888f5a60b659ea68e7e45768e19a55d1273b6bf4aefaf8e0ff23ba3e6f8c0",
+      "positive_matte_sha256": "807c6dc01bef11b52bbdce2865676773252d601121d50b263db1f9acbb74d903",
+      "original_coverage": 0.21317440855736827,
+      "positive_coverage": 0.40176373650045955,
+      "union_coverage": 0.40213549744849114,
+      "new_soft_mass": 0.18896108889112287,
+      "changed_core_fraction": 0.49310055754414445,
+      "core_iou": 0.48781549730442686
+    },
+    "greenhouse": {
+      "neutral_image": {
+        "sha256": "4dfb64292cfc9fa379b721e3f9823af25cff8d378ad83b794b14a7f38d5d8a1f",
+        "model": {
+          "model": "circlestone-labs/Anima:turbo-v1.1",
+          "sha256": "eb5520f293d42a19df9242d8d442d5d2068e5121620814418c2b50a97de0552f",
+          "identity_schema": "portable-model-v1",
+          "environment_sha256": "55ac97305e688c56d4a2908243b020e999cf101a05b1cf7e5a3e2c48d4a4d7ba",
+          "runtime_sha256": "0b0dfc97ba76a99ed3f5313695e89e5802ece8e1db4470443a9705692ae579c3"
+        }
+      },
+      "positive_image": {
+        "sha256": "fba8bf0acbfcc04d4fc6bffe8fe2c149894cf909c9e3052bb5e09a00f6904d16",
+        "model": {
+          "model": "circlestone-labs/Anima:turbo-v1.1",
+          "sha256": "eb5520f293d42a19df9242d8d442d5d2068e5121620814418c2b50a97de0552f",
+          "identity_schema": "portable-model-v1",
+          "environment_sha256": "55ac97305e688c56d4a2908243b020e999cf101a05b1cf7e5a3e2c48d4a4d7ba",
+          "runtime_sha256": "0b0dfc97ba76a99ed3f5313695e89e5802ece8e1db4470443a9705692ae579c3"
+        }
+      },
+      "original_matte_sha256": "ce4065e1f866b4d76c965bca2b310cddc1b0754eefe46fca928f5418c827b828",
+      "positive_matte_sha256": "099d5fa0ed60cd3a82510c2f32752d01b399a10912ec37342a238b2ad5f24ddd",
+      "original_coverage": 0.19311735863779106,
+      "positive_coverage": 0.4794630013260187,
+      "union_coverage": 0.4794630013260187,
+      "new_soft_mass": 0.28634564268822765,
+      "changed_core_fraction": 0.702663035953293,
+      "core_iou": 0.29733696404670695
+    },
+    "harbor": {
+      "neutral_image": {
+        "sha256": "6a0c226ca8c7d5d7b74794bae0caa04c16914f88ffae49acdbe391dc7a2bf80c",
+        "model": {
+          "model": "circlestone-labs/Anima:turbo-v1.1",
+          "sha256": "eb5520f293d42a19df9242d8d442d5d2068e5121620814418c2b50a97de0552f",
+          "identity_schema": "portable-model-v1",
+          "environment_sha256": "55ac97305e688c56d4a2908243b020e999cf101a05b1cf7e5a3e2c48d4a4d7ba",
+          "runtime_sha256": "0b0dfc97ba76a99ed3f5313695e89e5802ece8e1db4470443a9705692ae579c3"
+        }
+      },
+      "positive_image": {
+        "sha256": "a74a1a18a548204663a02bd4d3a433383790299fa51cc2a9bf979476a246e400",
+        "model": {
+          "model": "circlestone-labs/Anima:turbo-v1.1",
+          "sha256": "eb5520f293d42a19df9242d8d442d5d2068e5121620814418c2b50a97de0552f",
+          "identity_schema": "portable-model-v1",
+          "environment_sha256": "55ac97305e688c56d4a2908243b020e999cf101a05b1cf7e5a3e2c48d4a4d7ba",
+          "runtime_sha256": "0b0dfc97ba76a99ed3f5313695e89e5802ece8e1db4470443a9705692ae579c3"
+        }
+      },
+      "original_matte_sha256": "3f972ea70db59ac506e993dcc7f77762d4e75fed2c5a3bbf16d1d0c6aa268e77",
+      "positive_matte_sha256": "cc70a424db4fe3e249842f4f2718ebf979f3a4556389a9d205016933680a615d",
+      "original_coverage": 0.29534258374980854,
+      "positive_coverage": 0.6807539098403033,
+      "union_coverage": 0.6807667900534237,
+      "new_soft_mass": 0.3854242063036152,
+      "changed_core_fraction": 0.6009888298846365,
+      "core_iou": 0.39846527914174834
+    },
+    "library": {
+      "neutral_image": {
+        "sha256": "d055cac2747d44ea34387cdc5f1015a221c6677972d6e9ef2bfc6a6438bbd625",
+        "model": {
+          "model": "circlestone-labs/Anima:turbo-v1.1",
+          "sha256": "eb5520f293d42a19df9242d8d442d5d2068e5121620814418c2b50a97de0552f",
+          "identity_schema": "portable-model-v1",
+          "environment_sha256": "55ac97305e688c56d4a2908243b020e999cf101a05b1cf7e5a3e2c48d4a4d7ba",
+          "runtime_sha256": "0b0dfc97ba76a99ed3f5313695e89e5802ece8e1db4470443a9705692ae579c3"
+        }
+      },
+      "positive_image": {
+        "sha256": "7bdf4e48aef213dee1a4b68309b0c80c1e8a46f9af3a9a68e440d07699fa5c11",
+        "model": {
+          "model": "circlestone-labs/Anima:turbo-v1.1",
+          "sha256": "eb5520f293d42a19df9242d8d442d5d2068e5121620814418c2b50a97de0552f",
+          "identity_schema": "portable-model-v1",
+          "environment_sha256": "55ac97305e688c56d4a2908243b020e999cf101a05b1cf7e5a3e2c48d4a4d7ba",
+          "runtime_sha256": "0b0dfc97ba76a99ed3f5313695e89e5802ece8e1db4470443a9705692ae579c3"
+        }
+      },
+      "original_matte_sha256": "9d815c453c8f2e91519884f2991448d45e1f9a75f8de22b6af692cddc965479e",
+      "positive_matte_sha256": "a4cb3e8d8ac3587c6556de545359d3b66f9724f26a98875c81a6e69080cae24b",
+      "original_coverage": 0.2744871999703202,
+      "positive_coverage": 0.36612810621074604,
+      "union_coverage": 0.37226946961645985,
+      "new_soft_mass": 0.0977822696461397,
+      "changed_core_fraction": 0.3061082253928595,
+      "core_iou": 0.6733748500548735
+    },
+    "mall": {
+      "neutral_image": {
+        "sha256": "709f668b96b36f04bb92243f9a06c3bdfa0e41897beb0c9c5b043c39f174c375",
+        "model": {
+          "model": "circlestone-labs/Anima:turbo-v1.1",
+          "sha256": "eb5520f293d42a19df9242d8d442d5d2068e5121620814418c2b50a97de0552f",
+          "identity_schema": "portable-model-v1",
+          "environment_sha256": "55ac97305e688c56d4a2908243b020e999cf101a05b1cf7e5a3e2c48d4a4d7ba",
+          "runtime_sha256": "0b0dfc97ba76a99ed3f5313695e89e5802ece8e1db4470443a9705692ae579c3"
+        }
+      },
+      "positive_image": {
+        "sha256": "7974b9a85b21fbd56e8c86b3cb7db9ca70e356ee429dcf3f8e0365fd67ccce9e",
+        "model": {
+          "model": "circlestone-labs/Anima:turbo-v1.1",
+          "sha256": "eb5520f293d42a19df9242d8d442d5d2068e5121620814418c2b50a97de0552f",
+          "identity_schema": "portable-model-v1",
+          "environment_sha256": "55ac97305e688c56d4a2908243b020e999cf101a05b1cf7e5a3e2c48d4a4d7ba",
+          "runtime_sha256": "0b0dfc97ba76a99ed3f5313695e89e5802ece8e1db4470443a9705692ae579c3"
+        }
+      },
+      "original_matte_sha256": "0c842feef6349790639fa81d7ef1bdd204078b00cc3b218017c92bb871e4542a",
+      "positive_matte_sha256": "fbd57fd0e0e3ed24cd9306ebd86df35521aea9756b26958492668a8904921969",
+      "original_coverage": 0.2630418665268842,
+      "positive_coverage": 0.49341560812557445,
+      "union_coverage": 0.5015175763298484,
+      "new_soft_mass": 0.23847570980296415,
+      "changed_core_fraction": 0.563972440361535,
+      "core_iou": 0.4248308219796084
+    }
+  }
+}

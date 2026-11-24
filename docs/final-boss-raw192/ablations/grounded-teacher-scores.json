@@ -1,0 +1,316 @@
+{
+  "scope": "Eight matched teacher-only renders per recipe. Frozen Anima with zero optimizer updates.",
+  "score_scale": "0\u20131",
+  "source_report_sha256": "6f1911240a400cb5ac62b0edca62cc1848a5029074e49f6db0c8a30e0fae51e4",
+  "methods": {
+    "constant-mask": {
+      "cases": [
+        {
+          "case": "paper-lantern-repairer",
+          "seed": 8812071,
+          "off_sha256": "d980af25752fec1ade6388fe3b6505f66564a1b548c73b82e780b081266437a3",
+          "on_sha256": "e20bb8e261c9e4a42cfc8c2bd92ef5692cb955543fda17149af0462097e96f7c",
+          "boss_off": 0.06,
+          "boss_on": 0.89,
+          "boss_gain": 0.83,
+          "image_damage": 0.5933333333333334,
+          "adjusted_score": 0.137263555556
+        },
+        {
+          "case": "river-mapkeeper",
+          "seed": 8812099,
+          "off_sha256": "737038a107b3a485eaa8aa4b79ecf299068f83a746dedd5944aa03db4bad0f1c",
+          "on_sha256": "a4ade3d64eb26b539dcf1d1b3eac9f659e8041a66712e264c99ebde249095833",
+          "boss_off": 0.11,
+          "boss_on": 0.88,
+          "boss_gain": 0.77,
+          "image_damage": 0.2966666666666667,
+          "adjusted_score": 0.380901888889
+        },
+        {
+          "case": "snow-glassworker",
+          "seed": 8812137,
+          "off_sha256": "57f925abf76dd54f4b955774cb4921720e9ea3e8c856ea42557eb8526a241635",
+          "on_sha256": "29a9d65170b034ed49e649924f02d0c2472ada174229732a792ebd7796c5be37",
+          "boss_off": 0.08,
+          "boss_on": 0.89,
+          "boss_gain": 0.81,
+          "image_damage": 0.33,
+          "adjusted_score": 0.363609
+        },
+        {
+          "case": "seed-librarian",
+          "seed": 8812173,
+          "off_sha256": "57fb0d949e2a581f862c2a12a174cad873aad490bcd196558c76835e05e90f2e",
+          "on_sha256": "5b8d1a95ffb606d98296dbf264afa9cc0b8e1ea74d997b1ba7ddd9310e2c5825",
+          "boss_off": 0.09,
+          "boss_on": 0.91,
+          "boss_gain": 0.82,
+          "image_damage": 0.42,
+          "adjusted_score": 0.275848
+        },
+        {
+          "case": "station-dyer",
+          "seed": 8812189,
+          "off_sha256": "0bac99ee5cedd106e45ee4044a5da7841fd8acc28faba11a037e3da3fd70ad57",
+          "on_sha256": "06d4f7ac68048871f87bb6b4645af84b8fc5d6fd7111246f7ee0b2a4082fae55",
+          "boss_off": 0.05,
+          "boss_on": 0.92,
+          "boss_gain": 0.87,
+          "image_damage": 0.7166666666666667,
+          "adjusted_score": 0.069841666667
+        },
+        {
+          "case": "coastal-ceramicist",
+          "seed": 8812211,
+          "off_sha256": "204c04a662c03b240e66ffefa9538fb79ad0d5fa1372f1cfb0d10b9b839f796f",
+          "on_sha256": "e0d114e8da96f5135924ecc925555aee363de7d9c0d9bedfe55e746a480645c2",
+          "boss_off": 0.06,
+          "boss_on": 0.89,
+          "boss_gain": 0.83,
+          "image_damage": 0.5766666666666667,
+          "adjusted_score": 0.148745222222
+        },
+        {
+          "case": "station-instrument-tuner",
+          "seed": 8812249,
+          "off_sha256": "a0f64afc4eca6740e54279d570c182da1a5f1002dcdd659b80bd959fe08d07ea",
+          "on_sha256": "2efa2423a89c4e6f14d4cd0b1d8d438af3a70fee19a8daa8c9b38a78155d3243",
+          "boss_off": 0.06,
+          "boss_on": 0.91,
+          "boss_gain": 0.85,
+          "image_damage": 0.37333333333333335,
+          "adjusted_score": 0.333804444444
+        },
+        {
+          "case": "plaza-marble-polisher",
+          "seed": 8812283,
+          "off_sha256": "a7d476a76c13341c6d07a76650785770d9350f70db08a37d615f4b9d06954910",
+          "on_sha256": "cd2a7b45f70675e0109708ac11b24d17ce4f5b1029dda2618ac2f3bf077ecd4d",
+          "boss_off": 0.07,
+          "boss_on": 0.9,
+          "boss_gain": 0.83,
+          "image_damage": 0.4066666666666667,
+          "adjusted_score": 0.292196888889
+        }
+      ],
+      "status": "measured",
+      "missing": 0,
+      "means": {
+        "boss_gain": 0.8262499999999999,
+        "image_damage": 0.46416666666666667,
+        "adjusted_score": 0.250276333333375
+      },
+      "score_bounds": [
+        0.250276333333375,
+        0.250276333333375
+      ]
+    },
+    "costume-anchored": {
+      "cases": [
+        {
+          "case": "paper-lantern-repairer",
+          "seed": 8812071,
+          "off_sha256": "d980af25752fec1ade6388fe3b6505f66564a1b548c73b82e780b081266437a3",
+          "on_sha256": "50e3013c7c62ee955dd20c86258bef36c4a8947ad08ef39519a786df33ff9422",
+          "boss_off": 0.06,
+          "boss_on": 0.83,
+          "boss_gain": 0.77,
+          "image_damage": 0.29,
+          "adjusted_score": 0.388157
+        },
+        {
+          "case": "river-mapkeeper",
+          "seed": 8812099,
+          "off_sha256": "737038a107b3a485eaa8aa4b79ecf299068f83a746dedd5944aa03db4bad0f1c",
+          "on_sha256": "9f84da16804aad4fcd2cf6ede916af837a775957115d0464bc821ea5f2cf9af4",
+          "boss_off": 0.11,
+          "boss_on": 0.82,
+          "boss_gain": 0.71,
+          "image_damage": 0.18000000000000002,
+          "adjusted_score": 0.477404
+        },
+        {
+          "case": "snow-glassworker",
+          "seed": 8812137,
+          "off_sha256": "57f925abf76dd54f4b955774cb4921720e9ea3e8c856ea42557eb8526a241635",
+          "on_sha256": "777868de37c5d4be07d7f26c7783b8de94656146911f35dacc08c4a512228321",
+          "boss_off": 0.08,
+          "boss_on": 0.81,
+          "boss_gain": 0.73,
+          "image_damage": 0.3833333333333333,
+          "adjusted_score": 0.277602777778
+        },
+        {
+          "case": "seed-librarian",
+          "seed": 8812173,
+          "off_sha256": "57fb0d949e2a581f862c2a12a174cad873aad490bcd196558c76835e05e90f2e",
+          "on_sha256": "fe144e94140c1967c0b2e1ed6a84b987d1dd00d242f24753bd67c41b193af0ef",
+          "boss_off": 0.09,
+          "boss_on": 0.84,
+          "boss_gain": 0.75,
+          "image_damage": 0.26333333333333336,
+          "adjusted_score": 0.407008333333
+        },
+        {
+          "case": "station-dyer",
+          "seed": 8812189,
+          "off_sha256": "0bac99ee5cedd106e45ee4044a5da7841fd8acc28faba11a037e3da3fd70ad57",
+          "on_sha256": "e0f5d984930a666d8988949eddd5175a64b589ea6a0a206806a57a2b28e6946a",
+          "boss_off": 0.05,
+          "boss_on": 0.74,
+          "boss_gain": 0.69,
+          "image_damage": 0.30333333333333334,
+          "adjusted_score": 0.334887666667
+        },
+        {
+          "case": "coastal-ceramicist",
+          "seed": 8812211,
+          "off_sha256": "204c04a662c03b240e66ffefa9538fb79ad0d5fa1372f1cfb0d10b9b839f796f",
+          "on_sha256": "b83f4446fa3e2a6fed7569c6c465589bcb38c3b98d935268cdf3aade84a296c9",
+          "boss_off": 0.06,
+          "boss_on": 0.77,
+          "boss_gain": 0.71,
+          "image_damage": 0.31,
+          "adjusted_score": 0.338031
+        },
+        {
+          "case": "station-instrument-tuner",
+          "seed": 8812249,
+          "off_sha256": "a0f64afc4eca6740e54279d570c182da1a5f1002dcdd659b80bd959fe08d07ea",
+          "on_sha256": "f265a7efbf147d3b7ae29fd669828ea28537e8312516c4274207daa149f39b84",
+          "boss_off": 0.06,
+          "boss_on": 0.84,
+          "boss_gain": 0.78,
+          "image_damage": 0.22999999999999998,
+          "adjusted_score": 0.462462
+        },
+        {
+          "case": "plaza-marble-polisher",
+          "seed": 8812283,
+          "off_sha256": "a7d476a76c13341c6d07a76650785770d9350f70db08a37d615f4b9d06954910",
+          "on_sha256": "d490134d14c89bda2195775ee7ed5c9e2ef89928d0388b6e825e345e608db81a",
+          "boss_off": 0.07,
+          "boss_on": 0.76,
+          "boss_gain": 0.69,
+          "image_damage": 0.37333333333333335,
+          "adjusted_score": 0.270970666667
+        }
+      ],
+      "status": "measured",
+      "missing": 0,
+      "means": {
+        "boss_gain": 0.72875,
+        "image_damage": 0.2916666666666667,
+        "adjusted_score": 0.369565430555625
+      },
+      "score_bounds": [
+        0.369565430555625,
+        0.369565430555625
+      ]
+    },
+    "worn-native": {
+      "cases": [
+        {
+          "case": "paper-lantern-repairer",
+          "seed": 8812071,
+          "off_sha256": "d980af25752fec1ade6388fe3b6505f66564a1b548c73b82e780b081266437a3",
+          "on_sha256": "213cc42662bf36dd05affeac0fd8a308bda28bc8067ad37a624db177b001efbb",
+          "boss_off": 0.06,
+          "boss_on": 0.82,
+          "boss_gain": 0.76,
+          "image_damage": 0.47333333333333333,
+          "adjusted_score": 0.210807111111
+        },
+        {
+          "case": "river-mapkeeper",
+          "seed": 8812099,
+          "off_sha256": "737038a107b3a485eaa8aa4b79ecf299068f83a746dedd5944aa03db4bad0f1c",
+          "on_sha256": "c6383cdb0a6e00071cf4c47dd6e9f242194a8bfaee5213fc7129e811030c1f17",
+          "boss_off": 0.11,
+          "boss_on": 0.81,
+          "boss_gain": 0.7,
+          "image_damage": 0.19999999999999998,
+          "adjusted_score": 0.448
+        },
+        {
+          "case": "snow-glassworker",
+          "seed": 8812137,
+          "off_sha256": "57f925abf76dd54f4b955774cb4921720e9ea3e8c856ea42557eb8526a241635",
+          "on_sha256": "64665c6216676911dcc6a8cc09d08c7c8c000b62129bf51c436cd1b1c0952a93",
+          "boss_off": 0.08,
+          "boss_on": 0.84,
+          "boss_gain": 0.76,
+          "image_damage": 0.37999999999999995,
+          "adjusted_score": 0.292144
+        },
+        {
+          "case": "seed-librarian",
+          "seed": 8812173,
+          "off_sha256": "57fb0d949e2a581f862c2a12a174cad873aad490bcd196558c76835e05e90f2e",
+          "on_sha256": "f13701a405c6ccf9f9b6671709e6959d902ab8b8b2b6c6d7c550aa8b3a3b950c",
+          "boss_off": 0.09,
+          "boss_on": 0.8,
+          "boss_gain": 0.71,
+          "image_damage": 0.48333333333333334,
+          "adjusted_score": 0.189530555556
+        },
+        {
+          "case": "station-dyer",
+          "seed": 8812189,
+          "off_sha256": "0bac99ee5cedd106e45ee4044a5da7841fd8acc28faba11a037e3da3fd70ad57",
+          "on_sha256": "a997c80c0952c62f42d457e5f47912c10c9dfc9846a39cd07f0902afc4b8a7ab",
+          "boss_off": 0.05,
+          "boss_on": 0.78,
+          "boss_gain": 0.73,
+          "image_damage": 0.48666666666666664,
+          "adjusted_score": 0.192363111111
+        },
+        {
+          "case": "coastal-ceramicist",
+          "seed": 8812211,
+          "off_sha256": "204c04a662c03b240e66ffefa9538fb79ad0d5fa1372f1cfb0d10b9b839f796f",
+          "on_sha256": "8e77196a1d960047d15fac184bf9f25498995400b2243fab0163dac25d347b3d",
+          "boss_off": 0.06,
+          "boss_on": 0.69,
+          "boss_gain": 0.63,
+          "image_damage": 0.45333333333333337,
+          "adjusted_score": 0.188272
+        },
+        {
+          "case": "station-instrument-tuner",
+          "seed": 8812249,
+          "off_sha256": "a0f64afc4eca6740e54279d570c182da1a5f1002dcdd659b80bd959fe08d07ea",
+          "on_sha256": "c80c4ac3ec2697965c43952f71798b21edb8dfcbaf5a174868c9299bc3763e17",
+          "boss_off": 0.06,
+          "boss_on": 0.77,
+          "boss_gain": 0.71,
+          "image_damage": 0.5,
+          "adjusted_score": 0.1775
+        },
+        {
+          "case": "plaza-marble-polisher",
+          "seed": 8812283,
+          "off_sha256": "a7d476a76c13341c6d07a76650785770d9350f70db08a37d615f4b9d06954910",
+          "on_sha256": "3ac8e91362e6fe0dec0f044a8d8c764498f7a7413ec65af4c0a60669162a5a31",
+          "boss_off": 0.07,
+          "boss_on": 0.73,
+          "boss_gain": 0.66,
+          "image_damage": 0.29333333333333333,
+          "adjusted_score": 0.329589333333
+        }
+      ],
+      "status": "measured",
+      "missing": 0,
+      "means": {
+        "boss_gain": 0.7075,
+        "image_damage": 0.40875,
+        "adjusted_score": 0.253525763888875
+      },
+      "score_bounds": [
+        0.253525763888875,
+        0.253525763888875
+      ]
+    }
+  }
+}

@@ -28,7 +28,7 @@ The turbo source DiT file also contains its conditioner. The three exact origina
 
 Trainable allowance: **8,373,153 parameters**. 28 × [8×(4×4096+2×4096+2×3072) + 8×6476] +512 bank +40,737 critic = 8,373,153. FP32 trainable weights and gradients require `4A+4A` bytes. Frozen base parameters have no gradient or optimizer tensor allocation. Routed particle-bank parameters, where present, are counted once; a frozen response cache is not a trainable bank.
 
-The current `bispf_optimized` PG0.9.5 recipe uses **DualNorm, momentum 0, direction_blend**; it is not assumed to be Adam. Persistent per-parameter moment tensors are0 in this profile; scalar counters are small. The peak ledger additionally reserves **`48A+32MiB` bytes** for protected normals, displacement/direction copies, FP64 promotion and thin-matrix SVD/Gram workspace. This is a conservative temporary-allocation allowance, not a claim that the optimizer uses no memory. Selecting historical `bispf`/Adam instead adds its actual state (typically another`8A` bytes for two FP32 moments); nonzero momentum or a different solver requires recalculation. Weight EMA adds0 bytes and must stay disabled.
+The archived `bispf_optimized` recipe uses **DualNorm, momentum 0, direction_blend**; it is not assumed to be Adam. Persistent per-parameter moment tensors are0 in this profile; scalar counters are small. The peak ledger additionally reserves **`48A+32MiB` bytes** for protected normals, displacement/direction copies, FP64 promotion and thin-matrix SVD/Gram workspace. This is a conservative temporary-allocation allowance, not a claim that the optimizer uses no memory. Selecting historical `bispf`/Adam instead adds its actual state (typically another`8A` bytes for two FP32 moments); nonzero momentum or a different solver requires recalculation. Weight EMA adds0 bytes and must stay disabled.
 
 ## Numeric peak ledger (GiB before headroom)
 
@@ -46,7 +46,7 @@ Cache bound for the training profile: **128 rows**, each with three FP32 native 
 
 ## Activation, cache and host calculation
 
-The auditable inputs and per-profile subtotals are in [source-facts.json](docs/memory/source-facts.json). For a transformer envelope, let `N=image tokens+bounded text tokens`, `D=hidden width`, `I=FFN width`, `H=attention heads`, `L=covered blocks`, and `B=simultaneously retained native graphs`:
+The auditable inputs and per-profile subtotals are in [source-facts.json](https://github.com/HyperGAN/anima-particle-sliders/blob/791a80a4f38a9b8cb096d719b6758a79325bd7d2/docs/memory/source-facts.json). For a transformer envelope, let `N=image tokens+bounded text tokens`, `D=hidden width`, `I=FFN width`, `H=attention heads`, `L=covered blocks`, and `B=simultaneously retained native graphs`:
 
 - One-block inference allowance: `4B(16ND+6NI)` bytes. The4-byte coefficient deliberately covers FP32 intermediates even for BF16 weights;16 and6 allow Q/K/V/output, normalization/residual, gated FFN and adapter intermediates.
 - Uncheckpointed training allowance: `4LB(16ND+6NI)`; checkpointed allowance: `4(4LBND+2B(16ND+6NI))`. Checkpointing saves layer inputs and recomputes block internals; it does not remove the frozen model, adapter or critic.
@@ -63,8 +63,8 @@ This profile's text-state allowance is **58,720,256 bytes** (0.055 GiB): conserv
 - [configs/anima/model.lock.json](configs/anima/model.lock.json)
 - [lumen_studio/backends/anima.py](lumen_studio/backends/anima.py)
 - [lumen_studio/particles.py](lumen_studio/particles.py)
-- [lumen_studio/pg09_training.py](lumen_studio/pg09_training.py)
-- [Captured architecture, published file/index sizes and arithmetic](docs/memory/source-facts.json) retains exact model revisions, metadata SHA256s and direct Hugging Face config URLs. No weights were downloaded or opened for this calculation.
-- Optimizer facts: the pinned ParticleGAN0.9.5 `recipes.py` (`bcap`/`bispf_optimized`, lines1435–1451), `optim/dualnorm.py` momentum/state branch, and `optim/direction_blend.py` FP64 normals. These are part of the dependency selected by the repository's existing core lock; their source facts are recorded in the combined calculation report.
+- [lumen_studio/engine_training.py](lumen_studio/engine_training.py)
+- [Captured architecture, published file/index sizes and arithmetic](https://github.com/HyperGAN/anima-particle-sliders/blob/791a80a4f38a9b8cb096d719b6758a79325bd7d2/docs/memory/source-facts.json) retains exact model revisions, metadata SHA256s and direct Hugging Face config URLs. No weights were downloaded or opened for this calculation.
+- Optimizer facts: the archived ParticleGAN release `recipes.py` (`bcap`/`bispf_optimized`, lines1435–1451), `optim/dualnorm.py` momentum/state branch, and `optim/direction_blend.py` FP64 normals. These are part of the dependency selected by the repository's existing core lock; their source facts are recorded in the combined calculation report.
 
 Documentation was calculated from source and published metadata on 2026-11-14. No model construction, import of Torch/Diffusers, forward pass, benchmark, sampling, training or new GPU work was performed.

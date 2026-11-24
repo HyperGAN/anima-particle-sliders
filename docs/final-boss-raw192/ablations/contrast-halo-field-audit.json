@@ -1,0 +1,2363 @@
+{
+  "source_cache_fingerprints": [
+    "8e28e58e797016219e5f0a0dbbaacccdc37eafaa25468b83ef954bfb2e90e120",
+    "7feebb6e2fedbbd9e90a9ab377687093647c69b9797158252121c601f2872445"
+  ],
+  "reference_paper": "https://openreview.net/pdf?id=3lge0p5o-M-",
+  "mask_positions_zero_indexed": [
+    3,
+    4,
+    5,
+    6
+  ],
+  "max_latent_radius": 4,
+  "cases": {
+    "bridge": {
+      "matte_sites": 1419,
+      "exterior_sites": 324,
+      "exterior_sites_relocated": 123
+    },
+    "cafe": {
+      "matte_sites": 1089,
+      "exterior_sites": 306,
+      "exterior_sites_relocated": 129
+    },
+    "greenhouse": {
+      "matte_sites": 1011,
+      "exterior_sites": 298,
+      "exterior_sites_relocated": 134
+    },
+    "harbor": {
+      "matte_sites": 1444,
+      "exterior_sites": 314,
+      "exterior_sites_relocated": 155
+    },
+    "library": {
+      "matte_sites": 1345,
+      "exterior_sites": 299,
+      "exterior_sites_relocated": 144
+    },
+    "mall": {
+      "matte_sites": 1306,
+      "exterior_sites": 313,
+      "exterior_sites_relocated": 159
+    }
+  },
+  "field_means": {
+    "all": {
+      "fields": 120,
+      "fixed_halo": {
+        "cue_direction_cosine": 0.9167347236516521,
+        "exterior_energy_coverage": 0.5391537448709902
+      },
+      "inferred_halo": {
+        "cue_direction_cosine": 0.9203260580043489,
+        "exterior_energy_coverage": 0.6914821048396133
+      }
+    },
+    "positions_used_for_mask": {
+      "fields": 48,
+      "fixed_halo": {
+        "cue_direction_cosine": 0.9391297108471822,
+        "exterior_energy_coverage": 0.5739937049726622
+      },
+      "inferred_halo": {
+        "cue_direction_cosine": 0.9450049270542519,
+        "exterior_energy_coverage": 0.8051835775007903
+      }
+    },
+    "other_positions": {
+      "fields": 72,
+      "fixed_halo": {
+        "cue_direction_cosine": 0.9018047321879654,
+        "exterior_energy_coverage": 0.5159271048032088
+      },
+      "inferred_halo": {
+        "cue_direction_cosine": 0.9038734786377469,
+        "exterior_energy_coverage": 0.6156811230654954
+      }
+    }
+  },
+  "fields": [
+    {
+      "scene": "bridge",
+      "position": 0,
+      "track": "neutral",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.9999999997155238,
+        "stronger_cue_distance_ratio": 0.9999999985213399,
+        "cue_direction_cosine": 0.8865835309685908,
+        "editable_area": 0.425537109375,
+        "exterior_energy_coverage": 0.5000003195861052
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 0.9999999996444403,
+        "stronger_cue_distance_ratio": 1.0000000002817846,
+        "cue_direction_cosine": 0.8867767354990659,
+        "editable_area": 0.425537109375,
+        "exterior_energy_coverage": 0.5012702719512699
+      }
+    },
+    {
+      "scene": "bridge",
+      "position": 1,
+      "track": "neutral",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 1.0000000001432816,
+        "stronger_cue_distance_ratio": 1.000000001866659,
+        "cue_direction_cosine": 0.9085143716804636,
+        "editable_area": 0.425537109375,
+        "exterior_energy_coverage": 0.5344096416429234
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 0.9999999999174186,
+        "stronger_cue_distance_ratio": 0.99999999987188,
+        "cue_direction_cosine": 0.9068878299293174,
+        "editable_area": 0.425537109375,
+        "exterior_energy_coverage": 0.5029122090482112
+      }
+    },
+    {
+      "scene": "bridge",
+      "position": 2,
+      "track": "neutral",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.9999999997005896,
+        "stronger_cue_distance_ratio": 0.999999999710815,
+        "cue_direction_cosine": 0.9347389688970135,
+        "editable_area": 0.425537109375,
+        "exterior_energy_coverage": 0.47632558799138147
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.0000000005482954,
+        "stronger_cue_distance_ratio": 0.9999999996740193,
+        "cue_direction_cosine": 0.9351771219024236,
+        "editable_area": 0.425537109375,
+        "exterior_energy_coverage": 0.5683140931148192
+      }
+    },
+    {
+      "scene": "bridge",
+      "position": 3,
+      "track": "neutral",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.9999999994545558,
+        "stronger_cue_distance_ratio": 0.9999999969828699,
+        "cue_direction_cosine": 0.9422423846649599,
+        "editable_area": 0.425537109375,
+        "exterior_energy_coverage": 0.6052641491671945
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 0.9999999993529437,
+        "stronger_cue_distance_ratio": 0.9999999976565144,
+        "cue_direction_cosine": 0.9472574091864002,
+        "editable_area": 0.425537109375,
+        "exterior_energy_coverage": 0.7878208772607644
+      }
+    },
+    {
+      "scene": "bridge",
+      "position": 4,
+      "track": "neutral",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 1.0000000003753164,
+        "stronger_cue_distance_ratio": 0.9999999979402963,
+        "cue_direction_cosine": 0.929544378818458,
+        "editable_area": 0.425537109375,
+        "exterior_energy_coverage": 0.6012362697413572
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 0.9999999995470009,
+        "stronger_cue_distance_ratio": 0.9999999984913115,
+        "cue_direction_cosine": 0.9370891133290368,
+        "editable_area": 0.425537109375,
+        "exterior_energy_coverage": 0.8597959476230644
+      }
+    },
+    {
+      "scene": "bridge",
+      "position": 5,
+      "track": "neutral",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.9999999990082196,
+        "stronger_cue_distance_ratio": 0.9999999975155897,
+        "cue_direction_cosine": 0.9437537914792667,
+        "editable_area": 0.425537109375,
+        "exterior_energy_coverage": 0.568122113965734
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.000000000468843,
+        "stronger_cue_distance_ratio": 0.9999999980539512,
+        "cue_direction_cosine": 0.9493587108267865,
+        "editable_area": 0.425537109375,
+        "exterior_energy_coverage": 0.8713411781847858
+      }
+    },
+    {
+      "scene": "bridge",
+      "position": 6,
+      "track": "neutral",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.9999999997534833,
+        "stronger_cue_distance_ratio": 1.0000000004911862,
+        "cue_direction_cosine": 0.972547979286958,
+        "editable_area": 0.425537109375,
+        "exterior_energy_coverage": 0.7191229502280002
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 0.9999999989837064,
+        "stronger_cue_distance_ratio": 0.9999999964513864,
+        "cue_direction_cosine": 0.973292660558634,
+        "editable_area": 0.425537109375,
+        "exterior_energy_coverage": 0.8093100139063722
+      }
+    },
+    {
+      "scene": "bridge",
+      "position": 7,
+      "track": "neutral",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.9999999982865717,
+        "stronger_cue_distance_ratio": 1.0000000089515892,
+        "cue_direction_cosine": 0.9559111976884331,
+        "editable_area": 0.425537109375,
+        "exterior_energy_coverage": 0.5044424241545523
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 0.9999999962123487,
+        "stronger_cue_distance_ratio": 1.0000000121705763,
+        "cue_direction_cosine": 0.9566973804410427,
+        "editable_area": 0.425537109375,
+        "exterior_energy_coverage": 0.6002313664225895
+      }
+    },
+    {
+      "scene": "bridge",
+      "position": 8,
+      "track": "neutral",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 1.000000005134301,
+        "stronger_cue_distance_ratio": 0.9999999619072241,
+        "cue_direction_cosine": 0.889890942775747,
+        "editable_area": 0.425537109375,
+        "exterior_energy_coverage": 0.5322642471737926
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 0.9999999902750708,
+        "stronger_cue_distance_ratio": 1.0000000086329754,
+        "cue_direction_cosine": 0.8919003751550959,
+        "editable_area": 0.425537109375,
+        "exterior_energy_coverage": 0.6195806169608821
+      }
+    },
+    {
+      "scene": "bridge",
+      "position": 9,
+      "track": "neutral",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.9999999862358264,
+        "stronger_cue_distance_ratio": 0.9999999735368547,
+        "cue_direction_cosine": 0.8788599380986252,
+        "editable_area": 0.425537109375,
+        "exterior_energy_coverage": 0.41880586470302195
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.0000000027974094,
+        "stronger_cue_distance_ratio": 0.9999999757264412,
+        "cue_direction_cosine": 0.8848203219065301,
+        "editable_area": 0.425537109375,
+        "exterior_energy_coverage": 0.6617874197608197
+      }
+    },
+    {
+      "scene": "bridge",
+      "position": 0,
+      "track": "positive",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.9999999997155238,
+        "stronger_cue_distance_ratio": 0.9999999985213399,
+        "cue_direction_cosine": 0.8865835309685908,
+        "editable_area": 0.425537109375,
+        "exterior_energy_coverage": 0.5000003195861052
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 0.9999999996444403,
+        "stronger_cue_distance_ratio": 1.0000000002817846,
+        "cue_direction_cosine": 0.8867767354990659,
+        "editable_area": 0.425537109375,
+        "exterior_energy_coverage": 0.5012702719512699
+      }
+    },
+    {
+      "scene": "bridge",
+      "position": 1,
+      "track": "positive",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 1.0000000001659468,
+        "stronger_cue_distance_ratio": 0.9999999988539201,
+        "cue_direction_cosine": 0.9205587466409618,
+        "editable_area": 0.425537109375,
+        "exterior_energy_coverage": 0.6200328700961708
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.000000000700644,
+        "stronger_cue_distance_ratio": 1.0000000003645333,
+        "cue_direction_cosine": 0.9199872575561865,
+        "editable_area": 0.425537109375,
+        "exterior_energy_coverage": 0.5722531901042065
+      }
+    },
+    {
+      "scene": "bridge",
+      "position": 2,
+      "track": "positive",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.999999999669753,
+        "stronger_cue_distance_ratio": 1.0000000002919334,
+        "cue_direction_cosine": 0.944947270096959,
+        "editable_area": 0.425537109375,
+        "exterior_energy_coverage": 0.6551514075362428
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 0.9999999996504064,
+        "stronger_cue_distance_ratio": 0.9999999985929675,
+        "cue_direction_cosine": 0.9456507617380047,
+        "editable_area": 0.425537109375,
+        "exterior_energy_coverage": 0.6492926907160125
+      }
+    },
+    {
+      "scene": "bridge",
+      "position": 3,
+      "track": "positive",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.9999999995660159,
+        "stronger_cue_distance_ratio": 1.0000000007680434,
+        "cue_direction_cosine": 0.9198820112646764,
+        "editable_area": 0.425537109375,
+        "exterior_energy_coverage": 0.6959915232052737
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.0000000000519587,
+        "stronger_cue_distance_ratio": 0.9999999977797095,
+        "cue_direction_cosine": 0.924769366041492,
+        "editable_area": 0.425537109375,
+        "exterior_energy_coverage": 0.7763309191697162
+      }
+    },
+    {
+      "scene": "bridge",
+      "position": 4,
+      "track": "positive",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 1.00000000003617,
+        "stronger_cue_distance_ratio": 1.0000000054255438,
+        "cue_direction_cosine": 0.918460434386279,
+        "editable_area": 0.425537109375,
+        "exterior_energy_coverage": 0.7853369963931207
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 0.9999999999094159,
+        "stronger_cue_distance_ratio": 0.9999999938233256,
+        "cue_direction_cosine": 0.9279394466184574,
+        "editable_area": 0.425537109375,
+        "exterior_energy_coverage": 0.8735954741999351
+      }
+    },
+    {
+      "scene": "bridge",
+      "position": 5,
+      "track": "positive",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.9999999999552096,
+        "stronger_cue_distance_ratio": 0.9999999960921141,
+        "cue_direction_cosine": 0.9482765739097934,
+        "editable_area": 0.425537109375,
+        "exterior_energy_coverage": 0.6181468034087217
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.0000000001481868,
+        "stronger_cue_distance_ratio": 1.0000000046049462,
+        "cue_direction_cosine": 0.9519547464518124,
+        "editable_area": 0.425537109375,
+        "exterior_energy_coverage": 0.8081813291996343
+      }
+    },
+    {
+      "scene": "bridge",
+      "position": 6,
+      "track": "positive",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.999999998066446,
+        "stronger_cue_distance_ratio": 0.9999999975101037,
+        "cue_direction_cosine": 0.8737087335775775,
+        "editable_area": 0.425537109375,
+        "exterior_energy_coverage": 0.5852172060813032
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.0000000008132222,
+        "stronger_cue_distance_ratio": 1.0000000070760906,
+        "cue_direction_cosine": 0.8771072961381131,
+        "editable_area": 0.425537109375,
+        "exterior_energy_coverage": 0.7148544206087359
+      }
+    },
+    {
+      "scene": "bridge",
+      "position": 7,
+      "track": "positive",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 1.0000000007776377,
+        "stronger_cue_distance_ratio": 1.0000000027672649,
+        "cue_direction_cosine": 0.7923715053650372,
+        "editable_area": 0.425537109375,
+        "exterior_energy_coverage": 0.4701624583455657
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.0000000007510497,
+        "stronger_cue_distance_ratio": 0.9999999975826434,
+        "cue_direction_cosine": 0.7953799214063637,
+        "editable_area": 0.425537109375,
+        "exterior_energy_coverage": 0.6466234880980247
+      }
+    },
+    {
+      "scene": "bridge",
+      "position": 8,
+      "track": "positive",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.9999999979102895,
+        "stronger_cue_distance_ratio": 1.0000000282178572,
+        "cue_direction_cosine": 0.8243028600254604,
+        "editable_area": 0.425537109375,
+        "exterior_energy_coverage": 0.35402939464578626
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 0.9999999997305936,
+        "stronger_cue_distance_ratio": 1.0000000004086291,
+        "cue_direction_cosine": 0.8304413021056348,
+        "editable_area": 0.425537109375,
+        "exterior_energy_coverage": 0.6303189951461318
+      }
+    },
+    {
+      "scene": "bridge",
+      "position": 9,
+      "track": "positive",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.9999999993387625,
+        "stronger_cue_distance_ratio": 1.0000000028082683,
+        "cue_direction_cosine": 0.8927400085032454,
+        "editable_area": 0.425537109375,
+        "exterior_energy_coverage": 0.5216427835961355
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 0.999999985032118,
+        "stronger_cue_distance_ratio": 0.9999999257413352,
+        "cue_direction_cosine": 0.8936377580742793,
+        "editable_area": 0.425537109375,
+        "exterior_energy_coverage": 0.5738045964551031
+      }
+    },
+    {
+      "scene": "cafe",
+      "position": 0,
+      "track": "neutral",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 1.0000000000180649,
+        "stronger_cue_distance_ratio": 0.9999999997726416,
+        "cue_direction_cosine": 0.6637634085890989,
+        "editable_area": 0.340576171875,
+        "exterior_energy_coverage": 0.5525564805061339
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.0000000001058418,
+        "stronger_cue_distance_ratio": 1.0000000012023298,
+        "cue_direction_cosine": 0.6653188914085529,
+        "editable_area": 0.340576171875,
+        "exterior_energy_coverage": 0.5958196302109561
+      }
+    },
+    {
+      "scene": "cafe",
+      "position": 1,
+      "track": "neutral",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.9999999995918584,
+        "stronger_cue_distance_ratio": 1.0000000018353947,
+        "cue_direction_cosine": 0.8952624399472083,
+        "editable_area": 0.340576171875,
+        "exterior_energy_coverage": 0.4513922763910065
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.000000000419972,
+        "stronger_cue_distance_ratio": 1.0000000011757946,
+        "cue_direction_cosine": 0.9012720573655669,
+        "editable_area": 0.340576171875,
+        "exterior_energy_coverage": 0.5512825781837694
+      }
+    },
+    {
+      "scene": "cafe",
+      "position": 2,
+      "track": "neutral",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.9999999999781025,
+        "stronger_cue_distance_ratio": 0.9999999987593209,
+        "cue_direction_cosine": 0.9546803471219699,
+        "editable_area": 0.340576171875,
+        "exterior_energy_coverage": 0.5245338467276939
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.0000000001104388,
+        "stronger_cue_distance_ratio": 0.999999999548065,
+        "cue_direction_cosine": 0.9595352774372741,
+        "editable_area": 0.340576171875,
+        "exterior_energy_coverage": 0.7107426965538032
+      }
+    },
+    {
+      "scene": "cafe",
+      "position": 3,
+      "track": "neutral",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.9999999992031092,
+        "stronger_cue_distance_ratio": 0.9999999995080936,
+        "cue_direction_cosine": 0.9835206439331659,
+        "editable_area": 0.340576171875,
+        "exterior_energy_coverage": 0.6038006759678851
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.0000000003613188,
+        "stronger_cue_distance_ratio": 1.0000000025544562,
+        "cue_direction_cosine": 0.9862535589237006,
+        "editable_area": 0.340576171875,
+        "exterior_energy_coverage": 0.742235344832096
+      }
+    },
+    {
+      "scene": "cafe",
+      "position": 4,
+      "track": "neutral",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.9999999990320091,
+        "stronger_cue_distance_ratio": 1.0000000034282894,
+        "cue_direction_cosine": 0.9672481516664012,
+        "editable_area": 0.340576171875,
+        "exterior_energy_coverage": 0.661889928657667
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.0000000006882739,
+        "stronger_cue_distance_ratio": 1.0000000012484838,
+        "cue_direction_cosine": 0.9722878739627686,
+        "editable_area": 0.340576171875,
+        "exterior_energy_coverage": 0.7711703238935059
+      }
+    },
+    {
+      "scene": "cafe",
+      "position": 5,
+      "track": "neutral",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 1.0000000001359028,
+        "stronger_cue_distance_ratio": 1.0000000028618405,
+        "cue_direction_cosine": 0.9736983053476942,
+        "editable_area": 0.340576171875,
+        "exterior_energy_coverage": 0.5801756815135304
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 0.999999999115009,
+        "stronger_cue_distance_ratio": 0.9999999973122388,
+        "cue_direction_cosine": 0.9746223111270803,
+        "editable_area": 0.340576171875,
+        "exterior_energy_coverage": 0.6744220294551179
+      }
+    },
+    {
+      "scene": "cafe",
+      "position": 6,
+      "track": "neutral",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 1.000000000217202,
+        "stronger_cue_distance_ratio": 0.9999999929793549,
+        "cue_direction_cosine": 0.8819819152446869,
+        "editable_area": 0.340576171875,
+        "exterior_energy_coverage": 0.4257753629135146
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.0000000005187388,
+        "stronger_cue_distance_ratio": 0.9999999985407281,
+        "cue_direction_cosine": 0.89695284106078,
+        "editable_area": 0.340576171875,
+        "exterior_energy_coverage": 0.7916334877315959
+      }
+    },
+    {
+      "scene": "cafe",
+      "position": 7,
+      "track": "neutral",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 1.0000000010818972,
+        "stronger_cue_distance_ratio": 0.9999999993670386,
+        "cue_direction_cosine": 0.926072645485094,
+        "editable_area": 0.340576171875,
+        "exterior_energy_coverage": 0.36218003250999053
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 0.9999999979092985,
+        "stronger_cue_distance_ratio": 1.0000000053318732,
+        "cue_direction_cosine": 0.9281734657042754,
+        "editable_area": 0.340576171875,
+        "exterior_energy_coverage": 0.585473480662977
+      }
+    },
+    {
+      "scene": "cafe",
+      "position": 8,
+      "track": "neutral",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.9999999992371069,
+        "stronger_cue_distance_ratio": 1.0000000030899987,
+        "cue_direction_cosine": 0.9056481944858655,
+        "editable_area": 0.340576171875,
+        "exterior_energy_coverage": 0.5663432685117405
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.0000000096968433,
+        "stronger_cue_distance_ratio": 1.00000005659925,
+        "cue_direction_cosine": 0.9154147033781609,
+        "editable_area": 0.340576171875,
+        "exterior_energy_coverage": 0.6369128082527381
+      }
+    },
+    {
+      "scene": "cafe",
+      "position": 9,
+      "track": "neutral",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.9999999988154805,
+        "stronger_cue_distance_ratio": 1.00000002411359,
+        "cue_direction_cosine": 0.9295070605429259,
+        "editable_area": 0.340576171875,
+        "exterior_energy_coverage": 0.5300556568677314
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 0.9999999964550566,
+        "stronger_cue_distance_ratio": 1.000000018646694,
+        "cue_direction_cosine": 0.9317649097444594,
+        "editable_area": 0.340576171875,
+        "exterior_energy_coverage": 0.5781913320918081
+      }
+    },
+    {
+      "scene": "cafe",
+      "position": 0,
+      "track": "positive",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 1.0000000000180649,
+        "stronger_cue_distance_ratio": 0.9999999997726416,
+        "cue_direction_cosine": 0.6637634085890989,
+        "editable_area": 0.340576171875,
+        "exterior_energy_coverage": 0.5525564805061339
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.0000000001058418,
+        "stronger_cue_distance_ratio": 1.0000000012023298,
+        "cue_direction_cosine": 0.6653188914085529,
+        "editable_area": 0.340576171875,
+        "exterior_energy_coverage": 0.5958196302109561
+      }
+    },
+    {
+      "scene": "cafe",
+      "position": 1,
+      "track": "positive",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.9999999997397089,
+        "stronger_cue_distance_ratio": 0.9999999999480774,
+        "cue_direction_cosine": 0.9189155351647379,
+        "editable_area": 0.340576171875,
+        "exterior_energy_coverage": 0.5677143172645354
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.0000000001515692,
+        "stronger_cue_distance_ratio": 1.0000000008358734,
+        "cue_direction_cosine": 0.923855561744096,
+        "editable_area": 0.340576171875,
+        "exterior_energy_coverage": 0.6693042714994311
+      }
+    },
+    {
+      "scene": "cafe",
+      "position": 2,
+      "track": "positive",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 1.0000000002350218,
+        "stronger_cue_distance_ratio": 1.0000000004993284,
+        "cue_direction_cosine": 0.9449681232251066,
+        "editable_area": 0.340576171875,
+        "exterior_energy_coverage": 0.6227196428850491
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.000000000138224,
+        "stronger_cue_distance_ratio": 1.0000000004951726,
+        "cue_direction_cosine": 0.947500319504569,
+        "editable_area": 0.340576171875,
+        "exterior_energy_coverage": 0.7143253731826741
+      }
+    },
+    {
+      "scene": "cafe",
+      "position": 3,
+      "track": "positive",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 1.0000000002073233,
+        "stronger_cue_distance_ratio": 1.0000000002068576,
+        "cue_direction_cosine": 0.9428133769124527,
+        "editable_area": 0.340576171875,
+        "exterior_energy_coverage": 0.5234778926774603
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 0.9999999998383495,
+        "stronger_cue_distance_ratio": 0.9999999990679865,
+        "cue_direction_cosine": 0.9465832229919571,
+        "editable_area": 0.340576171875,
+        "exterior_energy_coverage": 0.7473792851513311
+      }
+    },
+    {
+      "scene": "cafe",
+      "position": 4,
+      "track": "positive",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 1.0000000005865355,
+        "stronger_cue_distance_ratio": 1.0000000009521781,
+        "cue_direction_cosine": 0.9325852272438774,
+        "editable_area": 0.340576171875,
+        "exterior_energy_coverage": 0.5501699341365708
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.0000000008685455,
+        "stronger_cue_distance_ratio": 1.0000000012388912,
+        "cue_direction_cosine": 0.9404588247674438,
+        "editable_area": 0.340576171875,
+        "exterior_energy_coverage": 0.84583493218942
+      }
+    },
+    {
+      "scene": "cafe",
+      "position": 5,
+      "track": "positive",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.9999999999172583,
+        "stronger_cue_distance_ratio": 0.9999999970855561,
+        "cue_direction_cosine": 0.9585658721282492,
+        "editable_area": 0.340576171875,
+        "exterior_energy_coverage": 0.6036140751777495
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 0.9999999998395149,
+        "stronger_cue_distance_ratio": 1.000000005092197,
+        "cue_direction_cosine": 0.964225134010976,
+        "editable_area": 0.340576171875,
+        "exterior_energy_coverage": 0.8097866757171702
+      }
+    },
+    {
+      "scene": "cafe",
+      "position": 6,
+      "track": "positive",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.9999999992167621,
+        "stronger_cue_distance_ratio": 1.0000000038193906,
+        "cue_direction_cosine": 0.9736069747198424,
+        "editable_area": 0.340576171875,
+        "exterior_energy_coverage": 0.6508654967485885
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.0000000006847185,
+        "stronger_cue_distance_ratio": 0.9999999900282512,
+        "cue_direction_cosine": 0.9770029976024976,
+        "editable_area": 0.340576171875,
+        "exterior_energy_coverage": 0.7595585996328855
+      }
+    },
+    {
+      "scene": "cafe",
+      "position": 7,
+      "track": "positive",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 1.0000000013884336,
+        "stronger_cue_distance_ratio": 1.0000000035321355,
+        "cue_direction_cosine": 0.971765888119044,
+        "editable_area": 0.340576171875,
+        "exterior_energy_coverage": 0.6989938241989225
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 0.9999999999128979,
+        "stronger_cue_distance_ratio": 1.000000014053878,
+        "cue_direction_cosine": 0.9754761773957874,
+        "editable_area": 0.340576171875,
+        "exterior_energy_coverage": 0.8403322966802209
+      }
+    },
+    {
+      "scene": "cafe",
+      "position": 8,
+      "track": "positive",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.999999999640087,
+        "stronger_cue_distance_ratio": 1.000000045850951,
+        "cue_direction_cosine": 0.9421042868956786,
+        "editable_area": 0.340576171875,
+        "exterior_energy_coverage": 0.6043411898073253
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.000000000520189,
+        "stronger_cue_distance_ratio": 0.9999999900776471,
+        "cue_direction_cosine": 0.9436858431920822,
+        "editable_area": 0.340576171875,
+        "exterior_energy_coverage": 0.7157255770895061
+      }
+    },
+    {
+      "scene": "cafe",
+      "position": 9,
+      "track": "positive",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 1.0000000072207775,
+        "stronger_cue_distance_ratio": 1.0000000449061908,
+        "cue_direction_cosine": 0.932320458948302,
+        "editable_area": 0.340576171875,
+        "exterior_energy_coverage": 0.44937850531149215
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.00000000089042,
+        "stronger_cue_distance_ratio": 0.9999999737837478,
+        "cue_direction_cosine": 0.9349543434104147,
+        "editable_area": 0.340576171875,
+        "exterior_energy_coverage": 0.6197010250213743
+      }
+    },
+    {
+      "scene": "greenhouse",
+      "position": 0,
+      "track": "neutral",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 1.0000000001056073,
+        "stronger_cue_distance_ratio": 0.9999999985881708,
+        "cue_direction_cosine": 0.9236911940311661,
+        "editable_area": 0.319580078125,
+        "exterior_energy_coverage": 0.539071576792784
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.0000000000764218,
+        "stronger_cue_distance_ratio": 0.9999999979561125,
+        "cue_direction_cosine": 0.9209774164489267,
+        "editable_area": 0.319580078125,
+        "exterior_energy_coverage": 0.5072489280738417
+      }
+    },
+    {
+      "scene": "greenhouse",
+      "position": 1,
+      "track": "neutral",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.9999999995961889,
+        "stronger_cue_distance_ratio": 0.9999999985285597,
+        "cue_direction_cosine": 0.926308633934302,
+        "editable_area": 0.319580078125,
+        "exterior_energy_coverage": 0.5635376639429394
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.0000000000979725,
+        "stronger_cue_distance_ratio": 1.0000000000138634,
+        "cue_direction_cosine": 0.9240013120805453,
+        "editable_area": 0.319580078125,
+        "exterior_energy_coverage": 0.524880837866618
+      }
+    },
+    {
+      "scene": "greenhouse",
+      "position": 2,
+      "track": "neutral",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 1.0000000002786849,
+        "stronger_cue_distance_ratio": 1.0000000009318606,
+        "cue_direction_cosine": 0.9411447973023815,
+        "editable_area": 0.319580078125,
+        "exterior_energy_coverage": 0.546713082568699
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.000000000224915,
+        "stronger_cue_distance_ratio": 1.0000000013080754,
+        "cue_direction_cosine": 0.9385252246719008,
+        "editable_area": 0.319580078125,
+        "exterior_energy_coverage": 0.46891590642708064
+      }
+    },
+    {
+      "scene": "greenhouse",
+      "position": 3,
+      "track": "neutral",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 1.0000000000450089,
+        "stronger_cue_distance_ratio": 1.0000000005842398,
+        "cue_direction_cosine": 0.9849870156954998,
+        "editable_area": 0.319580078125,
+        "exterior_energy_coverage": 0.6848292593957422
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.0000000001499774,
+        "stronger_cue_distance_ratio": 1.000000000862895,
+        "cue_direction_cosine": 0.9860300245281348,
+        "editable_area": 0.319580078125,
+        "exterior_energy_coverage": 0.7829886886040209
+      }
+    },
+    {
+      "scene": "greenhouse",
+      "position": 4,
+      "track": "neutral",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.9999999991121975,
+        "stronger_cue_distance_ratio": 0.9999999993017021,
+        "cue_direction_cosine": 0.9877611365843532,
+        "editable_area": 0.319580078125,
+        "exterior_energy_coverage": 0.73349550642129
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.0000000011939008,
+        "stronger_cue_distance_ratio": 1.0000000013655062,
+        "cue_direction_cosine": 0.9887622211218875,
+        "editable_area": 0.319580078125,
+        "exterior_energy_coverage": 0.8302192408131752
+      }
+    },
+    {
+      "scene": "greenhouse",
+      "position": 5,
+      "track": "neutral",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.9999999989781864,
+        "stronger_cue_distance_ratio": 1.0000000010046346,
+        "cue_direction_cosine": 0.9903276761633285,
+        "editable_area": 0.319580078125,
+        "exterior_energy_coverage": 0.7096263379646536
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.0000000000940095,
+        "stronger_cue_distance_ratio": 0.9999999986791108,
+        "cue_direction_cosine": 0.9904004889051138,
+        "editable_area": 0.319580078125,
+        "exterior_energy_coverage": 0.739482065880786
+      }
+    },
+    {
+      "scene": "greenhouse",
+      "position": 6,
+      "track": "neutral",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.9999999994382753,
+        "stronger_cue_distance_ratio": 0.9999999968183576,
+        "cue_direction_cosine": 0.9640895073251475,
+        "editable_area": 0.319580078125,
+        "exterior_energy_coverage": 0.5957772300099689
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 0.9999999983806956,
+        "stronger_cue_distance_ratio": 0.9999999933183165,
+        "cue_direction_cosine": 0.9650823008937766,
+        "editable_area": 0.319580078125,
+        "exterior_energy_coverage": 0.6934562042487044
+      }
+    },
+    {
+      "scene": "greenhouse",
+      "position": 7,
+      "track": "neutral",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 1.0000000027881504,
+        "stronger_cue_distance_ratio": 1.000000005347951,
+        "cue_direction_cosine": 0.8531794603886468,
+        "editable_area": 0.319580078125,
+        "exterior_energy_coverage": 0.5157464296391491
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.0000000000830982,
+        "stronger_cue_distance_ratio": 0.9999999898731743,
+        "cue_direction_cosine": 0.8589433657613033,
+        "editable_area": 0.319580078125,
+        "exterior_energy_coverage": 0.619004495321304
+      }
+    },
+    {
+      "scene": "greenhouse",
+      "position": 8,
+      "track": "neutral",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.9999999989111914,
+        "stronger_cue_distance_ratio": 0.9999999682111737,
+        "cue_direction_cosine": 0.8607885563122342,
+        "editable_area": 0.319580078125,
+        "exterior_energy_coverage": 0.5819845834676
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 0.99999999689483,
+        "stronger_cue_distance_ratio": 0.9999999829197896,
+        "cue_direction_cosine": 0.8660891402598823,
+        "editable_area": 0.319580078125,
+        "exterior_energy_coverage": 0.636181317889778
+      }
+    },
+    {
+      "scene": "greenhouse",
+      "position": 9,
+      "track": "neutral",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 1.000000000500934,
+        "stronger_cue_distance_ratio": 0.9999999936986637,
+        "cue_direction_cosine": 0.8863103733524956,
+        "editable_area": 0.319580078125,
+        "exterior_energy_coverage": 0.6380942890026259
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 0.9999999977733619,
+        "stronger_cue_distance_ratio": 1.0000000060098293,
+        "cue_direction_cosine": 0.8901331078670861,
+        "editable_area": 0.319580078125,
+        "exterior_energy_coverage": 0.706404405202828
+      }
+    },
+    {
+      "scene": "greenhouse",
+      "position": 0,
+      "track": "positive",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 1.0000000001056073,
+        "stronger_cue_distance_ratio": 0.9999999985881708,
+        "cue_direction_cosine": 0.9236911940311661,
+        "editable_area": 0.319580078125,
+        "exterior_energy_coverage": 0.539071576792784
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.0000000000764218,
+        "stronger_cue_distance_ratio": 0.9999999979561125,
+        "cue_direction_cosine": 0.9209774164489267,
+        "editable_area": 0.319580078125,
+        "exterior_energy_coverage": 0.5072489280738417
+      }
+    },
+    {
+      "scene": "greenhouse",
+      "position": 1,
+      "track": "positive",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.9999999996844741,
+        "stronger_cue_distance_ratio": 0.9999999997472004,
+        "cue_direction_cosine": 0.898475378162,
+        "editable_area": 0.319580078125,
+        "exterior_energy_coverage": 0.604674101467423
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.0000000001699234,
+        "stronger_cue_distance_ratio": 1.0000000016826434,
+        "cue_direction_cosine": 0.8997449927324199,
+        "editable_area": 0.319580078125,
+        "exterior_energy_coverage": 0.7115650701939925
+      }
+    },
+    {
+      "scene": "greenhouse",
+      "position": 2,
+      "track": "positive",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.9999999994511981,
+        "stronger_cue_distance_ratio": 1.0000000004682124,
+        "cue_direction_cosine": 0.9239110854097966,
+        "editable_area": 0.319580078125,
+        "exterior_energy_coverage": 0.517875634195782
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 0.9999999995688532,
+        "stronger_cue_distance_ratio": 0.999999999900982,
+        "cue_direction_cosine": 0.9247950547293029,
+        "editable_area": 0.319580078125,
+        "exterior_energy_coverage": 0.6766947807125284
+      }
+    },
+    {
+      "scene": "greenhouse",
+      "position": 3,
+      "track": "positive",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.9999999997627106,
+        "stronger_cue_distance_ratio": 1.0000000023388567,
+        "cue_direction_cosine": 0.9575442762016223,
+        "editable_area": 0.319580078125,
+        "exterior_energy_coverage": 0.5034583296377586
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 0.9999999997603805,
+        "stronger_cue_distance_ratio": 0.999999998712743,
+        "cue_direction_cosine": 0.9618003010480801,
+        "editable_area": 0.319580078125,
+        "exterior_energy_coverage": 0.7987482147659581
+      }
+    },
+    {
+      "scene": "greenhouse",
+      "position": 4,
+      "track": "positive",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.9999999996029701,
+        "stronger_cue_distance_ratio": 1.000000000673567,
+        "cue_direction_cosine": 0.9030154898666469,
+        "editable_area": 0.319580078125,
+        "exterior_energy_coverage": 0.6142459332855288
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.0000000004594816,
+        "stronger_cue_distance_ratio": 1.0000000038789942,
+        "cue_direction_cosine": 0.9097736720619652,
+        "editable_area": 0.319580078125,
+        "exterior_energy_coverage": 0.7942663082969506
+      }
+    },
+    {
+      "scene": "greenhouse",
+      "position": 5,
+      "track": "positive",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.9999999996949974,
+        "stronger_cue_distance_ratio": 1.0000000028286378,
+        "cue_direction_cosine": 0.9057388894599705,
+        "editable_area": 0.319580078125,
+        "exterior_energy_coverage": 0.5589206232160303
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 0.9999999999433031,
+        "stronger_cue_distance_ratio": 0.9999999955227242,
+        "cue_direction_cosine": 0.9136554502653782,
+        "editable_area": 0.319580078125,
+        "exterior_energy_coverage": 0.7892008026890333
+      }
+    },
+    {
+      "scene": "greenhouse",
+      "position": 6,
+      "track": "positive",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.9999999996303495,
+        "stronger_cue_distance_ratio": 1.0000000065287906,
+        "cue_direction_cosine": 0.8889361413266299,
+        "editable_area": 0.319580078125,
+        "exterior_energy_coverage": 0.4167368447678589
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.0000000007084429,
+        "stronger_cue_distance_ratio": 1.000000005271683,
+        "cue_direction_cosine": 0.899837368723953,
+        "editable_area": 0.319580078125,
+        "exterior_energy_coverage": 0.809837164794758
+      }
+    },
+    {
+      "scene": "greenhouse",
+      "position": 7,
+      "track": "positive",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.999999998901389,
+        "stronger_cue_distance_ratio": 0.9999999838981242,
+        "cue_direction_cosine": 0.8786227471354681,
+        "editable_area": 0.319580078125,
+        "exterior_energy_coverage": 0.4455604552259352
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.0000000006375191,
+        "stronger_cue_distance_ratio": 1.0000000082105949,
+        "cue_direction_cosine": 0.8831939051780696,
+        "editable_area": 0.319580078125,
+        "exterior_energy_coverage": 0.6959070952214982
+      }
+    },
+    {
+      "scene": "greenhouse",
+      "position": 8,
+      "track": "positive",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 1.0000000006156016,
+        "stronger_cue_distance_ratio": 0.9999999918403797,
+        "cue_direction_cosine": 0.8717305787071941,
+        "editable_area": 0.319580078125,
+        "exterior_energy_coverage": 0.4276324167459504
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 0.9999999992803366,
+        "stronger_cue_distance_ratio": 0.9999999850489414,
+        "cue_direction_cosine": 0.8774522988214365,
+        "editable_area": 0.319580078125,
+        "exterior_energy_coverage": 0.7241306986994055
+      }
+    },
+    {
+      "scene": "greenhouse",
+      "position": 9,
+      "track": "positive",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 1.0000000012421568,
+        "stronger_cue_distance_ratio": 0.9999999801796015,
+        "cue_direction_cosine": 0.8499960361899074,
+        "editable_area": 0.319580078125,
+        "exterior_energy_coverage": 0.4951488252730553
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 0.9999999990584723,
+        "stronger_cue_distance_ratio": 0.9999999968985326,
+        "cue_direction_cosine": 0.8541647900469734,
+        "editable_area": 0.319580078125,
+        "exterior_energy_coverage": 0.637978834131056
+      }
+    },
+    {
+      "scene": "harbor",
+      "position": 0,
+      "track": "neutral",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.9999999999442619,
+        "stronger_cue_distance_ratio": 0.9999999989759036,
+        "cue_direction_cosine": 0.9181391514407943,
+        "editable_area": 0.42919921875,
+        "exterior_energy_coverage": 0.5962208684113581
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 0.9999999997532972,
+        "stronger_cue_distance_ratio": 1.0000000032975862,
+        "cue_direction_cosine": 0.9148868550125626,
+        "editable_area": 0.42919921875,
+        "exterior_energy_coverage": 0.4963066843971183
+      }
+    },
+    {
+      "scene": "harbor",
+      "position": 1,
+      "track": "neutral",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.999999999796684,
+        "stronger_cue_distance_ratio": 0.9999999997820646,
+        "cue_direction_cosine": 0.8056608611924628,
+        "editable_area": 0.42919921875,
+        "exterior_energy_coverage": 0.48218623607993844
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.000000000292473,
+        "stronger_cue_distance_ratio": 1.000000000558518,
+        "cue_direction_cosine": 0.8076468530026082,
+        "editable_area": 0.42919921875,
+        "exterior_energy_coverage": 0.5391356190547377
+      }
+    },
+    {
+      "scene": "harbor",
+      "position": 2,
+      "track": "neutral",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.9999999999397605,
+        "stronger_cue_distance_ratio": 0.9999999998135892,
+        "cue_direction_cosine": 0.9147237542443865,
+        "editable_area": 0.42919921875,
+        "exterior_energy_coverage": 0.5443767809741258
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.0000000000419083,
+        "stronger_cue_distance_ratio": 1.0000000002641023,
+        "cue_direction_cosine": 0.9119784655290809,
+        "editable_area": 0.42919921875,
+        "exterior_energy_coverage": 0.4708717537126588
+      }
+    },
+    {
+      "scene": "harbor",
+      "position": 3,
+      "track": "neutral",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 1.0000000000562121,
+        "stronger_cue_distance_ratio": 1.0000000030025373,
+        "cue_direction_cosine": 0.9851606736326337,
+        "editable_area": 0.42919921875,
+        "exterior_energy_coverage": 0.6642699075690864
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.0000000000330902,
+        "stronger_cue_distance_ratio": 0.9999999992578504,
+        "cue_direction_cosine": 0.9860824075338305,
+        "editable_area": 0.42919921875,
+        "exterior_energy_coverage": 0.8062748499063633
+      }
+    },
+    {
+      "scene": "harbor",
+      "position": 4,
+      "track": "neutral",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 1.0000000001737486,
+        "stronger_cue_distance_ratio": 1.0000000033235747,
+        "cue_direction_cosine": 0.9695988644747855,
+        "editable_area": 0.42919921875,
+        "exterior_energy_coverage": 0.47178809041769343
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 0.9999999999136322,
+        "stronger_cue_distance_ratio": 0.9999999961704416,
+        "cue_direction_cosine": 0.9705346904724199,
+        "editable_area": 0.42919921875,
+        "exterior_energy_coverage": 0.7410446408669394
+      }
+    },
+    {
+      "scene": "harbor",
+      "position": 5,
+      "track": "neutral",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.9999999988422918,
+        "stronger_cue_distance_ratio": 0.9999999897604999,
+        "cue_direction_cosine": 0.9619429909754166,
+        "editable_area": 0.42919921875,
+        "exterior_energy_coverage": 0.4817642083194828
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.0000000000140197,
+        "stronger_cue_distance_ratio": 1.000000004030231,
+        "cue_direction_cosine": 0.9662063100061961,
+        "editable_area": 0.42919921875,
+        "exterior_energy_coverage": 0.7453105705973448
+      }
+    },
+    {
+      "scene": "harbor",
+      "position": 6,
+      "track": "neutral",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 1.000000000758828,
+        "stronger_cue_distance_ratio": 1.0000000056628666,
+        "cue_direction_cosine": 0.9582814498496017,
+        "editable_area": 0.42919921875,
+        "exterior_energy_coverage": 0.4763794027041289
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 0.9999999997948671,
+        "stronger_cue_distance_ratio": 0.9999999949869369,
+        "cue_direction_cosine": 0.9635266171133567,
+        "editable_area": 0.42919921875,
+        "exterior_energy_coverage": 0.8398388983028808
+      }
+    },
+    {
+      "scene": "harbor",
+      "position": 7,
+      "track": "neutral",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 1.0000000035891916,
+        "stronger_cue_distance_ratio": 1.0000000009602863,
+        "cue_direction_cosine": 0.9306260453187616,
+        "editable_area": 0.42919921875,
+        "exterior_energy_coverage": 0.47849710305596993
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.0000000001828178,
+        "stronger_cue_distance_ratio": 0.9999999930916229,
+        "cue_direction_cosine": 0.9355466427337699,
+        "editable_area": 0.42919921875,
+        "exterior_energy_coverage": 0.6470185689543364
+      }
+    },
+    {
+      "scene": "harbor",
+      "position": 8,
+      "track": "neutral",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 1.0000000003155658,
+        "stronger_cue_distance_ratio": 1.0000000068881645,
+        "cue_direction_cosine": 0.9234192962039395,
+        "editable_area": 0.42919921875,
+        "exterior_energy_coverage": 0.5402256951298754
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.0000000008419743,
+        "stronger_cue_distance_ratio": 0.9999999949320534,
+        "cue_direction_cosine": 0.9248562662360159,
+        "editable_area": 0.42919921875,
+        "exterior_energy_coverage": 0.6219786342965246
+      }
+    },
+    {
+      "scene": "harbor",
+      "position": 9,
+      "track": "neutral",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.9999999976213169,
+        "stronger_cue_distance_ratio": 0.9999999613468555,
+        "cue_direction_cosine": 0.9142784607618506,
+        "editable_area": 0.42919921875,
+        "exterior_energy_coverage": 0.5663829556376131
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 0.9999999806965683,
+        "stronger_cue_distance_ratio": 1.000000018090576,
+        "cue_direction_cosine": 0.9159654519638845,
+        "editable_area": 0.42919921875,
+        "exterior_energy_coverage": 0.6484639162679412
+      }
+    },
+    {
+      "scene": "harbor",
+      "position": 0,
+      "track": "positive",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.9999999999442619,
+        "stronger_cue_distance_ratio": 0.9999999989759036,
+        "cue_direction_cosine": 0.9181391514407943,
+        "editable_area": 0.42919921875,
+        "exterior_energy_coverage": 0.5962208684113581
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 0.9999999997532972,
+        "stronger_cue_distance_ratio": 1.0000000032975862,
+        "cue_direction_cosine": 0.9148868550125626,
+        "editable_area": 0.42919921875,
+        "exterior_energy_coverage": 0.4963066843971183
+      }
+    },
+    {
+      "scene": "harbor",
+      "position": 1,
+      "track": "positive",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.999999999951468,
+        "stronger_cue_distance_ratio": 0.9999999997332017,
+        "cue_direction_cosine": 0.8870660751763556,
+        "editable_area": 0.42919921875,
+        "exterior_energy_coverage": 0.4063936052606775
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.0000000001927178,
+        "stronger_cue_distance_ratio": 1.0000000005367433,
+        "cue_direction_cosine": 0.8905359406016359,
+        "editable_area": 0.42919921875,
+        "exterior_energy_coverage": 0.5321608881819431
+      }
+    },
+    {
+      "scene": "harbor",
+      "position": 2,
+      "track": "positive",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.9999999996729145,
+        "stronger_cue_distance_ratio": 1.0000000005465666,
+        "cue_direction_cosine": 0.9063475672811401,
+        "editable_area": 0.42919921875,
+        "exterior_energy_coverage": 0.5236945617342711
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 0.9999999995327064,
+        "stronger_cue_distance_ratio": 1.0000000000346978,
+        "cue_direction_cosine": 0.9063849956721891,
+        "editable_area": 0.42919921875,
+        "exterior_energy_coverage": 0.4938208045681162
+      }
+    },
+    {
+      "scene": "harbor",
+      "position": 3,
+      "track": "positive",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 1.0000000001443543,
+        "stronger_cue_distance_ratio": 0.999999999194574,
+        "cue_direction_cosine": 0.8588012219638713,
+        "editable_area": 0.42919921875,
+        "exterior_energy_coverage": 0.5128433371825949
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 0.9999999996985114,
+        "stronger_cue_distance_ratio": 0.999999998740408,
+        "cue_direction_cosine": 0.8628327185045445,
+        "editable_area": 0.42919921875,
+        "exterior_energy_coverage": 0.6461884498271622
+      }
+    },
+    {
+      "scene": "harbor",
+      "position": 4,
+      "track": "positive",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.9999999996737652,
+        "stronger_cue_distance_ratio": 0.9999999993560714,
+        "cue_direction_cosine": 0.8399271068308034,
+        "editable_area": 0.42919921875,
+        "exterior_energy_coverage": 0.44727772144173733
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.000000000024932,
+        "stronger_cue_distance_ratio": 0.9999999983006087,
+        "cue_direction_cosine": 0.8620116900809981,
+        "editable_area": 0.42919921875,
+        "exterior_energy_coverage": 0.8315124622343845
+      }
+    },
+    {
+      "scene": "harbor",
+      "position": 5,
+      "track": "positive",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 1.000000000942061,
+        "stronger_cue_distance_ratio": 1.0000000016070267,
+        "cue_direction_cosine": 0.7382622612644667,
+        "editable_area": 0.42919921875,
+        "exterior_energy_coverage": 0.6293732745680856
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.0000000001182796,
+        "stronger_cue_distance_ratio": 1.0000000156445623,
+        "cue_direction_cosine": 0.7624921391314402,
+        "editable_area": 0.42919921875,
+        "exterior_energy_coverage": 0.857579698976763
+      }
+    },
+    {
+      "scene": "harbor",
+      "position": 6,
+      "track": "positive",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 1.0000000003734608,
+        "stronger_cue_distance_ratio": 1.0000000038104748,
+        "cue_direction_cosine": 0.7667144829997283,
+        "editable_area": 0.42919921875,
+        "exterior_energy_coverage": 0.5045544225554414
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.0000000012865227,
+        "stronger_cue_distance_ratio": 0.9999999993017263,
+        "cue_direction_cosine": 0.7788302395443056,
+        "editable_area": 0.42919921875,
+        "exterior_energy_coverage": 0.7909537595570264
+      }
+    },
+    {
+      "scene": "harbor",
+      "position": 7,
+      "track": "positive",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 1.000000010313259,
+        "stronger_cue_distance_ratio": 1.000000069052711,
+        "cue_direction_cosine": 0.824427733416018,
+        "editable_area": 0.42919921875,
+        "exterior_energy_coverage": 0.2822780389701064
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.0000000023585796,
+        "stronger_cue_distance_ratio": 0.999999985737498,
+        "cue_direction_cosine": 0.8337890272505478,
+        "editable_area": 0.42919921875,
+        "exterior_energy_coverage": 0.6640776578487779
+      }
+    },
+    {
+      "scene": "harbor",
+      "position": 8,
+      "track": "positive",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.9999999979271925,
+        "stronger_cue_distance_ratio": 0.9999999524280483,
+        "cue_direction_cosine": 0.7653112993970874,
+        "editable_area": 0.42919921875,
+        "exterior_energy_coverage": 0.41251548963294854
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 0.9999999969197516,
+        "stronger_cue_distance_ratio": 1.0000000474747641,
+        "cue_direction_cosine": 0.7660447485486634,
+        "editable_area": 0.42919921875,
+        "exterior_energy_coverage": 0.48527482489607116
+      }
+    },
+    {
+      "scene": "harbor",
+      "position": 9,
+      "track": "positive",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 1.0000000058406744,
+        "stronger_cue_distance_ratio": 1.0000000046007451,
+        "cue_direction_cosine": 0.8524375009815529,
+        "editable_area": 0.42919921875,
+        "exterior_energy_coverage": 0.4984139926491997
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.000000004505537,
+        "stronger_cue_distance_ratio": 0.9999999340239684,
+        "cue_direction_cosine": 0.8528398378176715,
+        "editable_area": 0.42919921875,
+        "exterior_energy_coverage": 0.5185683437751306
+      }
+    },
+    {
+      "scene": "library",
+      "position": 0,
+      "track": "neutral",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 1.000000000306023,
+        "stronger_cue_distance_ratio": 1.0000000019620212,
+        "cue_direction_cosine": 0.93900781889809,
+        "editable_area": 0.4013671875,
+        "exterior_energy_coverage": 0.5116221566568473
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.0000000001595681,
+        "stronger_cue_distance_ratio": 1.0000000029131293,
+        "cue_direction_cosine": 0.9402501491897582,
+        "editable_area": 0.4013671875,
+        "exterior_energy_coverage": 0.6113839710225186
+      }
+    },
+    {
+      "scene": "library",
+      "position": 1,
+      "track": "neutral",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 1.0000000000577178,
+        "stronger_cue_distance_ratio": 0.9999999977839614,
+        "cue_direction_cosine": 0.9377662765575331,
+        "editable_area": 0.4013671875,
+        "exterior_energy_coverage": 0.5560941389753903
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 0.9999999997655467,
+        "stronger_cue_distance_ratio": 1.0000000003472025,
+        "cue_direction_cosine": 0.9388256702734868,
+        "editable_area": 0.4013671875,
+        "exterior_energy_coverage": 0.6838839682083296
+      }
+    },
+    {
+      "scene": "library",
+      "position": 2,
+      "track": "neutral",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 1.0000000000750777,
+        "stronger_cue_distance_ratio": 1.000000000010787,
+        "cue_direction_cosine": 0.9251234639556837,
+        "editable_area": 0.4013671875,
+        "exterior_energy_coverage": 0.5454509076630711
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.000000000421169,
+        "stronger_cue_distance_ratio": 0.9999999996316067,
+        "cue_direction_cosine": 0.9243497131725463,
+        "editable_area": 0.4013671875,
+        "exterior_energy_coverage": 0.5983474660922106
+      }
+    },
+    {
+      "scene": "library",
+      "position": 3,
+      "track": "neutral",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.9999999996829472,
+        "stronger_cue_distance_ratio": 0.9999999987920077,
+        "cue_direction_cosine": 0.9745060638408819,
+        "editable_area": 0.4013671875,
+        "exterior_energy_coverage": 0.6691603467606554
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.0000000001339362,
+        "stronger_cue_distance_ratio": 0.9999999986745207,
+        "cue_direction_cosine": 0.974572863448291,
+        "editable_area": 0.4013671875,
+        "exterior_energy_coverage": 0.7153681807298382
+      }
+    },
+    {
+      "scene": "library",
+      "position": 4,
+      "track": "neutral",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.9999999990106941,
+        "stronger_cue_distance_ratio": 1.0000000000839326,
+        "cue_direction_cosine": 0.9723225534812,
+        "editable_area": 0.4013671875,
+        "exterior_energy_coverage": 0.5954403931365363
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.000000000180188,
+        "stronger_cue_distance_ratio": 1.0000000004697562,
+        "cue_direction_cosine": 0.974271494706788,
+        "editable_area": 0.4013671875,
+        "exterior_energy_coverage": 0.8541995324383962
+      }
+    },
+    {
+      "scene": "library",
+      "position": 5,
+      "track": "neutral",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.9999999986754194,
+        "stronger_cue_distance_ratio": 0.9999999956888742,
+        "cue_direction_cosine": 0.9840892771254498,
+        "editable_area": 0.4013671875,
+        "exterior_energy_coverage": 0.5902400394749394
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 0.9999999992257773,
+        "stronger_cue_distance_ratio": 1.000000000591344,
+        "cue_direction_cosine": 0.9851620511428331,
+        "editable_area": 0.4013671875,
+        "exterior_energy_coverage": 0.8540619268057733
+      }
+    },
+    {
+      "scene": "library",
+      "position": 6,
+      "track": "neutral",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 1.0000000009535148,
+        "stronger_cue_distance_ratio": 0.9999999971819379,
+        "cue_direction_cosine": 0.9887092614201441,
+        "editable_area": 0.4013671875,
+        "exterior_energy_coverage": 0.49928722240763124
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 0.9999999999046995,
+        "stronger_cue_distance_ratio": 0.9999999949788682,
+        "cue_direction_cosine": 0.9890822326922463,
+        "editable_area": 0.4013671875,
+        "exterior_energy_coverage": 0.7309205128676772
+      }
+    },
+    {
+      "scene": "library",
+      "position": 7,
+      "track": "neutral",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 1.000000001165854,
+        "stronger_cue_distance_ratio": 0.9999999984434087,
+        "cue_direction_cosine": 0.9935751707881572,
+        "editable_area": 0.4013671875,
+        "exterior_energy_coverage": 0.5314955963663653
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.0000000009215326,
+        "stronger_cue_distance_ratio": 1.000000001918604,
+        "cue_direction_cosine": 0.9935692933899323,
+        "editable_area": 0.4013671875,
+        "exterior_energy_coverage": 0.5887279360909115
+      }
+    },
+    {
+      "scene": "library",
+      "position": 8,
+      "track": "neutral",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 1.0000000001291334,
+        "stronger_cue_distance_ratio": 0.999999999003444,
+        "cue_direction_cosine": 0.9886261628748151,
+        "editable_area": 0.4013671875,
+        "exterior_energy_coverage": 0.510856407785368
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.000000000504075,
+        "stronger_cue_distance_ratio": 0.9999999932004676,
+        "cue_direction_cosine": 0.9886412437152954,
+        "editable_area": 0.4013671875,
+        "exterior_energy_coverage": 0.6243106002717811
+      }
+    },
+    {
+      "scene": "library",
+      "position": 9,
+      "track": "neutral",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.9999999998443229,
+        "stronger_cue_distance_ratio": 0.9999999557394978,
+        "cue_direction_cosine": 0.8966006018828219,
+        "editable_area": 0.4013671875,
+        "exterior_energy_coverage": 0.48083904382670994
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.0000000000826283,
+        "stronger_cue_distance_ratio": 1.0000000040838581,
+        "cue_direction_cosine": 0.8978077674922726,
+        "editable_area": 0.4013671875,
+        "exterior_energy_coverage": 0.5951406665249901
+      }
+    },
+    {
+      "scene": "library",
+      "position": 0,
+      "track": "positive",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 1.000000000306023,
+        "stronger_cue_distance_ratio": 1.0000000019620212,
+        "cue_direction_cosine": 0.93900781889809,
+        "editable_area": 0.4013671875,
+        "exterior_energy_coverage": 0.5116221566568473
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.0000000001595681,
+        "stronger_cue_distance_ratio": 1.0000000029131293,
+        "cue_direction_cosine": 0.9402501491897582,
+        "editable_area": 0.4013671875,
+        "exterior_energy_coverage": 0.6113839710225186
+      }
+    },
+    {
+      "scene": "library",
+      "position": 1,
+      "track": "positive",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.9999999996652874,
+        "stronger_cue_distance_ratio": 1.0000000002985807,
+        "cue_direction_cosine": 0.939730582426285,
+        "editable_area": 0.4013671875,
+        "exterior_energy_coverage": 0.46546962729139774
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.0000000002145142,
+        "stronger_cue_distance_ratio": 1.0000000003178589,
+        "cue_direction_cosine": 0.9407551250306527,
+        "editable_area": 0.4013671875,
+        "exterior_energy_coverage": 0.6125904718225811
+      }
+    },
+    {
+      "scene": "library",
+      "position": 2,
+      "track": "positive",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.999999999906076,
+        "stronger_cue_distance_ratio": 1.0000000009412155,
+        "cue_direction_cosine": 0.935416703709421,
+        "editable_area": 0.4013671875,
+        "exterior_energy_coverage": 0.4406551837424219
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.0000000000442573,
+        "stronger_cue_distance_ratio": 1.0000000002635208,
+        "cue_direction_cosine": 0.9382743775859334,
+        "editable_area": 0.4013671875,
+        "exterior_energy_coverage": 0.7618754503656358
+      }
+    },
+    {
+      "scene": "library",
+      "position": 3,
+      "track": "positive",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 1.0000000004369036,
+        "stronger_cue_distance_ratio": 1.0000000005340541,
+        "cue_direction_cosine": 0.9546599683025214,
+        "editable_area": 0.4013671875,
+        "exterior_energy_coverage": 0.549875172310791
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 0.9999999994581101,
+        "stronger_cue_distance_ratio": 0.9999999995984951,
+        "cue_direction_cosine": 0.9577313413849007,
+        "editable_area": 0.4013671875,
+        "exterior_energy_coverage": 0.8551714709773441
+      }
+    },
+    {
+      "scene": "library",
+      "position": 4,
+      "track": "positive",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.9999999998284519,
+        "stronger_cue_distance_ratio": 0.9999999993075411,
+        "cue_direction_cosine": 0.9179964705735346,
+        "editable_area": 0.4013671875,
+        "exterior_energy_coverage": 0.5487613226206806
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.0000000002083496,
+        "stronger_cue_distance_ratio": 0.999999999972422,
+        "cue_direction_cosine": 0.9277145157571346,
+        "editable_area": 0.4013671875,
+        "exterior_energy_coverage": 0.9044084045380717
+      }
+    },
+    {
+      "scene": "library",
+      "position": 5,
+      "track": "positive",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 1.0000000005324128,
+        "stronger_cue_distance_ratio": 0.999999998245607,
+        "cue_direction_cosine": 0.8274969105302269,
+        "editable_area": 0.4013671875,
+        "exterior_energy_coverage": 0.33990812360757483
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 0.9999999992392675,
+        "stronger_cue_distance_ratio": 1.0000000019692608,
+        "cue_direction_cosine": 0.861190749367667,
+        "editable_area": 0.4013671875,
+        "exterior_energy_coverage": 0.9364239021067904
+      }
+    },
+    {
+      "scene": "library",
+      "position": 6,
+      "track": "positive",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 1.0000000001794969,
+        "stronger_cue_distance_ratio": 1.0000000024327829,
+        "cue_direction_cosine": 0.9496894778789184,
+        "editable_area": 0.4013671875,
+        "exterior_energy_coverage": 0.45292789208875567
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.0000000003137963,
+        "stronger_cue_distance_ratio": 1.0000000024684876,
+        "cue_direction_cosine": 0.9546311804299641,
+        "editable_area": 0.4013671875,
+        "exterior_energy_coverage": 0.8879888965408091
+      }
+    },
+    {
+      "scene": "library",
+      "position": 7,
+      "track": "positive",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 1.0000000018293416,
+        "stronger_cue_distance_ratio": 0.9999999908950981,
+        "cue_direction_cosine": 0.9088489763840254,
+        "editable_area": 0.4013671875,
+        "exterior_energy_coverage": 0.5462217724700775
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.0000000013629495,
+        "stronger_cue_distance_ratio": 0.9999999936143942,
+        "cue_direction_cosine": 0.909413427668835,
+        "editable_area": 0.4013671875,
+        "exterior_energy_coverage": 0.7201214903006912
+      }
+    },
+    {
+      "scene": "library",
+      "position": 8,
+      "track": "positive",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.9999999969439349,
+        "stronger_cue_distance_ratio": 0.9999999876756862,
+        "cue_direction_cosine": 0.88177937061647,
+        "editable_area": 0.4013671875,
+        "exterior_energy_coverage": 0.5687785375678681
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 0.9999999981698604,
+        "stronger_cue_distance_ratio": 1.0000000354580418,
+        "cue_direction_cosine": 0.8811590635416362,
+        "editable_area": 0.4013671875,
+        "exterior_energy_coverage": 0.7372875755139656
+      }
+    },
+    {
+      "scene": "library",
+      "position": 9,
+      "track": "positive",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 1.0000000063745382,
+        "stronger_cue_distance_ratio": 0.9999999392079844,
+        "cue_direction_cosine": 0.8689616237188112,
+        "editable_area": 0.4013671875,
+        "exterior_energy_coverage": 0.510817335862121
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.000000001929887,
+        "stronger_cue_distance_ratio": 0.999999866659536,
+        "cue_direction_cosine": 0.8705447899383464,
+        "editable_area": 0.4013671875,
+        "exterior_energy_coverage": 0.6488401365712269
+      }
+    },
+    {
+      "scene": "mall",
+      "position": 0,
+      "track": "neutral",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.9999999996652915,
+        "stronger_cue_distance_ratio": 0.9999999992979602,
+        "cue_direction_cosine": 0.9118126417852906,
+        "editable_area": 0.395263671875,
+        "exterior_energy_coverage": 0.383202642953186
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.000000000100463,
+        "stronger_cue_distance_ratio": 1.0000000003382006,
+        "cue_direction_cosine": 0.9136853768239184,
+        "editable_area": 0.395263671875,
+        "exterior_energy_coverage": 0.5285819723632218
+      }
+    },
+    {
+      "scene": "mall",
+      "position": 1,
+      "track": "neutral",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.9999999999699931,
+        "stronger_cue_distance_ratio": 0.9999999994352272,
+        "cue_direction_cosine": 0.9317089565164317,
+        "editable_area": 0.395263671875,
+        "exterior_energy_coverage": 0.47077829429643786
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.0000000000514084,
+        "stronger_cue_distance_ratio": 1.0000000008488619,
+        "cue_direction_cosine": 0.9363287200233057,
+        "editable_area": 0.395263671875,
+        "exterior_energy_coverage": 0.6245613860370559
+      }
+    },
+    {
+      "scene": "mall",
+      "position": 2,
+      "track": "neutral",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.9999999997477367,
+        "stronger_cue_distance_ratio": 0.9999999999900713,
+        "cue_direction_cosine": 0.9824246936597087,
+        "editable_area": 0.395263671875,
+        "exterior_energy_coverage": 0.6763662321707036
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 0.9999999995008286,
+        "stronger_cue_distance_ratio": 0.9999999987025676,
+        "cue_direction_cosine": 0.9826269517732029,
+        "editable_area": 0.395263671875,
+        "exterior_energy_coverage": 0.7547087696087031
+      }
+    },
+    {
+      "scene": "mall",
+      "position": 3,
+      "track": "neutral",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 1.0000000002678995,
+        "stronger_cue_distance_ratio": 1.0000000019917774,
+        "cue_direction_cosine": 0.9822676798596566,
+        "editable_area": 0.395263671875,
+        "exterior_energy_coverage": 0.49727665940038623
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.0000000000823268,
+        "stronger_cue_distance_ratio": 0.9999999997989693,
+        "cue_direction_cosine": 0.9852014841824333,
+        "editable_area": 0.395263671875,
+        "exterior_energy_coverage": 0.8687645828918744
+      }
+    },
+    {
+      "scene": "mall",
+      "position": 4,
+      "track": "neutral",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.9999999995137133,
+        "stronger_cue_distance_ratio": 1.000000002237823,
+        "cue_direction_cosine": 0.9832450301959129,
+        "editable_area": 0.395263671875,
+        "exterior_energy_coverage": 0.5927758605925748
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.0000000001149705,
+        "stronger_cue_distance_ratio": 0.9999999994551043,
+        "cue_direction_cosine": 0.9865166748683832,
+        "editable_area": 0.395263671875,
+        "exterior_energy_coverage": 0.8630543743371695
+      }
+    },
+    {
+      "scene": "mall",
+      "position": 5,
+      "track": "neutral",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 1.0000000003328495,
+        "stronger_cue_distance_ratio": 1.000000007278333,
+        "cue_direction_cosine": 0.9840206101079999,
+        "editable_area": 0.395263671875,
+        "exterior_energy_coverage": 0.49064441196053604
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.0000000006851923,
+        "stronger_cue_distance_ratio": 1.0000000015547024,
+        "cue_direction_cosine": 0.9872540363962361,
+        "editable_area": 0.395263671875,
+        "exterior_energy_coverage": 0.8461797969035363
+      }
+    },
+    {
+      "scene": "mall",
+      "position": 6,
+      "track": "neutral",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.9999999973569421,
+        "stronger_cue_distance_ratio": 0.9999999905670498,
+        "cue_direction_cosine": 0.9830459310470004,
+        "editable_area": 0.395263671875,
+        "exterior_energy_coverage": 0.4980160404442318
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.0000000012643442,
+        "stronger_cue_distance_ratio": 0.9999999961984091,
+        "cue_direction_cosine": 0.9854111735017144,
+        "editable_area": 0.395263671875,
+        "exterior_energy_coverage": 0.7986992524749722
+      }
+    },
+    {
+      "scene": "mall",
+      "position": 7,
+      "track": "neutral",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 1.0000000016610773,
+        "stronger_cue_distance_ratio": 1.0000000014805623,
+        "cue_direction_cosine": 0.9613795779595599,
+        "editable_area": 0.395263671875,
+        "exterior_energy_coverage": 0.4445236042993147
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 0.9999999989126124,
+        "stronger_cue_distance_ratio": 0.9999999961699005,
+        "cue_direction_cosine": 0.9713480756860522,
+        "editable_area": 0.395263671875,
+        "exterior_energy_coverage": 0.715835627690744
+      }
+    },
+    {
+      "scene": "mall",
+      "position": 8,
+      "track": "neutral",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.9999999997554422,
+        "stronger_cue_distance_ratio": 0.9999999771154002,
+        "cue_direction_cosine": 0.9759381002492105,
+        "editable_area": 0.395263671875,
+        "exterior_energy_coverage": 0.46841019141960305
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 0.9999999978426716,
+        "stronger_cue_distance_ratio": 1.000000002055835,
+        "cue_direction_cosine": 0.9783055418632453,
+        "editable_area": 0.395263671875,
+        "exterior_energy_coverage": 0.7788682218160147
+      }
+    },
+    {
+      "scene": "mall",
+      "position": 9,
+      "track": "neutral",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 1.0000000029577796,
+        "stronger_cue_distance_ratio": 1.000000004048599,
+        "cue_direction_cosine": 0.9583966534880479,
+        "editable_area": 0.395263671875,
+        "exterior_energy_coverage": 0.457620910156052
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.0000000063102705,
+        "stronger_cue_distance_ratio": 1.0000000053198879,
+        "cue_direction_cosine": 0.9602855310580745,
+        "editable_area": 0.395263671875,
+        "exterior_energy_coverage": 0.6180157743517521
+      }
+    },
+    {
+      "scene": "mall",
+      "position": 0,
+      "track": "positive",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.9999999996652915,
+        "stronger_cue_distance_ratio": 0.9999999992979602,
+        "cue_direction_cosine": 0.9118126417852906,
+        "editable_area": 0.395263671875,
+        "exterior_energy_coverage": 0.383202642953186
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.000000000100463,
+        "stronger_cue_distance_ratio": 1.0000000003382006,
+        "cue_direction_cosine": 0.9136853768239184,
+        "editable_area": 0.395263671875,
+        "exterior_energy_coverage": 0.5285819723632218
+      }
+    },
+    {
+      "scene": "mall",
+      "position": 1,
+      "track": "positive",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.9999999998080347,
+        "stronger_cue_distance_ratio": 1.000000001455292,
+        "cue_direction_cosine": 0.9209565412058258,
+        "editable_area": 0.395263671875,
+        "exterior_energy_coverage": 0.46488646620984037
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 0.9999999996769174,
+        "stronger_cue_distance_ratio": 0.9999999988893403,
+        "cue_direction_cosine": 0.9229141887276724,
+        "editable_area": 0.395263671875,
+        "exterior_energy_coverage": 0.5693403706221118
+      }
+    },
+    {
+      "scene": "mall",
+      "position": 2,
+      "track": "positive",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.9999999997635707,
+        "stronger_cue_distance_ratio": 0.999999999843826,
+        "cue_direction_cosine": 0.9020010904228508,
+        "editable_area": 0.395263671875,
+        "exterior_energy_coverage": 0.6013939829001764
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.0000000003873708,
+        "stronger_cue_distance_ratio": 0.9999999988341797,
+        "cue_direction_cosine": 0.9035066582076076,
+        "editable_area": 0.395263671875,
+        "exterior_energy_coverage": 0.5690724036163716
+      }
+    },
+    {
+      "scene": "mall",
+      "position": 3,
+      "track": "positive",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.9999999998517857,
+        "stronger_cue_distance_ratio": 0.9999999982580977,
+        "cue_direction_cosine": 0.9690208586535509,
+        "editable_area": 0.395263671875,
+        "exterior_energy_coverage": 0.5961656278192571
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.0000000000652676,
+        "stronger_cue_distance_ratio": 0.9999999988445419,
+        "cue_direction_cosine": 0.9767068666773758,
+        "editable_area": 0.395263671875,
+        "exterior_energy_coverage": 0.8309820479928789
+      }
+    },
+    {
+      "scene": "mall",
+      "position": 4,
+      "track": "positive",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.9999999999827373,
+        "stronger_cue_distance_ratio": 0.9999999998140682,
+        "cue_direction_cosine": 0.9578929009355315,
+        "editable_area": 0.395263671875,
+        "exterior_energy_coverage": 0.5244183610722687
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 0.9999999999449268,
+        "stronger_cue_distance_ratio": 1.0000000042842552,
+        "cue_direction_cosine": 0.9644754997338223,
+        "editable_area": 0.395263671875,
+        "exterior_energy_coverage": 0.8508774014413462
+      }
+    },
+    {
+      "scene": "mall",
+      "position": 5,
+      "track": "positive",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 1.0000000005171954,
+        "stronger_cue_distance_ratio": 1.0000000058482315,
+        "cue_direction_cosine": 0.9565269788900281,
+        "editable_area": 0.395263671875,
+        "exterior_energy_coverage": 0.5658876831466362
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.0000000001995846,
+        "stronger_cue_distance_ratio": 0.999999999449777,
+        "cue_direction_cosine": 0.9638415887856542,
+        "editable_area": 0.395263671875,
+        "exterior_energy_coverage": 0.8860394820120313
+      }
+    },
+    {
+      "scene": "mall",
+      "position": 6,
+      "track": "positive",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 1.000000000266585,
+        "stronger_cue_distance_ratio": 0.9999999958492919,
+        "cue_direction_cosine": 0.969210208623346,
+        "editable_area": 0.395263671875,
+        "exterior_energy_coverage": 0.7573651924035769
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 0.9999999982864942,
+        "stronger_cue_distance_ratio": 1.0000000000001765,
+        "cue_direction_cosine": 0.971458591995325,
+        "editable_area": 0.395263671875,
+        "exterior_energy_coverage": 0.8255190958610431
+      }
+    },
+    {
+      "scene": "mall",
+      "position": 7,
+      "track": "positive",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.9999999988698356,
+        "stronger_cue_distance_ratio": 1.000000005517374,
+        "cue_direction_cosine": 0.910287944829765,
+        "editable_area": 0.395263671875,
+        "exterior_energy_coverage": 0.6646944635475711
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.0000000000287497,
+        "stronger_cue_distance_ratio": 1.0000000234317248,
+        "cue_direction_cosine": 0.9232906641262482,
+        "editable_area": 0.395263671875,
+        "exterior_energy_coverage": 0.8107903990220694
+      }
+    },
+    {
+      "scene": "mall",
+      "position": 8,
+      "track": "positive",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 0.9999999982847789,
+        "stronger_cue_distance_ratio": 1.0000000213193863,
+        "cue_direction_cosine": 0.8555337845890081,
+        "editable_area": 0.395263671875,
+        "exterior_energy_coverage": 0.559257722298581
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 0.9999999973602761,
+        "stronger_cue_distance_ratio": 0.9999999866711304,
+        "cue_direction_cosine": 0.8573251192860296,
+        "editable_area": 0.395263671875,
+        "exterior_energy_coverage": 0.6709093180568957
+      }
+    },
+    {
+      "scene": "mall",
+      "position": 9,
+      "track": "positive",
+      "fixed_halo": {
+        "full_edit_norm_ratio": 1.0000000074354671,
+        "stronger_cue_distance_ratio": 0.9999999995175984,
+        "cue_direction_cosine": 0.8900419196971547,
+        "editable_area": 0.395263671875,
+        "exterior_energy_coverage": 0.4799418561541906
+      },
+      "inferred_halo": {
+        "full_edit_norm_ratio": 1.0000000067325239,
+        "stronger_cue_distance_ratio": 0.9999999780990443,
+        "cue_direction_cosine": 0.8909835799952801,
+        "editable_area": 0.395263671875,
+        "exterior_energy_coverage": 0.49444535382633775
+      }
+    }
+  ]
+}

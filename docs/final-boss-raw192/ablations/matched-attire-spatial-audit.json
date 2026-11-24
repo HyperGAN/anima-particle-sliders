@@ -1,0 +1,196 @@
+{
+  "scope": "Comparison of archived and matched-attire native teacher fields before training.",
+  "outside_matte_inclusive": 0.01,
+  "fields": 120,
+  "means": {
+    "stronger_cue_from_baseline": {
+      "fraction_squared_change_outside_matte": 0.16896904442529706,
+      "exterior_change_over_baseline_edit_norm": 0.07241755842694819
+    },
+    "matched_attire_from_baseline": {
+      "fraction_squared_change_outside_matte": 0.1276522339099974,
+      "exterior_change_over_baseline_edit_norm": 0.12244084794855933
+    },
+    "effect_of_changing_reference": {
+      "fraction_squared_change_outside_matte": 0.11046640198841641,
+      "exterior_change_over_baseline_edit_norm": 0.09537631105558483
+    }
+  },
+  "by_position": [
+    {
+      "position": 0,
+      "means": {
+        "stronger_cue_from_baseline": {
+          "fraction_squared_change_outside_matte": 0.23848927888809782,
+          "exterior_change_over_baseline_edit_norm": 0.09710677346859782
+        },
+        "matched_attire_from_baseline": {
+          "fraction_squared_change_outside_matte": 0.15373112956457374,
+          "exterior_change_over_baseline_edit_norm": 0.15893165931797873
+        },
+        "effect_of_changing_reference": {
+          "fraction_squared_change_outside_matte": 0.1620098732140756,
+          "exterior_change_over_baseline_edit_norm": 0.14808915810424075
+        }
+      }
+    },
+    {
+      "position": 1,
+      "means": {
+        "stronger_cue_from_baseline": {
+          "fraction_squared_change_outside_matte": 0.18907341284374013,
+          "exterior_change_over_baseline_edit_norm": 0.09051523955236311
+        },
+        "matched_attire_from_baseline": {
+          "fraction_squared_change_outside_matte": 0.15223120242075167,
+          "exterior_change_over_baseline_edit_norm": 0.1727635121613473
+        },
+        "effect_of_changing_reference": {
+          "fraction_squared_change_outside_matte": 0.12899894050410507,
+          "exterior_change_over_baseline_edit_norm": 0.13920298828426442
+        }
+      }
+    },
+    {
+      "position": 2,
+      "means": {
+        "stronger_cue_from_baseline": {
+          "fraction_squared_change_outside_matte": 0.1431842852086466,
+          "exterior_change_over_baseline_edit_norm": 0.09267426624972114
+        },
+        "matched_attire_from_baseline": {
+          "fraction_squared_change_outside_matte": 0.120305242814086,
+          "exterior_change_over_baseline_edit_norm": 0.14463399726873355
+        },
+        "effect_of_changing_reference": {
+          "fraction_squared_change_outside_matte": 0.09954578655697087,
+          "exterior_change_over_baseline_edit_norm": 0.10631876220526752
+        }
+      }
+    },
+    {
+      "position": 3,
+      "means": {
+        "stronger_cue_from_baseline": {
+          "fraction_squared_change_outside_matte": 0.10024377459051276,
+          "exterior_change_over_baseline_edit_norm": 0.06334022262352072
+        },
+        "matched_attire_from_baseline": {
+          "fraction_squared_change_outside_matte": 0.09253999624833714,
+          "exterior_change_over_baseline_edit_norm": 0.12091321280093836
+        },
+        "effect_of_changing_reference": {
+          "fraction_squared_change_outside_matte": 0.09079069789138279,
+          "exterior_change_over_baseline_edit_norm": 0.10438092136830542
+        }
+      }
+    },
+    {
+      "position": 4,
+      "means": {
+        "stronger_cue_from_baseline": {
+          "fraction_squared_change_outside_matte": 0.1301850540038662,
+          "exterior_change_over_baseline_edit_norm": 0.06032988882464149
+        },
+        "matched_attire_from_baseline": {
+          "fraction_squared_change_outside_matte": 0.09978514929159694,
+          "exterior_change_over_baseline_edit_norm": 0.10413549149837348
+        },
+        "effect_of_changing_reference": {
+          "fraction_squared_change_outside_matte": 0.08348777681403143,
+          "exterior_change_over_baseline_edit_norm": 0.07962202177898062
+        }
+      }
+    },
+    {
+      "position": 5,
+      "means": {
+        "stronger_cue_from_baseline": {
+          "fraction_squared_change_outside_matte": 0.1404478844900318,
+          "exterior_change_over_baseline_edit_norm": 0.052103393507144796
+        },
+        "matched_attire_from_baseline": {
+          "fraction_squared_change_outside_matte": 0.10462752479254422,
+          "exterior_change_over_baseline_edit_norm": 0.09301456433144732
+        },
+        "effect_of_changing_reference": {
+          "fraction_squared_change_outside_matte": 0.09525147710304772,
+          "exterior_change_over_baseline_edit_norm": 0.07269177717610224
+        }
+      }
+    },
+    {
+      "position": 6,
+      "means": {
+        "stronger_cue_from_baseline": {
+          "fraction_squared_change_outside_matte": 0.1399811513884974,
+          "exterior_change_over_baseline_edit_norm": 0.05396666619104406
+        },
+        "matched_attire_from_baseline": {
+          "fraction_squared_change_outside_matte": 0.11156737403475447,
+          "exterior_change_over_baseline_edit_norm": 0.09608307514109367
+        },
+        "effect_of_changing_reference": {
+          "fraction_squared_change_outside_matte": 0.09414139765176023,
+          "exterior_change_over_baseline_edit_norm": 0.07166812435082646
+        }
+      }
+    },
+    {
+      "position": 7,
+      "means": {
+        "stronger_cue_from_baseline": {
+          "fraction_squared_change_outside_matte": 0.1809855089189498,
+          "exterior_change_over_baseline_edit_norm": 0.061445735369867784
+        },
+        "matched_attire_from_baseline": {
+          "fraction_squared_change_outside_matte": 0.12719778234397527,
+          "exterior_change_over_baseline_edit_norm": 0.10436703768426607
+        },
+        "effect_of_changing_reference": {
+          "fraction_squared_change_outside_matte": 0.09822550901606865,
+          "exterior_change_over_baseline_edit_norm": 0.07365475916619713
+        }
+      }
+    },
+    {
+      "position": 8,
+      "means": {
+        "stronger_cue_from_baseline": {
+          "fraction_squared_change_outside_matte": 0.21682723440071294,
+          "exterior_change_over_baseline_edit_norm": 0.07072851268807155
+        },
+        "matched_attire_from_baseline": {
+          "fraction_squared_change_outside_matte": 0.13516985402353,
+          "exterior_change_over_baseline_edit_norm": 0.10758115675010475
+        },
+        "effect_of_changing_reference": {
+          "fraction_squared_change_outside_matte": 0.09800751582247558,
+          "exterior_change_over_baseline_edit_norm": 0.07241003095936095
+        }
+      }
+    },
+    {
+      "position": 9,
+      "means": {
+        "stronger_cue_from_baseline": {
+          "fraction_squared_change_outside_matte": 0.21027285951991517,
+          "exterior_change_over_baseline_edit_norm": 0.08196488579450938
+        },
+        "matched_attire_from_baseline": {
+          "fraction_squared_change_outside_matte": 0.17936708356582431,
+          "exterior_change_over_baseline_edit_norm": 0.12198477253131014
+        },
+        "effect_of_changing_reference": {
+          "fraction_squared_change_outside_matte": 0.15420504531024606,
+          "exterior_change_over_baseline_edit_norm": 0.08572456716230281
+        }
+      }
+    }
+  ],
+  "caches": {
+    "soft-floor45": "8e28e58e797016219e5f0a0dbbaacccdc37eafaa25468b83ef954bfb2e90e120",
+    "strong-boss-45-mix35": "7feebb6e2fedbbd9e90a9ab377687093647c69b9797158252121c601f2872445",
+    "matched-attire35": "b6f07c7e0b9ded5f8be93f34cec1f32ffdee76dd36fcff64c4c61798d5d1f330"
+  }
+}
