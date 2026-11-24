@@ -50,9 +50,9 @@ The public capture command reproduced all **360** archived fields for the early-
 
 ## Update-144 preview
 
-At shared early α 2/3, early cues scored **9.78**, the two-cue average **9.55**, late cues **8.92**, and soft foreground weighting **7.75**. All four passed the structural checks. Early cues led on three cases. The two-cue average led on seamstress and tied early cues for mean Boss distinction gain (**+0.200**). Its higher mean damage (**0.329** versus **0.289**) contributed to a lower adjusted score. [Matched originals and renders](final-boss-raw192/ablations/cue-timing-raw144-matched.jpg) · [Per-case scores](final-boss-raw192/ablations/cue-timing-raw144-scores.json)
+At shared early α 2/3, early cues scored **9.78**, the two-cue average **9.55**, late cues **8.92**, soft foreground weighting **7.75**, and qualified costume teachers **5.13**. All five passed the structural checks. Early cues led on three cases, and the two-cue average led on seamstress. The costume teachers had the lowest mean damage (**0.258**) and the weakest mean Boss distinction gain (**+0.090**). [Matched originals and renders](final-boss-raw192/ablations/cue-timing-raw144-matched.jpg) · [Per-case scores](final-boss-raw192/ablations/cue-timing-raw144-scores.json)
 
-The quarter-check question gave mean gains of **+0.513** for early cues, **+0.497** for the two-cue average, **+0.453** for late cues, and **+0.401** for soft foreground weighting.
+The quarter-check question gave mean gains of **+0.513** for early cues, **+0.497** for the two-cue average, **+0.453** for late cues, **+0.401** for soft foreground weighting, and **+0.318** for the costume teachers.
 
 ## Late cues at update 192
 
@@ -77,6 +77,8 @@ The training recipe pairs all **80** fields from four qualified costume teachers
 On eight matched frozen-teacher cases, the in-scene armor-and-crown prompt scored **36.96** under the leaderboard rubric. The worn helmet scored **25.35** and the amplified mask **25.03**. In-scene costume beat amplified mask on six cases. It had lower mean Boss distinction gain (**+0.729** versus **+0.826**) and much lower mean damage (**0.292** versus **0.464**). Several amplified-mask renders introduced inset portraits or multiple views. All three recipes used the frozen model with zero optimizer updates. [Matched teacher renders](final-boss-raw192/ablations/grounded-teacher-matched.jpg) · [Per-case scores](final-boss-raw192/ablations/grounded-teacher-scores.json)
 
 The queued training test gives the original six contexts in-scene prompts that describe the existing costume as worn by the subject under the original light. Both arms use the original trajectories, 0.45 background floor, and per-field L2 normalization. One mixes in the grounded contrast at 35% throughout. The other tapers the mix from 39.2% to 27.3% across the ten teacher positions. Both are planned for 192 stock ParticleGAN updates and the shared-strength evaluation. [Exact prompts and mixing weights](final-boss-raw192/ablations/grounded-training-prompts.json)
+
+Both caches are prepared on CUDA. The 120 latents, neutral velocities, and embeddings match the soft-foreground cache. The taper changes the target direction by up to **4.58%** of the edit norm on average at a denoising position and preserves the per-field L2 norm. [Cache and field comparison](final-boss-raw192/ablations/grounded-training-prompts.json)
 
 ## Structural stops
 
