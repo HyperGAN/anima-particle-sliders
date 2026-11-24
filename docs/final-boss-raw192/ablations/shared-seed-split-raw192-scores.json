@@ -1,0 +1,956 @@
+{
+ "development_cases": [
+  {
+   "label": "ranger",
+   "seed": 552242,
+   "prompt": "Anime illustration. Waist-up eye-level portrait of one adult man with wavy blond hair, wearing a russet hiking jacket, standing naturally facing the viewer. Background: alpine cable-car station with a green numbered post, metal railings and snow in the distance. Lighting: bright midday mountain light. Show the surroundings clearly."
+  },
+  {
+   "label": "smith",
+   "seed": 552243,
+   "prompt": "Anime illustration. Waist-up eye-level portrait of one adult woman with a straight gray bob, wearing a denim apron, standing naturally facing the viewer. Background: historical stone smithy with an old iron anvil and tools hanging from a wooden rack. Lighting: steady warm light from the hinged brass wall lamps. Show the surroundings clearly."
+  },
+  {
+   "label": "stationer",
+   "seed": 552244,
+   "prompt": "Anime illustration. Waist-up eye-level portrait of one adult man with short black curls, wearing a brown cardigan, standing naturally facing the viewer. Background: covered town square with orange awnings, terracotta pavement and a blue souvenir sign. Lighting: cool early evening light with street lanterns. Show the surroundings clearly."
+  },
+  {
+   "label": "ferryman",
+   "seed": 553302,
+   "prompt": "Anime illustration. Eye-level half-body portrait of one adult man with gray hair and a short beard, standing naturally facing the viewer. Background: covered ferry pier with a red railing and mooring rope. Lighting: clear morning sunlight. Keep the surrounding setting clearly visible."
+  },
+  {
+   "label": "watchmaker",
+   "seed": 553304,
+   "prompt": "Anime illustration. Eye-level half-body portrait of one older man with wavy white hair, standing naturally facing the viewer. Background: watch repair shop with brass clocks and a cream workbench. Lighting: steady warm lamp light. Keep the surrounding setting clearly visible."
+  },
+  {
+   "label": "guide",
+   "seed": 553305,
+   "prompt": "Anime illustration. Eye-level half-body portrait of one adult woman with dark brown curls and dark skin, standing naturally facing the viewer. Background: sandstone trail shelter with a wooden map board and distant dunes. Lighting: bright late-afternoon daylight. Keep the surrounding setting clearly visible."
+  },
+  {
+   "label": "guard",
+   "seed": 553306,
+   "prompt": "Anime illustration. Eye-level half-body portrait of one adult man with short black hair and round glasses, standing naturally facing the viewer. Background: quiet tiled vestibule with green lockers and a white enamel sign. Lighting: neutral fluorescent light. Keep the surrounding setting clearly visible."
+  },
+  {
+   "label": "violinist",
+   "seed": 553308,
+   "prompt": "Anime illustration. Eye-level half-body portrait of one adult man with straight shoulder-length brown hair, standing naturally facing the viewer. Background: concert hall anteroom with two burgundy chairs and a gilded mirror. Lighting: low warm evening lamp light. Keep the surrounding setting clearly visible."
+  }
+ ],
+ "sigmas": [
+  1.0,
+  0.964285671710968,
+  0.9230769872665405,
+  0.8749999403953552,
+  0.8181818127632141,
+  0.75,
+  0.6666666865348816,
+  0.5625,
+  0.4285714626312256,
+  0.25,
+  0.0
+ ],
+ "scoring": {
+  "final_score": {
+   "formula": "max(0, Boss_ON - Boss_OFF) * (1 - image_damage)**2",
+   "role": "objective the run was declared and tuned with (harness score)"
+  },
+  "final_boss_score": {
+   "formula": "max(0, Boss_ON - Boss_OFF) * Boss_ON**3 * (1 - image_damage)**2 * min(1, (1 - image_damage) / (1 - 1/3))**3",
+   "version": "final-boss-distinction-v1",
+   "role": "current leaderboard score, recomputed from the same saved readings with release_tools/final_boss_scoring.py"
+  },
+  "boss_distinction_rubric": "identical to rubrics.json boss_distinction",
+  "image_breakage_rubric": "identical to rubrics.json image_breakage (severity)"
+ },
+ "controls": {
+  "matched_constant": "shared-best-stock",
+  "fixed_strength": null
+ },
+ "control_note": "The stock control belongs to a separate shared-teacher study. Its readings are cited here unchanged as the matched reference. Its early alpha 2/3 setting is unmeasured in that study (violinist structural check unmeasured, no Boss distinction readings), so there is no matched early comparison.",
+ "training": {
+  "options": {
+   "batch_size": 2,
+   "critic_width": 32,
+   "ema_decay": null,
+   "learning_rates": {
+    "d_lr_mult": 12.0,
+    "lr": 0.00075,
+    "prior_lr_mult": 40.0
+   },
+   "numerical_profile": null,
+   "response_scale": 1.0,
+   "seed": 1,
+   "sigma": 1.0,
+   "total_steps": 192,
+   "variation": "vibe-4b4773bba3bd2b7c"
+  },
+  "parameterisation": "stock ParticleGAN EMPF updates, RAW weights, ema_decay None"
+ },
+ "teacher_cache": {
+  "shared_manifest_sha256": "6a527d50d6bb2fd6c972b5349d44c3c47480731953b72ae368884655f1de84d5",
+  "scenes": [
+   "knight",
+   "tree",
+   "colossus",
+   "wyrm",
+   "insect"
+  ],
+  "fields": 100,
+  "seed_a": 31237,
+  "candidate_order": [
+   31238,
+   31239,
+   31240
+  ],
+  "assignment": "neutral trajectory: seed A at even positions, seed B at odd positions; positive trajectory: seed B at even positions, seed A at odd positions",
+  "seed_b": {
+   "knight": 31238,
+   "tree": 31238,
+   "colossus": 31238,
+   "wyrm": null,
+   "insect": 31239
+  },
+  "fields_from_seed_b": 40,
+  "fields_verbatim_from_shared_cache": 60,
+  "audit_checks": {
+   "a_count_and_order": true,
+   "b_a_slots_verbatim": true,
+   "c_b_slots_from_capture": true,
+   "d_crossed_parity": true,
+   "e_embeddings_and_prompts": true,
+   "f_finite": true,
+   "g_g3_norm": true
+  },
+  "cache_fingerprint": "5fdbe5db09cc2458532ee32c2019dd727df56a82245c1c14ce556ae4cca32ab9",
+  "shared_cache": "03a5ad7c0306e39df0db4f40b93c89d9e3266fbc8f8ff504bbf7f4fb83c31557"
+ },
+ "edit_strength_gate": {
+  "declared": {
+   "bounds": [
+    0.85,
+    1.15
+   ],
+   "applied_to": "every teacher position",
+   "verdict": "no admissible candidate",
+   "pooled_ratio_first_split": [
+    1.0079909632413961,
+    1.0432400619574058,
+    0.8450805033509925,
+    0.8802894242461287,
+    1.0529848215001967,
+    0.7247288299910493,
+    1.0166255470264898,
+    0.6977895432342656,
+    0.9819052053899243,
+    0.8413908554680724
+   ],
+   "failing_positions_zero_indexed": [
+    2,
+    5,
+    7,
+    9
+   ]
+  },
+  "amendment": {
+   "written_before": "any training update of shared-best-seed-split; no finished-image score of this arm exists",
+   "what_changed": "The edit-strength gate G3 keeps its bounds [0.85, 1.15] but applies them to the overall seed-B over seed-A edit strength (geometric mean of the pooled per-position ratios, and the norm-weighted ratio; both must pass) instead of to every teacher position separately. Seed B is still the first qualified candidate in the fixed order. On an overall failure the scene whose own ratio is farthest from 1 advances.",
+   "what_did_not_change": "Candidate seeds and their order, main's qualifies(row, 0.75) rule, the second judge read, the 3-of-5 admission rule, the crossed assignment, and everything about training and evaluation."
+  },
+  "amended_result": {
+   "geometric_mean": 0.9003087969168674,
+   "norm_weighted": 0.9223520439578011,
+   "per_scene_geometric_mean": {
+    "knight": 0.966504664674124,
+    "tree": 0.9496221683666892,
+    "colossus": 0.8197804427592353,
+    "insect": 0.9099546794583812
+   },
+   "pooled_by_position": [
+    1.0079909632413961,
+    1.0432400619574058,
+    0.8450805033509925,
+    0.8802894242461287,
+    1.0529848215001967,
+    0.7247288299910493,
+    1.0166255470264898,
+    0.6977895432342656,
+    0.9819052053899243,
+    0.8413908554680724
+   ]
+  },
+  "independent_review": {
+   "verdict": "defensible; cache sound; single-variable binding holds; training should continue",
+   "finding_to_disclose": "The seed-B fields are a systematically weaker teacher, not just noisier: overall 0.900 (geometric) and 0.922 (norm-weighted) of the seed-A fields they replace, about 4 standard errors beyond same-seed slot noise; pooled 0.725 and 0.698 at positions 5 and 7, outside the same-seed range of 0.846 to 1.126 for the four split scenes; colossus scene 0.82; whole crossed cache 0.968 of the shared cache's total edit norm. Eight of nine qualified candidate seeds are weaker than seed 31237.",
+   "seed_choice_unaffected": "The fixed-order first-qualified seeds passed the amended gate with no fallback; stronger candidates existed (knight 31240 at 1.037, insect 31240 at 0.99) and were not taken.",
+   "interpretation": "If the arm loses, a weaker average teacher edit is an alternative explanation to seed mixing. If it wins, it wins despite weaker fields; a softer target acting as regularisation cannot be ruled out. A per-scene breakdown or a strength-matched follow-up would separate them.",
+   "declared_gate_code": "seed-b/declared-gate/qualify.py.txt reconstructs the declared implementation (sha256 matches the stop record)."
+  }
+ },
+ "recipes": {
+  "shared-best-seed-split": {
+   "label": "Shared main-selected teachers with a second qualified seed crossed into 40 of 100 fields",
+   "status": "measured",
+   "step": 192,
+   "raw_sha256": "d6b058933904d9271636bac9e82d4a65f19950f77e4cca74e432efa77ae4244d",
+   "cache": "5fdbe5db09cc2458532ee32c2019dd727df56a82245c1c14ce556ae4cca32ab9",
+   "source_report_sha256": "e0ccfc2708a3de44a33634cbc20190cd79ed9313f16db3f7099d18723b5cb7a1",
+   "source_review_sha256": "05fa17f3821643c68b60ec4fc73ad8bdaef988285372be0e03158242e609c62c",
+   "fixed_strength": {
+    "status": "pass",
+    "profile": "early",
+    "alpha": 0.6666666666666666,
+    "gains": [
+     1.0,
+     1.0,
+     1.0,
+     1.0,
+     1.0,
+     1.0,
+     1.0,
+     0.6444445235641115,
+     0.3333333333333333,
+     0.3333333333333333
+    ],
+    "means": {
+     "boss_distinction": 0.14250000000000002,
+     "original_boss_distinction": 0.08125,
+     "boss_effect": 0.06125,
+     "image_breakage": 0.26375,
+     "final_score": 0.03271997222222223,
+     "final_boss_score": 0.00018043925746195755
+    },
+    "cases": {
+     "ranger": {
+      "boss_distinction": 0.14,
+      "original_boss_distinction": 0.06,
+      "image_breakage": 0.24666666666666667,
+      "boss_effect": 0.08000000000000002,
+      "final_score": 0.04540088888888889,
+      "final_boss_score": 0.00012458003911111116,
+      "integrity": "pass",
+      "structural_checks": {
+       "no_readable_image": 0.04,
+       "split_or_duplication": 0.02,
+       "broken_structure": 0.25
+      },
+      "on_sha256": "421c8271418ae22b19c0e5bbfb45d71790f52f4f5126ca82473f0110274d23e1",
+      "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+     },
+     "smith": {
+      "boss_distinction": 0.12,
+      "original_boss_distinction": 0.08,
+      "image_breakage": 0.4033333333333333,
+      "boss_effect": 0.039999999999999994,
+      "final_score": 0.014240444444444443,
+      "final_boss_score": 1.7641535702303988e-05,
+      "integrity": "pass",
+      "structural_checks": {
+       "no_readable_image": 0.05,
+       "split_or_duplication": 0.05,
+       "broken_structure": 0.31
+      },
+      "on_sha256": "35a69e5289e39bf8138cd4a58c8525534f6dc149cb82adbb82c828cddecadf4c",
+      "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+     },
+     "stationer": {
+      "boss_distinction": 0.13,
+      "original_boss_distinction": 0.09,
+      "image_breakage": 0.22,
+      "boss_effect": 0.04000000000000001,
+      "final_score": 0.024336000000000007,
+      "final_boss_score": 5.346619200000002e-05,
+      "integrity": "pass",
+      "structural_checks": {
+       "no_readable_image": 0.05,
+       "split_or_duplication": 0.03,
+       "broken_structure": 0.33
+      },
+      "on_sha256": "4ba29868f2be9a79a0f332aab2eb96c4cd6fb71cae9c316d10d1517c68509153",
+      "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+     },
+     "ferryman": {
+      "boss_distinction": 0.13,
+      "original_boss_distinction": 0.11,
+      "image_breakage": 0.15666666666666665,
+      "boss_effect": 0.020000000000000004,
+      "final_score": 0.014224222222222228,
+      "final_boss_score": 3.125061622222224e-05,
+      "integrity": "pass",
+      "structural_checks": {
+       "no_readable_image": 0.04,
+       "split_or_duplication": 0.03,
+       "broken_structure": 0.26
+      },
+      "on_sha256": "aa9646594c80abf6fa7b5b699307cfe4f5cb43fa72b19de5b1cab91c9b7dcd57",
+      "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+     },
+     "watchmaker": {
+      "boss_distinction": 0.15,
+      "original_boss_distinction": 0.07,
+      "image_breakage": 0.26,
+      "boss_effect": 0.07999999999999999,
+      "final_score": 0.04380799999999999,
+      "final_boss_score": 0.00014785199999999994,
+      "integrity": "pass",
+      "structural_checks": {
+       "no_readable_image": 0.04,
+       "split_or_duplication": 0.02,
+       "broken_structure": 0.41
+      },
+      "on_sha256": "1d043dd3b91a425667341c56ce657573723716a3b1d79fca37a810bc89efaf1b",
+      "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+     },
+     "guide": {
+      "boss_distinction": 0.08,
+      "original_boss_distinction": 0.08,
+      "image_breakage": 0.22666666666666668,
+      "boss_effect": 0,
+      "final_score": 0.0,
+      "final_boss_score": 0.0,
+      "integrity": "pass",
+      "structural_checks": {
+       "no_readable_image": 0.04,
+       "split_or_duplication": 0.02,
+       "broken_structure": 0.34
+      },
+      "on_sha256": "0a08fab440eb0d1ac79bb450abf39efb87499b1ed08055a76d3d81c2e38a67b7",
+      "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+     },
+     "guard": {
+      "boss_distinction": 0.22,
+      "original_boss_distinction": 0.07,
+      "image_breakage": 0.24,
+      "boss_effect": 0.15,
+      "final_score": 0.08664,
+      "final_boss_score": 0.0009225427199999999,
+      "integrity": "pass",
+      "structural_checks": {
+       "no_readable_image": 0.04,
+       "split_or_duplication": 0.02,
+       "broken_structure": 0.3
+      },
+      "on_sha256": "ea6360022a4043b009ac4e0e4470f342c7c528e45192eee6472b90207992f2f5",
+      "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+     },
+     "violinist": {
+      "boss_distinction": 0.17,
+      "original_boss_distinction": 0.09,
+      "image_breakage": 0.3566666666666667,
+      "boss_effect": 0.08000000000000002,
+      "final_score": 0.03311022222222223,
+      "final_boss_score": 0.00014618095666002319,
+      "integrity": "pass",
+      "structural_checks": {
+       "no_readable_image": 0.06,
+       "split_or_duplication": 0.07,
+       "broken_structure": 0.39
+      },
+      "on_sha256": "06f5e37cd0068efd51dca0769e3c73be883d46621ed4febe39d1b98a13fd094d",
+      "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+     }
+    }
+   },
+   "matched_constant": {
+    "status": "pass",
+    "profile": "constant",
+    "alpha": 0.6375,
+    "gains": [
+     0.6375,
+     0.6375,
+     0.6375,
+     0.6375,
+     0.6375,
+     0.6375,
+     0.6375,
+     0.6375,
+     0.6375,
+     0.6375
+    ],
+    "means": {
+     "boss_distinction": 0.14,
+     "original_boss_distinction": 0.08125,
+     "boss_effect": 0.05875,
+     "image_breakage": 0.29041666666666666,
+     "final_score": 0.031035666666666666,
+     "final_boss_score": 0.00013278047174741667
+    },
+    "cases": {
+     "ranger": {
+      "boss_distinction": 0.14,
+      "original_boss_distinction": 0.06,
+      "image_breakage": 0.24,
+      "boss_effect": 0.08000000000000002,
+      "final_score": 0.046208000000000006,
+      "final_boss_score": 0.00012679475200000006,
+      "integrity": "pass",
+      "structural_checks": {
+       "no_readable_image": 0.04,
+       "split_or_duplication": 0.02,
+       "broken_structure": 0.25
+      },
+      "on_sha256": "4b3fac4f6829d334d2f6f89b4c9c80b8543350619458f441c6d883463be41e23",
+      "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+     },
+     "smith": {
+      "boss_distinction": 0.11,
+      "original_boss_distinction": 0.08,
+      "image_breakage": 0.38999999999999996,
+      "boss_effect": 0.03,
+      "final_score": 0.011163000000000003,
+      "final_boss_score": 1.138209647588888e-05,
+      "integrity": "pass",
+      "structural_checks": {
+       "no_readable_image": 0.05,
+       "split_or_duplication": 0.04,
+       "broken_structure": 0.37
+      },
+      "on_sha256": "0b179bbea2b9769d21ac6c24c4e612fbc8a65da4543e6ec0e50cd070471d42f0",
+      "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+     },
+     "stationer": {
+      "boss_distinction": 0.17,
+      "original_boss_distinction": 0.09,
+      "image_breakage": 0.27666666666666667,
+      "boss_effect": 0.08000000000000002,
+      "final_score": 0.0418568888888889,
+      "final_boss_score": 0.00020564289511111123,
+      "integrity": "pass",
+      "structural_checks": {
+       "no_readable_image": 0.05,
+       "split_or_duplication": 0.03,
+       "broken_structure": 0.3
+      },
+      "on_sha256": "bd378c3009a254cda1e8da4c03a788675e55c95fa7ee898df17f4743c0eaea53",
+      "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+     },
+     "ferryman": {
+      "boss_distinction": 0.12,
+      "original_boss_distinction": 0.11,
+      "image_breakage": 0.25666666666666665,
+      "boss_effect": 0.009999999999999995,
+      "final_score": 0.005525444444444442,
+      "final_boss_score": 9.547967999999993e-06,
+      "integrity": "pass",
+      "structural_checks": {
+       "no_readable_image": 0.05,
+       "split_or_duplication": 0.02,
+       "broken_structure": 0.31
+      },
+      "on_sha256": "8a8b7fa87bc5e5ec485d87b31b8f13d3022ded168595dcd9a86f140413993b0a",
+      "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+     },
+     "watchmaker": {
+      "boss_distinction": 0.15,
+      "original_boss_distinction": 0.07,
+      "image_breakage": 0.27,
+      "boss_effect": 0.07999999999999999,
+      "final_score": 0.04263199999999999,
+      "final_boss_score": 0.00014388299999999992,
+      "integrity": "pass",
+      "structural_checks": {
+       "no_readable_image": 0.05,
+       "split_or_duplication": 0.02,
+       "broken_structure": 0.36
+      },
+      "on_sha256": "c30a8a85c883f1ff0905549aa1196febdd6bc3733562c96e12ded4928511989f",
+      "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+     },
+     "guide": {
+      "boss_distinction": 0.09,
+      "original_boss_distinction": 0.08,
+      "image_breakage": 0.27999999999999997,
+      "boss_effect": 0.009999999999999995,
+      "final_score": 0.005183999999999997,
+      "final_boss_score": 3.7791359999999976e-06,
+      "integrity": "pass",
+      "structural_checks": {
+       "no_readable_image": 0.04,
+       "split_or_duplication": 0.02,
+       "broken_structure": 0.32
+      },
+      "on_sha256": "c23088c1efe259034218b36a223b1426a429a1c6875c0c0b0d5a169f4bc6a2fa",
+      "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+     },
+     "guard": {
+      "boss_distinction": 0.19,
+      "original_boss_distinction": 0.07,
+      "image_breakage": 0.21666666666666667,
+      "boss_effect": 0.12,
+      "final_score": 0.07363333333333333,
+      "final_boss_score": 0.0005050510333333333,
+      "integrity": "pass",
+      "structural_checks": {
+       "no_readable_image": 0.04,
+       "split_or_duplication": 0.02,
+       "broken_structure": 0.28
+      },
+      "on_sha256": "0711799165415043955263f747b16f92170ab4e9358e3e6ebc1fb48f41f23767",
+      "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+     },
+     "violinist": {
+      "boss_distinction": 0.15,
+      "original_boss_distinction": 0.09,
+      "image_breakage": 0.3933333333333333,
+      "boss_effect": 0.06,
+      "final_score": 0.022082666666666667,
+      "final_boss_score": 5.6162893058999976e-05,
+      "integrity": "pass",
+      "structural_checks": {
+       "no_readable_image": 0.07,
+       "split_or_duplication": 0.04,
+       "broken_structure": 0.43
+      },
+      "on_sha256": "f9c1fd54dc2cf626f32d5be2c72241cc0b1bfe9669884f561b32cb7fd1ab9637",
+      "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+     }
+    }
+   },
+   "quarter_checks": {
+    "48": {
+     "mean_gain": 0.09583333333333333,
+     "question": "How well does the candidate convey ‘Final Boss’ without breaking the image?",
+     "cases": {
+      "archivist": {
+       "gain": 0.09333333333333332,
+       "integrity": "pass"
+      },
+      "bookkeeper": {
+       "gain": 0.10666666666666666,
+       "integrity": "pass"
+      },
+      "botanist": {
+       "gain": 0.09,
+       "integrity": "pass"
+      },
+      "seamstress": {
+       "gain": 0.09333333333333335,
+       "integrity": "pass"
+      }
+     }
+    },
+    "96": {
+     "mean_gain": 0.12250000000000001,
+     "question": "How well does the candidate convey ‘Final Boss’ without breaking the image?",
+     "cases": {
+      "archivist": {
+       "gain": 0.10999999999999999,
+       "integrity": "pass"
+      },
+      "bookkeeper": {
+       "gain": 0.12666666666666668,
+       "integrity": "pass"
+      },
+      "botanist": {
+       "gain": 0.12000000000000002,
+       "integrity": "pass"
+      },
+      "seamstress": {
+       "gain": 0.13333333333333336,
+       "integrity": "pass"
+      }
+     }
+    },
+    "144": {
+     "mean_gain": 0.12666666666666668,
+     "question": "How well does the candidate convey ‘Final Boss’ without breaking the image?",
+     "cases": {
+      "archivist": {
+       "gain": 0.10666666666666666,
+       "integrity": "pass"
+      },
+      "bookkeeper": {
+       "gain": 0.15666666666666665,
+       "integrity": "pass"
+      },
+      "botanist": {
+       "gain": 0.1466666666666667,
+       "integrity": "pass"
+      },
+      "seamstress": {
+       "gain": 0.09666666666666668,
+       "integrity": "pass"
+      }
+     }
+    },
+    "192": {
+     "mean_gain": 0.12000000000000001,
+     "question": "How well does the candidate convey ‘Final Boss’ without breaking the image?",
+     "cases": {
+      "archivist": {
+       "gain": 0.17333333333333334,
+       "integrity": "pass"
+      },
+      "bookkeeper": {
+       "gain": 0.08333333333333334,
+       "integrity": "pass"
+      },
+      "botanist": {
+       "gain": 0.15000000000000002,
+       "integrity": "pass"
+      },
+      "seamstress": {
+       "gain": 0.07333333333333333,
+       "integrity": "pass"
+      }
+     }
+    }
+   }
+  },
+  "shared-best-stock": {
+   "label": "Shared main-selected teachers, stock (matched control from the shared-teacher study)",
+   "status": "measured",
+   "step": 192,
+   "raw_sha256": "efa9277eef8c455e2cddcf6862f8c4cb9e8cbc6697a75fc09abbc15ac8c05b9f",
+   "cache": "03a5ad7c0306e39df0db4f40b93c89d9e3266fbc8f8ff504bbf7f4fb83c31557",
+   "source_report_sha256": "58ed8329380d0ed39f26ee05e5606f5c38a4346ffe8e20d9fdc8d95b04d28dd3",
+   "source_review_sha256": "05fa17f3821643c68b60ec4fc73ad8bdaef988285372be0e03158242e609c62c",
+   "fixed_strength": {
+    "status": "unmeasured",
+    "profile": "early",
+    "alpha": 0.6666666666666666,
+    "gains": [
+     1.0,
+     1.0,
+     1.0,
+     1.0,
+     1.0,
+     1.0,
+     1.0,
+     0.6444445235641115,
+     0.3333333333333333,
+     0.3333333333333333
+    ],
+    "cases": {
+     "ranger": {
+      "integrity": "pass",
+      "on_sha256": "2e3008f66fe89e60a6561dccf9deb8db66b5a5b162083a5e32a9a3bc70ae1920",
+      "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+     },
+     "smith": {
+      "integrity": "pass",
+      "on_sha256": "defef015978db0819c393122d327ad0499b3e36dccdb580d569c106dc376855c",
+      "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+     },
+     "stationer": {
+      "integrity": "pass",
+      "on_sha256": "952b89e39e868fb632092220370331da22e79f6ff6ad7f248ef4a3010f71ec8d",
+      "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+     },
+     "ferryman": {
+      "integrity": "pass",
+      "on_sha256": "10f4dabca60e7f3151cba3d745bf6cbe62522dc21ed9dd16f671d2d2e6d7a711",
+      "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+     },
+     "watchmaker": {
+      "integrity": "pass",
+      "on_sha256": "a1338ba3547bc38631c2a04cdc4220312325ae413d0befc6e00d7f271e3c2d1d",
+      "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+     },
+     "guide": {
+      "integrity": "pass",
+      "on_sha256": "83fe81af3bad221d0fe76d6a44802e24229c7448de9ae6f334da3d10d15ef31f",
+      "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+     },
+     "guard": {
+      "integrity": "pass",
+      "on_sha256": "cda8ed432830a25cdccc4392b4b631e4db249d6be375d184745e8250b0a21022",
+      "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+     },
+     "violinist": {
+      "integrity": "unmeasured",
+      "on_sha256": "f4249b2091c3ca7c666b68c514c229036fe8477c3adb52d79300435fd8691490",
+      "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+     }
+    },
+    "means": null,
+    "note": "No Boss distinction readings were recorded at this setting and one structural check is unmeasured; both scores are unmeasured."
+   },
+   "matched_constant": {
+    "status": "pass",
+    "profile": "constant",
+    "alpha": 0.6375,
+    "gains": [
+     0.6375,
+     0.6375,
+     0.6375,
+     0.6375,
+     0.6375,
+     0.6375,
+     0.6375,
+     0.6375,
+     0.6375,
+     0.6375
+    ],
+    "means": {
+     "boss_distinction": 0.12875,
+     "original_boss_distinction": 0.08125,
+     "boss_effect": 0.049999999999999996,
+     "image_breakage": 0.28750000000000003,
+     "final_score": 0.025099999999999997,
+     "final_boss_score": 0.000138227622635232
+    },
+    "cases": {
+     "ranger": {
+      "boss_distinction": 0.12,
+      "original_boss_distinction": 0.06,
+      "image_breakage": 0.26333333333333336,
+      "boss_effect": 0.06,
+      "final_score": 0.03256066666666666,
+      "final_boss_score": 5.6264831999999984e-05,
+      "integrity": "pass",
+      "structural_checks": {
+       "no_readable_image": 0.04,
+       "split_or_duplication": 0.03,
+       "broken_structure": 0.24
+      },
+      "on_sha256": "19665eb82ae35fc8f5017507513ce0beb66ba216647f3c13df1750bdcbd05f35",
+      "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+     },
+     "smith": {
+      "boss_distinction": 0.07,
+      "original_boss_distinction": 0.08,
+      "image_breakage": 0.35000000000000003,
+      "boss_effect": 0,
+      "final_score": 0.0,
+      "final_boss_score": 0.0,
+      "integrity": "pass",
+      "structural_checks": {
+       "no_readable_image": 0.05,
+       "split_or_duplication": 0.03,
+       "broken_structure": 0.47
+      },
+      "on_sha256": "6b84dd168992236f6f2f353196ed07bc769c89f6e2d67ba810a7e17e52a4439c",
+      "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+     },
+     "stationer": {
+      "boss_distinction": 0.12,
+      "original_boss_distinction": 0.09,
+      "image_breakage": 0.2966666666666667,
+      "boss_effect": 0.03,
+      "final_score": 0.014840333333333334,
+      "final_boss_score": 2.5644096e-05,
+      "integrity": "pass",
+      "structural_checks": {
+       "no_readable_image": 0.04,
+       "split_or_duplication": 0.03,
+       "broken_structure": 0.34
+      },
+      "on_sha256": "3d0a4d65decad4ad6f46e444f7b73f54fcbbac398725da69edb5f46418b3bf98",
+      "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+     },
+     "ferryman": {
+      "boss_distinction": 0.15,
+      "original_boss_distinction": 0.11,
+      "image_breakage": 0.26,
+      "boss_effect": 0.039999999999999994,
+      "final_score": 0.021903999999999996,
+      "final_boss_score": 7.392599999999997e-05,
+      "integrity": "pass",
+      "structural_checks": {
+       "no_readable_image": 0.05,
+       "split_or_duplication": 0.03,
+       "broken_structure": 0.3
+      },
+      "on_sha256": "64ac43644a84c0295f657900e71c2c4ddd322dc9ce73820585caf5b56606541a",
+      "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+     },
+     "watchmaker": {
+      "boss_distinction": 0.22,
+      "original_boss_distinction": 0.07,
+      "image_breakage": 0.2966666666666667,
+      "boss_effect": 0.15,
+      "final_score": 0.07420166666666667,
+      "final_boss_score": 0.0007900993466666667,
+      "integrity": "pass",
+      "structural_checks": {
+       "no_readable_image": 0.05,
+       "split_or_duplication": 0.03,
+       "broken_structure": 0.34
+      },
+      "on_sha256": "e480541b340d3c0d8f6ba676a24009e60bedd981888205d30fa15e9b62c28a2d",
+      "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+     },
+     "guide": {
+      "boss_distinction": 0.07,
+      "original_boss_distinction": 0.08,
+      "image_breakage": 0.21333333333333335,
+      "boss_effect": 0,
+      "final_score": 0.0,
+      "final_boss_score": 0.0,
+      "integrity": "pass",
+      "structural_checks": {
+       "no_readable_image": 0.04,
+       "split_or_duplication": 0.03,
+       "broken_structure": 0.36
+      },
+      "on_sha256": "101d35f36e0d22da75401e19c4a10d5eca82340c72185e1bfd68ff2b5c444be7",
+      "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+     },
+     "guard": {
+      "boss_distinction": 0.13,
+      "original_boss_distinction": 0.07,
+      "image_breakage": 0.3466666666666667,
+      "boss_effect": 0.06,
+      "final_score": 0.025610666666666664,
+      "final_boss_score": 5.2957706415189306e-05,
+      "integrity": "pass",
+      "structural_checks": {
+       "no_readable_image": 0.03,
+       "split_or_duplication": 0.02,
+       "broken_structure": 0.32
+      },
+      "on_sha256": "1d5fafa03af910a7a6dc0897cedcf5783377c70f63b7fefc511932638102a08b",
+      "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+     },
+     "violinist": {
+      "boss_distinction": 0.15,
+      "original_boss_distinction": 0.09,
+      "image_breakage": 0.2733333333333333,
+      "boss_effect": 0.06,
+      "final_score": 0.031682666666666665,
+      "final_boss_score": 0.00010692899999999998,
+      "integrity": "pass",
+      "structural_checks": {
+       "no_readable_image": 0.06,
+       "split_or_duplication": 0.05,
+       "broken_structure": 0.36
+      },
+      "on_sha256": "54e5e9006660b8fbccf08a10ea678d757eb396e17a3d52a5ea9939e7933310d9",
+      "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+     }
+    }
+   },
+   "quarter_checks": {
+    "48": {
+     "mean_gain": 0.12333333333333335,
+     "question": "How well does the candidate convey ‘Final Boss’ without breaking the image?",
+     "cases": {
+      "archivist": {
+       "gain": 0.13000000000000003,
+       "integrity": "pass"
+      },
+      "bookkeeper": {
+       "gain": 0.18000000000000002,
+       "integrity": "pass"
+      },
+      "botanist": {
+       "gain": 0.08333333333333334,
+       "integrity": "pass"
+      },
+      "seamstress": {
+       "gain": 0.1,
+       "integrity": "pass"
+      }
+     }
+    },
+    "96": {
+     "mean_gain": 0.11666666666666667,
+     "question": "How well does the candidate convey ‘Final Boss’ without breaking the image?",
+     "cases": {
+      "archivist": {
+       "gain": 0.12000000000000002,
+       "integrity": "pass"
+      },
+      "bookkeeper": {
+       "gain": 0.14666666666666667,
+       "integrity": "pass"
+      },
+      "botanist": {
+       "gain": 0.10999999999999999,
+       "integrity": "pass"
+      },
+      "seamstress": {
+       "gain": 0.09,
+       "integrity": "pass"
+      }
+     }
+    },
+    "144": {
+     "mean_gain": 0.15416666666666667,
+     "question": "How well does the candidate convey ‘Final Boss’ without breaking the image?",
+     "cases": {
+      "archivist": {
+       "gain": 0.11666666666666667,
+       "integrity": "pass"
+      },
+      "bookkeeper": {
+       "gain": 0.22333333333333336,
+       "integrity": "pass"
+      },
+      "botanist": {
+       "gain": 0.16999999999999998,
+       "integrity": "pass"
+      },
+      "seamstress": {
+       "gain": 0.10666666666666669,
+       "integrity": "pass"
+      }
+     }
+    },
+    "192": {
+     "mean_gain": 0.14250000000000002,
+     "question": "How well does the candidate convey ‘Final Boss’ without breaking the image?",
+     "cases": {
+      "archivist": {
+       "gain": 0.13000000000000003,
+       "integrity": "pass"
+      },
+      "bookkeeper": {
+       "gain": 0.19333333333333333,
+       "integrity": "pass"
+      },
+      "botanist": {
+       "gain": 0.11666666666666667,
+       "integrity": "pass"
+      },
+      "seamstress": {
+       "gain": 0.13,
+       "integrity": "pass"
+      }
+     }
+    }
+   }
+  }
+ },
+ "paired_constant_difference": {
+  "final_score": {
+   "per_case": {
+    "ranger": 0.013647333333333345,
+    "smith": 0.011163000000000003,
+    "stationer": 0.027016555555555568,
+    "ferryman": -0.016378555555555556,
+    "watchmaker": -0.031569666666666676,
+    "guide": 0.005183999999999997,
+    "guard": 0.048022666666666665,
+    "violinist": -0.009599999999999997
+   },
+   "mean": 0.005935666666666668,
+   "sd": 0.02521057245704653,
+   "standard_error": 0.008913283370986201,
+   "cases_seed_split_higher": 5,
+   "cases_stock_higher": 3
+  },
+  "final_boss_score": {
+   "per_case": {
+    "ranger": 7.052992000000008e-05,
+    "smith": 1.138209647588888e-05,
+    "stationer": 0.00017999879911111122,
+    "ferryman": -6.437803199999998e-05,
+    "watchmaker": -0.0006462163466666667,
+    "guide": 3.7791359999999976e-06,
+    "guard": 0.000452093326918144,
+    "violinist": -5.0766106941e-05
+   },
+   "mean": -5.447150887815318e-06,
+   "sd": 0.0003084491556213466,
+   "standard_error": 0.00010905324479555943,
+   "cases_seed_split_higher": 5,
+   "cases_stock_higher": 3
+  }
+ }
+}
