@@ -1,6 +1,14 @@
 # Anima Final Boss leaderboard
 
-**Current research default.** Soft foreground weighting with a 0.45 background floor, trained to RAW192 and replayed at early α 0.95. It scored **33.71** on the eight development cases and **28.55** on eight separate confirmation cases. [Default and exact gains](final-boss-raw192/default.json) · [Matched confirmation images](final-boss-raw192/confirmed-default.jpg) · [Download RAW checkpoints](https://huggingface.co/ntc-ai/anima-final-boss-research)
+## Summary
+
+**Current research default.** Soft foreground weighting with a 0.45 background floor, trained to RAW192 and replayed at early α 0.95. It scored **33.71** on eight development cases and **28.55** on eight separate confirmation cases. [Default and exact gains](final-boss-raw192/default.json) · [Matched confirmation images](final-boss-raw192/confirmed-default.jpg) · [Download RAW checkpoints](https://huggingface.co/ntc-ai/anima-final-boss-research)
+
+**What worked in training.** Soft foreground weighting concentrates the teacher edit on the character while retaining some signal in the background. It leads the matched early-strength comparison at **25.66**. A 35% blend of stronger Boss cues scored **24.93** at early strength and led at constant strength with **16.90**. Paired contexts and projection sometimes improved readability at the cost of a weaker character change. [Training comparison](#training-techniques) · [Target-generation source](final-boss-raw192/README.md#source-for-the-trained-targets)
+
+**What earns a high score.** The slider should make the subject visibly read as a Final Boss while keeping the image coherent. An edit with zero Boss gain scores zero. Visible damage lowers the score even when the Boss effect is strong. [Scoring and comparison protocol](#comparing-a-new-run) · [Jev rubrics](final-boss-raw192/rubrics.json)
+
+**Latest challenger.** Applying stronger cues to the final three teacher positions leads the four-case Boss-gain check at update 144. Its full 192-update score with the image-damage penalty is pending. [Matched update-144 renders](#update-144-preview)
 
 ## Training techniques
 
@@ -30,6 +38,10 @@ The late-cue and two-cue-average runs each passed all four image checks. Mean Je
 The resumed late-cue run passed all four image checks. Mean Jev Boss gain reached **+0.353**, compared with **+0.373** for soft foreground weighting at the same update. The late-cue archivist gained **+0.427** versus **+0.260** for soft foreground weighting. Soft foreground weighting led on the other three cases. [Four matched originals and renders](final-boss-raw192/ablations/late-cues-raw96-matched.jpg)
 
 Each cue-timing recipe replaces 36 of the 120 teacher fields. The replacement moves the edit by an average of **22.0%** of its original L2 norm at the first three positions and **16.8%** at the last three. The source and replacement fields have matched L2 norms. [Teacher field distances by position](final-boss-raw192/ablations/cue-field-distances.json)
+
+## Update-144 preview
+
+Late cues passed all four structural checks and reached **+0.453** mean Jev Boss gain at the shared early inference strength, compared with **+0.401** for soft foreground weighting at the same update. Late cues led on three cases, with the largest gain on bookkeeper (**+0.547** versus **+0.413**). The bookkeeper render also has heavier facial shadow. This preview measures Boss gain. The eight-case RAW192 comparison also scores visible image damage. [Four matched originals and renders](final-boss-raw192/ablations/late-cues-raw144-matched.jpg)
 
 ## Structural stops
 
