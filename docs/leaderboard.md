@@ -8,7 +8,7 @@
 
 **What earns a high score.** The slider should make the subject visibly read as a Final Boss while keeping the image coherent. An edit with zero Boss gain scores zero. Visible damage lowers the score even when the Boss effect is strong. [Scoring and comparison protocol](#comparing-a-new-run) · [Jev rubrics](final-boss-raw192/rubrics.json)
 
-**Latest challengers.** The costume-teacher run led the four-case RAW192 preview, then scored **21.47** in the eight-case diagnostic with one unresolved structure check. Percentile filtering is training. Two in-scene costume runs and two denoising-position exposure runs are queued. [Costume-teacher comparison](#costume-teachers-at-update-192) · [Percentile filtering](#percentile-filtered-teacher-edits) · [In-scene prompts](#in-scene-costume-prompts) · [Denoising-position exposure](#denoising-position-exposure)
+**Latest challengers.** The costume-teacher run led the four-case RAW192 preview, then scored **21.47** in the eight-case diagnostic with one unresolved structure check. Percentile filtering is training. In-scene costume targets, denoising-position exposure, and regional stronger cues are queued. [Costume-teacher comparison](#costume-teachers-at-update-192) · [Percentile filtering](#percentile-filtered-teacher-edits) · [In-scene prompts](#in-scene-costume-prompts) · [Denoising-position exposure](#denoising-position-exposure) · [Regional stronger cues](#regional-stronger-cues)
 
 ## Training techniques
 
@@ -100,6 +100,12 @@ Both caches are prepared on CUDA. The 120 latents, neutral velocities, and embed
 Diffusion studies found that the training signal from different noise levels can emphasize different visual concepts or pull optimization in different directions. This Anima adaptation tests whether spending more of the same training budget at certain denoising positions changes the finished slider. The opening positions test larger character changes. The middle positions test whether costume and silhouette can become more distinct with less damage. [Perception Prioritized Training](https://arxiv.org/abs/2204.00227) · [Min-SNR Training](https://arxiv.org/abs/2303.09556)
 
 Both arms retain all 120 soft-foreground teacher fields and repeat 48 of them once. The opening arm repeats zero-indexed positions 0–3. The middle arm repeats positions 3–6. Each arm uses the stock balanced shuffle, 192 updates, and 384 row presentations per optimizer side. The original and repeated tensors matched the source bit for bit. The sampler replay drew every row in both arms, with identical row ID sequences across arms. Training is queued behind the in-scene comparison. [Cache and sampler verification](final-boss-raw192/ablations/phase-exposure-protocol.json) · [Reproduction commands](final-boss-raw192/README.md#denoising-position-exposure)
+
+## Regional stronger cues
+
+The 35% stronger-cue recipe moved an average of **16.9%** of its squared change from the baseline into locations outside the subject matte. Blended Diffusion preserves the surrounding image by applying edits locally at successive denoising steps. This training adaptation applies that idea to the added cue in each frozen teacher field. It keeps the soft-foreground edit unchanged outside the allowed region. It also matches both the total baseline edit norm and the distance from the baseline to the whole-field stronger cue. [Blended Diffusion](https://arxiv.org/abs/2111.14818) · [Field audit and recipe](final-boss-raw192/ablations/regional-cue-protocol.json)
+
+The original matte and a two-site latent halo passed the norm and support checks on all 120 archived fields. The matte contained the entire change within the original subject. The halo left **0.7%** outside it, with the remainder concentrated on the subject. Both training runs are queued with the same RAW192 budget and shared strengths. [Frozen-field checks](final-boss-raw192/ablations/regional-cue-protocol.json)
 
 ## Structural stops
 

@@ -1,0 +1,116 @@
+{
+  "scope": "Comparisons of archived training fields. Both regional arms await native admission and training.",
+  "source_cache_fingerprints": {
+    "soft-floor45": "8e28e58e797016219e5f0a0dbbaacccdc37eafaa25468b83ef954bfb2e90e120",
+    "strong-boss-45-mix35": "7feebb6e2fedbbd9e90a9ab377687093647c69b9797158252121c601f2872445"
+  },
+  "stronger_cue": {
+    "fields": 120,
+    "means": {
+      "delta_norm_over_source": 0.19294487967307078,
+      "delta_energy_away_from_subject": 0.16896904672382393,
+      "delta_energy_in_soft_matte_background": 0.2220829038207163,
+      "matte_area_fraction": 0.2542535364627838
+    },
+    "by_position": [
+      {
+        "delta_norm_over_source": 0.19743673743376713,
+        "delta_energy_away_from_subject": 0.23848928968475924,
+        "delta_energy_in_soft_matte_background": 0.29179723309105715,
+        "matte_area_fraction": 0.2542535364627838
+      },
+      {
+        "delta_norm_over_source": 0.2126145076684499,
+        "delta_energy_away_from_subject": 0.189073417330457,
+        "delta_energy_in_soft_matte_background": 0.24414102530241175,
+        "matte_area_fraction": 0.2542535364627838
+      },
+      {
+        "delta_norm_over_source": 0.2509144306268254,
+        "delta_energy_away_from_subject": 0.14318428759242569,
+        "delta_energy_in_soft_matte_background": 0.2056804949754958,
+        "matte_area_fraction": 0.2542535364627838
+      },
+      {
+        "delta_norm_over_source": 0.22717183282707862,
+        "delta_energy_away_from_subject": 0.10024377452819498,
+        "delta_energy_in_soft_matte_background": 0.15488677008774698,
+        "matte_area_fraction": 0.2542535364627838
+      },
+      {
+        "delta_norm_over_source": 0.1935533272212507,
+        "delta_energy_away_from_subject": 0.13018504966560426,
+        "delta_energy_in_soft_matte_background": 0.19414191246262102,
+        "matte_area_fraction": 0.2542535364627838
+      },
+      {
+        "delta_norm_over_source": 0.17654834756807367,
+        "delta_energy_away_from_subject": 0.1404478867605315,
+        "delta_energy_in_soft_matte_background": 0.20362222872004213,
+        "matte_area_fraction": 0.2542535364627838
+      },
+      {
+        "delta_norm_over_source": 0.166332240272658,
+        "delta_energy_away_from_subject": 0.13998115381983076,
+        "delta_energy_in_soft_matte_background": 0.186906935104583,
+        "matte_area_fraction": 0.2542535364627838
+      },
+      {
+        "delta_norm_over_source": 0.162396316602388,
+        "delta_energy_away_from_subject": 0.18098550809035277,
+        "delta_energy_in_soft_matte_background": 0.22367828616266794,
+        "matte_area_fraction": 0.2542535364627838
+      },
+      {
+        "delta_norm_over_source": 0.1627595479612717,
+        "delta_energy_away_from_subject": 0.21682723788827707,
+        "delta_energy_in_soft_matte_background": 0.2582586904382767,
+        "matte_area_fraction": 0.2542535364627838
+      },
+      {
+        "delta_norm_over_source": 0.17972150854894484,
+        "delta_energy_away_from_subject": 0.2102728618778059,
+        "delta_energy_in_soft_matte_background": 0.2577154618622605,
+        "matte_area_fraction": 0.2542535364627838
+      }
+    ]
+  },
+  "adaptation": {
+    "mask": "Original foreground matte M, threshold 0.01 after resizing to native 64 by 64 grid.",
+    "method": [
+      "Compute baseline edit B as the soft-foreground velocity minus neutral velocity. Compute D as the whole-field stronger target minus the soft-foreground target.",
+      "Within the support M > 0.01, let b = B and v = M times D. Remove the projection of v onto b to obtain tangent t.",
+      "Let c = 1 - squared_norm(D) / (2 * squared_norm(b)). Replace b by c*b + sqrt((1-c)*(1+c)) * norm(b) * t/norm(t).",
+      "Use the original baseline field outside the support and emit the same dtype."
+    ],
+    "halo": "The alternative uses a 5 by 5 max pool at stride one before thresholding, extending the mask by up to two latent sites.",
+    "source_sha256": "1396d5aa2620bd1af43715719a17117175f7fc7f5ad85b63ea5e8451d16ca937"
+  },
+  "registered_training": {
+    "steps": 192,
+    "batch_size": 2,
+    "seed": 1,
+    "ema_decay": null,
+    "shared_early_alpha": 0.6666666666666666,
+    "shared_constant_alpha": 0.6375
+  },
+  "regional_fields": {
+    "regional-cue-matte": {
+      "fields": 120,
+      "editable_area": 0.309814453125,
+      "cue_direction_cosine": 0.8922963553665835,
+      "delta_energy_outside_original_subject": 0.0,
+      "max_norm_error": 2.0370003461778197e-08,
+      "max_distance_error": 1.3781038099569543e-07
+    },
+    "regional-cue-dilated2": {
+      "fields": 120,
+      "editable_area": 0.38525390625,
+      "cue_direction_cosine": 0.9167347236516521,
+      "delta_energy_outside_original_subject": 0.006705927680498765,
+      "max_norm_error": 1.3764173578678651e-08,
+      "max_distance_error": 6.905271110468902e-08
+    }
+  },
+  "research": "https://arxiv.org/abs/2111.14818"
+}
