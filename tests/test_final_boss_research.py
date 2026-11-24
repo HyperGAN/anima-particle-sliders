@@ -10,10 +10,11 @@ from release_tools.final_boss_apg import project_subject_target
 from release_tools.final_boss_cues import ARMOR_CREST_START, ROLE_AFTER_COSTUME, ROLE_BEFORE_COSTUME
 from release_tools.final_boss_targets import (
     ANCHORED_APG, APG_POSITIONS, FOREGROUND_APG, FRAMING_MATCHED, GROUNDED_COSTUME, GROUNDED_WAVELET, GUIDED_TEACHER,
-    LOOKAHEAD_EARLY, PAIRED_EXTERIOR, RECIPES, STEPS, capture_row, edited_target, final_target,
+    LATE_SUBJECT_DOSE, LOOKAHEAD_EARLY, PAIRED_EXTERIOR, RECIPES, STEPS, capture_row, edited_target, final_target,
     paired_context_target, subject_matte, teacher_rows, verify_guided_trajectory,
 )
 from release_tools.final_boss_wavelet import low_band
+from release_tools.final_boss_subject_dose import LATE, LATE_ENERGY_SHARE, redistribute_subject_target, trajectory_scales
 
 
 STUDY = Path(__file__).resolve().parents[1] / "docs/final-boss-raw192"
@@ -148,6 +149,24 @@ def test_framing_contrast_subtracts_the_matched_negative_and_keeps_the_original_
         prompt = row.pop("framing_matched_neutral")
         assert row == base and prompt != base["neutral"]
         assert prompt.split(". Background:", 1)[1] == base["neutral"].split(". Background:", 1)[1]
+
+
+def test_late_subject_dose_conserves_trajectory_energy_and_preserves_exterior():
+    neutral = torch.tensor([[[[[0.1, 0.2, 0.3]]]]])
+    matte = torch.tensor([[[[[0.8, 0.01, 0.0]]]]])
+    subject = matte > .01
+    targets = [neutral + torch.tensor([[[[[float(11 - position), 7., 9.]]]]]) for position in range(10)]
+    original = [float(((target - neutral)[subject].double() ** 2).sum()) for target in targets]
+    scales = trajectory_scales(original)
+    updated = [redistribute_subject_target(neutral, target, matte, position, scales)
+               for position, target in enumerate(targets)]
+    changed = [float(((target - neutral)[subject].double() ** 2).sum()) for target in updated]
+    assert all(torch.equal(before[~subject], after[~subject]) for before, after in zip(targets, updated, strict=True))
+    assert all(torch.equal(before, after) for before, after in zip(targets[:3], updated[:3], strict=True))
+    assert sum(changed) == pytest.approx(sum(original))
+    assert sum(changed[i] - original[i] for i in LATE) == pytest.approx(LATE_ENERGY_SHARE * sum(original))
+    archived = teacher_rows(STUDY / "training-pairs.json", LATE_SUBJECT_DOSE)
+    assert len(archived) == 6 and all(set(row["late_subject_scales"]) == {"neutral", "positive"} for row in archived)
 
 
 def test_foreground_apg_removes_the_clean_latent_component_at_fixed_dose():

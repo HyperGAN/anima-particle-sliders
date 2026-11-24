@@ -203,6 +203,15 @@ To measure straight near-white margins in saved renders, use the pixel diagnosti
 python -m release_tools.final_boss_frame_padding ordinary.png boss.png
 ```
 
+## Late subject contrast
+
+The `late-subject-dose45` recipe starts from the incumbent's soft foreground target. It moves one percentage point of each frozen trajectory's subject edit energy from positions 3–6 to positions 7–9. The scales apply to the velocity contrast inside matte values above 0.01. Both the opening fields and the exterior values remain exact. The command replays the original teacher states, applies the audited scales, and checks four fields through the native teacher. [Exact scales and archived field audit](ablations/late-subject-dose-field-audit.json) · [Redistribution source](../../release_tools/final_boss_subject_dose.py)
+
+```sh
+python -m release_tools.final_boss_targets late-subject-dose45 \
+  --model "$ANIMA_MODEL" --out targets/late-subject-dose45
+```
+
 ## Two-step teacher contrast
 
 At zero-indexed positions 0–2 of both original trajectories, this recipe advances the frozen neutral and Boss teachers separately from the current shared latent. It forms the sigma-weighted average of their contrasts over the two-step window. The fit still uses the original neutral velocity, foreground weighting, and instantaneous edit norm. There are 36 substituted targets across the same 120 fields. [MeanFlow paper](https://arxiv.org/abs/2505.13447) · [Two-step target source](../../release_tools/final_boss_lookahead.py)

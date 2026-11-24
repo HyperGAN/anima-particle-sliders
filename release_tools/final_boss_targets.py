@@ -14,6 +14,7 @@ from lumen_studio.contracts import atomic_json, digest, file_hash
 from release_tools.final_boss_apg import project_subject_target
 from release_tools.final_boss_cues import split_teacher_cues
 from release_tools.final_boss_lookahead import two_step_target
+from release_tools.final_boss_subject_dose import LATE, LATE_ENERGY_SHARE, MIDDLE, redistribute_subject_target
 from release_tools.final_boss_wavelet import coarse_exterior_target
 
 
@@ -40,10 +41,12 @@ MIDDLE_CUES = "strong-cues-middle4"
 PAIRED_EXTERIOR = "paired-exterior-floor45"
 PAIRED_CONTEXTS = ("Original context", "Matched alternate lighting", "Matched alternate setting")
 FRAMING_MATCHED = "framing-matched-floor45"
+LATE_SUBJECT_DOSE = "late-subject-dose45"
 PERCENTILE_POSITIONS = {"sega-early35": (0, 1, 2), "sega-all35": tuple(range(STEPS))}
 RECIPES = {"prompt-only": (1.0, 0.0), "soft-floor45": (0.45, 0.0),
            GUIDED_TEACHER: (0.45, 0.0), FOREGROUND_APG: (0.45, 0.0), LOOKAHEAD_EARLY: (0.45, 0.0),
            PAIRED_EXTERIOR: (0.45, 0.0),
+           LATE_SUBJECT_DOSE: (0.45, 0.0),
            FRAMING_MATCHED: (0.45, 1.0),
            ANCHORED_APG: (0.45, 0.35),
            "strong-boss-45-mix35": (0.45, 0.35), "strong-cues-early3": (0.45, 0.35),
@@ -171,6 +174,18 @@ def row_metadata(row):
 
 def teacher_rows(fixture, recipe):
     rows = json.loads(fixture.read_text())["pairs"]
+    if recipe == LATE_SUBJECT_DOSE:
+        audit = json.loads((fixture.parent / "ablations/late-subject-dose-field-audit.json").read_text())
+        expected_rule = {"middle": list(MIDDLE), "late": list(LATE),
+                         "transferred_subject_energy_share": LATE_ENERGY_SHARE, "matte_threshold": 0.01}
+        scales = audit["scales_by_case"]
+        if (audit["recipe"] != recipe or audit["control"] != "soft-floor45" or audit["rule"] != expected_rule
+                or audit["fixture_sha256"] != file_hash(fixture) or set(scales) != {row["id"] for row in rows}
+                or any(set(value) != {"neutral", "positive"} for value in scales.values())
+                or not all(0 < pair["middle"] < 1 < pair["late"] < float("inf")
+                           for value in scales.values() for pair in value.values())):
+            raise ValueError("Late subject scales must match the fixed teacher study")
+        return [row | {"late_subject_scales": scales[row["id"]]} for row in rows]
     if recipe == FRAMING_MATCHED:
         study = json.loads((fixture.parent / "ablations/framing-matched-prompts.json").read_text())
         wardrobe = study["omitted_lower_body_terms"]
@@ -339,6 +354,8 @@ def capture_row(runtime, row, matte_path, recipe):
                                       subject_projection=projection,
                                       paired_matte=matte if recipe == PAIRED_EXTERIOR else None,
                                       framing_matched=recipe == FRAMING_MATCHED)
+            if recipe == LATE_SUBJECT_DOSE:
+                target = redistribute_subject_target(base, target, matte, position, row["late_subject_scales"][track])
             records[track].append(dict(position=position, timestep=float(timestep), trajectory=track,
                                        latent=latent.cpu().clone(), neutral=base.cpu().clone(),
                                        positive=target.cpu().clone()))
@@ -412,6 +429,8 @@ def verify_native(runtime, cache, request, fixture=FIXTURE):
     indices = (1, 19, 42, 117) if recipe in CUE_POSITIONS or percentile_positions else (3, 19, 46, 117)
     if recipe == MIDDLE_CUES:
         indices = (4, 16, 42, 117)
+    if recipe == LATE_SUBJECT_DOSE:
+        indices = (1, 15, 28, 117)
     if recipe in (LOOKAHEAD_EARLY, ANCHORED_APG):
         indices = (1, 12, 46, 117)
     with runtime.mixer.scales({}):
@@ -450,6 +469,9 @@ def verify_native(runtime, cache, request, fixture=FIXTURE):
                                       subject_projection=projection,
                                       paired_matte=matte if recipe == PAIRED_EXTERIOR else None,
                                       framing_matched=recipe == FRAMING_MATCHED)
+            if recipe == LATE_SUBJECT_DOSE:
+                scales = row["late_subject_scales"][record["trajectory"]]
+                target = redistribute_subject_target(neutral, target, matte, position, scales)
             if not (torch.equal(neutral.cpu(), record["neutral"]) and torch.equal(target.cpu(), record["positive"])):
                 return False
     return True

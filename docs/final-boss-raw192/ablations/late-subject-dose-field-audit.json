@@ -1,0 +1,253 @@
+{
+  "recipe": "late-subject-dose45",
+  "control": "soft-floor45",
+  "source_cache": "8e28e58e797016219e5f0a0dbbaacccdc37eafaa25468b83ef954bfb2e90e120",
+  "fixture_sha256": "f871c82eafe34dcbb87a825723659571911a202dbb1c03349d2ebdbf67491c0a",
+  "rule": {
+    "middle": [
+      3,
+      4,
+      5,
+      6
+    ],
+    "late": [
+      7,
+      8,
+      9
+    ],
+    "transferred_subject_energy_share": 0.01,
+    "matte_threshold": 0.01
+  },
+  "scales_by_case": {
+    "bridge": {
+      "neutral": {
+        "middle": 0.9813035061777906,
+        "late": 1.438804964460108
+      },
+      "positive": {
+        "middle": 0.9892020073054033,
+        "late": 1.3066997301236836
+      }
+    },
+    "cafe": {
+      "neutral": {
+        "middle": 0.9844470614684465,
+        "late": 1.190120611840958
+      },
+      "positive": {
+        "middle": 0.9876082163630464,
+        "late": 1.1879133291156712
+      }
+    },
+    "greenhouse": {
+      "neutral": {
+        "middle": 0.9690157560754349,
+        "late": 1.251899779594382
+      },
+      "positive": {
+        "middle": 0.986212135094466,
+        "late": 1.1351839609598342
+      }
+    },
+    "harbor": {
+      "neutral": {
+        "middle": 0.9833932142103841,
+        "late": 1.3066143761328455
+      },
+      "positive": {
+        "middle": 0.9882792503146589,
+        "late": 1.3334546582467508
+      }
+    },
+    "library": {
+      "neutral": {
+        "middle": 0.9803407158825289,
+        "late": 1.1688222408354176
+      },
+      "positive": {
+        "middle": 0.9878442796895104,
+        "late": 1.3241484158274428
+      }
+    },
+    "mall": {
+      "neutral": {
+        "middle": 0.9813328733989721,
+        "late": 1.2385951645345321
+      },
+      "positive": {
+        "middle": 0.9850183822706052,
+        "late": 1.1939452893871558
+      }
+    }
+  },
+  "trajectories": [
+    {
+      "case": "bridge",
+      "trajectory": "neutral",
+      "changed_subject_fields": 7,
+      "exact_exterior_fields": 10,
+      "early_exact_fields": 3,
+      "original_late_share": 0.009344399494145129,
+      "new_late_share": 0.019344399642370655,
+      "relative_energy_error": 1.5332379810217844e-10,
+      "scales": {
+        "middle": 0.9813035061777906,
+        "late": 1.438804964460108
+      }
+    },
+    {
+      "case": "bridge",
+      "trajectory": "positive",
+      "changed_subject_fields": 7,
+      "exact_exterior_fields": 10,
+      "early_exact_fields": 3,
+      "original_late_share": 0.014134991164486264,
+      "new_late_share": 0.024134990969676078,
+      "relative_energy_error": 4.4279691024939893e-11,
+      "scales": {
+        "middle": 0.9892020073054033,
+        "late": 1.3066997301236836
+      }
+    },
+    {
+      "case": "cafe",
+      "trajectory": "neutral",
+      "changed_subject_fields": 7,
+      "exact_exterior_fields": 10,
+      "early_exact_fields": 3,
+      "original_late_share": 0.024016115540041974,
+      "new_late_share": 0.03401611563059288,
+      "relative_energy_error": 5.502205357998946e-10,
+      "scales": {
+        "middle": 0.9844470614684465,
+        "late": 1.190120611840958
+      }
+    },
+    {
+      "case": "cafe",
+      "trajectory": "positive",
+      "changed_subject_fields": 7,
+      "exact_exterior_fields": 10,
+      "early_exact_fields": 3,
+      "original_late_share": 0.024322728901768453,
+      "new_late_share": 0.03432272886546221,
+      "relative_energy_error": 3.469897702501612e-10,
+      "scales": {
+        "middle": 0.9876082163630464,
+        "late": 1.1879133291156712
+      }
+    },
+    {
+      "case": "greenhouse",
+      "trajectory": "neutral",
+      "changed_subject_fields": 7,
+      "exact_exterior_fields": 10,
+      "early_exact_fields": 3,
+      "original_late_share": 0.017628816374547933,
+      "new_late_share": 0.027628816336694118,
+      "relative_energy_error": 7.189360218262664e-12,
+      "scales": {
+        "middle": 0.9690157560754349,
+        "late": 1.251899779594382
+      }
+    },
+    {
+      "case": "greenhouse",
+      "trajectory": "positive",
+      "changed_subject_fields": 7,
+      "exact_exterior_fields": 10,
+      "early_exact_fields": 3,
+      "original_late_share": 0.03464491771567775,
+      "new_late_share": 0.04464491740290325,
+      "relative_energy_error": 3.7675218500510255e-10,
+      "scales": {
+        "middle": 0.986212135094466,
+        "late": 1.1351839609598342
+      }
+    },
+    {
+      "case": "harbor",
+      "trajectory": "neutral",
+      "changed_subject_fields": 7,
+      "exact_exterior_fields": 10,
+      "early_exact_fields": 3,
+      "original_late_share": 0.01413944919952848,
+      "new_late_share": 0.024139449017506597,
+      "relative_energy_error": 4.023532618191439e-10,
+      "scales": {
+        "middle": 0.9833932142103841,
+        "late": 1.3066143761328455
+      }
+    },
+    {
+      "case": "harbor",
+      "trajectory": "positive",
+      "changed_subject_fields": 7,
+      "exact_exterior_fields": 10,
+      "early_exact_fields": 3,
+      "original_late_share": 0.0128517966375259,
+      "new_late_share": 0.022851796850412994,
+      "relative_energy_error": 8.453963085131022e-10,
+      "scales": {
+        "middle": 0.9882792503146589,
+        "late": 1.3334546582467508
+      }
+    },
+    {
+      "case": "library",
+      "trajectory": "neutral",
+      "changed_subject_fields": 7,
+      "exact_exterior_fields": 10,
+      "early_exact_fields": 3,
+      "original_late_share": 0.027311552083715895,
+      "new_late_share": 0.037311552143004884,
+      "relative_energy_error": 2.927292852561436e-10,
+      "scales": {
+        "middle": 0.9803407158825289,
+        "late": 1.1688222408354176
+      }
+    },
+    {
+      "case": "library",
+      "trajectory": "positive",
+      "changed_subject_fields": 7,
+      "exact_exterior_fields": 10,
+      "early_exact_fields": 3,
+      "original_late_share": 0.013273707359572529,
+      "new_late_share": 0.023273707640993995,
+      "relative_energy_error": 2.4359536610063515e-10,
+      "scales": {
+        "middle": 0.9878442796895104,
+        "late": 1.3241484158274428
+      }
+    },
+    {
+      "case": "mall",
+      "trajectory": "neutral",
+      "changed_subject_fields": 7,
+      "exact_exterior_fields": 10,
+      "early_exact_fields": 3,
+      "original_late_share": 0.01872245523337037,
+      "new_late_share": 0.028722455053071905,
+      "relative_energy_error": 2.2112478514912937e-10,
+      "scales": {
+        "middle": 0.9813328733989721,
+        "late": 1.2385951645345321
+      }
+    },
+    {
+      "case": "mall",
+      "trajectory": "positive",
+      "changed_subject_fields": 7,
+      "exact_exterior_fields": 10,
+      "early_exact_fields": 3,
+      "original_late_share": 0.023501466914162775,
+      "new_late_share": 0.0335014668261143,
+      "relative_energy_error": 3.1556757207340524e-11,
+      "scales": {
+        "middle": 0.9850183822706052,
+        "late": 1.1939452893871558
+      }
+    }
+  ]
+}

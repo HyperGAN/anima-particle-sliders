@@ -271,6 +271,12 @@ Straight white margins appeared in **4 of 6** ordinary teacher renders and **1 o
 
 The `framing-matched-floor45` recipe keeps the original rollout states and teacher anchors, then removes the unmatched clothing and footwear descriptions from the ordinary prompt used in the contrast. It retains the original 0.45-floor matte and matches the original edit norm per field. The teacher render preview and native training comparison will show whether this makes the Boss effect less dependent on reframing. [Exact terms and source](final-boss-raw192/README.md#framing-matched-wardrobe-contrast) · [Prompt-to-Prompt layout analysis](https://arxiv.org/abs/2208.01626)
 
+## More subject contrast at late denoising positions
+
+The same-checkpoint strength sweep showed that a setting with stronger late steps improved Guide. The incumbent's archived targets put an average of **1.95%** of their subject edit energy in the last three positions. This training trial moves one percentage point of that energy from positions 3–6 to positions 7–9 for each teacher trajectory. The energy is the sum of squared velocity contrasts inside the matte. The total is matched across the trajectory. The field count and sampling schedule stay fixed. [Strength sweep](final-boss-raw192/ablations/soft-floor45-strength-case-audit.json) · [Temporal Concept Dynamics](https://arxiv.org/abs/2512.08486)
+
+The archive check moved the late share to **2.95%**, with exact exterior targets on all **120** fields and exact opening targets on **36** fields. The largest relative difference in total subject energy was **8.46 × 10⁻¹⁰**. Native RAW192 evaluation is pending. [Field audit and exact scales](final-boss-raw192/ablations/late-subject-dose-field-audit.json) · [Capture command](final-boss-raw192/README.md#late-subject-contrast)
+
 ## Comparing a new run
 
 Compare the saved RAW checkpoint with the incumbent on the same prompts, seeds, sampler, and shared strengths. At 192 updates the early score to beat is **25.66**. The 35% cue blend sets the constant-strength comparison at **16.90**.
