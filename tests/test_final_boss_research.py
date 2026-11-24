@@ -9,7 +9,7 @@ import torch
 from release_tools.final_boss_apg import project_subject_target
 from release_tools.final_boss_cues import ARMOR_CREST_START, ROLE_AFTER_COSTUME, ROLE_BEFORE_COSTUME
 from release_tools.final_boss_targets import (
-    FOREGROUND_APG, GROUNDED_COSTUME, GROUNDED_WAVELET, GUIDED_TEACHER, RECIPES, STEPS, capture_row,
+    FOREGROUND_APG, GROUNDED_COSTUME, GROUNDED_WAVELET, GUIDED_TEACHER, LOOKAHEAD_EARLY, RECIPES, STEPS, capture_row,
     edited_target, final_target, subject_matte, teacher_rows, verify_guided_trajectory,
 )
 from release_tools.final_boss_wavelet import low_band
@@ -115,6 +115,64 @@ def test_foreground_apg_removes_the_clean_latent_component_at_fixed_dose():
     torch.testing.assert_close((target - neutral).norm(), (baseline - neutral).norm())
     with pytest.raises(ValueError, match="Degenerate conditional clean-latent axis"):
         project_subject_target(sigma * positive, sigma, neutral, positive, baseline, matte)
+
+
+def test_lookahead_uses_two_sigma_weighted_steps_at_the_first_three_positions():
+    class Scheduler:
+        def __init__(self, steps):
+            self.timesteps = torch.arange(steps)
+            self.sigmas = torch.linspace(1, 0, steps + 1).square()
+            self.position = 0
+
+        def set_begin_index(self, position):
+            self.position = position
+
+    class Runtime:
+        device = "cpu"
+        scheduler = Scheduler
+
+        def encode(self, prompt):
+            return torch.tensor(float(prompt == "boss"))
+
+        def noise(self, seed, width, height):
+            return torch.linspace(-0.5, 0.5, 16).reshape(1, 1, 1, 4, 4)
+
+        def predict(self, latent, timestep, embedding):
+            return latent * 0.125 + embedding * (0.2 + (timestep + 1) * latent.square())
+
+        def step(self, scheduler, velocity, timestep, latent):
+            assert int(timestep) == scheduler.position
+            scheduler.position += 1
+            sigmas = scheduler.sigmas
+            return latent - (sigmas[timestep] - sigmas[timestep + 1]) * velocity
+
+    runtime = Runtime()
+    row = {"id": "fixture", "seed": 1, "neutral": "ordinary", "positive": "boss"}
+    matte = STUDY / "mattes/bridge.png"
+    reference = capture_row(runtime, row, matte, "soft-floor45")["records"]
+    candidate = capture_row(runtime, row, matte, LOOKAHEAD_EARLY)["records"]
+    sigmas = runtime.scheduler(STEPS).sigmas
+    for control, trial in zip(reference, candidate, strict=True):
+        position = trial["position"]
+        assert trial["position"] == control["position"] and trial["trajectory"] == control["trajectory"]
+        assert all(torch.equal(trial[key], control[key]) for key in ("latent", "neutral"))
+        if position >= 3:
+            assert torch.equal(trial["positive"], control["positive"])
+            continue
+        x = trial["latent"]
+        neutral = trial["neutral"]
+        positive = runtime.predict(x, position, 1.)
+        first = neutral + (positive - neutral) - neutral
+        ds1 = sigmas[position] - sigmas[position + 1]
+        ds2 = sigmas[position + 1] - sigmas[position + 2]
+        x_neutral = x - ds1 * neutral
+        x_positive = x - ds1 * (neutral + first)
+        future = runtime.predict(x_positive, position + 1, 1.) - runtime.predict(x_neutral, position + 1, 0.)
+        weight = 0.45 + 0.55 * subject_matte(matte, x.shape[-2:], runtime.device)
+        expected = ((ds1 * first + ds2 * future) / (ds1 + ds2)) * weight
+        torch.testing.assert_close(trial["positive"] - neutral, expected * (first.norm() / expected.norm()))
+        torch.testing.assert_close((trial["positive"] - neutral).norm(), (control["positive"] - neutral).norm())
+        assert not torch.equal(trial["positive"], control["positive"])
 
 
 def test_split_cues_keep_the_original_teacher_text_and_each_recorded_insertion():

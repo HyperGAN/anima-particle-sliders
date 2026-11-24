@@ -13,6 +13,7 @@ from lumen_studio.cache import TargetCache, save_tensor_file
 from lumen_studio.contracts import atomic_json, digest, file_hash
 from release_tools.final_boss_apg import project_subject_target
 from release_tools.final_boss_cues import split_teacher_cues
+from release_tools.final_boss_lookahead import two_step_target
 from release_tools.final_boss_wavelet import coarse_exterior_target
 
 
@@ -31,9 +32,11 @@ WAVELET_RECIPES = (WAVELET_EXTERIOR, GROUNDED_WAVELET)
 SPLIT_CUES = ("role-cue35", "crest-cue35")
 GUIDED_TEACHER = "guided-teacher-floor45"
 FOREGROUND_APG = "foreground-apg-floor45"
+LOOKAHEAD_EARLY = "lookahead-early3"
+LOOKAHEAD_POSITIONS = (0, 1, 2)
 PERCENTILE_POSITIONS = {"sega-early35": (0, 1, 2), "sega-all35": tuple(range(STEPS))}
 RECIPES = {"prompt-only": (1.0, 0.0), "soft-floor45": (0.45, 0.0),
-           GUIDED_TEACHER: (0.45, 0.0), FOREGROUND_APG: (0.45, 0.0),
+           GUIDED_TEACHER: (0.45, 0.0), FOREGROUND_APG: (0.45, 0.0), LOOKAHEAD_EARLY: (0.45, 0.0),
            "strong-boss-45-mix35": (0.45, 0.35), "strong-cues-early3": (0.45, 0.35),
            "strong-cues-late3": (0.45, 0.35), "diverse-mean35": (0.45, 0.35),
            "matched-attire35": (0.45, 0.35), WAVELET_EXTERIOR: (0.45, 0.35),
@@ -246,10 +249,13 @@ def capture_row(runtime, row, matte_path, recipe):
         for track, latent, base, positive_field in (("neutral", n, vn, vp), ("positive", p, vnp, vpp)):
             active = cues if position in cue_positions else ()
             percentile_active = None if percentile_positions is None else position in percentile_positions
-            target = final_target(runtime, latent, timestep, base, positive_field, weight, cue_schedule[position],
-                                  active, regional=regional, percentile_active=percentile_active,
-                                  matched_attire=matched_attire, wavelet_matte=wavelet_matte,
-                                  subject_projection=projection)
+            if recipe == LOOKAHEAD_EARLY and position in LOOKAHEAD_POSITIONS:
+                target = two_step_target(runtime, STEPS, position, latent, neutral, positive, base, positive_field, weight)
+            else:
+                target = final_target(runtime, latent, timestep, base, positive_field, weight, cue_schedule[position],
+                                      active, regional=regional, percentile_active=percentile_active,
+                                      matched_attire=matched_attire, wavelet_matte=wavelet_matte,
+                                      subject_projection=projection)
             records[track].append(dict(position=position, timestep=float(timestep), trajectory=track,
                                        latent=latent.cpu().clone(), neutral=base.cpu().clone(),
                                        positive=target.cpu().clone()))
@@ -320,6 +326,8 @@ def verify_native(runtime, cache, request, fixture=FIXTURE):
     matched_attire = recipe in MATCHED_ATTIRE
     sigmas = runtime.scheduler(STEPS).sigmas if recipe == FOREGROUND_APG else None
     indices = (1, 19, 42, 117) if recipe in CUE_POSITIONS or percentile_positions else (3, 19, 46, 117)
+    if recipe == LOOKAHEAD_EARLY:
+        indices = (1, 12, 46, 117)
     with runtime.mixer.scales({}):
         if recipe == GUIDED_TEACHER and (identity["manifest_sha256"] != digest(list(rows.values()))
                 or len(cache) != len(rows) * 2 * STEPS or not all(
@@ -330,8 +338,10 @@ def verify_native(runtime, cache, request, fixture=FIXTURE):
             record = cache[index]
             row = rows[record["row"]["id"]]
             latent, timestep = record["latent"].to(runtime.device), record["timestep"]
-            neutral = runtime.predict(latent, timestep, runtime.encode(row["neutral"]))
-            positive = runtime.predict(latent, timestep, runtime.encode(row["positive"]))
+            neutral_embedding = runtime.encode(row["neutral"])
+            neutral = runtime.predict(latent, timestep, neutral_embedding)
+            positive_embedding = runtime.encode(row["positive"])
+            positive = runtime.predict(latent, timestep, positive_embedding)
             matte_path = fixture.parent / row["matte"]["file"]
             if file_hash(matte_path) != row["matte"]["sha256"]:
                 return False
@@ -344,10 +354,14 @@ def verify_native(runtime, cache, request, fixture=FIXTURE):
             percentile_active = None if percentile_positions is None else position in percentile_positions
             strength = row["grounded_schedule"][position] if recipe in GROUNDED_RECIPES else cue_mix
             projection = (matte, float(sigmas[position])) if sigmas is not None else None
-            target = final_target(runtime, latent, timestep, neutral, positive, weight, strength,
-                                  cues, regional=regional, percentile_active=percentile_active,
-                                  matched_attire=matched_attire, wavelet_matte=wavelet_matte,
-                                  subject_projection=projection)
+            if recipe == LOOKAHEAD_EARLY and position in LOOKAHEAD_POSITIONS:
+                target = two_step_target(runtime, STEPS, position, latent, neutral_embedding, positive_embedding,
+                                         neutral, positive, weight)
+            else:
+                target = final_target(runtime, latent, timestep, neutral, positive, weight, strength,
+                                      cues, regional=regional, percentile_active=percentile_active,
+                                      matched_attire=matched_attire, wavelet_matte=wavelet_matte,
+                                      subject_projection=projection)
             if not (torch.equal(neutral.cpu(), record["neutral"]) and torch.equal(target.cpu(), record["positive"])):
                 return False
     return True

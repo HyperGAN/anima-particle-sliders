@@ -194,6 +194,12 @@ Adaptive Projected Guidance associates oversaturation at high classifier-free gu
 
 On all 120 archived fields, the exterior target stayed bit for bit identical and edit norms matched within a relative error of 4 × 10⁻⁹. The projection moved the target by an average of 23.1% of its edit norm. The largest mean shift was 43.1% at the second denoising position. CUDA capture verified all 120 original states and exterior targets, and the four native teacher field rechecks passed. [Archived-field audit and native capture](final-boss-raw192/ablations/foreground-apg-field-audit.json)
 
+## Two-step teacher contrast
+
+MeanFlow represents flow over a denoising interval by an average velocity. This training adaptation starts both frozen teachers at the same saved latent, takes one native step on each branch, and measures their velocities at the resulting states. It weights both steps by their sigma interval to estimate the average contrast. The first three positions use this contrast with the same soft foreground mask and edit norm as the incumbent. The remaining seven use the original targets. [MeanFlow](https://arxiv.org/abs/2505.13447) · [Capture commands and source](final-boss-raw192/README.md#two-step-teacher-contrast)
+
+Across the six archived starting states, the two-step contrast moved the target by an average of **27.4%** of the original edit norm. The recipe awaits native evaluation. [Archived opening-state audit](final-boss-raw192/ablations/two-step-teacher-opening-audit.json)
+
 ## Comparing a new run
 
 Compare the saved RAW checkpoint with the incumbent on the same prompts, seeds, sampler, and shared strengths. At 192 updates the early score to beat is **25.66**. The 35% cue blend sets the constant-strength comparison at **16.90**. Report tuned strength and its confirmation panel alongside the shared-strength comparison.

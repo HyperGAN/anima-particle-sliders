@@ -165,3 +165,12 @@ The conditional clean prediction for Anima's flow sampler is `latent − sigma �
 python -m release_tools.final_boss_targets foreground-apg-floor45 \
   --model "$ANIMA_MODEL" --out targets/foreground-apg-floor45
 ```
+
+## Two-step teacher contrast
+
+At zero-indexed positions 0–2 of both original trajectories, this recipe advances the frozen neutral and Boss teachers separately from the current shared latent. It forms the sigma-weighted average of their contrasts over the two-step window. The fit still uses the original neutral velocity, foreground weighting, and instantaneous edit norm. There are 36 substituted targets across the same 120 fields. [MeanFlow paper](https://arxiv.org/abs/2505.13447) · [Two-step target source](../../release_tools/final_boss_lookahead.py)
+
+```sh
+python -m release_tools.final_boss_targets lookahead-early3 \
+  --model "$ANIMA_MODEL" --out targets/lookahead-early3
+```
