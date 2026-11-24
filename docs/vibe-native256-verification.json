@@ -1,0 +1,98 @@
+{
+  "schema": "Anima-final-boss-native-vibe-256-verification-v1",
+  "status": "passed",
+  "date": "2026-11-17",
+  "cohort_id": "anima-final-boss-vibe-EMPF-fresh-seed1-20261117-v2",
+  "training": {
+    "completed_updates": 256,
+    "batch_size": 2,
+    "seed": 1,
+    "recipe": "empf",
+    "ParticleGAN": "0.10.0",
+    "rates": {
+      "g": 0.00075,
+      "d": 0.009000000000000001,
+      "bank": 0.03
+    },
+    "ema_decay": null,
+    "weights": "raw",
+    "new_LR_search": false,
+    "reference_scope": "reuse completed Candlelit EMPF tuning as provisional reference, no optimum or transfer claim for final-boss data",
+    "backbone_math": "CUDA only",
+    "all_saved_updates_audited": true,
+    "regularizer_calls": 256,
+    "lazy_k": 1,
+    "original_initializer_preserved": true,
+    "initial_zero_UP_payloads_verified": 224
+  },
+  "data": {
+    "qualified_matched_training_cases": 8,
+    "paired_native_fields": 160,
+    "completed_collection_images": 32,
+    "completed_teacher_cache_reused": true,
+    "unseen_confirmation": false
+  },
+  "quarters": [
+    {
+      "step": 64,
+      "mean_intended_effect_gain": 0.4675,
+      "catastrophic_gate": "pass",
+      "exact_RAW_FULL_payloads": 4033,
+      "RAW_sha256": "075afedb58180050fbdc0e7a51c94abe549e9840bbaef3e0a9e3bb752ef4ae25"
+    },
+    {
+      "step": 128,
+      "mean_intended_effect_gain": 0.48041666666666666,
+      "catastrophic_gate": "pass",
+      "exact_RAW_FULL_payloads": 4033,
+      "RAW_sha256": "0df77a20602133f8f7c376033ab028e6fa98b6e28bf5eaa698b079610e4c0f14"
+    },
+    {
+      "step": 192,
+      "mean_intended_effect_gain": 0.5033333333333334,
+      "catastrophic_gate": "pass",
+      "exact_RAW_FULL_payloads": 4033,
+      "RAW_sha256": "ad958cd81f003be55c69fc9abf380d5937a0926c4245d180e70a1885cb26e8f7"
+    },
+    {
+      "step": 256,
+      "mean_intended_effect_gain": 0.45875,
+      "catastrophic_gate": "pass",
+      "exact_RAW_FULL_payloads": 4033,
+      "RAW_sha256": "bfc6e26e790e3ea9c3497f54d1548441e45bb8c70a7542f69b3ca10623ffdaa0"
+    }
+  ],
+  "selection": {
+    "metric": "Equal-case finished intended-effect ON1 minus matched OFF0",
+    "best_steps": [
+      192
+    ],
+    "maximum_mean_gain": 0.5033333333333334,
+    "no_other_selector_or_averaging": true
+  },
+  "native": {
+    "selected_step": 192,
+    "RAW_sha256": "ad958cd81f003be55c69fc9abf380d5937a0926c4245d180e70a1885cb26e8f7",
+    "RAW_bytes": 33739000,
+    "fresh_original_CUDA_backbone": true,
+    "public_reader_source_sha256": "5d488e507c5132e79c2a16e3af52fdccd5a178695ddd9e871fcb6b009b0b1d00",
+    "reader": "ParticleAdapter.load_export",
+    "exact_case0_PNG_reproduced": true,
+    "PNG_sha256": "7ba7051c58d784b545b8bc4429b070990e03ca0885be42164086705140f16d7f",
+    "original_pretrained_parameters_preserved": true,
+    "official_initializer_calls": 0,
+    "new_training_updates": 0,
+    "new_effect_judge_calls": 0
+  },
+  "evidence": {
+    "completion_audit_sha256": "045921471937c8d402b6c42b5be02bfc1d8df8bc4b33a0dba6ef95a8df93fd1d",
+    "durable_prefix256_audit_sha256": "ff50a5d65611458ce9dd698f53860babfd0ab604383ffb9bb9b4a52357aee48f",
+    "native_verification_sha256": "6fd158b1e37cab6983f8d59704700a0e929ab0889ecc52690766a83c8f7c993b"
+  },
+  "limits": [
+    "Training-case results only; no unseen or general optimum claim.",
+    "Separate captured EMPF run; original public PG0.9.5 trainer/defaults and all prior cohorts unchanged.",
+    "Weights remain local; no public weight release.",
+    "Remote effect/failure aliases do not establish immutable remote model weights."
+  ]
+}

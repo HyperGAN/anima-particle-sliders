@@ -67,6 +67,12 @@ def compile_manifest(split="train", *, definitions=None, characters=None):
 
 
 def validate_manifest(manifest, *, definitions=None, characters=None):
+    if manifest.get('extension') == 'anima-vibe-manifest-v1':
+        if definitions is not None or characters is not None:
+            raise ValueError('vibe manifests have independent collection provenance')
+        from .vibe import validate_manifest as validate_vibe
+        validate_vibe(manifest)
+        return
     if "extension" in manifest:
         from .psychological_horror import SCHEMA
         from .bad_intent import validate_manifest as validate_horror
