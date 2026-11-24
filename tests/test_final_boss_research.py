@@ -6,6 +6,7 @@ from types import SimpleNamespace
 import pytest
 import torch
 
+from release_tools.final_boss_cues import ARMOR_CREST_START, ROLE_AFTER_COSTUME, ROLE_BEFORE_COSTUME
 from release_tools.final_boss_targets import (
     GROUNDED_COSTUME, GROUNDED_WAVELET, RECIPES, STEPS, capture_row, edited_target, final_target, teacher_rows,
 )
@@ -94,6 +95,20 @@ def test_wavelet_exterior_keeps_the_stronger_foreground_and_reduces_coarse_exter
     filtered = torch.where(foreground, 0., (wavelet - baseline).double())
     source = torch.where(foreground, 0., (stronger - baseline).double())
     assert low_band(filtered, 3).norm() < low_band(source, 3).norm()
+
+
+def test_split_cues_keep_the_original_teacher_text_and_each_recorded_insertion():
+    fixture = STUDY / "training-pairs.json"
+    arms = [teacher_rows(fixture, name) for name in ("strong-boss-45-mix35", "role-cue35", "crest-cue35")]
+    for anchor, role_row, crest_row in zip(*arms, strict=True):
+        role, crest = role_row["explicit_positive"], crest_row["explicit_positive"]
+        assert all(role_row[key] == crest_row[key] == anchor[key] for key in ("neutral", "positive", "matte", "seed"))
+        subject, background = anchor["positive"].split(" Background: ", 1)
+        introduced_crest = crest.split(" Background: ", 1)[0][len(subject) + 1:]
+        assert introduced_crest.startswith(ARMOR_CREST_START)
+        assert crest == f"{subject} {introduced_crest} Background: {background}"
+        assert role.replace(ROLE_BEFORE_COSTUME + " ", "").replace(ROLE_AFTER_COSTUME + " ", "") == anchor["positive"]
+        assert role.replace(ROLE_AFTER_COSTUME, f"{introduced_crest} {ROLE_AFTER_COSTUME}") == anchor["explicit_positive"]
 
 
 def test_new_cue_recipes_reuse_trajectories_and_apply_the_declared_contrast():

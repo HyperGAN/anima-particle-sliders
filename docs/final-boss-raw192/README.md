@@ -136,3 +136,14 @@ for recipe in scene-grounded35 scene-grounded-taper35 scene-grounded-wavelet35; 
     --model "$ANIMA_MODEL" --out "targets/$recipe"
 done
 ```
+
+## Split role and crest cues
+
+The two recipes derive directly from the recorded stronger prompts. The role arm keeps their two antagonist sentences. The crest arm keeps the costume-specific helmet and crest sentence. Both retain every sentence in the original teacher prompt and apply the same 35% foreground-weighted blend. [Original prompt pairs](training-pairs.json) · [Prompt split source](../../release_tools/final_boss_cues.py) · [Leaderboard](../leaderboard.md#split-role-and-crest-cues)
+
+```sh
+for recipe in role-cue35 crest-cue35; do
+  python -m release_tools.final_boss_targets "$recipe" \
+    --model "$ANIMA_MODEL" --out "targets/$recipe"
+done
+```

@@ -163,6 +163,10 @@ Frequency-Aware Denoising Score separates wavelet bands to control which parts o
 
 Across **120** archived fields, the correction removed an average of **95.8%** of the added coarse exterior energy and changed the total edit by **3.2%** of its original norm. Restricting the whole-field cue to the middle wavelet band preserved less of its direction and raised the share of cue energy outside the matte from **16.9%** to **21.6%**. The exterior-only recipe is declared for the shared RAW192 comparison. [Field audit](final-boss-raw192/ablations/wavelet-exterior-field-audit.json)
 
+## Split role and crest cues
+
+The 35% stronger cue adds two kinds of signal to the original six prompts. Its two role sentences describe a climactic antagonist, and its crest sentence gives the costume a distinctive visible feature. Contrastive Guidance motivates keeping the shared prompt text fixed so the comparison isolates the changed cue. Two RAW192 arms separate the additions while preserving the original character, armor, background, lighting, trajectories, 35% blend, and per-field edit norm. The shared evaluation will show which wording contributes Boss distinction and visible damage. [Contrastive Guidance, §3.2](https://arxiv.org/html/2402.13490#S3.SS2) · [Capture commands and source](final-boss-raw192/README.md#split-role-and-crest-cues)
+
 ## Structural stops
 
 The 35% cue blend that kept only components with matching signs across its two alternate cue edits stopped at update 48. The bookkeeper render collapsed to a texture and scored 0.83 on Jev’s unreadable-image check. Training stopped before update 49. [Saved RAW48 render](final-boss-raw192/ablations/diverse-consensus35-raw48-bookkeeper.png) · [Consensus research](https://github.com/HyperGAN/particle-sliders/pull/315)

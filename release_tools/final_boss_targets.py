@@ -11,6 +11,7 @@ from torch.nn import functional as F
 
 from lumen_studio.cache import TargetCache, save_tensor_file
 from lumen_studio.contracts import atomic_json, digest, file_hash
+from release_tools.final_boss_cues import split_teacher_cues
 from release_tools.final_boss_wavelet import coarse_exterior_target
 
 
@@ -26,12 +27,14 @@ WAVELET_EXTERIOR = "wavelet-exterior35"
 GROUNDED_WAVELET = "scene-grounded-wavelet35"
 GROUNDED_RECIPES = (*GROUNDED_COSTUME, GROUNDED_WAVELET)
 WAVELET_RECIPES = (WAVELET_EXTERIOR, GROUNDED_WAVELET)
+SPLIT_CUES = ("role-cue35", "crest-cue35")
 PERCENTILE_POSITIONS = {"sega-early35": (0, 1, 2), "sega-all35": tuple(range(STEPS))}
 RECIPES = {"prompt-only": (1.0, 0.0), "soft-floor45": (0.45, 0.0),
            "strong-boss-45-mix35": (0.45, 0.35), "strong-cues-early3": (0.45, 0.35),
            "strong-cues-late3": (0.45, 0.35), "diverse-mean35": (0.45, 0.35),
            "matched-attire35": (0.45, 0.35), WAVELET_EXTERIOR: (0.45, 0.35),
            **dict.fromkeys(GROUNDED_RECIPES, (0.45, 0.35)),
+           **dict.fromkeys(SPLIT_CUES, (0.45, 0.35)),
            **dict.fromkeys(REGIONAL_RADII, (0.45, 0.35)),
            **dict.fromkeys(PERCENTILE_POSITIONS, (0.45, 0.0))}
 CUE_POSITIONS = {"strong-cues-early3": (0, 1, 2), "strong-cues-late3": (7, 8, 9)}
@@ -122,6 +125,9 @@ def row_metadata(row):
 
 def teacher_rows(fixture, recipe):
     rows = json.loads(fixture.read_text())["pairs"]
+    if recipe in SPLIT_CUES:
+        return [row | {"explicit_positive": split_teacher_cues(row["positive"], row["explicit_positive"])[recipe]}
+                for row in rows]
     if recipe in GROUNDED_RECIPES:
         study = json.loads((fixture.parent / "ablations/grounded-training-prompts.json").read_text())
         prompts = {row["id"]: row for row in study["rows"]}
