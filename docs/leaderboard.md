@@ -8,7 +8,7 @@
 
 **What earns a high score.** The slider should make the subject visibly read as a Final Boss while keeping the image coherent. An edit with zero Boss gain scores zero. Visible damage lowers the score even when the Boss effect is strong. [Scoring and comparison protocol](#comparing-a-new-run) · [Jev rubrics](final-boss-raw192/rubrics.json)
 
-**Latest challengers.** The all-step percentile filter completed RAW192 and scored **11.22** on four screening cases while its eight-case evaluation runs. The early-position filter scored **3.22** at update 48 versus **2.34** for soft foreground weighting. In-scene costumes, denoising-position exposure, regional cues, and matched ordinary attire are queued. [Percentile filtering](#percentile-filtered-teacher-edits) · [In-scene prompts](#in-scene-costume-prompts) · [Denoising-position exposure](#denoising-position-exposure) · [Regional stronger cues](#regional-stronger-cues) · [Matched ordinary attire](#matched-ordinary-attire)
+**Latest challengers.** The all-step percentile filter scored **19.52** on the eight-case RAW192 leaderboard. The early-position filter scored **3.22** at update 48 versus **2.34** for soft foreground weighting. In-scene costumes, denoising-position exposure, regional cues, and matched ordinary attire are queued. [Percentile filtering](#percentile-filtered-teacher-edits) · [In-scene prompts](#in-scene-costume-prompts) · [Denoising-position exposure](#denoising-position-exposure) · [Regional stronger cues](#regional-stronger-cues) · [Matched ordinary attire](#matched-ordinary-attire)
 
 ## Training techniques
 
@@ -22,9 +22,10 @@ The ranking uses the best measured variant of each technique after 192 updates w
 | 4 | Background-only scene and lighting projection, 0.45 floor | 22.22 | 11.51 | Local Anima adaptation of [nuisance deflation #254](https://github.com/HyperGAN/particle-sliders/pull/254) |
 | 5 | Stronger cues at the final three teacher positions | 21.20 | 10.41 | [Teacher timing adaptation and matched renders](#late-cues-at-update-192) |
 | 6 | Stronger cues at the first three teacher positions | 20.32 | 14.99 | [Teacher timing adaptation and matched renders](#early-cues-at-update-192) |
-| 7 | Whole-image scene and lighting projection, 0.65 floor | 18.74 | 13.72 | Local Anima adaptation of [nuisance deflation #254](https://github.com/HyperGAN/particle-sliders/pull/254) |
-| 8 | Soft foreground weighting plus a 35% blend of two averaged cues | 17.34 | 8.08 | [Anima comparison](#two-cue-average-at-update-192), related [cue diversification #313](https://github.com/HyperGAN/particle-sliders/pull/313) |
-| 9 | Train on adapter rollout states, 0.45 floor | 11.61 | 5.49 | Local Anima experiment, related [rollout protocol #246](https://github.com/HyperGAN/particle-sliders/pull/246) |
+| 7 | Percentile-filtered blend at all ten teacher positions | 19.52 | Unmeasured | [Anima comparison](#percentile-filtered-teacher-edits), based on [SEGA](https://arxiv.org/html/2301.12247) |
+| 8 | Whole-image scene and lighting projection, 0.65 floor | 18.74 | 13.72 | Local Anima adaptation of [nuisance deflation #254](https://github.com/HyperGAN/particle-sliders/pull/254) |
+| 9 | Soft foreground weighting plus a 35% blend of two averaged cues | 17.34 | 8.08 | [Anima comparison](#two-cue-average-at-update-192), related [cue diversification #313](https://github.com/HyperGAN/particle-sliders/pull/313) |
+| 10 | Train on adapter rollout states, 0.45 floor | 11.61 | 5.49 | Local Anima experiment, related [rollout protocol #246](https://github.com/HyperGAN/particle-sliders/pull/246) |
 | — | Four qualified costume teachers and two soft-foreground contexts | Unmeasured | 10.84 | [Matched renders and diagnostic scores](#costume-teachers-at-update-192) |
 
 The prompt-only control scored **18.32** at shared early strength. Its constant result is unmeasured. The 35% cue blend gained **3.84 points** at constant strength over the default training recipe. It improved seven of eight matched cases at constant strength and one of eight at early strength. The 85% cue blend scored lower at both shared strengths. Each technique used one initialization seed. [All runs and per-case scores](final-boss-raw192/results.json)
@@ -92,6 +93,8 @@ At update 96, the same run passed all four structural checks and scored **4.89**
 At update 144, all four structural checks passed. The all-step filter scored **4.57** versus **7.75** for soft foreground weighting, with lower scores on all four cases. Mean Boss distinction gain was **+0.128** versus **+0.168**, and mean visible damage was **0.375** versus **0.302**. The earlier damage advantage disappeared at this checkpoint. [Matched update-144 renders](final-boss-raw192/ablations/sega-all-raw144-matched.jpg) · [Per-case scores](final-boss-raw192/ablations/sega-all-raw144-scores.json)
 
 The all-step filter completed **192 updates** and passed the four screening cases at shared early α 2/3. It scored **11.22** versus **19.16** for soft foreground weighting on those four cases. Boss distinction gain fell from **+0.368** to **+0.218** on average. Mean damage rose from **0.266** to **0.283**. Bookkeeper accounted for the biggest score loss. [RAW192 screening renders](final-boss-raw192/ablations/sega-all-raw192-screen-matched.jpg) · [Per-case screening scores](final-boss-raw192/ablations/sega-all-raw192-screen-scores.json)
+
+On all eight leaderboard cases, the all-step filter passed the structural checks and scored **19.52** at shared early α 2/3. It trailed soft foreground weighting on every case. The per-case score decomposition attributes **5.60** of the **6.13** lost points to weaker Boss distinction and **0.53** to visible damage. At shared constant α 0.6375, all eight structural checks passed and Jev left guard's Boss distinction unmeasured, so the constant aggregate is unmeasured. The corrected evaluation used the saved RAW192 and the pinned leaderboard rubric. [Matched RAW192 renders](final-boss-raw192/ablations/sega-all-raw192-matched.jpg) · [Both strengths and per-case scores](final-boss-raw192/ablations/sega-all-raw192-scores.json)
 
 ## In-scene costume prompts
 
