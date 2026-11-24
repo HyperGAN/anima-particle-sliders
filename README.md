@@ -13,7 +13,7 @@ training, evaluation, export and inference.
 - [Optional HNDL backend](HNDL-CANDIDATE.md)
 - [Saved Candlelit C2 RAW960 results](docs/finished-output-learning-rates.md)
 - [Scheduled slider strength](docs/scheduled-strength.md) for the measured Candlelit RAW256 and Final Boss RAW192 profiles and opt-in activation-dependent calibration.
-- [Final Boss RAW192 research default](docs/final-boss-raw192/README.md) with matched images, downloadable adapters, and training target source.
+- [Final Boss research leaderboard](docs/leaderboard.md) with matched scores, the current default, and links to samples and source.
 
 Saved checkpoints and previously published showcase files retain their original
 source and dependency profiles.

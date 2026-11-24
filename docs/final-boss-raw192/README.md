@@ -2,7 +2,7 @@
 
 The **Final Boss research default** is soft foreground weighting with a **0.45 background floor**, using the saved RAW192 particle adapter at **early α 0.95**. This setting scored **33.71** on the development panel and **28.55** on eight separate confirmation cases. Use the shared early α 2/3 comparison below when comparing training techniques.
 
-[Default manifest and exact per-step gains](default.json) · [Public RAW checkpoints](https://huggingface.co/ntc-ai/anima-final-boss-research) · [Per-case results and prompts](results.json)
+[Leaderboard summary](../leaderboard.md) · [Default manifest and exact per-step gains](default.json) · [Public RAW checkpoints](https://huggingface.co/ntc-ai/anima-final-boss-research) · [Per-case results and prompts](results.json)
 
 ![Eight confirmation cases showing the same original, the default early 0.95 edit, and the early 0.9125 control](confirmed-default.jpg)
 
