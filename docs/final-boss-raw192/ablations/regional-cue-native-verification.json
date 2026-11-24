@@ -1,0 +1,33 @@
+{
+  "sources": {
+    "docs/final-boss-raw192/mattes/bridge.png": "91a3cdcc5acef18c8645c4e76c616474a7b209aeabc73ac6498c608e1a5554fe",
+    "docs/final-boss-raw192/mattes/cafe.png": "77c888f5a60b659ea68e7e45768e19a55d1273b6bf4aefaf8e0ff23ba3e6f8c0",
+    "docs/final-boss-raw192/mattes/greenhouse.png": "ce4065e1f866b4d76c965bca2b310cddc1b0754eefe46fca928f5418c827b828",
+    "docs/final-boss-raw192/mattes/harbor.png": "3f972ea70db59ac506e993dcc7f77762d4e75fed2c5a3bbf16d1d0c6aa268e77",
+    "docs/final-boss-raw192/mattes/library.png": "9d815c453c8f2e91519884f2991448d45e1f9a75f8de22b6af692cddc965479e",
+    "docs/final-boss-raw192/mattes/mall.png": "0c842feef6349790639fa81d7ef1bdd204078b00cc3b218017c92bb871e4542a",
+    "docs/final-boss-raw192/training-pairs.json": "f871c82eafe34dcbb87a825723659571911a202dbb1c03349d2ebdbf67491c0a",
+    "release_tools/final_boss_targets.py": "85d3c00d13aee55434619eb9da875007c7091deabe07210b9188b909174c3c2c"
+  },
+  "model": {
+    "model": "circlestone-labs/Anima:turbo-v1.1",
+    "sha256": "eb5520f293d42a19df9242d8d442d5d2068e5121620814418c2b50a97de0552f",
+    "identity_schema": "portable-model-v1",
+    "environment_sha256": "55ac97305e688c56d4a2908243b020e999cf101a05b1cf7e5a3e2c48d4a4d7ba",
+    "runtime_sha256": "0b0dfc97ba76a99ed3f5313695e89e5802ece8e1db4470443a9705692ae579c3"
+  },
+  "methods": {
+    "regional-cue-matte": {
+      "fields_verified": 120,
+      "public_cache": "54b60a4ab80c78b97062e0201c2789dadaf436f870df0603f9a28ee37d40cd9a",
+      "training_cache": "7aece2c3afd889e98be2c50d105c6237525b098a1edfe8cad9973e0525ca7ea7",
+      "native_parity": true
+    },
+    "regional-cue-dilated2": {
+      "fields_verified": 120,
+      "public_cache": "5df1e328f9f9c8df67d4dd164e4d9101c39807c3cbbbce374008c8f5491d0058",
+      "training_cache": "54f0c7b74386e92f1fd88f7acd6c887a4f4ba7f3b6a7fe0967b25750fb70d007",
+      "native_parity": true
+    }
+  }
+}

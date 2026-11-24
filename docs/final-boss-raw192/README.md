@@ -88,3 +88,5 @@ for recipe in regional-cue-matte regional-cue-dilated2; do
     --model "$ANIMA_MODEL" --out "targets/$recipe"
 done
 ```
+
+Independent CUDA capture matched the queued training targets bit for bit across both 120-field caches. Both recipes passed native admission. [CUDA verification](ablations/regional-cue-native-verification.json)

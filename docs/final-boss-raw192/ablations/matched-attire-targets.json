@@ -1,0 +1,79 @@
+{
+  "scope": "One fresh native target cache with 120 original states and conditions, before training.",
+  "cache_fingerprints": {
+    "soft-floor45": "8e28e58e797016219e5f0a0dbbaacccdc37eafaa25468b83ef954bfb2e90e120",
+    "strong-boss-45-mix35": "7feebb6e2fedbbd9e90a9ab377687093647c69b9797158252121c601f2872445",
+    "matched-attire35": "b6f07c7e0b9ded5f8be93f34cec1f32ffdee76dd36fcff64c4c61798d5d1f330"
+  },
+  "native_fields": 120,
+  "unchanged_original_state_and_conditions": true,
+  "max_norm_ratio_error": 2.0542801770773167e-07,
+  "means": {
+    "matched_norm_over_baseline": 0.9999999985355885,
+    "matched_distance_from_strong": 0.30985009259198215,
+    "matched_distance_from_baseline": 0.3693514462912395,
+    "strong_distance_from_baseline": 0.19294489412235466
+  },
+  "by_position": [
+    {
+      "matched_norm_over_baseline": 1.0000000448650204,
+      "matched_distance_from_strong": 0.3749760605095254,
+      "matched_distance_from_baseline": 0.41129019675976825,
+      "strong_distance_from_baseline": 0.19743664084966392
+    },
+    {
+      "matched_norm_over_baseline": 1.0000000051978388,
+      "matched_distance_from_strong": 0.3877178112312058,
+      "matched_distance_from_baseline": 0.44300880967279127,
+      "strong_distance_from_baseline": 0.21261448852091983
+    },
+    {
+      "matched_norm_over_baseline": 1.000000017407402,
+      "matched_distance_from_strong": 0.35278821576967107,
+      "matched_distance_from_baseline": 0.4283114568425522,
+      "strong_distance_from_baseline": 0.2509141348082151
+    },
+    {
+      "matched_norm_over_baseline": 0.9999999982847418,
+      "matched_distance_from_strong": 0.362034685380811,
+      "matched_distance_from_baseline": 0.42279391142347067,
+      "strong_distance_from_baseline": 0.22717183774323615
+    },
+    {
+      "matched_norm_over_baseline": 1.0000000108555727,
+      "matched_distance_from_strong": 0.3044485805674966,
+      "matched_distance_from_baseline": 0.36992139723185335,
+      "strong_distance_from_baseline": 0.19355323274359973
+    },
+    {
+      "matched_norm_over_baseline": 0.9999999683309034,
+      "matched_distance_from_strong": 0.2761872859601711,
+      "matched_distance_from_baseline": 0.335385035877014,
+      "strong_distance_from_baseline": 0.17654841472691893
+    },
+    {
+      "matched_norm_over_baseline": 0.9999999667126698,
+      "matched_distance_from_strong": 0.27597814805922943,
+      "matched_distance_from_baseline": 0.33021129761729057,
+      "strong_distance_from_baseline": 0.1663321575210092
+    },
+    {
+      "matched_norm_over_baseline": 0.9999999978634385,
+      "matched_distance_from_strong": 0.2759350415737713,
+      "matched_distance_from_baseline": 0.33692545022403847,
+      "strong_distance_from_baseline": 0.16239633720971838
+    },
+    {
+      "matched_norm_over_baseline": 0.9999999904681709,
+      "matched_distance_from_strong": 0.25984366130157205,
+      "matched_distance_from_baseline": 0.31740358699265864,
+      "strong_distance_from_baseline": 0.16275971637348993
+    },
+    {
+      "matched_norm_over_baseline": 0.9999999853701267,
+      "matched_distance_from_strong": 0.22859143556636807,
+      "matched_distance_from_baseline": 0.29826332027095775,
+      "strong_distance_from_baseline": 0.1797219807267755
+    }
+  ]
+}
