@@ -8,7 +8,7 @@
 
 **What earns a high score.** The slider should make the subject visibly read as a Final Boss while keeping the image coherent. An edit with zero Boss gain scores zero. Visible damage lowers the score even when the Boss effect is strong. [Scoring and comparison protocol](#comparing-a-new-run) · [Jev rubrics](final-boss-raw192/rubrics.json)
 
-**Latest challengers.** Early cue timing, late cue timing, and the two-cue average finished below the shared early leader. Qualified costume teachers are training, and two in-scene costume recipes are queued. [Completed two-cue comparison](#two-cue-average-at-update-192) · [Qualified teacher targets](#qualified-teacher-targets) · [In-scene prompt evidence](#in-scene-costume-prompts)
+**Latest challengers.** The costume-teacher run led the four-case RAW192 preview, then scored **21.47** in the eight-case diagnostic with one unresolved structure check. Both percentile-filtered target recipes are training. The two in-scene costume caches are ready for the next wave. [Costume-teacher comparison](#costume-teachers-at-update-192) · [Percentile filtering](#percentile-filtered-teacher-edits) · [In-scene prompts](#in-scene-costume-prompts)
 
 ## Training techniques
 
@@ -25,6 +25,7 @@ The ranking uses the best measured variant of each technique after 192 updates w
 | 7 | Whole-image scene and lighting projection, 0.65 floor | 18.74 | 13.72 | Local Anima adaptation of [nuisance deflation #254](https://github.com/HyperGAN/particle-sliders/pull/254) |
 | 8 | Soft foreground weighting plus a 35% blend of two averaged cues | 17.34 | 8.08 | [Anima comparison](#two-cue-average-at-update-192), related [cue diversification #313](https://github.com/HyperGAN/particle-sliders/pull/313) |
 | 9 | Train on adapter rollout states, 0.45 floor | 11.61 | 5.49 | Local Anima experiment, related [rollout protocol #246](https://github.com/HyperGAN/particle-sliders/pull/246) |
+| — | Four qualified costume teachers and two soft-foreground contexts | Unmeasured | 10.84 | [Matched renders and diagnostic scores](#costume-teachers-at-update-192) |
 
 The prompt-only control scored **18.32** at shared early strength. Its constant result is unmeasured. The 35% cue blend gained **3.84 points** at constant strength over the default training recipe. It improved seven of eight matched cases at constant strength and one of eight at early strength. The 85% cue blend scored lower at both shared strengths. Each technique used one initialization seed. [All runs and per-case scores](final-boss-raw192/results.json)
 
@@ -71,6 +72,16 @@ The two-cue average completed 192 updates and passed the structural checks at bo
 On eight archived teacher cases, guiding toward a concrete costume more strongly early in denoising scored **29.50–32.38**, versus **26.70** for the same costume prompt at fixed teacher strength. The range covers every possible outcome for one missing damage judgment. These are frozen Anima renders made before adapter training. [Per-case scores and gain schedule](final-boss-raw192/ablations/vibe-teacher-readability.json)
 
 The training recipe pairs all **80** fields from four qualified costume teachers with **40** fields from two original soft-foreground contexts. The original and new recipes each use 120 fields across six contexts. The new recipe changes both the contexts and the teacher guidance. Its first attempt stopped before any updates because the cache lacked the RAW export manifest digest. The retry preserved all 120 fields, reproduced six fields exactly in CUDA admission, and started the 192-update stock ParticleGAN fit. The timing test draws on observations that text conditioning has different effects across denoising stages. [Cache and score evidence](final-boss-raw192/ablations/vibe-teacher-readability.json) · [eDiff-I](https://arxiv.org/abs/2211.01324) · [Prompt-Conditioned Interventions](https://arxiv.org/abs/2512.08486)
+
+## Costume teachers at update 192
+
+On the four checkpoint cases, the costume-teacher adapter scored **25.70** versus **19.16** for soft foreground weighting. It won three cases. Mean Boss distinction gain rose from **+0.368** to **+0.418**, and mean damage fell from **0.266** to **0.206**. [Four matched checkpoint cases](final-boss-raw192/ablations/costume-teacher-raw192-preview-matched.jpg) · [Checkpoint scores](final-boss-raw192/ablations/costume-teacher-raw192-preview-scores.json)
+
+On the full eight-case panel at early α 2/3, Jev left the violinist's armor structure unresolved. The other seven passed. Separately scoring all eight images for Boss effect and damage gave **21.47** versus **25.66** for soft foreground weighting. Mean Boss distinction gain rose from **+0.423** to **+0.436**, but mean damage rose from **0.214** to **0.291**. Ranger and guide improved. The constant-strength comparison passed and scored **10.84**. [Eight matched renders](final-boss-raw192/ablations/costume-teacher-raw192-matched.jpg) · [Full diagnostic scores](final-boss-raw192/ablations/costume-teacher-raw192-diagnostic.json) · [Qualified score records](final-boss-raw192/ablations/costume-teacher-raw192-scores.json)
+
+## Percentile-filtered teacher edits
+
+SEGA uses a percentile of the absolute prompt-response difference to select components for guidance. The Anima training adaptation blends 35% of the norm-matched top 10% of the soft-foreground edit into the dense edit, then restores the original per-field L2 norm. One run applies the blend at the first three denoising positions. The other applies it at all ten. Both passed native target admission and are training toward the same RAW192 comparisons. [SEGA paper](https://arxiv.org/html/2301.12247)
 
 ## In-scene costume prompts
 
