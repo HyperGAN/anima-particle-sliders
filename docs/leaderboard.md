@@ -45,6 +45,12 @@ Late cues passed all four structural checks. The quarter-check question gave lat
 
 Scoring those same renders with the leaderboard’s separate character and damage questions gave late cues **8.92** and soft foreground weighting **7.75**. Late cues had higher mean Boss distinction gain (**+0.183** versus **+0.168**) and slightly lower mean image damage (**0.287** versus **0.302**). Bookkeeper accounted for most of the score increase. Botanist and seamstress favored soft foreground weighting after the damage adjustment. [Per-case scores and matched image hashes](final-boss-raw192/ablations/late-cues-raw144-scores.json)
 
+## Qualified teacher targets
+
+On eight archived teacher cases, guiding toward a concrete costume more strongly early in denoising scored **29.50–32.38**, versus **26.70** for the same costume prompt at fixed teacher strength. The range covers every possible outcome for one missing damage judgment. These are frozen Anima renders made before adapter training. [Per-case scores and gain schedule](final-boss-raw192/ablations/vibe-teacher-readability.json)
+
+A prepared training recipe pairs all **80** fields from four qualified costume teachers with **40** fields from two original soft-foreground contexts. The original and new recipes each use 120 fields across six contexts. The new recipe changes both the contexts and the teacher guidance. Its planned fit uses 192 stock ParticleGAN updates and the same development comparisons. The timing test draws on observations that text conditioning has different effects across denoising stages. [eDiff-I](https://arxiv.org/abs/2211.01324) · [Prompt-Conditioned Interventions](https://arxiv.org/abs/2512.08486)
+
 ## Structural stops
 
 The 35% cue blend that kept only components with matching signs across its two alternate cue edits stopped at update 48. The bookkeeper render collapsed to a texture and scored 0.83 on Jev’s unreadable-image check. Training stopped before update 49. [Saved RAW48 render](final-boss-raw192/ablations/diverse-consensus35-raw48-bookkeeper.png) · [Consensus research](https://github.com/HyperGAN/particle-sliders/pull/315)
