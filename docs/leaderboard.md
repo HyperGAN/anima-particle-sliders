@@ -23,7 +23,7 @@ Stronger Boss distinction accounts for **3.52** of the cue blend’s constant-st
 
 ## Update-48 preview
 
-Using stronger cue targets in the last three teacher positions passed all four image checks. At shared early inference strength the mean Jev Boss gain was **+0.176**, compared with **+0.186** for soft foreground weighting at the same update. The late-cue archivist render shows a softer coat silhouette and warmer scene lighting. [Four matched originals and renders](final-boss-raw192/ablations/late-cues-raw48-matched.jpg)
+The late-cue and two-cue-average runs each passed all four image checks. Mean Jev Boss gain at shared early inference strength was **+0.186** for soft foreground weighting, **+0.176** for late cues, and **+0.174** for the cue average. Both challengers gained on bookkeeper, botanist, and seamstress. Both scored lower on archivist, where soft foreground weighting gave the coat a sharper silhouette. [Four matched cases across all three recipes](final-boss-raw192/ablations/cue-tests-raw48-matched.jpg)
 
 ## Structural stops
 
