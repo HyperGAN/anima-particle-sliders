@@ -8,7 +8,7 @@
 
 **What earns a high score.** The slider should make the subject visibly read as a Final Boss while keeping the image coherent. An edit with zero Boss gain scores zero. Visible damage lowers the score even when the Boss effect is strong. [Scoring and comparison protocol](#comparing-a-new-run) · [Jev rubrics](final-boss-raw192/rubrics.json)
 
-**Latest challengers.** The costume-teacher run led the four-case RAW192 preview, then scored **21.47** in the eight-case diagnostic with one unresolved structure check. Percentile filtering is training. In-scene costume targets, denoising-position exposure, and regional stronger cues are queued. [Costume-teacher comparison](#costume-teachers-at-update-192) · [Percentile filtering](#percentile-filtered-teacher-edits) · [In-scene prompts](#in-scene-costume-prompts) · [Denoising-position exposure](#denoising-position-exposure) · [Regional stronger cues](#regional-stronger-cues)
+**Latest challengers.** The all-step percentile filter completed RAW192 and scored **11.22** on four screening cases while its eight-case evaluation runs. The early-position filter scored **3.22** at update 48 versus **2.34** for soft foreground weighting. In-scene costumes, denoising-position exposure, regional cues, and matched ordinary attire are queued. [Percentile filtering](#percentile-filtered-teacher-edits) · [In-scene prompts](#in-scene-costume-prompts) · [Denoising-position exposure](#denoising-position-exposure) · [Regional stronger cues](#regional-stronger-cues) · [Matched ordinary attire](#matched-ordinary-attire)
 
 ## Training techniques
 
@@ -85,9 +85,13 @@ SEGA uses a percentile of the absolute prompt-response difference to select comp
 
 At update 48, the all-ten-position blend passed all four structural checks and scored **2.22**, close to soft foreground weighting at **2.34**. It led on three cases and trailed on archivist. Mean image damage was **0.208** versus **0.268** for soft foreground weighting. Both showed weak Boss distinction at this checkpoint. [Matched update-48 renders](final-boss-raw192/ablations/sega-all-raw48-matched.jpg) · [Per-case scores](final-boss-raw192/ablations/sega-all-raw48-scores.json)
 
+The early-position filter also passed all four checks at update 48. It scored **3.22** and improved bookkeeper and seamstress relative to soft foreground weighting at **2.34**. Mean Boss distinction gain rose from **+0.048** to **+0.063**, and mean damage rose from **0.268** to **0.279**. [Both filters at update 48](final-boss-raw192/ablations/sega-early-raw48-matched.jpg) · [Per-case scores](final-boss-raw192/ablations/sega-early-raw48-scores.json)
+
 At update 96, the same run passed all four structural checks and scored **4.89** at shared early α 2/3. Soft foreground weighting scored **5.73**, and the two-cue average scored **10.34** at this checkpoint. Percentile filtering lowered mean damage from **0.315** to **0.265**, while mean Boss distinction gain fell from **+0.125** to **+0.088**. Archivist and seamstress improved, and bookkeeper dropped the most. [Matched update-96 renders](final-boss-raw192/ablations/sega-all-raw96-matched.jpg) · [Per-case scores](final-boss-raw192/ablations/sega-all-raw96-scores.json)
 
 At update 144, all four structural checks passed. The all-step filter scored **4.57** versus **7.75** for soft foreground weighting, with lower scores on all four cases. Mean Boss distinction gain was **+0.128** versus **+0.168**, and mean visible damage was **0.375** versus **0.302**. The earlier damage advantage disappeared at this checkpoint. [Matched update-144 renders](final-boss-raw192/ablations/sega-all-raw144-matched.jpg) · [Per-case scores](final-boss-raw192/ablations/sega-all-raw144-scores.json)
+
+The all-step filter completed **192 updates** and passed the four screening cases at shared early α 2/3. It scored **11.22** versus **19.16** for soft foreground weighting on those four cases. Boss distinction gain fell from **+0.368** to **+0.218** on average. Mean damage rose from **0.266** to **0.283**. Bookkeeper accounted for the biggest score loss. [RAW192 screening renders](final-boss-raw192/ablations/sega-all-raw192-screen-matched.jpg) · [Per-case screening scores](final-boss-raw192/ablations/sega-all-raw192-screen-scores.json)
 
 ## In-scene costume prompts
 
@@ -108,6 +112,10 @@ Both arms retain all 120 soft-foreground teacher fields and repeat 48 of them on
 The 35% stronger-cue recipe moved an average of **16.9%** of its squared change from the baseline into locations outside the subject matte. Blended Diffusion preserves the surrounding image by applying edits locally at successive denoising steps. This training adaptation applies that idea to the added cue in each frozen teacher field. It keeps the soft-foreground edit unchanged outside the allowed region. It also matches both the total baseline edit norm and the distance from the baseline to the whole-field stronger cue. [Blended Diffusion](https://arxiv.org/abs/2111.14818) · [Field audit and recipe](final-boss-raw192/ablations/regional-cue-protocol.json)
 
 The original matte and a two-site latent halo passed the norm and support checks on all 120 archived fields. The matte contained the entire change within the original subject. The halo left **0.7%** outside it, with the remainder concentrated on the subject. Both training runs are queued with the same RAW192 budget and shared strengths. [Frozen-field checks](final-boss-raw192/ablations/regional-cue-protocol.json) · [Capture commands and source](final-boss-raw192/README.md#regional-stronger-cues)
+
+## Matched ordinary attire
+
+Concept Sliders uses a contrast between prompts to emphasize one attribute and suppress another. The Anima test keeps the exact stronger Boss prompt and compares it with an ordinary outfit that echoes its colors and materials, with the same subject, framing, background, and lighting. This asks whether the stronger cue can teach the Boss silhouette and expression with a smaller contribution from costume palette and fabric changes. The stock fit uses the same 35% blend, 0.45 background floor, and per-field edit norm. Preparation and RAW192 training are queued. [Concept Sliders method](https://arxiv.org/html/2311.12092v2#S4) · [Six exact prompt pairs](final-boss-raw192/ablations/matched-attire-prompts.json)
 
 ## Structural stops
 
