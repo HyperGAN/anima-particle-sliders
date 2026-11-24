@@ -1,11 +1,12 @@
 import json
 from pathlib import Path
 from statistics import fmean
+from types import SimpleNamespace
 
 import pytest
 import torch
 
-from release_tools.final_boss_targets import RECIPES, edited_target
+from release_tools.final_boss_targets import RECIPES, STEPS, capture_row, edited_target
 
 
 STUDY = Path(__file__).resolve().parents[1] / "docs/final-boss-raw192"
@@ -41,3 +42,49 @@ def test_fitted_teacher_contrast_keeps_the_original_l2_dose(recipe):
 
     torch.testing.assert_close(edit.norm(), (positive - neutral).norm())
     assert edit[1] / edit[0] == pytest.approx(floor / (1 + 2 * cue_mix))
+
+
+def test_new_cue_recipes_reuse_trajectories_and_apply_the_declared_contrast():
+    class Runtime:
+        device = "cpu"
+
+        def encode(self, prompt):
+            velocities = {"plain": (0, 0), "boss": (2, 2), "specific": (6, 1), "other": (1, 9)}
+            return torch.tensor(velocities[prompt], dtype=torch.float32).reshape(1, 1, 1, 1, 2)
+
+        def noise(self, seed, width, height):
+            return torch.zeros((1, 1, 1, 1, 2))
+
+        def scheduler(self, steps):
+            return SimpleNamespace(timesteps=torch.arange(steps))
+
+        def predict(self, latent, timestep, embedding):
+            return latent * 0.125 + embedding
+
+        def step(self, scheduler, velocity, timestep, latent):
+            return latent + velocity * 0.1
+
+    runtime = Runtime()
+    row = {"id": "fixture", "seed": 1, "neutral": "plain", "positive": "boss",
+           "explicit_positive": "specific", "alternate_positive": "other"}
+    matte = STUDY / "mattes/bridge.png"
+    recipes = ("soft-floor45", "strong-boss-45-mix35", "strong-cues-early3", "strong-cues-late3", "diverse-mean35")
+    baseline, strong, early, late, diverse = [capture_row(runtime, row, matte, recipe)["records"] for recipe in recipes]
+    for index, fields in enumerate(zip(baseline, strong, early, late, diverse, strict=True)):
+        control, explicit, first, final, averaged = fields
+        step = index % STEPS
+        for field in fields:
+            assert field["position"] == step and field["trajectory"] == control["trajectory"]
+            assert torch.equal(field["latent"], control["latent"])
+            assert torch.equal(field["neutral"], control["neutral"])
+        assert torch.equal(first["positive"], (explicit if step < 3 else control)["positive"])
+        assert torch.equal(final["positive"], (explicit if step >= 7 else control)["positive"])
+        neutral = control["neutral"]
+        pure = runtime.predict(control["latent"], step, runtime.encode(row["positive"]))
+        control_edit = control["positive"] - neutral
+        cue = (runtime.encode("specific") + runtime.encode("other")) * 0.5
+        mixed = (pure - neutral).lerp(cue, 0.35)
+        # Infer the relative matte weights from the masked baseline contrast.
+        expected = mixed * (control_edit / (pure - neutral))
+        expected = expected * ((pure - neutral).norm() / expected.norm())
+        torch.testing.assert_close(averaged["positive"] - neutral, expected)

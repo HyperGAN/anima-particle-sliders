@@ -52,6 +52,15 @@ python -m release_tools.final_boss_targets strong-boss-45-mix35 \
   --model "$ANIMA_MODEL" --out targets/strong-boss-45-mix35
 ```
 
+The timed recipes apply the 35% cue blend only at positions 0–2 or 7–9. The two-cue recipe averages the two positive-minus-neutral responses at each frozen state before taking the 35% blend. All three use the same soft foreground mask and restore the original per-field L2 norm. [Exact alternate prompts](ablations/two-cue-prompts.json) · [Leaderboard evidence](../leaderboard.md)
+
+```sh
+for recipe in strong-cues-early3 strong-cues-late3 diverse-mean35; do
+  python -m release_tools.final_boss_targets "$recipe" \
+    --model "$ANIMA_MODEL" --out "targets/$recipe"
+done
+```
+
 Pass the resulting `TargetCache` to [scoped training](../explicit-fresh-initialization.md), with `variation="character-final-boss"` and `native_admission=lambda request: verify_native(runtime, cache, request)`. Keep the fit at `seed=1`, `batch_size=2`, `total_steps=192`, `response_scale=1`, `sigma=1`, `critic_width=32`, `lr=0.00075`, `d_lr_mult=12`, `prior_lr_mult=40`, and `ema_decay=None`. Use fresh scoped initialization for a new cohort. Save RAW at 48, 96, 144, and 192 and check the matched rendered images before continuing past each checkpoint. The recorded experiment used [this Anima source](https://github.com/HyperGAN/anima-particle-sliders/tree/c4b0e86e78670f21ffa5e7545b244d0f9e63cea6), [this core source](https://github.com/HyperGAN/particle-sliders/tree/507168a241e237fc3d5f1032a8137196fa3c3562), and ParticleGAN 0.11.1. Compare future cohorts on the same development cases at both shared strengths.
 
 Related research includes teacher mixing [#278](https://github.com/HyperGAN/particle-sliders/pull/278), [Concept Sliders](https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/05660.pdf) and contrast isolation [#216](https://github.com/HyperGAN/particle-sliders/pull/216), nuisance projection [#254](https://github.com/HyperGAN/particle-sliders/pull/254), and rollout comparison [#246](https://github.com/HyperGAN/particle-sliders/pull/246). The trained Anima recipes are native adaptations.
