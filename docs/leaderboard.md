@@ -8,7 +8,7 @@
 
 **What earns a high score.** The slider should make the subject visibly read as a Final Boss while keeping the image coherent. An edit with zero Boss gain scores zero. Visible damage lowers the score even when the Boss effect is strong. [Scoring and comparison protocol](#comparing-a-new-run) · [Jev rubrics](final-boss-raw192/rubrics.json)
 
-**Latest challengers.** Matched ordinary attire scored **19.86** on the eight-case RAW192 leaderboard, the all-step percentile filter scored **19.52**, and the early-position filter scored **17.30**. Subject APG scored **8.03** at shared constant strength. Its shared early aggregate is unmeasured. The scheduled frozen-teacher fit and middle-position exposure fit are running. [Percentile filtering](#percentile-filtered-teacher-edits) · [Subject APG](#adaptive-projected-guidance-on-the-subject) · [Frozen-teacher trajectory](#scheduled-frozen-teacher-trajectory)
+**Latest challengers.** Matched ordinary attire scored **19.86** on the eight-case RAW192 leaderboard, the all-step percentile filter scored **19.52**, and the early-position filter scored **17.30**. Subject APG scored **8.03** at shared constant strength. Its shared early aggregate is unmeasured. Frozen-teacher trajectories scored **2.30** on the four-case RAW48 panel, close to the same-step soft foreground control at **2.34**. [Subject APG](#adaptive-projected-guidance-on-the-subject) · [Frozen-teacher trajectory](#scheduled-frozen-teacher-trajectory) · [Paired exterior targets](#paired-contexts-outside-the-subject)
 
 ## Training techniques
 
@@ -201,6 +201,8 @@ The 35% cue blend that kept only components with matching signs across its two a
 Jensen and Sadat cached trajectories generated with classifier-free guidance to reduce the gap between training and inference. This Anima adaptation makes the second training trajectory follow the frozen teacher's 0.45-floor foreground edit at the shared early schedule. It retains the original neutral trajectory and computes the same full teacher target at every visited state. The fit uses the same 120 records, prompts, seeds, and stock ParticleGAN setup. The earlier adapter-rollout arm used a trained adapter to generate its states and scored 11.61 at RAW192. The frozen-teacher fit has started on GPU 0. [Paper and trajectory algorithm](https://arxiv.org/html/2503.07274v1#S4.SS1) · [Pinned schedule and capture](final-boss-raw192/README.md#scheduled-frozen-teacher-trajectory)
 
 CUDA capture matched **66** control fields bit for bit and produced **54** observations at different states. Native admission replayed all six guided paths and rechecked four fields against the frozen teacher. [Native capture evidence](final-boss-raw192/ablations/guided-teacher-native-verification.json)
+
+At RAW48, all four structural checks passed. Frozen-teacher training scored **2.30** at shared early α 2/3, compared with **2.34** for soft foreground weighting and **3.74** for the stronger-cue blend. Bookkeeper and Seamstress improved relative to soft foreground weighting, while Archivist accounted for the largest drop. [Four matched cases](final-boss-raw192/ablations/guided-teacher-raw48-matched.jpg) · [Per-case scores and RAW digests](final-boss-raw192/ablations/guided-teacher-raw48-scores.json)
 
 ## Adaptive projected guidance on the subject
 
