@@ -1,0 +1,408 @@
+{
+  "scope": "Descriptive pixel audit of saved native 512px renders, counting evaluated settings separately.",
+  "source_results_sha256": "4f9eaafc6fc03c7ab4f293bbf9184372950de041ee156198b5c0181a0a1dfec0",
+  "analysis_implementation_sha256": "4d2ba942d049a800f01b9cb42e443b6e6bfbd86dce172a76b835e975aea20d87",
+  "pixel_rule": {
+    "min_value_each_channel": 247,
+    "min_white_fraction_in_line": 0.995,
+    "minimum_contiguous_lines": 8
+  },
+  "teacher_pairs": {
+    "bridge": {
+      "neutral": {
+        "sha256": "5b1478ed0d84b798648f48d54de0a1c029081a4f8f5c0ac4e0f3683dea1652c6",
+        "edges": {
+          "top": 0,
+          "bottom": 0,
+          "left": 0,
+          "right": 0
+        }
+      },
+      "positive": {
+        "sha256": "b019dd959bfd03089e081dc12efce6c07e3d5ff9bb3370bb91f26bd8378c1156",
+        "edges": {
+          "top": 0,
+          "bottom": 0,
+          "left": 0,
+          "right": 0
+        }
+      }
+    },
+    "cafe": {
+      "neutral": {
+        "sha256": "36438f67277f9e38b8d7265a4a236b7e368d6bb6604443d8b30fe657dbe192d6",
+        "edges": {
+          "top": 0,
+          "bottom": 0,
+          "left": 135,
+          "right": 135
+        }
+      },
+      "positive": {
+        "sha256": "54bbae83b90cb7c3e4c4a64a96f26195ec8ac2f5904d6de1859d723f3e1249a7",
+        "edges": {
+          "top": 0,
+          "bottom": 0,
+          "left": 79,
+          "right": 79
+        }
+      }
+    },
+    "greenhouse": {
+      "neutral": {
+        "sha256": "4dfb64292cfc9fa379b721e3f9823af25cff8d378ad83b794b14a7f38d5d8a1f",
+        "edges": {
+          "top": 0,
+          "bottom": 0,
+          "left": 94,
+          "right": 94
+        }
+      },
+      "positive": {
+        "sha256": "fba8bf0acbfcc04d4fc6bffe8fe2c149894cf909c9e3052bb5e09a00f6904d16",
+        "edges": {
+          "top": 0,
+          "bottom": 0,
+          "left": 0,
+          "right": 0
+        }
+      }
+    },
+    "harbor": {
+      "neutral": {
+        "sha256": "6a0c226ca8c7d5d7b74794bae0caa04c16914f88ffae49acdbe391dc7a2bf80c",
+        "edges": {
+          "top": 0,
+          "bottom": 0,
+          "left": 74,
+          "right": 75
+        }
+      },
+      "positive": {
+        "sha256": "a74a1a18a548204663a02bd4d3a433383790299fa51cc2a9bf979476a246e400",
+        "edges": {
+          "top": 0,
+          "bottom": 0,
+          "left": 0,
+          "right": 0
+        }
+      }
+    },
+    "library": {
+      "neutral": {
+        "sha256": "d055cac2747d44ea34387cdc5f1015a221c6677972d6e9ef2bfc6a6438bbd625",
+        "edges": {
+          "top": 0,
+          "bottom": 0,
+          "left": 0,
+          "right": 0
+        }
+      },
+      "positive": {
+        "sha256": "7bdf4e48aef213dee1a4b68309b0c80c1e8a46f9af3a9a68e440d07699fa5c11",
+        "edges": {
+          "top": 0,
+          "bottom": 0,
+          "left": 0,
+          "right": 0
+        }
+      }
+    },
+    "mall": {
+      "neutral": {
+        "sha256": "709f668b96b36f04bb92243f9a06c3bdfa0e41897beb0c9c5b043c39f174c375",
+        "edges": {
+          "top": 0,
+          "bottom": 0,
+          "left": 99,
+          "right": 99
+        }
+      },
+      "positive": {
+        "sha256": "7974b9a85b21fbd56e8c86b3cb7db9ca70e356ee429dcf3f8e0365fd67ccce9e",
+        "edges": {
+          "top": 0,
+          "bottom": 0,
+          "left": 0,
+          "right": 0
+        }
+      }
+    }
+  },
+  "development_originals": {
+    "ranger": {
+      "sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c",
+      "edges": {
+        "top": 0,
+        "bottom": 0,
+        "left": 0,
+        "right": 0
+      }
+    },
+    "smith": {
+      "sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245",
+      "edges": {
+        "top": 0,
+        "bottom": 0,
+        "left": 0,
+        "right": 0
+      }
+    },
+    "stationer": {
+      "sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339",
+      "edges": {
+        "top": 0,
+        "bottom": 0,
+        "left": 0,
+        "right": 0
+      }
+    },
+    "ferryman": {
+      "sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b",
+      "edges": {
+        "top": 0,
+        "bottom": 0,
+        "left": 0,
+        "right": 0
+      }
+    },
+    "watchmaker": {
+      "sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8",
+      "edges": {
+        "top": 0,
+        "bottom": 0,
+        "left": 0,
+        "right": 0
+      }
+    },
+    "guide": {
+      "sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa",
+      "edges": {
+        "top": 0,
+        "bottom": 0,
+        "left": 0,
+        "right": 0
+      }
+    },
+    "guard": {
+      "sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5",
+      "edges": {
+        "top": 0,
+        "bottom": 0,
+        "left": 0,
+        "right": 0
+      }
+    },
+    "violinist": {
+      "sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50",
+      "edges": {
+        "top": 0,
+        "bottom": 0,
+        "left": 0,
+        "right": 0
+      }
+    }
+  },
+  "raw192": {
+    "fixed_strength": {
+      "render_count": 168,
+      "padded": [
+        {
+          "method": "matched-attire35",
+          "qualification": "pass",
+          "case": "guide",
+          "sha256": "561aee1df52d1bfa3fd72d3c85e0e2e22a2eb8d22a43a1a44b484b6a512cd15b",
+          "edges": {
+            "top": 52,
+            "bottom": 52,
+            "left": 0,
+            "right": 0
+          }
+        }
+      ]
+    },
+    "matched_constant": {
+      "render_count": 168,
+      "padded": [
+        {
+          "method": "matched-attire35",
+          "qualification": "unmeasured",
+          "case": "guide",
+          "sha256": "594e9a1c87451c5216f200181e50048a46dd3b32fcb6bdec959b408eb8259882",
+          "edges": {
+            "top": 52,
+            "bottom": 51,
+            "left": 0,
+            "right": 0
+          }
+        }
+      ]
+    }
+  },
+  "middle_exposure_previews": {
+    "48": {
+      "archivist": {
+        "off": {
+          "sha256": "356413c7d85b7405c8ad15d520ba188fdab64b1805d5140758f61221d704bbd1",
+          "edges": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        "on": {
+          "sha256": "456194634fcae3dc231c83baad532c9c9e2975424363eb42a927b03fe87441ee",
+          "edges": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        }
+      },
+      "bookkeeper": {
+        "off": {
+          "sha256": "e891f6ea6fbdf921858d1e349fbe4f08c2df9b89045363fb55cf4dafa3064fa4",
+          "edges": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        "on": {
+          "sha256": "a720bf5c4eb53810aaf7d71348fcd8cf6f1cd2fe287e83ad8a3647760dd0be8e",
+          "edges": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        }
+      },
+      "botanist": {
+        "off": {
+          "sha256": "21af6f3fbc2798373e25ef77b57d3aa11de44ef6536fbfa7cd41298ebbe4d606",
+          "edges": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        "on": {
+          "sha256": "e4720b4a7e531f718f23711b707816790882ed84bbab6435fc507371c650930b",
+          "edges": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        }
+      },
+      "seamstress": {
+        "off": {
+          "sha256": "4a53b469861b66c0e414f89dd0774224b71d13d630d789f89bba80799bb55eac",
+          "edges": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        "on": {
+          "sha256": "fa1c58229ddb1d895aab96b873c6063bf6118366b9e17f60ae1ee1c161fa1c62",
+          "edges": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        }
+      }
+    },
+    "96": {
+      "archivist": {
+        "off": {
+          "sha256": "356413c7d85b7405c8ad15d520ba188fdab64b1805d5140758f61221d704bbd1",
+          "edges": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        "on": {
+          "sha256": "764a9904d3c86b21e1e24f772339cac45d2e8aedac91bc38ced3e768d2e79ff4",
+          "edges": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        }
+      },
+      "bookkeeper": {
+        "off": {
+          "sha256": "e891f6ea6fbdf921858d1e349fbe4f08c2df9b89045363fb55cf4dafa3064fa4",
+          "edges": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        "on": {
+          "sha256": "d9099efa9ef9bdb568911cc0431cc506aefecff4224091d4d6f889a8250c7667",
+          "edges": {
+            "top": 47,
+            "bottom": 47,
+            "left": 0,
+            "right": 0
+          }
+        }
+      },
+      "botanist": {
+        "off": {
+          "sha256": "21af6f3fbc2798373e25ef77b57d3aa11de44ef6536fbfa7cd41298ebbe4d606",
+          "edges": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        "on": {
+          "sha256": "c82e821e2ef8700def23774d3d3d564cc807c210930bec846041ec54588eb1d6",
+          "edges": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        }
+      },
+      "seamstress": {
+        "off": {
+          "sha256": "4a53b469861b66c0e414f89dd0774224b71d13d630d789f89bba80799bb55eac",
+          "edges": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        "on": {
+          "sha256": "f73e73bd9bb94963163d0305aaf1be233a5fb03bcd266f6f61eb4a83638d16e3",
+          "edges": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        }
+      }
+    }
+  }
+}
