@@ -107,7 +107,7 @@ Both arms retain all 120 soft-foreground teacher fields and repeat 48 of them on
 
 The 35% stronger-cue recipe moved an average of **16.9%** of its squared change from the baseline into locations outside the subject matte. Blended Diffusion preserves the surrounding image by applying edits locally at successive denoising steps. This training adaptation applies that idea to the added cue in each frozen teacher field. It keeps the soft-foreground edit unchanged outside the allowed region. It also matches both the total baseline edit norm and the distance from the baseline to the whole-field stronger cue. [Blended Diffusion](https://arxiv.org/abs/2111.14818) · [Field audit and recipe](final-boss-raw192/ablations/regional-cue-protocol.json)
 
-The original matte and a two-site latent halo passed the norm and support checks on all 120 archived fields. The matte contained the entire change within the original subject. The halo left **0.7%** outside it, with the remainder concentrated on the subject. Both training runs are queued with the same RAW192 budget and shared strengths. [Frozen-field checks](final-boss-raw192/ablations/regional-cue-protocol.json)
+The original matte and a two-site latent halo passed the norm and support checks on all 120 archived fields. The matte contained the entire change within the original subject. The halo left **0.7%** outside it, with the remainder concentrated on the subject. Both training runs are queued with the same RAW192 budget and shared strengths. [Frozen-field checks](final-boss-raw192/ablations/regional-cue-protocol.json) · [Capture commands and source](final-boss-raw192/README.md#regional-stronger-cues)
 
 ## Structural stops
 

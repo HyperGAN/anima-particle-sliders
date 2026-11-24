@@ -77,3 +77,14 @@ for recipe in exposure-opening4 exposure-middle4; do
     "targets/$recipe" --receipt "targets/$recipe-sampler.json"
 done
 ```
+
+## Regional stronger cues
+
+The regional recipes keep both teacher trajectories and change the stronger cue only within the allowed mask. They match the baseline edit norm and the whole-field cue's distance from the baseline at each position. The target capture and native admission use the same parameters and matte in each recipe. [Regional target source](../../release_tools/final_boss_targets.py) · [Field checks and protocol](ablations/regional-cue-protocol.json)
+
+```sh
+for recipe in regional-cue-matte regional-cue-dilated2; do
+  python -m release_tools.final_boss_targets "$recipe" \
+    --model "$ANIMA_MODEL" --out "targets/$recipe"
+done
+```
