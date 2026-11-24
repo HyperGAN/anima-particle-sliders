@@ -224,6 +224,58 @@
         }
       ],
       "milestone_sha256": "7eeaa9a238999c5dd28bd3fb5315071b355dc6004dc73048f62e5bb66386ae24"
+    },
+    "vibe-qualified4": {
+      "status": "measured",
+      "quarter_check_gain": 0.3058333333333334,
+      "means": {
+        "boss_gain": 0.0975,
+        "image_damage": 0.2625,
+        "adjusted_score": 0.05075647222225
+      },
+      "cases": [
+        {
+          "case": "archivist",
+          "off_sha256": "356413c7d85b7405c8ad15d520ba188fdab64b1805d5140758f61221d704bbd1",
+          "on_sha256": "367c3410120eb6f9346f8bc7a290238833ea721dbb5a0c4fd262d5d24e179dbb",
+          "boss_off": 0.06,
+          "boss_on": 0.15,
+          "boss_gain": 0.09,
+          "image_damage": 0.23666666666666666,
+          "adjusted_score": 0.052441
+        },
+        {
+          "case": "bookkeeper",
+          "off_sha256": "e891f6ea6fbdf921858d1e349fbe4f08c2df9b89045363fb55cf4dafa3064fa4",
+          "on_sha256": "cac8998ea9f1d63ac97eb8b8de4d934e7b5aaf41ee3e39f666996383209518be",
+          "boss_off": 0.08,
+          "boss_on": 0.18,
+          "boss_gain": 0.09999999999999999,
+          "image_damage": 0.3066666666666667,
+          "adjusted_score": 0.048071111111
+        },
+        {
+          "case": "botanist",
+          "off_sha256": "21af6f3fbc2798373e25ef77b57d3aa11de44ef6536fbfa7cd41298ebbe4d606",
+          "on_sha256": "a7a4f9fb7efa7981e167e290eb1f2ce8f4adffea5fc9afa593b4f34c058c6639",
+          "boss_off": 0.07,
+          "boss_on": 0.11,
+          "boss_gain": 0.039999999999999994,
+          "image_damage": 0.19999999999999998,
+          "adjusted_score": 0.0256
+        },
+        {
+          "case": "seamstress",
+          "off_sha256": "4a53b469861b66c0e414f89dd0774224b71d13d630d789f89bba80799bb55eac",
+          "on_sha256": "ff1bcdb627027926677f1466c3b6bf08d069a79788ab12eb10c96b3ad420b492",
+          "boss_off": 0.06,
+          "boss_on": 0.22,
+          "boss_gain": 0.16,
+          "image_damage": 0.3066666666666667,
+          "adjusted_score": 0.076913777778
+        }
+      ],
+      "milestone_sha256": "56bd26d22647c76edcccd0dc03ef9b102f85648fb895b18578bae9ebf2e4db60"
     }
   }
 }
