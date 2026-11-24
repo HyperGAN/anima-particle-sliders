@@ -102,7 +102,7 @@ On eight matched frozen-teacher cases, the in-scene armor-and-crown prompt score
 
 The queued training test gives the original six contexts in-scene prompts that describe the existing costume as worn by the subject under the original light. Both arms use the original trajectories, 0.45 background floor, and per-field L2 normalization. One mixes in the grounded contrast at 35% throughout. The other tapers the mix from 39.2% to 27.3% across the ten teacher positions. Both are planned for 192 stock ParticleGAN updates and the shared-strength evaluation. [Exact prompts and mixing weights](final-boss-raw192/ablations/grounded-training-prompts.json)
 
-Both caches are prepared on CUDA. The 120 latents, neutral velocities, and embeddings match the soft-foreground cache. The taper changes the target direction by up to **4.58%** of the edit norm on average at a denoising position and preserves the per-field L2 norm. [Cache and field comparison](final-boss-raw192/ablations/grounded-training-prompts.json)
+Both caches are prepared on CUDA. The 120 latents, neutral velocities, and embeddings match the soft-foreground cache. The taper changes the target direction by up to **4.58%** of the edit norm on average at a denoising position and preserves the per-field L2 norm. The fixed blend is reserved for the next released training lane, ahead of the taper comparison. [Cache and field comparison](final-boss-raw192/ablations/grounded-training-prompts.json)
 
 ## Denoising-position exposure
 
@@ -125,6 +125,8 @@ The prepared CUDA cache retains all 120 original latents, neutral velocities and
 At update 48, all four structural checks passed. Matched attire scored **2.14**, soft foreground weighting scored **2.34**, and the original 35% stronger cue scored **3.74** at the same strength. Mean Boss distinction gain was similar across the three recipes (**+0.048** to **+0.058**). The matched-attire renders showed a warm cast and fine texture in the backgrounds. Mean damage was **0.361** versus **0.268** for soft foreground weighting and **0.204** for the stronger cue. Bookkeeper improved over soft foreground weighting. [Matched update-48 renders](final-boss-raw192/ablations/matched-attire-raw48-matched.jpg) · [Per-case scores](final-boss-raw192/ablations/matched-attire-raw48-scores.json)
 
 The matched-attire edit moved farther outside the subject matte in the training fields. Relative to soft foreground weighting, the exterior change averaged **12.2%** of the baseline edit norm, versus **7.2%** for the original stronger cue. The overall edit moved farther, so the exterior's share of the squared change fell from **16.9%** to **12.8%**. [Spatial field audit](final-boss-raw192/ablations/matched-attire-spatial-audit.json)
+
+At update 96, Jev left the matched-attire seamstress's structure unresolved. The original stronger cue had one unresolved structure check on botanist. On the four screening cases, the diagnostic scores were **5.19** for matched attire and **4.05** for the stronger cue. Soft foreground weighting passed the four checks and scored **5.73**. Matched attire raised mean Boss distinction gain from **+0.125** to **+0.130** and mean damage from **0.315** to **0.374** relative to soft foreground weighting. [Matched update-96 renders](final-boss-raw192/ablations/matched-attire-raw96-matched.jpg) · [Scores and structural statuses](final-boss-raw192/ablations/matched-attire-raw96-scores.json)
 
 ## Cap added exterior nuisance
 
