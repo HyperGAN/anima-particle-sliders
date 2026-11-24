@@ -1,0 +1,2827 @@
+{
+  "scoring_version": "final-boss-distinction-v1",
+  "per_case_formula": "max(0, Boss_ON - Boss_OFF) * Boss_ON**3 * (1 - image_damage)**2 * min(1, (1 - image_damage) / (1 - 1/3))**3",
+  "source_results_git_blob": "a9deb41045346c43362222c679988a75a1067278",
+  "scope": "RAW192 native Anima, eight development cases",
+  "rankings": {
+    "fixed_strength": [
+      {
+        "method": "soft-floor45",
+        "label": "Soft weighting \u00b7 background 0.45",
+        "profile": "early",
+        "alpha": 0.6666666666666666,
+        "gains": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.6444445235641115,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "final_boss_score": 0.06629500134923612,
+        "boss_distinction": 0.51375,
+        "boss_effect": 0.4225,
+        "image_breakage": 0.21375,
+        "final_score": 0.256589361111
+      },
+      {
+        "method": "strong-boss-45-dose100",
+        "label": "Explicit Final Boss teacher \u00b7 100% target strength \u00b7 background 0.45",
+        "profile": "early",
+        "alpha": 0.6666666666666666,
+        "gains": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.6444445235641115,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "final_boss_score": 0.05574216813597391,
+        "boss_distinction": 0.5,
+        "boss_effect": 0.40875,
+        "image_breakage": 0.2758333333333333,
+        "final_score": 0.217652888889
+      },
+      {
+        "method": "strong-boss-45-mix35",
+        "label": "Explicit Final Boss teacher \u00b7 35% cue mix \u00b7 background 0.45",
+        "profile": "early",
+        "alpha": 0.6666666666666666,
+        "gains": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.6444445235641115,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "final_boss_score": 0.05155766336719446,
+        "boss_distinction": 0.50375,
+        "boss_effect": 0.4125,
+        "image_breakage": 0.22416666666666665,
+        "final_score": 0.249294194444
+      },
+      {
+        "method": "strong-cues-early3",
+        "label": "Stronger cue targets at the first three teacher positions",
+        "profile": "early",
+        "alpha": 0.6666666666666666,
+        "gains": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.6444445235641115,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "final_boss_score": 0.043546656932128495,
+        "boss_distinction": 0.49125,
+        "boss_effect": 0.40875,
+        "image_breakage": 0.28833333333333333,
+        "final_score": 0.203186097222
+      },
+      {
+        "method": "soft45-background-orthogonal",
+        "label": "Exterior lighting and scene projection",
+        "profile": "early",
+        "alpha": 0.6666666666666666,
+        "gains": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.6444445235641115,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "final_boss_score": 0.04027974352583333,
+        "boss_distinction": 0.49875,
+        "boss_effect": 0.4075,
+        "image_breakage": 0.25125,
+        "final_score": 0.222224347222
+      },
+      {
+        "method": "soft-contexts-45-blend50",
+        "label": "Soft weighting + paired contexts \u00b7 50% blend \u00b7 background 0.45",
+        "profile": "early",
+        "alpha": 0.6666666666666666,
+        "gains": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.6444445235641115,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "final_boss_score": 0.03626365855156944,
+        "boss_distinction": 0.4475,
+        "boss_effect": 0.35625,
+        "image_breakage": 0.22166666666666668,
+        "final_score": 0.214133958333
+      },
+      {
+        "method": "strong-cues-late3",
+        "label": "Stronger cue targets at the last three teacher positions",
+        "profile": "early",
+        "alpha": 0.6666666666666666,
+        "gains": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.6444445235641115,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "final_boss_score": 0.03405245095398612,
+        "boss_distinction": 0.44,
+        "boss_effect": 0.3575,
+        "image_breakage": 0.23333333333333334,
+        "final_score": 0.211956041667
+      },
+      {
+        "method": "soft-contexts-65-blend50",
+        "label": "Soft weighting + paired contexts",
+        "profile": "early",
+        "alpha": 0.6666666666666666,
+        "gains": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.6444445235641115,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "final_boss_score": 0.032738568452375,
+        "boss_distinction": 0.43875000000000003,
+        "boss_effect": 0.3475,
+        "image_breakage": 0.195,
+        "final_score": 0.222261638889
+      },
+      {
+        "method": "sega-early35",
+        "label": "35% percentile-filtered blend at the first three teacher positions",
+        "profile": "early",
+        "alpha": 0.6666666666666666,
+        "gains": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.6444445235641115,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "final_boss_score": 0.03060092111397507,
+        "boss_distinction": 0.46375,
+        "boss_effect": 0.385,
+        "image_breakage": 0.31958333333333333,
+        "final_score": 0.173015569445
+      },
+      {
+        "method": "prompt-only",
+        "label": "Prompt-only",
+        "profile": "early",
+        "alpha": 0.6666666666666666,
+        "gains": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.6444445235641115,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "final_boss_score": 0.02996880308830555,
+        "boss_distinction": 0.395,
+        "boss_effect": 0.30375,
+        "image_breakage": 0.23083333333333333,
+        "final_score": 0.183217430555
+      },
+      {
+        "method": "matched-attire35",
+        "label": "Matched ordinary attire with a 35% stronger Boss cue blend",
+        "profile": "early",
+        "alpha": 0.6666666666666666,
+        "gains": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.6444445235641115,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "final_boss_score": 0.02825709351875,
+        "boss_distinction": 0.42874999999999996,
+        "boss_effect": 0.345,
+        "image_breakage": 0.24166666666666667,
+        "final_score": 0.198609041667
+      },
+      {
+        "method": "diverse-mean35",
+        "label": "35% blend of two Boss cue edits",
+        "profile": "early",
+        "alpha": 0.6666666666666666,
+        "gains": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.6444445235641115,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "final_boss_score": 0.027445544976971683,
+        "boss_distinction": 0.425,
+        "boss_effect": 0.345,
+        "image_breakage": 0.2891666666666667,
+        "final_score": 0.173364083333
+      },
+      {
+        "method": "incumbent",
+        "label": "Soft weighting \u00b7 saved adapter",
+        "profile": "early",
+        "alpha": 0.6666666666666666,
+        "gains": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.6444445235641115,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "final_boss_score": 0.02568331888324792,
+        "boss_distinction": 0.41125,
+        "boss_effect": 0.32,
+        "image_breakage": 0.25333333333333335,
+        "final_score": 0.178319388889
+      },
+      {
+        "method": "sega-all35",
+        "label": "35% percentile-filtered blend at all teacher positions",
+        "profile": "early",
+        "alpha": 0.6666666666666666,
+        "gains": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.6444445235641115,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "final_boss_score": 0.021589374867401662,
+        "boss_distinction": 0.40750000000000003,
+        "boss_effect": 0.32875,
+        "image_breakage": 0.23583333333333334,
+        "final_score": 0.195241402778
+      },
+      {
+        "method": "exposure-middle4",
+        "label": "Extra exposure to the middle four native teacher positions",
+        "profile": "early",
+        "alpha": 0.6666666666666666,
+        "gains": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.6444445235641115,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "final_boss_score": 0.02102387470612276,
+        "boss_distinction": 0.39375,
+        "boss_effect": 0.31125,
+        "image_breakage": 0.27458333333333335,
+        "final_score": 0.162822111111
+      },
+      {
+        "method": "soft-projection-65-blend50",
+        "label": "Soft weighting + lighting / scene projection",
+        "profile": "early",
+        "alpha": 0.6666666666666666,
+        "gains": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.6444445235641115,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "final_boss_score": 0.020099473954555556,
+        "boss_distinction": 0.385,
+        "boss_effect": 0.29375,
+        "image_breakage": 0.20375,
+        "final_score": 0.187374416667
+      },
+      {
+        "method": "scene-grounded35",
+        "label": "In-scene costume cue blend",
+        "profile": "early",
+        "alpha": 0.6666666666666666,
+        "gains": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.6444445235641115,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "final_boss_score": 0.01891420772775288,
+        "boss_distinction": 0.38375,
+        "boss_effect": 0.30375,
+        "image_breakage": 0.24666666666666667,
+        "final_score": 0.175278541667
+      },
+      {
+        "method": "soft45-adapter-rollout",
+        "label": "Training on saved-slider trajectories",
+        "profile": "early",
+        "alpha": 0.6666666666666666,
+        "gains": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.6444445235641115,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "final_boss_score": 0.00819781828584971,
+        "boss_distinction": 0.34625,
+        "boss_effect": 0.255,
+        "image_breakage": 0.31958333333333333,
+        "final_score": 0.116070458333
+      }
+    ],
+    "matched_constant": [
+      {
+        "method": "strong-boss-45-dose100",
+        "label": "Explicit Final Boss teacher \u00b7 100% target strength \u00b7 background 0.45",
+        "profile": "constant",
+        "alpha": 0.6375,
+        "gains": [
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375
+        ],
+        "final_boss_score": 0.021030510747639813,
+        "boss_distinction": 0.35375,
+        "boss_effect": 0.2625,
+        "image_breakage": 0.26708333333333334,
+        "final_score": 0.143944041667
+      },
+      {
+        "method": "strong-boss-45-mix35",
+        "label": "Explicit Final Boss teacher \u00b7 35% cue mix \u00b7 background 0.45",
+        "profile": "constant",
+        "alpha": 0.6375,
+        "gains": [
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375
+        ],
+        "final_boss_score": 0.020555486157500004,
+        "boss_distinction": 0.3625,
+        "boss_effect": 0.27125,
+        "image_breakage": 0.21583333333333332,
+        "final_score": 0.168987847222
+      },
+      {
+        "method": "soft45-background-orthogonal",
+        "label": "Exterior lighting and scene projection",
+        "profile": "constant",
+        "alpha": 0.6375,
+        "gains": [
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375
+        ],
+        "final_boss_score": 0.017141594497027783,
+        "boss_distinction": 0.30375,
+        "boss_effect": 0.2125,
+        "image_breakage": 0.2579166666666667,
+        "final_score": 0.115129222222
+      },
+      {
+        "method": "strong-cues-early3",
+        "label": "Stronger cue targets at the first three teacher positions",
+        "profile": "constant",
+        "alpha": 0.6375,
+        "gains": [
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375
+        ],
+        "final_boss_score": 0.014880157815444446,
+        "boss_distinction": 0.3425,
+        "boss_effect": 0.26,
+        "image_breakage": 0.2425,
+        "final_score": 0.149898611111
+      },
+      {
+        "method": "soft-projection-65-blend50",
+        "label": "Soft weighting + lighting / scene projection",
+        "profile": "constant",
+        "alpha": 0.6375,
+        "gains": [
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375
+        ],
+        "final_boss_score": 0.012625693893444442,
+        "boss_distinction": 0.32625,
+        "boss_effect": 0.235,
+        "image_breakage": 0.23625000000000002,
+        "final_score": 0.137168388889
+      },
+      {
+        "method": "soft-floor45",
+        "label": "Soft weighting \u00b7 background 0.45",
+        "profile": "constant",
+        "alpha": 0.6375,
+        "gains": [
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375
+        ],
+        "final_boss_score": 0.012451015381249998,
+        "boss_distinction": 0.30625,
+        "boss_effect": 0.215,
+        "image_breakage": 0.22208333333333333,
+        "final_score": 0.130613416667
+      },
+      {
+        "method": "scene-grounded35",
+        "label": "In-scene costume cue blend",
+        "profile": "constant",
+        "alpha": 0.6375,
+        "gains": [
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375
+        ],
+        "final_boss_score": 0.011333613739950305,
+        "boss_distinction": 0.3125,
+        "boss_effect": 0.2325,
+        "image_breakage": 0.25875,
+        "final_score": 0.120789208333
+      },
+      {
+        "method": "strong-boss-65-dose100",
+        "label": "Explicit Final Boss teacher \u00b7 100% target strength \u00b7 background 0.65",
+        "profile": "constant",
+        "alpha": 0.6375,
+        "gains": [
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375
+        ],
+        "final_boss_score": 0.010786404857680558,
+        "boss_distinction": 0.32875,
+        "boss_effect": 0.2375,
+        "image_breakage": 0.24541666666666667,
+        "final_score": 0.139126305556
+      },
+      {
+        "method": "vibe-qualified4",
+        "label": "Four qualified costume teachers and two soft-foreground anchors",
+        "profile": "constant",
+        "alpha": 0.6375,
+        "gains": [
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375
+        ],
+        "final_boss_score": 0.00696707405519688,
+        "boss_distinction": 0.295,
+        "boss_effect": 0.21625,
+        "image_breakage": 0.2895833333333333,
+        "final_score": 0.108400930555
+      },
+      {
+        "method": "incumbent",
+        "label": "Soft weighting \u00b7 saved adapter",
+        "profile": "constant",
+        "alpha": 0.6375,
+        "gains": [
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375
+        ],
+        "final_boss_score": 0.006346345422388259,
+        "boss_distinction": 0.305,
+        "boss_effect": 0.21375,
+        "image_breakage": 0.27041666666666664,
+        "final_score": 0.113015972222
+      },
+      {
+        "method": "soft-contexts-45-blend50",
+        "label": "Soft weighting + paired contexts \u00b7 50% blend \u00b7 background 0.45",
+        "profile": "constant",
+        "alpha": 0.6375,
+        "gains": [
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375
+        ],
+        "final_boss_score": 0.005733195248777779,
+        "boss_distinction": 0.30375,
+        "boss_effect": 0.2125,
+        "image_breakage": 0.2520833333333333,
+        "final_score": 0.114033
+      },
+      {
+        "method": "soft-contexts-65-blend50",
+        "label": "Soft weighting + paired contexts",
+        "profile": "constant",
+        "alpha": 0.6375,
+        "gains": [
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375
+        ],
+        "final_boss_score": 0.005049889869861111,
+        "boss_distinction": 0.29375,
+        "boss_effect": 0.2025,
+        "image_breakage": 0.2520833333333333,
+        "final_score": 0.115786125
+      },
+      {
+        "method": "strong-cues-late3",
+        "label": "Stronger cue targets at the last three teacher positions",
+        "profile": "constant",
+        "alpha": 0.6375,
+        "gains": [
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375
+        ],
+        "final_boss_score": 0.0035724389848540805,
+        "boss_distinction": 0.26625,
+        "boss_effect": 0.18375,
+        "image_breakage": 0.24833333333333335,
+        "final_score": 0.104070194444
+      },
+      {
+        "method": "sega-early35",
+        "label": "35% percentile-filtered blend at the first three teacher positions",
+        "profile": "constant",
+        "alpha": 0.6375,
+        "gains": [
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375
+        ],
+        "final_boss_score": 0.002805789412317881,
+        "boss_distinction": 0.24875,
+        "boss_effect": 0.17,
+        "image_breakage": 0.31916666666666665,
+        "final_score": 0.077435541667
+      },
+      {
+        "method": "diverse-mean35",
+        "label": "35% blend of two Boss cue edits",
+        "profile": "constant",
+        "alpha": 0.6375,
+        "gains": [
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375
+        ],
+        "final_boss_score": 0.0023482214751516925,
+        "boss_distinction": 0.2425,
+        "boss_effect": 0.1625,
+        "image_breakage": 0.27875,
+        "final_score": 0.080789375
+      },
+      {
+        "method": "foreground-apg-floor45",
+        "label": "Soft foreground weighting with subject APG",
+        "profile": "constant",
+        "alpha": 0.6375,
+        "gains": [
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375
+        ],
+        "final_boss_score": 0.0015634219958091528,
+        "boss_distinction": 0.245,
+        "boss_effect": 0.165,
+        "image_breakage": 0.29833333333333334,
+        "final_score": 0.080326305556
+      },
+      {
+        "method": "exposure-middle4",
+        "label": "Extra exposure to the middle four native teacher positions",
+        "profile": "constant",
+        "alpha": 0.6375,
+        "gains": [
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375
+        ],
+        "final_boss_score": 0.0008519308376925616,
+        "boss_distinction": 0.2125,
+        "boss_effect": 0.13,
+        "image_breakage": 0.30041666666666667,
+        "final_score": 0.062128180556
+      },
+      {
+        "method": "soft45-adapter-rollout",
+        "label": "Training on saved-slider trajectories",
+        "profile": "constant",
+        "alpha": 0.6375,
+        "gains": [
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375
+        ],
+        "final_boss_score": 0.0005974134649427807,
+        "boss_distinction": 0.20750000000000002,
+        "boss_effect": 0.11625,
+        "image_breakage": 0.3091666666666667,
+        "final_score": 0.054925541667
+      }
+    ],
+    "best_saved_replay": [
+      {
+        "method": "soft-floor45",
+        "label": "Soft weighting \u00b7 background 0.45",
+        "profile": "early",
+        "alpha": 0.95,
+        "gains": [
+          1.4249999999999998,
+          1.4249999999999998,
+          1.4249999999999998,
+          1.4249999999999998,
+          1.4249999999999998,
+          1.4249999999999998,
+          1.4249999999999998,
+          0.9183334460788589,
+          0.475,
+          0.475
+        ],
+        "final_boss_score": 0.14722418635952778,
+        "boss_distinction": 0.69875,
+        "boss_effect": 0.6075,
+        "image_breakage": 0.24875,
+        "final_score": 0.337123680556,
+        "reviewed_at_utc": "2026-11-23T21:50:39+00:00",
+        "cases": {
+          "ranger": {
+            "boss_distinction": 0.7,
+            "original_boss_distinction": 0.09,
+            "image_breakage": 0.20666666666666667,
+            "final_boss_score": 0.1316847124444444,
+            "on_sha256": "68b559012d04fdb704ef0a38808c741da534799e63bc12d8e7bfd830c0bb8d2b",
+            "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+          },
+          "smith": {
+            "boss_distinction": 0.77,
+            "original_boss_distinction": 0.07,
+            "image_breakage": 0.31666666666666665,
+            "final_boss_score": 0.1492228836388889,
+            "on_sha256": "4080c8af17b39265d1f31f5e04dc884692e35b64c0603f6e34460e5312c83fe4",
+            "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+          },
+          "stationer": {
+            "boss_distinction": 0.82,
+            "original_boss_distinction": 0.12,
+            "image_breakage": 0.25666666666666665,
+            "final_boss_score": 0.2132587276711111,
+            "on_sha256": "0a80b9f8c7243e35c269f335be32980e2b2f2c9659994d24de1976236d9d4636",
+            "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+          },
+          "ferryman": {
+            "boss_distinction": 0.79,
+            "original_boss_distinction": 0.12,
+            "image_breakage": 0.2333333333333333,
+            "final_boss_score": 0.19416423641111116,
+            "on_sha256": "8f4a244df5c902dc6c576728e2ea9e6328b1b95bb4bd61a4b6bc16e40aa2cef8",
+            "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+          },
+          "watchmaker": {
+            "boss_distinction": 0.7,
+            "original_boss_distinction": 0.1,
+            "image_breakage": 0.27666666666666667,
+            "final_boss_score": 0.10767684666666666,
+            "on_sha256": "3f0cf8739e764b9fe6e2969d908c7d13b10273669d11f197cf8fd63bfc621f4b",
+            "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+          },
+          "guide": {
+            "boss_distinction": 0.25,
+            "original_boss_distinction": 0.08,
+            "image_breakage": 0.18000000000000002,
+            "final_boss_score": 0.0017860624999999995,
+            "on_sha256": "02165e232a3633d7d6ca1e245165c6f03bfd192ab951472594d961f7d352a02c",
+            "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+          },
+          "guard": {
+            "boss_distinction": 0.82,
+            "original_boss_distinction": 0.07,
+            "image_breakage": 0.22999999999999998,
+            "final_boss_score": 0.24517956539999994,
+            "on_sha256": "62356f627339b197b7b2fd84bafbaf2308fe925a733bbef50aed5d074cb31ff5",
+            "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+          },
+          "violinist": {
+            "boss_distinction": 0.74,
+            "original_boss_distinction": 0.08,
+            "image_breakage": 0.29,
+            "final_boss_score": 0.13482045614399998,
+            "on_sha256": "1926cdd8baf7bf4cf8d4bea9345bac5bb415533a9e71c06f12179f56eff22b16",
+            "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+          }
+        }
+      },
+      {
+        "method": "prompt-only",
+        "label": "Prompt-only",
+        "profile": "constant",
+        "alpha": 1.33125,
+        "gains": [
+          1.33125,
+          1.33125,
+          1.33125,
+          1.33125,
+          1.33125,
+          1.33125,
+          1.33125,
+          1.33125,
+          1.33125,
+          1.33125
+        ],
+        "final_boss_score": 0.10706318297906561,
+        "boss_distinction": 0.61375,
+        "boss_effect": 0.5225,
+        "image_breakage": 0.24958333333333332,
+        "final_score": 0.301780277778,
+        "reviewed_at_utc": "2026-11-23T21:32:38+00:00",
+        "cases": {
+          "ranger": {
+            "boss_distinction": 0.47,
+            "original_boss_distinction": 0.09,
+            "image_breakage": 0.43333333333333335,
+            "final_boss_score": 0.007780173480302771,
+            "on_sha256": "3ff03b4ff8499bd08ae4cf6cac83b9c926c87343d78cfc48e43d76f8ea21d9c3",
+            "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+          },
+          "smith": {
+            "boss_distinction": 0.52,
+            "original_boss_distinction": 0.07,
+            "image_breakage": 0.27999999999999997,
+            "final_boss_score": 0.032801034240000006,
+            "on_sha256": "78103d8f5cf7f7da1dce50d0c7afb581db5cb8646fad1297195b769461366a38",
+            "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+          },
+          "stationer": {
+            "boss_distinction": 0.63,
+            "original_boss_distinction": 0.12,
+            "image_breakage": 0.17333333333333334,
+            "final_boss_score": 0.08714704723200001,
+            "on_sha256": "f05f72156bfd4efe24e472f2bd7fc3be65b81c56c83f1a3ac2c4abc519d73104",
+            "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+          },
+          "ferryman": {
+            "boss_distinction": 0.77,
+            "original_boss_distinction": 0.12,
+            "image_breakage": 0.27999999999999997,
+            "final_boss_score": 0.15383335968000003,
+            "on_sha256": "26f4b65a135964e2c95ee7c25812bd57a94a9d5049f6f9e3b4811f8b1f2c423d",
+            "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+          },
+          "watchmaker": {
+            "boss_distinction": 0.82,
+            "original_boss_distinction": 0.1,
+            "image_breakage": 0.25666666666666665,
+            "final_boss_score": 0.21935183417599996,
+            "on_sha256": "4b653dacbcb14308efa90036777ac3a9f351036461840701371e4364d7fbcf87",
+            "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+          },
+          "guide": {
+            "boss_distinction": 0.27,
+            "original_boss_distinction": 0.08,
+            "image_breakage": 0.21666666666666667,
+            "final_boss_score": 0.0022947644250000004,
+            "on_sha256": "1fff4e4cad284824f5ab0391a06ba883950bb2fc7f4e857bfe57324ffdd54819",
+            "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+          },
+          "guard": {
+            "boss_distinction": 0.82,
+            "original_boss_distinction": 0.07,
+            "image_breakage": 0.19333333333333333,
+            "final_boss_score": 0.2690859629333332,
+            "on_sha256": "92322c9d74fb61d07639ae2c2119abfcb19fa603f01bd51bc1e4ec716ac56443",
+            "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+          },
+          "violinist": {
+            "boss_distinction": 0.61,
+            "original_boss_distinction": 0.08,
+            "image_breakage": 0.16333333333333333,
+            "final_boss_score": 0.0842112876658889,
+            "on_sha256": "d03be38cec4f6b7adc4e9c7f41e1238abd5ce4c9c646d70f3e4947309337d5b2",
+            "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+          }
+        }
+      },
+      {
+        "method": "soft-contexts-45-blend50",
+        "label": "Soft weighting + paired contexts \u00b7 50% blend \u00b7 background 0.45",
+        "profile": "constant",
+        "alpha": 1.4125,
+        "gains": [
+          1.4125,
+          1.4125,
+          1.4125,
+          1.4125,
+          1.4125,
+          1.4125,
+          1.4125,
+          1.4125,
+          1.4125,
+          1.4125
+        ],
+        "final_boss_score": 0.10441052568024653,
+        "boss_distinction": 0.66875,
+        "boss_effect": 0.5775,
+        "image_breakage": 0.30166666666666664,
+        "final_score": 0.276602541667,
+        "reviewed_at_utc": "2026-11-24T00:35:50+00:00",
+        "cases": {
+          "ranger": {
+            "boss_distinction": 0.77,
+            "original_boss_distinction": 0.09,
+            "image_breakage": 0.33,
+            "final_boss_score": 0.139357611316,
+            "on_sha256": "d4d9feced83ad58349a1031aa69911120920ae1756ce96d1e2a0f416b6fb83e2",
+            "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+          },
+          "smith": {
+            "boss_distinction": 0.75,
+            "original_boss_distinction": 0.07,
+            "image_breakage": 0.35333333333333333,
+            "final_boss_score": 0.10948858827675001,
+            "on_sha256": "d0d0c090cd26098457f928aa6da5177e144d1b4778acb83463a2a57d6bf883db",
+            "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+          },
+          "stationer": {
+            "boss_distinction": 0.58,
+            "original_boss_distinction": 0.12,
+            "image_breakage": 0.22,
+            "final_boss_score": 0.054604824767999986,
+            "on_sha256": "89a83e854b478c3b77697fef3f1b80ff918750518c80b647730cf19d2fe1195d",
+            "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+          },
+          "ferryman": {
+            "boss_distinction": 0.72,
+            "original_boss_distinction": 0.12,
+            "image_breakage": 0.31666666666666665,
+            "final_boss_score": 0.10457164799999999,
+            "on_sha256": "ff88237f88fbce39df82ed0ea2e80dfaeb7c7a16048b9704f111ef1d6a5f710b",
+            "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+          },
+          "watchmaker": {
+            "boss_distinction": 0.67,
+            "original_boss_distinction": 0.1,
+            "image_breakage": 0.27666666666666667,
+            "final_boss_score": 0.08969664974433338,
+            "on_sha256": "7f5b12aa0a29021fc8f324860aac1be602134efad3ef9cf88192c0c2e681fcbb",
+            "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+          },
+          "guide": {
+            "boss_distinction": 0.28,
+            "original_boss_distinction": 0.08,
+            "image_breakage": 0.2733333333333333,
+            "final_boss_score": 0.0023183263288888895,
+            "on_sha256": "ab5ec7dfffea88e24947f4dc2204a0e082cecd4a8c68714a8ebf8e04de8a4046",
+            "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+          },
+          "guard": {
+            "boss_distinction": 0.84,
+            "original_boss_distinction": 0.07,
+            "image_breakage": 0.3133333333333333,
+            "final_boss_score": 0.215189221632,
+            "on_sha256": "c4ff6a7f758d35ce24dc3cf5c20c45e95ecfb308a99b908752a86ef3bdffbdb6",
+            "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+          },
+          "violinist": {
+            "boss_distinction": 0.74,
+            "original_boss_distinction": 0.08,
+            "image_breakage": 0.33,
+            "final_boss_score": 0.12005733537599997,
+            "on_sha256": "cf7d7ba28838032e116d15fe76e5511e2d619dea7eca884eaa8f8f97abe014b6",
+            "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+          }
+        }
+      },
+      {
+        "method": "soft-contexts-65-blend50",
+        "label": "Soft weighting + paired contexts",
+        "profile": "constant",
+        "alpha": 1.2875,
+        "gains": [
+          1.2875,
+          1.2875,
+          1.2875,
+          1.2875,
+          1.2875,
+          1.2875,
+          1.2875,
+          1.2875,
+          1.2875,
+          1.2875
+        ],
+        "final_boss_score": 0.08614309332156946,
+        "boss_distinction": 0.60875,
+        "boss_effect": 0.5175,
+        "image_breakage": 0.25458333333333333,
+        "final_score": 0.281349416666,
+        "reviewed_at_utc": "2026-11-23T22:12:55+00:00",
+        "cases": {
+          "ranger": {
+            "boss_distinction": 0.58,
+            "original_boss_distinction": 0.09,
+            "image_breakage": 0.24666666666666667,
+            "final_boss_score": 0.05425683167644443,
+            "on_sha256": "30e9f8c6a1cc65e1093a539a2b96f01fae8b7b56ef5c41dc3242fa7fa9f09f14",
+            "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+          },
+          "smith": {
+            "boss_distinction": 0.46,
+            "original_boss_distinction": 0.07,
+            "image_breakage": 0.2866666666666667,
+            "final_boss_score": 0.019316264309333336,
+            "on_sha256": "e683fffa872cfb447aef5b81b8d22fd1034c87767f729c9b8b00cad400a21f39",
+            "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+          },
+          "stationer": {
+            "boss_distinction": 0.77,
+            "original_boss_distinction": 0.12,
+            "image_breakage": 0.2833333333333333,
+            "final_boss_score": 0.1524122739027778,
+            "on_sha256": "f0e8c77b053b2c712f1cb17ff289e6c20a3f7fd786ab756c8aa59058c67eff46",
+            "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+          },
+          "ferryman": {
+            "boss_distinction": 0.79,
+            "original_boss_distinction": 0.12,
+            "image_breakage": 0.32,
+            "final_boss_score": 0.152747426512,
+            "on_sha256": "b200c5bdcd9ce66fb0144cc5d646e1f13196599d41bb2c0341e04ac139ec92d4",
+            "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+          },
+          "watchmaker": {
+            "boss_distinction": 0.72,
+            "original_boss_distinction": 0.1,
+            "image_breakage": 0.25,
+            "final_boss_score": 0.13017024,
+            "on_sha256": "936eb2b629e73e9c87b2dfe530b3b27b63e2f18f971625e690ebea02511b02af",
+            "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+          },
+          "guide": {
+            "boss_distinction": 0.26,
+            "original_boss_distinction": 0.08,
+            "image_breakage": 0.15333333333333335,
+            "final_boss_score": 0.0022678664320000003,
+            "on_sha256": "083961e63866e6ab00e58deb79f1fbccbddb9b7de5f97884416f50f8d4744e52",
+            "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+          },
+          "guard": {
+            "boss_distinction": 0.66,
+            "original_boss_distinction": 0.07,
+            "image_breakage": 0.18333333333333335,
+            "final_boss_score": 0.11312887740000004,
+            "on_sha256": "2105685a4ef61c4ace37791459c191ca0afbc5b77c34faec6af52c37c17386b8",
+            "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+          },
+          "violinist": {
+            "boss_distinction": 0.63,
+            "original_boss_distinction": 0.08,
+            "image_breakage": 0.3133333333333333,
+            "final_boss_score": 0.06484496634000003,
+            "on_sha256": "94d9c18b9c99610cd4640ac03271419c34ab45e36b93603086a464552637de83",
+            "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+          }
+        }
+      },
+      {
+        "method": "strong-boss-45-mix35",
+        "label": "Explicit Final Boss teacher \u00b7 35% cue mix \u00b7 background 0.45",
+        "profile": "early",
+        "alpha": 0.8,
+        "gains": [
+          1.2000000000000002,
+          1.2000000000000002,
+          1.2000000000000002,
+          1.2000000000000002,
+          1.2000000000000002,
+          1.2000000000000002,
+          1.2000000000000002,
+          0.773333428276934,
+          0.4,
+          0.4
+        ],
+        "final_boss_score": 0.07771576674901295,
+        "boss_distinction": 0.64,
+        "boss_effect": 0.54875,
+        "image_breakage": 0.3070833333333333,
+        "final_score": 0.263783291667,
+        "reviewed_at_utc": "2026-11-24T01:18:29+00:00",
+        "cases": {
+          "ranger": {
+            "boss_distinction": 0.7,
+            "original_boss_distinction": 0.09,
+            "image_breakage": 0.29333333333333333,
+            "final_boss_score": 0.10448481244444441,
+            "on_sha256": "d8e161bbebf953c585e9e17c93b60516720f08508ca20a9c4f1774621bfaea84",
+            "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+          },
+          "smith": {
+            "boss_distinction": 0.66,
+            "original_boss_distinction": 0.07,
+            "image_breakage": 0.44333333333333336,
+            "final_boss_score": 0.030600863213196296,
+            "on_sha256": "ae480f7016ebe65021e17ebcedfa4b481a74711a0c5af236fdc4ba2c95439221",
+            "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+          },
+          "stationer": {
+            "boss_distinction": 0.69,
+            "original_boss_distinction": 0.12,
+            "image_breakage": 0.15666666666666665,
+            "final_boss_score": 0.133174373013,
+            "on_sha256": "517268aa5ca97e2226a67e922a93c5058585eb06d6bad456cd6a36a243e06d7e",
+            "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+          },
+          "ferryman": {
+            "boss_distinction": 0.75,
+            "original_boss_distinction": 0.12,
+            "image_breakage": 0.25666666666666665,
+            "final_boss_score": 0.14685595312500002,
+            "on_sha256": "db23bd6e33e409035365bb8641e8a5f4b3dfe5d09df585ef52b2d463459d657a",
+            "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+          },
+          "watchmaker": {
+            "boss_distinction": 0.63,
+            "original_boss_distinction": 0.1,
+            "image_breakage": 0.22,
+            "final_boss_score": 0.08062815524400002,
+            "on_sha256": "ab72a4642bf08388768f333cfe2b925017ca6399cf85ac8f680bfc3e2efbd814",
+            "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+          },
+          "guide": {
+            "boss_distinction": 0.24,
+            "original_boss_distinction": 0.08,
+            "image_breakage": 0.18333333333333335,
+            "final_boss_score": 0.0014751743999999996,
+            "on_sha256": "710467ddf906182d15501b47918f585b2b3ca8a66f4e0bf37b3fcb54d7179ef2",
+            "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+          },
+          "guard": {
+            "boss_distinction": 0.69,
+            "original_boss_distinction": 0.07,
+            "image_breakage": 0.22999999999999998,
+            "final_boss_score": 0.12075925138199994,
+            "on_sha256": "4cb3a92a74f054f1b9646df13f6ecf78c1e102049e22580a2575de936e18f169",
+            "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+          },
+          "violinist": {
+            "boss_distinction": 0.76,
+            "original_boss_distinction": 0.08,
+            "image_breakage": 0.6733333333333333,
+            "final_boss_score": 0.0037475511704629463,
+            "on_sha256": "fbc3b6e5360ab34f67f38864477193a3e11714301b34f44a7fde70107c686b31",
+            "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+          }
+        }
+      },
+      {
+        "method": "strong-boss-45-dose100",
+        "label": "Explicit Final Boss teacher \u00b7 100% target strength \u00b7 background 0.45",
+        "profile": "early",
+        "alpha": 0.7666666666666667,
+        "gains": [
+          1.1500000000000001,
+          1.1500000000000001,
+          1.1500000000000001,
+          1.1500000000000001,
+          1.1500000000000001,
+          1.1500000000000001,
+          1.1500000000000001,
+          0.7411112020987284,
+          0.38333333333333336,
+          0.38333333333333336
+        ],
+        "final_boss_score": 0.057694478074150145,
+        "boss_distinction": 0.535,
+        "boss_effect": 0.44375,
+        "image_breakage": 0.30583333333333335,
+        "final_score": 0.21385275,
+        "reviewed_at_utc": "2026-11-24T00:06:44+00:00",
+        "cases": {
+          "ranger": {
+            "boss_distinction": 0.5,
+            "original_boss_distinction": 0.09,
+            "image_breakage": 0.37666666666666665,
+            "final_boss_score": 0.016276814197894087,
+            "on_sha256": "be1a12abe03ff9e9a07176fcd48a5700222a7c71d00ef202f23df22384e4be4a",
+            "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+          },
+          "smith": {
+            "boss_distinction": 0.34,
+            "original_boss_distinction": 0.07,
+            "image_breakage": 0.25,
+            "final_boss_score": 0.005969295000000001,
+            "on_sha256": "58bcc0361e301ebe3911cce0e20f0e9250a4e19661a8c9ab3a338cd50f1cf049",
+            "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+          },
+          "stationer": {
+            "boss_distinction": 0.68,
+            "original_boss_distinction": 0.12,
+            "image_breakage": 0.26333333333333336,
+            "final_boss_score": 0.09555574505244445,
+            "on_sha256": "d30bd76c357f21e0efe03ae4f1a309295dbcdc8ec5fd807c7a8a2ad750940bea",
+            "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+          },
+          "ferryman": {
+            "boss_distinction": 0.65,
+            "original_boss_distinction": 0.12,
+            "image_breakage": 0.38666666666666666,
+            "final_boss_score": 0.04263561757940619,
+            "on_sha256": "2b91fca3f323f366c7638b9301e47bd4000f3ecb30376c57ef00aa04651f3427",
+            "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+          },
+          "watchmaker": {
+            "boss_distinction": 0.68,
+            "original_boss_distinction": 0.1,
+            "image_breakage": 0.22999999999999998,
+            "final_boss_score": 0.10812750502400002,
+            "on_sha256": "3ce503ed1b04b2b9a9c4c78ec3fe09406f84946a14f34e032ac96837ff70aa40",
+            "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+          },
+          "guide": {
+            "boss_distinction": 0.2,
+            "original_boss_distinction": 0.08,
+            "image_breakage": 0.27999999999999997,
+            "final_boss_score": 0.0004976640000000002,
+            "on_sha256": "b4fd521744b4660b442fda9f2a50bf72dc24ad2479086e61c543a62413983804",
+            "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+          },
+          "guard": {
+            "boss_distinction": 0.81,
+            "original_boss_distinction": 0.07,
+            "image_breakage": 0.32,
+            "final_boss_score": 0.181846355616,
+            "on_sha256": "7abd27664067799e2ea40c72850337fb2e4bc7aae8a8db84ee517d0d5676b89d",
+            "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+          },
+          "violinist": {
+            "boss_distinction": 0.42,
+            "original_boss_distinction": 0.08,
+            "image_breakage": 0.34,
+            "final_boss_score": 0.010646828123456437,
+            "on_sha256": "16cf5bd7e65735cec7fe3ecc991b274fa4ccf3386e200df9824bd009c4ce446e",
+            "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+          }
+        }
+      },
+      {
+        "method": "soft-projection-65-blend50",
+        "label": "Soft weighting + lighting / scene projection",
+        "profile": "constant",
+        "alpha": 1.225,
+        "gains": [
+          1.225,
+          1.225,
+          1.225,
+          1.225,
+          1.225,
+          1.225,
+          1.225,
+          1.225,
+          1.225,
+          1.225
+        ],
+        "final_boss_score": 0.04474277036474641,
+        "boss_distinction": 0.51125,
+        "boss_effect": 0.42,
+        "image_breakage": 0.2816666666666667,
+        "final_score": 0.213629555556,
+        "reviewed_at_utc": "2026-11-23T22:40:00+00:00",
+        "cases": {
+          "ranger": {
+            "boss_distinction": 0.58,
+            "original_boss_distinction": 0.09,
+            "image_breakage": 0.3433333333333333,
+            "final_boss_score": 0.039398409974526795,
+            "on_sha256": "9c2af82ed61aff9d375bfd270be504651bb81616a4b2aa8322ebf33c468afaa1",
+            "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+          },
+          "smith": {
+            "boss_distinction": 0.49,
+            "original_boss_distinction": 0.07,
+            "image_breakage": 0.3233333333333333,
+            "final_boss_score": 0.022624922324666667,
+            "on_sha256": "29537a5dcb41f2f392059284f42fd00a4de8b09dec5254dfb1f7e6c3ef03be85",
+            "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+          },
+          "stationer": {
+            "boss_distinction": 0.44,
+            "original_boss_distinction": 0.12,
+            "image_breakage": 0.2966666666666667,
+            "final_boss_score": 0.013484362183111113,
+            "on_sha256": "e017a17ed833037f0f2224ad7f84701214d3482a6095d8da96d2d772c9b1ac87",
+            "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+          },
+          "ferryman": {
+            "boss_distinction": 0.68,
+            "original_boss_distinction": 0.12,
+            "image_breakage": 0.26,
+            "final_boss_score": 0.09642245939200002,
+            "on_sha256": "f9af5fc888d5405f28010cab1c8e12ca4a25ae7deb66efd0fd69b2ba08fef0ab",
+            "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+          },
+          "watchmaker": {
+            "boss_distinction": 0.52,
+            "original_boss_distinction": 0.1,
+            "image_breakage": 0.3133333333333333,
+            "final_boss_score": 0.027845258410666675,
+            "on_sha256": "8a90db665cb6026ac22a450902f4b191b5739b555b5ae37e30fa8462b2646096",
+            "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+          },
+          "guide": {
+            "boss_distinction": 0.21,
+            "original_boss_distinction": 0.08,
+            "image_breakage": 0.19666666666666666,
+            "final_boss_score": 0.0007769495369999999,
+            "on_sha256": "e6e32e09b86162d2147e3a230c2d83a6e5cd3dff5d7714a27c2efa9a4ff9cebb",
+            "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+          },
+          "guard": {
+            "boss_distinction": 0.73,
+            "original_boss_distinction": 0.07,
+            "image_breakage": 0.26,
+            "final_boss_score": 0.14059696807199998,
+            "on_sha256": "39e09c2ad4e58e0df05e22fcaa1c8c7a94ce0b1b6496f6887adefc9ad7f2961a",
+            "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+          },
+          "violinist": {
+            "boss_distinction": 0.44,
+            "original_boss_distinction": 0.08,
+            "image_breakage": 0.26,
+            "final_boss_score": 0.016792833023999997,
+            "on_sha256": "c6406b34d45a61fae8c816741c06d55c74cdcd8b0c4b6ad647f088b612995e27",
+            "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+          }
+        }
+      },
+      {
+        "method": "incumbent",
+        "label": "Soft weighting \u00b7 saved adapter",
+        "profile": "constant",
+        "alpha": 1.35,
+        "gains": [
+          1.35,
+          1.35,
+          1.35,
+          1.35,
+          1.35,
+          1.35,
+          1.35,
+          1.35,
+          1.35,
+          1.35
+        ],
+        "final_boss_score": 0.04373083017301085,
+        "boss_distinction": 0.5599999999999999,
+        "boss_effect": 0.46875,
+        "image_breakage": 0.3254166666666667,
+        "final_score": 0.206268111111,
+        "reviewed_at_utc": "2026-11-23T22:35:43+00:00",
+        "cases": {
+          "ranger": {
+            "boss_distinction": 0.58,
+            "original_boss_distinction": 0.09,
+            "image_breakage": 0.30333333333333334,
+            "final_boss_score": 0.046401297369777765,
+            "on_sha256": "38f40375ea773531de4708c081ae9b15d5746d86eafe300fa0c3ca98c013fd9e",
+            "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+          },
+          "smith": {
+            "boss_distinction": 0.44,
+            "original_boss_distinction": 0.07,
+            "image_breakage": 0.39666666666666667,
+            "final_boss_score": 0.008503938905457368,
+            "on_sha256": "df7483b54df542ca4270d6e82427d1d614c5711cce8e2873f49e5f2f74ecabec",
+            "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+          },
+          "stationer": {
+            "boss_distinction": 0.51,
+            "original_boss_distinction": 0.12,
+            "image_breakage": 0.24666666666666667,
+            "final_boss_score": 0.029359557396000005,
+            "on_sha256": "61df024a577a84e6e42b43e1e1abb350a9c23ba128c2902739a89ee22b9eaad0",
+            "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+          },
+          "ferryman": {
+            "boss_distinction": 0.72,
+            "original_boss_distinction": 0.12,
+            "image_breakage": 0.2733333333333333,
+            "final_boss_score": 0.11825491967999999,
+            "on_sha256": "0e05039cf4608a034553a3d6480ff49b2d16dcc5b909209aa7fc2654fa93fe9d",
+            "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+          },
+          "watchmaker": {
+            "boss_distinction": 0.62,
+            "original_boss_distinction": 0.1,
+            "image_breakage": 0.45333333333333337,
+            "final_boss_score": 0.020420442836483626,
+            "on_sha256": "a19b8605c077c8e52dab2df991abb7aadb749949cd5278c3a186a9818763bebf",
+            "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+          },
+          "guide": {
+            "boss_distinction": 0.23,
+            "original_boss_distinction": 0.08,
+            "image_breakage": 0.18666666666666668,
+            "final_boss_score": 0.0012072908533333337,
+            "on_sha256": "d8ff472fb5fc7e474d543b4e11707860e80273e63835a2fd32820a354b3dd850",
+            "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+          },
+          "guard": {
+            "boss_distinction": 0.65,
+            "original_boss_distinction": 0.07,
+            "image_breakage": 0.31,
+            "final_boss_score": 0.07583439824999999,
+            "on_sha256": "3a6eb13cc79c2fb2ce7800bd7f59d8573af955973ffb664aef6870d4a5164016",
+            "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+          },
+          "violinist": {
+            "boss_distinction": 0.73,
+            "original_boss_distinction": 0.08,
+            "image_breakage": 0.43333333333333335,
+            "final_boss_score": 0.04986479609303469,
+            "on_sha256": "06e096903a111e10f6df260c531f2a36bb036370a37db57b91e8f8ac11e7eb67",
+            "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+          }
+        }
+      },
+      {
+        "method": "strong-cues-early3",
+        "label": "Stronger cue targets at the first three teacher positions",
+        "profile": "early",
+        "alpha": 0.6666666666666666,
+        "gains": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.6444445235641115,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "final_boss_score": 0.043546656932128495,
+        "boss_distinction": 0.49125,
+        "boss_effect": 0.40875,
+        "image_breakage": 0.28833333333333333,
+        "final_score": 0.203186097222,
+        "reviewed_at_utc": "2026-11-24T07:12:28+00:00",
+        "cases": {
+          "ranger": {
+            "boss_distinction": 0.63,
+            "original_boss_distinction": 0.08,
+            "image_breakage": 0.33,
+            "final_boss_score": 0.061735354065000005,
+            "on_sha256": "0e9df22fc8c5db11495f3d5d41e6a5986be8d7c74ea876e13355807aee69814b",
+            "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+          },
+          "smith": {
+            "boss_distinction": 0.25,
+            "original_boss_distinction": 0.06,
+            "image_breakage": 0.2733333333333333,
+            "final_boss_score": 0.0015676319444444444,
+            "on_sha256": "5dc38b1308bbe3e1fd747f41b05d8260b358244f79cf54bcf21559d87c4a20d0",
+            "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+          },
+          "stationer": {
+            "boss_distinction": 0.42,
+            "original_boss_distinction": 0.09,
+            "image_breakage": 0.17666666666666667,
+            "final_boss_score": 0.016573460903999995,
+            "on_sha256": "ea03cb684958a1759de33697ec05ea740b550aa142dfd4f6b7f715e53b850325",
+            "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+          },
+          "ferryman": {
+            "boss_distinction": 0.6,
+            "original_boss_distinction": 0.11,
+            "image_breakage": 0.25333333333333335,
+            "final_boss_score": 0.059006975999999975,
+            "on_sha256": "8dd03347b2f75d3d8f0acfcfe995c326f01e9a797f0161d5fc79e93a7c3d5203",
+            "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+          },
+          "watchmaker": {
+            "boss_distinction": 0.64,
+            "original_boss_distinction": 0.08,
+            "image_breakage": 0.36333333333333334,
+            "final_boss_score": 0.05182774207103342,
+            "on_sha256": "8176fa30959bd3d1b3cf619203ef9125dbc4fe8d97bae044174a35ea1f8958f5",
+            "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+          },
+          "guide": {
+            "boss_distinction": 0.21,
+            "original_boss_distinction": 0.06,
+            "image_breakage": 0.25666666666666665,
+            "final_boss_score": 0.000767567115,
+            "on_sha256": "73af9454781bdd8aa83a3ea20b27dc37d39792d2f14891ca0db6b82144a719e5",
+            "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+          },
+          "guard": {
+            "boss_distinction": 0.76,
+            "original_boss_distinction": 0.09,
+            "image_breakage": 0.29,
+            "final_boss_score": 0.148262827072,
+            "on_sha256": "42173ded88fbd29959d0dcadb7684607151a1584899fc419a3c25e56ea7c960f",
+            "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+          },
+          "violinist": {
+            "boss_distinction": 0.42,
+            "original_boss_distinction": 0.09,
+            "image_breakage": 0.36333333333333334,
+            "final_boss_score": 0.008631696285550104,
+            "on_sha256": "9a5d937b81ae796d9d38e80dca5a156331015b5274fd46d202021f1606c85c0a",
+            "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+          }
+        }
+      },
+      {
+        "method": "soft45-background-orthogonal",
+        "label": "Exterior lighting and scene projection",
+        "profile": "early",
+        "alpha": 0.6666666666666666,
+        "gains": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.6444445235641115,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "final_boss_score": 0.04027974352583333,
+        "boss_distinction": 0.49875,
+        "boss_effect": 0.4075,
+        "image_breakage": 0.25125,
+        "final_score": 0.222224347222,
+        "reviewed_at_utc": "2026-11-24T03:45:31+00:00",
+        "cases": {
+          "ranger": {
+            "boss_distinction": 0.42,
+            "original_boss_distinction": 0.09,
+            "image_breakage": 0.25,
+            "final_boss_score": 0.013752584999999994,
+            "on_sha256": "78e39253b56de16a0dc033d8bf99f6f58de597009fd4ea3ac00749ebcc85b9d2",
+            "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+          },
+          "smith": {
+            "boss_distinction": 0.55,
+            "original_boss_distinction": 0.07,
+            "image_breakage": 0.38999999999999996,
+            "final_boss_score": 0.022764192951777767,
+            "on_sha256": "87f36c2530ed22edcfe59add14f9c59e3a0f15e77351c0272840a9fd635eb4af",
+            "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+          },
+          "stationer": {
+            "boss_distinction": 0.43,
+            "original_boss_distinction": 0.12,
+            "image_breakage": 0.21,
+            "final_boss_score": 0.015382298797000002,
+            "on_sha256": "d94f5a2e8a597f86d5d88ac56e3bd8f5f910ace9c56b46fe021c8a14ffe56c71",
+            "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+          },
+          "ferryman": {
+            "boss_distinction": 0.65,
+            "original_boss_distinction": 0.12,
+            "image_breakage": 0.22333333333333336,
+            "final_boss_score": 0.08779813123611112,
+            "on_sha256": "2b53fdb4bdef96afcc9ef35288a2571bd99f7adaf36c45c42108d74f475ab688",
+            "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+          },
+          "watchmaker": {
+            "boss_distinction": 0.69,
+            "original_boss_distinction": 0.1,
+            "image_breakage": 0.29333333333333333,
+            "final_boss_score": 0.09678955569599998,
+            "on_sha256": "5a35444a640cb90777dc72f689e76c616651a2edbdfb0755297b89863cc51d59",
+            "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+          },
+          "guide": {
+            "boss_distinction": 0.2,
+            "original_boss_distinction": 0.08,
+            "image_breakage": 0.15333333333333335,
+            "final_boss_score": 0.000688170666666667,
+            "on_sha256": "5222721a6804bda79edefc12879ef909de3afe753f3d54474fec53c54b9f5ac4",
+            "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+          },
+          "guard": {
+            "boss_distinction": 0.59,
+            "original_boss_distinction": 0.07,
+            "image_breakage": 0.21666666666666667,
+            "final_boss_score": 0.06553187492222222,
+            "on_sha256": "893440b3b740906f8e44a2987e3e1e2fa0a651041314de6b15ced5e1141ff56e",
+            "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+          },
+          "violinist": {
+            "boss_distinction": 0.46,
+            "original_boss_distinction": 0.08,
+            "image_breakage": 0.2733333333333333,
+            "final_boss_score": 0.01953113893688889,
+            "on_sha256": "28f86916353eac2b8d5f0c516d80e195f5f4ae87912ec6eeaa0b9185f1044cb8",
+            "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+          }
+        }
+      },
+      {
+        "method": "strong-boss-65-dose100",
+        "label": "Explicit Final Boss teacher \u00b7 100% target strength \u00b7 background 0.65",
+        "profile": "early",
+        "alpha": 0.6,
+        "gains": [
+          0.8999999999999999,
+          0.8999999999999999,
+          0.8999999999999999,
+          0.8999999999999999,
+          0.8999999999999999,
+          0.8999999999999999,
+          0.8999999999999999,
+          0.5800000712077004,
+          0.3,
+          0.3
+        ],
+        "final_boss_score": 0.037003694264988625,
+        "boss_distinction": 0.48875,
+        "boss_effect": 0.3975,
+        "image_breakage": 0.26625,
+        "final_score": 0.212490291667,
+        "reviewed_at_utc": "2026-11-23T22:21:05+00:00",
+        "cases": {
+          "ranger": {
+            "boss_distinction": 0.55,
+            "original_boss_distinction": 0.09,
+            "image_breakage": 0.22333333333333336,
+            "final_boss_score": 0.04616525436111112,
+            "on_sha256": "2adb0d3e2d803eea97b83cda64f411ac7533ff0e3e004f8134f5334740686a18",
+            "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+          },
+          "smith": {
+            "boss_distinction": 0.38,
+            "original_boss_distinction": 0.07,
+            "image_breakage": 0.35333333333333333,
+            "final_boss_score": 0.006492151365353435,
+            "on_sha256": "2e0631a94e0f2010ab60a3f6faa717a4ed42daffcbb48b173b53f9dbc6fc3b2b",
+            "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+          },
+          "stationer": {
+            "boss_distinction": 0.52,
+            "original_boss_distinction": 0.12,
+            "image_breakage": 0.25666666666666665,
+            "final_boss_score": 0.031076867697777785,
+            "on_sha256": "fb1336c5bc970e19101b2ed369e80ba7076b2f292c4ad7d4007fa89848dda616",
+            "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+          },
+          "ferryman": {
+            "boss_distinction": 0.6,
+            "original_boss_distinction": 0.12,
+            "image_breakage": 0.2733333333333333,
+            "final_boss_score": 0.05474764799999999,
+            "on_sha256": "1ec067e8a70d050985132ca615911adbbbcae5a7793b6982b24c1fd0102f3269",
+            "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+          },
+          "watchmaker": {
+            "boss_distinction": 0.67,
+            "original_boss_distinction": 0.1,
+            "image_breakage": 0.2833333333333333,
+            "final_boss_score": 0.08805087460833336,
+            "on_sha256": "734a4d03fcb38016ac277b3121c910983ed722bf89a0362d4fc9a1560c1c4b1c",
+            "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+          },
+          "guide": {
+            "boss_distinction": 0.23,
+            "original_boss_distinction": 0.08,
+            "image_breakage": 0.23666666666666666,
+            "final_boss_score": 0.0010634160783333335,
+            "on_sha256": "90e2fa43ab24fb921abeda85eb3ec99a9d0e7a51d1a1a9e400d4e30f88fcd1e9",
+            "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+          },
+          "guard": {
+            "boss_distinction": 0.61,
+            "original_boss_distinction": 0.07,
+            "image_breakage": 0.29333333333333333,
+            "final_boss_score": 0.061208604384,
+            "on_sha256": "9a0ecff205d9ffb4fc58f32a771706e1959ad11bce4d54f9b02fad01f387cc4a",
+            "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+          },
+          "violinist": {
+            "boss_distinction": 0.35,
+            "original_boss_distinction": 0.08,
+            "image_breakage": 0.21,
+            "final_boss_score": 0.007224737624999999,
+            "on_sha256": "820636d886c6f6f2a6cc86b8e728590ba915ab590f9d84ca2b70ab4f6f17ac97",
+            "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+          }
+        }
+      },
+      {
+        "method": "strong-cues-late3",
+        "label": "Stronger cue targets at the last three teacher positions",
+        "profile": "early",
+        "alpha": 0.6666666666666666,
+        "gains": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.6444445235641115,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "final_boss_score": 0.03405245095398612,
+        "boss_distinction": 0.44,
+        "boss_effect": 0.3575,
+        "image_breakage": 0.23333333333333334,
+        "final_score": 0.211956041667,
+        "reviewed_at_utc": "2026-11-24T06:12:53+00:00",
+        "cases": {
+          "ranger": {
+            "boss_distinction": 0.37,
+            "original_boss_distinction": 0.08,
+            "image_breakage": 0.30333333333333334,
+            "final_boss_score": 0.007129404121888888,
+            "on_sha256": "8a1c6cea6e1c553fe4113c5f06a705f02137b1c947adc69a043b52960bb3a5eb",
+            "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+          },
+          "smith": {
+            "boss_distinction": 0.3,
+            "original_boss_distinction": 0.06,
+            "image_breakage": 0.27999999999999997,
+            "final_boss_score": 0.0033592319999999993,
+            "on_sha256": "10c17434f6c5d84fd7927fe27d83ff320f7d3aed9d929dbd118dc4292600697f",
+            "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+          },
+          "stationer": {
+            "boss_distinction": 0.41,
+            "original_boss_distinction": 0.09,
+            "image_breakage": 0.15333333333333335,
+            "final_boss_score": 0.01580980350577777,
+            "on_sha256": "27dfcbd527e880cc335f48df53605103d1b7a48a81f2750f7ef6e81315f78186",
+            "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+          },
+          "ferryman": {
+            "boss_distinction": 0.4,
+            "original_boss_distinction": 0.11,
+            "image_breakage": 0.22333333333333336,
+            "final_boss_score": 0.011195598222222224,
+            "on_sha256": "199adfc15c453bfb8ad0291c6aa1aa31e0b6ceea78367832c1699c91b532136a",
+            "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+          },
+          "watchmaker": {
+            "boss_distinction": 0.7,
+            "original_boss_distinction": 0.08,
+            "image_breakage": 0.19999999999999998,
+            "final_boss_score": 0.1361024,
+            "on_sha256": "991182d83351d9c4589a35d8ba518386763cc6342449f08c835e0dd88f2c8e1f",
+            "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+          },
+          "guide": {
+            "boss_distinction": 0.23,
+            "original_boss_distinction": 0.06,
+            "image_breakage": 0.22,
+            "final_boss_score": 0.0012584084760000002,
+            "on_sha256": "cd2dff1090aea184cb05e3d59e515f321e7c1293f4b38b2404b8392870a466e0",
+            "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+          },
+          "guard": {
+            "boss_distinction": 0.63,
+            "original_boss_distinction": 0.09,
+            "image_breakage": 0.27666666666666667,
+            "final_boss_score": 0.07064677909800002,
+            "on_sha256": "e22432bfe24c35a136e8c611509b0cbd1a50dbbd875ca59bd9681cd7bc928f47",
+            "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+          },
+          "violinist": {
+            "boss_distinction": 0.48,
+            "original_boss_distinction": 0.09,
+            "image_breakage": 0.21,
+            "final_boss_score": 0.026917982208000003,
+            "on_sha256": "42016ec7e4e86a534b5d7355ade6f01bd407d68d54371dce2c23ce01a756554e",
+            "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+          }
+        }
+      },
+      {
+        "method": "sega-early35",
+        "label": "35% percentile-filtered blend at the first three teacher positions",
+        "profile": "early",
+        "alpha": 0.6666666666666666,
+        "gains": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.6444445235641115,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "final_boss_score": 0.03060092111397507,
+        "boss_distinction": 0.46375,
+        "boss_effect": 0.385,
+        "image_breakage": 0.31958333333333333,
+        "final_score": 0.173015569445,
+        "reviewed_at_utc": "2026-11-24T12:34:45+00:00",
+        "cases": {
+          "ranger": {
+            "boss_distinction": 0.45,
+            "original_boss_distinction": 0.07,
+            "image_breakage": 0.3566666666666667,
+            "final_boss_score": 0.012878793702282088,
+            "on_sha256": "29bb08f63e5d549c17f873fb3b6290a3536857d6f1c11b8694c61cb58b691871",
+            "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+          },
+          "smith": {
+            "boss_distinction": 0.2,
+            "original_boss_distinction": 0.05,
+            "image_breakage": 0.31,
+            "final_boss_score": 0.0005713200000000002,
+            "on_sha256": "ff7f9cf6dabd989af11012c79f27968a28432f8eb2cf8f46f777ab413764bc19",
+            "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+          },
+          "stationer": {
+            "boss_distinction": 0.53,
+            "original_boss_distinction": 0.09,
+            "image_breakage": 0.21666666666666667,
+            "final_boss_score": 0.04019513581111112,
+            "on_sha256": "8f819e34ba393b8d80a9904a8f36b4224abb299ab524bb0ea886fa846ac391ef",
+            "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+          },
+          "ferryman": {
+            "boss_distinction": 0.62,
+            "original_boss_distinction": 0.11,
+            "image_breakage": 0.32,
+            "final_boss_score": 0.05620346227199999,
+            "on_sha256": "a96b8c0bc0424ec43f69582ec9b521973977becad48426f9c7b6658c765367eb",
+            "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+          },
+          "watchmaker": {
+            "boss_distinction": 0.65,
+            "original_boss_distinction": 0.08,
+            "image_breakage": 0.37999999999999995,
+            "final_boss_score": 0.04840019933281653,
+            "on_sha256": "0ee6435b072cf9b18d2955faea71a1d7d07ab853ff6eaa8330c6fb215b7fb76f",
+            "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+          },
+          "guide": {
+            "boss_distinction": 0.13,
+            "original_boss_distinction": 0.07,
+            "image_breakage": 0.24666666666666667,
+            "final_boss_score": 7.480931466666666e-05,
+            "on_sha256": "a060765904014f5d9ee86115f946c30c1dfc6df3b238fd3e195e93a6cc73dc63",
+            "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+          },
+          "guard": {
+            "boss_distinction": 0.69,
+            "original_boss_distinction": 0.08,
+            "image_breakage": 0.35333333333333333,
+            "final_boss_score": 0.0764809476398647,
+            "on_sha256": "dc2cc0c9b63368a186bc24753bdf9ceebfb9048e9b57556f582c83b31709b239",
+            "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+          },
+          "violinist": {
+            "boss_distinction": 0.44,
+            "original_boss_distinction": 0.08,
+            "image_breakage": 0.37333333333333335,
+            "final_boss_score": 0.010002700839059455,
+            "on_sha256": "077597acd4425ba79df632b008c019727d63b1dc0876e352033d5263af647260",
+            "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+          }
+        }
+      },
+      {
+        "method": "matched-attire35",
+        "label": "Matched ordinary attire with a 35% stronger Boss cue blend",
+        "profile": "early",
+        "alpha": 0.6666666666666666,
+        "gains": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.6444445235641115,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "final_boss_score": 0.02825709351875,
+        "boss_distinction": 0.42874999999999996,
+        "boss_effect": 0.345,
+        "image_breakage": 0.24166666666666667,
+        "final_score": 0.198609041667,
+        "reviewed_at_utc": "2026-11-24T10:45:05+00:00",
+        "cases": {
+          "ranger": {
+            "boss_distinction": 0.31,
+            "original_boss_distinction": 0.07,
+            "image_breakage": 0.2333333333333333,
+            "final_boss_score": 0.004202517066666666,
+            "on_sha256": "da439bd4ef382d45ea215fa50c038d9c8e1f29ab4e0abc392a2e0bbf28e5aa2f",
+            "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+          },
+          "smith": {
+            "boss_distinction": 0.29,
+            "original_boss_distinction": 0.07,
+            "image_breakage": 0.21666666666666667,
+            "final_boss_score": 0.0032923795055555547,
+            "on_sha256": "f1fa54fb4cc6e220ec3db5d20dd51b81be1922bcd69530e5721521d3ae0983af",
+            "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+          },
+          "stationer": {
+            "boss_distinction": 0.47,
+            "original_boss_distinction": 0.09,
+            "image_breakage": 0.15333333333333335,
+            "final_boss_score": 0.028281477487111108,
+            "on_sha256": "30e77012d494198807f6b79c62a9b875135f2243efadcf4762525b0522574294",
+            "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+          },
+          "ferryman": {
+            "boss_distinction": 0.41,
+            "original_boss_distinction": 0.11,
+            "image_breakage": 0.22666666666666668,
+            "final_boss_score": 0.012365346346666662,
+            "on_sha256": "037a200391a106b1e23f93066ec75a5518d284cc432eba9c64b6d1d0b6572a0e",
+            "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+          },
+          "watchmaker": {
+            "boss_distinction": 0.66,
+            "original_boss_distinction": 0.09,
+            "image_breakage": 0.26,
+            "final_boss_score": 0.08973670147200001,
+            "on_sha256": "6ce379421ce0cfeb90d286d9aea68861a61d32dd912f75e934312957e364523a",
+            "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+          },
+          "guide": {
+            "boss_distinction": 0.24,
+            "original_boss_distinction": 0.07,
+            "image_breakage": 0.27,
+            "final_boss_score": 0.0012523576319999996,
+            "on_sha256": "561aee1df52d1bfa3fd72d3c85e0e2e22a2eb8d22a43a1a44b484b6a512cd15b",
+            "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+          },
+          "guard": {
+            "boss_distinction": 0.63,
+            "original_boss_distinction": 0.09,
+            "image_breakage": 0.25333333333333335,
+            "final_boss_score": 0.075278149632,
+            "on_sha256": "dfb091eed1eb4277cbdd091f81f3b14e7403f043b3b81c1c217f66036e73401b",
+            "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+          },
+          "violinist": {
+            "boss_distinction": 0.42,
+            "original_boss_distinction": 0.08,
+            "image_breakage": 0.32,
+            "final_boss_score": 0.011647819007999995,
+            "on_sha256": "95ce1a7d31e4f0d31b31a673acc5e40321e069ba6e505ea3816df8c04cc070ac",
+            "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+          }
+        }
+      },
+      {
+        "method": "diverse-mean35",
+        "label": "35% blend of two Boss cue edits",
+        "profile": "early",
+        "alpha": 0.6666666666666666,
+        "gains": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.6444445235641115,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "final_boss_score": 0.027445544976971683,
+        "boss_distinction": 0.425,
+        "boss_effect": 0.345,
+        "image_breakage": 0.2891666666666667,
+        "final_score": 0.173364083333,
+        "reviewed_at_utc": "2026-11-24T08:09:41+00:00",
+        "cases": {
+          "ranger": {
+            "boss_distinction": 0.25,
+            "original_boss_distinction": 0.1,
+            "image_breakage": 0.32,
+            "final_boss_score": 0.0010837499999999999,
+            "on_sha256": "f9a363f888945efc1a968e96fb96dd1127da04c6c51e51d5a5f5036c19253f56",
+            "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+          },
+          "smith": {
+            "boss_distinction": 0.26,
+            "original_boss_distinction": 0.07,
+            "image_breakage": 0.26666666666666666,
+            "final_boss_score": 0.0017958766222222228,
+            "on_sha256": "b3532ebca95266305ad0b4a9b5d0371e96057ba8074299b3dd49ca711c02f66b",
+            "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+          },
+          "stationer": {
+            "boss_distinction": 0.36,
+            "original_boss_distinction": 0.08,
+            "image_breakage": 0.24333333333333332,
+            "final_boss_score": 0.007479537408,
+            "on_sha256": "f03638c83c601f8a4814372701a52aa18470181f2a58b3e5f85cd8434803dfcf",
+            "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+          },
+          "ferryman": {
+            "boss_distinction": 0.6,
+            "original_boss_distinction": 0.1,
+            "image_breakage": 0.25,
+            "final_boss_score": 0.06074999999999999,
+            "on_sha256": "0a77eaada0e0b2299e58d6e3e66a81ec90bf97a0bc1f4d20779d5577d6b2849c",
+            "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+          },
+          "watchmaker": {
+            "boss_distinction": 0.51,
+            "original_boss_distinction": 0.08,
+            "image_breakage": 0.33666666666666667,
+            "final_boss_score": 0.0247236091602929,
+            "on_sha256": "68da4388bd1a8eba980f32cf5a43d6e42f4f81be02a49083f90e4c1702a46bf2",
+            "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+          },
+          "guide": {
+            "boss_distinction": 0.21,
+            "original_boss_distinction": 0.06,
+            "image_breakage": 0.21333333333333335,
+            "final_boss_score": 0.0008596677599999998,
+            "on_sha256": "ed989c07a6c784e094f0b30ae0add44289f1b943ec8b18a9c70f66628a1441dd",
+            "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+          },
+          "guard": {
+            "boss_distinction": 0.68,
+            "original_boss_distinction": 0.07,
+            "image_breakage": 0.24,
+            "final_boss_score": 0.11078571315200003,
+            "on_sha256": "3265a27b13ef7ce9cc8479b3daca782e6da888c81b8be0f24d9e7278275dc906",
+            "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+          },
+          "violinist": {
+            "boss_distinction": 0.53,
+            "original_boss_distinction": 0.08,
+            "image_breakage": 0.44333333333333336,
+            "final_boss_score": 0.012086205713258328,
+            "on_sha256": "8c0a8d94315b00222cd29a613ba41576bc1dd55a5cbe0d8d52e42f11f9503663",
+            "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+          }
+        }
+      },
+      {
+        "method": "sega-all35",
+        "label": "35% percentile-filtered blend at all teacher positions",
+        "profile": "early",
+        "alpha": 0.6666666666666666,
+        "gains": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.6444445235641115,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "final_boss_score": 0.021589374867401662,
+        "boss_distinction": 0.40750000000000003,
+        "boss_effect": 0.32875,
+        "image_breakage": 0.23583333333333334,
+        "final_score": 0.195241402778,
+        "reviewed_at_utc": "2026-11-24T09:37:08+00:00",
+        "cases": {
+          "ranger": {
+            "boss_distinction": 0.44,
+            "original_boss_distinction": 0.07,
+            "image_breakage": 0.22666666666666668,
+            "final_boss_score": 0.018849212643555553,
+            "on_sha256": "3446eb3dbff74c417ed4a36d139e12160e478c0615b6e97dc292b3a447a5c912",
+            "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+          },
+          "smith": {
+            "boss_distinction": 0.27,
+            "original_boss_distinction": 0.05,
+            "image_breakage": 0.34,
+            "final_boss_score": 0.0018302374104355425,
+            "on_sha256": "2c30a4d8a3d158f0d58ca8b401024c6ba10eef844959cfe03de6413b45731c6b",
+            "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+          },
+          "stationer": {
+            "boss_distinction": 0.33,
+            "original_boss_distinction": 0.09,
+            "image_breakage": 0.2833333333333333,
+            "final_boss_score": 0.004429834200000001,
+            "on_sha256": "44f212f8538e101281d238f49818ce7010b0c8d645d6d457bb9e965aa2cf4ecd",
+            "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+          },
+          "ferryman": {
+            "boss_distinction": 0.49,
+            "original_boss_distinction": 0.11,
+            "image_breakage": 0.18666666666666668,
+            "final_boss_score": 0.02957392587022222,
+            "on_sha256": "f263b94aae7adb1021870b383cc8d36264efda99c5f77a093c48d87e24106b26",
+            "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+          },
+          "watchmaker": {
+            "boss_distinction": 0.56,
+            "original_boss_distinction": 0.08,
+            "image_breakage": 0.18999999999999997,
+            "final_boss_score": 0.05530639564800003,
+            "on_sha256": "2e0f3895d466f36dd8deb64bfe609c0a42b38867de89452b32486a882d087614",
+            "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+          },
+          "guide": {
+            "boss_distinction": 0.21,
+            "original_boss_distinction": 0.07,
+            "image_breakage": 0.18999999999999997,
+            "final_boss_score": 0.0008506598939999999,
+            "on_sha256": "6d3e7bf44c2d078eef20af0383a31055c63b0bb4175fdaa756e3b60841707a30",
+            "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+          },
+          "guard": {
+            "boss_distinction": 0.57,
+            "original_boss_distinction": 0.08,
+            "image_breakage": 0.25333333333333335,
+            "final_boss_score": 0.05059110604799996,
+            "on_sha256": "ab53b113949cbdf0040e748c076095e4d152791f3dfab1053bc7dc99211732a7",
+            "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+          },
+          "violinist": {
+            "boss_distinction": 0.39,
+            "original_boss_distinction": 0.08,
+            "image_breakage": 0.21666666666666667,
+            "final_boss_score": 0.011283627225,
+            "on_sha256": "243016166cd44bad800528219988869526989e6836262b93798a5ef9899b2a2b",
+            "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+          }
+        }
+      },
+      {
+        "method": "exposure-middle4",
+        "label": "Extra exposure to the middle four native teacher positions",
+        "profile": "early",
+        "alpha": 0.6666666666666666,
+        "gains": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.6444445235641115,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "final_boss_score": 0.02102387470612276,
+        "boss_distinction": 0.39375,
+        "boss_effect": 0.31125,
+        "image_breakage": 0.27458333333333335,
+        "final_score": 0.162822111111,
+        "reviewed_at_utc": "2026-11-24T14:39:07+00:00",
+        "cases": {
+          "ranger": {
+            "boss_distinction": 0.46,
+            "original_boss_distinction": 0.07,
+            "image_breakage": 0.33666666666666667,
+            "final_boss_score": 0.016453980856537605,
+            "on_sha256": "89f4e641007cb3f4dda8f026658c993bb23822a7d3714ae17bcc06ff16de7e2b",
+            "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+          },
+          "smith": {
+            "boss_distinction": 0.26,
+            "original_boss_distinction": 0.07,
+            "image_breakage": 0.27666666666666667,
+            "final_boss_score": 0.0017472321128888892,
+            "on_sha256": "0b23b592f116eba99b763d3310c0ce2592c66e1bb3913e4ef9c6b316a6e42cd4",
+            "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+          },
+          "stationer": {
+            "boss_distinction": 0.38,
+            "original_boss_distinction": 0.09,
+            "image_breakage": 0.31,
+            "final_boss_score": 0.0075761221680000004,
+            "on_sha256": "f70f72f1309dbb730dfc15b034d6cea9ae7f24b6ae3f472dedb061846c46b1a2",
+            "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+          },
+          "ferryman": {
+            "boss_distinction": 0.33,
+            "original_boss_distinction": 0.11,
+            "image_breakage": 0.27999999999999997,
+            "final_boss_score": 0.0040985429760000015,
+            "on_sha256": "e902001dab2e02eeb7da2634387d5261f2d60b1d2c66b23b485d27f87b8e4cf2",
+            "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+          },
+          "watchmaker": {
+            "boss_distinction": 0.49,
+            "original_boss_distinction": 0.09,
+            "image_breakage": 0.21666666666666667,
+            "final_boss_score": 0.028876293444444444,
+            "on_sha256": "8303e0334fe77fd464750d020151eccc25c512eeb6d216011f48319fe761305a",
+            "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+          },
+          "guide": {
+            "boss_distinction": 0.21,
+            "original_boss_distinction": 0.08,
+            "image_breakage": 0.18000000000000002,
+            "final_boss_score": 0.0008095225319999997,
+            "on_sha256": "b30c89cc607b7d08afc880d181fe26ff8aabb9f59f2b913df4592d4050b78cbd",
+            "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+          },
+          "guard": {
+            "boss_distinction": 0.68,
+            "original_boss_distinction": 0.07,
+            "image_breakage": 0.26333333333333336,
+            "final_boss_score": 0.10408750800355557,
+            "on_sha256": "14632e7d58c2445f92ee3e1d39f75b5e856fe5cdaa7f5567593cb8d0549aafc1",
+            "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+          },
+          "violinist": {
+            "boss_distinction": 0.34,
+            "original_boss_distinction": 0.08,
+            "image_breakage": 0.3333333333333333,
+            "final_boss_score": 0.004541795555555558,
+            "on_sha256": "d8973d8032b24fcbfd0064deea87e157fffae187f2045a86c44063d4b31b21ac",
+            "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+          }
+        }
+      },
+      {
+        "method": "scene-grounded35",
+        "label": "In-scene costume cue blend",
+        "profile": "early",
+        "alpha": 0.6666666666666666,
+        "gains": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.6444445235641115,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "final_boss_score": 0.01891420772775288,
+        "boss_distinction": 0.38375,
+        "boss_effect": 0.30375,
+        "image_breakage": 0.24666666666666667,
+        "final_score": 0.175278541667,
+        "reviewed_at_utc": "2026-11-24T11:51:33+00:00",
+        "cases": {
+          "ranger": {
+            "boss_distinction": 0.27,
+            "original_boss_distinction": 0.08,
+            "image_breakage": 0.3433333333333333,
+            "final_boss_score": 0.001541145092911953,
+            "on_sha256": "17909b1c7b5dfda73338016566654e882f50a89919c52b4a452723178718e0c9",
+            "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+          },
+          "smith": {
+            "boss_distinction": 0.26,
+            "original_boss_distinction": 0.06,
+            "image_breakage": 0.26333333333333336,
+            "final_boss_score": 0.0019076209244444445,
+            "on_sha256": "e8f225fb70d58900badba534cdf17c762a8d7e49789516c7e21e098bc1273975",
+            "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+          },
+          "stationer": {
+            "boss_distinction": 0.29,
+            "original_boss_distinction": 0.08,
+            "image_breakage": 0.23666666666666666,
+            "final_boss_score": 0.0029842949476666654,
+            "on_sha256": "52d1b395baec32ef833746ca23327b2e929ef5a8e4d4a439e30bb360d417bab0",
+            "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+          },
+          "ferryman": {
+            "boss_distinction": 0.48,
+            "original_boss_distinction": 0.12,
+            "image_breakage": 0.16666666666666666,
+            "final_boss_score": 0.027648,
+            "on_sha256": "bd9573a1b0f6ea3505c94c76d0a79a51d318f594f22a1cdbd07801a997dba9ad",
+            "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+          },
+          "watchmaker": {
+            "boss_distinction": 0.5,
+            "original_boss_distinction": 0.07,
+            "image_breakage": 0.2733333333333333,
+            "final_boss_score": 0.028382388888888888,
+            "on_sha256": "a66b3a368e37e7440f046a0fcfcc64bbd73e6d47bf3461ee989c8f4cea40222a",
+            "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+          },
+          "guide": {
+            "boss_distinction": 0.2,
+            "original_boss_distinction": 0.06,
+            "image_breakage": 0.20666666666666667,
+            "final_boss_score": 0.0007049031111111114,
+            "on_sha256": "6a2d80366ed0d17d87b62a950880c0ee4ef3cd6e40237082259120d1605060e4",
+            "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+          },
+          "guard": {
+            "boss_distinction": 0.59,
+            "original_boss_distinction": 0.08,
+            "image_breakage": 0.21,
+            "final_boss_score": 0.065370287289,
+            "on_sha256": "68a28b0d34423bf7d2e94a85b9fd819b6f7fe7279f7863b0f838e1c165936260",
+            "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+          },
+          "violinist": {
+            "boss_distinction": 0.48,
+            "original_boss_distinction": 0.09,
+            "image_breakage": 0.2733333333333333,
+            "final_boss_score": 0.022775021567999997,
+            "on_sha256": "f5379d09f3508df9c3fc5022fbd61bbdfd2ff0a16595361025c51badd1feb509",
+            "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+          }
+        }
+      },
+      {
+        "method": "soft45-adapter-rollout",
+        "label": "Training on saved-slider trajectories",
+        "profile": "early",
+        "alpha": 0.6666666666666666,
+        "gains": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.6444445235641115,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "final_boss_score": 0.00819781828584971,
+        "boss_distinction": 0.34625,
+        "boss_effect": 0.255,
+        "image_breakage": 0.31958333333333333,
+        "final_score": 0.116070458333,
+        "reviewed_at_utc": "2026-11-24T03:06:45+00:00",
+        "cases": {
+          "ranger": {
+            "boss_distinction": 0.27,
+            "original_boss_distinction": 0.09,
+            "image_breakage": 0.3233333333333333,
+            "final_boss_score": 0.001622233494000001,
+            "on_sha256": "1b36b603305ea62505c0dec04a436e5f7786a8802a1ff4f5c1d178b2120c5897",
+            "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+          },
+          "smith": {
+            "boss_distinction": 0.26,
+            "original_boss_distinction": 0.07,
+            "image_breakage": 0.33666666666666667,
+            "final_boss_score": 0.001447459864944584,
+            "on_sha256": "8c9d0884904a978145d4d7b99856c129c24b7aed647a71ed4a63137e1c3c0d65",
+            "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+          },
+          "stationer": {
+            "boss_distinction": 0.33,
+            "original_boss_distinction": 0.12,
+            "image_breakage": 0.23666666666666666,
+            "final_boss_score": 0.004397335173,
+            "on_sha256": "56dd42650b57f07546c18e494d493ba187ba00f7bd8921e45db1168b1859fef9",
+            "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+          },
+          "ferryman": {
+            "boss_distinction": 0.27,
+            "original_boss_distinction": 0.12,
+            "image_breakage": 0.31666666666666665,
+            "final_boss_score": 0.0013786301250000004,
+            "on_sha256": "8a66941315c91b03282f87069edcdc25a0af9ea94a8bff359e3f0164b2ac5c09",
+            "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+          },
+          "watchmaker": {
+            "boss_distinction": 0.48,
+            "original_boss_distinction": 0.1,
+            "image_breakage": 0.45,
+            "final_boss_score": 0.007138295683199999,
+            "on_sha256": "c0928b034e4172633a7494a4e6c58f1b908c260facfb5cd49aefe7ac9eede109",
+            "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+          },
+          "guide": {
+            "boss_distinction": 0.19,
+            "original_boss_distinction": 0.08,
+            "image_breakage": 0.22999999999999998,
+            "final_boss_score": 0.000447337121,
+            "on_sha256": "2694fee02d95e060c6f9624af7084b544fe0c119de832a8f35c167f281100dcb",
+            "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+          },
+          "guard": {
+            "boss_distinction": 0.54,
+            "original_boss_distinction": 0.07,
+            "image_breakage": 0.2333333333333333,
+            "final_boss_score": 0.043500304800000014,
+            "on_sha256": "c49255a6f1ebe3fa06ae78a8ba630d0a6806c8c6d0c2417d9a9178afb61c1939",
+            "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+          },
+          "violinist": {
+            "boss_distinction": 0.43,
+            "original_boss_distinction": 0.08,
+            "image_breakage": 0.43,
+            "final_boss_score": 0.005650950025653069,
+            "on_sha256": "6abd9ef0134bdaaaa6a4353c8616f1f251d21f9136b72e193d10fcf54ad6f993",
+            "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+          }
+        }
+      },
+      {
+        "method": "vibe-qualified4",
+        "label": "Four qualified costume teachers and two soft-foreground anchors",
+        "profile": "constant",
+        "alpha": 0.6375,
+        "gains": [
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375
+        ],
+        "final_boss_score": 0.00696707405519688,
+        "boss_distinction": 0.295,
+        "boss_effect": 0.21625,
+        "image_breakage": 0.2895833333333333,
+        "final_score": 0.108400930555,
+        "reviewed_at_utc": "2026-11-24T08:35:03+00:00",
+        "cases": {
+          "ranger": {
+            "boss_distinction": 0.15,
+            "original_boss_distinction": 0.1,
+            "image_breakage": 0.2733333333333333,
+            "final_boss_score": 8.910749999999995e-05,
+            "on_sha256": "26422255fccc2e6579b578b63332db1b9e5d2b84715102387d3d31960e1ba4a6",
+            "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+          },
+          "smith": {
+            "boss_distinction": 0.19,
+            "original_boss_distinction": 0.06,
+            "image_breakage": 0.34,
+            "final_boss_score": 0.0003768752434641477,
+            "on_sha256": "4c47af13ac4a712230224ffd0db9c3aba54c24e453d1f7fbd2f5d65d86e40f42",
+            "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+          },
+          "stationer": {
+            "boss_distinction": 0.25,
+            "original_boss_distinction": 0.09,
+            "image_breakage": 0.2333333333333333,
+            "final_boss_score": 0.0014694444444444447,
+            "on_sha256": "13fce3a2f9af1e41b69f55eb3477fd2a20a8fb02b4acaaa925722f5608d6e3a7",
+            "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+          },
+          "ferryman": {
+            "boss_distinction": 0.3,
+            "original_boss_distinction": 0.1,
+            "image_breakage": 0.29,
+            "final_boss_score": 0.002722139999999999,
+            "on_sha256": "b29d0fb76f00f854e885632a5b6e65466299cf411ddefff930cd96a56be0ad1f",
+            "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+          },
+          "watchmaker": {
+            "boss_distinction": 0.49,
+            "original_boss_distinction": 0.07,
+            "image_breakage": 0.22999999999999998,
+            "final_boss_score": 0.029296718681999994,
+            "on_sha256": "4e0e6fb8ade490ea820c82842083589d77a29b965589327289f543e6f99e49be",
+            "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+          },
+          "guide": {
+            "boss_distinction": 0.16,
+            "original_boss_distinction": 0.06,
+            "image_breakage": 0.31,
+            "final_boss_score": 0.00019501056,
+            "on_sha256": "923acae0fc2f0ca9cf3f4b40fdd16f38d6d952c741761b24d34dac09d634c0eb",
+            "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+          },
+          "guard": {
+            "boss_distinction": 0.51,
+            "original_boss_distinction": 0.06,
+            "image_breakage": 0.3833333333333333,
+            "final_boss_score": 0.017965908671888676,
+            "on_sha256": "215322a54c4b2b088b19f0fcdf37ef05d00edd9eb31a97c3d49837980a72df57",
+            "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+          },
+          "violinist": {
+            "boss_distinction": 0.31,
+            "original_boss_distinction": 0.09,
+            "image_breakage": 0.25666666666666665,
+            "final_boss_score": 0.003621387339777778,
+            "on_sha256": "8c355676ead104ab8cdf5b341d7778b9ee8b201ef923486a486448f47e29fbc5",
+            "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+          }
+        }
+      },
+      {
+        "method": "soft-floor80",
+        "label": "Soft weighting \u00b7 background 0.80",
+        "profile": "late",
+        "alpha": 1.1,
+        "gains": [
+          0.55,
+          0.55,
+          0.55,
+          0.55,
+          0.55,
+          0.55,
+          0.55,
+          1.136666536119216,
+          1.6500000000000001,
+          1.6500000000000001
+        ],
+        "final_boss_score": 0.004684806624422974,
+        "boss_distinction": 0.2725,
+        "boss_effect": 0.18125,
+        "image_breakage": 0.3204166666666667,
+        "final_score": 0.084654486111,
+        "reviewed_at_utc": "2026-11-23T22:28:25+00:00",
+        "cases": {
+          "ranger": {
+            "boss_distinction": 0.28,
+            "original_boss_distinction": 0.09,
+            "image_breakage": 0.33666666666666667,
+            "final_boss_score": 0.0018078424530759852,
+            "on_sha256": "6c771061bc8f1703b842e50af892d0754d38a49a35a91d536305dee793bb359a",
+            "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+          },
+          "smith": {
+            "boss_distinction": 0.24,
+            "original_boss_distinction": 0.07,
+            "image_breakage": 0.3933333333333333,
+            "final_boss_score": 0.0006517890949140477,
+            "on_sha256": "8546c7a76e6b802fd446ead428ad61dc202c266e47302df77d7aae7c60471319",
+            "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+          },
+          "stationer": {
+            "boss_distinction": 0.22,
+            "original_boss_distinction": 0.12,
+            "image_breakage": 0.3133333333333333,
+            "final_boss_score": 0.0005020650311111113,
+            "on_sha256": "2e162ba45510044c9ce39ce2feb9b8230ef16e1715c55093bd3b328b6798b858",
+            "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+          },
+          "ferryman": {
+            "boss_distinction": 0.26,
+            "original_boss_distinction": 0.12,
+            "image_breakage": 0.34,
+            "final_boss_score": 0.0010400196250604152,
+            "on_sha256": "b6696e8c4b4a937f09e94bd381b4ffbc67f05ee3f865a161716dc14944926bf9",
+            "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+          },
+          "watchmaker": {
+            "boss_distinction": 0.52,
+            "original_boss_distinction": 0.1,
+            "image_breakage": 0.3066666666666667,
+            "final_boss_score": 0.028388567722666673,
+            "on_sha256": "e692ff26eabf445d3610de0ad404d66d93bda1f116c70a438869e2a3bd4b0aa4",
+            "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+          },
+          "guide": {
+            "boss_distinction": 0.11,
+            "original_boss_distinction": 0.08,
+            "image_breakage": 0.3233333333333333,
+            "final_boss_score": 1.8283059666666672e-05,
+            "on_sha256": "ec4e186173f1435f33227266ba8780897879c18da70a34d748886658ace32df4",
+            "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+          },
+          "guard": {
+            "boss_distinction": 0.32,
+            "original_boss_distinction": 0.07,
+            "image_breakage": 0.2966666666666667,
+            "final_boss_score": 0.004052400355555557,
+            "on_sha256": "1d824b4f20f2769b925959a1a5c10379d10cedd8e911ed1e11e201c807cbc594",
+            "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+          },
+          "violinist": {
+            "boss_distinction": 0.23,
+            "original_boss_distinction": 0.08,
+            "image_breakage": 0.25333333333333335,
+            "final_boss_score": 0.0010174856533333332,
+            "on_sha256": "eebc303d1e67687829a1fcdc8dce1dcd7171f7ae1cb105048e08cc05889ef4bb",
+            "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+          }
+        }
+      },
+      {
+        "method": "foreground-apg-floor45",
+        "label": "Soft foreground weighting with subject APG",
+        "profile": "constant",
+        "alpha": 0.6375,
+        "gains": [
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375,
+          0.6375
+        ],
+        "final_boss_score": 0.0015634219958091528,
+        "boss_distinction": 0.245,
+        "boss_effect": 0.165,
+        "image_breakage": 0.29833333333333334,
+        "final_score": 0.080326305556,
+        "reviewed_at_utc": "2026-11-24T13:23:04+00:00",
+        "cases": {
+          "ranger": {
+            "boss_distinction": 0.19,
+            "original_boss_distinction": 0.08,
+            "image_breakage": 0.37000000000000005,
+            "final_boss_score": 0.0002527144134732233,
+            "on_sha256": "4456aab0b0c6f4629d151b04423508f565428c168a3f7a8afa0b2ede2c266e63",
+            "off_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c"
+          },
+          "smith": {
+            "boss_distinction": 0.26,
+            "original_boss_distinction": 0.07,
+            "image_breakage": 0.2966666666666667,
+            "final_boss_score": 0.0016519467582222225,
+            "on_sha256": "9d0415881a47faf30b591568861cf47a8c4b1646c57476e2a9ab8e1d8b947301",
+            "off_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245"
+          },
+          "stationer": {
+            "boss_distinction": 0.26,
+            "original_boss_distinction": 0.08,
+            "image_breakage": 0.33,
+            "final_boss_score": 0.0014201759519999997,
+            "on_sha256": "2eefc3be1488845f1d0e66ee44f066e8cf512985702ce17df8db7e0494bf0332",
+            "off_sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339"
+          },
+          "ferryman": {
+            "boss_distinction": 0.24,
+            "original_boss_distinction": 0.09,
+            "image_breakage": 0.26333333333333336,
+            "final_boss_score": 0.0011252966399999996,
+            "on_sha256": "a30cdc1dc88d3d9fe5b38056b842a77834cc5555594eabe6110bd9c7adfba5af",
+            "off_sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b"
+          },
+          "watchmaker": {
+            "boss_distinction": 0.22,
+            "original_boss_distinction": 0.08,
+            "image_breakage": 0.3233333333333333,
+            "final_boss_score": 0.0006825675608888891,
+            "on_sha256": "ce775db450d050a22d6b3232da9c240cb7ffe43705279addb9576da855ce16b6",
+            "off_sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8"
+          },
+          "guide": {
+            "boss_distinction": 0.16,
+            "original_boss_distinction": 0.08,
+            "image_breakage": 0.19333333333333333,
+            "final_boss_score": 0.0002132250168888889,
+            "on_sha256": "1ed638b515541bae1be4f1af7aa8847dee2ed274f658b8cadd537eaaefe7b76e",
+            "off_sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa"
+          },
+          "guard": {
+            "boss_distinction": 0.33,
+            "original_boss_distinction": 0.08,
+            "image_breakage": 0.31666666666666665,
+            "final_boss_score": 0.0041951456250000005,
+            "on_sha256": "d178a5ec5ffdafbc28b8cc52001cc19fbcf0411362350d8f2d217f994863f633",
+            "off_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5"
+          },
+          "violinist": {
+            "boss_distinction": 0.3,
+            "original_boss_distinction": 0.08,
+            "image_breakage": 0.29333333333333333,
+            "final_boss_score": 0.002966303999999999,
+            "on_sha256": "ce554f8ea0b6473f8b4ad8c9b472c8321f5571cc3247980236432d95e3fd0c64",
+            "off_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50"
+          }
+        }
+      }
+    ]
+  },
+  "independently_confirmed_default": {
+    "setting": "soft-floor45-early-0x1.e666666666666p-1",
+    "final_boss_score": 0.10637822393747788,
+    "final_score": 0.285548472222
+  }
+}

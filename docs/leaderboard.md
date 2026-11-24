@@ -2,42 +2,48 @@
 
 ## Summary
 
-**Current research default.** Soft foreground weighting with a 0.45 background floor, trained to RAW192 and replayed at early α 0.95. It scored **33.71** on eight development cases and **28.55** on eight separate confirmation cases. [Default and exact gains](final-boss-raw192/default.json) · [Matched confirmation images](final-boss-raw192/confirmed-default.jpg) · [Download RAW checkpoints](https://huggingface.co/ntc-ai/anima-final-boss-research)
+**Current research default.** Soft foreground weighting with a 0.45 background floor, trained to RAW192 and replayed at early α 0.95. It leads the saved replays with **14.72** on eight development cases and scores **10.64** on eight separate confirmation cases. The original score was 33.71 on development and 28.55 on confirmation. [Default and exact gains](final-boss-raw192/default.json) · [Matched confirmation images](final-boss-raw192/confirmed-default.jpg) · [Download RAW checkpoints](https://huggingface.co/ntc-ai/anima-final-boss-research)
 
-**What worked in training.** Soft foreground weighting concentrates the teacher edit on the character while retaining some signal in the background. It leads the matched early-strength comparison at **25.66**. A 35% blend of stronger Boss cues scored **24.93** at early strength and led at constant strength with **16.90**. Paired contexts and projection sometimes improved readability at the cost of a weaker character change. [Training comparison](#training-techniques) · [Target-generation source](final-boss-raw192/README.md#source-for-the-trained-targets)
+**What worked in training.** Soft foreground weighting concentrates the teacher edit on the character while retaining some signal in the background. It leads at shared early strength with **6.63**. Full-strength Boss cues on the same background floor score **5.57** at shared early strength and lead at shared constant strength with **2.10**. [Training comparison](#training-techniques) · [Target-generation source](final-boss-raw192/README.md#source-for-the-trained-targets)
 
-**What earns a high score.** The slider should make the subject visibly read as a Final Boss while keeping the image coherent. An edit with zero Boss gain scores zero. Visible damage lowers the score even when the Boss effect is strong. [Scoring and comparison protocol](#comparing-a-new-run) · [Jev rubrics](final-boss-raw192/rubrics.json)
+**What earns a high score.** The finished character's Boss distinction is cubed and multiplied by the positive gain over the original. Image damage reduces the score, with a steeper penalty above Jev's minor-defect anchor. [Scoring and comparison protocol](#comparing-a-new-run) · [Jev rubrics](final-boss-raw192/rubrics.json)
 
-**Latest challengers.** Middle exposure finished RAW192 at **16.28** shared early and **6.21** shared constant. The four-case preview advantage at RAW144 gave way to weaker Boss distinction at RAW192. Frozen-teacher RAW96 is unmeasured because Archivist's structural check was inconclusive. [Middle exposure](#denoising-position-exposure) · [Frozen-teacher trajectory](#scheduled-frozen-teacher-trajectory)
+**Overnight challenger.** Paired scene and lighting contexts at a 0.45 floor finished at 00:15 UTC on November 24 and reached **10.44** at constant α 1.4125. At shared early strength, it scored **3.63**. Middle exposure later finished at **2.10** shared early and **0.09** shared constant. [Saved replay rankings](final-boss-raw192/boss-distinction-results.json) · [Middle exposure](#denoising-position-exposure)
 
 ## Training techniques
 
-The ranking uses the best measured variant of each technique after 192 updates with stock ParticleGAN. All rows share the same eight development cases and the early α 2/3 setting. The constant α 0.6375 column shows how the same checkpoints perform with a fixed gain through denoising.
+Training ranks compare RAW192 checkpoints from stock ParticleGAN on the same eight development cases at early α 2/3. The constant α 0.6375 column scores those checkpoints at a fixed gain through denoising. Each recipe used one initialization seed.
 
 | Rank | Training change | Early α 2/3 | Constant α 0.6375 | Research source |
 | ---: | --- | ---: | ---: | --- |
-| 1 | Soft foreground weighting, 0.45 background floor | **25.66** | 13.06 | [Anima PR #31](https://github.com/HyperGAN/anima-particle-sliders/pull/31) |
-| 2 | Soft foreground weighting plus 35% stronger Boss cues | 24.93 | **16.90** | [Anima PR #31](https://github.com/HyperGAN/anima-particle-sliders/pull/31), related [teacher mixing #278](https://github.com/HyperGAN/particle-sliders/pull/278) |
-| 3 | Paired scene and lighting contexts, 50% blend, 0.65 floor | 22.23 | 11.58 | [Concept Sliders](https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/05660.pdf), related [contrast isolation #216](https://github.com/HyperGAN/particle-sliders/pull/216) |
-| 4 | Background-only scene and lighting projection, 0.45 floor | 22.22 | 11.51 | Local Anima adaptation of [nuisance deflation #254](https://github.com/HyperGAN/particle-sliders/pull/254) |
-| 5 | Stronger cues at the final three teacher positions | 21.20 | 10.41 | [Teacher timing adaptation and matched renders](#late-cues-at-update-192) |
-| 6 | Stronger cues at the first three teacher positions | 20.32 | 14.99 | [Teacher timing adaptation and matched renders](#early-cues-at-update-192) |
-| 7 | Stronger Boss cues contrasted with matched ordinary attire | 19.86 | Unmeasured | [Anima comparison](#matched-ordinary-attire), based on [Concept Sliders](https://arxiv.org/html/2311.12092v2#S4) |
-| 8 | Percentile-filtered blend at all ten teacher positions | 19.52 | Unmeasured | [Anima comparison](#percentile-filtered-teacher-edits), based on [SEGA](https://arxiv.org/html/2301.12247) |
-| 9 | Whole-image scene and lighting projection, 0.65 floor | 18.74 | 13.72 | Local Anima adaptation of [nuisance deflation #254](https://github.com/HyperGAN/particle-sliders/pull/254) |
-| 10 | In-scene costume cue blend, 35% | 17.53 | 12.08 | [Training comparison and renders](#in-scene-costume-prompts) |
-| 11 | Soft foreground weighting plus a 35% blend of two averaged cues | 17.34 | 8.08 | [Anima comparison](#two-cue-average-at-update-192), related [cue diversification #313](https://github.com/HyperGAN/particle-sliders/pull/313) |
-| 12 | Percentile-filtered blend at the first three teacher positions | 17.30 | 7.74 | [Anima comparison](#percentile-filtered-teacher-edits), based on [SEGA](https://arxiv.org/html/2301.12247) |
-| 13 | Extra training exposure at the middle four denoising positions | 16.28 | 6.21 | [Anima comparison](#denoising-position-exposure), informed by [Perception Prioritized Training](https://arxiv.org/abs/2204.00227) and [Min-SNR](https://arxiv.org/abs/2303.09556) |
-| 14 | Train on adapter rollout states, 0.45 floor | 11.61 | 5.49 | Local Anima experiment, related [rollout protocol #246](https://github.com/HyperGAN/particle-sliders/pull/246) |
-| — | Four qualified costume teachers and two soft-foreground contexts | Unmeasured | 10.84 | [Matched renders and diagnostic scores](#costume-teachers-at-update-192) |
-| — | Soft foreground weighting with subject APG | Unmeasured | 8.03 | [Matched renders and per-case scores](#adaptive-projected-guidance-on-the-subject) |
-
-The prompt-only control scored **18.32** at shared early strength. Its constant result is unmeasured. The 35% cue blend gained **3.84 points** at constant strength over the default training recipe. It improved seven of eight matched cases at constant strength and one of eight at early strength. The 85% cue blend scored lower at both shared strengths. Each technique used one initialization seed. [All runs and per-case scores](final-boss-raw192/results.json)
-
-Stronger Boss distinction accounts for **3.52** of the cue blend’s constant-strength gain. At early strength, paired contexts and whole-image projection improved readability, while weaker Boss distinction cost them **4.61** and **8.02** points respectively. These contributions compare each variant to soft foreground weighting. For each matched case, the calculation multiplies each factor’s change by the other factor’s average across the two renders, then averages across cases. [Per-case Boss and readability scores](final-boss-raw192/results.json)
+| 1 | Soft foreground weighting, 0.45 background floor | **6.63** | 1.25 | [Anima PR #31](https://github.com/HyperGAN/anima-particle-sliders/pull/31) |
+| 2 | Soft foreground weighting with full-strength Boss cues | 5.57 | **2.10** | [Teacher recipe and source](final-boss-raw192/README.md#source-for-the-trained-targets) |
+| 3 | Soft foreground weighting plus 35% stronger Boss cues | 5.16 | 2.06 | [Anima PR #31](https://github.com/HyperGAN/anima-particle-sliders/pull/31), [teacher mixing #278](https://github.com/HyperGAN/particle-sliders/pull/278) |
+| 4 | Stronger cues at the first three teacher positions | 4.35 | 1.49 | [Teacher timing adaptation and matched renders](#early-cues-at-update-192) |
+| 5 | Background-only scene and lighting projection, 0.45 floor | 4.03 | 1.71 | [Nuisance deflation #254](https://github.com/HyperGAN/particle-sliders/pull/254) |
+| 6 | Paired scene and lighting contexts, 50% blend, 0.45 floor | 3.63 | 0.57 | [Concept Sliders](https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/05660.pdf), [contrast isolation #216](https://github.com/HyperGAN/particle-sliders/pull/216) |
+| 7 | Stronger cues at the final three teacher positions | 3.41 | 0.36 | [Teacher timing adaptation and matched renders](#late-cues-at-update-192) |
+| 8 | Paired scene and lighting contexts, 50% blend, 0.65 floor | 3.27 | 0.50 | [Concept Sliders](https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/05660.pdf), [contrast isolation #216](https://github.com/HyperGAN/particle-sliders/pull/216) |
+| 9 | Percentile-filtered blend at the first three teacher positions | 3.06 | 0.28 | [Anima comparison](#percentile-filtered-teacher-edits), [SEGA](https://arxiv.org/html/2301.12247) |
+| 10 | Prompt-only control | 3.00 | Unmeasured | [Training and replay source](final-boss-raw192/README.md#source-for-the-trained-targets) |
+| 11 | Stronger Boss cues contrasted with matched ordinary attire | 2.83 | Unmeasured | [Anima comparison](#matched-ordinary-attire), [Concept Sliders](https://arxiv.org/html/2311.12092v2#S4) |
+| 12 | Soft foreground weighting plus a 35% blend of two averaged cues | 2.74 | 0.23 | [Anima comparison](#two-cue-average-at-update-192), [cue diversification #313](https://github.com/HyperGAN/particle-sliders/pull/313) |
+| 13 | Previously saved soft-weighted adapter | 2.57 | 0.63 | [All runs and per-case scores](final-boss-raw192/results.json) |
+| 14 | Percentile-filtered blend at all ten teacher positions | 2.16 | Unmeasured | [Anima comparison](#percentile-filtered-teacher-edits), [SEGA](https://arxiv.org/html/2301.12247) |
+| 15 | Extra training exposure at the middle four denoising positions | 2.10 | 0.09 | [Anima comparison](#denoising-position-exposure), [Perception Prioritized Training](https://arxiv.org/abs/2204.00227) |
+| 16 | Whole-image scene and lighting projection, 0.65 floor | 2.01 | 1.26 | [Nuisance deflation #254](https://github.com/HyperGAN/particle-sliders/pull/254) |
+| 17 | In-scene costume cue blend, 35% | 1.89 | 1.13 | [Training comparison and renders](#in-scene-costume-prompts) |
+| 18 | Train on adapter rollout states, 0.45 floor | 0.82 | 0.06 | [Rollout protocol #246](https://github.com/HyperGAN/particle-sliders/pull/246) |
+| — | Four qualified costume teachers and two soft-foreground contexts | Unmeasured | 0.70 | [Matched renders and diagnostic scores](#costume-teachers-at-update-192) |
+| — | Soft foreground weighting with subject APG | Unmeasured | 0.16 | [Matched renders and per-case scores](#adaptive-projected-guidance-on-the-subject) |
 
 [Shared early samples](final-boss-raw192/shared-early.jpg) · [Shared constant samples](final-boss-raw192/shared-constant.jpg) · [Training and replay source](final-boss-raw192/README.md#source-for-the-trained-targets)
+
+## Best saved replays
+
+Each recipe uses its highest-scoring saved setting across the eight development cases. Some recipes have only been rendered at the shared strengths. At their best measured settings, the prompt-only control scored **10.71** at constant α 1.33125 and the 0.45-floor paired-context recipe scored **10.44** at constant α 1.4125. The 0.45-floor soft foreground recipe led at **14.72** with early α 0.95. [Both shared-strength rankings and all per-recipe replay scores](final-boss-raw192/boss-distinction-results.json)
+
+The experiment notes below report the original score and matched diagnostics from their recorded runs. [Original results](final-boss-raw192/results.json)
 
 ## Where the leading recipes miss
 
@@ -281,10 +287,10 @@ The archive check moved the late share to **2.95%**, with exact exterior targets
 
 ## Comparing a new run
 
-Compare the saved RAW checkpoint with the incumbent on the same prompts, seeds, sampler, and shared strengths. At 192 updates the early score to beat is **25.66**. The 35% cue blend sets the constant-strength comparison at **16.90**.
+Compare the saved RAW checkpoint with the incumbent on the same prompts, seeds, sampler, and shared strengths. At 192 updates the early score to beat is **6.63**. The full-strength Boss cue recipe sets the constant-strength comparison at **2.10**.
 
 When a training recipe wins at shared early strength, choose its alpha and schedule using the development cases. Freeze that setting and the incumbent's published setting before opening eight fresh confirmation cases. Render both recipes at shared early strength on those same cases as well. Report the two comparisons together. A new default needs a qualified win against the incumbent at their frozen tuned settings on the confirmation panel.
 
-Jev measures Boss character distinction and visible image damage separately. For each case the score is `max(0, Boss_ON − Boss_OFF) × (1 − image_damage)²`. The leaderboard averages the per-case scores on a 0–100 scale. Catastrophic structural failures and unmeasured rows carry separate statuses. [Jev rubrics](final-boss-raw192/rubrics.json)
+Jev measures Boss character distinction and visible image damage separately on a 0–1 scale. Multiply positive matched Boss gain by `Boss_ON³ × (1 − image_damage)²`. Above the minor-damage anchor of 1/3, also multiply by `((1 − image_damage) / (1 − 1/3))³`. Average the eight case scores equally and multiply by 100 for display. Catastrophic structural failures and cases with missing measurements carry separate statuses. [Scoring code](../release_tools/final_boss_scoring.py) · [Jev rubrics](final-boss-raw192/rubrics.json)
 
 The Particle Sliders CPU study ranked paired contexts first at early strength and background-only projection first at constant strength. Both winners differ from the native Anima rankings above. Use matched native renders to rank changes to the training recipe. [Particle Sliders PR #321](https://github.com/HyperGAN/particle-sliders/pull/321)
