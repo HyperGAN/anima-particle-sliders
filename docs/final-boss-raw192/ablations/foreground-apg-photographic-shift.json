@@ -286,6 +286,95 @@
         ],
         "mean_photographic_shift": 0.29000000000000004
       }
+    },
+    "192": {
+      "soft-floor45": {
+        "cases": [
+          {
+            "case": "archivist",
+            "off_sha256": "356413c7d85b7405c8ad15d520ba188fdab64b1805d5140758f61221d704bbd1",
+            "on_sha256": "96065c8f65c2a3e9db860a5a79316f8b1f7f6e4dba6e8e3c76b8a37644cb40b6",
+            "photographic_shift": 0.38
+          },
+          {
+            "case": "bookkeeper",
+            "off_sha256": "e891f6ea6fbdf921858d1e349fbe4f08c2df9b89045363fb55cf4dafa3064fa4",
+            "on_sha256": "cea99d61e1648ae9a0e1cf5a9d29f604c7d4537d6fbc137961424732693a8eae",
+            "photographic_shift": 0.36
+          },
+          {
+            "case": "botanist",
+            "off_sha256": "21af6f3fbc2798373e25ef77b57d3aa11de44ef6536fbfa7cd41298ebbe4d606",
+            "on_sha256": "e0450d087f797b6195073d250e5efdc1a4b9efd8bb55d12d26f984c9e1ce0880",
+            "photographic_shift": 0.26
+          },
+          {
+            "case": "seamstress",
+            "off_sha256": "4a53b469861b66c0e414f89dd0774224b71d13d630d789f89bba80799bb55eac",
+            "on_sha256": "a8c895cf704bad026e71af7deff6c9c55d1ffb5da1de81d12db30a4af12850d9",
+            "photographic_shift": 0.24
+          }
+        ],
+        "mean_photographic_shift": 0.31
+      },
+      "strong-boss-45-mix35": {
+        "cases": [
+          {
+            "case": "archivist",
+            "off_sha256": "356413c7d85b7405c8ad15d520ba188fdab64b1805d5140758f61221d704bbd1",
+            "on_sha256": "0646dce2742677ebca019921fe47b73d86b654d7f450396b04cfa1622aabb8b1",
+            "photographic_shift": 0.47
+          },
+          {
+            "case": "bookkeeper",
+            "off_sha256": "e891f6ea6fbdf921858d1e349fbe4f08c2df9b89045363fb55cf4dafa3064fa4",
+            "on_sha256": "6686b1f30a64fb964836e63b7292fd278e8df5e13801d52f3f7e147b5796c6e9",
+            "photographic_shift": 0.34
+          },
+          {
+            "case": "botanist",
+            "off_sha256": "21af6f3fbc2798373e25ef77b57d3aa11de44ef6536fbfa7cd41298ebbe4d606",
+            "on_sha256": "ea1268eafcf7bf5fd1ca94edab11c46dd3d4387da7d11fcde09a6fa99e086e18",
+            "photographic_shift": 0.28
+          },
+          {
+            "case": "seamstress",
+            "off_sha256": "4a53b469861b66c0e414f89dd0774224b71d13d630d789f89bba80799bb55eac",
+            "on_sha256": "e203c4452bfea05be57482fb070e0fafce8c2eb3edfda4f63749308ff117d06e",
+            "photographic_shift": 0.24
+          }
+        ],
+        "mean_photographic_shift": 0.3325
+      },
+      "foreground-apg-floor45": {
+        "cases": [
+          {
+            "case": "archivist",
+            "off_sha256": "356413c7d85b7405c8ad15d520ba188fdab64b1805d5140758f61221d704bbd1",
+            "on_sha256": "e435dda06cbee966cb072995291f78b75327c3f283b57d4be5e355d459335744",
+            "photographic_shift": 0.4
+          },
+          {
+            "case": "bookkeeper",
+            "off_sha256": "e891f6ea6fbdf921858d1e349fbe4f08c2df9b89045363fb55cf4dafa3064fa4",
+            "on_sha256": "230a03d5986010b4a2d6e7ccb69d728961bff8a7d8272d33bdb5a80b8eab800e",
+            "photographic_shift": 0.3
+          },
+          {
+            "case": "botanist",
+            "off_sha256": "21af6f3fbc2798373e25ef77b57d3aa11de44ef6536fbfa7cd41298ebbe4d606",
+            "on_sha256": "488621fd77dedf68dc00ffdbfd438559f9b9d51c3cc21bb243ac5159bbe7842e",
+            "photographic_shift": 0.4
+          },
+          {
+            "case": "seamstress",
+            "off_sha256": "4a53b469861b66c0e414f89dd0774224b71d13d630d789f89bba80799bb55eac",
+            "on_sha256": "ef77d68768114d67ff5b64da3c966287340ba928a082555f34d37feb58e5b692",
+            "photographic_shift": 0.2
+          }
+        ],
+        "mean_photographic_shift": 0.325
+      }
     }
   }
 }

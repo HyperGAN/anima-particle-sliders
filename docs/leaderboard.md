@@ -8,7 +8,7 @@
 
 **What earns a high score.** The slider should make the subject visibly read as a Final Boss while keeping the image coherent. An edit with zero Boss gain scores zero. Visible damage lowers the score even when the Boss effect is strong. [Scoring and comparison protocol](#comparing-a-new-run) · [Jev rubrics](final-boss-raw192/rubrics.json)
 
-**Latest challengers.** Matched ordinary attire scored **19.86** on the eight-case RAW192 leaderboard, the all-step percentile filter scored **19.52**, and the early-position filter scored **17.30**. Subject APG reached update 144 and scored **4.79** on four cases. The scheduled frozen-teacher fit is running. [Percentile filtering](#percentile-filtered-teacher-edits) · [Subject APG](#adaptive-projected-guidance-on-the-subject) · [Frozen-teacher trajectory](#scheduled-frozen-teacher-trajectory)
+**Latest challengers.** Matched ordinary attire scored **19.86** on the eight-case RAW192 leaderboard, the all-step percentile filter scored **19.52**, and the early-position filter scored **17.30**. Subject APG scored **8.03** at shared constant strength. Its shared early aggregate is unmeasured. The scheduled frozen-teacher fit and middle-position exposure fit are running. [Percentile filtering](#percentile-filtered-teacher-edits) · [Subject APG](#adaptive-projected-guidance-on-the-subject) · [Frozen-teacher trajectory](#scheduled-frozen-teacher-trajectory)
 
 ## Training techniques
 
@@ -30,6 +30,7 @@ The ranking uses the best measured variant of each technique after 192 updates w
 | 12 | Percentile-filtered blend at the first three teacher positions | 17.30 | 7.74 | [Anima comparison](#percentile-filtered-teacher-edits), based on [SEGA](https://arxiv.org/html/2301.12247) |
 | 13 | Train on adapter rollout states, 0.45 floor | 11.61 | 5.49 | Local Anima experiment, related [rollout protocol #246](https://github.com/HyperGAN/particle-sliders/pull/246) |
 | — | Four qualified costume teachers and two soft-foreground contexts | Unmeasured | 10.84 | [Matched renders and diagnostic scores](#costume-teachers-at-update-192) |
+| — | Soft foreground weighting with subject APG | Unmeasured | 8.03 | [Matched renders and per-case scores](#adaptive-projected-guidance-on-the-subject) |
 
 The prompt-only control scored **18.32** at shared early strength. Its constant result is unmeasured. The 35% cue blend gained **3.84 points** at constant strength over the default training recipe. It improved seven of eight matched cases at constant strength and one of eight at early strength. The 85% cue blend scored lower at both shared strengths. Each technique used one initialization seed. [All runs and per-case scores](final-boss-raw192/results.json)
 
@@ -139,7 +140,7 @@ Across the 120 archived training fields, **25.5%** of the fixed blend's added cu
 
 Diffusion studies found that the training signal from different noise levels can emphasize different visual concepts or pull optimization in different directions. This Anima adaptation tests whether spending more of the same training budget at certain denoising positions changes the finished slider. The opening positions test larger character changes. The middle positions test whether costume and silhouette can become more distinct with less damage. [Perception Prioritized Training](https://arxiv.org/abs/2204.00227) · [Min-SNR Training](https://arxiv.org/abs/2303.09556)
 
-Both arms retain all 120 soft-foreground teacher fields and repeat 48 of them once. The opening arm repeats zero-indexed positions 0–3. The middle arm repeats positions 3–6. Each arm uses the stock balanced shuffle, 192 updates, and 384 row presentations per optimizer side. The original and repeated tensors matched the source bit for bit. The sampler replay drew every row in both arms, with identical row ID sequences across arms. Training is queued behind the in-scene comparison. [Cache and sampler verification](final-boss-raw192/ablations/phase-exposure-protocol.json) · [Reproduction commands](final-boss-raw192/README.md#denoising-position-exposure)
+Both arms retain all 120 soft-foreground teacher fields and repeat 48 of them once. The opening arm repeats zero-indexed positions 0–3. The middle arm repeats positions 3–6. Each arm uses the stock balanced shuffle, 192 updates, and 384 row presentations per optimizer side. The original and repeated tensors matched the source bit for bit. The sampler replay drew every row in both arms, with identical row ID sequences across arms. The middle arm started on GPU 1 after the APG evaluation completed. [Cache and sampler verification](final-boss-raw192/ablations/phase-exposure-protocol.json) · [Reproduction commands](final-boss-raw192/README.md#denoising-position-exposure)
 
 ## Regional stronger cues
 
@@ -213,7 +214,11 @@ At update 96, APG passed all four structural checks and scored **2.25** against 
 
 At update 144, APG passed all four structural checks and scored **4.79** versus **7.75** for soft foreground weighting and **8.43** for the stronger cues. It scored lower than soft foreground weighting on all four cases. Greater visible damage accounted for **1.83** points of the gap and weaker Boss distinction for **1.13**. The Bookkeeper render added broad white borders and had the largest score drop. [Matched RAW144 renders](final-boss-raw192/ablations/foreground-apg-raw144-matched.jpg) · [Per-case scores](final-boss-raw192/ablations/foreground-apg-raw144-scores.json)
 
-An auxiliary Jev check measured the shift toward photographic rendering on a 0–1 scale. The APG mean dropped from **0.76** at update 48 to **0.38** at update 96 and **0.29** at update 144. Soft foreground weighting averaged **0.27**, **0.27**, and **0.24**. Botanist remained the clearest photographic APG case at update 96 (**0.71**). [Question, matched image digests, and per-case judgments](final-boss-raw192/ablations/foreground-apg-photographic-shift.json)
+At RAW192, APG passed all four screening checks and scored **8.72** versus **19.16** for soft foreground weighting and **21.41** for the stronger cues. Mean Boss distinction gain was **+0.163** versus **+0.368** for soft foreground weighting. Weaker Boss distinction accounted for **10.37** of the **10.44** points lost. [Matched RAW192 screening renders](final-boss-raw192/ablations/foreground-apg-raw192-screen-matched.jpg) · [Per-case scores](final-boss-raw192/ablations/foreground-apg-raw192-screen-scores.json)
+
+On the eight-case panel, APG passed all structural checks at shared constant strength and scored **8.03** against **16.90** for the stronger cues. Weaker Boss distinction cost **6.05** points and additional damage cost **2.82**. Smith and Violinist improved. At shared early strength Smith's structural decision was unmeasured, so the aggregate remains unmeasured. The evaluator's first attempt looked for the checkpoint in the baseline directory. The recovered evaluation used the original saved RAW192 weights. [Eight matched constant-strength renders](final-boss-raw192/ablations/foreground-apg-raw192-constant-matched.jpg) · [Both strengths and recovery evidence](final-boss-raw192/ablations/foreground-apg-raw192-scores.json)
+
+An auxiliary Jev check measured the shift toward photographic rendering on a 0–1 scale. The APG mean dropped from **0.76** at update 48 to **0.38** at update 96 and **0.29** at update 144. At RAW192 it measured **0.33**, close to soft foreground weighting at **0.31** and stronger cues at **0.33**. [Question, matched image digests, and per-case judgments](final-boss-raw192/ablations/foreground-apg-photographic-shift.json)
 
 ### Preserve the baseline component when projecting added cues
 
