@@ -28,8 +28,10 @@ GROUNDED_WAVELET = "scene-grounded-wavelet35"
 GROUNDED_RECIPES = (*GROUNDED_COSTUME, GROUNDED_WAVELET)
 WAVELET_RECIPES = (WAVELET_EXTERIOR, GROUNDED_WAVELET)
 SPLIT_CUES = ("role-cue35", "crest-cue35")
+GUIDED_TEACHER = "guided-teacher-floor45"
 PERCENTILE_POSITIONS = {"sega-early35": (0, 1, 2), "sega-all35": tuple(range(STEPS))}
 RECIPES = {"prompt-only": (1.0, 0.0), "soft-floor45": (0.45, 0.0),
+           GUIDED_TEACHER: (0.45, 0.0),
            "strong-boss-45-mix35": (0.45, 0.35), "strong-cues-early3": (0.45, 0.35),
            "strong-cues-late3": (0.45, 0.35), "diverse-mean35": (0.45, 0.35),
            "matched-attire35": (0.45, 0.35), WAVELET_EXTERIOR: (0.45, 0.35),
@@ -125,6 +127,13 @@ def row_metadata(row):
 
 def teacher_rows(fixture, recipe):
     rows = json.loads(fixture.read_text())["pairs"]
+    if recipe == GUIDED_TEACHER:
+        rollout = json.loads((fixture.parent / "ablations/guided-teacher-trajectory-plan.json").read_text())
+        if (rollout["recipe"] != recipe or rollout["control"] != "soft-floor45"
+                or len(rollout["sigmas"]) != STEPS + 1 or len(rollout["gains"]) != STEPS
+                or not all(0 <= gain <= 1 for gain in rollout["gains"])):
+            raise ValueError("The frozen teacher rollout requires its registered ten-position schedule")
+        return [row | {"guided_rollout": rollout} for row in rows]
     if recipe in SPLIT_CUES:
         return [row | {"explicit_positive": split_teacher_cues(row["positive"], row["explicit_positive"])[recipe]}
                 for row in rows]
@@ -191,6 +200,17 @@ def final_target(runtime, latent, timestep, neutral, positive, weight, cue_mix, 
     return regional_target(neutral, baseline, target, matte, radius)[0]
 
 
+def guided_scheduler(runtime, rollout):
+    scheduler = runtime.scheduler(STEPS)
+    if scheduler.sigmas.tolist() != rollout["sigmas"]:
+        raise ValueError("Native sigmas differ from the registered teacher rollout")
+    return scheduler
+
+
+def guided_step(runtime, scheduler, timestep, latent, neutral, target, gain):
+    return runtime.step(scheduler, neutral.lerp(target, gain), timestep, latent)
+
+
 def capture_row(runtime, row, matte_path, recipe):
     floor, cue_mix = RECIPES[recipe]
     cue_schedule = row["grounded_schedule"] if recipe in GROUNDED_RECIPES else (cue_mix,) * STEPS
@@ -204,7 +224,9 @@ def capture_row(runtime, row, matte_path, recipe):
     regional = (matte, REGIONAL_RADII[recipe]) if recipe in REGIONAL_RADII else None
     matched_attire = recipe in MATCHED_ATTIRE
     wavelet_matte = matte if recipe in WAVELET_RECIPES else None
-    n_scheduler, p_scheduler = runtime.scheduler(STEPS), runtime.scheduler(STEPS)
+    rollout = row["guided_rollout"] if recipe == GUIDED_TEACHER else None
+    n_scheduler = runtime.scheduler(STEPS)
+    p_scheduler = guided_scheduler(runtime, rollout) if rollout else runtime.scheduler(STEPS)
     records = {"neutral": [], "positive": []}
     for position, timestep in enumerate(n_scheduler.timesteps):
         vn = runtime.predict(n, timestep, neutral)
@@ -212,7 +234,8 @@ def capture_row(runtime, row, matte_path, recipe):
         vnp, vpp = ((vn, vp) if position == 0 else
                     (runtime.predict(p, timestep, neutral), runtime.predict(p, timestep, positive)))
         n_next = runtime.step(n_scheduler, vn, timestep, n)
-        p_next = runtime.step(p_scheduler, vnp + (vpp - vnp), timestep, p)
+        if rollout is None:
+            p_next = runtime.step(p_scheduler, vnp + (vpp - vnp), timestep, p)
         for track, latent, base, positive_field in (("neutral", n, vn, vp), ("positive", p, vnp, vpp)):
             active = cues if position in cue_positions else ()
             percentile_active = None if percentile_positions is None else position in percentile_positions
@@ -222,6 +245,8 @@ def capture_row(runtime, row, matte_path, recipe):
             records[track].append(dict(position=position, timestep=float(timestep), trajectory=track,
                                        latent=latent.cpu().clone(), neutral=base.cpu().clone(),
                                        positive=target.cpu().clone()))
+            if rollout is not None and track == "positive":
+                p_next = guided_step(runtime, p_scheduler, timestep, latent, base, target, rollout["gains"][position])
         n, p = n_next, p_next
     return dict(row=row_metadata(row), seed=row["seed"], embedding=neutral.cpu(),
                 positive_embedding=positive.cpu(), records=records["neutral"] + records["positive"])
@@ -229,7 +254,7 @@ def capture_row(runtime, row, matte_path, recipe):
 
 @torch.no_grad()
 def capture(runtime, recipe, output, fixture=FIXTURE):
-    """Capture both frozen paths and replace only the positive response fields."""
+    """Capture two frozen teacher paths and their supervised response fields."""
     fixture = Path(fixture)
     output = Path(output)
     rows = teacher_rows(fixture, recipe)
@@ -254,6 +279,22 @@ def capture(runtime, recipe, output, fixture=FIXTURE):
     return TargetCache(output, verify=True)
 
 
+def verify_guided_trajectory(runtime, cache, shard_index, rollout, row):
+    scheduler = guided_scheduler(runtime, rollout)
+    latent = runtime.noise(row["seed"], RESOLUTION, RESOLUTION)
+    first = shard_index * 2 * STEPS + STEPS
+    for position, timestep in enumerate(scheduler.timesteps):
+        record = cache[first + position]
+        if (record["row"]["id"] != row["id"] or record["trajectory"] != "positive"
+                or record["position"] != position or record["timestep"] != float(timestep)
+                or not torch.equal(latent.cpu(), record["latent"])):
+            return False
+        latent = guided_step(runtime, scheduler, timestep, latent,
+                             record["neutral"].to(runtime.device), record["positive"].to(runtime.device),
+                             rollout["gains"][position])
+    return True
+
+
 @torch.no_grad()
 def verify_native(runtime, cache, request, fixture=FIXTURE):
     """Recheck four captured fields through the frozen native teacher."""
@@ -271,6 +312,11 @@ def verify_native(runtime, cache, request, fixture=FIXTURE):
     matched_attire = recipe in MATCHED_ATTIRE
     indices = (1, 19, 42, 117) if recipe in CUE_POSITIONS or percentile_positions else (3, 19, 46, 117)
     with runtime.mixer.scales({}):
+        if recipe == GUIDED_TEACHER and (identity["manifest_sha256"] != digest(list(rows.values()))
+                or len(cache) != len(rows) * 2 * STEPS or not all(
+                    verify_guided_trajectory(runtime, cache, index, row["guided_rollout"], row)
+                    for index, row in enumerate(rows.values()))):
+            return False
         for index in indices:
             record = cache[index]
             row = rows[record["row"]["id"]]

@@ -180,6 +180,10 @@ The 35% stronger cue adds two kinds of signal to the original six prompts. Its t
 
 The 35% cue blend that kept only components with matching signs across its two alternate cue edits stopped at update 48. The bookkeeper render collapsed to a texture and scored 0.83 on Jev’s unreadable-image check. Training stopped before update 49. [Saved RAW48 render](final-boss-raw192/ablations/diverse-consensus35-raw48-bookkeeper.png) · [Consensus research](https://github.com/HyperGAN/particle-sliders/pull/315)
 
+## Scheduled frozen-teacher trajectory
+
+Jensen and Sadat cached trajectories generated with classifier-free guidance to reduce the gap between training and inference. This Anima adaptation makes the second training trajectory follow the frozen teacher's 0.45-floor foreground edit at the shared early schedule. It retains the original neutral trajectory and computes the same full teacher target at every visited state. The fit uses the same 120 records, prompts, seeds, and stock ParticleGAN setup. The earlier adapter-rollout arm used a trained adapter to generate its states and scored 11.61 at RAW192. The frozen-teacher recipe awaits native evaluation. [Paper and trajectory algorithm](https://arxiv.org/html/2503.07274v1#S4.SS1) · [Pinned schedule and capture](final-boss-raw192/README.md#scheduled-frozen-teacher-trajectory)
+
 ## Comparing a new run
 
 Compare the saved RAW checkpoint with the incumbent on the same prompts, seeds, sampler, and shared strengths. At 192 updates the early score to beat is **25.66**. The 35% cue blend sets the constant-strength comparison at **16.90**. Report tuned strength and its confirmation panel alongside the shared-strength comparison.

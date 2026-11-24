@@ -147,3 +147,12 @@ for recipe in role-cue35 crest-cue35; do
     --model "$ANIMA_MODEL" --out "targets/$recipe"
 done
 ```
+
+## Scheduled frozen-teacher trajectory
+
+The guided recipe starts the second trajectory at the same seed noise and runs the frozen Anima teacher at each visited state. It advances with neutral velocity plus the pinned early-schedule gain times the soft-foreground teacher contrast. Both trajectories store the full soft-foreground target. Native admission replays every guided path from noise and independently reconstructs four teacher fields. [Trajectory collection method, §4.1](https://arxiv.org/html/2503.07274v1#S4.SS1) · [Exact sigmas and gains](ablations/guided-teacher-trajectory-plan.json) · [Capture source](../../release_tools/final_boss_targets.py)
+
+```sh
+python -m release_tools.final_boss_targets guided-teacher-floor45 \
+  --model "$ANIMA_MODEL" --out targets/guided-teacher-floor45
+```

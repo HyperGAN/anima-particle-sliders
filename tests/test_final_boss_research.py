@@ -8,7 +8,8 @@ import torch
 
 from release_tools.final_boss_cues import ARMOR_CREST_START, ROLE_AFTER_COSTUME, ROLE_BEFORE_COSTUME
 from release_tools.final_boss_targets import (
-    GROUNDED_COSTUME, GROUNDED_WAVELET, RECIPES, STEPS, capture_row, edited_target, final_target, teacher_rows,
+    GROUNDED_COSTUME, GROUNDED_WAVELET, GUIDED_TEACHER, RECIPES, STEPS, capture_row, edited_target, final_target,
+    subject_matte, teacher_rows, verify_guided_trajectory,
 )
 from release_tools.final_boss_wavelet import low_band
 
@@ -109,6 +110,64 @@ def test_split_cues_keep_the_original_teacher_text_and_each_recorded_insertion()
         assert crest == f"{subject} {introduced_crest} Background: {background}"
         assert role.replace(ROLE_BEFORE_COSTUME + " ", "").replace(ROLE_AFTER_COSTUME + " ", "") == anchor["positive"]
         assert role.replace(ROLE_AFTER_COSTUME, f"{introduced_crest} {ROLE_AFTER_COSTUME}") == anchor["explicit_positive"]
+
+
+def test_guided_teacher_changes_only_the_positive_path_and_preserves_full_targets():
+    fixture = STUDY / "training-pairs.json"
+    row = teacher_rows(fixture, GUIDED_TEACHER)[0]
+    rollout = row["guided_rollout"]
+    results = json.loads((STUDY / "results.json").read_text())
+    reference = results["methods"]["soft-floor45"]["fixed_strength"]
+    assert (rollout["profile"], rollout["alpha"], rollout["gains"]) == (
+        reference["profile"], reference["alpha"], reference["gains"])
+    assert rollout["sigmas"] == results["sigmas"]
+
+    class Runtime:
+        device = "cpu"
+
+        def encode(self, prompt):
+            return torch.tensor(float(prompt == row["positive"]))
+
+        def noise(self, seed, width, height):
+            return torch.full((1, 1, 1, 4, 4), seed % 7 / 5.)
+
+        def scheduler(self, steps):
+            return SimpleNamespace(sigmas=torch.tensor(rollout["sigmas"]), timesteps=torch.arange(steps))
+
+        def predict(self, latent, timestep, embedding):
+            return latent * 0.125 + embedding * (torch.ones_like(latent) + latent * 0.06)
+
+        def step(self, scheduler, velocity, timestep, latent):
+            return latent - velocity * (scheduler.sigmas[timestep] - scheduler.sigmas[timestep + 1])
+
+    runtime = Runtime()
+    matte = STUDY / row["matte"]["file"]
+    baseline = capture_row(runtime, row, matte, "soft-floor45")
+    guided = capture_row(runtime, row, matte, GUIDED_TEACHER)
+    assert baseline["row"] == guided["row"] and baseline["seed"] == guided["seed"]
+    for original, new in zip(baseline["records"], guided["records"], strict=True):
+        position = new["position"]
+        assert new["trajectory"] == original["trajectory"]
+        assert position == original["position"] and new["timestep"] == original["timestep"]
+        if new["trajectory"] == "neutral" or position == 0:
+            assert all(torch.equal(new[key], original[key]) for key in ("latent", "neutral", "positive"))
+        else:
+            assert not torch.equal(new["latent"], original["latent"])
+            positive = runtime.predict(new["latent"], position, 1.)
+            weight = 0.45 + 0.55 * subject_matte(matte, new["latent"].shape[-2:], runtime.device)
+            contrast = positive - new["neutral"]
+            masked = contrast * weight
+            assert torch.equal(new["neutral"], runtime.predict(new["latent"], position, 0.))
+            torch.testing.assert_close(new["positive"], new["neutral"] + masked * (contrast.norm() / masked.norm()))
+    records = [record | {"row": guided["row"]} for record in guided["records"]]
+    assert verify_guided_trajectory(runtime, records, 0, rollout, row)
+    records[-1]["latent"] = baseline["records"][-1]["latent"]
+    assert not verify_guided_trajectory(runtime, records, 0, rollout, row)
+    with pytest.raises(ValueError, match="Native sigmas differ"):
+        schedule = runtime.scheduler(STEPS)
+        schedule.sigmas[1] -= 0.01
+        invalid_runtime = SimpleNamespace(scheduler=lambda steps: schedule)
+        verify_guided_trajectory(invalid_runtime, records, 0, rollout, row)
 
 
 def test_new_cue_recipes_reuse_trajectories_and_apply_the_declared_contrast():
