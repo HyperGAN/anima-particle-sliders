@@ -10,6 +10,12 @@
 
 **Overnight challenger.** Paired scene and lighting contexts at a 0.45 floor finished at 00:15 UTC on November 24 and reached **10.44** at constant α 1.4125. At shared early strength, it scored **3.63**. Middle exposure later finished at **2.10** shared early and **0.09** shared constant. [Saved replay rankings](final-boss-raw192/boss-distinction-results.json) · [Middle exposure](#denoising-position-exposure)
 
+## Shared-teacher retraining
+
+The merged Final Boss selector produced five qualified prompt pairs. One native cache freezes 100 fields across both trajectories and all ten denoising positions. Each fresh run uses that same cache. The sampling trials select or repeat its original fields with their values intact.
+
+The comparison includes stock sampling, extra exposure at the opening or middle four positions, neutral versus alternating trajectories, and uniform versus high-divergence positions. Older recipes that rewrite the teacher responses or recapture the states remain in the original comparison. At 192 updates, all seven new recipes use the same eight evaluation cases and the two shared strengths below. [Selection method](../VIBE.md#named-portfolios) · [Frozen-teacher protocol and historical coverage](final-boss-raw192/shared-teacher-protocol.json)
+
 ## Training techniques
 
 Training ranks compare RAW192 checkpoints from stock ParticleGAN on the same eight development cases at early α 2/3. The constant α 0.6375 column scores those checkpoints at a fixed gain through denoising. Each recipe used one initialization seed.

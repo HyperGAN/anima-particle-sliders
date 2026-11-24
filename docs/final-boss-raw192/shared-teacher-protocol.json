@@ -1,0 +1,171 @@
+{
+  "source_main": "aaaf41adc02b7d1564c601864ea392b949389a71",
+  "selection": {
+    "manifest_sha256": "6a527d50d6bb2fd6c972b5349d44c3c47480731953b72ae368884655f1de84d5",
+    "teacher_count": 5,
+    "native_fields": 100,
+    "distinct_finish_gain": 0.163056944444,
+    "frozen_cache_sha256": "03a5ad7c0306e39df0db4f40b93c89d9e3266fbc8f8ff504bbf7f4fb83c31557",
+    "base_model": {
+      "model": "circlestone-labs/Anima:turbo-v1.1",
+      "sha256": "eb5520f293d42a19df9242d8d442d5d2068e5121620814418c2b50a97de0552f",
+      "identity_schema": "portable-model-v1",
+      "environment_sha256": "55ac97305e688c56d4a2908243b020e999cf101a05b1cf7e5a3e2c48d4a4d7ba",
+      "runtime_sha256": "0b0dfc97ba76a99ed3f5313695e89e5802ece8e1db4470443a9705692ae579c3"
+    }
+  },
+  "training": {
+    "checkpoint_updates": 192,
+    "batch_size": 2,
+    "seed": 1,
+    "weight_ema": null,
+    "game": "stock EMPF",
+    "same_field_rule": "An identical frozen response may be selected, repeated or omitted by a sampling recipe. All retained latent, neutral, positive and embedding values must be byte-equivalent to source."
+  },
+  "evaluation": {
+    "development_panel": "same eight prompts and seeds as results.json",
+    "score": "final-boss-distinction-v1",
+    "strengths": [
+      [
+        "early",
+        0.6666666666666666
+      ],
+      [
+        "constant",
+        0.6375
+      ]
+    ],
+    "progress_checkpoints": [
+      48,
+      96,
+      144,
+      192
+    ]
+  },
+  "historical_coverage": {
+    "prompt-only": {
+      "disposition": "shared_target_retrain",
+      "new_arm": "shared-best-stock"
+    },
+    "incumbent": {
+      "disposition": "requires_changed_targets",
+      "new_arm": null
+    },
+    "soft-contexts-45-blend50": {
+      "disposition": "requires_changed_targets",
+      "new_arm": null
+    },
+    "soft-contexts-65-blend50": {
+      "disposition": "requires_changed_targets",
+      "new_arm": null
+    },
+    "soft-floor45": {
+      "disposition": "requires_changed_targets",
+      "new_arm": null
+    },
+    "soft-floor80": {
+      "disposition": "requires_changed_targets",
+      "new_arm": null
+    },
+    "soft-projection-65-blend50": {
+      "disposition": "requires_changed_targets",
+      "new_arm": null
+    },
+    "soft45-adapter-rollout": {
+      "disposition": "requires_changed_states",
+      "new_arm": null
+    },
+    "soft45-background-orthogonal": {
+      "disposition": "requires_changed_targets",
+      "new_arm": null
+    },
+    "strong-boss-45-dose100": {
+      "disposition": "requires_changed_targets",
+      "new_arm": null
+    },
+    "strong-boss-45-mix35": {
+      "disposition": "requires_changed_targets",
+      "new_arm": null
+    },
+    "strong-boss-65-dose100": {
+      "disposition": "requires_changed_targets",
+      "new_arm": null
+    },
+    "strong-boss-65-dose130": {
+      "disposition": "requires_changed_targets",
+      "new_arm": null
+    },
+    "strong-cues-late3": {
+      "disposition": "requires_changed_targets",
+      "new_arm": null
+    },
+    "strong-cues-early3": {
+      "disposition": "requires_changed_targets",
+      "new_arm": null
+    },
+    "diverse-mean35": {
+      "disposition": "requires_changed_targets",
+      "new_arm": null
+    },
+    "vibe-qualified4": {
+      "disposition": "requires_changed_targets",
+      "new_arm": null
+    },
+    "sega-all35": {
+      "disposition": "requires_changed_targets",
+      "new_arm": null
+    },
+    "matched-attire35": {
+      "disposition": "requires_changed_targets",
+      "new_arm": null
+    },
+    "scene-grounded35": {
+      "disposition": "requires_changed_targets",
+      "new_arm": null
+    },
+    "sega-early35": {
+      "disposition": "requires_changed_targets",
+      "new_arm": null
+    },
+    "foreground-apg-floor45": {
+      "disposition": "requires_changed_targets",
+      "new_arm": null
+    },
+    "exposure-middle4": {
+      "disposition": "shared_target_retrain",
+      "new_arm": "shared-best-middle"
+    },
+    "foreground": {
+      "disposition": "requires_changed_targets",
+      "new_arm": null
+    },
+    "foreground-rms": {
+      "disposition": "requires_changed_targets",
+      "new_arm": null
+    },
+    "neutral-trajectory": {
+      "disposition": "shared_target_retrain",
+      "new_arm": "shared-best-neutral-path"
+    },
+    "mixed-trajectory": {
+      "disposition": "shared_target_retrain",
+      "new_arm": "shared-best-mixed-path"
+    },
+    "divergence": {
+      "disposition": "shared_target_retrain",
+      "new_arm": "shared-best-divergence"
+    },
+    "uniform-steps": {
+      "disposition": "shared_target_retrain",
+      "new_arm": "shared-best-uniform-steps"
+    },
+    "consistent-cue": {
+      "disposition": "requires_changed_targets",
+      "new_arm": null
+    },
+    "exposure-opening4": {
+      "disposition": "shared_target_retrain",
+      "new_arm": "shared-best-opening"
+    }
+  }
+}
