@@ -232,6 +232,12 @@ MeanFlow represents flow over a denoising interval by an average velocity. This 
 
 Across the six archived starting states, the two-step contrast moved the target by an average of **27.4%** of the original edit norm. The recipe awaits native evaluation. [Archived opening-state audit](final-boss-raw192/ablations/two-step-teacher-opening-audit.json)
 
+## Paired contexts outside the subject
+
+Paired contexts scored **22.23** at shared early strength. Combining their archived per-case image-damage scores with the incumbent's Boss gains yields **26.91** in an arithmetic check, versus the incumbent's measured **25.66**. The paired-context recipe's own Boss gains yield **21.12** when combined with the incumbent's image-damage scores. The check motivates using paired contexts outside the subject while keeping the incumbent's subject target. The new recipe still needs a native training and render comparison. [Per-case arithmetic](final-boss-raw192/ablations/shared-early-factor-substitution.json)
+
+At each shared teacher state, the recipe takes the paired-context direction where the area-resampled matte is at most 0.01 and uses the incumbent's exterior edit norm. All **120** archived fields kept the incumbent's subject targets exactly. The exterior substitution moved the field by **6.85%** of its full edit norm on average. The largest relative change in edit norm was **3.52 × 10⁻⁸**. [Field audit](final-boss-raw192/ablations/paired-exterior-field-audit.json) · [Exact prompts](final-boss-raw192/ablations/paired-exterior-prompts.json) · [Capture and native admission](final-boss-raw192/README.md#paired-contexts-outside-the-subject)
+
 ## Comparing a new run
 
 Compare the saved RAW checkpoint with the incumbent on the same prompts, seeds, sampler, and shared strengths. At 192 updates the early score to beat is **25.66**. The 35% cue blend sets the constant-strength comparison at **16.90**. Report tuned strength and its confirmation panel alongside the shared-strength comparison.

@@ -175,6 +175,17 @@ python -m release_tools.final_boss_targets anchored-apg-early35 \
   --model "$ANIMA_MODEL" --out targets/anchored-apg-early35
 ```
 
+## Paired contexts outside the subject
+
+The `paired-exterior-floor45` recipe uses the incumbent 0.45-floor target wherever the area-resampled matte exceeds 0.01. Elsewhere it uses the contrast direction from the 0.65-floor, 50% paired-context blend, scaled to the incumbent's exterior L2 norm. The paired contrast averages the same character change under the original scene and lighting, alternate matched lighting, and an alternate matched setting at each common latent and timestep. This adapts paired concept guidance to the exterior of the target. [Concept Sliders](https://arxiv.org/html/2311.12092v2#S4) · [Spatially localized diffusion edits](https://arxiv.org/abs/2111.14818) · [Exact paired prompts](ablations/paired-exterior-prompts.json)
+
+```sh
+python -m release_tools.final_boss_targets paired-exterior-floor45 \
+  --model "$ANIMA_MODEL" --out targets/paired-exterior-floor45
+```
+
+Capture regenerates the paired contexts with the native teacher and rechecks four fields before reporting success. The archive audit used the already captured targets on both original teacher paths. It verified all 120 subject targets and the unchanged edit norm. The finished-image comparison is pending. [Field audit](ablations/paired-exterior-field-audit.json) · [Training hypothesis](../leaderboard.md#paired-contexts-outside-the-subject)
+
 ## Two-step teacher contrast
 
 At zero-indexed positions 0–2 of both original trajectories, this recipe advances the frozen neutral and Boss teachers separately from the current shared latent. It forms the sigma-weighted average of their contrasts over the two-step window. The fit still uses the original neutral velocity, foreground weighting, and instantaneous edit norm. There are 36 substituted targets across the same 120 fields. [MeanFlow paper](https://arxiv.org/abs/2505.13447) · [Two-step target source](../../release_tools/final_boss_lookahead.py)

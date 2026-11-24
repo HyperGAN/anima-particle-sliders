@@ -1,0 +1,1224 @@
+{
+  "recipe": "paired-exterior-floor45",
+  "mode": "archived teacher field geometry",
+  "device": "cpu",
+  "parents": {
+    "soft-floor45": "8e28e58e797016219e5f0a0dbbaacccdc37eafaa25468b83ef954bfb2e90e120",
+    "soft-contexts-65-blend50": "b57fbb9795f4c2976c0df33d9af2e374e70e8095e9f6ce4c74b7169500ef1270"
+  },
+  "sources": {
+    "implementation_sha256": "235fab59e7b6453074a38bfa12f960cd6793fa6473564eca69fa1cb0511b7f74",
+    "fixture_sha256": "f871c82eafe34dcbb87a825723659571911a202dbb1c03349d2ebdbf67491c0a",
+    "prompts_sha256": "3dcbe6a2e2efcfa8b74f0bad9c8843c732c875283c8e3f97e71dfd4b502edd7c"
+  },
+  "summary": {
+    "fields": 120,
+    "subject_equal": 120,
+    "max_relative_dose_error": 3.5198338688147146e-08,
+    "mean_fraction_changed": 0.06854825633622236,
+    "mean_exterior_fraction_changed": 0.20822442147959172,
+    "mean_exterior_support": 0.690185546875
+  },
+  "fields": [
+    {
+      "case": "bridge",
+      "position": 0,
+      "trajectory": "neutral",
+      "subject_exact": true,
+      "dose_ratio": 1.0000000001236373,
+      "fraction_changed": 0.10174926336168377,
+      "exterior_fraction_changed": 0.2337499654521393,
+      "exterior_support": 0.653564453125
+    },
+    {
+      "case": "bridge",
+      "position": 1,
+      "trajectory": "neutral",
+      "subject_exact": true,
+      "dose_ratio": 0.9999999997936326,
+      "fraction_changed": 0.07547510409593948,
+      "exterior_fraction_changed": 0.19457804051844885,
+      "exterior_support": 0.653564453125
+    },
+    {
+      "case": "bridge",
+      "position": 2,
+      "trajectory": "neutral",
+      "subject_exact": true,
+      "dose_ratio": 1.0000000001531784,
+      "fraction_changed": 0.08266413653535526,
+      "exterior_fraction_changed": 0.23256427609870325,
+      "exterior_support": 0.653564453125
+    },
+    {
+      "case": "bridge",
+      "position": 3,
+      "trajectory": "neutral",
+      "subject_exact": true,
+      "dose_ratio": 1.000000000260488,
+      "fraction_changed": 0.05529160544433681,
+      "exterior_fraction_changed": 0.37235447263552934,
+      "exterior_support": 0.653564453125
+    },
+    {
+      "case": "bridge",
+      "position": 4,
+      "trajectory": "neutral",
+      "subject_exact": true,
+      "dose_ratio": 1.0000000001088907,
+      "fraction_changed": 0.05434989965692126,
+      "exterior_fraction_changed": 0.398700357897911,
+      "exterior_support": 0.653564453125
+    },
+    {
+      "case": "bridge",
+      "position": 5,
+      "trajectory": "neutral",
+      "subject_exact": true,
+      "dose_ratio": 0.999999999984329,
+      "fraction_changed": 0.0708209769219896,
+      "exterior_fraction_changed": 0.39088880879916527,
+      "exterior_support": 0.653564453125
+    },
+    {
+      "case": "bridge",
+      "position": 6,
+      "trajectory": "neutral",
+      "subject_exact": true,
+      "dose_ratio": 0.9999999998549116,
+      "fraction_changed": 0.07535776952159352,
+      "exterior_fraction_changed": 0.3129537317841316,
+      "exterior_support": 0.653564453125
+    },
+    {
+      "case": "bridge",
+      "position": 7,
+      "trajectory": "neutral",
+      "subject_exact": true,
+      "dose_ratio": 1.000000000539786,
+      "fraction_changed": 0.08207091212052835,
+      "exterior_fraction_changed": 0.2339148159108707,
+      "exterior_support": 0.653564453125
+    },
+    {
+      "case": "bridge",
+      "position": 8,
+      "trajectory": "neutral",
+      "subject_exact": true,
+      "dose_ratio": 0.9999999989378414,
+      "fraction_changed": 0.07149799842091828,
+      "exterior_fraction_changed": 0.21953575394679403,
+      "exterior_support": 0.653564453125
+    },
+    {
+      "case": "bridge",
+      "position": 9,
+      "trajectory": "neutral",
+      "subject_exact": true,
+      "dose_ratio": 1.0000000037204355,
+      "fraction_changed": 0.07988927433957876,
+      "exterior_fraction_changed": 0.2467273079034081,
+      "exterior_support": 0.653564453125
+    },
+    {
+      "case": "bridge",
+      "position": 0,
+      "trajectory": "positive",
+      "subject_exact": true,
+      "dose_ratio": 1.0000000001236373,
+      "fraction_changed": 0.10174926336168377,
+      "exterior_fraction_changed": 0.2337499654521393,
+      "exterior_support": 0.653564453125
+    },
+    {
+      "case": "bridge",
+      "position": 1,
+      "trajectory": "positive",
+      "subject_exact": true,
+      "dose_ratio": 0.9999999997623349,
+      "fraction_changed": 0.08311423190142436,
+      "exterior_fraction_changed": 0.20686230818293005,
+      "exterior_support": 0.653564453125
+    },
+    {
+      "case": "bridge",
+      "position": 2,
+      "trajectory": "positive",
+      "subject_exact": true,
+      "dose_ratio": 1.0000000003144311,
+      "fraction_changed": 0.07970270455786616,
+      "exterior_fraction_changed": 0.2001588248139592,
+      "exterior_support": 0.653564453125
+    },
+    {
+      "case": "bridge",
+      "position": 3,
+      "trajectory": "positive",
+      "subject_exact": true,
+      "dose_ratio": 1.0000000000186944,
+      "fraction_changed": 0.0649111976886274,
+      "exterior_fraction_changed": 0.1517839723047642,
+      "exterior_support": 0.653564453125
+    },
+    {
+      "case": "bridge",
+      "position": 4,
+      "trajectory": "positive",
+      "subject_exact": true,
+      "dose_ratio": 1.000000000161972,
+      "fraction_changed": 0.07266983497733435,
+      "exterior_fraction_changed": 0.16198981076620045,
+      "exterior_support": 0.653564453125
+    },
+    {
+      "case": "bridge",
+      "position": 5,
+      "trajectory": "positive",
+      "subject_exact": true,
+      "dose_ratio": 1.0000000000453277,
+      "fraction_changed": 0.058701625840598515,
+      "exterior_fraction_changed": 0.14016267950619118,
+      "exterior_support": 0.653564453125
+    },
+    {
+      "case": "bridge",
+      "position": 6,
+      "trajectory": "positive",
+      "subject_exact": true,
+      "dose_ratio": 1.0000000012501638,
+      "fraction_changed": 0.05844468661282222,
+      "exterior_fraction_changed": 0.11981889753278305,
+      "exterior_support": 0.653564453125
+    },
+    {
+      "case": "bridge",
+      "position": 7,
+      "trajectory": "positive",
+      "subject_exact": true,
+      "dose_ratio": 1.0000000002150549,
+      "fraction_changed": 0.06768723244764731,
+      "exterior_fraction_changed": 0.12515162309215716,
+      "exterior_support": 0.653564453125
+    },
+    {
+      "case": "bridge",
+      "position": 8,
+      "trajectory": "positive",
+      "subject_exact": true,
+      "dose_ratio": 0.9999999843406382,
+      "fraction_changed": 0.08141305142287956,
+      "exterior_fraction_changed": 0.17532300450161703,
+      "exterior_support": 0.653564453125
+    },
+    {
+      "case": "bridge",
+      "position": 9,
+      "trajectory": "positive",
+      "subject_exact": true,
+      "dose_ratio": 1.000000000781114,
+      "fraction_changed": 0.07990129154622677,
+      "exterior_fraction_changed": 0.1959128899734891,
+      "exterior_support": 0.653564453125
+    },
+    {
+      "case": "cafe",
+      "position": 0,
+      "trajectory": "neutral",
+      "subject_exact": true,
+      "dose_ratio": 1.000000000074317,
+      "fraction_changed": 0.17849568351010842,
+      "exterior_fraction_changed": 0.2544174139078222,
+      "exterior_support": 0.734130859375
+    },
+    {
+      "case": "cafe",
+      "position": 1,
+      "trajectory": "neutral",
+      "subject_exact": true,
+      "dose_ratio": 1.0000000001602432,
+      "fraction_changed": 0.06491172729037074,
+      "exterior_fraction_changed": 0.14178036699395413,
+      "exterior_support": 0.734130859375
+    },
+    {
+      "case": "cafe",
+      "position": 2,
+      "trajectory": "neutral",
+      "subject_exact": true,
+      "dose_ratio": 0.999999999566953,
+      "fraction_changed": 0.08133122556071318,
+      "exterior_fraction_changed": 0.2027487293734776,
+      "exterior_support": 0.734130859375
+    },
+    {
+      "case": "cafe",
+      "position": 3,
+      "trajectory": "neutral",
+      "subject_exact": true,
+      "dose_ratio": 1.000000000117849,
+      "fraction_changed": 0.05491889934888421,
+      "exterior_fraction_changed": 0.17424154436094672,
+      "exterior_support": 0.734130859375
+    },
+    {
+      "case": "cafe",
+      "position": 4,
+      "trajectory": "neutral",
+      "subject_exact": true,
+      "dose_ratio": 0.9999999994833363,
+      "fraction_changed": 0.062026729456340614,
+      "exterior_fraction_changed": 0.22837009139409478,
+      "exterior_support": 0.734130859375
+    },
+    {
+      "case": "cafe",
+      "position": 5,
+      "trajectory": "neutral",
+      "subject_exact": true,
+      "dose_ratio": 0.9999999993378448,
+      "fraction_changed": 0.07532892312553187,
+      "exterior_fraction_changed": 0.30831824594488244,
+      "exterior_support": 0.734130859375
+    },
+    {
+      "case": "cafe",
+      "position": 6,
+      "trajectory": "neutral",
+      "subject_exact": true,
+      "dose_ratio": 0.9999999999357698,
+      "fraction_changed": 0.12130438416101648,
+      "exterior_fraction_changed": 0.2956371017750166,
+      "exterior_support": 0.734130859375
+    },
+    {
+      "case": "cafe",
+      "position": 7,
+      "trajectory": "neutral",
+      "subject_exact": true,
+      "dose_ratio": 0.9999999947425207,
+      "fraction_changed": 0.07479737913037152,
+      "exterior_fraction_changed": 0.30073318489258644,
+      "exterior_support": 0.734130859375
+    },
+    {
+      "case": "cafe",
+      "position": 8,
+      "trajectory": "neutral",
+      "subject_exact": true,
+      "dose_ratio": 0.9999999980144053,
+      "fraction_changed": 0.05336546005696906,
+      "exterior_fraction_changed": 0.19905308092014565,
+      "exterior_support": 0.734130859375
+    },
+    {
+      "case": "cafe",
+      "position": 9,
+      "trajectory": "neutral",
+      "subject_exact": true,
+      "dose_ratio": 1.0000000079964548,
+      "fraction_changed": 0.04971153868384748,
+      "exterior_fraction_changed": 0.23947284304432082,
+      "exterior_support": 0.734130859375
+    },
+    {
+      "case": "cafe",
+      "position": 0,
+      "trajectory": "positive",
+      "subject_exact": true,
+      "dose_ratio": 1.000000000074317,
+      "fraction_changed": 0.17849568351010842,
+      "exterior_fraction_changed": 0.2544174139078222,
+      "exterior_support": 0.734130859375
+    },
+    {
+      "case": "cafe",
+      "position": 1,
+      "trajectory": "positive",
+      "subject_exact": true,
+      "dose_ratio": 1.0000000001872567,
+      "fraction_changed": 0.07168710757408374,
+      "exterior_fraction_changed": 0.17409976734236934,
+      "exterior_support": 0.734130859375
+    },
+    {
+      "case": "cafe",
+      "position": 2,
+      "trajectory": "positive",
+      "subject_exact": true,
+      "dose_ratio": 0.9999999999027456,
+      "fraction_changed": 0.07021424686056572,
+      "exterior_fraction_changed": 0.20580319044853682,
+      "exterior_support": 0.734130859375
+    },
+    {
+      "case": "cafe",
+      "position": 3,
+      "trajectory": "positive",
+      "subject_exact": true,
+      "dose_ratio": 1.000000000278589,
+      "fraction_changed": 0.0776303109027456,
+      "exterior_fraction_changed": 0.232026986522084,
+      "exterior_support": 0.734130859375
+    },
+    {
+      "case": "cafe",
+      "position": 4,
+      "trajectory": "positive",
+      "subject_exact": true,
+      "dose_ratio": 0.999999999903256,
+      "fraction_changed": 0.06947671202732493,
+      "exterior_fraction_changed": 0.2006437055343408,
+      "exterior_support": 0.734130859375
+    },
+    {
+      "case": "cafe",
+      "position": 5,
+      "trajectory": "positive",
+      "subject_exact": true,
+      "dose_ratio": 0.9999999999611284,
+      "fraction_changed": 0.057825758520279755,
+      "exterior_fraction_changed": 0.2471495881573172,
+      "exterior_support": 0.734130859375
+    },
+    {
+      "case": "cafe",
+      "position": 6,
+      "trajectory": "positive",
+      "subject_exact": true,
+      "dose_ratio": 0.9999999994155039,
+      "fraction_changed": 0.05859581941019809,
+      "exterior_fraction_changed": 0.2781174884964094,
+      "exterior_support": 0.734130859375
+    },
+    {
+      "case": "cafe",
+      "position": 7,
+      "trajectory": "positive",
+      "subject_exact": true,
+      "dose_ratio": 1.0000000003200546,
+      "fraction_changed": 0.029900369028549166,
+      "exterior_fraction_changed": 0.16472967058580468,
+      "exterior_support": 0.734130859375
+    },
+    {
+      "case": "cafe",
+      "position": 8,
+      "trajectory": "positive",
+      "subject_exact": true,
+      "dose_ratio": 1.000000006174147,
+      "fraction_changed": 0.03405939298020543,
+      "exterior_fraction_changed": 0.19903935270153778,
+      "exterior_support": 0.734130859375
+    },
+    {
+      "case": "cafe",
+      "position": 9,
+      "trajectory": "positive",
+      "subject_exact": true,
+      "dose_ratio": 0.9999999824186523,
+      "fraction_changed": 0.053008586889916005,
+      "exterior_fraction_changed": 0.2611486631839964,
+      "exterior_support": 0.734130859375
+    },
+    {
+      "case": "greenhouse",
+      "position": 0,
+      "trajectory": "neutral",
+      "subject_exact": true,
+      "dose_ratio": 0.9999999998926565,
+      "fraction_changed": 0.08279535980879886,
+      "exterior_fraction_changed": 0.12294493276162798,
+      "exterior_support": 0.753173828125
+    },
+    {
+      "case": "greenhouse",
+      "position": 1,
+      "trajectory": "neutral",
+      "subject_exact": true,
+      "dose_ratio": 1.000000000204742,
+      "fraction_changed": 0.06210294031049992,
+      "exterior_fraction_changed": 0.150042590096459,
+      "exterior_support": 0.753173828125
+    },
+    {
+      "case": "greenhouse",
+      "position": 2,
+      "trajectory": "neutral",
+      "subject_exact": true,
+      "dose_ratio": 1.0000000001766283,
+      "fraction_changed": 0.05844505988103292,
+      "exterior_fraction_changed": 0.14768669340184323,
+      "exterior_support": 0.753173828125
+    },
+    {
+      "case": "greenhouse",
+      "position": 3,
+      "trajectory": "neutral",
+      "subject_exact": true,
+      "dose_ratio": 0.9999999998147987,
+      "fraction_changed": 0.13365399271432402,
+      "exterior_fraction_changed": 0.5615099731330228,
+      "exterior_support": 0.753173828125
+    },
+    {
+      "case": "greenhouse",
+      "position": 4,
+      "trajectory": "neutral",
+      "subject_exact": true,
+      "dose_ratio": 1.000000000285965,
+      "fraction_changed": 0.07099691904217609,
+      "exterior_fraction_changed": 0.3101797018751858,
+      "exterior_support": 0.753173828125
+    },
+    {
+      "case": "greenhouse",
+      "position": 5,
+      "trajectory": "neutral",
+      "subject_exact": true,
+      "dose_ratio": 1.0000000006477237,
+      "fraction_changed": 0.06746870471772,
+      "exterior_fraction_changed": 0.2422762147441434,
+      "exterior_support": 0.753173828125
+    },
+    {
+      "case": "greenhouse",
+      "position": 6,
+      "trajectory": "neutral",
+      "subject_exact": true,
+      "dose_ratio": 1.00000000213191,
+      "fraction_changed": 0.0744538055397973,
+      "exterior_fraction_changed": 0.2639812508221659,
+      "exterior_support": 0.753173828125
+    },
+    {
+      "case": "greenhouse",
+      "position": 7,
+      "trajectory": "neutral",
+      "subject_exact": true,
+      "dose_ratio": 1.0000000009941437,
+      "fraction_changed": 0.08832432380717169,
+      "exterior_fraction_changed": 0.22351310734010696,
+      "exterior_support": 0.753173828125
+    },
+    {
+      "case": "greenhouse",
+      "position": 8,
+      "trajectory": "neutral",
+      "subject_exact": true,
+      "dose_ratio": 1.0000000032889456,
+      "fraction_changed": 0.07727088299578787,
+      "exterior_fraction_changed": 0.19816737054846253,
+      "exterior_support": 0.753173828125
+    },
+    {
+      "case": "greenhouse",
+      "position": 9,
+      "trajectory": "neutral",
+      "subject_exact": true,
+      "dose_ratio": 1.0000000089070709,
+      "fraction_changed": 0.06084196978945415,
+      "exterior_fraction_changed": 0.17322755682432106,
+      "exterior_support": 0.753173828125
+    },
+    {
+      "case": "greenhouse",
+      "position": 0,
+      "trajectory": "positive",
+      "subject_exact": true,
+      "dose_ratio": 0.9999999998926565,
+      "fraction_changed": 0.08279535980879886,
+      "exterior_fraction_changed": 0.12294493276162798,
+      "exterior_support": 0.753173828125
+    },
+    {
+      "case": "greenhouse",
+      "position": 1,
+      "trajectory": "positive",
+      "subject_exact": true,
+      "dose_ratio": 0.9999999999901712,
+      "fraction_changed": 0.0708505913781746,
+      "exterior_fraction_changed": 0.14157073806049303,
+      "exterior_support": 0.753173828125
+    },
+    {
+      "case": "greenhouse",
+      "position": 2,
+      "trajectory": "positive",
+      "subject_exact": true,
+      "dose_ratio": 0.9999999998942146,
+      "fraction_changed": 0.06459690752479551,
+      "exterior_fraction_changed": 0.14701552282700428,
+      "exterior_support": 0.753173828125
+    },
+    {
+      "case": "greenhouse",
+      "position": 3,
+      "trajectory": "positive",
+      "subject_exact": true,
+      "dose_ratio": 1.0000000001003524,
+      "fraction_changed": 0.05948758600791518,
+      "exterior_fraction_changed": 0.1374391710622794,
+      "exterior_support": 0.753173828125
+    },
+    {
+      "case": "greenhouse",
+      "position": 4,
+      "trajectory": "positive",
+      "subject_exact": true,
+      "dose_ratio": 0.9999999998730088,
+      "fraction_changed": 0.05412515925179819,
+      "exterior_fraction_changed": 0.1444973961508574,
+      "exterior_support": 0.753173828125
+    },
+    {
+      "case": "greenhouse",
+      "position": 5,
+      "trajectory": "positive",
+      "subject_exact": true,
+      "dose_ratio": 1.0000000003557181,
+      "fraction_changed": 0.0373860484622875,
+      "exterior_fraction_changed": 0.11296506215092755,
+      "exterior_support": 0.753173828125
+    },
+    {
+      "case": "greenhouse",
+      "position": 6,
+      "trajectory": "positive",
+      "subject_exact": true,
+      "dose_ratio": 0.9999999998605652,
+      "fraction_changed": 0.034850108920647,
+      "exterior_fraction_changed": 0.09877142261832819,
+      "exterior_support": 0.753173828125
+    },
+    {
+      "case": "greenhouse",
+      "position": 7,
+      "trajectory": "positive",
+      "subject_exact": true,
+      "dose_ratio": 1.000000000244652,
+      "fraction_changed": 0.03003240829621846,
+      "exterior_fraction_changed": 0.08295862622382306,
+      "exterior_support": 0.753173828125
+    },
+    {
+      "case": "greenhouse",
+      "position": 8,
+      "trajectory": "positive",
+      "subject_exact": true,
+      "dose_ratio": 0.9999999986492735,
+      "fraction_changed": 0.03563265760095422,
+      "exterior_fraction_changed": 0.08806930872530369,
+      "exterior_support": 0.753173828125
+    },
+    {
+      "case": "greenhouse",
+      "position": 9,
+      "trajectory": "positive",
+      "subject_exact": true,
+      "dose_ratio": 1.000000000297493,
+      "fraction_changed": 0.07209700019534175,
+      "exterior_fraction_changed": 0.13814649900898426,
+      "exterior_support": 0.753173828125
+    },
+    {
+      "case": "harbor",
+      "position": 0,
+      "trajectory": "neutral",
+      "subject_exact": true,
+      "dose_ratio": 1.0000000004282164,
+      "fraction_changed": 0.08974446183547576,
+      "exterior_fraction_changed": 0.15612493593601545,
+      "exterior_support": 0.6474609375
+    },
+    {
+      "case": "harbor",
+      "position": 1,
+      "trajectory": "neutral",
+      "subject_exact": true,
+      "dose_ratio": 1.000000000004237,
+      "fraction_changed": 0.1485871888381689,
+      "exterior_fraction_changed": 0.2393045339488273,
+      "exterior_support": 0.6474609375
+    },
+    {
+      "case": "harbor",
+      "position": 2,
+      "trajectory": "neutral",
+      "subject_exact": true,
+      "dose_ratio": 1.0000000000888012,
+      "fraction_changed": 0.07095121748712375,
+      "exterior_fraction_changed": 0.28771981495820675,
+      "exterior_support": 0.6474609375
+    },
+    {
+      "case": "harbor",
+      "position": 3,
+      "trajectory": "neutral",
+      "subject_exact": true,
+      "dose_ratio": 1.0000000000683515,
+      "fraction_changed": 0.054184299592643044,
+      "exterior_fraction_changed": 0.3040074037524645,
+      "exterior_support": 0.6474609375
+    },
+    {
+      "case": "harbor",
+      "position": 4,
+      "trajectory": "neutral",
+      "subject_exact": true,
+      "dose_ratio": 1.000000000320856,
+      "fraction_changed": 0.06749416070749749,
+      "exterior_fraction_changed": 0.32450512556293426,
+      "exterior_support": 0.6474609375
+    },
+    {
+      "case": "harbor",
+      "position": 5,
+      "trajectory": "neutral",
+      "subject_exact": true,
+      "dose_ratio": 1.0000000009367416,
+      "fraction_changed": 0.06770132516993158,
+      "exterior_fraction_changed": 0.2276392597618152,
+      "exterior_support": 0.6474609375
+    },
+    {
+      "case": "harbor",
+      "position": 6,
+      "trajectory": "neutral",
+      "subject_exact": true,
+      "dose_ratio": 0.9999999992729246,
+      "fraction_changed": 0.06793672442652532,
+      "exterior_fraction_changed": 0.2992037427096359,
+      "exterior_support": 0.6474609375
+    },
+    {
+      "case": "harbor",
+      "position": 7,
+      "trajectory": "neutral",
+      "subject_exact": true,
+      "dose_ratio": 1.0000000002144853,
+      "fraction_changed": 0.05942361137940035,
+      "exterior_fraction_changed": 0.20745510105440204,
+      "exterior_support": 0.6474609375
+    },
+    {
+      "case": "harbor",
+      "position": 8,
+      "trajectory": "neutral",
+      "subject_exact": true,
+      "dose_ratio": 1.0000000008728211,
+      "fraction_changed": 0.06410082965180694,
+      "exterior_fraction_changed": 0.18639409660594178,
+      "exterior_support": 0.6474609375
+    },
+    {
+      "case": "harbor",
+      "position": 9,
+      "trajectory": "neutral",
+      "subject_exact": true,
+      "dose_ratio": 0.999999988042098,
+      "fraction_changed": 0.07532143544514858,
+      "exterior_fraction_changed": 0.24281582623222836,
+      "exterior_support": 0.6474609375
+    },
+    {
+      "case": "harbor",
+      "position": 0,
+      "trajectory": "positive",
+      "subject_exact": true,
+      "dose_ratio": 1.0000000004282164,
+      "fraction_changed": 0.08974446183547576,
+      "exterior_fraction_changed": 0.15612493593601545,
+      "exterior_support": 0.6474609375
+    },
+    {
+      "case": "harbor",
+      "position": 1,
+      "trajectory": "positive",
+      "subject_exact": true,
+      "dose_ratio": 1.0000000001999705,
+      "fraction_changed": 0.11164734244598246,
+      "exterior_fraction_changed": 0.26283523891686544,
+      "exterior_support": 0.6474609375
+    },
+    {
+      "case": "harbor",
+      "position": 2,
+      "trajectory": "positive",
+      "subject_exact": true,
+      "dose_ratio": 0.9999999998314218,
+      "fraction_changed": 0.11029846655241048,
+      "exterior_fraction_changed": 0.2710886317661416,
+      "exterior_support": 0.6474609375
+    },
+    {
+      "case": "harbor",
+      "position": 3,
+      "trajectory": "positive",
+      "subject_exact": true,
+      "dose_ratio": 1.000000000024718,
+      "fraction_changed": 0.09378121562783387,
+      "exterior_fraction_changed": 0.2141951750190095,
+      "exterior_support": 0.6474609375
+    },
+    {
+      "case": "harbor",
+      "position": 4,
+      "trajectory": "positive",
+      "subject_exact": true,
+      "dose_ratio": 1.0000000000216938,
+      "fraction_changed": 0.08700895230732653,
+      "exterior_fraction_changed": 0.1878910681902222,
+      "exterior_support": 0.6474609375
+    },
+    {
+      "case": "harbor",
+      "position": 5,
+      "trajectory": "positive",
+      "subject_exact": true,
+      "dose_ratio": 1.0000000003507343,
+      "fraction_changed": 0.08161702024932609,
+      "exterior_fraction_changed": 0.14719955313899502,
+      "exterior_support": 0.6474609375
+    },
+    {
+      "case": "harbor",
+      "position": 6,
+      "trajectory": "positive",
+      "subject_exact": true,
+      "dose_ratio": 0.9999999992813737,
+      "fraction_changed": 0.070300754660894,
+      "exterior_fraction_changed": 0.13144331940784212,
+      "exterior_support": 0.6474609375
+    },
+    {
+      "case": "harbor",
+      "position": 7,
+      "trajectory": "positive",
+      "subject_exact": true,
+      "dose_ratio": 1.000000000489844,
+      "fraction_changed": 0.06528343142221492,
+      "exterior_fraction_changed": 0.12259016363875923,
+      "exterior_support": 0.6474609375
+    },
+    {
+      "case": "harbor",
+      "position": 8,
+      "trajectory": "positive",
+      "subject_exact": true,
+      "dose_ratio": 0.9999999999818441,
+      "fraction_changed": 0.07233301021096468,
+      "exterior_fraction_changed": 0.151018114914012,
+      "exterior_support": 0.6474609375
+    },
+    {
+      "case": "harbor",
+      "position": 9,
+      "trajectory": "positive",
+      "subject_exact": true,
+      "dose_ratio": 1.0000000351983387,
+      "fraction_changed": 0.09956368969913391,
+      "exterior_fraction_changed": 0.210980161522913,
+      "exterior_support": 0.6474609375
+    },
+    {
+      "case": "library",
+      "position": 0,
+      "trajectory": "neutral",
+      "subject_exact": true,
+      "dose_ratio": 0.9999999997744206,
+      "fraction_changed": 0.0676387534721639,
+      "exterior_fraction_changed": 0.1542012317304784,
+      "exterior_support": 0.671630859375
+    },
+    {
+      "case": "library",
+      "position": 1,
+      "trajectory": "neutral",
+      "subject_exact": true,
+      "dose_ratio": 1.0000000002702436,
+      "fraction_changed": 0.06630462862895445,
+      "exterior_fraction_changed": 0.14927607399817128,
+      "exterior_support": 0.671630859375
+    },
+    {
+      "case": "library",
+      "position": 2,
+      "trajectory": "neutral",
+      "subject_exact": true,
+      "dose_ratio": 0.9999999999306314,
+      "fraction_changed": 0.08866699888799337,
+      "exterior_fraction_changed": 0.1949092074244834,
+      "exterior_support": 0.671630859375
+    },
+    {
+      "case": "library",
+      "position": 3,
+      "trajectory": "neutral",
+      "subject_exact": true,
+      "dose_ratio": 1.0000000002016016,
+      "fraction_changed": 0.07045411446162082,
+      "exterior_fraction_changed": 0.2175268776474964,
+      "exterior_support": 0.671630859375
+    },
+    {
+      "case": "library",
+      "position": 4,
+      "trajectory": "neutral",
+      "subject_exact": true,
+      "dose_ratio": 0.9999999997218694,
+      "fraction_changed": 0.09003842547923695,
+      "exterior_fraction_changed": 0.41174629103962856,
+      "exterior_support": 0.671630859375
+    },
+    {
+      "case": "library",
+      "position": 5,
+      "trajectory": "neutral",
+      "subject_exact": true,
+      "dose_ratio": 1.000000000586076,
+      "fraction_changed": 0.03600290769269448,
+      "exterior_fraction_changed": 0.2733888928281503,
+      "exterior_support": 0.671630859375
+    },
+    {
+      "case": "library",
+      "position": 6,
+      "trajectory": "neutral",
+      "subject_exact": true,
+      "dose_ratio": 1.000000000852573,
+      "fraction_changed": 0.02465310160163453,
+      "exterior_fraction_changed": 0.23772299792127388,
+      "exterior_support": 0.671630859375
+    },
+    {
+      "case": "library",
+      "position": 7,
+      "trajectory": "neutral",
+      "subject_exact": true,
+      "dose_ratio": 0.9999999977871296,
+      "fraction_changed": 0.02568861659304737,
+      "exterior_fraction_changed": 0.21270552565965922,
+      "exterior_support": 0.671630859375
+    },
+    {
+      "case": "library",
+      "position": 8,
+      "trajectory": "neutral",
+      "subject_exact": true,
+      "dose_ratio": 1.000000000486034,
+      "fraction_changed": 0.03205392517493825,
+      "exterior_fraction_changed": 0.23866211385282224,
+      "exterior_support": 0.671630859375
+    },
+    {
+      "case": "library",
+      "position": 9,
+      "trajectory": "neutral",
+      "subject_exact": true,
+      "dose_ratio": 0.9999999869193704,
+      "fraction_changed": 0.05373088261083426,
+      "exterior_fraction_changed": 0.2697318270334023,
+      "exterior_support": 0.671630859375
+    },
+    {
+      "case": "library",
+      "position": 0,
+      "trajectory": "positive",
+      "subject_exact": true,
+      "dose_ratio": 0.9999999997744206,
+      "fraction_changed": 0.0676387534721639,
+      "exterior_fraction_changed": 0.1542012317304784,
+      "exterior_support": 0.671630859375
+    },
+    {
+      "case": "library",
+      "position": 1,
+      "trajectory": "positive",
+      "subject_exact": true,
+      "dose_ratio": 0.99999999980925,
+      "fraction_changed": 0.06592284596125071,
+      "exterior_fraction_changed": 0.14910190974142948,
+      "exterior_support": 0.671630859375
+    },
+    {
+      "case": "library",
+      "position": 2,
+      "trajectory": "positive",
+      "subject_exact": true,
+      "dose_ratio": 0.9999999999129627,
+      "fraction_changed": 0.1023774773331394,
+      "exterior_fraction_changed": 0.1999043613081322,
+      "exterior_support": 0.671630859375
+    },
+    {
+      "case": "library",
+      "position": 3,
+      "trajectory": "positive",
+      "subject_exact": true,
+      "dose_ratio": 0.9999999999005884,
+      "fraction_changed": 0.08282659543988136,
+      "exterior_fraction_changed": 0.20572002191715927,
+      "exterior_support": 0.671630859375
+    },
+    {
+      "case": "library",
+      "position": 4,
+      "trajectory": "positive",
+      "subject_exact": true,
+      "dose_ratio": 0.9999999996356832,
+      "fraction_changed": 0.052033171679782005,
+      "exterior_fraction_changed": 0.16727684960395597,
+      "exterior_support": 0.671630859375
+    },
+    {
+      "case": "library",
+      "position": 5,
+      "trajectory": "positive",
+      "subject_exact": true,
+      "dose_ratio": 1.0000000002422895,
+      "fraction_changed": 0.03841613479487607,
+      "exterior_fraction_changed": 0.10074342945063545,
+      "exterior_support": 0.671630859375
+    },
+    {
+      "case": "library",
+      "position": 6,
+      "trajectory": "positive",
+      "subject_exact": true,
+      "dose_ratio": 0.9999999973802552,
+      "fraction_changed": 0.029876231033790116,
+      "exterior_fraction_changed": 0.12371598336924543,
+      "exterior_support": 0.671630859375
+    },
+    {
+      "case": "library",
+      "position": 7,
+      "trajectory": "positive",
+      "subject_exact": true,
+      "dose_ratio": 0.9999999975958329,
+      "fraction_changed": 0.042745248226246486,
+      "exterior_fraction_changed": 0.15339545211537856,
+      "exterior_support": 0.671630859375
+    },
+    {
+      "case": "library",
+      "position": 8,
+      "trajectory": "positive",
+      "subject_exact": true,
+      "dose_ratio": 1.000000001919919,
+      "fraction_changed": 0.06795205163967188,
+      "exterior_fraction_changed": 0.17245368416596626,
+      "exterior_support": 0.671630859375
+    },
+    {
+      "case": "library",
+      "position": 9,
+      "trajectory": "positive",
+      "subject_exact": true,
+      "dose_ratio": 0.9999999970277993,
+      "fraction_changed": 0.07979409429718626,
+      "exterior_fraction_changed": 0.18126715464628074,
+      "exterior_support": 0.671630859375
+    },
+    {
+      "case": "mall",
+      "position": 0,
+      "trajectory": "neutral",
+      "subject_exact": true,
+      "dose_ratio": 0.9999999998922188,
+      "fraction_changed": 0.06830528933487165,
+      "exterior_fraction_changed": 0.09898236918958633,
+      "exterior_support": 0.68115234375
+    },
+    {
+      "case": "mall",
+      "position": 1,
+      "trajectory": "neutral",
+      "subject_exact": true,
+      "dose_ratio": 1.0000000003160832,
+      "fraction_changed": 0.07236874826344543,
+      "exterior_fraction_changed": 0.14646639387857127,
+      "exterior_support": 0.68115234375
+    },
+    {
+      "case": "mall",
+      "position": 2,
+      "trajectory": "neutral",
+      "subject_exact": true,
+      "dose_ratio": 1.0000000006551688,
+      "fraction_changed": 0.04716085664726429,
+      "exterior_fraction_changed": 0.24680000752484468,
+      "exterior_support": 0.68115234375
+    },
+    {
+      "case": "mall",
+      "position": 3,
+      "trajectory": "neutral",
+      "subject_exact": true,
+      "dose_ratio": 1.000000000248597,
+      "fraction_changed": 0.04192869564931627,
+      "exterior_fraction_changed": 0.19784880676677918,
+      "exterior_support": 0.68115234375
+    },
+    {
+      "case": "mall",
+      "position": 4,
+      "trajectory": "neutral",
+      "subject_exact": true,
+      "dose_ratio": 1.0000000003521157,
+      "fraction_changed": 0.05576157819631692,
+      "exterior_fraction_changed": 0.30454340596437873,
+      "exterior_support": 0.68115234375
+    },
+    {
+      "case": "mall",
+      "position": 5,
+      "trajectory": "neutral",
+      "subject_exact": true,
+      "dose_ratio": 0.9999999999265196,
+      "fraction_changed": 0.05049454981131566,
+      "exterior_fraction_changed": 0.3396796002254684,
+      "exterior_support": 0.68115234375
+    },
+    {
+      "case": "mall",
+      "position": 6,
+      "trajectory": "neutral",
+      "subject_exact": true,
+      "dose_ratio": 0.9999999989453666,
+      "fraction_changed": 0.03376476705990353,
+      "exterior_fraction_changed": 0.23617710917488952,
+      "exterior_support": 0.68115234375
+    },
+    {
+      "case": "mall",
+      "position": 7,
+      "trajectory": "neutral",
+      "subject_exact": true,
+      "dose_ratio": 1.000000000080966,
+      "fraction_changed": 0.03913934956169798,
+      "exterior_fraction_changed": 0.3162729869629343,
+      "exterior_support": 0.68115234375
+    },
+    {
+      "case": "mall",
+      "position": 8,
+      "trajectory": "neutral",
+      "subject_exact": true,
+      "dose_ratio": 0.9999999939374067,
+      "fraction_changed": 0.03399645706507445,
+      "exterior_fraction_changed": 0.2209248641991458,
+      "exterior_support": 0.68115234375
+    },
+    {
+      "case": "mall",
+      "position": 9,
+      "trajectory": "neutral",
+      "subject_exact": true,
+      "dose_ratio": 0.9999999788552254,
+      "fraction_changed": 0.041824028015504396,
+      "exterior_fraction_changed": 0.263919718961787,
+      "exterior_support": 0.68115234375
+    },
+    {
+      "case": "mall",
+      "position": 0,
+      "trajectory": "positive",
+      "subject_exact": true,
+      "dose_ratio": 0.9999999998922188,
+      "fraction_changed": 0.06830528933487165,
+      "exterior_fraction_changed": 0.09898236918958633,
+      "exterior_support": 0.68115234375
+    },
+    {
+      "case": "mall",
+      "position": 1,
+      "trajectory": "positive",
+      "subject_exact": true,
+      "dose_ratio": 1.0000000001107774,
+      "fraction_changed": 0.08541050007664544,
+      "exterior_fraction_changed": 0.19515289227435773,
+      "exterior_support": 0.68115234375
+    },
+    {
+      "case": "mall",
+      "position": 2,
+      "trajectory": "positive",
+      "subject_exact": true,
+      "dose_ratio": 0.9999999997505556,
+      "fraction_changed": 0.07653337778299148,
+      "exterior_fraction_changed": 0.20550941156753857,
+      "exterior_support": 0.68115234375
+    },
+    {
+      "case": "mall",
+      "position": 3,
+      "trajectory": "positive",
+      "subject_exact": true,
+      "dose_ratio": 1.0000000001238376,
+      "fraction_changed": 0.05857530239215065,
+      "exterior_fraction_changed": 0.18197699643190704,
+      "exterior_support": 0.68115234375
+    },
+    {
+      "case": "mall",
+      "position": 4,
+      "trajectory": "positive",
+      "subject_exact": true,
+      "dose_ratio": 1.0000000008641312,
+      "fraction_changed": 0.054022783700506075,
+      "exterior_fraction_changed": 0.15313814933499698,
+      "exterior_support": 0.68115234375
+    },
+    {
+      "case": "mall",
+      "position": 5,
+      "trajectory": "positive",
+      "subject_exact": true,
+      "dose_ratio": 1.0000000000342864,
+      "fraction_changed": 0.0368943497307433,
+      "exterior_fraction_changed": 0.12855424714386393,
+      "exterior_support": 0.68115234375
+    },
+    {
+      "case": "mall",
+      "position": 6,
+      "trajectory": "positive",
+      "subject_exact": true,
+      "dose_ratio": 0.9999999993505477,
+      "fraction_changed": 0.04174182716991402,
+      "exterior_fraction_changed": 0.14644423729732536,
+      "exterior_support": 0.68115234375
+    },
+    {
+      "case": "mall",
+      "position": 7,
+      "trajectory": "positive",
+      "subject_exact": true,
+      "dose_ratio": 0.9999999978621044,
+      "fraction_changed": 0.04257512434252227,
+      "exterior_fraction_changed": 0.14734326911754492,
+      "exterior_support": 0.68115234375
+    },
+    {
+      "case": "mall",
+      "position": 8,
+      "trajectory": "positive",
+      "subject_exact": true,
+      "dose_ratio": 0.9999999991312462,
+      "fraction_changed": 0.04146604582940365,
+      "exterior_fraction_changed": 0.14535707209027673,
+      "exterior_support": 0.68115234375
+    },
+    {
+      "case": "mall",
+      "position": 9,
+      "trajectory": "positive",
+      "subject_exact": true,
+      "dose_ratio": 1.0000000070175465,
+      "fraction_changed": 0.07092749749805376,
+      "exterior_fraction_changed": 0.19793134239998345,
+      "exterior_support": 0.68115234375
+    }
+  ]
+}

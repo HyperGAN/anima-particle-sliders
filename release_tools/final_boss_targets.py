@@ -37,9 +37,12 @@ APG_POSITIONS = {FOREGROUND_APG: tuple(range(STEPS)), ANCHORED_APG: (0, 1, 2)}
 LOOKAHEAD_EARLY = "lookahead-early3"
 LOOKAHEAD_POSITIONS = (0, 1, 2)
 MIDDLE_CUES = "strong-cues-middle4"
+PAIRED_EXTERIOR = "paired-exterior-floor45"
+PAIRED_CONTEXTS = ("Original context", "Matched alternate lighting", "Matched alternate setting")
 PERCENTILE_POSITIONS = {"sega-early35": (0, 1, 2), "sega-all35": tuple(range(STEPS))}
 RECIPES = {"prompt-only": (1.0, 0.0), "soft-floor45": (0.45, 0.0),
            GUIDED_TEACHER: (0.45, 0.0), FOREGROUND_APG: (0.45, 0.0), LOOKAHEAD_EARLY: (0.45, 0.0),
+           PAIRED_EXTERIOR: (0.45, 0.0),
            ANCHORED_APG: (0.45, 0.35),
            "strong-boss-45-mix35": (0.45, 0.35), "strong-cues-early3": (0.45, 0.35),
            MIDDLE_CUES: (0.45, 0.35), "strong-cues-late3": (0.45, 0.35), "diverse-mean35": (0.45, 0.35),
@@ -77,6 +80,36 @@ def matched_attire_target(neutral, positive, stronger, ordinary, weight, cue_mix
     original = positive - neutral
     mixed = original.lerp(stronger - ordinary, cue_mix) * weight
     return neutral + mixed * (original.norm() / mixed.norm())
+
+
+def paired_exterior_target(neutral, baseline, paired, matte):
+    """Replace the exterior contrast direction at the incumbent's exterior dose."""
+    exterior = (matte <= 0.01).expand_as(baseline)
+    if not exterior.any() or exterior.all():
+        raise ValueError("The paired exterior target needs both subject and exterior support")
+    neutral_outside = neutral[exterior].double()
+    base_delta = baseline[exterior].double() - neutral_outside
+    paired_delta = paired[exterior].double() - neutral_outside
+    base_norm, paired_norm = base_delta.norm(), paired_delta.norm()
+    pair_norms = torch.stack((base_norm, paired_norm))
+    if not torch.isfinite(pair_norms).all() or (pair_norms <= 1e-10).any():
+        raise ValueError("Degenerate paired exterior contrast")
+    replaced = (neutral_outside + paired_delta * (base_norm / paired_norm)).to(baseline.dtype)
+    target = baseline.masked_scatter(exterior, replaced)
+    if abs((replaced.double() - neutral_outside).norm() / base_norm - 1) > 1e-6:
+        raise ValueError("The paired exterior replacement changed the edit dose")
+    return target
+
+
+def paired_context_target(runtime, latent, timestep, neutral, positive, matte, pairs):
+    if len(pairs) != 2:
+        raise ValueError("Expected one alternate lighting pair and one alternate setting pair")
+    original = positive - neutral
+    contrasts = [original]
+    for negative, target in pairs:
+        contrasts.append(runtime.predict(latent, timestep, target) - runtime.predict(latent, timestep, negative))
+    paired = neutral + torch.stack(contrasts).mean(dim=0)
+    return edited_target(neutral, positive, 0.65 + 0.35 * matte, 0.5, paired)
 
 
 def percentile_delta(neutral, positive, weight, *, active):
@@ -136,6 +169,20 @@ def row_metadata(row):
 
 def teacher_rows(fixture, recipe):
     rows = json.loads(fixture.read_text())["pairs"]
+    if recipe == PAIRED_EXTERIOR:
+        settings = json.loads((fixture.parent / "ablations/paired-exterior-prompts.json").read_text())
+        pairs = settings["pairs"]
+        if (settings["recipe"] != recipe or settings["control"] != "soft-floor45"
+                or settings["exterior_source"] != "soft-contexts-65-blend50"
+                or set(pairs) != {row["id"] for row in rows}):
+            raise ValueError("Paired exterior prompts must cover the incumbent training cases exactly")
+        for row in rows:
+            entries = pairs[row["id"]]
+            if (set(entries) != set(PAIRED_CONTEXTS)
+                    or entries[PAIRED_CONTEXTS[0]] != [row["neutral"], row["positive"]]
+                    or any(len(entries[key]) != 2 or not all(entries[key]) for key in PAIRED_CONTEXTS[1:])):
+                raise ValueError(f"The paired context endpoints changed for {row['id']}")
+        return [row | {"paired_contexts": [pairs[row["id"]][key] for key in PAIRED_CONTEXTS[1:]]} for row in rows]
     if recipe == GUIDED_TEACHER:
         rollout = json.loads((fixture.parent / "ablations/guided-teacher-trajectory-plan.json").read_text())
         if (rollout["recipe"] != recipe or rollout["control"] != "soft-floor45"
@@ -174,6 +221,8 @@ def teacher_rows(fixture, recipe):
 
 
 def teacher_cues(runtime, row, recipe):
+    if recipe == PAIRED_EXTERIOR:
+        return tuple((runtime.encode(negative), runtime.encode(positive)) for negative, positive in row["paired_contexts"])
     if not RECIPES[recipe][1]:
         return ()
     keys = ("grounded_positive",) if recipe in GROUNDED_RECIPES else ("explicit_positive",)
@@ -186,13 +235,17 @@ def teacher_cues(runtime, row, recipe):
 
 def final_target(runtime, latent, timestep, neutral, positive, weight, cue_mix, cue_embeddings,
                  *, regional=None, percentile_active=None, matched_attire=False, wavelet_matte=None,
-                 subject_projection=None):
+                 subject_projection=None, paired_matte=None):
     # Preserve the rounding of the original full-frame capture.
     positive = neutral + (positive - neutral)
     if weight is None:
         return positive
     if percentile_active is not None:
         return neutral + percentile_delta(neutral, positive, weight, active=percentile_active)
+    if paired_matte is not None:
+        baseline = edited_target(neutral, positive, weight, 0.)
+        paired = paired_context_target(runtime, latent, timestep, neutral, positive, paired_matte, cue_embeddings)
+        return paired_exterior_target(neutral, baseline, paired, paired_matte)
     cues = (runtime.predict(latent, timestep, embedding) for embedding in cue_embeddings)
     if matched_attire:
         stronger, ordinary = cues
@@ -261,7 +314,8 @@ def capture_row(runtime, row, matte_path, recipe):
                 target = final_target(runtime, latent, timestep, base, positive_field, weight, cue_schedule[position],
                                       active, regional=regional, percentile_active=percentile_active,
                                       matched_attire=matched_attire, wavelet_matte=wavelet_matte,
-                                      subject_projection=projection)
+                                      subject_projection=projection,
+                                      paired_matte=matte if recipe == PAIRED_EXTERIOR else None)
             records[track].append(dict(position=position, timestep=float(timestep), trajectory=track,
                                        latent=latent.cpu().clone(), neutral=base.cpu().clone(),
                                        positive=target.cpu().clone()))
@@ -370,7 +424,8 @@ def verify_native(runtime, cache, request, fixture=FIXTURE):
                 target = final_target(runtime, latent, timestep, neutral, positive, weight, strength,
                                       cues, regional=regional, percentile_active=percentile_active,
                                       matched_attire=matched_attire, wavelet_matte=wavelet_matte,
-                                      subject_projection=projection)
+                                      subject_projection=projection,
+                                      paired_matte=matte if recipe == PAIRED_EXTERIOR else None)
             if not (torch.equal(neutral.cpu(), record["neutral"]) and torch.equal(target.cpu(), record["positive"])):
                 return False
     return True

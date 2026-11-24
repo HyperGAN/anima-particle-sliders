@@ -10,8 +10,8 @@ from release_tools.final_boss_apg import project_subject_target
 from release_tools.final_boss_cues import ARMOR_CREST_START, ROLE_AFTER_COSTUME, ROLE_BEFORE_COSTUME
 from release_tools.final_boss_targets import (
     ANCHORED_APG, APG_POSITIONS, FOREGROUND_APG, GROUNDED_COSTUME, GROUNDED_WAVELET, GUIDED_TEACHER,
-    LOOKAHEAD_EARLY, RECIPES, STEPS, capture_row, edited_target, final_target, subject_matte, teacher_rows,
-    verify_guided_trajectory,
+    LOOKAHEAD_EARLY, PAIRED_EXTERIOR, RECIPES, STEPS, capture_row, edited_target, final_target,
+    paired_context_target, subject_matte, teacher_rows, verify_guided_trajectory,
 )
 from release_tools.final_boss_wavelet import low_band
 
@@ -98,6 +98,30 @@ def test_wavelet_exterior_keeps_the_stronger_foreground_and_reduces_coarse_exter
     filtered = torch.where(foreground, 0., (wavelet - baseline).double())
     source = torch.where(foreground, 0., (stronger - baseline).double())
     assert low_band(filtered, 3).norm() < low_band(source, 3).norm()
+
+
+def test_paired_contexts_change_only_the_exterior_direction_at_incumbent_dose():
+    def field(values):
+        return torch.tensor(values, dtype=torch.float32).reshape(1, 1, 1, 1, 4)
+
+    runtime = SimpleNamespace(predict=lambda latent, timestep, embedding: embedding)
+    neutral = field((1, 2, 3, 5))
+    positive = neutral + field((1, 2, 3, 4))
+    matte = field((1, .02, .01, 0))
+    pairs = ((neutral, neutral + field((2, 1, -3, 3))),
+             (neutral, neutral + field((3, 1, 3, -4))))
+    weight = 0.45 + 0.55 * matte
+    baseline = final_target(runtime, None, 0, neutral, positive, weight, 0., ())
+    paired = paired_context_target(runtime, None, 0, neutral, positive, matte, pairs)
+    target = final_target(runtime, None, 0, neutral, positive, weight, 0., pairs, paired_matte=matte)
+    exterior = matte <= 0.01
+    assert torch.equal(target[~exterior], baseline[~exterior])
+    base_delta, paired_delta, target_delta = [(value - neutral)[exterior] for value in (baseline, paired, target)]
+    assert not torch.equal(target_delta, base_delta)
+    torch.testing.assert_close(target_delta.norm(), base_delta.norm())
+    torch.testing.assert_close(target_delta / target_delta.norm(), paired_delta / paired_delta.norm())
+    rows = teacher_rows(STUDY / "training-pairs.json", PAIRED_EXTERIOR)
+    assert len(rows) == 6 and all(len(row["paired_contexts"]) == 2 for row in rows)
 
 
 def test_foreground_apg_removes_the_clean_latent_component_at_fixed_dose():
