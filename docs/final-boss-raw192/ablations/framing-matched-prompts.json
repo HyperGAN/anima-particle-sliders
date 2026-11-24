@@ -1,0 +1,11 @@
+{
+  "recipe": "framing-matched-floor45",
+  "omitted_lower_body_terms": {
+    "bridge": ["dark jeans", "running shoes"],
+    "cafe": ["brown pleated midi skirt", "white sneakers"],
+    "greenhouse": ["rolled denim jeans", "muddy work boots"],
+    "harbor": ["heavy canvas cargo trousers", "worn leather deck shoes"],
+    "library": ["dark corduroy slacks", "slip-on leather loafers"],
+    "mall": ["relaxed cargo pants", "high-top sneakers"]
+  }
+}

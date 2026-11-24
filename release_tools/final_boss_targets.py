@@ -39,10 +39,12 @@ LOOKAHEAD_POSITIONS = (0, 1, 2)
 MIDDLE_CUES = "strong-cues-middle4"
 PAIRED_EXTERIOR = "paired-exterior-floor45"
 PAIRED_CONTEXTS = ("Original context", "Matched alternate lighting", "Matched alternate setting")
+FRAMING_MATCHED = "framing-matched-floor45"
 PERCENTILE_POSITIONS = {"sega-early35": (0, 1, 2), "sega-all35": tuple(range(STEPS))}
 RECIPES = {"prompt-only": (1.0, 0.0), "soft-floor45": (0.45, 0.0),
            GUIDED_TEACHER: (0.45, 0.0), FOREGROUND_APG: (0.45, 0.0), LOOKAHEAD_EARLY: (0.45, 0.0),
            PAIRED_EXTERIOR: (0.45, 0.0),
+           FRAMING_MATCHED: (0.45, 1.0),
            ANCHORED_APG: (0.45, 0.35),
            "strong-boss-45-mix35": (0.45, 0.35), "strong-cues-early3": (0.45, 0.35),
            MIDDLE_CUES: (0.45, 0.35), "strong-cues-late3": (0.45, 0.35), "diverse-mean35": (0.45, 0.35),
@@ -169,6 +171,21 @@ def row_metadata(row):
 
 def teacher_rows(fixture, recipe):
     rows = json.loads(fixture.read_text())["pairs"]
+    if recipe == FRAMING_MATCHED:
+        study = json.loads((fixture.parent / "ablations/framing-matched-prompts.json").read_text())
+        wardrobe = study["omitted_lower_body_terms"]
+        if study["recipe"] != recipe or set(wardrobe) != {row["id"] for row in rows}:
+            raise ValueError("Framing-matched prompts must cover the incumbent training cases")
+        for row in rows:
+            prompt = row["neutral"]
+            removed = wardrobe[row["id"]]
+            if (len(removed) != 2 or any(not phrase or prompt.count(f"{phrase}, ") != 1
+                                        or phrase in row["positive"] for phrase in removed)):
+                raise ValueError(f"The original wardrobe contrast changed for {row['id']}")
+            for phrase in removed:
+                prompt = prompt.replace(f"{phrase}, ", "", 1)
+            row["framing_matched_neutral"] = prompt
+        return rows
     if recipe == PAIRED_EXTERIOR:
         settings = json.loads((fixture.parent / "ablations/paired-exterior-prompts.json").read_text())
         pairs = settings["pairs"]
@@ -221,6 +238,8 @@ def teacher_rows(fixture, recipe):
 
 
 def teacher_cues(runtime, row, recipe):
+    if recipe == FRAMING_MATCHED:
+        return (runtime.encode(row["framing_matched_neutral"]),)
     if recipe == PAIRED_EXTERIOR:
         return tuple((runtime.encode(negative), runtime.encode(positive)) for negative, positive in row["paired_contexts"])
     if not RECIPES[recipe][1]:
@@ -235,7 +254,7 @@ def teacher_cues(runtime, row, recipe):
 
 def final_target(runtime, latent, timestep, neutral, positive, weight, cue_mix, cue_embeddings,
                  *, regional=None, percentile_active=None, matched_attire=False, wavelet_matte=None,
-                 subject_projection=None, paired_matte=None):
+                 subject_projection=None, paired_matte=None, framing_matched=False):
     # Preserve the rounding of the original full-frame capture.
     positive = neutral + (positive - neutral)
     if weight is None:
@@ -247,6 +266,9 @@ def final_target(runtime, latent, timestep, neutral, positive, weight, cue_mix, 
         paired = paired_context_target(runtime, latent, timestep, neutral, positive, paired_matte, cue_embeddings)
         return paired_exterior_target(neutral, baseline, paired, paired_matte)
     cues = (runtime.predict(latent, timestep, embedding) for embedding in cue_embeddings)
+    if framing_matched:
+        matched_neutral, = cues
+        return matched_attire_target(neutral, positive, positive, matched_neutral, cue_mix=cue_mix, weight=weight)
     if matched_attire:
         stronger, ordinary = cues
         target = matched_attire_target(neutral, positive, stronger, ordinary, weight, cue_mix)
@@ -315,7 +337,8 @@ def capture_row(runtime, row, matte_path, recipe):
                                       active, regional=regional, percentile_active=percentile_active,
                                       matched_attire=matched_attire, wavelet_matte=wavelet_matte,
                                       subject_projection=projection,
-                                      paired_matte=matte if recipe == PAIRED_EXTERIOR else None)
+                                      paired_matte=matte if recipe == PAIRED_EXTERIOR else None,
+                                      framing_matched=recipe == FRAMING_MATCHED)
             records[track].append(dict(position=position, timestep=float(timestep), trajectory=track,
                                        latent=latent.cpu().clone(), neutral=base.cpu().clone(),
                                        positive=target.cpu().clone()))
@@ -425,7 +448,8 @@ def verify_native(runtime, cache, request, fixture=FIXTURE):
                                       cues, regional=regional, percentile_active=percentile_active,
                                       matched_attire=matched_attire, wavelet_matte=wavelet_matte,
                                       subject_projection=projection,
-                                      paired_matte=matte if recipe == PAIRED_EXTERIOR else None)
+                                      paired_matte=matte if recipe == PAIRED_EXTERIOR else None,
+                                      framing_matched=recipe == FRAMING_MATCHED)
             if not (torch.equal(neutral.cpu(), record["neutral"]) and torch.equal(target.cpu(), record["positive"])):
                 return False
     return True

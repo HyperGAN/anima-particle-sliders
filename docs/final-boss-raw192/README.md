@@ -186,6 +186,17 @@ python -m release_tools.final_boss_targets paired-exterior-floor45 \
 
 Capture regenerates the paired contexts with the native teacher and rechecks four fields before reporting success. The archive audit used the already captured targets on both original teacher paths. It verified all 120 subject targets and the unchanged edit norm. The finished-image comparison is pending. [Field audit](ablations/paired-exterior-field-audit.json) · [Training hypothesis](../leaderboard.md#paired-contexts-outside-the-subject)
 
+## Framing-matched wardrobe contrast
+
+The ordinary prompts in the original capture mention pants or a skirt and footwear. To test whether this wording teaches the slider to reframe the image, the new contrast omits those two phrases from each ordinary prompt. At every frozen latent and timestep, subtract the edited ordinary prompt's response from the original Boss response. Apply the incumbent matte and normalize to the original positive-minus-neutral edit norm. Add the result to the original neutral response. The stored embeddings, trajectory states, positive prompts, and 120 training fields retain the incumbent configuration. [Exact terms omitted](ablations/framing-matched-prompts.json) · [Original and Boss silhouettes](ablations/paired-foregrounds.jpg) · [Foreground audit source](../../release_tools/final_boss_matte_audit.py)
+
+```sh
+python -m release_tools.final_boss_targets framing-matched-floor45 \
+  --model "$ANIMA_MODEL" --out targets/framing-matched-floor45
+```
+
+Capture rechecks four target fields through the native Anima teacher. The RAW192 comparison is pending.
+
 ## Two-step teacher contrast
 
 At zero-indexed positions 0–2 of both original trajectories, this recipe advances the frozen neutral and Boss teachers separately from the current shared latent. It forms the sigma-weighted average of their contrasts over the two-step window. The fit still uses the original neutral velocity, foreground weighting, and instantaneous edit norm. There are 36 substituted targets across the same 120 fields. [MeanFlow paper](https://arxiv.org/abs/2505.13447) · [Two-step target source](../../release_tools/final_boss_lookahead.py)

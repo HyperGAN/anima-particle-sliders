@@ -9,7 +9,7 @@ import torch
 from release_tools.final_boss_apg import project_subject_target
 from release_tools.final_boss_cues import ARMOR_CREST_START, ROLE_AFTER_COSTUME, ROLE_BEFORE_COSTUME
 from release_tools.final_boss_targets import (
-    ANCHORED_APG, APG_POSITIONS, FOREGROUND_APG, GROUNDED_COSTUME, GROUNDED_WAVELET, GUIDED_TEACHER,
+    ANCHORED_APG, APG_POSITIONS, FOREGROUND_APG, FRAMING_MATCHED, GROUNDED_COSTUME, GROUNDED_WAVELET, GUIDED_TEACHER,
     LOOKAHEAD_EARLY, PAIRED_EXTERIOR, RECIPES, STEPS, capture_row, edited_target, final_target,
     paired_context_target, subject_matte, teacher_rows, verify_guided_trajectory,
 )
@@ -122,6 +122,32 @@ def test_paired_contexts_change_only_the_exterior_direction_at_incumbent_dose():
     torch.testing.assert_close(target_delta / target_delta.norm(), paired_delta / paired_delta.norm())
     rows = teacher_rows(STUDY / "training-pairs.json", PAIRED_EXTERIOR)
     assert len(rows) == 6 and all(len(row["paired_contexts"]) == 2 for row in rows)
+
+
+def test_framing_contrast_subtracts_the_matched_negative_and_keeps_the_original_dose():
+    calls = []
+
+    def predict(latent, timestep, embedding):
+        calls.append((latent, timestep))
+        return embedding
+
+    runtime = SimpleNamespace(predict=predict)
+    neutral = torch.tensor((0.1, 0.2, 2.0))
+    positive = torch.tensor((3.5, 2.1, 10.0))
+    matched_neutral = torch.tensor((0.1, 1.5, 7.0))
+    weight = torch.tensor((1.0, .7, .45))
+    target = final_target(runtime, 'frozen state', 56, neutral, positive, weight, 1., (matched_neutral,),
+                          framing_matched=True)
+    expected = (positive - matched_neutral) * weight
+    torch.testing.assert_close(target - neutral, expected * ((positive - neutral).norm() / expected.norm()))
+    assert calls == [('frozen state', 56)]
+
+    ordinary = teacher_rows(STUDY / "training-pairs.json", "soft-floor45")
+    matched = teacher_rows(STUDY / "training-pairs.json", FRAMING_MATCHED)
+    for row, base in zip(matched, ordinary, strict=True):
+        prompt = row.pop("framing_matched_neutral")
+        assert row == base and prompt != base["neutral"]
+        assert prompt.split(". Background:", 1)[1] == base["neutral"].split(". Background:", 1)[1]
 
 
 def test_foreground_apg_removes_the_clean_latent_component_at_fixed_dose():
