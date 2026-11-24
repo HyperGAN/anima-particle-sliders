@@ -486,5 +486,89 @@
         }
       }
     }
+  },
+  "paired_exterior_previews": {
+    "48": {
+      "archivist": {
+        "off": {
+          "sha256": "356413c7d85b7405c8ad15d520ba188fdab64b1805d5140758f61221d704bbd1",
+          "edges": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        "on": {
+          "sha256": "2204b92ee39ed921f2be2915e71af91d3ebb0c336e148b3c234142a04f695a59",
+          "edges": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        }
+      },
+      "bookkeeper": {
+        "off": {
+          "sha256": "e891f6ea6fbdf921858d1e349fbe4f08c2df9b89045363fb55cf4dafa3064fa4",
+          "edges": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        "on": {
+          "sha256": "67534eb10fd95581c29dcebbb12d7ac219701a7b3c2e54c3c0b0aeac51f9fe5a",
+          "edges": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        }
+      },
+      "botanist": {
+        "off": {
+          "sha256": "21af6f3fbc2798373e25ef77b57d3aa11de44ef6536fbfa7cd41298ebbe4d606",
+          "edges": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        "on": {
+          "sha256": "dbde4e62ed2a1273a55f242ef30061834393ff69a83998f586c4b5a2e6af3c41",
+          "edges": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        }
+      },
+      "seamstress": {
+        "off": {
+          "sha256": "4a53b469861b66c0e414f89dd0774224b71d13d630d789f89bba80799bb55eac",
+          "edges": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        "on": {
+          "sha256": "16e59bc1b2232cd5bd67c2d092a4f5e0a9b626b610c809a92e9adcb0fa7559eb",
+          "edges": {
+            "top": 0,
+            "bottom": 0,
+            "left": 73,
+            "right": 74
+          }
+        }
+      }
+    }
   }
 }
