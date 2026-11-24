@@ -8,7 +8,7 @@
 
 **What earns a high score.** The slider should make the subject visibly read as a Final Boss while keeping the image coherent. An edit with zero Boss gain scores zero. Visible damage lowers the score even when the Boss effect is strong. [Scoring and comparison protocol](#comparing-a-new-run) · [Jev rubrics](final-boss-raw192/rubrics.json)
 
-**Latest challenger.** Applying stronger cues to the final three teacher positions led the four-case update-144 preview, **8.92** to **7.75** under the leaderboard rubric. The eight-case RAW192 comparison is pending. [Matched update-144 results](#update-144-preview)
+**Latest challengers.** Averaging two alternate cue directions led the four-case update-96 preview. Applying stronger cues to the final three teacher positions led the update-144 preview against the incumbent. Both eight-case RAW192 comparisons are pending. [Update-96 results](#update-96-preview) · [Update-144 results](#update-144-preview)
 
 ## Training techniques
 
@@ -35,7 +35,9 @@ The late-cue and two-cue-average runs each passed all four image checks. Mean Je
 
 ## Update-96 preview
 
-The resumed late-cue run passed all four image checks. Mean Jev Boss gain reached **+0.353**, compared with **+0.373** for soft foreground weighting at the same update. The late-cue archivist gained **+0.427** versus **+0.260** for soft foreground weighting. Soft foreground weighting led on the other three cases. [Four matched originals and renders](final-boss-raw192/ablations/late-cues-raw96-matched.jpg)
+The two-cue average blends 35% of the mean of two alternate teacher edit directions into the original edit and keeps the 0.45 background floor and original per-field L2 norm. It passed all four structural checks. Under the leaderboard rubric it scored **10.34**, ahead of late cues at **6.76** and soft foreground weighting at **5.73**, all at shared early α 2/3. It led on every case. Its mean damage score was **0.268**, compared with **0.315** for soft foreground weighting. Some edits visibly change the face, hair, or pose. [Matched originals and renders](final-boss-raw192/ablations/cue-tests-raw96-matched.jpg) · [Per-case scores](final-boss-raw192/ablations/cue-tests-raw96-scores.json)
+
+The quarter-check question gave mean Jev gains of **+0.526** for the two-cue average, **+0.373** for soft foreground weighting, and **+0.353** for late cues. The full training comparison uses the eight-case RAW192 panel.
 
 Each cue-timing recipe replaces 36 of the 120 teacher fields. The replacement moves the edit by an average of **22.0%** of its original L2 norm at the first three positions and **16.8%** at the last three. The source and replacement fields have matched L2 norms. [Teacher field distances by position](final-boss-raw192/ablations/cue-field-distances.json)
 
