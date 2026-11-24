@@ -1,8 +1,8 @@
 {
   "scope": "Eight archived teacher confirmation cases. Frozen Anima. No fitted adapter or optimizer updates.",
-  "score_scale": "0\u20131",
+  "score_scale": "0–1",
   "score": "Mean of max(0, Boss ON minus OFF) times (1 minus visible image damage) squared.",
-  "bound_rule": "For a missing damage judgment, assume the entire 0\u20131 damage range and keep the corresponding score bounds.",
+  "bound_rule": "For a missing damage judgment, assume the entire 0–1 damage range and keep the corresponding score bounds.",
   "teacher_panel_sha256": "6a9bc64fbda495066b8a6a3401b11ee2ec0653255061eaa3e01562f1ac550e53",
   "early_teacher_gains": [
     1.55,
@@ -256,6 +256,55 @@
     "source_index_sha256": [
       "3eeab399fca2673bc7ef9cd92b5ed6d4496378042349a15c87cc877279608c6b",
       "0988e1e797466e90ef4a1f9b0924ea39a98a1e808b5d24c12b30d038334c436f"
+    ]
+  },
+  "admitted_training_cache": {
+    "cache_sha256": "0b8d58760c86918913d2abb44ef9333f20b5e98e2f1d532f4c1f4866dcf9cd0b",
+    "manifest_sha256": "4396814c9a5e5315fa00770f7f500a55994e533343e05a223aa6f2e6699aa418",
+    "exact_fields": 120,
+    "native_checks": [
+      {
+        "index": 3,
+        "row": "bridge",
+        "embedding": true,
+        "neutral": true,
+        "positive": true
+      },
+      {
+        "index": 33,
+        "row": "cafe",
+        "embedding": true,
+        "neutral": true,
+        "positive": true
+      },
+      {
+        "index": 40,
+        "row": "orchid-tender-early",
+        "embedding": true,
+        "neutral": true,
+        "positive": true
+      },
+      {
+        "index": 63,
+        "row": "clock-porter-replace",
+        "embedding": true,
+        "neutral": true,
+        "positive": true
+      },
+      {
+        "index": 89,
+        "row": "glass-seller-early",
+        "embedding": true,
+        "neutral": true,
+        "positive": true
+      },
+      {
+        "index": 117,
+        "row": "honey-keeper-explicit-early",
+        "embedding": true,
+        "neutral": true,
+        "positive": true
+      }
     ]
   }
 }
