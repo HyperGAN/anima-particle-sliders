@@ -35,7 +35,7 @@ def main():
             source = root / name
             if name.startswith('anima_hndl/'):
                 source = Path(__file__).with_name('anima_hndl') / name.removeprefix('anima_hndl/')
-            elif name == 'lumen_studio/dataset.py':
+            elif name in ('lumen_studio/dataset.py', 'lumen_studio/backends/anima.py'):
                 source = Path(__file__).with_name('frozen_product') / name
             if hashlib.sha256(source.read_bytes()).hexdigest() != expected:
                 raise ValueError('HNDL source differs from its locked bytes: ' + name)
