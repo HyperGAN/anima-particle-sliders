@@ -1,0 +1,57 @@
+# Anima Final Boss RAW192
+
+The **Final Boss research default** is soft foreground weighting with a **0.45 background floor**, using the saved RAW192 particle adapter at **early α 0.95**. This setting scored **33.71** on the development panel and **28.55** on eight separate confirmation cases. Use the shared early α 2/3 comparison below when comparing training techniques.
+
+[Default manifest and exact per-step gains](default.json) · [Public RAW checkpoints](https://huggingface.co/ntc-ai/anima-final-boss-research) · [Per-case results and prompts](results.json)
+
+![Eight confirmation cases showing the same original, the default early 0.95 edit, and the early 0.9125 control](confirmed-default.jpg)
+
+## Training comparison
+
+Each scored row uses 192 stock ParticleGAN EMPF updates and eight matched cases at 512 × 512, ten native Euler steps, and CFG 1. The score is the equal-case mean of `max(0, Boss_ON − Boss_OFF) × (1 − image_damage)²`, shown on a 0–100 scale. Jev judges character design and visible damage separately. The structural check also runs at each quarter of training. [Jev rubrics](rubrics.json)
+
+| Training target | Early α 2/3 | Constant α 0.6375 |
+| --- | ---: | ---: |
+| Soft foreground weighting, 0.45 background floor | **25.66** | 13.06 |
+| Soft foreground weighting plus 35% stronger cues | 24.93 | **16.90** |
+| Paired scene and lighting contexts, 50% blend, 0.65 floor | 22.23 | 11.58 |
+| Background-only scene and lighting projection, 0.45 floor | 22.22 | 11.51 |
+| Soft foreground weighting plus 85% stronger cues, 0.45 floor | 21.77 | 14.39 |
+| Paired scene and lighting contexts, 50% blend, 0.45 floor | 21.41 | 11.40 |
+| Whole-image scene and lighting projection, 0.65 floor | 18.74 | 13.72 |
+| Prompt-only control | 18.32 | Unmeasured |
+| Earlier soft foreground weighting, 0.65 floor | 17.83 | 11.30 |
+| Training on adapter rollout states, 0.45 floor | 11.61 | 5.49 |
+| Soft foreground weighting plus 85% stronger cues, 0.65 floor | Unmeasured | 13.91 |
+
+![Eight matched early-strength cases comparing the original, soft foreground weighting, stronger cues, and prompt-only](shared-early.jpg)
+
+[Matched constant-strength samples](shared-constant.jpg)
+
+The 35% blend raised the constant-strength score from **13.06 to 16.90**, and its early-strength score was **0.73** points below the shared early leader. The 0.80 background-floor arm failed the structural check at both shared strengths. A stronger 1.30 target-dose arm stopped at update 96 after a structural failure. Each technique was fit at one initialization seed. The eight additional cases confirm the selected default strength on the same checkpoint and have two qualified settings out of nine attempted.
+
+## Replay the default
+
+Run from the Anima checkout with the [pinned native environment](../../configs/anima/requirements.lock). Use the official converted Anima Turbo v1.1 model. If you need to prepare it, run `python -m release_tools.prepare_model --output "$ANIMA_MODEL"`.
+
+```sh
+python -m release_tools.final_boss_replay --model "$ANIMA_MODEL" --out final-boss.png
+```
+
+The command loads the revision-pinned RAW artifact and verifies its SHA-256. It renders the `baker` confirmation case by default. Use `--case ranger` for a development example or `--checkpoint` for a local copy of the same RAW artifact. The JSON beside the PNG records the prompt, seed, model identity, checkpoint digest, native sigma grid, and effective strengths. Current Anima source reproduced all eight default confirmation PNGs byte for byte on CUDA.
+
+## Source for the trained targets
+
+On each frozen neutral or positive trajectory state, subtract the neutral velocity from the generic positive velocity. Multiply that edit by `0.45 + 0.55 × foreground_matte`, restore its original L2 norm, and add it back to the neutral velocity. The cue blend first interpolates 35% toward a stronger positive contrast evaluated at the **same latent and timestep**. The capture source reproduced all 120 archived training fields exactly for each recipe. Each cache uses six prompt pairs, two trajectories, and ten steps per trajectory.
+
+[Target capture and native admission source](../../release_tools/final_boss_targets.py) · [Exact training prompts, seeds and pinned mattes](training-pairs.json) · [Default replay source](../../release_tools/final_boss_replay.py)
+
+```sh
+python -m release_tools.final_boss_targets --model "$ANIMA_MODEL" --out targets/soft-floor45
+python -m release_tools.final_boss_targets strong-boss-45-mix35 \
+  --model "$ANIMA_MODEL" --out targets/strong-boss-45-mix35
+```
+
+Pass the resulting `TargetCache` to [scoped training](../explicit-fresh-initialization.md), with `variation="character-final-boss"` and `native_admission=lambda request: verify_native(runtime, cache, request)`. Keep the fit at `seed=1`, `batch_size=2`, `total_steps=192`, `response_scale=1`, `sigma=1`, `critic_width=32`, `lr=0.00075`, `d_lr_mult=12`, `prior_lr_mult=40`, and `ema_decay=None`. Use fresh scoped initialization for a new cohort. Save RAW at 48, 96, 144, and 192 and check the matched rendered images before continuing past each checkpoint. The recorded experiment used [this Anima source](https://github.com/HyperGAN/anima-particle-sliders/tree/c4b0e86e78670f21ffa5e7545b244d0f9e63cea6), [this core source](https://github.com/HyperGAN/particle-sliders/tree/507168a241e237fc3d5f1032a8137196fa3c3562), and ParticleGAN 0.11.1. Compare future cohorts on the same development cases at both shared strengths.
+
+Related research includes teacher mixing [#278](https://github.com/HyperGAN/particle-sliders/pull/278), [Concept Sliders](https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/05660.pdf) and contrast isolation [#216](https://github.com/HyperGAN/particle-sliders/pull/216), nuisance projection [#254](https://github.com/HyperGAN/particle-sliders/pull/254), and rollout comparison [#246](https://github.com/HyperGAN/particle-sliders/pull/246). The trained Anima recipes are native adaptations.
