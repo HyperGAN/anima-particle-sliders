@@ -1,0 +1,27 @@
+{
+  "scope": "Geometry check on archived CUDA teacher fields. Fresh candidate capture and training are pending.",
+  "verified_fields": 120,
+  "bitwise_unchanged_exterior_fields": 120,
+  "outside_matte_inclusive": 0.01,
+  "reference_caches": {
+    "strong-boss-45-mix35": "7feebb6e2fedbbd9e90a9ab377687093647c69b9797158252121c601f2872445",
+    "matched-attire35": "b6f07c7e0b9ded5f8be93f34cec1f32ffdee76dd36fcff64c4c61798d5d1f330"
+  },
+  "mean_alignment_with_full_attire_change": 0.928866138767625,
+  "minimum_alignment_with_full_attire_change": 0.7991631312826138,
+  "max_edit_norm_relative_error": 8.170250476169372e-09,
+  "max_cue_distance_relative_error": 4.101788675381357e-08,
+  "by_position": [
+    0.8926707067072984,
+    0.911556035976303,
+    0.9304596940441844,
+    0.9380570885180131,
+    0.9461597406334237,
+    0.9399264541930564,
+    0.9410671138468872,
+    0.9393071229272323,
+    0.9412376527936024,
+    0.9082197780362499
+  ],
+  "source_sha256": "fc1ae2f9518e553e214f364895bf752f7fd587c711ed290d9837d2a94c8e98b2"
+}
