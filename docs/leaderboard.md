@@ -25,6 +25,10 @@ Stronger Boss distinction accounts for **3.52** of the cue blend’s constant-st
 
 The late-cue and two-cue-average runs each passed all four image checks. Mean Jev Boss gain at shared early inference strength was **+0.186** for soft foreground weighting, **+0.176** for late cues, and **+0.174** for the cue average. Both challengers gained on bookkeeper, botanist, and seamstress. Both scored lower on archivist, where soft foreground weighting gave the coat a sharper silhouette. [Four matched cases across all three recipes](final-boss-raw192/ablations/cue-tests-raw48-matched.jpg)
 
+## Update-96 preview
+
+The resumed late-cue run passed all four image checks. Mean Jev Boss gain reached **+0.353**, compared with **+0.373** for soft foreground weighting at the same update. The late-cue archivist gained **+0.427** versus **+0.260** for soft foreground weighting. Soft foreground weighting led on the other three cases. [Four matched originals and renders](final-boss-raw192/ablations/late-cues-raw96-matched.jpg)
+
 ## Structural stops
 
 The 35% cue blend that kept only components with matching signs across its two alternate cue edits stopped at update 48. The bookkeeper render collapsed to a texture and scored 0.83 on Jev’s unreadable-image check. Training stopped before update 49. [Saved RAW48 render](final-boss-raw192/ablations/diverse-consensus35-raw48-bookkeeper.png) · [Consensus research](https://github.com/HyperGAN/particle-sliders/pull/315)
