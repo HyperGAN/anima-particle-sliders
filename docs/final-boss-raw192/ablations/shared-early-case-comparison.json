@@ -1,0 +1,117 @@
+{
+  "scope": "Per-case comparison of qualified RAW192 measurements. Maxima refer to different trained adapters.",
+  "protocol": {
+    "profile": "early",
+    "alpha": 0.6666666666666666,
+    "step": 192
+  },
+  "control": "soft-floor45",
+  "method_count": 17,
+  "source_results_sha256": "4f9eaafc6fc03c7ab4f293bbf9184372950de041ee156198b5c0181a0a1dfec0",
+  "cases": {
+    "ranger": {
+      "incumbent": {
+        "boss_gain": 0.44000000000000006,
+        "image_damage": 0.19999999999999998,
+        "adjusted_score": 0.2816
+      },
+      "maximum_observed_adjusted_score": 0.2816,
+      "best_measured_recipes": [
+        "soft-floor45"
+      ],
+      "methods_higher_than_incumbent": 0,
+      "mean_adjusted_score_across_methods": 0.15295773202611765
+    },
+    "smith": {
+      "incumbent": {
+        "boss_gain": 0.25,
+        "image_damage": 0.2733333333333333,
+        "adjusted_score": 0.132011111111
+      },
+      "maximum_observed_adjusted_score": 0.178608,
+      "best_measured_recipes": [
+        "soft45-background-orthogonal"
+      ],
+      "methods_higher_than_incumbent": 4,
+      "mean_adjusted_score_across_methods": 0.11549696732017647
+    },
+    "stationer": {
+      "incumbent": {
+        "boss_gain": 0.29,
+        "image_damage": 0.17333333333333334,
+        "adjusted_score": 0.198179555556
+      },
+      "maximum_observed_adjusted_score": 0.372832777778,
+      "best_measured_recipes": [
+        "strong-boss-45-mix35"
+      ],
+      "methods_higher_than_incumbent": 10,
+      "mean_adjusted_score_across_methods": 0.22064616993464706
+    },
+    "ferryman": {
+      "incumbent": {
+        "boss_gain": 0.52,
+        "image_damage": 0.21333333333333335,
+        "adjusted_score": 0.321799111111
+      },
+      "maximum_observed_adjusted_score": 0.321799111111,
+      "best_measured_recipes": [
+        "soft-floor45"
+      ],
+      "methods_higher_than_incumbent": 0,
+      "mean_adjusted_score_across_methods": 0.22678369934635292
+    },
+    "watchmaker": {
+      "incumbent": {
+        "boss_gain": 0.64,
+        "image_damage": 0.21,
+        "adjusted_score": 0.399424
+      },
+      "maximum_observed_adjusted_score": 0.399424,
+      "best_measured_recipes": [
+        "soft-floor45"
+      ],
+      "methods_higher_than_incumbent": 0,
+      "mean_adjusted_score_across_methods": 0.279341248366
+    },
+    "guide": {
+      "incumbent": {
+        "boss_gain": 0.14,
+        "image_damage": 0.15333333333333335,
+        "adjusted_score": 0.100358222222
+      },
+      "maximum_observed_adjusted_score": 0.103428,
+      "best_measured_recipes": [
+        "strong-cues-late3"
+      ],
+      "methods_higher_than_incumbent": 1,
+      "mean_adjusted_score_across_methods": 0.07971705228758823
+    },
+    "guard": {
+      "incumbent": {
+        "boss_gain": 0.73,
+        "image_damage": 0.26333333333333336,
+        "adjusted_score": 0.396154777778
+      },
+      "maximum_observed_adjusted_score": 0.409095555556,
+      "best_measured_recipes": [
+        "prompt-only"
+      ],
+      "methods_higher_than_incumbent": 2,
+      "mean_adjusted_score_across_methods": 0.3280791830065882
+    },
+    "violinist": {
+      "incumbent": {
+        "boss_gain": 0.37,
+        "image_damage": 0.22333333333333336,
+        "adjusted_score": 0.223188111111
+      },
+      "maximum_observed_adjusted_score": 0.25,
+      "best_measured_recipes": [
+        "prompt-only"
+      ],
+      "methods_higher_than_incumbent": 3,
+      "mean_adjusted_score_across_methods": 0.1865256470587647
+    }
+  }
+}

@@ -38,6 +38,12 @@ Stronger Boss distinction accounts for **3.52** of the cue blend’s constant-st
 
 [Shared early samples](final-boss-raw192/shared-early.jpg) · [Shared constant samples](final-boss-raw192/shared-constant.jpg) · [Training and replay source](final-boss-raw192/README.md#source-for-the-trained-targets)
 
+## Where the leading recipes miss
+
+Across 17 qualified RAW192 recipes at shared early strength, Guide reached **10.34** at best. The incumbent scored **10.04**, with a Boss gain of **0.14** and image damage of **0.153**. Both were the lowest of the incumbent's eight cases. Stationer had more headroom in the current recipes. Its score rose from **19.82** with soft foreground weighting to **37.28** with the 35% stronger-cue blend. The incumbent still led Ranger, Ferryman, and Watchmaker. [All eight per-case comparisons](final-boss-raw192/ablations/shared-early-case-comparison.json)
+
+The two-seed trial tests whether greater variation in training states improves these uneven results. It crosses a second frozen noise seed into the neutral and positive tracks at alternating positions. The target remains soft foreground weighting with a 0.45 floor, and the fit uses the same 120 slots and 192 stock ParticleGAN updates as the incumbent. Concept Sliders samples new initial noise during training. This trial adapts that idea to fixed, replayable Anima fields. Native capture is queued. [Concept Sliders](https://arxiv.org/abs/2311.12092) · [Reference trainer](https://github.com/rohitgandikota/sliders/blob/main/trainscripts/textsliders/train_lora.py)
+
 ## Update-48 preview
 
 All five recipes passed the structural checks. Stronger cues at the first three teacher positions led with **3.23** at shared early α 2/3. Soft foreground weighting scored **2.34**, the two-cue average **1.94**, late cues **1.74**, and the qualified costume teachers **0.90**. The costume-teacher recipe had the highest mean image damage (**0.403**) and the weakest Boss distinction gain (**+0.020**). [Four matched cases across all recipes](final-boss-raw192/ablations/cue-timing-raw48-matched.jpg) · [Per-case scores](final-boss-raw192/ablations/cue-timing-raw48-scores.json)
