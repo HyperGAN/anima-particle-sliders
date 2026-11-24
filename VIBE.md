@@ -1,18 +1,63 @@
 # Learn a vibe from successful image contexts
 
-The opt-in `anima-vibe --vibe` path collects training data without editing the
-catalog config files. A Nanoodle text workflow proposes matched neutral/positive
-prompts. Frozen Anima renders N matched outputs per pair. An image-capable NanoGPT
-decision workflow judges the finished images against your fixed criterion. Higher
-mean positive-minus-neutral scores keep a prompt in the pool; weaker prompts are
-replaced by new proposals informed by the saved results.
+The opt-in `anima-vibe --vibe` path collects training data using frozen
+Anima and an image-capable Jev judge. Each round retains successful scenes
+and explores new ones with a Nanoodle prompt workflow.
 
-For a final-boss creator, start with a criterion such as:
-`fantasy RPG final boss, imposing antagonist silhouette, epic battle scene`.
-The workflow supplies concrete subjects and cues rather than using this same
-sentence for every teacher. Each positive prompt keeps its neutral subject and
-scene. Curation scores do not by themselves establish a trained adapter's effect;
-a completed scoped training result is recorded below.
+## Named portfolios
+
+Use `--vibe 'final boss'` or `--vibe '1990s anime'` with a new output directory
+to run the shared finish-aware portfolio search. The prompt model proposes
+scenes. Anima renders a neutral and several prompt treatments at matched
+seeds. The Boss profile varies costume and silhouette. The anime profile
+varies whole-frame cel treatment and proposes environments, objects,
+animals and people in separate slots. It uses the calibrated cel-animation
+rubric and asks which distinctive cel treatment dominates the visible frame.
+
+Jev measures intended effect and multiplies it by one minus the larger of the
+visible overbake and broken-layout scores before matched neutral subtraction.
+The selector ranks by distinct finish gain. It compares each proposed portfolio under a
+second Jev effect reading and keeps a replacement only when that reading
+holds up. It caps each confident family and the unclassified bucket at two.
+It checks lookalikes in both image orders and counts pairs averaging 0.65
+or higher as near-duplicates.
+
+Distinct finish gain sums the strongest mutually distinct set, includes
+negative gains from the selected portfolio, and divides by the original
+number of scenes. Missing slots remain in that denominator. Catastrophic
+integrity is checked separately.
+
+`portfolio.json` preserves measurements and proposal history. The
+`teacher-selection` directory records the improved portfolios, second reads,
+lookalike audits and the recipe that won each comparison. The CLI exports the
+highest-distinct-finish measured round that contains a qualified teacher.
+When that round still has gaps, one text-model call proposes scene-preserving
+rewrites. Anima tests the rewrite, its named-vibe form and a cue-first
+prompt at the existing matched seed, then reselects from the expanded pool.
+
+The default is one adaptive round. Pass `--rounds 2` to feed prior scores into
+a second proposal. Each round keeps stronger scenes and replaces up to
+`--replace` weaker scenes. The qualified manifest keeps the same positive-gain
+and raw effect threshold. Both profiles render native prompt variants so the
+existing cache builder can replay the exact selected prompts and seeds.
+
+On two fresh panels of eight automatically proposed scenes each, the new
+selector and rewrite pass improved distinct finish and the second effect
+read. Scores below are on a 100-point scale.
+
+| Native CLI panel | Previous distinct finish | Current distinct finish | Qualified teachers |
+| --- | ---: | ---: | ---: |
+| Final Boss | +11.5 | +16.3 | 3 → 5 |
+| 1990s anime | +12.5 | +22.7 | 1 → 1 |
+
+The four-round anime run exported round three, with distinct finish improving
+from +21.9 to +32.3 and qualified teachers increasing from three to four.
+These comparisons measure teacher selection on finished images.
+
+Free-text vibes, explicit `--score-workflow` overrides, and saved
+`collection.json` runs use the adaptive prompt-pair workflow. Each proposed
+positive retains its neutral subject and scene. A collection remains bound to
+the source and judge graph that started it.
 
 ## Source setup
 
@@ -24,8 +69,8 @@ to a reviewed companion source commit, without requiring a PyPI release:
 python -m pip install '/path/to/anima-particle-sliders[vibe]'
 ```
 
-This checkout uses the current core 0.15.1 and ParticleGAN 0.11.0 pins
-described in [LIFECYCLE.md](LIFECYCLE.md). The `particle_sliders_vibe` add-on
+This checkout uses the runtime pins described in [LIFECYCLE.md](LIFECYCLE.md).
+The `particle_sliders_vibe` add-on
 has its own source identity and also works with the archived core. This
 checkout exposes collection through `anima-vibe`. The shared core's generic
 `particle-slider collect` command requires a core checkout containing the
@@ -53,14 +98,15 @@ live catalog's capabilities before changing the explicit image judge.
 
 ```sh
 anima-vibe \
-  --vibe 'fantasy RPG final boss, imposing antagonist silhouette, epic battle scene' \
+  --vibe 'final boss' \
   --model-dir /path/to/pinned/anima-turbo \
   --prompt-model "$VIBE_PROMPT_MODEL" --judge-model typesafe/jev-1.14 \
   --out runs/final-boss-vibe --device cuda:0 \
   --pool-size 8 --replace 4 --best-of 3 --rounds 4
 ```
 
-Rendering and target preparation use CUDA only, with no model offload. Native
+Use `python -m lumen_studio.vibe_cli` to run the same entrypoint from a source
+checkout. Rendering and target preparation use CUDA only, with no model offload. Native
 resource admission/leases remain the caller's responsibility, as for Anima's
 existing native APIs. No GPU work is started by `--help` or manifest validation.
 `--resolution` must be a multiple of 64 within Anima's native 512–1536 range;
@@ -71,8 +117,10 @@ model-specific Nanoodle graphs. The proposal graph accepts `Context` and returns
 `Pairs`, a JSON array of `{neutral, positive}` objects. The scoring graph accepts
 `Criterion` and `Image` and exposes a Decide score node named `judge`. Its full
 graph, model, rubric, native sampler and source identities bind the collection.
-The default rubric measures visible intended-effect intensity, not beauty or
-preservation. Nanoodle's one-based score is normalized to 0–1; its full typed
+The default free-text question is “How well does the candidate convey ‘{concept}’ without
+breaking the image?” The `--vibe` value supplies the concept. Four score levels
+range from absent effect or a broken image to an unmistakable effect in an
+intact image. Nanoodle's one-based score is normalized to 0–1 and its full typed
 distribution is retained. Missing or invalid measurements fail explicitly.
 NanoGPT independently rounds its reported score and probabilities to two
 decimals; the adapter allows only the resulting bounded rounding discrepancy
@@ -87,7 +135,7 @@ retained, and no existing training run is reset.
 
 ## Prepare frozen targets
 
-For each prompt, the manifest keeps the best context whose finished positive
+For free-text collection, the manifest keeps the best context per prompt whose finished positive
 image scores at least **0.75** and strictly above its matched neutral image.
 `--min-score` explicitly changes the qualification threshold; no qualifying
 contexts is a reported incomplete collection, not a synthetic target. Prompt

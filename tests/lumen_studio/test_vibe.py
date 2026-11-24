@@ -1,7 +1,6 @@
 from contextlib import contextmanager
 import json
 from pathlib import Path
-from types import SimpleNamespace
 
 import pytest
 
@@ -99,7 +98,8 @@ def test_best_qualifying_context_is_retained_even_when_largest_gain_is_below_thr
 
 
 @pytest.mark.parametrize('provider', ['nanogpt', 'typesafe'])
-def test_nanoodle_graphs_run_real_executor_with_injected_transport(tmp_path, monkeypatch, provider):
+@pytest.mark.parametrize('concept', ['Final Boss', 'Candlelit'])
+def test_nanoodle_graphs_run_real_executor_with_injected_transport(tmp_path, monkeypatch, provider, concept):
     """Exercise actual Nanoodle graph wiring, media encoding and typed decision parsing."""
     from nanoodle.transport import HttpResponse
     requests = []
@@ -116,21 +116,30 @@ def test_nanoodle_graphs_run_real_executor_with_injected_transport(tmp_path, mon
         return HttpResponse(200, {'content-type': 'application/json'}, json.dumps(data).encode())
     monkeypatch.setenv('NANOGPT_API_KEY', 'test-key-never-real')
     monkeypatch.setenv('TYPESAFE_API_KEY', 'fixture-typesafe')
-    pgraph, sgraph = workflow_graphs('fixture-writer', 'fixture-jev')
+    pgraph, sgraph = workflow_graphs('fixture-writer', 'fixture-jev', concept)
     workflows = NanoodleWorkflows(pgraph, sgraph, judge_provider=provider)
     workflows.prompts.http = http
     if provider == 'typesafe':
         monkeypatch.setattr('nanoodle.transport.default_http', http)
     else:
         workflows.judge.http = http
-    assert workflows.propose('final boss', 1, [], request_id='request')[0]['positive'] == 'boss knight'
+    assert workflows.propose(concept, 1, [], request_id='request')[0]['positive'] == 'boss knight'
     from PIL import Image
     image = tmp_path / 'image.png'
     Image.new('RGB', (16, 16)).save(image)
-    score = workflows.score('final boss', dict(path=str(image)), request_id='score')
+    score = workflows.score(concept, dict(path=str(image)), request_id='score')
     assert score['score'] == pytest.approx(.89)
     assert score['decision']['model'] == 'fixture-jev'
     assert len(requests) == 2
+    body = json.loads(requests[-1][2]['body'])
+    question = body['questions']['answer']
+    assert question['instructions'] == f'How well does the candidate convey ‘{concept}’ without breaking the image?'
+    assert question['criteria'] == [
+        f'No convincing {concept} effect, or the image is visibly broken.',
+        f'A weak suggestion of {concept} in a coherent image.',
+        f'Clearly conveys {concept} in a coherent, intact image.',
+        f'Unmistakably conveys {concept} in a coherent, intact image.',
+    ]
     if provider == 'typesafe':
         _, url, kwargs = requests[-1]
         assert url == 'https://api.typesafe.ai/v1/systemone'
@@ -138,7 +147,7 @@ def test_nanoodle_graphs_run_real_executor_with_injected_transport(tmp_path, mon
         assert 'x-api-key' not in kwargs['headers']
         body = json.loads(kwargs['body'])
         assert body['model'] == 'fixture-jev'
-        assert body['state'][0] == 'final boss'
+        assert body['state'][0] == concept
         assert body['state'][1] in body['assets']
         assert score['raw']['answers']['answer']['score'] == 2.67
 
@@ -148,7 +157,7 @@ def test_typesafe_rejection_is_reported_as_typesafe_not_nanogpt(tmp_path, monkey
     from particle_sliders_vibe import ProviderRejected
     monkeypatch.setattr('nanoodle.transport.default_http', lambda *a, **k: HttpResponse(402, {}, b'{}'))
     monkeypatch.setenv('TYPESAFE_API_KEY', 'fixture-typesafe')
-    workflows = NanoodleWorkflows(*workflow_graphs('writer', 'jev-latest'), judge_provider='typesafe')
+    workflows = NanoodleWorkflows(*workflow_graphs('writer', 'jev-latest', 'boss'), judge_provider='typesafe')
     from PIL import Image
     image = tmp_path / 'image.png'
     Image.new('RGB', (16, 16)).save(image)
@@ -161,7 +170,7 @@ def test_missing_provider_score_is_not_treated_as_zero(tmp_path, monkeypatch):
     payload = {'answers': {'answer': {'type': 'score', 'probabilities': {'0': 1, '1': 0, '2': 0, '3': 0}}}}
     monkeypatch.setattr('nanoodle.transport.default_http', lambda *a, **k: HttpResponse(200, {}, json.dumps(payload).encode()))
     monkeypatch.setenv('TYPESAFE_API_KEY', 'fixture-typesafe')
-    workflows = NanoodleWorkflows(*workflow_graphs('writer', 'jev-latest'), judge_provider='typesafe')
+    workflows = NanoodleWorkflows(*workflow_graphs('writer', 'jev-latest', 'boss'), judge_provider='typesafe')
     from PIL import Image
     image = tmp_path / 'image.png'
     Image.new('RGB', (16, 16)).save(image)

@@ -28,7 +28,7 @@ native = [
 anima = "lumen_studio.lifecycle:BACKEND"
 
 [project.scripts]
-anima-vibe = "lumen_studio.vibe:main"
+anima-vibe = "lumen_studio.vibe_cli:main"
 anima-vibe-targets = "lumen_studio.vibe:prepare_main"
 
 [project.entry-points."particle_sliders.inference_backends"]
