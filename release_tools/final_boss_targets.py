@@ -16,13 +16,15 @@ from lumen_studio.contracts import atomic_json, digest, file_hash
 STUDY = Path(__file__).resolve().parents[1] / "docs/final-boss-raw192"
 FIXTURE = STUDY / "training-pairs.json"
 VARIATION = "character-final-boss"
+RESOLUTION = 512
+STEPS = 10
 REGIONAL_RADII = {"regional-cue-matte": 0, "regional-cue-dilated2": 2}
+PERCENTILE_POSITIONS = {"sega-early35": (0, 1, 2), "sega-all35": tuple(range(STEPS))}
 RECIPES = {"prompt-only": (1.0, 0.0), "soft-floor45": (0.45, 0.0),
            "strong-boss-45-mix35": (0.45, 0.35), "strong-cues-early3": (0.45, 0.35),
            "strong-cues-late3": (0.45, 0.35), "diverse-mean35": (0.45, 0.35),
-           **dict.fromkeys(REGIONAL_RADII, (0.45, 0.35))}
-RESOLUTION = 512
-STEPS = 10
+           **dict.fromkeys(REGIONAL_RADII, (0.45, 0.35)),
+           **dict.fromkeys(PERCENTILE_POSITIONS, (0.45, 0.0))}
 CUE_POSITIONS = {"strong-cues-early3": (0, 1, 2), "strong-cues-late3": (7, 8, 9)}
 
 
@@ -46,6 +48,22 @@ def edited_target(neutral, positive, weight, cue_mix, explicit=None, alternate=N
     if not torch.isfinite(norm) or norm.item() <= 1e-10:
         raise ValueError("Degenerate weighted teacher contrast")
     return neutral + weighted * (residual.norm() / norm)
+
+
+def percentile_delta(neutral, positive, weight, *, active):
+    residual = positive - neutral
+    edit = residual * weight
+    if not active:
+        return edit * (residual.norm() / edit.norm().clamp_min(1e-10))
+
+    magnitude = edit.float().abs()
+    threshold = torch.quantile(magnitude.flatten(), 0.90)
+    tail = torch.where(magnitude >= threshold, edit, 0)
+    tail_norm = tail.norm(dtype=torch.float64)
+    if not torch.isfinite(tail_norm) or tail_norm.item() <= 1e-10:
+        raise ValueError("The semantic percentile mask has no finite edit")
+    edit = edit.lerp(tail * (edit.norm(dtype=torch.float64) / tail_norm), 0.35)
+    return edit * (residual.norm(dtype=torch.float64) / edit.norm(dtype=torch.float64).clamp_min(1e-10))
 
 
 def regional_target(neutral, baseline, stronger, matte, radius):
@@ -104,11 +122,14 @@ def teacher_cues(runtime, row, recipe):
     return tuple(runtime.encode(row[key]) for key in keys)
 
 
-def final_target(runtime, latent, timestep, neutral, positive, weight, cue_mix, cue_embeddings, *, regional=None):
+def final_target(runtime, latent, timestep, neutral, positive, weight, cue_mix, cue_embeddings,
+                 *, regional=None, percentile_active=None):
     # Preserve the rounding of the original full-frame capture.
     positive = neutral + (positive - neutral)
     if weight is None:
         return positive
+    if percentile_active is not None:
+        return neutral + percentile_delta(neutral, positive, weight, active=percentile_active)
     cues = (runtime.predict(latent, timestep, embedding) for embedding in cue_embeddings)
     target = edited_target(neutral, positive, weight, cue_mix, *cues)
     if regional is None:
@@ -123,6 +144,7 @@ def capture_row(runtime, row, matte_path, recipe):
     neutral, positive = (runtime.encode(row[key]) for key in ("neutral", "positive"))
     cues = teacher_cues(runtime, row, recipe)
     cue_positions = CUE_POSITIONS.get(recipe, range(STEPS))
+    percentile_positions = PERCENTILE_POSITIONS.get(recipe)
     n = p = runtime.noise(row["seed"], RESOLUTION, RESOLUTION)
     matte = subject_matte(matte_path, n.shape[-2:], runtime.device) if floor < 1 else None
     weight = floor + (1 - floor) * matte if matte is not None else None
@@ -138,8 +160,9 @@ def capture_row(runtime, row, matte_path, recipe):
         p_next = runtime.step(p_scheduler, vnp + (vpp - vnp), timestep, p)
         for track, latent, base, positive_field in (("neutral", n, vn, vp), ("positive", p, vnp, vpp)):
             active = cues if position in cue_positions else ()
+            percentile_active = None if percentile_positions is None else position in percentile_positions
             target = final_target(runtime, latent, timestep, base, positive_field, weight, cue_mix,
-                                  active, regional=regional)
+                                  active, regional=regional, percentile_active=percentile_active)
             records[track].append(dict(position=position, timestep=float(timestep), trajectory=track,
                                        latent=latent.cpu().clone(), neutral=base.cpu().clone(),
                                        positive=target.cpu().clone()))
@@ -188,7 +211,8 @@ def verify_native(runtime, cache, request, fixture=FIXTURE):
     rows = {row["id"]: row for row in teacher_rows(fixture, recipe)}
     floor, cue_mix = RECIPES[recipe]
     cue_positions = CUE_POSITIONS.get(recipe, range(STEPS))
-    indices = (1, 19, 42, 117) if recipe in CUE_POSITIONS else (3, 19, 46, 117)
+    percentile_positions = PERCENTILE_POSITIONS.get(recipe)
+    indices = (1, 19, 42, 117) if recipe in CUE_POSITIONS or percentile_positions else (3, 19, 46, 117)
     with runtime.mixer.scales({}):
         for index in indices:
             record = cache[index]
@@ -202,9 +226,11 @@ def verify_native(runtime, cache, request, fixture=FIXTURE):
             matte = subject_matte(matte_path, latent.shape[-2:], runtime.device) if floor < 1 else None
             weight = floor + (1 - floor) * matte if matte is not None else None
             regional = (matte, REGIONAL_RADII[recipe]) if recipe in REGIONAL_RADII else None
-            cues = teacher_cues(runtime, row, recipe) if record["position"] in cue_positions else ()
+            position = record["position"]
+            cues = teacher_cues(runtime, row, recipe) if position in cue_positions else ()
+            percentile_active = None if percentile_positions is None else position in percentile_positions
             target = final_target(runtime, latent, timestep, neutral, positive, weight, cue_mix,
-                                  cues, regional=regional)
+                                  cues, regional=regional, percentile_active=percentile_active)
             if not (torch.equal(neutral.cpu(), record["neutral"]) and torch.equal(target.cpu(), record["positive"])):
                 return False
     return True

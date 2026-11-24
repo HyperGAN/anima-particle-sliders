@@ -10,6 +10,8 @@ The **Final Boss research default** is soft foreground weighting with a **0.45 b
 
 Each scored row uses 192 stock ParticleGAN EMPF updates and eight matched cases at 512 × 512, ten native Euler steps, and CFG 1. The score is the equal-case mean of `max(0, Boss_ON − Boss_OFF) × (1 − image_damage)²`, shown on a 0–100 scale. Jev judges character design and visible damage separately. The structural check also runs at each quarter of training. [Jev rubrics](rubrics.json)
 
+This table covers the original control and dose comparisons. The results JSON includes the later matched ablations and their RAW fingerprints. [Current ranking](../leaderboard.md#training-techniques) · [Machine-readable scores](results.json)
+
 | Training target | Early α 2/3 | Constant α 0.6375 |
 | --- | ---: | ---: |
 | Soft foreground weighting, 0.45 background floor | **25.66** | 13.06 |
@@ -90,3 +92,14 @@ done
 ```
 
 Independent CUDA capture matched the queued training targets bit for bit across both 120-field caches. Both recipes passed native admission. [CUDA verification](ablations/regional-cue-native-verification.json)
+
+## Percentile-filtered teacher targets
+
+These recipes retain both original trajectories. The active positions blend 35% of the norm-matched top 10% of the soft-foreground edit into the original dense edit and restore its per-field L2 norm. The command checks native admission on the saved cache. [Leaderboard comparison](../leaderboard.md#percentile-filtered-teacher-edits) · [Capture source](../../release_tools/final_boss_targets.py)
+
+```sh
+for recipe in sega-early35 sega-all35; do
+  python -m release_tools.final_boss_targets "$recipe" \
+    --model "$ANIMA_MODEL" --out "targets/$recipe"
+done
+```

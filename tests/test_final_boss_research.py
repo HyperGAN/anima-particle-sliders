@@ -49,7 +49,7 @@ def test_new_cue_recipes_reuse_trajectories_and_apply_the_declared_contrast():
         device = "cpu"
 
         def encode(self, prompt):
-            velocities = {"plain": (0, 0), "boss": (2, 2), "specific": (6, 1), "other": (1, 9)}
+            velocities = {"plain": (0, 0), "boss": (2, 3), "specific": (6, 1), "other": (1, 9)}
             return torch.tensor(velocities[prompt], dtype=torch.float32).reshape(1, 1, 1, 1, 2)
 
         def noise(self, seed, width, height):
@@ -68,10 +68,11 @@ def test_new_cue_recipes_reuse_trajectories_and_apply_the_declared_contrast():
     row = {"id": "fixture", "seed": 1, "neutral": "plain", "positive": "boss",
            "explicit_positive": "specific", "alternate_positive": "other"}
     matte = STUDY / "mattes/bridge.png"
-    recipes = ("soft-floor45", "strong-boss-45-mix35", "strong-cues-early3", "strong-cues-late3", "diverse-mean35")
-    baseline, strong, early, late, diverse = [capture_row(runtime, row, matte, recipe)["records"] for recipe in recipes]
-    for index, fields in enumerate(zip(baseline, strong, early, late, diverse, strict=True)):
-        control, explicit, first, final, averaged = fields
+    recipes = ("soft-floor45", "strong-boss-45-mix35", "strong-cues-early3", "strong-cues-late3", "diverse-mean35",
+               "sega-early35", "sega-all35")
+    captures = [capture_row(runtime, row, matte, recipe)["records"] for recipe in recipes]
+    for index, fields in enumerate(zip(*captures, strict=True)):
+        control, explicit, first, final, averaged, percentile_early, percentile_all = fields
         step = index % STEPS
         for field in fields:
             assert field["position"] == step and field["trajectory"] == control["trajectory"]
@@ -79,6 +80,8 @@ def test_new_cue_recipes_reuse_trajectories_and_apply_the_declared_contrast():
             assert torch.equal(field["neutral"], control["neutral"])
         assert torch.equal(first["positive"], (explicit if step < 3 else control)["positive"])
         assert torch.equal(final["positive"], (explicit if step >= 7 else control)["positive"])
+        assert torch.equal(percentile_early["positive"], (percentile_all if step < 3 else control)["positive"])
+        assert not torch.equal(percentile_all["positive"], control["positive"])
         neutral = control["neutral"]
         pure = runtime.predict(control["latent"], step, runtime.encode(row["positive"]))
         control_edit = control["positive"] - neutral
@@ -88,3 +91,4 @@ def test_new_cue_recipes_reuse_trajectories_and_apply_the_declared_contrast():
         expected = mixed * (control_edit / (pure - neutral))
         expected = expected * ((pure - neutral).norm() / expected.norm())
         torch.testing.assert_close(averaged["positive"] - neutral, expected)
+        torch.testing.assert_close((percentile_all["positive"] - neutral).norm(), control_edit.norm())
