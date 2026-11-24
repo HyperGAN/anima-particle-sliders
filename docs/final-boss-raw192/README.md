@@ -104,6 +104,8 @@ for recipe in sega-early35 sega-all35; do
 done
 ```
 
+Independent CUDA capture reproduced all 120 archived fields for each recipe and both caches passed native admission. The verification used the published capture source at `d058517`. [CUDA verification](ablations/sega-native-verification.json) · [Verified source](https://github.com/HyperGAN/anima-particle-sliders/blob/d058517532d00098fed181c89eea2ac1b364ffc6/release_tools/final_boss_targets.py)
+
 ## Matched ordinary attire
 
 The matched-attire recipes use the published stronger Boss prompt and its same-scene ordinary outfit reference. The regional variant blends the matched-reference change into the character region and preserves the stronger cue's exterior values. [Exact prompt pairs](ablations/matched-attire-prompts.json) · [Regional field audit](ablations/regional-attire-field-audit.json) · [Leaderboard](../leaderboard.md#matched-ordinary-attire)
