@@ -18,11 +18,13 @@ FIXTURE = STUDY / "training-pairs.json"
 VARIATION = "character-final-boss"
 RESOLUTION = 512
 STEPS = 10
-REGIONAL_RADII = {"regional-cue-matte": 0, "regional-cue-dilated2": 2}
+REGIONAL_RADII = {"regional-cue-matte": 0, "regional-cue-dilated2": 2, "regional-attire35": 0}
+MATCHED_ATTIRE = ("matched-attire35", "regional-attire35")
 PERCENTILE_POSITIONS = {"sega-early35": (0, 1, 2), "sega-all35": tuple(range(STEPS))}
 RECIPES = {"prompt-only": (1.0, 0.0), "soft-floor45": (0.45, 0.0),
            "strong-boss-45-mix35": (0.45, 0.35), "strong-cues-early3": (0.45, 0.35),
            "strong-cues-late3": (0.45, 0.35), "diverse-mean35": (0.45, 0.35),
+           "matched-attire35": (0.45, 0.35),
            **dict.fromkeys(REGIONAL_RADII, (0.45, 0.35)),
            **dict.fromkeys(PERCENTILE_POSITIONS, (0.45, 0.0))}
 CUE_POSITIONS = {"strong-cues-early3": (0, 1, 2), "strong-cues-late3": (7, 8, 9)}
@@ -48,6 +50,12 @@ def edited_target(neutral, positive, weight, cue_mix, explicit=None, alternate=N
     if not torch.isfinite(norm) or norm.item() <= 1e-10:
         raise ValueError("Degenerate weighted teacher contrast")
     return neutral + weighted * (residual.norm() / norm)
+
+
+def matched_attire_target(neutral, positive, stronger, ordinary, weight, cue_mix):
+    original = positive - neutral
+    mixed = original.lerp(stronger - ordinary, cue_mix) * weight
+    return neutral + mixed * (original.norm() / mixed.norm())
 
 
 def percentile_delta(neutral, positive, weight, *, active):
@@ -107,6 +115,12 @@ def row_metadata(row):
 
 def teacher_rows(fixture, recipe):
     rows = json.loads(fixture.read_text())["pairs"]
+    if recipe in MATCHED_ATTIRE:
+        prompts = json.loads((fixture.parent / "ablations/matched-attire-prompts.json").read_text())["prompts"]
+        if (set(prompts) != {row["id"] for row in rows}
+                or any(prompts[row["id"]]["stronger"] != row["explicit_positive"] for row in rows)):
+            raise ValueError("Matched attire must reuse the stronger Boss prompt for every training pair")
+        return [row | {"ordinary_attire": prompts[row["id"]]["ordinary"]} for row in rows]
     if recipe != "diverse-mean35":
         return rows
     alternates = json.loads((fixture.parent / "ablations/two-cue-prompts.json").read_text())
@@ -118,12 +132,16 @@ def teacher_rows(fixture, recipe):
 def teacher_cues(runtime, row, recipe):
     if not RECIPES[recipe][1]:
         return ()
-    keys = ("explicit_positive", "alternate_positive") if recipe == "diverse-mean35" else ("explicit_positive",)
+    keys = ("explicit_positive",)
+    if recipe in MATCHED_ATTIRE:
+        keys += ("ordinary_attire",)
+    elif recipe == "diverse-mean35":
+        keys += ("alternate_positive",)
     return tuple(runtime.encode(row[key]) for key in keys)
 
 
 def final_target(runtime, latent, timestep, neutral, positive, weight, cue_mix, cue_embeddings,
-                 *, regional=None, percentile_active=None):
+                 *, regional=None, percentile_active=None, matched_attire=False):
     # Preserve the rounding of the original full-frame capture.
     positive = neutral + (positive - neutral)
     if weight is None:
@@ -131,11 +149,16 @@ def final_target(runtime, latent, timestep, neutral, positive, weight, cue_mix, 
     if percentile_active is not None:
         return neutral + percentile_delta(neutral, positive, weight, active=percentile_active)
     cues = (runtime.predict(latent, timestep, embedding) for embedding in cue_embeddings)
-    target = edited_target(neutral, positive, weight, cue_mix, *cues)
+    if matched_attire:
+        stronger, ordinary = cues
+        target = matched_attire_target(neutral, positive, stronger, ordinary, weight, cue_mix)
+    else:
+        target = edited_target(neutral, positive, weight, cue_mix, *cues)
     if regional is None:
         return target
     matte, radius = regional
-    baseline = edited_target(neutral, positive, weight, 0.)
+    baseline = (edited_target(neutral, positive, weight, cue_mix, stronger) if matched_attire
+                else edited_target(neutral, positive, weight, 0.))
     return regional_target(neutral, baseline, target, matte, radius)[0]
 
 
@@ -149,6 +172,7 @@ def capture_row(runtime, row, matte_path, recipe):
     matte = subject_matte(matte_path, n.shape[-2:], runtime.device) if floor < 1 else None
     weight = floor + (1 - floor) * matte if matte is not None else None
     regional = (matte, REGIONAL_RADII[recipe]) if recipe in REGIONAL_RADII else None
+    matched_attire = recipe in MATCHED_ATTIRE
     n_scheduler, p_scheduler = runtime.scheduler(STEPS), runtime.scheduler(STEPS)
     records = {"neutral": [], "positive": []}
     for position, timestep in enumerate(n_scheduler.timesteps):
@@ -162,7 +186,8 @@ def capture_row(runtime, row, matte_path, recipe):
             active = cues if position in cue_positions else ()
             percentile_active = None if percentile_positions is None else position in percentile_positions
             target = final_target(runtime, latent, timestep, base, positive_field, weight, cue_mix,
-                                  active, regional=regional, percentile_active=percentile_active)
+                                  active, regional=regional, percentile_active=percentile_active,
+                                  matched_attire=matched_attire)
             records[track].append(dict(position=position, timestep=float(timestep), trajectory=track,
                                        latent=latent.cpu().clone(), neutral=base.cpu().clone(),
                                        positive=target.cpu().clone()))
@@ -212,6 +237,7 @@ def verify_native(runtime, cache, request, fixture=FIXTURE):
     floor, cue_mix = RECIPES[recipe]
     cue_positions = CUE_POSITIONS.get(recipe, range(STEPS))
     percentile_positions = PERCENTILE_POSITIONS.get(recipe)
+    matched_attire = recipe in MATCHED_ATTIRE
     indices = (1, 19, 42, 117) if recipe in CUE_POSITIONS or percentile_positions else (3, 19, 46, 117)
     with runtime.mixer.scales({}):
         for index in indices:
@@ -230,7 +256,8 @@ def verify_native(runtime, cache, request, fixture=FIXTURE):
             cues = teacher_cues(runtime, row, recipe) if position in cue_positions else ()
             percentile_active = None if percentile_positions is None else position in percentile_positions
             target = final_target(runtime, latent, timestep, neutral, positive, weight, cue_mix,
-                                  cues, regional=regional, percentile_active=percentile_active)
+                                  cues, regional=regional, percentile_active=percentile_active,
+                                  matched_attire=matched_attire)
             if not (torch.equal(neutral.cpu(), record["neutral"]) and torch.equal(target.cpu(), record["positive"])):
                 return False
     return True

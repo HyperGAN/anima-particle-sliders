@@ -6,7 +6,7 @@ from types import SimpleNamespace
 import pytest
 import torch
 
-from release_tools.final_boss_targets import RECIPES, STEPS, capture_row, edited_target
+from release_tools.final_boss_targets import RECIPES, STEPS, capture_row, edited_target, final_target
 
 
 STUDY = Path(__file__).resolve().parents[1] / "docs/final-boss-raw192"
@@ -42,6 +42,32 @@ def test_fitted_teacher_contrast_keeps_the_original_l2_dose(recipe):
 
     torch.testing.assert_close(edit.norm(), (positive - neutral).norm())
     assert edit[1] / edit[0] == pytest.approx(floor / (1 + 2 * cue_mix))
+
+
+def test_regional_attire_preserves_the_stronger_cue_exterior_at_matched_dose():
+    def field(values):
+        return torch.tensor(values, dtype=torch.float32).reshape(1, 1, 1, 1, 3)
+
+    runtime = SimpleNamespace(predict=lambda latent, timestep, embedding: embedding)
+    neutral = field((0.1, 0.25, 0.3))
+    positive = field((1., 2., 4.))
+    stronger = field((4., 2., 4.))
+    ordinary = field((0.2, 0.9, 0.12))
+    matte = field((1., 0.8, 0.))
+    weight = 0.45 + 0.55 * matte
+    baseline = final_target(runtime, None, 0, neutral, positive, weight, 0.35, (stronger,))
+    matched = final_target(runtime, None, 0, neutral, positive, weight, 0.35,
+                           (stronger, ordinary), matched_attire=True)
+    localized = final_target(runtime, None, 0, neutral, positive, weight, 0.35,
+                             (stronger, ordinary), regional=(matte, 0), matched_attire=True)
+
+    original = (neutral + (positive - neutral)) - neutral
+    expected = original.lerp(stronger - ordinary, 0.35) * weight
+    torch.testing.assert_close(matched - neutral, expected * (original.norm() / expected.norm()))
+    assert not torch.equal(matched[matte == 0], baseline[matte == 0])
+    assert torch.equal(localized[matte == 0], baseline[matte == 0])
+    torch.testing.assert_close((localized - neutral).norm(), (baseline - neutral).norm())
+    torch.testing.assert_close((localized - baseline).norm(), (matched - baseline).norm())
 
 
 def test_new_cue_recipes_reuse_trajectories_and_apply_the_declared_contrast():
