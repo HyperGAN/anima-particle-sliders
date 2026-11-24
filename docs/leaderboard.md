@@ -29,6 +29,8 @@ The late-cue and two-cue-average runs each passed all four image checks. Mean Je
 
 The resumed late-cue run passed all four image checks. Mean Jev Boss gain reached **+0.353**, compared with **+0.373** for soft foreground weighting at the same update. The late-cue archivist gained **+0.427** versus **+0.260** for soft foreground weighting. Soft foreground weighting led on the other three cases. [Four matched originals and renders](final-boss-raw192/ablations/late-cues-raw96-matched.jpg)
 
+Each cue-timing recipe replaces 36 of the 120 teacher fields. The replacement moves the edit by an average of **22.0%** of its original L2 norm at the first three positions and **16.8%** at the last three. The source and replacement fields have matched L2 norms. [Teacher field distances by position](final-boss-raw192/ablations/cue-field-distances.json)
+
 ## Structural stops
 
 The 35% cue blend that kept only components with matching signs across its two alternate cue edits stopped at update 48. The bookkeeper render collapsed to a texture and scored 0.83 on Jev’s unreadable-image check. Training stopped before update 49. [Saved RAW48 render](final-boss-raw192/ablations/diverse-consensus35-raw48-bookkeeper.png) · [Consensus research](https://github.com/HyperGAN/particle-sliders/pull/315)

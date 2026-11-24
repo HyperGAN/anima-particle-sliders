@@ -1,0 +1,87 @@
+{
+  "scope": "Matched archived teacher velocity fields for soft foreground weighting and the 35% stronger-cue blend",
+  "absolute_shift": "L2 distance between the two edit fields at each matched state",
+  "relative_shift": "Absolute shift divided by the soft foreground edit L2 norm at that state",
+  "fields_per_phase": 36,
+  "cache_fingerprints": [
+    "8e28e58e797016219e5f0a0dbbaacccdc37eafaa25468b83ef954bfb2e90e120",
+    "7feebb6e2fedbbd9e90a9ab377687093647c69b9797158252121c601f2872445"
+  ],
+  "fields": 120,
+  "phase_means": {
+    "first3": {
+      "base_norm": 110.82924971840984,
+      "strong_norm": 110.82925252712143,
+      "absolute_shift": 23.779701336873767,
+      "relative_shift": 0.22032175472626628
+    },
+    "last3": {
+      "base_norm": 16.45905404752995,
+      "strong_norm": 16.459054119766837,
+      "absolute_shift": 2.6196911493936827,
+      "relative_shift": 0.16829267810332793
+    }
+  },
+  "position_means": {
+    "0": {
+      "base_norm": 127.2807052318927,
+      "strong_norm": 127.28070917035011,
+      "absolute_shift": 24.715657693693952,
+      "relative_shift": 0.19743664084966392
+    },
+    "1": {
+      "base_norm": 108.89965272493139,
+      "strong_norm": 108.89965487535596,
+      "absolute_shift": 22.774226325963596,
+      "relative_shift": 0.21261448852091983
+    },
+    "2": {
+      "base_norm": 96.30739119840547,
+      "strong_norm": 96.30739353565822,
+      "absolute_shift": 23.849219990963757,
+      "relative_shift": 0.2509141348082151
+    },
+    "3": {
+      "base_norm": 80.9993722193205,
+      "strong_norm": 80.9993720226138,
+      "absolute_shift": 17.405942186444783,
+      "relative_shift": 0.22717183774323615
+    },
+    "4": {
+      "base_norm": 71.0313685702656,
+      "strong_norm": 71.03136856809179,
+      "absolute_shift": 12.558809520575073,
+      "relative_shift": 0.19355323274359973
+    },
+    "5": {
+      "base_norm": 55.11380480164599,
+      "strong_norm": 55.11380350770944,
+      "absolute_shift": 8.786524759358459,
+      "relative_shift": 0.17654841472691893
+    },
+    "6": {
+      "base_norm": 36.217750642338125,
+      "strong_norm": 36.21775089319582,
+      "absolute_shift": 5.685146131851883,
+      "relative_shift": 0.1663321575210092
+    },
+    "7": {
+      "base_norm": 23.901579238242324,
+      "strong_norm": 23.901579887459206,
+      "absolute_shift": 3.700699131045804,
+      "relative_shift": 0.16239633720971838
+    },
+    "8": {
+      "base_norm": 15.836011677959112,
+      "strong_norm": 15.836011431200573,
+      "absolute_shift": 2.464993875569661,
+      "relative_shift": 0.16275971637348993
+    },
+    "9": {
+      "base_norm": 9.63957122638841,
+      "strong_norm": 9.639571040640734,
+      "absolute_shift": 1.693380441565582,
+      "relative_shift": 0.1797219807267755
+    }
+  }
+}
