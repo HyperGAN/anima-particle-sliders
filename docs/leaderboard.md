@@ -33,9 +33,9 @@ Stronger Boss distinction accounts for **3.52** of the cue blend’s constant-st
 
 ## Update-48 preview
 
-All four recipes passed the structural checks. Stronger cues at the first three teacher positions led under the leaderboard rubric with **3.23** at shared early α 2/3. Soft foreground weighting scored **2.34**, the two-cue average **1.94**, and late cues **1.74**. Early cues gained more Boss distinction and also had the highest mean image damage (**0.305**). The archivist and botanist renders show visible speckling. [Four matched cases across all recipes](final-boss-raw192/ablations/cue-timing-raw48-matched.jpg) · [Per-case scores](final-boss-raw192/ablations/cue-timing-raw48-scores.json)
+All five recipes passed the structural checks. Stronger cues at the first three teacher positions led with **3.23** at shared early α 2/3. Soft foreground weighting scored **2.34**, the two-cue average **1.94**, late cues **1.74**, and the qualified costume teachers **0.90**. The costume-teacher recipe had the highest mean image damage (**0.403**) and the weakest Boss distinction gain (**+0.020**). [Four matched cases across all recipes](final-boss-raw192/ablations/cue-timing-raw48-matched.jpg) · [Per-case scores](final-boss-raw192/ablations/cue-timing-raw48-scores.json)
 
-Mean gain under the quarter-check question was **+0.228** for early cues, **+0.186** for soft foreground weighting, **+0.176** for late cues, and **+0.174** for the two-cue average.
+Mean gain under the quarter-check question was **+0.228** for early cues, **+0.186** for soft foreground weighting, **+0.176** for late cues, **+0.174** for the two-cue average, and **+0.149** for the costume teachers.
 
 ## Update-96 preview
 
