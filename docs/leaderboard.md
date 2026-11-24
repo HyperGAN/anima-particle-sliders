@@ -46,9 +46,9 @@ Each cue-timing recipe replaces 36 of the 120 teacher fields. The replacement mo
 
 ## Update-144 preview
 
-Late cues passed all four structural checks. The quarter-check question gave late cues **+0.453** mean gain and soft foreground weighting **+0.401** at the same early strength. [Four matched originals and renders](final-boss-raw192/ablations/late-cues-raw144-matched.jpg)
+At shared early α 2/3, early cues scored **9.78**, late cues **8.92**, and soft foreground weighting **7.75**. All three passed the four structural checks. Early cues led on all four cases, with most of the gain over soft foreground weighting coming from bookkeeper. Mean Boss distinction gain was **+0.200** for early cues, **+0.183** for late cues, and **+0.168** for soft foreground weighting. [Matched originals and renders](final-boss-raw192/ablations/cue-timing-raw144-matched.jpg) · [Per-case scores](final-boss-raw192/ablations/cue-timing-raw144-scores.json)
 
-Scoring those same renders with the leaderboard’s separate character and damage questions gave late cues **8.92** and soft foreground weighting **7.75**. Late cues had higher mean Boss distinction gain (**+0.183** versus **+0.168**) and slightly lower mean image damage (**0.287** versus **0.302**). Bookkeeper accounted for most of the score increase. Botanist and seamstress favored soft foreground weighting after the damage adjustment. [Per-case scores and matched image hashes](final-boss-raw192/ablations/late-cues-raw144-scores.json)
+The quarter-check question gave mean gains of **+0.513** for early cues, **+0.453** for late cues, and **+0.401** for soft foreground weighting.
 
 ## Late cues at update 192
 
