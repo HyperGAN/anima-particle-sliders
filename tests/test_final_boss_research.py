@@ -9,8 +9,9 @@ import torch
 from release_tools.final_boss_apg import project_subject_target
 from release_tools.final_boss_cues import ARMOR_CREST_START, ROLE_AFTER_COSTUME, ROLE_BEFORE_COSTUME
 from release_tools.final_boss_targets import (
-    FOREGROUND_APG, GROUNDED_COSTUME, GROUNDED_WAVELET, GUIDED_TEACHER, LOOKAHEAD_EARLY, RECIPES, STEPS, capture_row,
-    edited_target, final_target, subject_matte, teacher_rows, verify_guided_trajectory,
+    ANCHORED_APG, APG_POSITIONS, FOREGROUND_APG, GROUNDED_COSTUME, GROUNDED_WAVELET, GUIDED_TEACHER,
+    LOOKAHEAD_EARLY, RECIPES, STEPS, capture_row, edited_target, final_target, subject_matte, teacher_rows,
+    verify_guided_trajectory,
 )
 from release_tools.final_boss_wavelet import low_band
 
@@ -115,6 +116,30 @@ def test_foreground_apg_removes_the_clean_latent_component_at_fixed_dose():
     torch.testing.assert_close((target - neutral).norm(), (baseline - neutral).norm())
     with pytest.raises(ValueError, match="Degenerate conditional clean-latent axis"):
         project_subject_target(sigma * positive, sigma, neutral, positive, baseline, matte)
+
+
+def test_anchored_apg_keeps_the_base_parallel_component_and_the_stronger_full_norm():
+    neutral = torch.tensor([[[[[0.25, 0.5, 0.625]]]]])
+    generic = neutral + torch.tensor([[[[[1.25, 1.75, 0.75]]]]])
+    explicit = neutral + torch.tensor([[[[[2.5, 1.25, 1.]]]]])
+    sigma = 0.75
+    latent = sigma * generic + torch.tensor([[[[[1., 0., 7.]]]]])
+    matte = torch.tensor([[[[[1., 1., 0.]]]]])
+    weight = 0.45 + 0.55 * matte
+    base = final_target(None, latent, 0, neutral, generic, weight, 0., ())
+    runtime = SimpleNamespace(predict=lambda latent, timestep, embedding: embedding)
+    floor, mix = RECIPES[ANCHORED_APG]
+    assert floor == 0.45 and mix == 0.35 and APG_POSITIONS[ANCHORED_APG] == (0, 1, 2)
+    strong = final_target(runtime, latent, 0, neutral, generic, weight, mix, (explicit,))
+    projected = final_target(runtime, latent, 0, neutral, generic, weight, mix, (explicit,),
+                             subject_projection=(matte, sigma))
+
+    assert not torch.equal(strong[..., 0], projected[..., 0])
+    torch.testing.assert_close(projected[..., 0], base[..., 0])
+    assert torch.equal(projected[..., 2], strong[..., 2])
+    torch.testing.assert_close((projected - neutral).norm(), (strong - neutral).norm())
+    with pytest.raises(ValueError, match="exceeds the subject edit norm"):
+        project_subject_target(latent, sigma, neutral, generic, strong, matte, reference=100. * base)
 
 
 def test_lookahead_uses_two_sigma_weighted_steps_at_the_first_three_positions():

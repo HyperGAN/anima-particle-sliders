@@ -207,6 +207,12 @@ At update 96, APG passed all four structural checks and scored **2.25** against 
 
 An auxiliary Jev check measured the shift toward photographic rendering on a 0–1 scale. The APG mean dropped from **0.76** at update 48 to **0.38** at update 96. Soft foreground weighting averaged **0.27** at each checkpoint. Botanist remained the most photographic APG case at update 96 (**0.71**). [Question, matched image digests, and per-case judgments](final-boss-raw192/ablations/foreground-apg-photographic-shift.json)
 
+### Preserve the baseline component when projecting added cues
+
+This follow-up starts from the 35% stronger-cue recipe. At the first three denoising positions, it keeps the part of the soft foreground edit that points along the conditional clean prediction. It adjusts the stronger cue inside the matte to retain that baseline component, the stronger cue's full edit norm, and its exact exterior values. The other seven positions retain the stronger-cue targets. [APG projection](https://arxiv.org/html/2410.02416v2) · [Capture command and source](final-boss-raw192/README.md#preserve-the-baseline-component-when-projecting-added-cues)
+
+Across the 36 projected archived fields, the new target moved an average of **4.17%** of the full edit norm and retained **96.8%** of the added cue's norm. The other 84 archived fields are carried over. The native trial will compare both shared strengths. [Archived-field audit](final-boss-raw192/ablations/anchored-apg-early-field-audit.json)
+
 ## Two-step teacher contrast
 
 MeanFlow represents flow over a denoising interval by an average velocity. This training adaptation starts both frozen teachers at the same saved latent, takes one native step on each branch, and measures their velocities at the resulting states. It weights both steps by their sigma interval to estimate the average contrast. The first three positions use this contrast with the same soft foreground mask and edit norm as the incumbent. The remaining seven use the original targets. [MeanFlow](https://arxiv.org/abs/2505.13447) · [Capture commands and source](final-boss-raw192/README.md#two-step-teacher-contrast)

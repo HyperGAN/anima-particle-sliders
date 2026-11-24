@@ -166,6 +166,15 @@ python -m release_tools.final_boss_targets foreground-apg-floor45 \
   --model "$ANIMA_MODEL" --out targets/foreground-apg-floor45
 ```
 
+### Preserve the baseline component when projecting added cues
+
+The anchored recipe uses the generic Boss clean prediction as the projection axis. At positions 0–2, it sets the stronger cue's subject-parallel component to the value from soft foreground weighting and rescales the orthogonal component to recover the stronger cue's edit norm. Each exterior value and all 84 later teacher fields come from the 35% stronger-cue recipe. [Projection source](../../release_tools/final_boss_apg.py) · [Archived-field checks](ablations/anchored-apg-early-field-audit.json)
+
+```sh
+python -m release_tools.final_boss_targets anchored-apg-early35 \
+  --model "$ANIMA_MODEL" --out targets/anchored-apg-early35
+```
+
 ## Two-step teacher contrast
 
 At zero-indexed positions 0–2 of both original trajectories, this recipe advances the frozen neutral and Boss teachers separately from the current shared latent. It forms the sigma-weighted average of their contrasts over the two-step window. The fit still uses the original neutral velocity, foreground weighting, and instantaneous edit norm. There are 36 substituted targets across the same 120 fields. [MeanFlow paper](https://arxiv.org/abs/2505.13447) · [Two-step target source](../../release_tools/final_boss_lookahead.py)

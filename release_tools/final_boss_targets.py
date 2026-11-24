@@ -32,11 +32,14 @@ WAVELET_RECIPES = (WAVELET_EXTERIOR, GROUNDED_WAVELET)
 SPLIT_CUES = ("role-cue35", "crest-cue35")
 GUIDED_TEACHER = "guided-teacher-floor45"
 FOREGROUND_APG = "foreground-apg-floor45"
+ANCHORED_APG = "anchored-apg-early35"
+APG_POSITIONS = {FOREGROUND_APG: tuple(range(STEPS)), ANCHORED_APG: (0, 1, 2)}
 LOOKAHEAD_EARLY = "lookahead-early3"
 LOOKAHEAD_POSITIONS = (0, 1, 2)
 PERCENTILE_POSITIONS = {"sega-early35": (0, 1, 2), "sega-all35": tuple(range(STEPS))}
 RECIPES = {"prompt-only": (1.0, 0.0), "soft-floor45": (0.45, 0.0),
            GUIDED_TEACHER: (0.45, 0.0), FOREGROUND_APG: (0.45, 0.0), LOOKAHEAD_EARLY: (0.45, 0.0),
+           ANCHORED_APG: (0.45, 0.35),
            "strong-boss-45-mix35": (0.45, 0.35), "strong-cues-early3": (0.45, 0.35),
            "strong-cues-late3": (0.45, 0.35), "diverse-mean35": (0.45, 0.35),
            "matched-attire35": (0.45, 0.35), WAVELET_EXTERIOR: (0.45, 0.35),
@@ -197,7 +200,8 @@ def final_target(runtime, latent, timestep, neutral, positive, weight, cue_mix, 
         target = edited_target(neutral, positive, weight, cue_mix, *cues)
     if subject_projection is not None:
         matte, sigma = subject_projection
-        return project_subject_target(latent, sigma, neutral, positive, target, matte)
+        reference = edited_target(neutral, positive, weight, 0.) if cue_mix else None
+        return project_subject_target(latent, sigma, neutral, positive, target, matte, reference=reference)
     if wavelet_matte is not None:
         baseline = edited_target(neutral, positive, weight, 0.)
         return coarse_exterior_target(neutral, baseline, target, wavelet_matte <= 0.01)
@@ -237,8 +241,9 @@ def capture_row(runtime, row, matte_path, recipe):
     n_scheduler = runtime.scheduler(STEPS)
     p_scheduler = guided_scheduler(runtime, rollout) if rollout else runtime.scheduler(STEPS)
     records = {"neutral": [], "positive": []}
+    projection_positions = APG_POSITIONS.get(recipe, ())
     for position, timestep in enumerate(n_scheduler.timesteps):
-        projection = (matte, float(n_scheduler.sigmas[position])) if recipe == FOREGROUND_APG else None
+        projection = (matte, float(n_scheduler.sigmas[position])) if position in projection_positions else None
         vn = runtime.predict(n, timestep, neutral)
         vp = runtime.predict(n, timestep, positive)
         vnp, vpp = ((vn, vp) if position == 0 else
@@ -324,9 +329,10 @@ def verify_native(runtime, cache, request, fixture=FIXTURE):
     cue_positions = CUE_POSITIONS.get(recipe, range(STEPS))
     percentile_positions = PERCENTILE_POSITIONS.get(recipe)
     matched_attire = recipe in MATCHED_ATTIRE
-    sigmas = runtime.scheduler(STEPS).sigmas if recipe == FOREGROUND_APG else None
+    projection_positions = APG_POSITIONS.get(recipe, ())
+    sigmas = runtime.scheduler(STEPS).sigmas if projection_positions else None
     indices = (1, 19, 42, 117) if recipe in CUE_POSITIONS or percentile_positions else (3, 19, 46, 117)
-    if recipe == LOOKAHEAD_EARLY:
+    if recipe in (LOOKAHEAD_EARLY, ANCHORED_APG):
         indices = (1, 12, 46, 117)
     with runtime.mixer.scales({}):
         if recipe == GUIDED_TEACHER and (identity["manifest_sha256"] != digest(list(rows.values()))
@@ -353,7 +359,7 @@ def verify_native(runtime, cache, request, fixture=FIXTURE):
             cues = teacher_cues(runtime, row, recipe) if position in cue_positions else ()
             percentile_active = None if percentile_positions is None else position in percentile_positions
             strength = row["grounded_schedule"][position] if recipe in GROUNDED_RECIPES else cue_mix
-            projection = (matte, float(sigmas[position])) if sigmas is not None else None
+            projection = (matte, float(sigmas[position])) if position in projection_positions else None
             if recipe == LOOKAHEAD_EARLY and position in LOOKAHEAD_POSITIONS:
                 target = two_step_target(runtime, STEPS, position, latent, neutral_embedding, positive_embedding,
                                          neutral, positive, weight)
