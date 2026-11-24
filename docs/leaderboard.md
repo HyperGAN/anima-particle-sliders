@@ -8,7 +8,7 @@
 
 **What earns a high score.** The slider should make the subject visibly read as a Final Boss while keeping the image coherent. An edit with zero Boss gain scores zero. Visible damage lowers the score even when the Boss effect is strong. [Scoring and comparison protocol](#comparing-a-new-run) · [Jev rubrics](final-boss-raw192/rubrics.json)
 
-**Latest challengers.** The costume-teacher run led the four-case RAW192 preview, then scored **21.47** in the eight-case diagnostic with one unresolved structure check. Both percentile-filtered target recipes are training. The two in-scene costume caches are ready for the next wave. [Costume-teacher comparison](#costume-teachers-at-update-192) · [Percentile filtering](#percentile-filtered-teacher-edits) · [In-scene prompts](#in-scene-costume-prompts)
+**Latest challengers.** The costume-teacher run led the four-case RAW192 preview, then scored **21.47** in the eight-case diagnostic with one unresolved structure check. Percentile filtering is training. Two in-scene costume runs and two denoising-position exposure runs are queued. [Costume-teacher comparison](#costume-teachers-at-update-192) · [Percentile filtering](#percentile-filtered-teacher-edits) · [In-scene prompts](#in-scene-costume-prompts) · [Denoising-position exposure](#denoising-position-exposure)
 
 ## Training techniques
 
@@ -85,6 +85,8 @@ SEGA uses a percentile of the absolute prompt-response difference to select comp
 
 At update 48, the all-ten-position blend passed all four structural checks and scored **2.22**, close to soft foreground weighting at **2.34**. It led on three cases and trailed on archivist. Mean image damage was **0.208** versus **0.268** for soft foreground weighting. Both showed weak Boss distinction at this checkpoint. [Matched update-48 renders](final-boss-raw192/ablations/sega-all-raw48-matched.jpg) · [Per-case scores](final-boss-raw192/ablations/sega-all-raw48-scores.json)
 
+At update 96, the same run passed all four structural checks and scored **4.89** at shared early α 2/3. Soft foreground weighting scored **5.73**, and the two-cue average scored **10.34** at this checkpoint. Percentile filtering lowered mean damage from **0.315** to **0.265**, while mean Boss distinction gain fell from **+0.125** to **+0.088**. Archivist and seamstress improved, and bookkeeper dropped the most. [Matched update-96 renders](final-boss-raw192/ablations/sega-all-raw96-matched.jpg) · [Per-case scores](final-boss-raw192/ablations/sega-all-raw96-scores.json)
+
 ## In-scene costume prompts
 
 On eight matched frozen-teacher cases, the in-scene armor-and-crown prompt scored **36.96** under the leaderboard rubric. The worn helmet scored **25.35** and the amplified mask **25.03**. In-scene costume beat amplified mask on six cases. It had lower mean Boss distinction gain (**+0.729** versus **+0.826**) and much lower mean damage (**0.292** versus **0.464**). Several amplified-mask renders introduced inset portraits or multiple views. All three recipes used the frozen model with zero optimizer updates. [Matched teacher renders](final-boss-raw192/ablations/grounded-teacher-matched.jpg) · [Per-case scores](final-boss-raw192/ablations/grounded-teacher-scores.json)
@@ -92,6 +94,12 @@ On eight matched frozen-teacher cases, the in-scene armor-and-crown prompt score
 The queued training test gives the original six contexts in-scene prompts that describe the existing costume as worn by the subject under the original light. Both arms use the original trajectories, 0.45 background floor, and per-field L2 normalization. One mixes in the grounded contrast at 35% throughout. The other tapers the mix from 39.2% to 27.3% across the ten teacher positions. Both are planned for 192 stock ParticleGAN updates and the shared-strength evaluation. [Exact prompts and mixing weights](final-boss-raw192/ablations/grounded-training-prompts.json)
 
 Both caches are prepared on CUDA. The 120 latents, neutral velocities, and embeddings match the soft-foreground cache. The taper changes the target direction by up to **4.58%** of the edit norm on average at a denoising position and preserves the per-field L2 norm. [Cache and field comparison](final-boss-raw192/ablations/grounded-training-prompts.json)
+
+## Denoising-position exposure
+
+Diffusion studies found that the training signal from different noise levels can emphasize different visual concepts or pull optimization in different directions. This Anima adaptation tests whether spending more of the same training budget at certain denoising positions changes the finished slider. The opening positions test larger character changes. The middle positions test whether costume and silhouette can become more distinct with less damage. [Perception Prioritized Training](https://arxiv.org/abs/2204.00227) · [Min-SNR Training](https://arxiv.org/abs/2303.09556)
+
+Both arms retain all 120 soft-foreground teacher fields and repeat 48 of them once. The opening arm repeats zero-indexed positions 0–3. The middle arm repeats positions 3–6. Each arm uses the stock balanced shuffle, 192 updates, and 384 row presentations per optimizer side. The original and repeated tensors matched the source bit for bit. The sampler replay drew every row in both arms, with identical row ID sequences across arms. Training is queued behind the in-scene comparison. [Cache and sampler verification](final-boss-raw192/ablations/phase-exposure-protocol.json) · [Reproduction commands](final-boss-raw192/README.md#denoising-position-exposure)
 
 ## Structural stops
 

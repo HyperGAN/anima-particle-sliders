@@ -66,3 +66,14 @@ A fresh CUDA run reproduced all **360** archived fields across these three recip
 Pass the resulting `TargetCache` to [scoped training](../explicit-fresh-initialization.md), with `variation="character-final-boss"` and `native_admission=lambda request: verify_native(runtime, cache, request)`. Keep the fit at `seed=1`, `batch_size=2`, `total_steps=192`, `response_scale=1`, `sigma=1`, `critic_width=32`, `lr=0.00075`, `d_lr_mult=12`, `prior_lr_mult=40`, and `ema_decay=None`. Use fresh scoped initialization for a new cohort. Save RAW at 48, 96, 144, and 192 and check the matched rendered images before continuing past each checkpoint. The recorded experiment used [this Anima source](https://github.com/HyperGAN/anima-particle-sliders/tree/c4b0e86e78670f21ffa5e7545b244d0f9e63cea6), [this core source](https://github.com/HyperGAN/particle-sliders/tree/507168a241e237fc3d5f1032a8137196fa3c3562), and ParticleGAN 0.11.1. Compare future cohorts on the same development cases at both shared strengths.
 
 Related research includes teacher mixing [#278](https://github.com/HyperGAN/particle-sliders/pull/278), [Concept Sliders](https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/05660.pdf) and contrast isolation [#216](https://github.com/HyperGAN/particle-sliders/pull/216), nuisance projection [#254](https://github.com/HyperGAN/particle-sliders/pull/254), and rollout comparison [#246](https://github.com/HyperGAN/particle-sliders/pull/246). The trained Anima recipes are native adaptations.
+
+## Denoising-position exposure
+
+Start with the soft-foreground capture above. The following builds each cache and records the expected per-position draws from the stock sampler. Pass the new cache to the same scoped training options and native verifier above. Validate the actual exposure counts in the completed FULL checkpoint and evaluate the corresponding RAW192 at both shared strengths. [Exposure source](../../release_tools/final_boss_exposure.py) · [Frozen protocol](ablations/phase-exposure-protocol.json)
+
+```sh
+for recipe in exposure-opening4 exposure-middle4; do
+  python -m release_tools.final_boss_exposure targets/soft-floor45 "$recipe" \
+    "targets/$recipe" --receipt "targets/$recipe-sampler.json"
+done
+```
