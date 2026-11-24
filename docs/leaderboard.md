@@ -250,7 +250,9 @@ The `framing-matched-floor45` recipe keeps the original rollout states and teach
 
 ## Comparing a new run
 
-Compare the saved RAW checkpoint with the incumbent on the same prompts, seeds, sampler, and shared strengths. At 192 updates the early score to beat is **25.66**. The 35% cue blend sets the constant-strength comparison at **16.90**. Report tuned strength and its confirmation panel alongside the shared-strength comparison.
+Compare the saved RAW checkpoint with the incumbent on the same prompts, seeds, sampler, and shared strengths. At 192 updates the early score to beat is **25.66**. The 35% cue blend sets the constant-strength comparison at **16.90**.
+
+When a training recipe wins at shared early strength, choose its alpha and schedule using the development cases. Freeze that setting and the incumbent's published setting before opening eight fresh confirmation cases. Render both recipes at shared early strength on those same cases as well. Report the two comparisons together. A new default needs a qualified win against the incumbent at their frozen tuned settings on the confirmation panel.
 
 Jev measures Boss character distinction and visible image damage separately. For each case the score is `max(0, Boss_ON − Boss_OFF) × (1 − image_damage)²`. The leaderboard averages the per-case scores on a 0–100 scale. Catastrophic structural failures and unmeasured rows carry separate statuses. [Jev rubrics](final-boss-raw192/rubrics.json)
 
