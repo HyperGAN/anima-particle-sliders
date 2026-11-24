@@ -8,7 +8,7 @@
 
 **What earns a high score.** The slider should make the subject visibly read as a Final Boss while keeping the image coherent. An edit with zero Boss gain scores zero. Visible damage lowers the score even when the Boss effect is strong. [Scoring and comparison protocol](#comparing-a-new-run) · [Jev rubrics](final-boss-raw192/rubrics.json)
 
-**Latest challengers.** Averaging two alternate cue directions led the four-case update-96 preview. Stronger cues at the final three teacher positions finished at **21.20** on the eight-case RAW192 panel. Stronger cues at the first three positions are training. [Update-96 results](#update-96-preview) · [Completed late-cue comparison](#late-cues-at-update-192)
+**Latest challengers.** The two-cue average led the update-96 preview and is training toward RAW192. Early and late cue timing finished below the shared early leader. The next run uses four qualified costume teachers and two soft-foreground contexts. [Update-144 results](#update-144-preview) · [Completed early-cue comparison](#early-cues-at-update-192) · [Qualified teacher targets](#qualified-teacher-targets)
 
 ## Training techniques
 
@@ -21,8 +21,9 @@ The ranking uses the best measured variant of each technique after 192 updates w
 | 3 | Paired scene and lighting contexts, 50% blend, 0.65 floor | 22.23 | 11.58 | [Concept Sliders](https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/05660.pdf), related [contrast isolation #216](https://github.com/HyperGAN/particle-sliders/pull/216) |
 | 4 | Background-only scene and lighting projection, 0.45 floor | 22.22 | 11.51 | Local Anima adaptation of [nuisance deflation #254](https://github.com/HyperGAN/particle-sliders/pull/254) |
 | 5 | Stronger cues at the final three teacher positions | 21.20 | 10.41 | [Teacher timing adaptation and matched renders](#late-cues-at-update-192) |
-| 6 | Whole-image scene and lighting projection, 0.65 floor | 18.74 | 13.72 | Local Anima adaptation of [nuisance deflation #254](https://github.com/HyperGAN/particle-sliders/pull/254) |
-| 7 | Train on adapter rollout states, 0.45 floor | 11.61 | 5.49 | Local Anima experiment, related [rollout protocol #246](https://github.com/HyperGAN/particle-sliders/pull/246) |
+| 6 | Stronger cues at the first three teacher positions | 20.32 | 14.99 | [Teacher timing adaptation and matched renders](#early-cues-at-update-192) |
+| 7 | Whole-image scene and lighting projection, 0.65 floor | 18.74 | 13.72 | Local Anima adaptation of [nuisance deflation #254](https://github.com/HyperGAN/particle-sliders/pull/254) |
+| 8 | Train on adapter rollout states, 0.45 floor | 11.61 | 5.49 | Local Anima experiment, related [rollout protocol #246](https://github.com/HyperGAN/particle-sliders/pull/246) |
 
 The prompt-only control scored **18.32** at shared early strength. Its constant result is unmeasured. The 35% cue blend gained **3.84 points** at constant strength over the default training recipe. It improved seven of eight matched cases at constant strength and one of eight at early strength. The 85% cue blend scored lower at both shared strengths. Each technique used one initialization seed. [All runs and per-case scores](final-boss-raw192/results.json)
 
@@ -46,19 +47,23 @@ Each cue-timing recipe replaces 36 of the 120 teacher fields. The replacement mo
 
 ## Update-144 preview
 
-At shared early α 2/3, early cues scored **9.78**, late cues **8.92**, and soft foreground weighting **7.75**. All three passed the four structural checks. Early cues led on all four cases, with most of the gain over soft foreground weighting coming from bookkeeper. Mean Boss distinction gain was **+0.200** for early cues, **+0.183** for late cues, and **+0.168** for soft foreground weighting. [Matched originals and renders](final-boss-raw192/ablations/cue-timing-raw144-matched.jpg) · [Per-case scores](final-boss-raw192/ablations/cue-timing-raw144-scores.json)
+At shared early α 2/3, early cues scored **9.78**, the two-cue average **9.55**, late cues **8.92**, and soft foreground weighting **7.75**. All four passed the structural checks. Early cues led on three cases. The two-cue average led on seamstress and tied early cues for mean Boss distinction gain (**+0.200**). Its higher mean damage (**0.329** versus **0.289**) contributed to a lower adjusted score. [Matched originals and renders](final-boss-raw192/ablations/cue-timing-raw144-matched.jpg) · [Per-case scores](final-boss-raw192/ablations/cue-timing-raw144-scores.json)
 
-The quarter-check question gave mean gains of **+0.513** for early cues, **+0.453** for late cues, and **+0.401** for soft foreground weighting.
+The quarter-check question gave mean gains of **+0.513** for early cues, **+0.497** for the two-cue average, **+0.453** for late cues, and **+0.401** for soft foreground weighting.
 
 ## Late cues at update 192
 
 The late-cue recipe used the 35% stronger-cue teacher at the final three denoising positions and retained the soft-foreground teacher at the other seven. It completed 192 updates and passed the structural checks at both shared strengths. At early α 2/3 it finished **4.46 points** behind soft foreground weighting. It had weaker mean Boss distinction gain (**+0.358** versus **+0.423**) and more visible damage (**0.233** versus **0.214**). Stationer, guide, and violinist favored late cues. Ranger, ferryman, and guard accounted for most of the decline. [Eight matched renders](final-boss-raw192/ablations/late-cues-raw192-matched.jpg) · [Both strengths and per-case scores](final-boss-raw192/ablations/late-cues-raw192-scores.json) · [Training source and commands](final-boss-raw192/README.md#source-for-the-trained-targets) · [Timing research](https://arxiv.org/abs/2512.08486)
 
+## Early cues at update 192
+
+The early-cue recipe used the same 35% blend at the first three denoising positions. It completed 192 updates and passed the structural checks at both shared strengths. At early α 2/3 it scored **20.32**, with Boss distinction gain of **+0.409** and mean damage of **0.288**. Compared with soft foreground weighting, **4.73** of the **5.34** lost points came from the damage term using the same per-case decomposition as above. Stationer improved, and watchmaker lost the most. At constant strength early cues scored **14.99**, between soft foreground weighting at **13.06** and full-trajectory stronger cues at **16.90**. [Eight matched renders](final-boss-raw192/ablations/early-cues-raw192-matched.jpg) · [Both strengths and per-case scores](final-boss-raw192/ablations/early-cues-raw192-scores.json) · [Training source and commands](final-boss-raw192/README.md#source-for-the-trained-targets)
+
 ## Qualified teacher targets
 
 On eight archived teacher cases, guiding toward a concrete costume more strongly early in denoising scored **29.50–32.38**, versus **26.70** for the same costume prompt at fixed teacher strength. The range covers every possible outcome for one missing damage judgment. These are frozen Anima renders made before adapter training. [Per-case scores and gain schedule](final-boss-raw192/ablations/vibe-teacher-readability.json)
 
-A prepared training recipe pairs all **80** fields from four qualified costume teachers with **40** fields from two original soft-foreground contexts. The original and new recipes each use 120 fields across six contexts. The new recipe changes both the contexts and the teacher guidance. Its planned fit uses 192 stock ParticleGAN updates and the same development comparisons. The timing test draws on observations that text conditioning has different effects across denoising stages. [eDiff-I](https://arxiv.org/abs/2211.01324) · [Prompt-Conditioned Interventions](https://arxiv.org/abs/2512.08486)
+The training recipe pairs all **80** fields from four qualified costume teachers with **40** fields from two original soft-foreground contexts. The original and new recipes each use 120 fields across six contexts. The new recipe changes both the contexts and the teacher guidance. Its 192-update stock ParticleGAN run has started, with the shared development comparisons planned. The timing test draws on observations that text conditioning has different effects across denoising stages. [eDiff-I](https://arxiv.org/abs/2211.01324) · [Prompt-Conditioned Interventions](https://arxiv.org/abs/2512.08486)
 
 ## Structural stops
 
