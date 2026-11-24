@@ -1,0 +1,119 @@
+{
+  "method": "scene-grounded-taper35",
+  "control": "soft-floor45",
+  "step": 48,
+  "profile": "early",
+  "alpha": 0.6666666666666666,
+  "gains": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.6444445235641115,
+    0.3333333333333333,
+    0.3333333333333333
+  ],
+  "status": "scientific-stop",
+  "last_committed_update": 48,
+  "raw_sha256": "7322572ac63a60e82b329dcde7273b2317752f264506aff619b021c1d61743ae",
+  "milestone_sha256": "fbd6dfea6fc8a536c1f8b67f475787496543876731af89ac5e232f0e88c0a098",
+  "training_receipt_sha256": "d9ec0be7e44608d6efbe2bfdcf7a748e1661b883c6f651f0e170cb9cfd0dd5bc",
+  "cases": [
+    {
+      "case": "archivist",
+      "original_sha256": "356413c7d85b7405c8ad15d520ba188fdab64b1805d5140758f61221d704bbd1",
+      "control_on_sha256": "cf03008493b2017519ff625deeca74ab44ba2cd88db24f54fd069c373197b335",
+      "taper_on_sha256": "4a0889870dc80c7f09bbdb03460ffad550b418d63ee65f7b76ac7fc62ebb6ca6",
+      "control_structure": {
+        "status": "pass",
+        "checks": {
+          "no_readable_image": 0.05,
+          "split_or_duplication": 0.03,
+          "broken_structure": 0.31
+        }
+      },
+      "taper_structure": {
+        "status": "fail",
+        "checks": {
+          "no_readable_image": 0.25,
+          "split_or_duplication": 0.12,
+          "broken_structure": 0.86
+        }
+      }
+    },
+    {
+      "case": "bookkeeper",
+      "original_sha256": "e891f6ea6fbdf921858d1e349fbe4f08c2df9b89045363fb55cf4dafa3064fa4",
+      "control_on_sha256": "7610c3ad79c3f7523df3b853424923caf7081854e6af6a65905b54e76dac7856",
+      "taper_on_sha256": "da0dcc653c70b55516b33be5b8fb0a44c64f74586ddb677ea2ead61ef71b3b01",
+      "control_structure": {
+        "status": "pass",
+        "checks": {
+          "no_readable_image": 0.05,
+          "split_or_duplication": 0.02,
+          "broken_structure": 0.22
+        }
+      },
+      "taper_structure": {
+        "status": "pass",
+        "checks": {
+          "no_readable_image": 0.09,
+          "split_or_duplication": 0.09,
+          "broken_structure": 0.33
+        }
+      }
+    },
+    {
+      "case": "botanist",
+      "original_sha256": "21af6f3fbc2798373e25ef77b57d3aa11de44ef6536fbfa7cd41298ebbe4d606",
+      "control_on_sha256": "c33d87e2418fac8ca9541c268e6107e35be4528d1ee2e9a22059fbfce423989a",
+      "taper_on_sha256": "aee992c0355151028d7944a67adc02a91d6a4d0e30a5ae593d62840238513525",
+      "control_structure": {
+        "status": "pass",
+        "checks": {
+          "no_readable_image": 0.05,
+          "split_or_duplication": 0.04,
+          "broken_structure": 0.31
+        }
+      },
+      "taper_structure": {
+        "status": "fail",
+        "checks": {
+          "no_readable_image": 0.22,
+          "split_or_duplication": 0.22,
+          "broken_structure": 0.94
+        }
+      }
+    },
+    {
+      "case": "seamstress",
+      "original_sha256": "4a53b469861b66c0e414f89dd0774224b71d13d630d789f89bba80799bb55eac",
+      "control_on_sha256": "f2ca6187cd99ef61744f9ebb3cd8218304b27cada50b88ef09c3096f941708a3",
+      "taper_on_sha256": "1d8a0096dda6a6a295bceeb65b51de032e13e89f6e82c8a994dad30578059c70",
+      "control_structure": {
+        "status": "pass",
+        "checks": {
+          "no_readable_image": 0.05,
+          "split_or_duplication": 0.03,
+          "broken_structure": 0.24
+        }
+      },
+      "taper_structure": {
+        "status": "unmeasured",
+        "checks": {
+          "no_readable_image": 0.12,
+          "split_or_duplication": 0.05,
+          "broken_structure": 0.56
+        },
+        "structural_details": {
+          "accidental_parts": 0.37,
+          "accidental_face": 0.56,
+          "accidental_geometry": 0.16
+        }
+      }
+    }
+  ]
+}
