@@ -21,6 +21,10 @@ Stronger Boss distinction accounts for **3.52** of the cue blend’s constant-st
 
 [Shared early samples](final-boss-raw192/shared-early.jpg) · [Shared constant samples](final-boss-raw192/shared-constant.jpg) · [Training and replay source](final-boss-raw192/README.md#source-for-the-trained-targets)
 
+## Update-48 preview
+
+Using stronger cue targets in the last three teacher positions passed all four image checks. At shared early inference strength the mean Jev Boss gain was **+0.176**, compared with **+0.186** for soft foreground weighting at the same update. The late-cue archivist render shows a softer coat silhouette and warmer scene lighting. [Four matched originals and renders](final-boss-raw192/ablations/late-cues-raw48-matched.jpg)
+
 ## Structural stops
 
 The 35% cue blend that kept only components with matching signs across its two alternate cue edits stopped at update 48. The bookkeeper render collapsed to a texture and scored 0.83 on Jev’s unreadable-image check. Training stopped before update 49. [Saved RAW48 render](final-boss-raw192/ablations/diverse-consensus35-raw48-bookkeeper.png) · [Consensus research](https://github.com/HyperGAN/particle-sliders/pull/315)
