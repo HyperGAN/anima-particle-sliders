@@ -153,10 +153,10 @@ def run(args):
     )
     try:
         opts = dict(
-            schema="anima-stock-empf-study-v1",
+            schema="anima-stock-empf-study-v2",
             model=rt.identity,
             core=verify_core(),
-            spec=digest(spec),
+            spec=digest(dict(teachers=config, validation=spec["validation"])),
             concept=concept,
             minimum=args.min_teachers,
             attempts=args.collection_attempts,
@@ -165,6 +165,11 @@ def run(args):
         bound = root / "data-config.json"
         if bound.exists():
             original = read(bound)
+            if original["schema"] == "anima-stock-empf-study-v1" and original[
+                "spec"
+            ] == digest(spec):
+                atomic_json(root / "data-config-v1.json", original)
+                original = original | {"schema": opts["schema"], "spec": opts["spec"]}
             if original | {"attempts": args.collection_attempts} != opts:
                 raise ValueError("The existing run has a different study configuration")
             if (

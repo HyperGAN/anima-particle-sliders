@@ -262,7 +262,9 @@ The audited weights remain local.
 The `anima-vibe-train` command collects matched teacher images, prepares frozen
 targets, trains a stock EMPF adapter and confirms a saved RAW on held-out
 prompts. The bundled scene file contains Final Boss, 1990s anime and Visually
-appealing character. Subjects are specified as adults in the prompts.
+appealing character. Subjects are specified as adults in the prompts. Use the
+pinned native Anima environment and set `NANOGPT_API_KEY` for Jev. On a shared
+GPU, `--gpu-cap-gib` limits this process’s PyTorch allocations (19 GiB by default).
 
 ```sh
 anima-vibe-train --vibe 'Final Boss' --model-dir /models/anima-turbo-v11 \
