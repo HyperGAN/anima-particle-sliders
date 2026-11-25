@@ -139,6 +139,22 @@ def train(outputs, cache, panels, rates, budget, phase, *, schedule_horizon=None
                 dest / "failure.json", dict(step=step, phase=phase, result=result)
             )
             raise Catastrophe(f"Catastrophic output at update {step}")
+        if (
+            phase == "fit"
+            and cut < step < end
+            and (dest / "screen" / f"{cut}.json").is_file()
+        ):
+            # A screened scene can break earlier than the separate step panel.
+            # Check while the current weights are still installed, before the next update.
+            score_rate_panel(
+                dest,
+                dest / "fit-screen" / f"{step}.json",
+                step,
+                raw,
+                lambda: outputs.compare(
+                    panels["rates"], variation, raw, 1.0, "constant", owner=inference
+                ),
+            )
         return result
 
     last_result = dest / phase / f"{end}.json"
@@ -255,18 +271,32 @@ def rate_candidates(reference):
             yield reference | {role: reference[role] * factor}
 
 
+def score_rate_panel(arm, receipt, step, raw, measure):
+    if receipt.is_file():
+        result = read(receipt)
+        if result["raw"] != asdict(raw) or file_pin(raw.path) != raw:
+            raise ValueError("Screening scene check differs from its saved RAW")
+    else:
+        result = measure()
+        atomic_json(receipt, result)
+    if result["status"] == "fail":
+        atomic_json(
+            arm / "failure.json", dict(step=step, phase="fit-rate-panel", result=result)
+        )
+        raise Catastrophe(
+            f"A screened case developed a catastrophic defect at update {step}"
+        )
+    return result
+
+
 def recheck_screened_cases(outputs, cache, panels, rates, horizon, fit):
-    """Catch late regressions on the cases that originally qualified the rate."""
+    """Check the original screening scenes at the full training budget."""
     arm = arm_path(outputs.root, rates)
     if not (arm / "screen" / f"{horizon // 4}.json").is_file():
         return
     raw = Checkpoint(**fit["raw"])
-    receipt = arm / "fit-rate-panel.json"
-    if receipt.is_file():
-        result = read(receipt)
-        if result["raw"] != asdict(raw) or file_pin(raw.path) != raw:
-            raise ValueError("Full-budget rate check differs from its saved RAW")
-    else:
+
+    def measure():
         rt = outputs.runtime
         variation = cache.index["identity"]["variation"]
         owner = open_inference(
@@ -279,20 +309,13 @@ def recheck_screened_cases(outputs, cache, panels, rates, horizon, fit):
             ),
         )
         try:
-            result = outputs.compare(
+            return outputs.compare(
                 panels["rates"], variation, raw, 1.0, "constant", owner=owner
             )
         finally:
             owner.close()
-        atomic_json(receipt, result)
-    if result["status"] == "fail":
-        atomic_json(
-            arm / "failure.json",
-            dict(step=horizon, phase="fit-rate-panel", result=result),
-        )
-        raise Catastrophe(
-            "A screened case developed a catastrophic defect at the full budget"
-        )
+
+    result = score_rate_panel(arm, arm / "fit-rate-panel.json", horizon, raw, measure)
     if result["status"] != "pass":
         raise Unmeasured(
             "Full-budget integrity on the original rate panel was unmeasured"
@@ -303,11 +326,14 @@ def recheck_screened_cases(outputs, cache, panels, rates, horizon, fit):
 
 def select_checkpoint(root, rates, horizon):
     directory = arm_path(root, rates) / "fit"
-    rows = [
-        read(directory / f"{step}.json")
-        for step in range(horizon // 4, horizon + 1, horizon // 4)
-    ]
-    eligible = [r for r in rows if r["status"] == "pass"]
+    eligible = []
+    for step in range(horizon // 4, horizon + 1, horizon // 4):
+        row = read(directory / f"{step}.json")
+        screened = directory.parent / "fit-screen" / f"{step}.json"
+        if row["status"] == "pass" and (
+            not screened.exists() or read(screened)["status"] == "pass"
+        ):
+            eligible.append(row)
     if not eligible:
         raise Unmeasured("No checkpoint has measured intact outputs")
     return max(eligible, key=lambda row: row["mean_gain"])

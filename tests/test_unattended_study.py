@@ -484,3 +484,31 @@ def test_missing_effect_replaces_the_teacher_seed(tmp_path):
     assert attempts[0]["treatments"] == []
     assert attempts[1]["treatments"][0]["gain"] is None
     assert attempts[1]["treatments"][0]["eligible"] is False
+
+
+def test_midrun_screen_regression_stops_before_another_update(tmp_path):
+    from dataclasses import asdict
+    from lumen_studio.study.training import score_rate_panel, Catastrophe
+    from lumen_studio_scoped.training import file_pin
+
+    adapter = tmp_path / "RAW000128.safetensors"
+    adapter.write_bytes(b"matched split at 128")
+    raw = file_pin(adapter)
+    receipt = tmp_path / "fit-screen/128.json"
+    failed = {"status": "fail", "raw": asdict(raw), "mean_gain": 0.47}
+    with pytest.raises(Catastrophe, match="update 128"):
+        score_rate_panel(tmp_path, receipt, 128, raw, lambda: failed)
+    assert read(receipt) == failed
+    assert read(tmp_path / "failure.json")["step"] == 128
+
+
+def test_uncertain_original_scene_excludes_that_quarter(tmp_path):
+    rates = {"g": 0.1, "d": 0.2, "particle": 0.3}
+    arm = arm_path(tmp_path, rates)
+    for step, gain in zip((64, 128, 192, 256), (0.1, 0.8, 0.4, 0.3)):
+        atomic_json(
+            arm / "fit" / f"{step}.json",
+            {"step": step, "status": "pass", "mean_gain": gain},
+        )
+    atomic_json(arm / "fit-screen/128.json", {"status": "unmeasured"})
+    assert select_checkpoint(tmp_path, rates, 256)["step"] == 192

@@ -297,8 +297,10 @@ The optional rate screen varies one of the three absolute rates by a factor of
 two in each direction. When a different G wins, it repeats the D and particle
 comparisons at that G. When a lower G is the only usable initial setting, it
 also checks two lower G values. It continues the highest-scoring qualified
-FULL checkpoint. Before promoting a screened rate, it checks the original rate
-scenes again at the full budget for structural regressions. It also checks
+FULL checkpoint. It rechecks the original rate scenes at every later quarter.
+A confirmed split or other catastrophic defect stops the candidate before the
+next update. A checkpoint with an unresolved recheck is ineligible for selection.
+The full-budget check also applies when resuming a run from an older version. It also checks
 the proposed replay strength on those scenes before using the held-out panel. If the bracket
 yields no usable fit, it tests lower G values
 with the reference critic and particle rates held fixed. For a run
