@@ -45,5 +45,5 @@ include = ["lumen_studio*", "configs.anima*"]
 namespaces = true
 
 [tool.setuptools.package-data]
-"configs.anima" = ["*.json", "requirements.lock", "candidates/*.json"]
+"configs.anima" = ["*.json", "requirements.lock", "candidates/*.json", "boss-teachers/*.json", "boss-teachers/*.png"]
 lumen_studio = ["engine-source.json", "calibration/*.png", "calibration/*.json", "static/*", "vendor/LICENSE", "vendor/provenance.json"]

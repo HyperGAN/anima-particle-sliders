@@ -7,6 +7,7 @@ from particle_sliders.candidate_failure import FileRecord
 from ..contracts import atomic_json, digest
 from ..vibe import SCHEMA, validate_manifest
 from ..vibe_profiles import profile_for
+from .pair_checks import PAIR_PROTOCOLS
 from .outputs import Unmeasured, read
 
 
@@ -48,6 +49,9 @@ def collect(outputs, config, concept, minimum, attempts):
         min_score=0.75,
         required=minimum,
     )
+    protocol = PAIR_PROTOCOLS.get(concept.casefold())
+    if protocol:
+        identity["pair_check"] = protocol
     variation = "vibe-" + digest(identity)[:16]
     rows = []
     used = set()
@@ -91,12 +95,18 @@ def collect(outputs, config, concept, minimum, attempts):
                             and score >= 0.75
                             and gain > 0
                         )
+                        pair = {}
+                        if eligible and protocol:
+                            check = outputs.teacher_pair(neutral, positive)
+                            pair["pair_check"] = check
+                            eligible = check["status"] == "pass"
                         evidence["treatments"].append(
                             dict(
                                 prompt=prompt,
                                 positive=positive,
                                 gain=gain,
                                 eligible=eligible,
+                                **pair,
                             )
                         )
                 qualified = [t for t in evidence["treatments"] if t["eligible"]]
@@ -113,6 +123,8 @@ def collect(outputs, config, concept, minimum, attempts):
                         neutral=neutral,
                         positive=best["positive"],
                     )
+                    if protocol:
+                        selection["pair_check"] = best["pair_check"]
                     rows.append(
                         dict(
                             id="vibe-" + key,

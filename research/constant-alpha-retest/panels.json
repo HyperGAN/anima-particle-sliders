@@ -1,0 +1,217 @@
+{
+  "boss": {
+    "state": "Image_1 is the original illustration. Image_2 is the edited illustration. Judge whether the edited person has become an unmistakable climactic video-game antagonist, from visible design of the character alone.",
+    "questions": {
+      "boss_distinction": {
+        "type": "noul",
+        "instructions": "Score Final Boss distinction from 0 to 1. 0 means no discernible boss character. 0.25 means ordinary clothing, generic armor, or a stern face alone. 0.50 means a credible elite warrior or rival, with some boss cues. 0.75 means a distinctive endgame antagonist with a recognizable, purposeful silhouette and signature character details. 1.0 means a visually unmistakable final encounter character. Reward commanding presence built into the character design. Judge the outfit, silhouette, headpiece, insignia, and other visible evidence. Ignore scene, lighting, crop, and image polish."
+      }
+    }
+  },
+  "repeat": {
+    "state": "Compare the central character designs in these two illustrations from the same visual style.",
+    "questions": {
+      "repeat": {
+        "type": "score",
+        "instructions": "How much is the same underlying boss design repeated across the characters? Consider the silhouette, body construction, head or mask, costume shapes and signature visual idea together. Different people can be put in essentially the same boss design. Distinct bosses can both wear armor: look for individual design ideas. Differences in setting, lighting, hue, camera or pose alone say little about the design. Ignore beauty and rendering damage; those are judged separately.",
+        "criteria": [
+          "Clearly different character designs with different signature forms",
+          "Mostly different designs with a few shared motifs",
+          "Related designs with substantial overlap and individual differences",
+          "Mostly the same boss template with minor design differences",
+          "Effectively the same character design or a repeat of the same illustration"
+        ]
+      }
+    }
+  },
+  "binding": "89e7d97f4e7ecdea35a7317f446b435b87267023af4e0a345f2ef53c3f70506d",
+  "model": "typesafe/jev-1.14",
+  "panels": {
+    "search": [
+      "archivist",
+      "bookkeeper",
+      "botanist",
+      "seamstress"
+    ],
+    "ranking": [
+      "ranger",
+      "smith",
+      "stationer",
+      "ferryman",
+      "watchmaker",
+      "guide",
+      "guard",
+      "violinist"
+    ]
+  },
+  "cases": [
+    {
+      "id": "archivist",
+      "split": "reserved",
+      "request": {
+        "prompt": "Anime illustration. Waist-up eye-level portrait of one adult woman with lightly freckled face and brown braided hair, wearing a plain blue traveling coat, standing naturally facing the viewer. Background: sunlit stone plaza with an aquamarine door and patterned floor tiles. Lighting: bright neutral morning daylight. Show the surroundings clearly.",
+        "seed": 552241
+      },
+      "preserve": "One adult woman with lightly freckled face and brown braided hair, wearing a plain blue traveling coat in sunlit stone plaza with an aquamarine door and patterned floor tiles. The original lighting is bright neutral morning daylight. The requested change is the character's costume, accessories and expression.",
+      "off": {
+        "path": "/ml2/particlesliders-working/anima-character-final-boss-20261122/heldout/archivist/off/image.png",
+        "sha256": "356413c7d85b7405c8ad15d520ba188fdab64b1805d5140758f61221d704bbd1",
+        "bytes": 282513
+      }
+    },
+    {
+      "id": "ranger",
+      "split": "search",
+      "request": {
+        "prompt": "Anime illustration. Waist-up eye-level portrait of one adult man with wavy blond hair, wearing a russet hiking jacket, standing naturally facing the viewer. Background: alpine cable-car station with a green numbered post, metal railings and snow in the distance. Lighting: bright midday mountain light. Show the surroundings clearly.",
+        "seed": 552242
+      },
+      "preserve": "One adult man with wavy blond hair, wearing a russet hiking jacket in alpine cable-car station with a green numbered post, metal railings and snow in the distance. The original lighting is bright midday mountain light. The requested change is the character's costume, accessories and expression.",
+      "off": {
+        "path": "/ml2/particlesliders-working/anima-character-final-boss-20261122/heldout/ranger/off/image.png",
+        "sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c",
+        "bytes": 310799
+      }
+    },
+    {
+      "id": "smith",
+      "split": "search",
+      "request": {
+        "prompt": "Anime illustration. Waist-up eye-level portrait of one adult woman with a straight gray bob, wearing a denim apron, standing naturally facing the viewer. Background: historical stone smithy with an old iron anvil and tools hanging from a wooden rack. Lighting: steady warm light from the hinged brass wall lamps. Show the surroundings clearly.",
+        "seed": 552243
+      },
+      "preserve": "One adult woman with a straight gray bob, wearing a denim apron in historical stone smithy with an old iron anvil and tools hanging from a wooden rack. The original lighting is steady warm light from the hinged brass wall lamps. The requested change is the character's costume, accessories and expression.",
+      "off": {
+        "path": "/ml2/particlesliders-working/anima-character-final-boss-20261122/heldout/smith/off/image.png",
+        "sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245",
+        "bytes": 283317
+      }
+    },
+    {
+      "id": "stationer",
+      "split": "reserved",
+      "request": {
+        "prompt": "Anime illustration. Waist-up eye-level portrait of one adult man with short black curls, wearing a brown cardigan, standing naturally facing the viewer. Background: covered town square with orange awnings, terracotta pavement and a blue souvenir sign. Lighting: cool early evening light with street lanterns. Show the surroundings clearly.",
+        "seed": 552244
+      },
+      "preserve": "One adult man with short black curls, wearing a brown cardigan in covered town square with orange awnings, terracotta pavement and a blue souvenir sign. The original lighting is cool early evening light with street lanterns. The requested change is the character's costume, accessories and expression.",
+      "off": {
+        "path": "/ml2/particlesliders-working/anima-character-final-boss-20261122/heldout/stationer/off/image.png",
+        "sha256": "0a2a34a6625af9d82efe4060fd7349b66151ba76d370dbd2c5c9ab40fb818339",
+        "bytes": 291656
+      }
+    },
+    {
+      "id": "bookkeeper",
+      "split": "search",
+      "request": {
+        "prompt": "Anime illustration. Eye-level half-body portrait of one middle-aged woman with short black hair and warm brown skin, standing naturally facing the viewer. Background: quiet bookshop with a brass ladder and green counter. Lighting: cool daylight from a wide front window. Keep the surrounding setting clearly visible.",
+        "seed": 553301
+      },
+      "preserve": "One middle-aged woman with short black hair and warm brown skin in quiet bookshop with a brass ladder and green counter. The original lighting is cool daylight from a wide front window. The requested change is the character's costume, accessories and expression.",
+      "off": {
+        "path": "/ml2/particlesliders-working/anima-final-boss-research-raw192-20261123/shared-off/bookkeeper/image.png",
+        "sha256": "e891f6ea6fbdf921858d1e349fbe4f08c2df9b89045363fb55cf4dafa3064fa4",
+        "bytes": 210667
+      }
+    },
+    {
+      "id": "ferryman",
+      "split": "reserved",
+      "request": {
+        "prompt": "Anime illustration. Eye-level half-body portrait of one adult man with gray hair and a short beard, standing naturally facing the viewer. Background: covered ferry pier with a red railing and mooring rope. Lighting: clear morning sunlight. Keep the surrounding setting clearly visible.",
+        "seed": 553302
+      },
+      "preserve": "One adult man with gray hair and a short beard in covered ferry pier with a red railing and mooring rope. The original lighting is clear morning sunlight. The requested change is the character's costume, accessories and expression.",
+      "off": {
+        "path": "/ml2/particlesliders-working/anima-final-boss-research-raw192-20261123/shared-off/ferryman/image.png",
+        "sha256": "761e34e6373db484b158387b4156d497b1d2429e8a00cb398b4820dbe496fd3b",
+        "bytes": 266538
+      }
+    },
+    {
+      "id": "botanist",
+      "split": "reserved",
+      "request": {
+        "prompt": "Anime illustration. Eye-level half-body portrait of one adult woman with auburn braids and freckles, standing naturally facing the viewer. Background: botanical museum atrium with two ceramic planters and a blue mosaic. Lighting: soft overcast daylight. Keep the surrounding setting clearly visible.",
+        "seed": 553303
+      },
+      "preserve": "One adult woman with auburn braids and freckles in botanical museum atrium with two ceramic planters and a blue mosaic. The original lighting is soft overcast daylight. The requested change is the character's costume, accessories and expression.",
+      "off": {
+        "path": "/ml2/particlesliders-working/anima-final-boss-research-raw192-20261123/shared-off/botanist/image.png",
+        "sha256": "21af6f3fbc2798373e25ef77b57d3aa11de44ef6536fbfa7cd41298ebbe4d606",
+        "bytes": 334955
+      }
+    },
+    {
+      "id": "watchmaker",
+      "split": "search",
+      "request": {
+        "prompt": "Anime illustration. Eye-level half-body portrait of one older man with wavy white hair, standing naturally facing the viewer. Background: watch repair shop with brass clocks and a cream workbench. Lighting: steady warm lamp light. Keep the surrounding setting clearly visible.",
+        "seed": 553304
+      },
+      "preserve": "One older man with wavy white hair in watch repair shop with brass clocks and a cream workbench. The original lighting is steady warm lamp light. The requested change is the character's costume, accessories and expression.",
+      "off": {
+        "path": "/ml2/particlesliders-working/anima-final-boss-research-raw192-20261123/shared-off/watchmaker/image.png",
+        "sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8",
+        "bytes": 284543
+      }
+    },
+    {
+      "id": "guide",
+      "split": "reserved",
+      "request": {
+        "prompt": "Anime illustration. Eye-level half-body portrait of one adult woman with dark brown curls and dark skin, standing naturally facing the viewer. Background: sandstone trail shelter with a wooden map board and distant dunes. Lighting: bright late-afternoon daylight. Keep the surrounding setting clearly visible.",
+        "seed": 553305
+      },
+      "preserve": "One adult woman with dark brown curls and dark skin in sandstone trail shelter with a wooden map board and distant dunes. The original lighting is bright late-afternoon daylight. The requested change is the character's costume, accessories and expression.",
+      "off": {
+        "path": "/ml2/particlesliders-working/anima-final-boss-research-raw192-20261123/shared-off/guide/image.png",
+        "sha256": "6f327441093d64b0ae0403b98dc7e68443f0b43b65e0b6fe1a95c7825a8b61aa",
+        "bytes": 259387
+      }
+    },
+    {
+      "id": "guard",
+      "split": "reserved",
+      "request": {
+        "prompt": "Anime illustration. Eye-level half-body portrait of one adult man with short black hair and round glasses, standing naturally facing the viewer. Background: quiet tiled vestibule with green lockers and a white enamel sign. Lighting: neutral fluorescent light. Keep the surrounding setting clearly visible.",
+        "seed": 553306
+      },
+      "preserve": "One adult man with short black hair and round glasses in quiet tiled vestibule with green lockers and a white enamel sign. The original lighting is neutral fluorescent light. The requested change is the character's costume, accessories and expression.",
+      "off": {
+        "path": "/ml2/particlesliders-working/anima-final-boss-research-raw192-20261123/shared-off/guard/image.png",
+        "sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5",
+        "bytes": 274482
+      }
+    },
+    {
+      "id": "seamstress",
+      "split": "reserved",
+      "request": {
+        "prompt": "Anime illustration. Eye-level half-body portrait of one adult woman with close-cropped blond hair, standing naturally facing the viewer. Background: tailor studio with fabric bolts, a pine desk, and a high window. Lighting: soft diffuse daylight. Keep the surrounding setting clearly visible.",
+        "seed": 553307
+      },
+      "preserve": "One adult woman with close-cropped blond hair in tailor studio with fabric bolts, a pine desk, and a high window. The original lighting is soft diffuse daylight. The requested change is the character's costume, accessories and expression.",
+      "off": {
+        "path": "/ml2/particlesliders-working/anima-final-boss-research-raw192-20261123/shared-off/seamstress/image.png",
+        "sha256": "4a53b469861b66c0e414f89dd0774224b71d13d630d789f89bba80799bb55eac",
+        "bytes": 253779
+      }
+    },
+    {
+      "id": "violinist",
+      "split": "reserved",
+      "request": {
+        "prompt": "Anime illustration. Eye-level half-body portrait of one adult man with straight shoulder-length brown hair, standing naturally facing the viewer. Background: concert hall anteroom with two burgundy chairs and a gilded mirror. Lighting: low warm evening lamp light. Keep the surrounding setting clearly visible.",
+        "seed": 553308
+      },
+      "preserve": "One adult man with straight shoulder-length brown hair in concert hall anteroom with two burgundy chairs and a gilded mirror. The original lighting is low warm evening lamp light. The requested change is the character's costume, accessories and expression.",
+      "off": {
+        "path": "/ml2/particlesliders-working/anima-final-boss-research-raw192-20261123/shared-off/violinist/image.png",
+        "sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50",
+        "bytes": 215793
+      }
+    }
+  ]
+}

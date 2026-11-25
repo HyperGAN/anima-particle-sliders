@@ -11,6 +11,8 @@ from lumen_studio_scoped import open_training, open_inference
 from lumen_studio_scoped.training import Checkpoint, file_pin
 from ..contracts import atomic_json, digest
 from .outputs import Unmeasured, read
+from .objectives import DISTINCT_BOSS, MATCHED_GAIN, protocol_id, selection_score
+from .scalar_search import search_constant, verify_search
 
 
 class Catastrophe(RuntimeError):
@@ -31,9 +33,17 @@ def check_native_cache(runtime, cache, request):
         for index, shard in enumerate(cache.index["shards"]):
             row = cache[offset + (index * 7 + 3) % shard["count"]]
             latent = row["latent"].to(runtime.device)
+            neutral = None
             for side in ("neutral", "positive"):
                 embedding = runtime.encode(row["row"][side])
                 prediction = runtime.predict(latent, row["timestep"], embedding)
+                if side == "neutral":
+                    neutral = prediction
+                elif cache.index["identity"].get("layout") == "final-boss/late-cues-v1":
+                    from .boss_targets import field_context, target_field
+                    context = field_context(runtime, cache.index["identity"]["field_recipe"], cache.directory,
+                                            row["row"], latent.shape[-2:])
+                    prediction = target_field(runtime, row, neutral, prediction, context)
                 if not torch.equal(prediction.cpu(), row[side]):
                     return False
             offset += shard["count"]
@@ -339,7 +349,7 @@ def recheck_screened_cases(
     return result
 
 
-def select_checkpoint(root, rates, horizon):
+def eligible_checkpoints(root, rates, horizon):
     directory = arm_path(root, rates) / "fit"
     eligible = []
     for step in range(horizon // 4, horizon + 1, horizon // 4):
@@ -351,7 +361,17 @@ def select_checkpoint(root, rates, horizon):
             eligible.append(row)
     if not eligible:
         raise Unmeasured("No checkpoint has measured intact outputs")
-    return max(eligible, key=lambda row: row["mean_gain"])
+    return eligible
+
+
+def select_checkpoint(root, rates, horizon, *, outputs=None):
+    rows = eligible_checkpoints(root, rates, horizon)
+    if outputs is not None:
+        rows = [outputs.with_objective(row) for row in rows]
+    scored = [r for r in rows if selection_score(r) is not None]
+    if not scored:
+        raise Unmeasured("No qualified checkpoint has a complete selection objective")
+    return max(scored, key=selection_score)
 
 
 def select_strength(results, receipt, recheck=None):
@@ -370,46 +390,147 @@ def select_strength(results, receipt, recheck=None):
     raise Unmeasured("No measured usable strength")
 
 
-def tune(outputs, cache, panels, selected, *, screened=False):
+def refine_strength(raw, cases, evaluate, strongest, *, anchor=None):
+    """Refine both sides of an intact leader and expand a rising upper edge."""
+    from particle_sliders.alpha_search import AlphaObservation, search_alpha
+    from particle_sliders.candidate_failure import FileRecord
+
+    ids = tuple(digest([case["prompt"], case["seed"]]) for case in cases)
+    grid = [0.5, 0.75, 1.0, 1.25, 1.5]
+    if anchor is not None:
+        grid = sorted(set(grid + [anchor]))
+
+    def observe(alpha):
+        row = evaluate(alpha)
+        return {
+            digest([pair["case"]["prompt"], pair["case"]["seed"]]): AlphaObservation(
+                pair["case"]["off"]["judgment"]["score"],
+                pair["on"]["judgment"]["score"],
+                row["status"],
+            )
+            for pair in row["pairs"]
+        }
+
+    # A measured plateau needs no extension. An unmeasured upper edge is a
+    # bracket boundary; its interval can still contain an intact, stronger edit.
+    while grid[0] > 0.03125:
+        first = evaluate(grid[0])
+        others = [
+            row["mean_gain"]
+            for alpha in grid[1:]
+            if (row := evaluate(alpha))["status"] == "pass"
+        ]
+        if others and (first["status"] != "pass" or first["mean_gain"] <= max(others)):
+            break
+        grid.insert(0, grid[0] / 2)
+
+    while grid[-1] < strongest:
+        edge = evaluate(grid[-1])
+        lower = [
+            row["mean_gain"]
+            for alpha in grid[:-1]
+            if (row := evaluate(alpha))["status"] == "pass"
+        ]
+        if edge["status"] != "pass" or (lower and edge["mean_gain"] <= max(lower)):
+            break
+        grid.append(min(strongest, grid[-1] * 1.5))
+    search_alpha(
+        checkpoint=FileRecord(**asdict(raw)),
+        case_ids=ids,
+        alphas=grid,
+        evaluate=observe,
+        refinement_rounds=2,
+    )
+
+
+def tune(outputs, cache, panels, selected, *, screened=False, receipt=None):
+    """Calibrate one constant alpha on a single frozen RAW and fixed selection cases."""
     rt = outputs.runtime
     raw = Checkpoint(**selected["raw"])
     variation = cache.index["identity"]["variation"]
     owner = open_inference(
-        rt,
-        variation,
-        raw=raw,
+        rt, variation, raw=raw,
         owner_admission=lambda request: (
             request["model_identity"] == rt.identity and request["RAW"] == asdict(raw)
         ),
     )
     try:
-        results = []
-        for profile in ("constant", "early", "late"):
-            for alpha in (0.5, 1.0, 1.5):
-                result = outputs.compare(
-                    panels["steps"], variation, raw, alpha, profile, owner=owner
-                )
-                results.append(result)
-                atomic_json(outputs.root / "strengths.json", results)
-
-        def recheck(candidate):
-            return outputs.compare(
-                panels["rates"],
-                variation,
-                raw,
-                candidate["alpha"],
-                candidate["profile"],
-                owner=owner,
-            )
-
-        return select_strength(
-            results, outputs.root / "strengths.json", recheck if screened else None
-        )
+        return calibrate_constant(outputs, panels, variation, raw, screened=screened, owner=owner, receipt=receipt)
     finally:
         owner.close()
 
 
-def confirm(outputs, cache, panels, strength):
+def calibrate_constant(outputs, panels, variation, raw, *, screened=False, owner=None, receipt=None):
+    """Select one constant strength for an already loaded, verified RAW."""
+    receipt = receipt or outputs.root / "strengths.json"
+    if receipt.exists() and any(r["profile"] != "constant" for r in read(receipt)):
+        archived = receipt.with_name(receipt.stem + "-before-constant.json")
+        if not archived.exists():
+            atomic_json(archived, read(receipt))
+    measured = {}
+    objective = getattr(outputs, "objective", MATCHED_GAIN)
+
+    def evaluate(alpha):
+        if alpha not in measured:
+            row = outputs.compare(panels["steps"], variation, raw, alpha, "constant", owner=owner)
+            if (row["raw"] != asdict(raw) or row["profile"] != "constant"
+                    or row["alpha"] != alpha or row["gains"] != [alpha] * 10):
+                raise ValueError("Alpha selection requires the pinned RAW and ten identical gains")
+            measured[alpha] = row
+            atomic_json(receipt, list(measured.values()))
+        return measured[alpha]
+
+    if {c["prompt"] for c in panels["steps"]} & {c["prompt"] for c in panels.get("confirm", [])}:
+        raise ValueError("Alpha search and confirmation prompts overlap")
+    trials = search_constant(lambda a: selection_score(evaluate(a), objective))
+    available = [a for a in trials if trials[a] is not None]
+    if not available:
+        raise Unmeasured(f"No complete alpha measurements for {objective}")
+    alpha = max(available, key=lambda a: (trials[a], -a))
+    verify_search(list(trials.items()), alpha)
+    selected = measured[alpha]
+    if screened and selected["status"] == "pass":
+        panel = outputs.compare(panels["rates"], variation, raw, alpha, "constant", owner=owner)
+        selected = dict(selected, selection_status=selected["status"], rate_panel=panel, status=panel["status"])
+        measured[alpha] = selected
+        atomic_json(receipt, list(measured.values()))
+    reservation = dict(objective=objective, protocol=protocol_id() if objective == DISTINCT_BOSS else None,
+                       raw_sha256=raw.sha256, cases_sha256=digest(panels["steps"]),
+                       trials=[[a, value] for a, value in trials.items()], alpha=alpha)
+    bound = receipt.with_name(receipt.stem + "-reservation.json")
+    if bound.exists() and read(bound) != reservation:
+        raise ValueError("Scalar search differs from its reserved objective, RAW or case panel")
+    atomic_json(bound, reservation)
+    return selected
+
+
+def validate_calibration(root, strength, cases, outputs):
+    """Refuse a held-out render when its scalar was selected with another metric or RAW."""
+    objective = outputs.objective
+    proof = read(root / "strengths-reservation.json")
+    policy = dict(objective=objective, protocol=protocol_id() if objective == DISTINCT_BOSS else None,
+                  raw_sha256=strength["raw"]["sha256"], cases_sha256=digest(cases))
+    if any(proof.get(key) != value for key, value in policy.items()):
+        raise ValueError("Reserved alpha does not belong to this study objective, RAW and panel")
+    record = []
+    for trial in read(root / "strengths.json"):
+        alpha = trial["alpha"]
+        if (trial["raw"] != strength["raw"] or trial["profile"] != "constant"
+                or trial["gains"] != [alpha] * 10 or [p["case"] for p in trial["pairs"]] != cases):
+            raise ValueError("Scalar search contains different weights, intervals or cases")
+        value = selection_score(trial, objective)
+        if objective == DISTINCT_BOSS and selection_score(outputs.with_objective(trial), objective) != value:
+            raise ValueError("Stored trial score differs from its bound design observations")
+        record.append([alpha, value])
+    if record != proof["trials"] or proof["alpha"] != strength["alpha"]:
+        raise ValueError("Held-out selection differs from the scalar search reservation")
+    verify_search(record, strength["alpha"])
+    if (strength["profile"] != "constant" or strength["gains"] != [strength["alpha"]] * 10
+            or dict(record)[strength["alpha"]] != selection_score(strength, objective)):
+        raise ValueError("Reserved strength or objective differs from the winning search trial")
+
+
+def measure_strength(outputs, cache, cases, strength):
     rt = outputs.runtime
     variation = cache.index["identity"]["variation"]
     raw = Checkpoint(**strength["raw"])
@@ -423,7 +544,7 @@ def confirm(outputs, cache, panels, strength):
     )
     try:
         return outputs.compare(
-            panels["confirm"],
+            cases,
             variation,
             raw,
             strength["alpha"],
@@ -432,3 +553,7 @@ def confirm(outputs, cache, panels, strength):
         )
     finally:
         owner.close()
+
+
+def confirm(outputs, cache, panels, strength):
+    return measure_strength(outputs, cache, panels["confirm"], strength)

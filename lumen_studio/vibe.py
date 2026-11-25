@@ -6,6 +6,7 @@ from pathlib import Path
 
 from .contracts import digest
 from .jev import concept_rubric
+from .study.pair_checks import PAIR_PROTOCOLS, pair_status
 
 SCHEMA = 'anima-vibe-manifest-v1'
 
@@ -139,6 +140,16 @@ def validate_manifest(manifest):
                 or row['neutral'] == row['positive']):
             raise ValueError('vibe rows require distinct nonempty neutral/positive prompts')
         selected = row['selection']
+        protocol = manifest["collection_identity"].get("pair_check")
+        if protocol is not None:
+            if protocol != PAIR_PROTOCOLS.get(manifest["criterion"].casefold()):
+                raise ValueError("Teacher pair protocol differs from the concept")
+            check = selected.get("pair_check") or {}
+            probability = check.get("separate_boss" if protocol == "separate-boss-v1" else "paired_effect")
+            if (check.get("status") != "pass" or pair_status(protocol, probability) != "pass"
+                    or any(check.get(side) != selected[side]["output"]["sha256"]
+                           for side in ("neutral", "positive"))):
+                raise ValueError("Teacher requires a passing paired check on the selected images")
         selected_id = digest(dict(round=selected['round'], prompt=selected['prompt']))
         if (selected.get('id') != selected_id or row['id'] != 'vibe-' + selected_id
                 or type(selected['round']) is not int or selected['round'] < 0):

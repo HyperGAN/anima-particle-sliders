@@ -8,7 +8,7 @@ and explores new ones with a Nanoodle prompt workflow.
 
 ## Worked example for other products
 
-The [shared `--vibe` instructions](https://github.com/HyperGAN/particle-sliders/blob/main/docs/vibe.md) give the template for every `*-particle-sliders` product. Here is how Anima used it for Final Boss.
+The [shared `--vibe` instructions](https://github.com/HyperGAN/particle-sliders/blob/main/docs/vibe.md) give the template for every `*-particle-sliders` product. This historical example records the released timed Final Boss. Fresh runs use the [constant-strength selection protocol](#rate-and-checkpoint-selection).
 
 1. **Select the teachers.** Run `anima-vibe --vibe 'final boss'` with the [native collection arguments](#source-setup). Render each ordinary character and its Boss treatments in the same scene at a matched seed. Jev requires an ordinary Boss rating ≤ 0.35 and a positive rating ≥ 0.75. Three collections supplied 14 qualified pairs. Comparing their designs removed two lookalikes, leaving 12 teaching scenes. [Selection protocol](#named-portfolios)
 2. **Build the late-cues targets.** Capture both frozen trajectories for each scene. At each of ten positions, ask how the Boss prompt changes the predicted denoising direction at that same state. This gives 240 fields. At positions 1–7 use the Boss-minus-neutral edit. At positions 8–10 mix 65% of that edit with 35% from the more explicit Boss prompt. Weight the subject at 1.0 and the background at 0.45 with a soft mask, then restore each edit’s original norm. [Exact cue prompts and parameters](docs/final-boss-raw192/vibe12/training/late-cues.json) · [Field construction](research/final-boss-vibe12/anima-final-boss-vibe12-20261124/adapters/spatial_stock.py)
@@ -286,16 +286,18 @@ on confirmed structural defects. Decisions and rejected images are saved with
 the run.
 
 For a bundled concept with a confirmed recipe, the ordinary command uses its
-measured G, D and particle rates and its selected update count first. A shorter
-run keeps the 256-update optimizer schedule used in qualification. Set
+measured G, D and particle rates and its selected update count first. Fresh Final Boss fits start at the released RAW192 rates and 192-update schedule. The failed RAW128 recipe remains available in the registry for replay. Other shorter
+runs keep the 256-update optimizer schedule used in qualification. Set
 `--steps 256` to compare the four original checkpoints again. If the default
-fit fails before confirmation,
+fit fails during training selection,
 the ordinary command searches alternative rates automatically. Explicit rates
 request a fixed fit unless `--search-rates` is supplied. A resumed run keeps the rates recorded with
 its existing checkpoints. `--g-lr`, `--d-lr` and `--particle-lr` override
 the corresponding rate. [Measured native recipes](configs/anima/study-recipes.json).
 
-### Measured settings on ParticleGAN 0.12.0
+### Original measured settings on ParticleGAN 0.12.0
+
+The default Final Boss leaderboard calibrates one constant alpha for each trained recipe and ranks the reserved selections on eight other characters. Both stages use the original distinct Boss score, including visible damage and repeated character designs. [Rankings and matched samples](docs/leaderboard.md)
 
 Each gain is the equally weighted mean change in the intended effect with the slider
 on versus off across four held-out prompts and seeds. All twelve pairs improved.
@@ -303,24 +305,44 @@ These settings apply to Anima Turbo v1.1 at 512 × 512 with ten Euler steps and 
 
 | Slider | G | D | Particle | Updates | Strength | Held-out gain |
 | --- | ---: | ---: | ---: | ---: | --- | ---: |
-| Final Boss | 0.00028125 | 0.009 | 0.03 | 128 | constant, α 1 | +0.1042 |
+| Final Boss · failed visual trial | 0.00028125 | 0.009 | 0.03 | 128 | constant, α 1 | +0.1042 |
 | 1990s anime | 0.000375 | 0.018 | 0.03 | 192 | constant, α 1.5 | +0.2050 |
 | Visually appealing character | 0.000375 | 0.018 | 0.03 | 256 | constant, α 1 | +0.1792 |
 
 The 1990s anime and character-appeal runs compared 64, 128, 192 and 256 updates.
+The released Final Boss is Vibe12 late-cues RAW192 with early α 1.15625. In a replay on the four RAW128 confirmation prompts with byte-identical OFF PNGs, that checkpoint gained +0.9442 versus +0.1042 for the constant-strength RAW128 study. The integrity observer passed two reference images, left one unmeasured and flagged one. Both effect scores and structural judgments are recorded separately. The trainer writes the per-case comparison to `reference-comparison.json` when the rubric, prompts, seeds, OFF images and scores match the pinned benchmark. It reports other panels as unmatched. For all three bundled sliders a full run requires an intact confirmation and a gain over its own pinned reference before returning exit 0. A research-only caller can use `--no-require-reference-gain` to accept a completed measurement regardless of its release decision. Exit 3 keeps a measured candidate and its gallery on disk when it falls short or lacks a matched reference. An incomplete or structurally unresolved confirmation exits 2. [Released checkpoint and settings](docs/final-boss-raw192/default.json) · [Pinned comparison](configs/anima/final-boss-reference.json)
+
+Fresh anime teachers must strengthen the cel treatment of the frame. Fresh character appeal teachers must strengthen the central character’s design. The paired judge receives the actual neutral image first and the proposed target second. A failed or uncertain pair returns the collector to the other candidates or next seed. The saved pair decision binds both PNG hashes. The script keeps subject age in the generation prompts.
+
+The 1990s anime reference is RAW192, constant α 1.5. For visually appealing character it is RAW256, constant α 1. Both started with the same three-strength grid as the historical Final Boss trial. Fresh runs freeze the recipe, rates and RAW after the training comparison. Alpha selection measures a single scalar applied at every native denoising step and reserves it before confirmation. The run compares that setting with the slider’s pinned reference on matched confirmation images. [Anime reference](configs/anima/1990s-anime-reference.json) · [Character appeal reference](configs/anima/character-appeal-reference.json)
+
+The original RAW128 search tried α 0.5, 1 and 1.5 on each schedule. Early α 1.0 had a selection gain of +0.342 but two screening images had uncertain integrity. Constant α 1.5 gained +0.363 with one uncertain selection image. A recorded HTTP 502 left one early α 1.5 effect missing. Its saved PNG later scored 0.89, giving that setting a +0.8117 selection gain with three uncertain structural checks. The study judge now retries explicit transient HTTP responses twice and keeps a separate receipt for each attempt. An interrupted request with an unknown outcome stays unmeasured. Constant α 1.0 was the strongest fully measured result on the original grid. The earlier mixed-schedule search and its selected strengths remain available for replay.
+
+The original study ranked teacher targets one image at a time. It accepted a tea-shop image in which an armored figure stands beside the original subject. New Final Boss collections compare the two images before freezing the field. A separate boss or an uncertain pair triggers the next eligible candidate or seed. The original nine-scene experiment used unweighted whole-image fields, G 0.00028125 and 128 updates on a 256-update optimizer schedule. Vibe12 used G 0.00075 and 192 updates with a 192-update schedule. On the four matched prompts, swapping the failed RAW128 from constant 1.0 to the released early α 1.15625 raised its mean gain from +0.1042 to +0.5442. Running the released RAW192 at the same two strengths yielded +0.6900 and +0.9442. Those comparisons isolate the effect of the inference schedule on each checkpoint. The released twelve-scene training recipe also applied a foreground weight and additional late teacher cues. [Field construction](#worked-example-for-other-products)
+
+To test the late-cues method on the eight corrected bundled teaching pairs, pass `--boss-targets late-cues` when starting a fresh Final Boss run. The script verifies each mask against the exact neutral and target PNGs, weights the teacher edit by 1.0 on the subject and 0.45 on the background, and blends 35% of a stronger cue at the last three positions. It stores the transformed cache separately and checks native predictions against a saved teaching field for each scene. A custom recipe file can supply different matched images, masks and explicit prompts. The original experiment and restored reference each keep their own frozen fields.
+
+The two 128-update studies on the same eight corrected pairs each used G 0.00028125. Whole-image fields selected RAW96 at constant α 1.6875. Its comparison gain was +0.2275 with one unresolved structure check. Foreground-weighted late-cue fields selected RAW128 at constant α 1.4375. One structure check failed and one effect request remained unmeasured. A third study kept the eight weighted targets and tried G 0.00075 with the released 192-update horizon. A portrait collapsed at update 48 and the script stopped before update 49. These specific fits remain failed or unmeasured. The published training rates are a starting point for fresh data.
+
+On the 0.12 runtime, the original Vibe12 RAW192 reproduced the archived Ranger and four matched comparison PNGs byte for byte using its ten published gains. A separate 48-update training control matched all 240 of the original teacher fields, all 4,033 initial adapter tensors and the minibatch order at every update. At early α 1.15625 the 0.11.1 and 0.12 RAW48 checkpoints gained +0.255 and +0.313 on the same four scenes. Both had structural failures. [Verified inference replay](docs/final-boss-raw192/vibe12/pg012-replay.json)
+
 The original Final Boss rate search found six settings that were intact at 64
-and later failed a structural check. The successful Final Boss fit used nine fresh
+and later failed a structural check. The failed RAW128 fit used nine fresh
 matched teacher scenes and compared 32, 64, 96 and 128 updates. Its screening
 panel included the exact watch-shop scene that had exposed duplicated characters.
 The upper endpoints are the best tested choices for those runs.
 
 ### Rate and checkpoint selection
 
-Use `--search-rates` to start a fresh learning-rate search. The rate screen varies one of the three absolute rates by a factor of
-two in each direction. When a different G wins, it repeats the D and particle
-comparisons at that G. When a lower G is the only usable initial setting, it
-also checks two lower G values. It continues the highest-scoring qualified
-FULL checkpoint. It rechecks the original rate scenes at every later quarter.
+Use `--search-rates` to compare generator, critic and particle learning rates at the
+same training budget and constant α 1. The first screen tests the reference plus a
+halving and doubling on each axis. The search repeats around a strictly better
+measured setting, then refines in factors of √2. If an entire initial screen
+fails, it can try a smaller generator rate. The default budget is 31 distinct
+rate settings. Set `--rate-arm-budget` to change it. The coverage record lists any
+untested or unmeasured neighbors, including an improving edge left open when
+the budget runs out. Exact ties keep their observation order. The trainer
+continues from the strongest qualified saved FULL. It rechecks the original rate scenes at every later quarter.
 A confirmed split or other catastrophic defect stops the candidate before the
 next update. A checkpoint with an unresolved recheck is ineligible for selection.
 The full-budget check also applies when resuming a screened run from an older version.
@@ -330,12 +352,8 @@ recheck those screening scenes. Previously frozen panels keep their original cas
 the proposed replay strength on those scenes before using the held-out panel. If the bracket
 yields no usable fit, it tests lower G values
 with the reference critic and particle rates held fixed. For a run
-using measured rates, pass `--g-lr`, `--d-lr` and `--particle-lr`. Ranking uses
-the mean change in intended effect across matched finished images.
-`--steps 256` compares updates 64, 128, 192 and 256. The winning RAW is loaded
-for constant, early and late strength comparisons and a separate held-out
-confirmation. Before rendering the first held-out image, the script saves the
-selected RAW, rates and strength in `confirmation-selection.json`. If that
+using measured rates, pass `--g-lr`, `--d-lr` and `--particle-lr`. Final Boss ranks by the distinct Boss score on matched finished images. The other sliders rank by mean intended-effect gain.
+`--steps 256` compares updates 64, 128, 192 and 256. The training comparison renders each eligible RAW at constant α 1 on the same prompts and seeds and ranks by the registered slider objective. The script writes the selected rates and one RAW hash to `training-selection.json` before alpha calibration starts. Calibration starts at α 1, tests both sides, includes probes at 0.5, 1.5 and 2, and extends a rising edge up to 5. The strongest measured setting is refined to neighboring probes within 1/32. Missing objective measurements are ineligible. The same α is used for all ten steps. A failed calibration ends the run with its evidence. A retry uses the frozen training selection. Before rendering the first held-out image, the script verifies the metric, matched panel, RAW hash, ten equal gains and full scalar trace against `strengths-reservation.json`, then saves the selected RAW, rates and strength in `confirmation-selection.json`. If that
 measurement is interrupted, a rerun checks the same selection. To reserve
 the selection while keeping held-out ON images unseen, use `--select-only`.
 Run the same command without that flag to confirm it.
@@ -343,7 +361,7 @@ Run the same command without that flag to confirm it.
 original RAW path. `status.json` records the result and an incomplete run's
 exit reason. Rerun with the same directory and arguments to reuse recorded work.
 
-Open `leaderboard.md` in the run directory to compare matched images. Render a new prompt with the recorded RAW and strength schedule:
+Open `leaderboard.md` in the run directory to compare matched images. Render a new prompt with the recorded RAW and confirmed strength.
 
 ```sh
 anima-vibe-render --outcome runs/boss/outcome.json --model-dir /models/anima-turbo-v11 \

@@ -51,6 +51,12 @@ def test_default_matches_the_published_distinct_design_winner():
         assert item["training_cache_sha256"] == board["methods"][name]["training_cache_sha256"]
     default = json.loads((STUDY / "default.json").read_text())
     assert default == select_default(panel, board, catalog)
+    proof = json.loads((folder / "pg012-replay.json").read_text())
+    assert proof["raw_sha256"] == default["checkpoints"][default["recipe"]]["sha256"]
+    assert proof["replay_model"] in default["qualified_replay_models"]
+    assert proof["training_model"] == default["training_model_identity"]
+    assert len(proof["cases"]) == 5 and all(case["expected"] == case["actual"] for case in proof["cases"])
+    assert proof["cases"][0]["actual"] == default["reference_png_sha256"]
     assert default["recipe"] == panel["rows"][0]["method"]
     assert default["development_score"] == max(row["score"] for row in panel["rows"])
 

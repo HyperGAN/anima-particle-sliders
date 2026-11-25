@@ -15,7 +15,7 @@ training, evaluation, export and inference.
 - [Anima `--vibe` instructions, from teacher selection to the released slider](VIBE.md)
 - [Saved Candlelit C2 RAW960 results](docs/finished-output-learning-rates.md)
 - [Scheduled slider strength](docs/scheduled-strength.md) for the measured Candlelit RAW256 and Final Boss RAW192 profiles and opt-in activation-dependent calibration.
-- [Final Boss research leaderboard](docs/leaderboard.md) with matched scores, the current default, and links to samples and source.
+- The Final Boss default is the distinct Boss score. Every frozen recipe gets its own one-dimensional constant-alpha search. [Rankings, matched samples and the archived failed trial](docs/leaderboard.md)
 
 Saved checkpoints and previously published showcase files retain their original
 source and dependency profiles.

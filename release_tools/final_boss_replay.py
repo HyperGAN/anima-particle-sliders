@@ -22,7 +22,10 @@ def replay(runtime, checkpoint, case, config):
     if checkpoint.stat().st_size != expected["bytes"] or file_hash(checkpoint) != expected["sha256"]:
         raise ValueError("The RAW checkpoint differs from the published research default")
     recorded = config["training_model_identity"]
-    if not same_portable_model(recorded, runtime.identity):
+    # An exact, output-qualified runtime may use a different package environment.
+    # It must still reproduce the archived reference before rendering a new case.
+    certified = runtime.identity in config.get("qualified_replay_models", ())
+    if not certified and not same_portable_model(recorded, runtime.identity):
         raise ValueError("Use a native runtime qualified for this Final Boss checkpoint")
     adapter = ParticleAdapter(runtime.transformer).to(runtime.device)
     # This manifest pins both the checkpoint's original identity and the
@@ -40,7 +43,8 @@ def replay(runtime, checkpoint, case, config):
                                 config["steps"], config["gains"])
 
     reference = config["reference_case"]
-    if (case == reference or runtime.identity["runtime_sha256"] not in config["qualified_replay_runtime_sha256"]):
+    if (case == reference or certified
+            or runtime.identity["runtime_sha256"] not in config["qualified_replay_runtime_sha256"]):
         image, info = render(reference)
         with BytesIO() as buffer:
             image.convert("RGB").save(buffer, format="PNG")

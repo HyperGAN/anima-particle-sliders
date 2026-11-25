@@ -12,6 +12,8 @@ python -m release_tools.final_boss_replay --model "$ANIMA_MODEL" --out final-bos
 
 The default case is the first matched development character. The command verifies the downloaded checkpoint and reproduces the measured reference PNG. Use `--case` to render another case or `--checkpoint` for a local copy of the same adapter. The JSON beside the PNG records the model, case, checkpoint, alpha and effective gains.
 
+The 0.12 runtime reproduced the archived Ranger and the four matched comparison PNGs byte for byte. Replay admits that exact model and environment identity and checks Ranger before each new case. [Five-image qualification](vibe12/pg012-replay.json)
+
 ## Use the winning training targets
 
 ```sh

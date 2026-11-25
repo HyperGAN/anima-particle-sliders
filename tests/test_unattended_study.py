@@ -211,7 +211,9 @@ def test_unattended_search_measures_critic_and_bank_at_viable_generator(
     monkeypatch.setattr(cli, "train", train_stub)
     options = cli.screened_rates(SimpleNamespace(root=tmp_path), None, None, ref, 256)
     assert next(options) == dict(g=0.002, d=0.02, particle=0.1)
-    assert len(calls) == len(set(calls)) == 13
+    assert len(calls) == len(set(calls))
+    assert len(calls) <= 31
+    assert (0.002, 0.04, 0.1) in calls
     assert (0.002, 0.01, 0.05) in calls and (0.002, 0.01, 0.2) in calls
 
 
@@ -383,10 +385,10 @@ def test_confirmation_reserves_one_setting_across_interruptions(tmp_path, monkey
 
     rates = dict(g=0.000375, d=0.009, particle=0.03)
     strength = dict(
-        raw={"path": str(tmp_path / "RAW.safetensors")}, alpha=0.5, profile="early"
+        raw={"path": str(tmp_path / "RAW.safetensors")}, alpha=0.5, profile="constant"
     )
     atomic_json(tmp_path / "RAW.scoped.json", {"completed_steps": 192})
-    outputs = SimpleNamespace(root=tmp_path)
+    outputs = SimpleNamespace(root=tmp_path, concept="demo")
 
     def candidates(*args):
         yield rates
@@ -395,7 +397,7 @@ def test_confirmation_reserves_one_setting_across_interruptions(tmp_path, monkey
     monkeypatch.setattr(cli, "fit_candidates", candidates)
     monkeypatch.setattr(cli, "train", lambda *a, **kw: {})
     monkeypatch.setattr(cli, "recheck_screened_cases", lambda *a, **kw: None)
-    monkeypatch.setattr(cli, "select_checkpoint", lambda *a: {})
+    monkeypatch.setattr(cli, "select_checkpoint", lambda *a: {"raw": strength["raw"]})
     monkeypatch.setattr(cli, "tune", lambda *a, **kw: strength)
     plan = {"budget": 256, "horizon": 256}
     selection = cli.choose_for_confirmation(outputs, None, {}, plan, None)
@@ -583,7 +585,7 @@ def test_bundled_recipes_bind_the_confirmed_budgets_and_holdouts(tmp_path):
     from lumen_studio.study.cli import arguments, study_panels, training_plan
 
     for title, budget in (
-        ("Final Boss", 128),
+        ("Final Boss", 192),
         ("1990s anime", 192),
         ("Visually appealing character", 256),
     ):
@@ -591,7 +593,15 @@ def test_bundled_recipes_bind_the_confirmed_budgets_and_holdouts(tmp_path):
         spec = read(args.spec)
         measured = read(args.spec.with_name("study-recipes.json"))["concepts"][title]
         plan = training_plan(args, tmp_path, title, spec["concepts"][title])
-        assert plan == {"rates": measured["rates"], "budget": budget, "horizon": 256}
+        start = measured.get("fresh_training", measured)
+        assert plan == {"rates": start["rates"], "budget": budget, "horizon": start.get("horizon", 256)}
+        if title == "Final Boss":
+            assert plan == dict(rates={"g": 0.00075, "d": 0.009, "particle": 0.03}, budget=192, horizon=192)
+            old = tmp_path / "failed"
+            atomic_json(old / "training-config.json", dict(rates=measured["rates"], max_updates=128, horizon=256))
+            assert training_plan(args, old, title, spec["concepts"][title]) == dict(
+                rates=measured["rates"], budget=128, horizon=256
+            )
         groups, _ = study_panels(spec, title, tmp_path)
         assert [case["seed"] for case in groups["confirm"]] == measured[
             "held_out_seeds"
@@ -603,3 +613,342 @@ def test_bundled_recipes_bind_the_confirmed_budgets_and_holdouts(tmp_path):
             re.search(r"\badult\b|\b\d+-year-old\b", case["prompt"], re.IGNORECASE)
             for case in groups["confirm"]
         )
+
+
+@pytest.mark.parametrize("concept", ["Final Boss", "1990s anime", "Visually appealing character"])
+def test_teacher_requires_its_concept_pair_check(tmp_path, concept):
+    from lumen_studio.contracts import digest
+    from lumen_studio.vibe import validate_manifest
+    outputs = RenderFixture(tmp_path)
+
+    def paired(neutral, positive):
+        return dict(
+            status="fail" if len(outputs.calls) == 2 else "pass",
+            **({"separate_boss": 0.95 if len(outputs.calls) == 2 else 0.03}
+               if concept == "Final Boss" else {"paired_effect": 0.1 if len(outputs.calls) == 2 else 0.95}),
+            neutral=neutral["output"]["sha256"],
+            positive=positive["output"]["sha256"],
+        )
+
+    outputs.teacher_pair = paired
+    cfg = dict(
+        neutral_ceiling=0.35,
+        teachers=[dict(neutral="original", treatments=["treatment"], seed=11)],
+    )
+    result = collect(outputs, cfg, concept, 1, 2)
+    assert result["rows"][0]["seeds"] == [104740]
+    tried = read(tmp_path / "teacher-decisions.json")
+    assert tried[0]["treatments"][0]["pair_check"]["status"] == "fail"
+    assert not tried[0]["treatments"][0]["eligible"]
+    assert result["rows"][0]["selection"]["pair_check"]["status"] == "pass"
+    result["rows"][0]["selection"]["pair_check"]["neutral"] = "other image"
+    result["sha256"] = digest({k: v for k, v in result.items() if k != "sha256"})
+    with pytest.raises(ValueError, match="paired check"):
+        validate_manifest(result)
+
+
+def test_alpha_search_finds_intact_interior_and_checks_rising_edge(tmp_path):
+    from particle_sliders.candidate_failure import FileRecord
+    from lumen_studio.study.training import refine_strength
+
+    path = tmp_path / "raw"
+    path.write_bytes(b"saved weights")
+    raw = FileRecord.from_path(path)
+    case = dict(prompt="portrait", seed=3, off={"judgment": {"score": 0.0}})
+
+    def run(center, ceiling):
+        tried = {}
+
+        def evaluate(alpha):
+            gain = 1 / (1 + abs(center - alpha))
+            status = "pass" if alpha <= ceiling else "unmeasured"
+            tried[alpha] = dict(
+                alpha=alpha,
+                status=status,
+                mean_gain=gain,
+                pairs=[dict(case=case, on={"judgment": {"score": gain}})],
+            )
+            return tried[alpha]
+
+        refine_strength(raw, [case], evaluate, strongest=5.0)
+        return tried
+
+    observations = run(1.1875, 1.3)
+    assert (
+        max(
+            (a for a in observations if a <= 1.3),
+            key=lambda a: observations[a]["mean_gain"],
+        )
+        == 1.1875
+    )
+    assert 5.0 in run(5.0, 5.0)
+    assert 0.125 in run(0.125, 0.25)
+
+
+def test_boss_effect_comparison_requires_exact_offs_cases_and_rubric():
+    from lumen_studio.study.cli import arguments
+    from lumen_studio.study.reference import compare_boss_reference
+
+    spec_file = arguments(
+        ["--vibe", "Final Boss", "--out", ".", "--model-dir", "."]
+    ).spec
+    spec = read(spec_file)
+    rubric = spec["concepts"]["Final Boss"]["effect"]
+    ref = read(spec_file.with_name("final-boss-reference.json"))
+    cases = spec["confirmation_cases"]["Final Boss"]
+    rows = [
+        dict(
+            case=dict(
+                prompt=c["prompt"],
+                seed=r["seed"],
+                off=dict(
+                    output=dict(sha256=r["off_sha256"]),
+                    judgment=dict(score=r["off_score"]),
+                ),
+            ),
+            on=dict(output=dict(sha256="abc"), integrity=dict(status="pass")),
+            gain=0.1,
+        )
+        for c, r in zip(cases, ref["cases"], strict=True)
+    ]
+    comparison = compare_boss_reference(dict(pairs=rows[::-1]), rubric)
+    assert comparison["status"] == "matched" and comparison["difference"] < -0.8
+    assert compare_boss_reference(dict(pairs=rows), {})["status"] == "unmatched"
+    rows[0]["case"]["off"]["output"]["sha256"] = "changed"
+    assert compare_boss_reference(dict(pairs=rows), rubric)["status"] == "unmatched"
+
+
+def test_pinned_boss_targets_use_actual_neutral_and_only_late_cues(tmp_path):
+    import torch
+    from PIL import Image
+    from lumen_studio.contracts import file_hash
+    from lumen_studio.study.boss_targets import field_context, target_field
+
+    mask = tmp_path / "matte.png"
+    Image.new("L", (2, 2), 255).save(mask)
+    recipe = dict(
+        rows={
+            "target": dict(
+                neutral_sha256="source",
+                matte=mask.name,
+                matte_sha256=file_hash(mask),
+                explicit="strong cue",
+            )
+        }
+    )
+    row = dict(
+        selection={
+            side: {"output": {"sha256": sha}}
+            for side, sha in [("neutral", "source"), ("positive", "target")]
+        }
+    )
+    calls = []
+
+    def predict(latent, step, text):
+        calls.append((step, text))
+        return torch.tensor([[[[[0.0, 1.0], [0.0, 1.0]]]]])
+
+    rt = SimpleNamespace(device="cpu", encode=lambda prompt: prompt, predict=predict)
+    ctx = field_context(rt, recipe, tmp_path, row, (2, 2))
+    neutral = torch.zeros((1, 1, 1, 2, 2))
+    positive = torch.tensor([[[[[1.0, 0.0], [1.0, 0.0]]]]])
+    record = dict(latent=neutral, timestep=5.0, position=6)
+    assert torch.equal(target_field(rt, record, neutral, positive, ctx), positive)
+    adjusted = target_field(rt, dict(record, position=7), neutral, positive, ctx)
+    assert calls == [(5.0, "strong cue")] and not torch.equal(adjusted, positive)
+    assert torch.isclose(adjusted.norm(), positive.norm())
+    row["selection"]["neutral"]["output"]["sha256"] = "changed"
+    with pytest.raises(ValueError, match="selected image pair"):
+        field_context(rt, recipe, tmp_path, row, (2, 2))
+
+
+def test_builtin_boss_recipe_is_available_to_installed_cli():
+    from lumen_studio.study.cli import arguments
+    from lumen_studio.contracts import file_hash
+
+    args = arguments(
+        [
+            "--vibe",
+            "Final Boss",
+            "--out",
+            ".",
+            "--model-dir",
+            ".",
+            "--boss-targets",
+            "late-cues",
+        ]
+    )
+    recipe = read(args.boss_targets)
+    assert recipe["method"] == "late-cues-v1" and len(recipe["rows"]) == 8
+    for entry in recipe["rows"].values():
+        assert (
+            file_hash(args.boss_targets.parent / entry["matte"])
+            == entry["matte_sha256"]
+        )
+
+
+@pytest.mark.parametrize("concept", ["Final Boss", "1990s anime", "Visually appealing character"])
+def test_publish_command_keeps_completed_trial_below_reference(tmp_path, monkeypatch, concept):
+    from lumen_studio.study import cli
+
+    args = ["--vibe", concept, "--out", str(tmp_path), "--model-dir", "."]
+    outcome = dict(
+        vibe=concept,
+        strength={"raw": {"sha256": "a"}},
+        selected_step=128,
+        confirmation={"mean_gain": 0.1},
+    )
+    atomic_json(tmp_path / "outcome.json", outcome)
+    monkeypatch.setattr(cli, "run", lambda _: outcome)
+    for decision, code in [
+        ("retain_reference", 3),
+        ("reference_unmeasured", 3),
+        ("exceeds_reference", 0),
+    ]:
+        atomic_json(tmp_path / "reference-comparison.json", {"decision": decision})
+        assert cli.main(args) == code
+        assert cli.main([*args, "--require-reference-gain"]) == code
+        assert cli.main([*args, "--no-require-reference-gain"]) == 0
+        assert read(tmp_path / "status.json")["release_decision"] == decision
+        assert read(tmp_path / "outcome.json") == outcome
+
+
+@pytest.mark.parametrize(
+    "http_status,succeeds", [(502, True), (400, False), (None, False)]
+)
+def test_transient_judge_keeps_first_receipt_and_never_repeats_unknown_transport(
+    tmp_path, monkeypatch, http_status, succeeds
+):
+    from io import BytesIO
+    from urllib.error import HTTPError
+    from particle_sliders import alpha_tune_jev as api
+    from particle_sliders.candidate_failure import FileRecord
+    from lumen_studio.study import judge
+
+    png = tmp_path / "image.png"
+    png.write_bytes(bytes.fromhex("89504e470d0a1a0a") + b"fixture")
+    img = api._Image.read(FileRecord.from_path(png))
+    questions = {"check": {"type": "noul", "instructions": "Check"}}
+    calls = []
+
+    def request(*args, **kwargs):
+        calls.append(True)
+        if len(calls) == 1:
+            if http_status is None:
+                raise OSError("response lost")
+            raise HTTPError(api.JEV_URL, http_status, "test status", {}, BytesIO())
+        return BytesIO(
+            json.dumps({"answers": {"check": {"type": "noul", "noul": 0.1}}}).encode()
+        )
+
+    monkeypatch.setattr(api, "urlopen", request)
+    monkeypatch.setenv("NANOGPT_API_KEY", "fixture")
+    monkeypatch.setattr(judge.time, "sleep", lambda _: None)
+    receipts = tmp_path / "receipts"
+    scorer = judge.StudyJudge(receipts, "fixture")
+    for _ in range(2):
+        decision = scorer._decide((img,), "state", questions)
+        assert decision == ({"check": 0.1} if succeeds else None)
+    assert len(calls) == (2 if succeeds else 1)
+    if http_status is not None:
+        (first,) = receipts.glob("*.json")
+        assert read(first)["response"] == {"http_status": http_status}
+    else:
+        assert list(receipts.glob("*.pending"))
+
+
+def test_failed_alpha_search_cannot_change_the_training_decision(tmp_path, monkeypatch):
+    from lumen_studio.study import cli
+
+    frozen = {"raw": {"path": "saved", "sha256": "fixed"}, "rates": {"g": 1}, "screened": False}
+    atomic_json(tmp_path / "training-selection.json", frozen)
+    monkeypatch.setattr(cli, "fit_candidates", lambda *a: pytest.fail("Re-entered training selection"))
+    def failed(outputs, cache, panels, selected, *, screened):
+        assert selected == frozen and not screened
+        raise Unmeasured("No measured usable strength")
+    monkeypatch.setattr(cli, "tune", failed)
+    with pytest.raises(Unmeasured, match="usable strength"):
+        cli.choose_for_confirmation(SimpleNamespace(root=tmp_path), None, {}, {}, None)
+    assert read(tmp_path / "training-selection.json") == frozen
+    assert not (tmp_path / "confirmation-selection.json").exists()
+
+
+def test_constant_calibration_varies_only_alpha_on_the_frozen_raw(tmp_path):
+    from dataclasses import asdict
+    from particle_sliders.candidate_failure import FileRecord
+    from lumen_studio.study.training import calibrate_constant
+
+    path = tmp_path / "RAW"
+    path.write_bytes(b"one training selection")
+    raw = FileRecord.from_path(path)
+    case = dict(prompt="portrait", seed=3, off={"judgment": {"score": 0.0}})
+    probes = []
+
+    def compare(cases, variation, checkpoint, alpha, profile, *, owner):
+        assert checkpoint == raw and profile == "constant" and variation == "vibe"
+        assert cases == [case]
+        gain = 1 / (1 + abs(1.1875 - alpha))
+        probes.append(alpha)
+        return dict(raw=asdict(raw), alpha=alpha, profile=profile, gains=[alpha] * 10,
+                    mean_gain=gain, status="pass",
+                    pairs=[dict(case=case, on={"judgment": {"score": gain}})])
+
+    outputs = SimpleNamespace(root=tmp_path, compare=compare)
+    panels = {"steps": [case]}
+    selected = calibrate_constant(outputs, panels, "vibe", raw)
+    assert selected["alpha"] == pytest.approx(1.1875, abs=1/32)
+    assert len(probes) == len(set(probes)) > 5
+    assert all(row["gains"] == [row["alpha"]] * 10 for row in read(tmp_path / "strengths.json"))
+
+
+def test_gallery_displays_fixed_training_probes_before_scalar_calibration(tmp_path):
+    from lumen_studio.study.leaderboard import gallery
+
+    raw = {"path": str(tmp_path / "RAW.safetensors"), "sha256": "chosen"}
+    picture = {"path": str(tmp_path / "image.png")}
+    pair = dict(case={"seed": 3, "off": {"output": picture}}, on={"output": picture}, gain=0.2)
+    trial = dict(raw=raw, profile="constant", alpha=1.25, gains=[1.25] * 10,
+                 pairs=[pair], status="pass", mean_gain=0.2)
+    rates = dict(g=0.001, d=0.01, particle=0.02)
+    arm = tmp_path / "rates" / "arm"
+    atomic_json(arm / "cursor.json", dict(rates=rates))
+    atomic_json(arm / "fit/64.json", dict(trial, alpha=1.0, gains=[1.0] * 10))
+    atomic_json(tmp_path / "training-selection.json", dict(raw=raw, rates=rates))
+    atomic_json(tmp_path / "strengths.json", [trial])
+    gallery(tmp_path, dict(vibe="test", strength=trial, selected_step=64, confirmation=trial))
+    page = (tmp_path / "leaderboard.md").read_text()
+    assert page.index("## Training checkpoint comparison") < page.index("## Constant alpha calibration")
+    assert "[64](rates/arm/fit/64.json) · selected" in page
+    assert "1.25" in page
+
+
+def test_lr_search_follows_rising_critic_and_particle_edges_at_fixed_g(tmp_path, monkeypatch):
+    from math import log2
+    from types import SimpleNamespace
+    from lumen_studio.study import cli
+
+    ref = dict(g=.001, d=.01, particle=.03)
+    def train(outputs, cache, panels, rates, steps, phase, *, schedule_horizon):
+        assert phase == "screen" and steps == 64 and schedule_horizon == 512
+        score = 1 - sum(abs(log2(rates[role] / target)) for role, target in (("g", .001), ("d", .04), ("particle", .06))) / 10
+        return dict(status="pass", mean_gain=score)
+    monkeypatch.setattr(cli,"train",train)
+    gen=cli.screened_rates(SimpleNamespace(root=tmp_path), None, None, ref, 64, 512)
+    assert next(gen) == dict(g=.001, d=.04, particle=.06)
+    result=read(tmp_path/"rate-search-coverage.json")
+    assert result["screen_updates"] == 16 and result["alpha"] == 1.0
+    assert result["status"] == "neighborhood-tested" and not result["untested"]
+    attempts=read(tmp_path/"rate-search.json")
+    assert len(attempts) == len({tuple(r["rates"].values()) for r in attempts})
+
+
+def test_lr_search_reports_untested_edge_at_the_arm_budget(tmp_path, monkeypatch):
+    from types import SimpleNamespace
+    from lumen_studio.study import cli
+    reference = dict(g=.001,d=.01,particle=.03)
+    def screen(outputs, cache, panels, rates, *args, **kwargs):
+        return dict(status="pass", mean_gain=rates["d"])
+    monkeypatch.setattr(cli,"train",screen)
+    assert next(cli.screened_rates(SimpleNamespace(root=tmp_path),None,None,reference,64,arm_budget=7))["d"]==.02
+    coverage=read(tmp_path/"rate-search-coverage.json")
+    assert coverage["status"]=="arm-budget" and dict(reference,d=.04) in coverage["untested"]

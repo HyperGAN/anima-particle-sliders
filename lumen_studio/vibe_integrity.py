@@ -4,7 +4,8 @@ from importlib.resources import files
 import json
 from pathlib import Path
 
-from particle_sliders.alpha_tune_jev import JevJudge, _Image
+from particle_sliders.alpha_tune_jev import _Image
+from .study.judge import StudyJudge
 from particle_sliders.candidate_failure import FileRecord
 
 DEFECTS = {
@@ -86,7 +87,7 @@ def _check(judge, image):
 
 class FrameIntegrity:
     def __init__(self, receipts):
-        self.judge = JevJudge(Path(receipts), "Anima structural integrity")
+        self.judge = StudyJudge(Path(receipts), "Anima structural integrity")
 
     def check(self, image):
         return _check(self.judge, _Image.read(image))

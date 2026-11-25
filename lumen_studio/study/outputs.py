@@ -8,11 +8,14 @@ from pathlib import Path
 from statistics import fmean
 
 import torch
-from particle_sliders.alpha_tune_jev import JevJudge, _Image
+from particle_sliders.alpha_tune_jev import _Image
 from particle_sliders.candidate_failure import FileRecord
 from particle_sliders.strength_schedule import interval_strengths
 
 from ..contracts import atomic_json, digest
+from .objectives import DISTINCT_BOSS, MATCHED_GAIN, default_objective, measure_design, protocol_id
+from .judge import StudyJudge
+from .pair_checks import EFFECT_QUESTIONS, PAIR_PROTOCOLS, pair_status
 from ..vibe_integrity import FrameIntegrity
 
 
@@ -37,11 +40,13 @@ def sample_adapter(rt, variation, gains, prompt, seed):
 
 
 class Outputs:
-    def __init__(self, root, runtime, concept, rubric):
+    def __init__(self, root, runtime, concept, rubric, *, objective=None):
         self.root = root
         self.runtime = runtime
+        self.concept = concept
         self.rubric = rubric
-        self.judge = JevJudge(root / "judgments", concept)
+        self.objective = objective or default_objective(concept)
+        self.judge = StudyJudge(root / "judgments", concept)
         self.integrity = FrameIntegrity(root / "judgments")
 
     @torch.no_grad()
@@ -79,6 +84,47 @@ class Outputs:
         atomic_json(receipt, dict(identity=identity, image=asdict(record)))
         return record
 
+    def boss_teacher_pair(self, neutral, positive):
+        images = tuple(
+            _Image.read(FileRecord(**side["output"])) for side in (neutral, positive)
+        )
+        answer = self.judge._decide(
+            images,
+            "Image 1 is the source. Image 2 is a proposed transformation of its central character.",
+            {
+                "separate_boss": {
+                    "type": "noul",
+                    "instructions": (
+                        "In image 2, does the original subject remain present as an ordinary person "
+                        "while a separate figure supplies the boss design? Look for two distinct figures. "
+                        "A single transformed person in armor, a mask or a new pose is a valid edit."
+                    ),
+                }
+            },
+        )
+        probability = None if answer is None else answer["separate_boss"]
+        status = pair_status("separate-boss-v1", probability)
+        return dict(
+            status=status,
+            separate_boss=probability,
+            neutral=neutral["output"]["sha256"],
+            positive=positive["output"]["sha256"],
+        )
+
+    def teacher_pair(self, neutral, positive):
+        concept = self.concept.casefold()
+        if concept == "final boss":
+            return self.boss_teacher_pair(neutral, positive)
+        images = tuple(_Image.read(FileRecord(**side["output"])) for side in (neutral, positive))
+        result = self.judge._decide(
+            images,
+            "Image 1 is the neutral source. Image 2 is the proposed target.",
+            {"paired_effect": {"type": "noul", "instructions": EFFECT_QUESTIONS[concept]}},
+        )
+        probability = result["paired_effect"] if result is not None else None
+        return dict(status=pair_status(PAIR_PROTOCOLS[concept], probability), paired_effect=probability,
+                    neutral=neutral["output"]["sha256"], positive=positive["output"]["sha256"])
+
     def score(self, record):
         result = self.judge._decide(
             (_Image.read(record),),
@@ -90,6 +136,25 @@ class Outputs:
             judgment={"score": result["effect"] if result is not None else None},
             integrity=self.integrity.check(record),
         )
+
+    def with_objective(self, row):
+        """Old observations can be scored from their saved images without replaying training."""
+        if self.objective != DISTINCT_BOSS:
+            return row
+        identity = dict(protocol=protocol_id(), raw=row["raw"]["sha256"], gains=row["gains"],
+                        cases=[[p["case"]["prompt"], p["case"]["seed"], p["case"]["off"]["output"]["sha256"],
+                                p["on"]["output"]["sha256"]] for p in row["pairs"]])
+        path = self.root / "design-observations" / (digest(identity) + ".json")
+        if path.exists():
+            proof = read(path)
+            if proof["identity"] != identity or digest(proof["measurement"]) != proof["measurement_sha256"]:
+                raise ValueError("Retained Final Boss design measurements differ from their binding")
+            measured = proof["measurement"]
+        else:
+            measured = measure_design(row["pairs"], self.judge)
+            atomic_json(path, dict(identity=identity, measurement=measured, measurement_sha256=digest(measured)))
+        return dict(row, objective=DISTINCT_BOSS, objective_score=measured["score"],
+                    design_protocol=identity["protocol"], design_observation=str(path))
 
     def compare(self, cases, variation, raw, alpha, profile, *, owner=None):
         sigmas = self.runtime.scheduler(10).sigmas.tolist()
@@ -128,10 +193,10 @@ class Outputs:
             "fail"
             if "fail" in statuses
             else "unmeasured"
-            if "unmeasured" in statuses or not measured
+            if "unmeasured" in statuses or (not measured and getattr(self, "objective", MATCHED_GAIN) != DISTINCT_BOSS)
             else "pass"
         )
-        return dict(
+        row = dict(
             raw=asdict(raw),
             profile=profile,
             alpha=alpha,
@@ -141,3 +206,4 @@ class Outputs:
             status=status,
             mean_gain=fmean(gains_by_case) if measured else None,
         )
+        return self.with_objective(row) if getattr(self, "objective", MATCHED_GAIN) == DISTINCT_BOSS else row

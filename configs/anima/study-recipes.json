@@ -15,6 +15,8 @@
   "ema_decay": null,
   "concepts": {
     "Final Boss": {
+      "role": "historical study candidate",
+      "published_reference": "final-boss-reference.json",
       "applies_to_plan_sha256": "b3039e3aa1bd844f79fdc0de6c341d063a56c8b58a75c31ad4e3d5a3469d0270",
       "source_manifest_sha256": "17f05391b16f658be2d73076bd803940cc8174fee2918f8d3c797468dd0be6e4",
       "training_corpus": "bundled native prompt collection",
@@ -76,7 +78,17 @@
         0.02333333333333333,
         0.18666666666666668
       ],
-      "raw_sha256": "21d6f10fd81e54647ce223745b3fbad3a2f8f385c3c31cd6480211c815a480c4"
+      "raw_sha256": "21d6f10fd81e54647ce223745b3fbad3a2f8f385c3c31cd6480211c815a480c4",
+      "fresh_training": {
+        "source": "Vibe12 late-cues RAW192",
+        "rates": {
+          "g": 0.00075,
+          "d": 0.009,
+          "particle": 0.03
+        },
+        "update": 192,
+        "horizon": 192
+      }
     },
     "1990s anime": {
       "applies_to_plan_sha256": "9fb59f9926e968719acbd960987aa53f2c503926e2da4d375cf71c57d75dc781",

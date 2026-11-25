@@ -1,0 +1,58 @@
+{
+  "name": "Visually appealing character RAW256 at constant α 1",
+  "raw_sha256": "10b34bf60b7074480941ca40fa8f05a276029db4140a76ded737f208c4404240",
+  "alpha": 1.0,
+  "profile": "constant",
+  "gains": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "judge": "typesafe/jev-1.14",
+  "rubric_sha256": "a21af37c0d34dee72d7de48418b858c05881eda186c940f02e5b31f67d1a3716",
+  "cases": [
+    {
+      "prompt_sha256": "3912d823449d3ca6b3676c8f5598c0269a0f7131b23d91701e3820e90a83f74b",
+      "seed": 992371,
+      "off_sha256": "de31f87e19aeb2b9b00dfbb6f41533dc1bdb79b04af2bc27f69b7939fbfe77bb",
+      "on_sha256": "da151f1fd2f4ac9dbed675e09b29531d9a5fc740000c9dd44b707abdbaa5385e",
+      "off_score": 0.47,
+      "on_score": 0.5866666666666667,
+      "integrity": "pass"
+    },
+    {
+      "prompt_sha256": "4eb85cc844b1a0e723322d68f941bc5db1090a78caf52b8484d1958d04048dcf",
+      "seed": 992402,
+      "off_sha256": "8f046afbd5e049ba8d19e006d0cdb9aefe2f25324ad0ad79ad6c3618bf162b5f",
+      "on_sha256": "51debdc0111c671b9c6db120c448c87577edfd9e6b9c68a67e9b680995ca4b8b",
+      "off_score": 0.41,
+      "on_score": 0.5833333333333334,
+      "integrity": "pass"
+    },
+    {
+      "prompt_sha256": "63fe4830f04651e1c672dd8985895f4d367a9efab73e870ff0fe6e34a86b96a0",
+      "seed": 992433,
+      "off_sha256": "da0ea44b100f6da64a5e4d07b24c40a860df26bb29f1cf644a864300112b6771",
+      "on_sha256": "3543c3b90286714e28d25b45c4e9a0d8ca9d56f4aeb19a37656f701325f0f555",
+      "off_score": 0.5233333333333333,
+      "on_score": 0.7000000000000001,
+      "integrity": "pass"
+    },
+    {
+      "prompt_sha256": "59baedeaee654ac1a82b98a5e7bc58685a7d3f7bbcfe79eeea58e311e56a4030",
+      "seed": 992464,
+      "off_sha256": "198a22eba14d72c7fede00e18bc1ba56e5417f725cb8b7ea86f63ec6694c56f3",
+      "on_sha256": "77c2775b19822886c39de4826e2e373328d5e4512bac9cce7d9138cc718a5391",
+      "off_score": 0.4166666666666667,
+      "on_score": 0.6666666666666666,
+      "integrity": "pass"
+    }
+  ]
+}

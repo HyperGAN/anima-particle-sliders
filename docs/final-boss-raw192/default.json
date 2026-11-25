@@ -76,5 +76,14 @@
     "prompt": "Anime illustration. Waist-up eye-level portrait of one adult man with wavy blond hair, wearing a russet hiking jacket, standing naturally facing the viewer. Background: alpine cable-car station with a green numbered post, metal railings and snow in the distance. Lighting: bright midday mountain light. Show the surroundings clearly.",
     "seed": 552242
   },
-  "reference_png_sha256": "30f5fa677ac67218ab183bcc2b476de329db2265c7ebef93f751c7c87e129fff"
+  "reference_png_sha256": "30f5fa677ac67218ab183bcc2b476de329db2265c7ebef93f751c7c87e129fff",
+  "qualified_replay_models": [
+    {
+      "model": "circlestone-labs/Anima:turbo-v1.1",
+      "sha256": "eb5520f293d42a19df9242d8d442d5d2068e5121620814418c2b50a97de0552f",
+      "identity_schema": "portable-model-v1",
+      "environment_sha256": "74c6c1ec0a5cf3e6f8ca33755efd21a2a7c6448270430cb2032aef11176e8a29",
+      "runtime_sha256": "79a45d5209f7b533fca589b1833f960a9f30c41b043e0709c86404f6f04bc917"
+    }
+  ]
 }

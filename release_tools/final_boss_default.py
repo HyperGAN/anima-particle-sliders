@@ -21,7 +21,7 @@ def select_default(panel, board, catalog):
         raise ValueError("The winning design measurements and replay images differ")
     case = panel["cases"][0]
     model = board["teacher"]["model"]
-    return dict(recipe=recipe, label=method["label"], step=board["training_updates"], weights=board["weights"],
+    default = dict(recipe=recipe, label=method["label"], step=board["training_updates"], weights=board["weights"],
                 resolution=512, steps=10, cfg=1, checkpoint_repository=catalog["repository"],
                 checkpoint_revision=catalog["revision"], checkpoints={recipe: artifact},
                 profile=winner["profile"], alpha=winner["alpha"], gains=setting["gains"], sigmas=method["sigmas"],
@@ -30,3 +30,7 @@ def select_default(panel, board, catalog):
                 training_model_identity=model, qualified_replay_runtime_sha256=[model["runtime_sha256"]],
                 reference_case=dict(label=case, **board["evaluation_requests"][case]),
                 reference_png_sha256=winner["inputs"][case])
+    qualified = catalog.get("qualified_replay_models", {}).get(artifact["sha256"])
+    if qualified:
+        default["qualified_replay_models"] = qualified
+    return default

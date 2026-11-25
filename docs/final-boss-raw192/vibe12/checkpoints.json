@@ -151,5 +151,16 @@
       "training_cache_sha256": "c718469fc5cecb03a4c2db18e774eaa5f6c96d33d5ac1a37ad19152af29f5890"
     }
   },
-  "revision": "4ebd99f8528b30e84e0232c5049f86f2eeb64e02"
+  "revision": "4ebd99f8528b30e84e0232c5049f86f2eeb64e02",
+  "qualified_replay_models": {
+    "9df8182c5af19f87c9c7b9298838f2d084be3dc17e0a761e550055e2cf55c5c4": [
+      {
+        "model": "circlestone-labs/Anima:turbo-v1.1",
+        "sha256": "eb5520f293d42a19df9242d8d442d5d2068e5121620814418c2b50a97de0552f",
+        "identity_schema": "portable-model-v1",
+        "environment_sha256": "74c6c1ec0a5cf3e6f8ca33755efd21a2a7c6448270430cb2032aef11176e8a29",
+        "runtime_sha256": "79a45d5209f7b533fca589b1833f960a9f30c41b043e0709c86404f6f04bc917"
+      }
+    ]
+  }
 }
