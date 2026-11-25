@@ -6,12 +6,20 @@ import json
 from math import isclose
 from pathlib import Path
 
-from .final_boss_damage_search import LOWER, UPPER, bound_limited, search
+from .final_boss_damage_search import FIRST_PROTOCOL_CEILING, LOWER, search, untried_side
 from .final_boss_default import scheduled_gains
 from .final_boss_design_scores import summarize
 from .final_boss_visible_damage import score_case
 from .publish_final_boss_vibe12 import read
 from .verify_final_boss_designs import verify_orders
+
+
+def ceiling(data):
+    """The alpha ceiling a record was searched under. New searches have none."""
+    lower, upper = data.get("bounds", (LOWER, FIRST_PROTOCOL_CEILING))
+    if lower != LOWER or upper not in (None, FIRST_PROTOCOL_CEILING):
+        raise ValueError("Unknown alpha search bounds")
+    return upper
 
 
 def verify(data, receipts):
@@ -62,7 +70,7 @@ def verify(data, receipts):
         if expected != old["upper_bound"]:
             raise ValueError("Pruning upper bound changed")
     for profile, recorded in data["paths"].items():
-        tested, steps = search(lambda a: settings["search", profile, a])
+        tested, steps = search(lambda a: settings["search", profile, a], ceiling(data))
         if (
             steps != recorded["steps"]
             or [{"alpha": a, "score": v} for a, v in tested.items()]
@@ -172,6 +180,7 @@ def export(campaign, method, output):
         "model": policy["model"],
         "state": policy["state"],
         "questions": policy["questions"],
+        "bounds": policy["bounds"],
         "selected": selected,
         "cases": {
             "search": policy["search_cases"],
@@ -219,9 +228,12 @@ def main():
     print(
         f"{selected['method']} · {selected['profile']} α {selected['alpha']:g} · {100 * selected['design']['score']:.2f}"
     )
+    if ceiling(data) is not None:
+        print(f"  searched under the withdrawn α {ceiling(data):g} ceiling")
     for profile, path in data["paths"].items():
-        if bound_limited({trial["alpha"]: trial["score"] for trial in path["trials"]}):
-            print(f"  {profile}: the strongest search probe is a bound of the α {LOWER:g}–{UPPER:g} range")
+        side = untried_side({trial["alpha"]: trial["score"] for trial in path["trials"]})
+        if side:
+            print(f"  {profile}: no probe on the {side} side of its best search alpha")
 
 
 if __name__ == "__main__":

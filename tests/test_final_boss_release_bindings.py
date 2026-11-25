@@ -6,7 +6,7 @@ from pathlib import Path
 import pytest
 
 from release_tools import publish_final_boss_vibe12 as board_export
-from release_tools.final_boss_damage_search import bound_limited, search
+from release_tools.final_boss_damage_search import FIRST_PROTOCOL_CEILING, TRIAL_BUDGET, search, untried_side
 from release_tools.final_boss_default import scheduled_gains, select_default
 from release_tools.final_boss_design_alpha import verify as verify_alpha
 from release_tools.verify_final_boss_designs import verify_panel
@@ -52,14 +52,54 @@ def test_alpha_search_refuses_gains_that_its_schedule_does_not_produce(gains):
         verify_alpha(evidence, receipts(folder / "receipts.json.gz"))
 
 
-def test_search_reports_when_its_best_probe_is_a_bound():
-    evidence = read(VIBE12 / "alpha-tuning/late-cues/search.json")
-    limited = {profile: bound_limited({trial["alpha"]: trial["score"] for trial in path["trials"]})
-               for profile, path in evidence["paths"].items()}
-    assert limited == dict(constant=True, early=False, late=True)
-    rising, _ = search(lambda alpha: alpha)
-    assert max(rising) == 1.75 and bound_limited(rising)
-    assert not bound_limited({1.0: .5, 1.75: None}) and not bound_limited({})
+def peaked(best):
+    return lambda alpha: 1 - abs(alpha - best) / 16
+
+
+def test_search_has_no_ceiling_and_measures_past_its_best_alpha():
+    trials, _ = search(peaked(2.5))
+    best = max(trials, key=trials.get)
+    assert best == 2.1875 and max(trials) > best and untried_side(trials) is None
+    # The published protocol stopped at its ceiling with the stronger side unmeasured.
+    capped, _ = search(peaked(2.5), FIRST_PROTOCOL_CEILING)
+    assert max(capped, key=capped.get) == max(capped) == 1.75 and untried_side(capped) == "stronger"
+
+
+def test_search_keeps_climbing_after_the_budget_until_a_stronger_probe_scores_lower():
+    trials, steps = search(peaked(7))
+    best = max(trials, key=trials.get)
+    assert len(trials) > TRIAL_BUDGET and max(trials) > best > 4 and untried_side(trials) is None
+    assert steps[-1]["next_anchor"] == best
+    # Past the budget only the stronger side is measured.
+    assert sorted(trials)[:4] == [.75, .875, 1.0, 1.0625]
+
+
+def test_search_stops_loudly_when_the_score_never_falls():
+    with pytest.raises(ValueError, match="not penalizing damage"):
+        search(lambda alpha: alpha / 100)
+
+
+def test_search_within_the_old_range_is_unchanged_and_reports_an_untried_weaker_side():
+    for best in (.9, 1.1, 1.3):
+        assert search(peaked(best)) == search(peaked(best), FIRST_PROTOCOL_CEILING)
+    falling, _ = search(lambda alpha: -alpha)
+    assert min(falling) == .25 and untried_side(falling) == "weaker"
+    assert untried_side({1.0: .5, 2.0: None}) == "stronger" and untried_side({}) is None
+
+
+def test_published_searches_replay_under_their_recorded_ceiling_only():
+    folder = VIBE12 / "alpha-tuning/late-cues"
+    evidence, proofs = read(folder / "search.json"), receipts(folder / "receipts.json.gz")
+    assert "bounds" not in evidence
+    verify_alpha(evidence, proofs)
+    sides = {profile: untried_side({trial["alpha"]: trial["score"] for trial in path["trials"]})
+             for profile, path in evidence["paths"].items()}
+    assert sides == dict(constant="stronger", early=None, late="stronger")
+    with pytest.raises(KeyError):
+        # Without the ceiling the same scores call for α 2.1875, which was never measured.
+        verify_alpha(evidence | dict(bounds=[.25, None]), proofs)
+    with pytest.raises(ValueError, match="Unknown alpha search bounds"):
+        verify_alpha(evidence | dict(bounds=[.25, 2.5]), proofs)
 
 
 def test_design_panel_ranks_every_trained_recipe_exactly_once():

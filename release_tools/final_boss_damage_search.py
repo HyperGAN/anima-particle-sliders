@@ -13,47 +13,73 @@ from release_tools import final_boss_visible_damage as visible_damage
 
 START = 1.0
 INITIAL_STEP = .25
-LOWER, UPPER = .25, 1.75
+LOWER = .25
 MIN_STEP = .03125
 TRIAL_BUDGET = 9
+# With no measured probe, the bracket widens until its step reaches this.
+UNMEASURED_REACH = 1.5
+# The first published searches clamped every probe to this alpha. Replay only.
+FIRST_PROTOCOL_CEILING = 1.75
+# No finished image survives this strength, so a score still rising here is a scoring fault.
+RUNAWAY = 16.0
 
 
-def search(evaluate):
-    """Measure both sides of a bracket, retaining the strongest measured score."""
+def search(evaluate, ceiling=None):
+    """Bracket the best alpha from both sides, and never stop with its stronger side unmeasured.
+
+    The trial budget limits refinement. While the best measured alpha is also the
+    strongest one tried, the next stronger probe is taken even after the budget is
+    spent. ``ceiling`` replays the first published protocol, which clamped probes
+    to that alpha and always stopped on the budget.
+    """
     trials = {}
     steps = []
 
-    def probe(alpha):
-        if alpha not in trials and len(trials) < TRIAL_BUDGET:
-            score = evaluate(alpha)
-            if score is not None and not isfinite(score):
-                raise ValueError('Alpha score must be finite')
-            trials[alpha] = score
+    def probe(alpha, required=False):
+        if alpha in trials or not (required or len(trials) < TRIAL_BUDGET):
+            return
+        if alpha > RUNAWAY:
+            raise ValueError(f'Alpha score is still rising at {max(trials):g}; the score is not penalizing damage')
+        score = evaluate(alpha)
+        if score is not None and not isfinite(score):
+            raise ValueError('Alpha score must be finite')
+        trials[alpha] = score
 
     anchor, step = START, INITIAL_STEP
     probe(anchor)
-    while len(trials) < TRIAL_BUDGET and step >= MIN_STEP:
-        above, below = min(UPPER, anchor + step), max(LOWER, anchor - step)
-        probe(above)
+    while step >= MIN_STEP:
+        measured = [alpha for alpha, score in trials.items() if score is not None]
+        climbing = ceiling is None and bool(measured) and anchor == max(measured)
+        if len(trials) >= TRIAL_BUDGET and not climbing:
+            break
+        above = anchor + step if ceiling is None else min(ceiling, anchor + step)
+        below = max(LOWER, anchor - step)
+        probe(above, required=climbing)
         probe(below)
         old, old_step = anchor, step
         available = [alpha for alpha in (anchor, above, below) if trials.get(alpha) is not None]
         if available:
             anchor = max(available, key=trials.__getitem__)
             step *= 1.5 if anchor != old else .5
-        elif step < UPPER - LOWER:
+        elif step < UNMEASURED_REACH:
             step *= 1.5
         else:
             break
+        # A side the budget left unmeasured is still listed here. ``trials`` holds what was measured.
         steps.append({'anchor': old, 'step': old_step, 'above': above, 'below': below,
                       'next_anchor': anchor, 'next_step': step})
     return trials, steps
 
 
-def bound_limited(trials):
-    """Whether the strongest measured alpha is a search bound, leaving its far side untried."""
+def untried_side(trials):
+    """Name the side of the best measured alpha that no probe covers, if any."""
     measured = {alpha: score for alpha, score in trials.items() if score is not None}
-    return bool(measured) and max(measured, key=measured.get) in (LOWER, UPPER)
+    if not measured:
+        return None
+    best = max(measured, key=measured.get)
+    if best == max(measured):
+        return 'stronger'
+    return 'weaker' if best == min(measured) else None
 
 
 def panel_scores(cases, case_names, version=LEGACY):
