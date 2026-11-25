@@ -1,5 +1,7 @@
 # Vibe12 Final Boss research source
 
+On the image leaderboard, **Anima default** marks the released adapter and exact strength. The page’s “Show the Anima default” link jumps to its eight samples. The host reads `storage/released-default.json`, linked to the release checkout’s `docs/final-boss-raw192/default.json`, and checks the RAW hash, gains and reference image before displaying the label.
+
 The [method inventory](ranked-methods.json) identifies the training implementation behind every ranked RAW192 adapter. The [checkpoint catalog](../../docs/final-boss-raw192/vibe12/checkpoints.json) gives the immutable download revision, file, size, SHA-256 and training-cache fingerprint.
 
 ### Publish a new leaderboard winner

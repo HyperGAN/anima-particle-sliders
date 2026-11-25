@@ -25,6 +25,7 @@ from publish_optimization import PUBLIC, sample
 
 OUTPUT = 'final-boss-vibe12-alpha-leaderboard.html'
 LABELS = read(ROOT / 'recipes.json')
+DEFAULT_MANIFEST = STORAGE / 'released-default.json'
 FIELDS = (GAIN, BOSS, DAMAGE, SCORE)
 ADAPTIVE = 'leaderboard-retune-visible'
 SEARCH_ROOTS = (ADAPTIVE, design_selection.RUN)
@@ -160,6 +161,15 @@ def publish():
                    'Other recipes show their measured per-image strength. <a href="final-boss-vibe12-design-alpha.html">Distinct-design search paths</a>. '
                    'Repeated designs across different characters share credit. Jev compares all 28 character pairs.</p>'
                    if audited else '')
+    released = read(DEFAULT_MANIFEST) if DEFAULT_MANIFEST.is_file() else None
+    default_link = ''
+    default_key = None
+    if released:
+        method = released['recipe']
+        checkpoint = read(ROOT / 'cohorts' / method / 'result.json')['raw']
+        if checkpoint['sha256'] != released['checkpoints'][method]['sha256']:
+            raise ValueError('The released checkpoint differs from the leaderboard adapter')
+        default_key = method, released['profile'], released['alpha']
     for rank, row in enumerate(ranked, 1):
         method, profile, alpha = row['method'], row['profile'], row['alpha']
         means = row['means']
@@ -192,13 +202,27 @@ def publish():
             span = str(low) if low == high else f'{low}–{high}'
             details = ''.join(f'<small>Omit {c.title()} · #{place}</small>' for c,place in places.items())
             sensitivity = f'<details><summary>7-case rank {span}</summary>{details}</details>'
-        lines.append(f'<tr data-effect="{means[GAIN]}" data-score="{means[SCORE]}" data-damage="{means[DAMAGE]}" '
+        marker, row_class = '', ''
+        strength = f'{alpha:.5g}'
+        if (method, profile, alpha) == default_key:
+            reference = released['reference_case']['label']
+            if row['gains'] != released['gains'] or row['cases'][reference]['on']['sha256'] != released['reference_png_sha256']:
+                raise ValueError('The released default differs from its measured setting')
+            marker = '<strong class="default-label" id="default">Anima default</strong>'
+            row_class = ' class="released-default"'
+            strength = str(alpha)
+            default_link = (f'<p><a href="?metric=design#default" id="show-default">Show the Anima default</a>'
+                            f' · {escape(LABELS[method])} · {profile.title()} α {strength}</p>')
+        lines.append(f'<tr{row_class} data-effect="{means[GAIN]}" data-score="{means[SCORE]}" data-damage="{means[DAMAGE]}" '
                      f'{design_data} data-method="{method}" data-adaptive="{int(candidate)}" '
                      f'data-fixed="{int(shared)}" data-control="{profile if control else ""}" id="{method}-{profile}-{alpha:g}">'
-                     f'<td class="rank">{rank}</td><th scope="row">{escape(LABELS[method])}{note}</th>'
-                     f'<td>{profile.title()} α {alpha:.5g}</td><td>{images(cases, row["cases"])}</td>'
+                     f'<td class="rank">{rank}</td><th scope="row">{marker}{escape(LABELS[method])}{note}</th>'
+                     f'<td>{profile.title()} α {strength}</td><td>{images(cases, row["cases"])}</td>'
                      f'{design_cell}<td class="effect">+{100 * means[GAIN]:.1f}</td><td>{100 * means[SCORE]:.2f}{sensitivity}</td>'
                      f'<td>{100 * means[DAMAGE]:.1f}</td></tr>')
+
+    if released and not default_link:
+        raise ValueError('The published default is missing from the measured rows')
 
     reference = next((r for r in ranked if (r['method'],r['profile'],r['alpha']) ==
                       ('shared-best-opening','early',1.15625)), None)
@@ -224,9 +248,12 @@ th[scope=row]{{min-width:145px}}td:nth-child(3){{white-space:nowrap}}tr:target{{
 .images{{display:flex;gap:4px;min-width:max-content}}img{{display:block;object-fit:contain;border-radius:4px}}
 .design{{display:none}}.design-view .design{{display:table-cell}}
 summary{{cursor:pointer;font-size:.75rem;color:#b6bdca}}
+.released-default{{background:#2b2723}}.released-default th[scope=row]{{border-inline-start:3px solid #ffc59f}}
+.default-label{{display:block;color:#ffc59f;font-size:.8rem}}
 small{{display:block;font-weight:400;color:#b6bdca;font-size:.75rem}}
 </style><main>
 <h1>Final Boss alpha leaderboard</h1>
+{default_link}
 <p>{len(completed)}/{len(progress['trained'])} trained recipes through the damage-adjusted search · {len(active)} running · {len(ranked)} settings measured across all searches · {queued} awaiting damage ratings.</p>
 <p>Jev rates rendering defects in the finished artwork on its own. The Boss score uses matched character gain and distinction, then multiplies by the undamaged fraction. Zero gain scores zero.</p>
 <p>Same eight cases at RAW192. Boss effect is the average gain over slider off. Expand a seven-case rank to see how far that recipe moves when one scene is left out. Each recipe keeps its full-panel strength.</p>
@@ -298,7 +325,22 @@ scope.addEventListener('change', () => {{
   if (scope.value !== 'top' && metric.value === 'design') metric.value = 'score';
   update();
 }});
+function showDefault() {{
+  const marker = document.getElementById('default');
+  if (location.hash === '#default' && marker) {{
+    const audited = marker.closest('tr').hasAttribute('data-design');
+    metric.value = audited ? 'design' : 'score';
+    scope.value = audited ? 'top' : 'all';
+    update();
+    marker.closest('tr').scrollIntoView({{block:'center'}});
+  }}
+}}
 update();
+showDefault();
+window.addEventListener('hashchange', showDefault);
+document.getElementById('show-default')?.addEventListener('click', () => {{
+  if (location.hash === '#default') showDefault();
+}});
 </script></html>'''
     file = PUBLIC / OUTPUT
     temporary = file.with_suffix('.publish')
@@ -326,6 +368,8 @@ def main():
     previous = None
     while True:
         inputs = [STORAGE / 'alpha-standings-v1.json']
+        if DEFAULT_MANIFEST.is_file():
+            inputs.append(DEFAULT_MANIFEST)
         design = ROOT / "metric-calibration/design-range/latest.json"
         if design.is_file():
             inputs.append(design)

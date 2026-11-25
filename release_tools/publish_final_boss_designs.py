@@ -72,7 +72,8 @@ def export(campaign, folder):
         sample=settings[r["method"],r["profile"],r["alpha"]]["samples"]
         artifact=catalog["checkpoints"][r["method"]]
         download=f'https://huggingface.co/{catalog["repository"]}/resolve/{catalog["revision"]}/{artifact["file"]}'
-        lines.append(f'| {rank} | {labels[r["method"]]} | {("Design-tuned · " if r["method"] in dev.get("tuned_methods",[]) else "")}{r["profile"]} {r["alpha"]:g} | {100*r["score"]:.2f} | '
+        marker='**Anima default** · ' if rank == 1 else ''
+        lines.append(f'| {rank} | {marker}{labels[r["method"]]} | {("Design-tuned · " if r["method"] in dev.get("tuned_methods",[]) else "")}{r["profile"]} {r["alpha"]:g} | {100*r["score"]:.2f} | '
                      f'{100*r["base"]:.2f} | {100*r["repeat"]:.1f} | [![Eight edits]({sample})]({sample}) | [RAW]({download}) |')
     lines+=["","## How the result depends on the characters","",
             "In a separate blind check Jev compared two four-character lineups as whole sets. "
