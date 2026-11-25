@@ -5,6 +5,7 @@ import math
 import os
 from pathlib import Path
 
+from .vibe_calls import InvalidReply, NotDispatched, ProviderUnavailable
 from .vibe_profiles import score_question, yes_no
 
 FINISH = {
@@ -100,10 +101,26 @@ def decision_values(response, questions):
     return result
 
 
+ENDPOINTS = {
+    "nanogpt": ("https://api.nano-gpt.com/api/v1/decisions", "NANOGPT_API_KEY"),
+    "typesafe": ("https://api.typesafe.ai/v1/systemone", "TYPESAFE_API_KEY"),
+}
+
+
+def judge_endpoint(provider):
+    """Resolve the decision endpoint and credential before anything is sent."""
+    url, variable = ENDPOINTS[provider]
+    key = os.environ.get(variable)
+    if not key:
+        raise NotDispatched(f"{variable} is required for the {provider} judge")
+    return url, {"Content-Type": "application/json", "Authorization": "Bearer " + key}
+
+
 def observe(provider, model, images, state, questions):
     from nanoodle.transport import default_http
     from particle_sliders_vibe import ProviderRejected
 
+    url, headers = judge_endpoint(provider)
     parts = [state]
     for i, image in enumerate(images, 1):
         if len(images) > 1:
@@ -111,21 +128,20 @@ def observe(provider, model, images, state, questions):
         encoded = base64.b64encode(Path(image).read_bytes()).decode("ascii")
         parts.append({"type": "image_url", "image_url": {"url": "data:image/png;base64," + encoded}})
     payload = dict(model=model, state=parts, questions=questions)
-    headers = {"Content-Type": "application/json"}
     if provider == "typesafe":
         from particle_sliders_vibe.nanoodle import typesafe_payload
 
-        url = "https://api.typesafe.ai/v1/systemone"
-        headers["Authorization"] = "Bearer " + os.environ["TYPESAFE_API_KEY"]
         headers["TypeSafe-Danger-Zone-Images"] = "true"
         payload = typesafe_payload(payload)
-    else:
-        url = "https://api.nano-gpt.com/api/v1/decisions"
-        headers["Authorization"] = "Bearer " + os.environ["NANOGPT_API_KEY"]
     response = default_http("POST", url, headers=headers, body=json.dumps(payload).encode(), timeout=75)
     if 400 <= response.status < 500:
         raise ProviderRejected("TypeSafe" if provider == "typesafe" else "NanoGPT", response.status)
     if response.status != 200:
-        raise RuntimeError(f"Jev HTTP {response.status}")
-    raw = json.loads(response.text())
-    return dict(values=decision_values(raw, questions), raw=raw)
+        raise ProviderUnavailable("Jev", response.status)
+    text = response.text()
+    try:
+        raw = json.loads(text)
+        return dict(values=decision_values(raw, questions), raw=raw)
+    except (ValueError, KeyError, TypeError) as error:
+        reason = str(error) if isinstance(error, ValueError) else f"Malformed Jev reply: {error!r}"
+        raise InvalidReply(reason, reply=text) from error

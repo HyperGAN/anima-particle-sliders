@@ -10,6 +10,10 @@ from .jev import concept_rubric
 SCHEMA = 'anima-vibe-manifest-v1'
 
 
+class NoQualifyingContexts(ValueError):
+    """A finished collection in which no context met the teacher thresholds."""
+
+
 def workflow_graphs(prompt_model, judge_model, concept):
     """Graphs can be replaced by model-specific saved Nanoodle workflows."""
     question, levels = concept_rubric(concept)
@@ -112,7 +116,8 @@ def training_manifest(collection, *, min_score=0.75):
                 neutral=selected['prompt']['neutral'], positive=selected['prompt']['positive'],
                 seeds=[selected['seed']], selection=selected))
     if not rows:
-        raise ValueError('no qualifying contexts; continue collection or explicitly change the score threshold')
+        raise NoQualifyingContexts(
+            'no qualifying contexts; continue collection or explicitly change the score threshold')
     manifest = dict(schema=1, extension=SCHEMA, split='train', variation=variation,
         collection_identity=collection['identity'], collection_sha256=digest(collection),
         criterion=collection['identity']['vibe'], min_score=min_score, rows=rows)
@@ -154,6 +159,37 @@ def validate_manifest(manifest):
             raise ValueError('vibe row differs from its qualifying context')
 
 
+def finished_targets(directory, manifest, model, resolution):
+    """Return the index of a complete, intact cache for this exact snapshot, or None."""
+    from .contracts import file_hash
+    path = Path(directory) / 'index.json'
+    if not path.is_file():
+        return None
+    index = json.loads(path.read_text())
+    identity = index['identity']
+    expected = {f"{row['id']}-{seed}.pt" for row in manifest['rows'] for seed in row['seeds']}
+    if (identity['model'] != model or identity['manifest_sha256'] != manifest['sha256']
+            or identity['variation'] != manifest['variation'] or identity['resolution'] != resolution
+            or index['input_fingerprint'] != digest(identity)
+            or index['fingerprint'] != digest(dict(input=index['input_fingerprint'], shards=index['shards']))
+            or {shard['path'] for shard in index['shards']} != expected
+            or any(file_hash(Path(directory) / shard['path']) != shard['sha256'] for shard in index['shards'])):
+        return None
+    return index
+
+
+def prepare_snapshot(runtime, manifest, directory, *, model, resolution):
+    """Prepare a snapshot's frozen targets once.
+
+    A finished cache is returned as saved. Preparing it again would rewrite
+    index.json with a new elapsed time and change the file hash that releases pin.
+    ``runtime`` is called only when model work remains.
+    """
+    from .cache import prepare_targets
+    return finished_targets(directory, manifest, model, resolution) or prepare_targets(
+        runtime(), manifest, manifest['variation'], directory, resolution=resolution)
+
+
 def prepare_main(argv=None):
     """Prepare a frozen cache in Anima's separately pinned native environment."""
     parser = argparse.ArgumentParser(description=prepare_main.__doc__)
@@ -170,15 +206,20 @@ def prepare_main(argv=None):
     expected = manifest['collection_identity']['product']
     if model_identity(args.model_dir) != expected['model']:
         raise ValueError('target model/runtime differs from the curated model identity')
-    from .backends.anima import TurboRuntime
-    from .cache import prepare_targets
-    runtime = TurboRuntime(args.model_dir, device=args.device, verify=True)
+    loaded = []
+
+    def runtime():
+        from .backends.anima import TurboRuntime
+        loaded.append(TurboRuntime(args.model_dir, device=args.device, verify=True))
+        return loaded[0]
+
     try:
-        index = prepare_targets(runtime, manifest, manifest['variation'], args.out,
-                                resolution=expected['resolution'])
+        index = prepare_snapshot(runtime, manifest, args.out, model=expected['model'],
+                                 resolution=expected['resolution'])
         print(json.dumps(dict(targets=str(args.out.resolve()), fingerprint=index['fingerprint'])))
     finally:
-        runtime.close()
+        for instance in loaded:
+            instance.close()
     return 0
 
 
@@ -204,6 +245,8 @@ def main(argv=None):
     parser.add_argument('--prepare-targets', action='store_true')
     parser.add_argument('--retry-pending', action='store_true')
     args = parser.parse_args(argv)
+    if not 0 <= args.min_score <= 1:
+        parser.error('--min-score must be in [0, 1]')
     try:
         from particle_sliders_vibe import collect, read_json, write_json
         from particle_sliders_vibe.nanoodle import NanoodleWorkflows
@@ -222,9 +265,8 @@ def main(argv=None):
         destination = args.out / 'training' / manifest['sha256']
         write_json(destination / 'manifest.json', manifest)
         if args.prepare_targets:
-            from .cache import prepare_targets
-            prepare_targets(product.get_runtime(), manifest, manifest['variation'], destination / 'targets',
-                            resolution=args.resolution)
+            prepare_snapshot(product.get_runtime, manifest, destination / 'targets',
+                             model=product.identity['model'], resolution=args.resolution)
         print(json.dumps(dict(manifest=str(destination / 'manifest.json'),
             targets=str(destination / 'targets') if args.prepare_targets else None,
             qualified_contexts=len(manifest['rows']), selection='raw')))

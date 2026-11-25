@@ -1,11 +1,11 @@
 """Construct a bounded native rewrite pass for the strongest measured round."""
 import json
 from concurrent.futures import ThreadPoolExecutor
-from threading import Lock
 
 from . import vibe_curation
-from .contracts import digest, file_hash
+from .contracts import file_hash
 from .vibe import workflow_graphs
+from .vibe_calls import InvalidReply
 from .vibe_observer import IMAGE_STATE, decision_values, image_questions
 from .vibe_portfolio import finish_score, observed_family
 
@@ -22,8 +22,12 @@ INSTRUCTION = (
 )
 
 
-class RewriteUnavailable(ValueError):
+class RewriteUnavailable(InvalidReply):
     """The text-model reply did not supply a usable scene rewrite."""
+
+
+class NothingToRewrite(ValueError):
+    """No scene in the round is eligible for a rewrite."""
 
 
 def rewrite_batch(profile, scenes, writer_model, judge_model, provider, call):
@@ -34,12 +38,19 @@ def rewrite_batch(profile, scenes, writer_model, judge_model, provider, call):
     writer = NanoodleWorkflows(prompts, score, judge_provider=provider)
     request = dict(target=profile.concept, scenes=scenes)
     binding = dict(input=request, workflow=writer.identity, instructions=INSTRUCTION)
+    # An unusable reply is saved as failed. The next run asks the writer again.
     proposed = call("rewrite", binding,
-                    lambda key: writer.propose(json.dumps(request), len(scenes), [], request_id=key))
+                    lambda key: writer.propose(json.dumps(request), len(scenes), [], request_id=key),
+                    check=lambda reply: rewritten_scenes(reply, scenes))
+    return rewritten_scenes(proposed, scenes)
+
+
+def rewritten_scenes(proposed, scenes):
     if not isinstance(proposed, list) or len(proposed) != len(scenes):
         raise RewriteUnavailable("The rewriting model did not return every specified teacher scene")
     rewritten = {row["id"]: row["positive"].strip() for row in proposed
-                 if isinstance(row, dict) and set(row) == {"id", "positive"} and isinstance(row["positive"], str)
+                 if isinstance(row, dict) and set(row) == {"id", "positive"}
+                 and isinstance(row["id"], str) and isinstance(row["positive"], str)
                  and 15 <= len(row["positive"].split()) <= 120}
     if rewritten.keys() != {row["id"] for row in scenes}:
         raise RewriteUnavailable("Teacher rewrite scene names or prompt lengths changed")
@@ -62,7 +73,7 @@ def augment_round(round_, picked, profile, product, root, call, *, writer_model,
         references[label] = reference
         scenes.append(dict(id=label, neutral=reference["neutral"]["output"]["prompt"], treatment=cue))
     if not scenes:
-        raise RewriteUnavailable("No neutral images meet the teacher score limit")
+        raise NothingToRewrite("No neutral images meet the teacher score limit")
     rewrites = rewrite_batch(profile, scenes, writer_model, judge_model, provider, call)
     pending = []
     for scene in scenes:
@@ -79,7 +90,6 @@ def augment_round(round_, picked, profile, product, root, call, *, writer_model,
             pending.append((f"{mode}:{seed}", output, reference))
 
     questions = image_questions(profile, candidate=True)
-    locks = {}
 
     def measure(request):
         method, output, reference = request
@@ -87,10 +97,9 @@ def augment_round(round_, picked, profile, product, root, call, *, writer_model,
         if file_hash(path) != output["sha256"]:
             raise ValueError("Rewritten teacher image changed")
         binding = dict(provider=provider, model=judge_model, state=IMAGE_STATE, questions=questions, images=[output["sha256"]])
-        with locks.setdefault(output["sha256"], Lock()):
-            receipt = call("judge", binding, lambda _: vibe_curation.observe(
-                provider, judge_model, (path,), IMAGE_STATE, questions,
-            ))
+        receipt = call("judge", binding, lambda _: vibe_curation.observe(
+            provider, judge_model, (path,), IMAGE_STATE, questions,
+        ))
         values = decision_values(receipt["raw"], questions)
         if values != receipt["values"]:
             raise ValueError("Saved rewrite readings differ from the typed response")
@@ -106,7 +115,7 @@ def augment_round(round_, picked, profile, product, root, call, *, writer_model,
             before["effect"], before["overbake"], before["layout"],
         )
         positive = dict(output=output, judgment={"score": values["effect"]}, readings=values,
-                        decision=digest(dict(kind="judge", inputs=binding)))
+                        decision=call.key("judge", binding))
         return dict(case=reference["case"], method=method, seed=reference["seed"],
                     observed_family=family if family in profile.families else None,
                     integrity=integrity, usable=values["usable"], finish_gain=gain, neutral=neutral, positive=positive)
