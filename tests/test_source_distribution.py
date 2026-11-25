@@ -106,7 +106,9 @@ def test_candidate_native_dependencies_preserve_the_current_model_cohort():
     assert candidate['project']['optional-dependencies']['native'] == default['project']['optional-dependencies']['native']
     core, = [dep for dep in default['project']['dependencies']
              if Requirement(dep).name == 'particle-sliders-core']
-    assert core in candidate['project']['dependencies']
+    candidate_core, = [dep for dep in candidate['project']['dependencies']
+                       if Requirement(dep).name == 'particle-sliders-core']
+    assert candidate_core != core
     assert core in (ROOT / 'requirements-comfy.txt').read_text().splitlines()
-    assert default['project']['version'] == '0.4.0'
+    assert default['project']['version'] == '0.4.1'
     assert candidate['project']['version'] == '0.4.0a1'

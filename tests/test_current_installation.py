@@ -19,13 +19,13 @@ def test_current_installer_resolves_exact_public_core_and_particlegan():
     origin = json.loads(core.read_text('direct_url.json'))
     assert origin['vcs_info']['commit_id'] == commit
     assert origin['subdirectory'] == 'packages/particle-sliders-core'
-    assert core.version == '0.15.2'
-    assert version('anima-particle-sliders') == project['version'] == '0.4.0'
-    assert version('particlegan') == '0.11.1'
+    assert core.version == '0.15.3'
+    assert version('anima-particle-sliders') == project['version'] == '0.4.1'
+    assert version('particlegan') == '0.12.0'
     from particle_sliders.engine import ConditionalParticleGAN, PG_VERSION, PG_SOURCE_PROFILE
     from lumen_studio.engine_training import ConditionalParticleGAN as product_engine
     assert product_engine is ConditionalParticleGAN
-    assert (PG_VERSION, PG_SOURCE_PROFILE) == ('0.11.1', 'release-0.11.1')
+    assert (PG_VERSION, PG_SOURCE_PROFILE) == ('0.12.0', 'release-0.12.0')
 
 
 def test_current_recursive_source_guard_and_old_profile_refusal():

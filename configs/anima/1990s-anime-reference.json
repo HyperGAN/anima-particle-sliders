@@ -1,0 +1,58 @@
+{
+  "name": "1990s anime RAW192 at constant α 1.5",
+  "raw_sha256": "020cf43bf7f888edab85e09c2f1f3b88bec73869dafa3af0da697bfa58378e09",
+  "alpha": 1.5,
+  "profile": "constant",
+  "gains": [
+    1.5,
+    1.5,
+    1.5,
+    1.5,
+    1.5,
+    1.5,
+    1.5,
+    1.5,
+    1.5,
+    1.5
+  ],
+  "judge": "typesafe/jev-1.14",
+  "rubric_sha256": "09318b90a371fbb6f05ffd32b2e393b8751afaa25b11973cbb5e1e3a6779f952",
+  "cases": [
+    {
+      "prompt_sha256": "3912d823449d3ca6b3676c8f5598c0269a0f7131b23d91701e3820e90a83f74b",
+      "seed": 992371,
+      "off_sha256": "de31f87e19aeb2b9b00dfbb6f41533dc1bdb79b04af2bc27f69b7939fbfe77bb",
+      "on_sha256": "287ed003912eb95eec9c28d11202d793b9171e0f48589e6d33137c1718cf3adb",
+      "off_score": 0.7466666666666667,
+      "on_score": 0.7733333333333333,
+      "integrity": "pass"
+    },
+    {
+      "prompt_sha256": "4eb85cc844b1a0e723322d68f941bc5db1090a78caf52b8484d1958d04048dcf",
+      "seed": 992402,
+      "off_sha256": "8f046afbd5e049ba8d19e006d0cdb9aefe2f25324ad0ad79ad6c3618bf162b5f",
+      "on_sha256": "6d207e0f010c7950b4f1d0b760e2862649e3effa441f2a3693ba2f4c96ebf7bb",
+      "off_score": 0.48333333333333334,
+      "on_score": 0.7533333333333333,
+      "integrity": "pass"
+    },
+    {
+      "prompt_sha256": "63fe4830f04651e1c672dd8985895f4d367a9efab73e870ff0fe6e34a86b96a0",
+      "seed": 992433,
+      "off_sha256": "da0ea44b100f6da64a5e4d07b24c40a860df26bb29f1cf644a864300112b6771",
+      "on_sha256": "fc073164cf59b126d7f1b021462a523e6cc07955dfff980736d92734772767d4",
+      "off_score": 0.6233333333333334,
+      "on_score": 0.8433333333333333,
+      "integrity": "pass"
+    },
+    {
+      "prompt_sha256": "59baedeaee654ac1a82b98a5e7bc58685a7d3f7bbcfe79eeea58e311e56a4030",
+      "seed": 992464,
+      "off_sha256": "198a22eba14d72c7fede00e18bc1ba56e5417f725cb8b7ea86f63ec6694c56f3",
+      "on_sha256": "cb3d52dc4318a6e36325af8876cab296aa0e392776b3b8f09f72fa9940357e07",
+      "off_score": 0.5033333333333333,
+      "on_score": 0.8066666666666666,
+      "integrity": "pass"
+    }
+  ]
+}

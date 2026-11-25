@@ -1,6 +1,6 @@
 # Anima image sessions
 
-Anima 0.4.0 installs core 0.15.2 and ParticleGAN 0.11.1. The registered
+Anima 0.4.1 installs core 0.15.3 and ParticleGAN 0.12.0. The registered
 `anima` backend is CPU-only and supports training and numerical response.
 The separately admitted native training API is
 `lumen_studio.engine_training.EngineTrainer`.

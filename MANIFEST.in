@@ -10,6 +10,8 @@ recursive-include release_tools *.py
 recursive-include scripts *.py
 recursive-include data *.json
 recursive-include validation *.json
-recursive-include cohorts *.py *.toml *.json *.hndl
+recursive-include cohorts *.py *.toml *.json *.hndl requirements.lock
 
 include docs/vibe-native256-verification.json
+
+recursive-include lumen_studio/calibration *.png *.json

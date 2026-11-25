@@ -14,7 +14,7 @@ python -m pip install -r anima-particle-sliders/requirements-comfy.txt
 
 Use the Python executable belonging to your ComfyUI installation, including
 its embedded Python on portable installations. The current source installs
-the same pinned core and ParticleGAN 0.11.1 as the default Anima package.
+the same pinned core and ParticleGAN 0.12.0 as the default Anima package.
 ZIPs built from this checkout carry those dependencies in `requirements.txt`.
 The previously published Hub ZIP carries its original requirements. See the
 [historical installation guide](https://github.com/HyperGAN/anima-particle-sliders/blob/791a80a4f38a9b8cb096d719b6758a79325bd7d2/COMFYUI.md)

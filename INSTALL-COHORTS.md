@@ -1,6 +1,6 @@
 # Anima installation cohorts
 
-The default source package and separate HNDL build both use ParticleGAN 0.11.1.
+The default package uses ParticleGAN 0.12.0. The independent HNDL candidate pins 0.11.1.
 See the [default lifecycle](LIFECYCLE.md) and [optional HNDL build](HNDL-CANDIDATE.md)
 for installation in separate environments.
 

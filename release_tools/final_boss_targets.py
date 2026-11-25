@@ -4,11 +4,10 @@ import argparse
 import json
 from pathlib import Path
 
-import numpy as np
-from PIL import Image
 import torch
 from torch.nn import functional as F
 
+from lumen_studio.study.boss_targets import edited_target, subject_matte
 from lumen_studio.cache import TargetCache, save_tensor_file
 from lumen_studio.contracts import atomic_json, digest, file_hash
 from release_tools.final_boss_apg import project_subject_target
@@ -57,28 +56,6 @@ RECIPES = {"prompt-only": (1.0, 0.0), "soft-floor45": (0.45, 0.0),
            **dict.fromkeys(REGIONAL_RADII, (0.45, 0.35)),
            **dict.fromkeys(PERCENTILE_POSITIONS, (0.45, 0.0))}
 CUE_POSITIONS = {"strong-cues-early3": (0, 1, 2), MIDDLE_CUES: (3, 4, 5, 6), "strong-cues-late3": (7, 8, 9)}
-
-
-def subject_matte(path, shape, device):
-    with Image.open(path) as image:
-        values = np.asarray(image.convert("L"), dtype=np.float32).copy() / 255
-    matte = torch.as_tensor(values, device=device)[None, None]
-    return torch.nn.functional.interpolate(matte, size=shape, mode="area").unsqueeze(2)
-
-
-def edited_target(neutral, positive, weight, cue_mix, explicit=None, alternate=None):
-    residual = positive - neutral
-    mixed = residual
-    if explicit is not None:
-        direction = explicit - neutral
-        if alternate is not None:
-            direction = (direction + (alternate - neutral)) * 0.5
-        mixed = residual.lerp(direction, cue_mix)
-    weighted = mixed * weight
-    norm = weighted.norm()
-    if not torch.isfinite(norm) or norm.item() <= 1e-10:
-        raise ValueError("Degenerate weighted teacher contrast")
-    return neutral + weighted * (residual.norm() / norm)
 
 
 def matched_attire_target(neutral, positive, stronger, ordinary, weight, cue_mix):

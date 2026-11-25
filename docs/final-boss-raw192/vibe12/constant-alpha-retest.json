@@ -1,0 +1,1608 @@
+{
+  "protocol": "36d8b886c4a315292e8fb4b8ed789254e574132d60868334bb71d547be1881ac",
+  "judge": "typesafe/jev-1.14",
+  "panels_sha256": "aa2b8fbf532e7989fe71c30fbd0cf60d28a238f0ee0e0a553650919b278b50c0",
+  "search_implementation_sha256": "870105e78da151b3bc0e817f7d76b9dab601b01ca60d3deb9ac5fa69d74bbfea",
+  "objective": "distinct_boss_score",
+  "score_display_multiplier": 100,
+  "panels": {
+    "search": [
+      "archivist",
+      "bookkeeper",
+      "botanist",
+      "seamstress"
+    ],
+    "ranking": [
+      "ranger",
+      "smith",
+      "stationer",
+      "ferryman",
+      "watchmaker",
+      "guide",
+      "guard",
+      "violinist"
+    ]
+  },
+  "replay_pg": "0.12.0",
+  "trained": 40,
+  "final_boss_retested": 38,
+  "completed_fit_ranks": 28,
+  "alpha_trials": 667,
+  "historical_replay_images": 192,
+  "historical_matched_24": {
+    "prior_mean_score": 0.22904052452253465,
+    "constant_mean_score": 0.19877551162907295,
+    "constant_higher": 0
+  },
+  "evidence_sha256": "5f62d950a2919171df3ec0e9eb495cb2cd7ecdbe741e86eef5913ec07e7b27d5",
+  "recipes": [
+    {
+      "rank": 1,
+      "method": "late-cues",
+      "label": "Stronger cues at the final three teacher positions",
+      "pg": "0.11.1",
+      "step": 192,
+      "training": "completed",
+      "raw_sha256": "9df8182c5af19f87c9c7b9298838f2d084be3dc17e0a761e550055e2cf55c5c4",
+      "alpha": 1.90625,
+      "score": 0.26512093659969255,
+      "probes": 18,
+      "search_score": 0.2641524687538542,
+      "mean_gain": 0.7675000000000001,
+      "integrity": "unmeasured",
+      "previous_design": 0.2883768569762545,
+      "original_measurement_recovered": false,
+      "missing_search_scores": 0,
+      "leave_one_out_ranks": {
+        "ranger": 1,
+        "smith": 1,
+        "stationer": 1,
+        "ferryman": 1,
+        "watchmaker": 1,
+        "guide": 1,
+        "guard": 1,
+        "violinist": 1
+      },
+      "original_24_prior_rank": 1,
+      "previous_profile": "early",
+      "previous_alpha": 1.15625,
+      "original_24_constant_rank": 1
+    },
+    {
+      "rank": 2,
+      "method": "soft-contexts-45-blend50",
+      "label": "Paired scene and lighting contexts, 50% blend, 0.45 floor",
+      "pg": "0.11.1",
+      "step": 192,
+      "training": "completed",
+      "raw_sha256": "112b5fe2408c84bbe89173cfac4f71ab6543c340a2bbc94ea8a4d7e6d873a471",
+      "alpha": 1.53125,
+      "score": 0.2469587376743036,
+      "probes": 16,
+      "search_score": 0.22586870394847913,
+      "mean_gain": 0.7425,
+      "integrity": "unmeasured",
+      "previous_design": 0.2611394827816869,
+      "original_measurement_recovered": false,
+      "missing_search_scores": 0,
+      "leave_one_out_ranks": {
+        "ranger": 2,
+        "smith": 4,
+        "stationer": 3,
+        "ferryman": 2,
+        "watchmaker": 2,
+        "guide": 2,
+        "guard": 3,
+        "violinist": 2
+      },
+      "original_24_prior_rank": 6,
+      "previous_profile": "early",
+      "previous_alpha": 1.15625,
+      "original_24_constant_rank": 2
+    },
+    {
+      "rank": 3,
+      "method": "soft45-background-orthogonal",
+      "label": "Background-only scene and lighting projection, 0.45 floor",
+      "pg": "0.11.1",
+      "step": 192,
+      "training": "completed",
+      "raw_sha256": "dfda230137f352346cf9349adea8d92b20c1fdf263c75650fdeb349a4f86f81c",
+      "alpha": 2.1171875,
+      "score": 0.24446166131123434,
+      "probes": 18,
+      "search_score": 0.2599288478462813,
+      "mean_gain": 0.76625,
+      "integrity": "fail",
+      "previous_design": 0.2724467578537277,
+      "original_measurement_recovered": false,
+      "missing_search_scores": 0,
+      "leave_one_out_ranks": {
+        "ranger": 3,
+        "smith": 3,
+        "stationer": 2,
+        "ferryman": 3,
+        "watchmaker": 3,
+        "guide": 3,
+        "guard": 2,
+        "violinist": 4
+      },
+      "original_24_prior_rank": 4,
+      "previous_profile": "early",
+      "previous_alpha": 1.484375,
+      "original_24_constant_rank": 3
+    },
+    {
+      "rank": 4,
+      "method": "matched-attire",
+      "label": "Stronger Boss cues contrasted with matched ordinary attire",
+      "pg": "0.11.1",
+      "step": 192,
+      "training": "completed",
+      "raw_sha256": "2772cdb72adc5eec22ae40021c94cb3839a34b93715ff4895e29463021537e89",
+      "alpha": 1.34375,
+      "score": 0.24023657117474606,
+      "probes": 17,
+      "search_score": 0.23146066718862493,
+      "mean_gain": 0.7575000000000001,
+      "integrity": "fail",
+      "previous_design": 0.24267862560314507,
+      "original_measurement_recovered": false,
+      "missing_search_scores": 0,
+      "leave_one_out_ranks": {
+        "ranger": 4,
+        "smith": 2,
+        "stationer": 5,
+        "ferryman": 4,
+        "watchmaker": 4,
+        "guide": 4,
+        "guard": 4,
+        "violinist": 3
+      },
+      "original_24_prior_rank": 12,
+      "previous_profile": "early",
+      "previous_alpha": 1.25,
+      "original_24_constant_rank": 4
+    },
+    {
+      "rank": 5,
+      "method": "soft45-adapter-rollout",
+      "label": "Train on adapter rollout states, 0.45 floor",
+      "pg": "0.11.1",
+      "step": 192,
+      "training": "completed",
+      "raw_sha256": "d8ca011d530b9981ee23d23893b34c7d202ea4ed01db11ddba685bfb01df6d6d",
+      "alpha": 2.0234375,
+      "score": 0.2304702717528136,
+      "probes": 18,
+      "search_score": 0.23322481814053123,
+      "mean_gain": 0.74375,
+      "integrity": "unmeasured",
+      "previous_design": 0.24307909203902622,
+      "original_measurement_recovered": false,
+      "missing_search_scores": 0,
+      "leave_one_out_ranks": {
+        "ranger": 5,
+        "smith": 7,
+        "stationer": 6,
+        "ferryman": 8,
+        "watchmaker": 6,
+        "guide": 5,
+        "guard": 5,
+        "violinist": 5
+      },
+      "original_24_prior_rank": 11,
+      "previous_profile": "early",
+      "previous_alpha": 1.75,
+      "original_24_constant_rank": 5
+    },
+    {
+      "rank": 6,
+      "method": "shared-best-divergence",
+      "label": "Six highest-divergence timestep positions",
+      "pg": "0.11.1",
+      "step": 192,
+      "training": "completed",
+      "raw_sha256": "7ffc9baefb3f7635955d648fb463add73c4f7a405e55b99e9d20c50b711d8a19",
+      "alpha": 1.36328125,
+      "score": 0.2269869065743828,
+      "probes": 18,
+      "search_score": 0.19989679939500005,
+      "mean_gain": 0.7075,
+      "integrity": "fail",
+      "previous_design": 0.2634237275789743,
+      "original_measurement_recovered": false,
+      "missing_search_scores": 0,
+      "leave_one_out_ranks": {
+        "ranger": 6,
+        "smith": 5,
+        "stationer": 10,
+        "ferryman": 5,
+        "watchmaker": 8,
+        "guide": 7,
+        "guard": 6,
+        "violinist": 10
+      },
+      "original_24_prior_rank": 5,
+      "previous_profile": "early",
+      "previous_alpha": 1.25,
+      "original_24_constant_rank": 6
+    },
+    {
+      "rank": 7,
+      "method": "incumbent-refit",
+      "label": "Soft foreground weighting · prior incumbent recipe",
+      "pg": "0.11.1",
+      "step": 192,
+      "training": "completed",
+      "raw_sha256": "8de9c61604dd25489d5d958b945da3910d32c3cbe6f6afb44ccf7af07f37c512",
+      "alpha": 1.4140625,
+      "score": 0.22403247645558763,
+      "probes": 16,
+      "search_score": 0.2314005904631562,
+      "mean_gain": 0.7225,
+      "integrity": "fail",
+      "previous_design": 0.24977388925590402,
+      "original_measurement_recovered": false,
+      "missing_search_scores": 0,
+      "leave_one_out_ranks": {
+        "ranger": 7,
+        "smith": 6,
+        "stationer": 8,
+        "ferryman": 6,
+        "watchmaker": 5,
+        "guide": 6,
+        "guard": 9,
+        "violinist": 7
+      },
+      "original_24_prior_rank": 8,
+      "previous_profile": "early",
+      "previous_alpha": 1.25,
+      "original_24_constant_rank": 7
+    },
+    {
+      "rank": 8,
+      "method": "early-cues",
+      "label": "Stronger cues at the first three teacher positions",
+      "pg": "0.11.1",
+      "step": 192,
+      "training": "completed",
+      "raw_sha256": "eb8d5e5be85aabeed62580a518a65e7b0341948de4802cfe0346bef436d06337",
+      "alpha": 1.296875,
+      "score": 0.22145578448680192,
+      "probes": 16,
+      "search_score": 0.2546741911526666,
+      "mean_gain": 0.73375,
+      "integrity": "fail",
+      "previous_design": 0.2554879479741942,
+      "original_measurement_recovered": false,
+      "missing_search_scores": 0,
+      "leave_one_out_ranks": {
+        "ranger": 8,
+        "smith": 10,
+        "stationer": 7,
+        "ferryman": 7,
+        "watchmaker": 7,
+        "guide": 8,
+        "guard": 8,
+        "violinist": 8
+      },
+      "original_24_prior_rank": 7,
+      "previous_profile": "early",
+      "previous_alpha": 1.3125,
+      "original_24_constant_rank": 8
+    },
+    {
+      "rank": 9,
+      "method": "shared-best-opening",
+      "label": "Extra training exposure at the opening four denoising positions",
+      "pg": "0.11.1",
+      "step": 192,
+      "training": "completed",
+      "raw_sha256": "47d0c96666762f6b34684ab8327ff383fe69b6cdb22c6f4bc4897b5352159f83",
+      "alpha": 2.1875,
+      "score": 0.2181857801032656,
+      "probes": 20,
+      "search_score": 0.22404158010251038,
+      "mean_gain": 0.71875,
+      "integrity": "fail",
+      "previous_design": 0.27628684183906144,
+      "original_measurement_recovered": false,
+      "missing_search_scores": 0,
+      "leave_one_out_ranks": {
+        "ranger": 14,
+        "smith": 8,
+        "stationer": 4,
+        "ferryman": 12,
+        "watchmaker": 9,
+        "guide": 11,
+        "guard": 7,
+        "violinist": 6
+      },
+      "original_24_prior_rank": 3,
+      "previous_profile": "early",
+      "previous_alpha": 1.25,
+      "original_24_constant_rank": 9
+    },
+    {
+      "rank": 10,
+      "method": "two-cue-average",
+      "label": "Soft foreground weighting plus a 35% blend of two averaged cues",
+      "pg": "0.11.1",
+      "step": 192,
+      "training": "completed",
+      "raw_sha256": "eceabc18a54122aaa5589dc6782184bfa1a2c950ebcab9db756bb91d4f98c2bd",
+      "alpha": 1.625,
+      "score": 0.2120746855458153,
+      "probes": 18,
+      "search_score": 0.19653818696617187,
+      "mean_gain": 0.7175,
+      "integrity": "fail",
+      "previous_design": 0.21631667257552287,
+      "original_measurement_recovered": false,
+      "missing_search_scores": 0,
+      "leave_one_out_ranks": {
+        "ranger": 11,
+        "smith": 9,
+        "stationer": 9,
+        "ferryman": 10,
+        "watchmaker": 10,
+        "guide": 9,
+        "guard": 12,
+        "violinist": 9
+      },
+      "original_24_prior_rank": 16,
+      "previous_profile": "early",
+      "previous_alpha": 1.125,
+      "original_24_constant_rank": 10
+    },
+    {
+      "rank": 11,
+      "method": "soft-floor45",
+      "label": "Soft foreground weighting, 0.45 background floor",
+      "pg": "0.11.1",
+      "step": 192,
+      "training": "completed",
+      "raw_sha256": "b1c2a4d3abf53b206551f4a92a54dd62b8930db4fcff3747664b44f978de7cff",
+      "alpha": 1.73046875,
+      "score": 0.206839900631106,
+      "probes": 20,
+      "search_score": 0.17807505464895831,
+      "mean_gain": 0.7162499999999999,
+      "integrity": "fail",
+      "previous_design": 0.23479078624896205,
+      "original_measurement_recovered": false,
+      "missing_search_scores": 0,
+      "leave_one_out_ranks": {
+        "ranger": 10,
+        "smith": 12,
+        "stationer": 11,
+        "ferryman": 9,
+        "watchmaker": 11,
+        "guide": 13,
+        "guard": 11,
+        "violinist": 13
+      },
+      "original_24_prior_rank": 13,
+      "previous_profile": "early",
+      "previous_alpha": 1.3125,
+      "original_24_constant_rank": 11
+    },
+    {
+      "rank": 12,
+      "method": "shared-best-middle",
+      "label": "Extra training exposure at the middle four denoising positions",
+      "pg": "0.11.1",
+      "step": 192,
+      "training": "completed",
+      "raw_sha256": "3ff5b5e5d9b628c2ae7cd3ce0ea84a164d5cd69038d8eb084e4794e995ebaa0d",
+      "alpha": 2.140625,
+      "score": 0.204897402987471,
+      "probes": 18,
+      "search_score": 0.2625465325488204,
+      "mean_gain": 0.7175,
+      "integrity": "fail",
+      "previous_design": 0.27736990168685943,
+      "original_measurement_recovered": false,
+      "missing_search_scores": 0,
+      "leave_one_out_ranks": {
+        "ranger": 12,
+        "smith": 11,
+        "stationer": 16,
+        "ferryman": 11,
+        "watchmaker": 12,
+        "guide": 12,
+        "guard": 10,
+        "violinist": 11
+      },
+      "original_24_prior_rank": 2,
+      "previous_profile": "early",
+      "previous_alpha": 1.4375,
+      "original_24_constant_rank": 12
+    },
+    {
+      "rank": 13,
+      "method": "shared-best-stock",
+      "label": "Prompt-only control · all 240 fields",
+      "pg": "0.11.1",
+      "step": 192,
+      "training": "completed",
+      "raw_sha256": "28f879d11da9cf7207427fd5e762e1286c496103107189a4a7cb4fb6bccd32af",
+      "alpha": 1.59375,
+      "score": 0.20309996193773044,
+      "probes": 16,
+      "search_score": 0.19605514303265623,
+      "mean_gain": 0.72,
+      "integrity": "fail",
+      "previous_design": 0.24440464709830803,
+      "original_measurement_recovered": false,
+      "missing_search_scores": 1,
+      "leave_one_out_ranks": {
+        "ranger": 9,
+        "smith": 13,
+        "stationer": 12,
+        "ferryman": 13,
+        "watchmaker": 14,
+        "guide": 16,
+        "guard": 13,
+        "violinist": 14
+      },
+      "original_24_prior_rank": 10,
+      "previous_profile": "early",
+      "previous_alpha": 1.25,
+      "original_24_constant_rank": 13
+    },
+    {
+      "rank": 14,
+      "method": "soft-contexts-65-blend50",
+      "label": "Paired scene and lighting contexts, 50% blend, 0.65 floor",
+      "pg": "0.11.1",
+      "step": 192,
+      "training": "completed",
+      "raw_sha256": "df27603c776b62691c7cc60db7563d923cae0cd4ec9bdfde016449c1e1da9a4f",
+      "alpha": 1.390625,
+      "score": 0.2017471109536211,
+      "probes": 16,
+      "search_score": 0.16480083487510414,
+      "mean_gain": 0.7000000000000001,
+      "integrity": "fail",
+      "previous_design": 0.2221348157395028,
+      "original_measurement_recovered": false,
+      "missing_search_scores": 0,
+      "leave_one_out_ranks": {
+        "ranger": 15,
+        "smith": 14,
+        "stationer": 13,
+        "ferryman": 15,
+        "watchmaker": 13,
+        "guide": 10,
+        "guard": 15,
+        "violinist": 15
+      },
+      "original_24_prior_rank": 14,
+      "previous_profile": "early",
+      "previous_alpha": 1.4375,
+      "original_24_constant_rank": 14
+    },
+    {
+      "rank": 15,
+      "method": "in-scene-costume",
+      "label": "In-scene costume cue blend, 35%",
+      "pg": "0.11.1",
+      "step": 192,
+      "training": "completed",
+      "raw_sha256": "a640faa3da1f767f9836e4b85a3a087c90fadd8785be2eaacc6f1299ba1fd964",
+      "alpha": 2.09375,
+      "score": 0.1982065296522589,
+      "probes": 18,
+      "search_score": 0.1562215011793802,
+      "mean_gain": 0.7075,
+      "integrity": "fail",
+      "previous_design": 0.21189367175369528,
+      "original_measurement_recovered": false,
+      "missing_search_scores": 0,
+      "leave_one_out_ranks": {
+        "ranger": 13,
+        "smith": 15,
+        "stationer": 14,
+        "ferryman": 16,
+        "watchmaker": 17,
+        "guide": 14,
+        "guard": 14,
+        "violinist": 12
+      },
+      "original_24_prior_rank": 19,
+      "previous_profile": "early",
+      "previous_alpha": 1.34375,
+      "original_24_constant_rank": 15
+    },
+    {
+      "rank": 16,
+      "method": "soft-projection-65-blend50",
+      "label": "Whole-image scene and lighting projection, 0.65 floor",
+      "pg": "0.11.1",
+      "step": 192,
+      "training": "completed",
+      "raw_sha256": "b4228bcb980718eee28d5956e7da7f5135f57a76b8de638b8072f73744ecae7f",
+      "alpha": 1.53125,
+      "score": 0.19479966193951173,
+      "probes": 16,
+      "search_score": 0.13520042731458592,
+      "mean_gain": 0.7025,
+      "integrity": "fail",
+      "previous_design": 0.2157968447358962,
+      "original_measurement_recovered": false,
+      "missing_search_scores": 0,
+      "leave_one_out_ranks": {
+        "ranger": 16,
+        "smith": 16,
+        "stationer": 15,
+        "ferryman": 14,
+        "watchmaker": 15,
+        "guide": 15,
+        "guard": 16,
+        "violinist": 16
+      },
+      "original_24_prior_rank": 17,
+      "previous_profile": "early",
+      "previous_alpha": 1.625,
+      "original_24_constant_rank": 16
+    },
+    {
+      "rank": 17,
+      "method": "strong-boss-45-mix35",
+      "label": "Soft foreground weighting plus 35% stronger Boss cues",
+      "pg": "0.11.1",
+      "step": 192,
+      "training": "completed",
+      "raw_sha256": "50a2cfaac04106bc0d3f7f4adb09ebbbde0f2a7225a42fa5ecd46cabc69e4dc5",
+      "alpha": 1.2265625,
+      "score": 0.1844624391119018,
+      "probes": 16,
+      "search_score": 0.200602620189,
+      "mean_gain": 0.6675,
+      "integrity": "unmeasured",
+      "previous_design": 0.24503303238033367,
+      "original_measurement_recovered": false,
+      "missing_search_scores": 0,
+      "leave_one_out_ranks": {
+        "ranger": 18,
+        "smith": 18,
+        "stationer": 18,
+        "ferryman": 17,
+        "watchmaker": 16,
+        "guide": 17,
+        "guard": 20,
+        "violinist": 17
+      },
+      "original_24_prior_rank": 9,
+      "previous_profile": "early",
+      "previous_alpha": 1.0625,
+      "original_24_constant_rank": 17
+    },
+    {
+      "rank": 18,
+      "method": "sparse-first",
+      "label": "Percentile-filtered blend at the first three teacher positions",
+      "pg": "0.11.1",
+      "step": 192,
+      "training": "completed",
+      "raw_sha256": "6e51e00ecae61b17eb53da213c7441fb759fd539de9c09eb93d3f68730ebf8da",
+      "alpha": 1.48046875,
+      "score": 0.17766849694312778,
+      "probes": 17,
+      "search_score": 0.1854523100604271,
+      "mean_gain": 0.6725,
+      "integrity": "fail",
+      "previous_design": 0.19506591200240292,
+      "original_measurement_recovered": false,
+      "missing_search_scores": 0,
+      "leave_one_out_ranks": {
+        "ranger": 19,
+        "smith": 17,
+        "stationer": 21,
+        "ferryman": 21,
+        "watchmaker": 19,
+        "guide": 18,
+        "guard": 18,
+        "violinist": 21
+      },
+      "original_24_prior_rank": 21,
+      "previous_profile": "constant",
+      "previous_alpha": 1.484375,
+      "original_24_constant_rank": 18
+    },
+    {
+      "rank": 19,
+      "method": "strong-boss-45-dose100",
+      "label": "Soft foreground weighting with full-strength Boss cues",
+      "pg": "0.11.1",
+      "step": 192,
+      "training": "completed",
+      "raw_sha256": "4891843b569d07e4c3eb98514cb0e4d6168fff8e5e91be34d3e5435ef1820bfe",
+      "alpha": 1.625,
+      "score": 0.17646069710341514,
+      "probes": 18,
+      "search_score": 0.18300146408362497,
+      "mean_gain": 0.67875,
+      "integrity": "fail",
+      "previous_design": 0.2126443852097243,
+      "original_measurement_recovered": false,
+      "missing_search_scores": 0,
+      "leave_one_out_ranks": {
+        "ranger": 20,
+        "smith": 20,
+        "stationer": 20,
+        "ferryman": 18,
+        "watchmaker": 18,
+        "guide": 19,
+        "guard": 21,
+        "violinist": 19
+      },
+      "original_24_prior_rank": 18,
+      "previous_profile": "early",
+      "previous_alpha": 1.4375,
+      "original_24_constant_rank": 19
+    },
+    {
+      "rank": 20,
+      "method": "shared-best-seed-split",
+      "label": "Second qualified seed on the shared teacher scenes",
+      "pg": "0.11.1",
+      "step": 192,
+      "training": "completed",
+      "raw_sha256": "6976bcdebb2bfe294ed3d2907a16c192a3eb11ac697fa07b665e004af693f9f2",
+      "alpha": 1.59375,
+      "score": 0.17229323843897434,
+      "probes": 16,
+      "search_score": 0.13319844418752083,
+      "mean_gain": 0.6950000000000001,
+      "integrity": "fail",
+      "previous_design": 0.21181610672532142,
+      "original_measurement_recovered": false,
+      "missing_search_scores": 0,
+      "leave_one_out_ranks": {
+        "ranger": 21,
+        "smith": 19,
+        "stationer": 19,
+        "ferryman": 19,
+        "watchmaker": 22,
+        "guide": 21,
+        "guard": 17,
+        "violinist": 18
+      },
+      "original_24_prior_rank": 20,
+      "previous_profile": "early",
+      "previous_alpha": 1.25,
+      "original_24_constant_rank": 20
+    },
+    {
+      "rank": 21,
+      "method": "costume-teachers",
+      "label": "Qualified costume teachers with soft-foreground contexts",
+      "pg": "0.11.1",
+      "step": 192,
+      "training": "completed",
+      "raw_sha256": "362ab4fe9517903764e1ecb4dea162d52f5a58471bf7581fce6de6a543c01a16",
+      "alpha": 1.5,
+      "score": 0.17018900212531252,
+      "probes": 17,
+      "search_score": 0.16800315301541666,
+      "mean_gain": 0.69125,
+      "integrity": "fail",
+      "previous_design": 0.22081804514937445,
+      "original_measurement_recovered": false,
+      "missing_search_scores": 0,
+      "leave_one_out_ranks": {
+        "ranger": 22,
+        "smith": 21,
+        "stationer": 17,
+        "ferryman": 20,
+        "watchmaker": 21,
+        "guide": 20,
+        "guard": 22,
+        "violinist": 22
+      },
+      "original_24_prior_rank": 15,
+      "previous_profile": "early",
+      "previous_alpha": 1.25,
+      "original_24_constant_rank": 21
+    },
+    {
+      "rank": 22,
+      "method": "shared-best-uniform-steps",
+      "label": "Six evenly spaced timestep positions",
+      "pg": "0.11.1",
+      "step": 192,
+      "training": "completed",
+      "raw_sha256": "a257684973c892292e69e4fbd2b7356964bfad99a626b912dbeee24effc2b90f",
+      "alpha": 1.765625,
+      "score": 0.16485297849434763,
+      "probes": 20,
+      "search_score": 0.14107529474049998,
+      "mean_gain": 0.62625,
+      "integrity": "fail",
+      "previous_design": 0.1924892846898181,
+      "original_measurement_recovered": false,
+      "missing_search_scores": 0,
+      "leave_one_out_ranks": {
+        "ranger": 17,
+        "smith": 22,
+        "stationer": 22,
+        "ferryman": 22,
+        "watchmaker": 20,
+        "guide": 22,
+        "guard": 19,
+        "violinist": 20
+      },
+      "original_24_prior_rank": 22,
+      "previous_profile": "early",
+      "previous_alpha": 1.40625,
+      "original_24_constant_rank": 22
+    },
+    {
+      "rank": 23,
+      "method": "subject-apg",
+      "label": "Soft foreground weighting with subject APG",
+      "pg": "0.11.1",
+      "step": 192,
+      "training": "completed",
+      "raw_sha256": "c92e014194cc7b5e7bdeddc7e76fad1588033dcc5adc0fe968724b9f22301f6e",
+      "alpha": 1.59375,
+      "score": 0.11717642971727402,
+      "probes": 16,
+      "search_score": 0.09434254597568748,
+      "mean_gain": 0.54125,
+      "integrity": "fail",
+      "previous_design": 0.1357842095879615,
+      "original_measurement_recovered": false,
+      "missing_search_scores": 1,
+      "leave_one_out_ranks": {
+        "ranger": 23,
+        "smith": 23,
+        "stationer": 23,
+        "ferryman": 23,
+        "watchmaker": 23,
+        "guide": 23,
+        "guard": 23,
+        "violinist": 23
+      },
+      "original_24_prior_rank": 23,
+      "previous_profile": "early",
+      "previous_alpha": 1.25,
+      "original_24_constant_rank": 23
+    },
+    {
+      "rank": 24,
+      "method": "boss-short-bc64fe76",
+      "label": "boss-short",
+      "pg": "0.12.0",
+      "step": 128,
+      "training": "completed",
+      "raw_sha256": "21d6f10fd81e54647ce223745b3fbad3a2f8f385c3c31cd6480211c815a480c4",
+      "alpha": 2.0234375,
+      "score": 0.09464846719815626,
+      "probes": 18,
+      "search_score": 0.1345697365719271,
+      "mean_gain": 0.5225,
+      "integrity": "fail",
+      "previous_design": null,
+      "original_measurement_recovered": false,
+      "missing_search_scores": 0,
+      "leave_one_out_ranks": {
+        "ranger": 24,
+        "smith": 24,
+        "stationer": 24,
+        "ferryman": 24,
+        "watchmaker": 24,
+        "guide": 24,
+        "guard": 24,
+        "violinist": 24
+      }
+    },
+    {
+      "rank": 25,
+      "method": "shared-best-neutral-path",
+      "label": "Neutral trajectory only",
+      "pg": "0.11.1",
+      "step": 192,
+      "training": "completed",
+      "raw_sha256": "1a86ae34539088613e74ae5cab14d7c4d3d716b172f5250382813622fac876da",
+      "alpha": 1.90625,
+      "score": 0.06793461738305524,
+      "probes": 18,
+      "search_score": 0.048669525503906234,
+      "mean_gain": 0.48250000000000004,
+      "integrity": "fail",
+      "previous_design": 0.10792105105517409,
+      "original_measurement_recovered": false,
+      "missing_search_scores": 0,
+      "leave_one_out_ranks": {
+        "ranger": 25,
+        "smith": 25,
+        "stationer": 25,
+        "ferryman": 25,
+        "watchmaker": 25,
+        "guide": 25,
+        "guard": 25,
+        "violinist": 25
+      },
+      "original_24_prior_rank": 24,
+      "previous_profile": "early",
+      "previous_alpha": 1.625,
+      "original_24_constant_rank": 24
+    },
+    {
+      "rank": 26,
+      "method": "boss-late-cue-repair-bc64fe76",
+      "label": "boss-late-cue-repair",
+      "pg": "0.12.0",
+      "step": 128,
+      "training": "completed",
+      "raw_sha256": "c8ac559be100f5051f09c0d044d41aeee01b5e1e818522e1088ec30e2d133a86",
+      "alpha": 1.90625,
+      "score": 0.024212749018720985,
+      "probes": 20,
+      "search_score": 0.019963956516083334,
+      "mean_gain": 0.30875,
+      "integrity": "fail",
+      "previous_design": null,
+      "original_measurement_recovered": false,
+      "missing_search_scores": 1,
+      "leave_one_out_ranks": {
+        "ranger": 27,
+        "smith": 26,
+        "stationer": 26,
+        "ferryman": 26,
+        "watchmaker": 26,
+        "guide": 26,
+        "guard": 26,
+        "violinist": 26
+      }
+    },
+    {
+      "rank": 27,
+      "method": "boss-pair-repair-bc64fe76",
+      "label": "boss-pair-repair",
+      "pg": "0.12.0",
+      "step": 96,
+      "training": "completed",
+      "raw_sha256": "394a914ad45aeea7746a8641ffcd7a88918d7f93fdb291737aeea744d1272b19",
+      "alpha": 1.65625,
+      "score": 0.015876078807874998,
+      "probes": 20,
+      "search_score": 0.005714121764690105,
+      "mean_gain": 0.255,
+      "integrity": "fail",
+      "previous_design": null,
+      "original_measurement_recovered": true,
+      "missing_search_scores": 0,
+      "leave_one_out_ranks": {
+        "ranger": 26,
+        "smith": 27,
+        "stationer": 27,
+        "ferryman": 27,
+        "watchmaker": 27,
+        "guide": 27,
+        "guard": 27,
+        "violinist": 27
+      }
+    },
+    {
+      "rank": 28,
+      "method": "boss-32-07608157",
+      "label": "boss-32",
+      "pg": "0.12.0",
+      "step": 16,
+      "training": "completed",
+      "raw_sha256": "3cf9bf3e87e83e3dca6baaa94691a64290a57368052f3dc894542593969eb54c",
+      "alpha": 1.40625,
+      "score": 0.002474858875288505,
+      "probes": 18,
+      "search_score": 0.0001505510228125,
+      "mean_gain": 0.10875,
+      "integrity": "pass",
+      "previous_design": null,
+      "original_measurement_recovered": false,
+      "missing_search_scores": 0,
+      "leave_one_out_ranks": {
+        "ranger": 28,
+        "smith": 28,
+        "stationer": 28,
+        "ferryman": 28,
+        "watchmaker": 28,
+        "guide": 28,
+        "guard": 28,
+        "violinist": 28
+      }
+    },
+    {
+      "rank": null,
+      "method": "shared-best-mixed-path",
+      "label": "shared-best-mixed-path",
+      "pg": "0.11.1",
+      "step": 192,
+      "training": "training stopped",
+      "raw_sha256": "d45872321a245545ff0235d5d53f5fe2353c8f9a61fd0956f8eb8f618bfb52d2",
+      "alpha": 1.677734375,
+      "score": 0.19172102991300669,
+      "probes": 20,
+      "search_score": 0.1858899517578385,
+      "mean_gain": 0.6825,
+      "integrity": "fail",
+      "previous_design": null,
+      "original_measurement_recovered": false,
+      "missing_search_scores": 0
+    },
+    {
+      "rank": null,
+      "method": "sparse-full",
+      "label": "sparse-full",
+      "pg": "0.11.1",
+      "step": 144,
+      "training": "training stopped",
+      "raw_sha256": "e0eb397bd1f491ac4e14b81c5f2b2498c1dcf4b5761653eb042767e31e749649",
+      "alpha": 2.0,
+      "score": 0.18759157914338392,
+      "probes": 19,
+      "search_score": 0.16947766093231253,
+      "mean_gain": 0.6225,
+      "integrity": "fail",
+      "previous_design": null,
+      "original_measurement_recovered": false,
+      "missing_search_scores": 0
+    },
+    {
+      "rank": null,
+      "method": "boss-reference-rate-repair-ee3ee151",
+      "label": "boss-reference-rate-repair",
+      "pg": "0.12.0",
+      "step": 48,
+      "training": "training stopped",
+      "raw_sha256": "874e13216a0dce477b008304cfa5baf48274e14a9762c78fcea4c02a53c2038f",
+      "alpha": 0.96875,
+      "score": 0.0013022531035279015,
+      "probes": 14,
+      "search_score": 0.0028911901702395834,
+      "mean_gain": 0.12375,
+      "integrity": "fail",
+      "previous_design": null,
+      "original_measurement_recovered": true,
+      "missing_search_scores": 1
+    },
+    {
+      "rank": null,
+      "method": "boss-short-548fb41c",
+      "label": "boss-short",
+      "pg": "0.12.0",
+      "step": 32,
+      "training": "rate screen only",
+      "raw_sha256": "7c447b173e3a2a10ea001962a2a29ca91b22d8070f3a931be8a59f991e3e7a0f",
+      "alpha": 1.73046875,
+      "score": 0.0008571575274358261,
+      "probes": 20,
+      "search_score": 0.00014345913932291664,
+      "mean_gain": 0.08875,
+      "integrity": "unmeasured",
+      "previous_design": null,
+      "original_measurement_recovered": false,
+      "missing_search_scores": 0
+    },
+    {
+      "rank": null,
+      "method": "boss-short-99e63b0f",
+      "label": "boss-short",
+      "pg": "0.12.0",
+      "step": 32,
+      "training": "rate screen only",
+      "raw_sha256": "c537433e48cdff54e3b551dc0e9a3588b0af898531e43ceba82f60d7a9974c84",
+      "alpha": 1.59375,
+      "score": 0.00031538220586049115,
+      "probes": 18,
+      "search_score": 0.00017532782587500006,
+      "mean_gain": 0.07125000000000001,
+      "integrity": "pass",
+      "previous_design": null,
+      "original_measurement_recovered": false,
+      "missing_search_scores": 0
+    },
+    {
+      "rank": null,
+      "method": "boss-short-68603208",
+      "label": "boss-short",
+      "pg": "0.12.0",
+      "step": 32,
+      "training": "rate screen only",
+      "raw_sha256": "a1605d0d9347af346e982f734b02a6eb2cf4aa523f14c468067eeb25b70c8673",
+      "alpha": 2.0,
+      "score": 0.00010293928902455356,
+      "probes": 22,
+      "search_score": 7.801057378125003e-05,
+      "mean_gain": 0.0225,
+      "integrity": "pass",
+      "previous_design": null,
+      "original_measurement_recovered": false,
+      "missing_search_scores": 0
+    },
+    {
+      "rank": null,
+      "method": "boss-short-a7af34ff",
+      "label": "boss-short",
+      "pg": "0.12.0",
+      "step": 32,
+      "training": "rate screen only",
+      "raw_sha256": "6524c88c787047df5da535f107745a27e8e21e4521caafba90a1ac17c5cf1a2a",
+      "alpha": 0.84375,
+      "score": 9.251755942857144e-05,
+      "probes": 16,
+      "search_score": 9.098070875000003e-05,
+      "mean_gain": 0.0375,
+      "integrity": "pass",
+      "previous_design": null,
+      "original_measurement_recovered": false,
+      "missing_search_scores": 0
+    },
+    {
+      "rank": null,
+      "method": "boss-short-ec003fb5",
+      "label": "boss-short",
+      "pg": "0.12.0",
+      "step": 64,
+      "training": "training stopped",
+      "raw_sha256": "992b66148c6643673ca69e42ed3eff132123ff241996f2d18d418c2de078247a",
+      "alpha": 1.15625,
+      "score": 7.456374084151788e-05,
+      "probes": 16,
+      "search_score": 0.0016696068898437498,
+      "mean_gain": 0.013749999999999998,
+      "integrity": "fail",
+      "previous_design": null,
+      "original_measurement_recovered": false,
+      "missing_search_scores": 0
+    },
+    {
+      "rank": null,
+      "method": "boss-short-0c0b0b83",
+      "label": "boss-short",
+      "pg": "0.12.0",
+      "step": 32,
+      "training": "training stopped",
+      "raw_sha256": "8711fbd1e83b2eaf5388e6a2f26f47d591d8bbe707d8530be281c0be9e9b099d",
+      "alpha": 0.90625,
+      "score": 3.932149883928572e-05,
+      "probes": 14,
+      "search_score": 5.646988671354167e-05,
+      "mean_gain": 0.021249999999999998,
+      "integrity": "fail",
+      "previous_design": null,
+      "original_measurement_recovered": false,
+      "missing_search_scores": 0
+    },
+    {
+      "rank": null,
+      "method": "pg012-late-cues-control",
+      "label": "Late-cues version control",
+      "pg": "0.12.0",
+      "step": 48,
+      "training": "version control",
+      "raw_sha256": "d2032870430e96540c22e631031509aa0048e77c22ef37cef8a7573bbcfa766c",
+      "alpha": 1.53125,
+      "score": 6.425999999999995e-07,
+      "probes": 15,
+      "search_score": 0.0003369352135625,
+      "mean_gain": -0.02,
+      "integrity": "fail",
+      "previous_design": null,
+      "original_measurement_recovered": false,
+      "missing_search_scores": 1
+    }
+  ],
+  "other_sliders": [
+    {
+      "slider": "1990s anime",
+      "pg": "0.12.0",
+      "raw_sha256": "020cf43bf7f888edab85e09c2f1f3b88bec73869dafa3af0da697bfa58378e09",
+      "step": 192,
+      "objective": "matched_intended_effect",
+      "alpha": 2.625,
+      "trials": [
+        [
+          1.0,
+          0.15666666666666662
+        ],
+        [
+          0.75,
+          0.14749999999999994
+        ],
+        [
+          1.25,
+          0.18333333333333324
+        ],
+        [
+          0.875,
+          0.1691666666666666
+        ],
+        [
+          1.625,
+          0.17499999999999996
+        ],
+        [
+          1.0625,
+          0.20499999999999996
+        ],
+        [
+          1.4375,
+          0.19249999999999995
+        ],
+        [
+          0.78125,
+          0.1033333333333333
+        ],
+        [
+          1.34375,
+          0.1858333333333333
+        ],
+        [
+          0.5,
+          0.07583333333333331
+        ],
+        [
+          1.5,
+          0.21499999999999994
+        ],
+        [
+          2.0,
+          0.2366666666666666
+        ],
+        [
+          1.8125,
+          0.17916666666666659
+        ],
+        [
+          3.0,
+          0.19
+        ],
+        [
+          1.90625,
+          0.23583333333333328
+        ],
+        [
+          2.5,
+          0.24499999999999994
+        ],
+        [
+          2.25,
+          0.23999999999999996
+        ],
+        [
+          2.75,
+          0.2466666666666666
+        ],
+        [
+          2.625,
+          0.2491666666666666
+        ],
+        [
+          2.875,
+          0.2308333333333333
+        ],
+        [
+          2.5625,
+          0.22583333333333325
+        ],
+        [
+          2.6875,
+          0.22749999999999992
+        ],
+        [
+          2.59375,
+          0.22833333333333325
+        ],
+        [
+          2.65625,
+          0.2283333333333333
+        ]
+      ],
+      "score": 0.21583333333333327,
+      "status": "pass",
+      "cases": [
+        {
+          "seed": 992371,
+          "prompt": "Anime illustration. Waist-up eye-level portrait of one 58-year-old man with mature facial features with short black curls, wearing a brown cardigan, standing naturally facing the viewer. Background: covered town square with orange awnings, terracotta pavement and a blue souvenir sign. Lighting: cool early evening light with street lanterns. Show the surroundings clearly. All depicted people are adults.",
+          "off_sha256": "de31f87e19aeb2b9b00dfbb6f41533dc1bdb79b04af2bc27f69b7939fbfe77bb",
+          "on_sha256": "26a82564db93078ef1a11d31d594b5af32e39565cd5b6d63739966aea32ae41d",
+          "gain": 0.016666666666666607,
+          "integrity": "pass",
+          "off_score": 0.7466666666666667,
+          "on_score": 0.7633333333333333
+        },
+        {
+          "seed": 992402,
+          "prompt": "Anime illustration. Eye-level half-body portrait of one 55-year-old woman with mature facial features with auburn braids and freckles, standing naturally facing the viewer. Background: botanical museum atrium with two ceramic planters and a blue mosaic. Lighting: soft overcast daylight. Keep the surrounding setting clearly visible. All depicted people are adults.",
+          "off_sha256": "8f046afbd5e049ba8d19e006d0cdb9aefe2f25324ad0ad79ad6c3618bf162b5f",
+          "on_sha256": "a970cfec58cf8c6b0c5c378d079ceabc405b6f0d630cfd2d812fdc2ed3c0c83e",
+          "gain": 0.1833333333333333,
+          "integrity": "pass",
+          "off_score": 0.48333333333333334,
+          "on_score": 0.6666666666666666
+        },
+        {
+          "seed": 992433,
+          "prompt": "Anime illustration. Eye-level half-body portrait of one 55-year-old woman with mature facial features with dark brown curls and dark skin, standing naturally facing the viewer. Background: sandstone trail shelter with a wooden map board and distant dunes. Lighting: bright late-afternoon daylight. Keep the surrounding setting clearly visible. All depicted people are adults.",
+          "off_sha256": "da0ea44b100f6da64a5e4d07b24c40a860df26bb29f1cf644a864300112b6771",
+          "on_sha256": "2aaa91b8c1338706f155e696250c26f61c9b57e97544d882bdb13d4244c47e56",
+          "gain": 0.22666666666666657,
+          "integrity": "pass",
+          "off_score": 0.6233333333333334,
+          "on_score": 0.85
+        },
+        {
+          "seed": 992464,
+          "prompt": "Anime illustration. Eye-level half-body portrait of one 55-year-old woman with mature facial features with close-cropped blond hair, standing naturally facing the viewer. Background: tailor studio with fabric bolts, a pine desk, and a high window. Lighting: soft diffuse daylight. Keep the surrounding setting clearly visible. All depicted people are adults.",
+          "off_sha256": "198a22eba14d72c7fede00e18bc1ba56e5417f725cb8b7ea86f63ec6694c56f3",
+          "on_sha256": "859135a2d194e0e458bc3597eccfb4292a082271a15baad3f69c6be49ce7a042",
+          "gain": 0.43666666666666665,
+          "integrity": "pass",
+          "off_score": 0.5033333333333333,
+          "on_score": 0.94
+        }
+      ],
+      "frozen_reference": {
+        "reference": "1990s anime RAW192 at constant α 1.5",
+        "raw_sha256": "020cf43bf7f888edab85e09c2f1f3b88bec73869dafa3af0da697bfa58378e09",
+        "role": "study_candidate",
+        "status": "matched",
+        "decision": "exceeds_reference",
+        "cases": [
+          {
+            "seed": 992371,
+            "off_sha256": "de31f87e19aeb2b9b00dfbb6f41533dc1bdb79b04af2bc27f69b7939fbfe77bb",
+            "reference_gain": 0.026666666666666616,
+            "reference_integrity": "pass",
+            "reference_on_sha256": "287ed003912eb95eec9c28d11202d793b9171e0f48589e6d33137c1718cf3adb",
+            "trial_gain": 0.016666666666666607,
+            "trial_integrity": "pass",
+            "trial_on_sha256": "26a82564db93078ef1a11d31d594b5af32e39565cd5b6d63739966aea32ae41d"
+          },
+          {
+            "seed": 992402,
+            "off_sha256": "8f046afbd5e049ba8d19e006d0cdb9aefe2f25324ad0ad79ad6c3618bf162b5f",
+            "reference_gain": 0.26999999999999996,
+            "reference_integrity": "pass",
+            "reference_on_sha256": "6d207e0f010c7950b4f1d0b760e2862649e3effa441f2a3693ba2f4c96ebf7bb",
+            "trial_gain": 0.1833333333333333,
+            "trial_integrity": "pass",
+            "trial_on_sha256": "a970cfec58cf8c6b0c5c378d079ceabc405b6f0d630cfd2d812fdc2ed3c0c83e"
+          },
+          {
+            "seed": 992433,
+            "off_sha256": "da0ea44b100f6da64a5e4d07b24c40a860df26bb29f1cf644a864300112b6771",
+            "reference_gain": 0.21999999999999986,
+            "reference_integrity": "pass",
+            "reference_on_sha256": "fc073164cf59b126d7f1b021462a523e6cc07955dfff980736d92734772767d4",
+            "trial_gain": 0.22666666666666657,
+            "trial_integrity": "pass",
+            "trial_on_sha256": "2aaa91b8c1338706f155e696250c26f61c9b57e97544d882bdb13d4244c47e56"
+          },
+          {
+            "seed": 992464,
+            "off_sha256": "198a22eba14d72c7fede00e18bc1ba56e5417f725cb8b7ea86f63ec6694c56f3",
+            "reference_gain": 0.30333333333333334,
+            "reference_integrity": "pass",
+            "reference_on_sha256": "cb3d52dc4318a6e36325af8876cab296aa0e392776b3b8f09f72fa9940357e07",
+            "trial_gain": 0.43666666666666665,
+            "trial_integrity": "pass",
+            "trial_on_sha256": "859135a2d194e0e458bc3597eccfb4292a082271a15baad3f69c6be49ce7a042"
+          }
+        ],
+        "reference_mean_gain": 0.20499999999999996,
+        "trial_mean_gain": 0.21583333333333327,
+        "difference": 0.010833333333333306
+      },
+      "prior_calibration": 2.25,
+      "prior_gain": 0.19499999999999995
+    },
+    {
+      "slider": "Visually appealing character",
+      "pg": "0.12.0",
+      "raw_sha256": "10b34bf60b7074480941ca40fa8f05a276029db4140a76ded737f208c4404240",
+      "step": 256,
+      "objective": "matched_intended_effect",
+      "alpha": 3.599609375,
+      "trials": [
+        [
+          1.0,
+          0.0833333333333333
+        ],
+        [
+          0.75,
+          0.05166666666666668
+        ],
+        [
+          1.25,
+          0.14749999999999996
+        ],
+        [
+          0.875,
+          0.0625
+        ],
+        [
+          1.625,
+          0.21083333333333332
+        ],
+        [
+          1.0625,
+          0.11416666666666667
+        ],
+        [
+          2.1875,
+          0.32666666666666666
+        ],
+        [
+          1.34375,
+          0.18416666666666667
+        ],
+        [
+          3.03125,
+          0.3783333333333333
+        ],
+        [
+          0.5,
+          0.04916666666666665
+        ],
+        [
+          1.5,
+          0.19166666666666665
+        ],
+        [
+          2.0,
+          0.3025
+        ],
+        [
+          2.609375,
+          0.3549999999999999
+        ],
+        [
+          4.546875,
+          0.2716666666666666
+        ],
+        [
+          2.8203125,
+          0.36166666666666664
+        ],
+        [
+          3.7890625,
+          0.38
+        ],
+        [
+          3.41015625,
+          0.35833333333333334
+        ],
+        [
+          4.16796875,
+          0.32
+        ],
+        [
+          3.599609375,
+          0.39583333333333337
+        ],
+        [
+          3.978515625,
+          0.33416666666666667
+        ],
+        [
+          3.5048828125,
+          0.3633333333333333
+        ],
+        [
+          3.6943359375,
+          0.38999999999999996
+        ],
+        [
+          3.55224609375,
+          0.3775
+        ],
+        [
+          3.64697265625,
+          0.395
+        ],
+        [
+          3.575927734375,
+          0.375
+        ],
+        [
+          3.623291015625,
+          0.3683333333333333
+        ]
+      ],
+      "score": 0.35916666666666675,
+      "status": "fail",
+      "cases": [
+        {
+          "seed": 992371,
+          "prompt": "Anime illustration. Waist-up eye-level portrait of one 58-year-old man with mature facial features with short black curls, wearing a brown cardigan, standing naturally facing the viewer. Background: covered town square with orange awnings, terracotta pavement and a blue souvenir sign. Lighting: cool early evening light with street lanterns. Show the surroundings clearly. All depicted people are adults.",
+          "off_sha256": "de31f87e19aeb2b9b00dfbb6f41533dc1bdb79b04af2bc27f69b7939fbfe77bb",
+          "on_sha256": "5469ba477bb52b84303fd3fdd764d7898ba349c11bb45db28a8be680590b8f3c",
+          "gain": 0.3400000000000001,
+          "integrity": "fail",
+          "off_score": 0.47,
+          "on_score": 0.81
+        },
+        {
+          "seed": 992402,
+          "prompt": "Anime illustration. Eye-level half-body portrait of one 55-year-old woman with mature facial features with auburn braids and freckles, standing naturally facing the viewer. Background: botanical museum atrium with two ceramic planters and a blue mosaic. Lighting: soft overcast daylight. Keep the surrounding setting clearly visible. All depicted people are adults.",
+          "off_sha256": "8f046afbd5e049ba8d19e006d0cdb9aefe2f25324ad0ad79ad6c3618bf162b5f",
+          "on_sha256": "697d96c90af8cc91b9107519411a61af4c821035fa020ff6bdd264f3d0c32a30",
+          "gain": 0.39666666666666667,
+          "integrity": "fail",
+          "off_score": 0.41,
+          "on_score": 0.8066666666666666
+        },
+        {
+          "seed": 992433,
+          "prompt": "Anime illustration. Eye-level half-body portrait of one 55-year-old woman with mature facial features with dark brown curls and dark skin, standing naturally facing the viewer. Background: sandstone trail shelter with a wooden map board and distant dunes. Lighting: bright late-afternoon daylight. Keep the surrounding setting clearly visible. All depicted people are adults.",
+          "off_sha256": "da0ea44b100f6da64a5e4d07b24c40a860df26bb29f1cf644a864300112b6771",
+          "on_sha256": "20530fbeb36f3a19a8ceeb85eff39ecb271bad6eacb057f8ed486a5a265adf6b",
+          "gain": 0.29333333333333345,
+          "integrity": "unmeasured",
+          "off_score": 0.5233333333333333,
+          "on_score": 0.8166666666666668
+        },
+        {
+          "seed": 992464,
+          "prompt": "Anime illustration. Eye-level half-body portrait of one 55-year-old woman with mature facial features with close-cropped blond hair, standing naturally facing the viewer. Background: tailor studio with fabric bolts, a pine desk, and a high window. Lighting: soft diffuse daylight. Keep the surrounding setting clearly visible. All depicted people are adults.",
+          "off_sha256": "198a22eba14d72c7fede00e18bc1ba56e5417f725cb8b7ea86f63ec6694c56f3",
+          "on_sha256": "9109e5681f3d516d0dbdca029019bd97f62e23aa81590a11d3cae877a9dd9a26",
+          "gain": 0.4066666666666667,
+          "integrity": "fail",
+          "off_score": 0.4166666666666667,
+          "on_score": 0.8233333333333334
+        }
+      ],
+      "frozen_reference": {
+        "reference": "Visually appealing character RAW256 at constant α 1",
+        "raw_sha256": "10b34bf60b7074480941ca40fa8f05a276029db4140a76ded737f208c4404240",
+        "role": "study_candidate",
+        "status": "matched",
+        "decision": "retain_reference",
+        "cases": [
+          {
+            "seed": 992371,
+            "off_sha256": "de31f87e19aeb2b9b00dfbb6f41533dc1bdb79b04af2bc27f69b7939fbfe77bb",
+            "reference_gain": 0.1166666666666667,
+            "reference_integrity": "pass",
+            "reference_on_sha256": "da151f1fd2f4ac9dbed675e09b29531d9a5fc740000c9dd44b707abdbaa5385e",
+            "trial_gain": 0.3400000000000001,
+            "trial_integrity": "fail",
+            "trial_on_sha256": "5469ba477bb52b84303fd3fdd764d7898ba349c11bb45db28a8be680590b8f3c"
+          },
+          {
+            "seed": 992402,
+            "off_sha256": "8f046afbd5e049ba8d19e006d0cdb9aefe2f25324ad0ad79ad6c3618bf162b5f",
+            "reference_gain": 0.1733333333333334,
+            "reference_integrity": "pass",
+            "reference_on_sha256": "51debdc0111c671b9c6db120c448c87577edfd9e6b9c68a67e9b680995ca4b8b",
+            "trial_gain": 0.39666666666666667,
+            "trial_integrity": "fail",
+            "trial_on_sha256": "697d96c90af8cc91b9107519411a61af4c821035fa020ff6bdd264f3d0c32a30"
+          },
+          {
+            "seed": 992433,
+            "off_sha256": "da0ea44b100f6da64a5e4d07b24c40a860df26bb29f1cf644a864300112b6771",
+            "reference_gain": 0.17666666666666675,
+            "reference_integrity": "pass",
+            "reference_on_sha256": "3543c3b90286714e28d25b45c4e9a0d8ca9d56f4aeb19a37656f701325f0f555",
+            "trial_gain": 0.29333333333333345,
+            "trial_integrity": "unmeasured",
+            "trial_on_sha256": "20530fbeb36f3a19a8ceeb85eff39ecb271bad6eacb057f8ed486a5a265adf6b"
+          },
+          {
+            "seed": 992464,
+            "off_sha256": "198a22eba14d72c7fede00e18bc1ba56e5417f725cb8b7ea86f63ec6694c56f3",
+            "reference_gain": 0.24999999999999994,
+            "reference_integrity": "pass",
+            "reference_on_sha256": "77c2775b19822886c39de4826e2e373328d5e4512bac9cce7d9138cc718a5391",
+            "trial_gain": 0.4066666666666667,
+            "trial_integrity": "fail",
+            "trial_on_sha256": "9109e5681f3d516d0dbdca029019bd97f62e23aa81590a11d3cae877a9dd9a26"
+          }
+        ],
+        "reference_mean_gain": 0.1791666666666667,
+        "trial_mean_gain": 0.35916666666666675,
+        "difference": 0.18000000000000005
+      },
+      "prior_calibration": 1.4375,
+      "prior_gain": 0.24583333333333335
+    }
+  ],
+  "finalist_confirmation": [
+    {
+      "method": "late-cues",
+      "roles": [
+        "leader"
+      ],
+      "alpha": 1.90625,
+      "raw_sha256": "9df8182c5af19f87c9c7b9298838f2d084be3dc17e0a761e550055e2cf55c5c4",
+      "score": 0.25120317238225004,
+      "integrity": "fail",
+      "reference_score": 0.29790454443206255,
+      "board_score": 0.26512093659969255,
+      "reference_decision": "retain_reference",
+      "promotion_decision": "retain_reference",
+      "cases": [
+        {
+          "seed": 714583,
+          "prompt": "Illustration. One 47-year-old adult woman with short black waves and a plain navy jacket in the ticket office of a hillside cable car station. A ticket rack and wooded hillside are visible behind her. Eye-level medium shot, soft afternoon light. All depicted people are adults.",
+          "off_sha256": "cf25903d058e7cdc5abb5ce14ce9e73204378014d0f61690ba84ea3933f32272",
+          "on_sha256": "7c6214471c4eb724f0ac7b6372dde5cc5eb57b687bec10f4dd431c7e0c4c72cd",
+          "reference_on_sha256": "68cd0d40e3bbbac2a343f3c06f230a889b040761e6c216ed9feeda86069b679f"
+        },
+        {
+          "seed": 873191,
+          "prompt": "Illustration. One 56-year-old adult man with a neat gray beard and a dark green overshirt in a municipal records room. He stands by a map cabinet and a narrow window. Eye-level medium shot, even daylight. All depicted people are adults.",
+          "off_sha256": "5fa13fbbcf7bb5b17bb26cdcb8411d6f9d400991a4c396a95872a27e72cba176",
+          "on_sha256": "24c1d51c27a89617ca07ebd25db9e1b0493fa6b794fe479b8b49c1e8e5a9682e",
+          "reference_on_sha256": "6f6764f1e6752c58b7b60ecf6aa4a353e9bbeb2b2016556cc78a5d5848a952c7"
+        },
+        {
+          "seed": 528067,
+          "prompt": "Illustration. One 42-year-old adult woman with a braid and a sand-colored work shirt arranging labeled jars on a perfume workshop shelf. Pale stucco walls, diffuse window light, waist-up three-quarter view. All depicted people are adults.",
+          "off_sha256": "c1c3042dfa273f156f737205f85c6d1442d4bff7dfbdd51012ccf1fbd941618b",
+          "on_sha256": "f778b4d1b0fb6a70183890ccf8affc70a7e1d4a651e36cfce2d27d8d317ffdb8",
+          "reference_on_sha256": "b4639fe50b7d2a07848a6a317b229d4e2e97c4f8e8bf8c662d85b7e06c735a3f"
+        },
+        {
+          "seed": 964153,
+          "prompt": "Illustration. One 63-year-old adult man with closely cropped hair and a blue cardigan at a linen shop counter. Stacked folded cloth and a wooden stool in the background. Calm expression, waist-up eye-level shot, warm indoor light. All depicted people are adults.",
+          "off_sha256": "959ce9882d6a0941f200bbc11222ad750ec03b4b1114b5908dd2ccb7ff337ef0",
+          "on_sha256": "36955d86ddd45bd87b174138b3b00c28a3fcb7223bb504705309b43303a5ce88",
+          "reference_on_sha256": "0309d34360ca825a6a416e9caa8eaf98eb669de6864e3cea7d68dc4305717b79"
+        }
+      ]
+    },
+    {
+      "method": "boss-32-07608157",
+      "roles": [
+        "qualified"
+      ],
+      "alpha": 1.40625,
+      "raw_sha256": "3cf9bf3e87e83e3dca6baaa94691a64290a57368052f3dc894542593969eb54c",
+      "score": 0.0002775575766875,
+      "integrity": "pass",
+      "reference_score": 0.29790454443206255,
+      "board_score": 0.002474858875288505,
+      "reference_decision": "retain_reference",
+      "promotion_decision": "retain_reference",
+      "cases": [
+        {
+          "seed": 714583,
+          "prompt": "Illustration. One 47-year-old adult woman with short black waves and a plain navy jacket in the ticket office of a hillside cable car station. A ticket rack and wooded hillside are visible behind her. Eye-level medium shot, soft afternoon light. All depicted people are adults.",
+          "off_sha256": "cf25903d058e7cdc5abb5ce14ce9e73204378014d0f61690ba84ea3933f32272",
+          "on_sha256": "9ab7d46b384a6862179541c44f304a2d07d82c2fbf628208800afcd4b685bd17",
+          "reference_on_sha256": "68cd0d40e3bbbac2a343f3c06f230a889b040761e6c216ed9feeda86069b679f"
+        },
+        {
+          "seed": 873191,
+          "prompt": "Illustration. One 56-year-old adult man with a neat gray beard and a dark green overshirt in a municipal records room. He stands by a map cabinet and a narrow window. Eye-level medium shot, even daylight. All depicted people are adults.",
+          "off_sha256": "5fa13fbbcf7bb5b17bb26cdcb8411d6f9d400991a4c396a95872a27e72cba176",
+          "on_sha256": "3d714e77af76999b105502bff2734e411ee853ebf3286aac9c4fceda74b970a6",
+          "reference_on_sha256": "6f6764f1e6752c58b7b60ecf6aa4a353e9bbeb2b2016556cc78a5d5848a952c7"
+        },
+        {
+          "seed": 528067,
+          "prompt": "Illustration. One 42-year-old adult woman with a braid and a sand-colored work shirt arranging labeled jars on a perfume workshop shelf. Pale stucco walls, diffuse window light, waist-up three-quarter view. All depicted people are adults.",
+          "off_sha256": "c1c3042dfa273f156f737205f85c6d1442d4bff7dfbdd51012ccf1fbd941618b",
+          "on_sha256": "038c73469954ed6e570c67771aec82eede45f5c6b4ecb3083cdd886fd7895674",
+          "reference_on_sha256": "b4639fe50b7d2a07848a6a317b229d4e2e97c4f8e8bf8c662d85b7e06c735a3f"
+        },
+        {
+          "seed": 964153,
+          "prompt": "Illustration. One 63-year-old adult man with closely cropped hair and a blue cardigan at a linen shop counter. Stacked folded cloth and a wooden stool in the background. Calm expression, waist-up eye-level shot, warm indoor light. All depicted people are adults.",
+          "off_sha256": "959ce9882d6a0941f200bbc11222ad750ec03b4b1114b5908dd2ccb7ff337ef0",
+          "on_sha256": "c7d6b253eefcb631d5297e7cf73332a6f560a6059eed4e49655df7070d9307df",
+          "reference_on_sha256": "0309d34360ca825a6a416e9caa8eaf98eb669de6864e3cea7d68dc4305717b79"
+        }
+      ]
+    }
+  ]
+}

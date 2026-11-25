@@ -1,0 +1,12 @@
+{
+  "objective": "distinct_boss_score",
+  "protocol": "36d8b886c4a315292e8fb4b8ed789254e574132d60868334bb71d547be1881ac",
+  "cases": [
+    "c5cc18e1b8b739801e1f2e46125d05e3914bbe798cb1da6faaa204fbd087c28a",
+    "acb7e19f3443a4e98dbe9fc0a66a99141f827a79f79639ed004460b8c4be4022",
+    "47c9616f5569bb42f90d16e949d1765fd5e874da24049c43744cac69e52eafe0",
+    "b64e83e3ac35adf80c1fcf000b3b784d006862493ab541378cab7d2be4a571c7"
+  ],
+  "reference_raw": "9df8182c5af19f87c9c7b9298838f2d084be3dc17e0a761e550055e2cf55c5c4",
+  "rule": "After the complete eight-case board is frozen, check the numerical leader and the first completed fit with passing eight-case structure. Keep the eight-case ordering. Compare the reserved scalar to the published timed late-cues RAW192 on four disjoint matched production scenes."
+}

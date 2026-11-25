@@ -1,0 +1,54 @@
+{
+  "method": "late-cues-v1",
+  "mask_model_sha256": "8d10d2f3bb75ae3b6d527c77944fc5e7dcd94b29809d47a739a7a728a912b491",
+  "rows": {
+    "396228f9b74536b09ecdec1f38a83b835920f95d23ff746684899d5ad42c61ee": {
+      "neutral_sha256": "d71c080f375da7e2c3ae8a871b294dcb7abaca4b0ed8bfff13d30e5dffd186c1",
+      "matte": "d71c080f375da7e2c3ae8a871b294dcb7abaca4b0ed8bfff13d30e5dffd186c1.png",
+      "matte_sha256": "ba03df6e64d3a4e77d7d8ee01a954c2b0878f17a5e0c511d1f0bc75ca8c653c1",
+      "explicit": "A middle-aged man with graying hair sits calmly on a wooden bench inside a minimalist sunlit greenhouse, holding a ceramic coffee mug with both hands, surrounded by potted ferns and glass panes. In-world anime scene of a formidable final RPG boss. An upright iron crown with a black armored coat and wide structured shoulders. A continuous shot with visible surroundings. The character has the unmistakable silhouette of the final boss of an anime role-playing game. A tall open-faced helmet carries three straight black-iron tines, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain. All depicted people are adults."
+    },
+    "b1fb7ab2d41c981b98d88e5752e7dd2d552826bdc4a0ca6143a8373254edba85": {
+      "neutral_sha256": "25b1dc7464dc63a51c7b29c1e1f24edf69f6da17266288b78c3b675d5bbf6f23",
+      "matte": "25b1dc7464dc63a51c7b29c1e1f24edf69f6da17266288b78c3b675d5bbf6f23.png",
+      "matte_sha256": "8a7f8bc6d24b23befd3017370f7b8812f5b52d10a1464f337324b722dc5dabeb",
+      "explicit": "A slender woman with dark braided hair stands at the center of a dusty antique clocktower gear room, looking straight ahead with her arms hanging relaxed at her sides, wearing an ornate segmented crimson battle gown, massive articulated brass shoulder armor shaped like cathedral spires, and a towering spiked halo crown. The character has the unmistakable silhouette of the final boss of an anime role-playing game. A tall open-faced helmet carries a ring of brass clock-hand spikes, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain. All depicted people are adults."
+    },
+    "50af4df85fa5c5c31dbf5d572cdcd37f985e41bfe737dab9812196d0c213fa4c": {
+      "neutral_sha256": "6ac380c1fbf9ede60a202427f609594e5b4b27c40e54c140494118d035b8689c",
+      "matte": "6ac380c1fbf9ede60a202427f609594e5b4b27c40e54c140494118d035b8689c.png",
+      "matte_sha256": "89e446cf7f55654851bab9964d31b88cec5fafa33f9ddb7ab9518d1186afab5d",
+      "explicit": "An athletic man with short black hair stands casually at the top of a stone staircase overlooking an empty plaza, with one hand resting on the stone balustrade, wearing sweeping layered midnight-blue plate armor, razor-edged winged pauldrons that cast an enormous jagged silhouette, and a billowing mantle laced with glowing ethereal trim. The character has the unmistakable silhouette of the final boss of an anime role-playing game. A tall open-faced helmet carries a split midnight-blue steel ridge, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain. All depicted people are adults."
+    },
+    "68ab4698e8286a576b11c938db3d617a6fb774b398c096dea5f78fe80947cd8f": {
+      "neutral_sha256": "b2bfa4c9fac2005468845bd7b6ddd982497f1d8f0531b82f5de51dc1d7e8d77e",
+      "matte": "b2bfa4c9fac2005468845bd7b6ddd982497f1d8f0531b82f5de51dc1d7e8d77e.png",
+      "matte_sha256": "c58e1ff71cae263251173d9d6c8f36bcce2ad3a4e8394ffc0432e9bd2fd96986",
+      "explicit": "A tall man with a neat beard leans against a rooftop cafe counter under twilight skies. Looming over him are enormous, gnarled tree-root antlers extending high above his head, fused to a broad, monolithic mantle of jagged dark tree bark and damp moss that squares off his shoulders into an immense silhouette. The textured, lichen-covered bark forms jagged contours against the dusky city horizon, casting deep, tangled shadows onto the counter. The character has the unmistakable silhouette of the final boss of an anime role-playing game. A tall open-faced helmet carries an open fork of dark oak and weathered iron, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain. All depicted people are adults."
+    },
+    "483a77daae889df421763215551a2a72b4b8db0ad789df45756af4fcc23c140c": {
+      "neutral_sha256": "6946a8291b1ed14eeeae8070bd688aadfd6f2c0f6e705433bc47bcbfe3c028c2",
+      "matte": "6946a8291b1ed14eeeae8070bd688aadfd6f2c0f6e705433bc47bcbfe3c028c2.png",
+      "matte_sha256": "553a6ed98fc54b27bbb6492a291395692c6fe91757706be4bed041594ad5a0fd",
+      "explicit": "Anime style, full body shot. The same stoic middle-aged man stands in the exact same stance by the wooden fence under the overcast pale sky, transformed into an awe-inspiring final boss. He is draped in a monolithic charcoal mantle that cascades like jagged stone, reinforced with asymmetrical spiked pauldrons and a grand high-arched iron collar. Floating crystalline shards orbit his broad shoulders, forming an imposing wide silhouette against the open horizon. The character has the unmistakable silhouette of the final boss of an anime role-playing game. A tall open-faced helmet carries three jagged slate fins, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain. All depicted people are adults."
+    },
+    "35968c48cb987e6dcf7af725f558e50acba0b5666e818a33fd5df8d78c09be99": {
+      "neutral_sha256": "a21687ae969648aa8bac548ffbfba14f95fdfdea9f388e2cb42b2f73fa78bfbe",
+      "matte": "a21687ae969648aa8bac548ffbfba14f95fdfdea9f388e2cb42b2f73fa78bfbe.png",
+      "matte_sha256": "c2e8e1cd74142cfae5b543d14f351a362b300d3d31f6a96aae99cadb7fa0c515",
+      "explicit": "A slender woman stands holding an overhead handrail on an empty train car, gazing out the window at passing tunnel lights, now wearing a towering cathedral-like high collar of razor-edged crimson steel, an asymmetrical fluted breastplate inlaid with glowing abyssal runes, long bladed gauntlets, and a floor-sweeping mantle of floating metallic needles. The character has the unmistakable silhouette of the final boss of an anime role-playing game. A tall open-faced helmet carries an open serrated crimson-steel visor crest, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain. All depicted people are adults."
+    },
+    "6e5b646aba3047dcbeb590e384580293ede21bd9bdcde233391a59ca0cfb3edd": {
+      "neutral_sha256": "0b2afe97bd6707bff888d86461b46e1522e8e8e19d5f692a08c56e8a137d9c8b",
+      "matte": "0b2afe97bd6707bff888d86461b46e1522e8e8e19d5f692a08c56e8a137d9c8b.png",
+      "matte_sha256": "722735ffa391f93d8df3fa04b3ed81f5c16b0bc411e23b0a52a38b34aa6c8e2c",
+      "explicit": "A focused dark-haired woman sits at a wooden drafting table pinning chalked fabric under a focused desk lamp, now clad in an extravagant imperial sovereign's high-collared gown of midnight velvet, flanked by floating crescent-shaped armor plates, wielding oversized ornate golden scissor-blades at her side, and wearing a crown of radiant floating needles. The character has the unmistakable silhouette of the final boss of an anime role-playing game. A tall open-faced helmet carries a narrow golden crest like a row of dressmaker pins, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain. All depicted people are adults."
+    },
+    "a6f121a49dec42b0c7c8d7d917b605f444c43ae82a25139cca8178bb65549bd5": {
+      "neutral_sha256": "9c6940e4d4b483cb45f803a40939865d3e4455b420816787a9477cd261ebead5",
+      "matte": "9c6940e4d4b483cb45f803a40939865d3e4455b420816787a9477cd261ebead5.png",
+      "matte_sha256": "3b6f154e8e37357090d0631d6398c951f36d71c27375dc385c0566c8407e4a17",
+      "explicit": "A weary middle-aged male florist with messy brown hair stands behind a wooden shop counter under warm pendant lights, his trimmed roses replaced in hand by a colossal double-bladed ceremonial halberd, clad in layered obsidian battle plate with jagged pauldrons, an expansive trailing cape of withered black petals, and a spiked spiked wrought-iron halo crowning his head. The character has the unmistakable silhouette of the final boss of an anime role-playing game. A tall open-faced helmet carries five black iron sprigs over a narrow visor, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain. All depicted people are adults."
+    }
+  }
+}

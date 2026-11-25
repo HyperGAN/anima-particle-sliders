@@ -54,8 +54,8 @@ def export(campaign, folder):
     late=next(r for r in dev["rows"] if r["method"]=="late-cues")
     leader=dev["rows"][0]
     lines=["# Distinct Final Boss designs across characters","",dev["as_of"],"",
-           f'**Default** · {labels[leader["method"]]} · {leader["profile"]} α {leader["alpha"]:g} · '
-           f'{100*leader["score"]:.2f}/100 on eight development characters. [Replay settings and training targets](../default.json)',"",
+           f'**Historical design-board leader** · {labels[leader["method"]]} · {leader["profile"]} α {leader["alpha"]:g} · '
+           f'{100*leader["score"]:.2f}/100 on eight development characters. [Replay settings and training targets](design-default.json)',"",
            f'Opening-four exposure places **{dev["rows"].index(opening)+1} of {len(dev["rows"])}** across matched characters, '
            f'compared with position {by_base.index(opening)+1} on the per-image score. Its average design repetition is '
            f'{100*opening["repeat"]:.1f}/100, compared with {100*late["repeat"]:.1f}/100 for late cues. '
@@ -91,7 +91,7 @@ def export(campaign, folder):
             "[Exact rubric, case pairs and lineups](design-range.json) · [Jev decision receipts](design-receipts.json.gz) · [Per-image rankings](README.md)","",
             "```sh","python -m release_tools.verify_final_boss_designs docs/final-boss-raw192/vibe12","```",""]
     (folder/"distinct-designs.md").write_text("\n".join(lines))
-    (folder.parent/"default.json").write_text(json.dumps(default,indent=2,allow_nan=False)+"\n")
+    (folder/"design-default.json").write_text(json.dumps(default,indent=2,allow_nan=False)+"\n")
 
 
 if __name__=="__main__":

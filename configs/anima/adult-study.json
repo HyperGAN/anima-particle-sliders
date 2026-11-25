@@ -1,0 +1,433 @@
+{
+  "concepts": {
+    "Final Boss": {
+      "effect": {
+        "type": "score",
+        "instructions": "How strongly does the main character visibly read as a formidable final video-game boss from their own costume, accessories, expression or silhouette? Ignore the setting, lighting, theatrical effects and image prettiness.",
+        "criteria": [
+          "The person looks ordinary or generic, with no convincing final-boss cue.",
+          "The person has a weak or ambiguous visual cue of a formidable antagonist.",
+          "Several visible character-design cues make the person clearly read as a formidable final boss.",
+          "The person's own iconic, imposing design makes them unmistakable as a formidable final boss."
+        ]
+      },
+      "neutral_ceiling": 0.35,
+      "teachers": [
+        {
+          "neutral": "A middle-aged man with graying hair sits calmly on a wooden bench inside a minimalist sunlit greenhouse, holding a ceramic coffee mug with both hands, surrounded by potted ferns and glass panes. All depicted people are adults.",
+          "treatments": [
+            "A middle-aged man with graying hair sits calmly on a wooden bench inside a minimalist sunlit greenhouse, holding a ceramic coffee mug with both hands, surrounded by potted ferns and glass panes. In-world anime scene of a formidable final RPG boss. An upright iron crown with a black armored coat and wide structured shoulders. A continuous shot with visible surroundings. All depicted people are adults."
+          ],
+          "seed": 31237
+        },
+        {
+          "neutral": "A slender woman with dark braided hair stands at the center of a dusty antique clocktower gear room, looking straight ahead with her arms hanging relaxed at her sides in a simple linen blouse and brown trousers. All depicted people are adults.",
+          "treatments": [
+            "A slender woman with dark braided hair stands at the center of a dusty antique clocktower gear room, looking straight ahead with her arms hanging relaxed at her sides, wearing an ornate segmented crimson battle gown, massive articulated brass shoulder armor shaped like cathedral spires, and a towering spiked halo crown. All depicted people are adults."
+          ],
+          "seed": 31237
+        },
+        {
+          "neutral": "An athletic man with short black hair stands casually at the top of a stone staircase overlooking an empty plaza, wearing a gray zip-up hoodie and dark jeans, with one hand resting on the stone balustrade. All depicted people are adults.",
+          "treatments": [
+            "An athletic man with short black hair stands casually at the top of a stone staircase overlooking an empty plaza, with one hand resting on the stone balustrade, wearing sweeping layered midnight-blue plate armor, razor-edged winged pauldrons that cast an enormous jagged silhouette, and a billowing mantle laced with glowing ethereal trim. All depicted people are adults."
+          ],
+          "seed": 31237
+        },
+        {
+          "neutral": "A tall man with a neat beard leans against the counter of a quiet rooftop cafe under twilight skies, wearing a faded denim jacket and rolled-up sleeves while looking out across the city. All depicted people are adults.",
+          "treatments": [
+            "A tall man with a neat beard leans against a rooftop cafe counter under twilight skies. Looming over him are enormous, gnarled tree-root antlers extending high above his head, fused to a broad, monolithic mantle of jagged dark tree bark and damp moss that squares off his shoulders into an immense silhouette. The textured, lichen-covered bark forms jagged contours against the dusky city horizon, casting deep, tangled shadows onto the counter. All depicted people are adults."
+          ],
+          "seed": 31237
+        },
+        {
+          "neutral": "A woman with long wavy brown hair pauses mid-stride along a cracked concrete corridor, turning slightly toward the viewer in a simple teal t-shirt and canvas cargo pants, hands open at her sides. All depicted people are adults.",
+          "treatments": [
+            "A woman with long wavy brown hair pauses mid-stride along a cracked concrete corridor, turning slightly toward the viewer, hands open at her sides, outfitted in a majestic multi-layered sorcerous battle coat with giant serrated shoulder mantles, sharp floating peripheral mantle rings, and deep purple velvet lined with luminous gold sigils. All depicted people are adults."
+          ],
+          "seed": 31237
+        },
+        {
+          "neutral": "An elderly female tea shop owner in a floral cardigan and cotton apron sits on a low wooden stool, pouring hot water from a ceramic kettle into a small clay teapot on a low bamboo table. All depicted people are adults.",
+          "treatments": [
+            "An elderly female tea shop owner in a floral cardigan and cotton apron sits on a low wooden stool, pouring hot water from a ceramic kettle into a small clay teapot on a low bamboo table. In-world anime scene of a formidable final RPG boss. An upright iron crown with a black armored coat and wide structured shoulders. A continuous shot with visible surroundings. All depicted people are adults."
+          ],
+          "seed": 31238
+        },
+        {
+          "neutral": "Anime style, full body shot. A stoic middle-aged man in a faded denim jacket, flannel shirt, and work boots stands next to a wooden fence on an open prairie under an overcast pale sky, resting one hand on the fence post. All depicted people are adults.",
+          "treatments": [
+            "Anime style, full body shot. The same stoic middle-aged man stands in the exact same stance by the wooden fence under the overcast pale sky, transformed into an awe-inspiring final boss. He is draped in a monolithic charcoal mantle that cascades like jagged stone, reinforced with asymmetrical spiked pauldrons and a grand high-arched iron collar. Floating crystalline shards orbit his broad shoulders, forming an imposing wide silhouette against the open horizon. All depicted people are adults."
+          ],
+          "seed": 31239
+        },
+        {
+          "neutral": "A slender female subway commuter wearing a beige trench coat and tortoiseshell glasses stands holding an overhead handrail on an empty train car, gazing out the window at passing tunnel lights. All depicted people are adults.",
+          "treatments": [
+            "A slender woman stands holding an overhead handrail on an empty train car, gazing out the window at passing tunnel lights, now wearing a towering cathedral-like high collar of razor-edged crimson steel, an asymmetrical fluted breastplate inlaid with glowing abyssal runes, long bladed gauntlets, and a floor-sweeping mantle of floating metallic needles. All depicted people are adults."
+          ],
+          "seed": 31238
+        },
+        {
+          "neutral": "A focused female tailor with her dark hair tied in a loose bun, wearing a simple linen apron over a gray dress, sits at a wooden drafting table pinning chalked fabric under a focused desk lamp. All depicted people are adults.",
+          "treatments": [
+            "A focused dark-haired woman sits at a wooden drafting table pinning chalked fabric under a focused desk lamp, now clad in an extravagant imperial sovereign's high-collared gown of midnight velvet, flanked by floating crescent-shaped armor plates, wielding oversized ornate golden scissor-blades at her side, and wearing a crown of radiant floating needles. All depicted people are adults."
+          ],
+          "seed": 31238
+        },
+        {
+          "neutral": "An older silver-haired male librarian in a knitted navy sweater and slacks leans against a tall stepladder in an arching library aisle, carefully sliding a thick leather-bound volume onto a high shelf. All depicted people are adults.",
+          "treatments": [
+            "An older silver-haired male librarian leans against a tall stepladder in an arching library aisle, sliding a thick leather-bound volume onto a high shelf. Final Boss presence, cloaked in a towering pointed ivory hood and deep indigo fabric that forms a severe, narrow triangular oracle silhouette, throwing sharp, exaggerated geometric shadows over the polished wooden bookshelves. All depicted people are adults."
+          ],
+          "seed": 31238
+        },
+        {
+          "neutral": "Anime style, full-length shot. A young man with messy dark hair sits slouched on a stone park bench in late afternoon light, hands pushed into the pockets of his casual fleece jacket and jeans. All depicted people are adults.",
+          "treatments": [
+            "Anime style, full-length shot. The same young man sits in the identical slouched pose on the park bench in the late afternoon light, embodying a final boss. He wears an overwhelming sovereign vestment of layered void-black silks and pointed sovereign armor that spills across the bench, flanked by massive sweeping crescent back-mantles that arch high over his head. A dark solar eclipse aura burns silently behind his frame, casting deep ominous shadows forward. All depicted people are adults."
+          ],
+          "seed": 31239
+        },
+        {
+          "neutral": "A weary middle-aged male florist with messy brown hair and rolled-up shirt sleeves stands behind a wooden shop counter, trimming the stems of pale roses under warm hanging pendant lights. All depicted people are adults.",
+          "treatments": [
+            "A weary middle-aged male florist with messy brown hair stands behind a wooden shop counter under warm pendant lights, his trimmed roses replaced in hand by a colossal double-bladed ceremonial halberd, clad in layered obsidian battle plate with jagged pauldrons, an expansive trailing cape of withered black petals, and a spiked spiked wrought-iron halo crowning his head. All depicted people are adults."
+          ],
+          "seed": 31238
+        }
+      ]
+    },
+    "1990s anime": {
+      "effect": {
+        "type": "score",
+        "instructions": "Imagine this image as a full-bleed frame from a broadcast or theatrical hand-drawn Japanese animated film of the 1990s. How convincing is that specific visual treatment? Look for opaque, uniform cel-painted flats, sharply bounded simple shadow shapes and consistent ink contours on foreground forms where visible, plus a separately painted background or a stylized background painting suitable as a cel-animation establishing shot. Consider the visible palette and optical softness only as supporting evidence. An ink-and-watercolor drawing on textured or bordered paper, pencil sketch, poster, or illustration with watercolor bleeding throughout does not itself establish the cel animation treatment. A person need not be present.",
+        "criteria": [
+          "The medium and overall treatment read as a different kind of image, including a sketch, watercolor on paper, glossy 3D, or photography.",
+          "A few illustrative features evoke animation, but the rendered frame lacks the specific hand-drawn cel treatment.",
+          "The image mostly looks like an animated cel-era frame, with clear opaque graphic shapes, controlled shadows and/or an animation background.",
+          "An unmistakable, coherent 1990s hand-drawn cel-animation frame, with a convincing production palette, graphic shapes and painted treatment throughout."
+        ]
+      },
+      "neutral_ceiling": 1.0,
+      "teachers": [
+        {
+          "neutral": "Portrait illustration. A 52-year-old silver-haired woman with smile lines in a simple charcoal work shirt looks calmly toward the viewer. Background: an antique clock shop with mahogany shelves. Soft light, head and shoulders filled by the subject. All depicted people are adults.",
+          "treatments": [
+            "1990s anime screencap, retro anime, old anime, hand painted cel. A 52-year-old silver-haired woman with smile lines looks calmly toward the viewer. Head-and-shoulders portrait, background: an antique clock shop with mahogany shelves. Fine restrained contour ink, opaque softly colored cels with crisp shadow shapes, and richly layered, atmospheric gouache background painting with deep spatial perspective All depicted people are adults.",
+            "A still from a Japanese 1994 hand-drawn seinen movie. Hand-inked cellulose acetate photographed against a gouache painting. A 52-year-old silver-haired woman with smile lines looks calmly toward the viewer. Head-and-shoulders portrait, background: an antique clock shop with mahogany shelves. Clean ink contour around the face, matte opaque colors, crisp angular cel shadows. All depicted people are adults.",
+            "Vintage 1990s anime film frame, retro Japanese cel animation, hand-drawn older character, adult drama. A 52-year-old silver-haired woman with smile lines looks calmly toward the viewer. Head-and-shoulders portrait, background: an antique clock shop with mahogany shelves. Heavy angular ink, two-tone color holds and crisp cast shadow across the mature face; richly painted background, muted analog palette."
+          ],
+          "seed": 190172
+        },
+        {
+          "neutral": "Portrait illustration. A 53-year-old broad-shouldered man with a salt-and-pepper beard in a simple charcoal work shirt looks calmly toward the viewer. Background: a greenhouse filled with potted plants. Soft light, head and shoulders filled by the subject. All depicted people are adults.",
+          "treatments": [
+            "1990s anime screencap, retro anime, old anime, hand painted cel. A 53-year-old broad-shouldered man with a salt-and-pepper beard looks calmly toward the viewer. Head-and-shoulders portrait, background: a greenhouse filled with potted plants. Medium-weight consistent outlines, clear two-tone cel shadows, and simplified matte painted backgrounds with economical descriptive detail All depicted people are adults.",
+            "A still from a Japanese 1994 hand-drawn seinen movie. Hand-inked cellulose acetate photographed against a gouache painting. A 53-year-old broad-shouldered man with a salt-and-pepper beard looks calmly toward the viewer. Head-and-shoulders portrait, background: a greenhouse filled with potted plants. Clean ink contour around the face, matte opaque colors, crisp angular cel shadows. All depicted people are adults.",
+            "Vintage 1990s anime film frame, retro Japanese cel animation, hand-drawn older character, adult drama. A 53-year-old broad-shouldered man with a salt-and-pepper beard looks calmly toward the viewer. Head-and-shoulders portrait, background: a greenhouse filled with potted plants. Heavy angular ink, two-tone color holds and crisp cast shadow across the mature face; richly painted background, muted analog palette."
+          ],
+          "seed": 190251
+        },
+        {
+          "neutral": "Portrait illustration. A 54-year-old dark-skinned woman with graying braids in a simple charcoal work shirt looks calmly toward the viewer. Background: a studio with dials and wooden shelves. Soft light, head and shoulders filled by the subject. All depicted people are adults.",
+          "treatments": [
+            "1990s anime screencap, retro anime, old anime, hand painted cel. A 54-year-old dark-skinned woman with graying braids looks calmly toward the viewer. Head-and-shoulders portrait, background: a studio with dials and wooden shelves. Thin technical contour lines, angular forms and hard geometric cel shadow boundaries, with precisely drafted backgrounds and finely inked details All depicted people are adults.",
+            "A still from a Japanese 1994 hand-drawn seinen movie. Hand-inked cellulose acetate photographed against a gouache painting. A 54-year-old dark-skinned woman with graying braids looks calmly toward the viewer. Head-and-shoulders portrait, background: a studio with dials and wooden shelves. Clean ink contour around the face, matte opaque colors, crisp angular cel shadows. All depicted people are adults.",
+            "Vintage 1990s anime film frame, retro Japanese cel animation, hand-drawn older character, adult drama. A 54-year-old dark-skinned woman with graying braids looks calmly toward the viewer. Head-and-shoulders portrait, background: a studio with dials and wooden shelves. Heavy angular ink, two-tone color holds and crisp cast shadow across the mature face; richly painted background, muted analog palette."
+          ],
+          "seed": 190330
+        },
+        {
+          "neutral": "Portrait illustration. A 55-year-old stocky bald man with forehead lines in a simple charcoal work shirt looks calmly toward the viewer. Background: a warmly lit bakery. Soft light, head and shoulders filled by the subject. All depicted people are adults.",
+          "treatments": [
+            "1990s anime screencap, retro anime, old anime, hand painted cel. A 55-year-old stocky bald man with forehead lines looks calmly toward the viewer. Head-and-shoulders portrait, background: a warmly lit bakery. Delicate tapered colored lines, opaque pastel cels with curved shadow shapes, and lightly painted soft-focus settings, in a clean full-bleed frame All depicted people are adults.",
+            "A still from a Japanese 1994 hand-drawn seinen movie. Hand-inked cellulose acetate photographed against a gouache painting. A 55-year-old stocky bald man with forehead lines looks calmly toward the viewer. Head-and-shoulders portrait, background: a warmly lit bakery. Clean ink contour around the face, matte opaque colors, crisp angular cel shadows. All depicted people are adults.",
+            "Vintage 1990s anime film frame, retro Japanese cel animation, hand-drawn older character, adult drama. A 55-year-old stocky bald man with forehead lines looks calmly toward the viewer. Head-and-shoulders portrait, background: a warmly lit bakery. Heavy angular ink, two-tone color holds and crisp cast shadow across the mature face; richly painted background, muted analog palette."
+          ],
+          "seed": 190409
+        },
+        {
+          "neutral": "Portrait illustration. A 56-year-old tan woman with a streak of gray hair in a simple charcoal work shirt looks calmly toward the viewer. Background: a ferry pier with a blue railing. Soft light, head and shoulders filled by the subject. All depicted people are adults.",
+          "treatments": [
+            "1990s anime screencap, retro anime, old anime, hand painted cel. A 56-year-old tan woman with a streak of gray hair looks calmly toward the viewer. Head-and-shoulders portrait, background: a ferry pier with a blue railing. Deep pools of angular ink shadow, hard low-key cel lighting with small clean highlights, and a restrained painted background with strong separation between dark layers All depicted people are adults.",
+            "A still from a Japanese 1994 hand-drawn seinen movie. Hand-inked cellulose acetate photographed against a gouache painting. A 56-year-old tan woman with a streak of gray hair looks calmly toward the viewer. Head-and-shoulders portrait, background: a ferry pier with a blue railing. Clean ink contour around the face, matte opaque colors, crisp angular cel shadows. All depicted people are adults.",
+            "Vintage 1990s anime film frame, retro Japanese cel animation, hand-drawn older character, adult drama. A 56-year-old tan woman with a streak of gray hair looks calmly toward the viewer. Head-and-shoulders portrait, background: a ferry pier with a blue railing. Heavy angular ink, two-tone color holds and crisp cast shadow across the mature face; richly painted background, muted analog palette."
+          ],
+          "seed": 190488
+        },
+        {
+          "neutral": "Portrait illustration. A 57-year-old gray-bearded man with heavy eyebrows in a simple charcoal work shirt looks calmly toward the viewer. Background: a tailor\u2019s shop with fabric rolls. Soft light, head and shoulders filled by the subject. All depicted people are adults.",
+          "treatments": [
+            "1990s anime screencap, retro anime, old anime, hand painted cel. A 57-year-old gray-bearded man with heavy eyebrows looks calmly toward the viewer. Head-and-shoulders portrait, background: a tailor\u2019s shop with fabric rolls. Bold bouncy rounded outlines, large uncomplicated opaque color shapes and sparse hard-edged shadows, with chunky simplified background shapes All depicted people are adults.",
+            "A still from a Japanese 1994 hand-drawn seinen movie. Hand-inked cellulose acetate photographed against a gouache painting. A 57-year-old gray-bearded man with heavy eyebrows looks calmly toward the viewer. Head-and-shoulders portrait, background: a tailor\u2019s shop with fabric rolls. Clean ink contour around the face, matte opaque colors, crisp angular cel shadows. All depicted people are adults.",
+            "Vintage 1990s anime film frame, retro Japanese cel animation, hand-drawn older character, adult drama. A 57-year-old gray-bearded man with heavy eyebrows looks calmly toward the viewer. Head-and-shoulders portrait, background: a tailor\u2019s shop with fabric rolls. Heavy angular ink, two-tone color holds and crisp cast shadow across the mature face; richly painted background, muted analog palette."
+          ],
+          "seed": 190567
+        },
+        {
+          "neutral": "Portrait illustration. A 58-year-old woman with short silver curls and wrinkles in a simple charcoal work shirt looks calmly toward the viewer. Background: a museum with a bronze vase. Soft light, head and shoulders filled by the subject. All depicted people are adults.",
+          "treatments": [
+            "1990s anime screencap, retro anime, old anime, hand painted cel. A 58-year-old woman with short silver curls and wrinkles looks calmly toward the viewer. Head-and-shoulders portrait, background: a museum with a bronze vase. Fine restrained contour ink, opaque softly colored cels with crisp shadow shapes, and richly layered, atmospheric gouache background painting with deep spatial perspective All depicted people are adults.",
+            "A still from a Japanese 1994 hand-drawn seinen movie. Hand-inked cellulose acetate photographed against a gouache painting. A 58-year-old woman with short silver curls and wrinkles looks calmly toward the viewer. Head-and-shoulders portrait, background: a museum with a bronze vase. Clean ink contour around the face, matte opaque colors, crisp angular cel shadows. All depicted people are adults.",
+            "Vintage 1990s anime film frame, retro Japanese cel animation, hand-drawn older character, adult drama. A 58-year-old woman with short silver curls and wrinkles looks calmly toward the viewer. Head-and-shoulders portrait, background: a museum with a bronze vase. Heavy angular ink, two-tone color holds and crisp cast shadow across the mature face; richly painted background, muted analog palette."
+          ],
+          "seed": 190646
+        },
+        {
+          "neutral": "Portrait illustration. A 59-year-old man with receding copper hair and a lined face in a simple charcoal work shirt looks calmly toward the viewer. Background: a quarry under a clouded sky. Soft light, head and shoulders filled by the subject. All depicted people are adults.",
+          "treatments": [
+            "1990s anime screencap, retro anime, old anime, hand painted cel. A 59-year-old man with receding copper hair and a lined face looks calmly toward the viewer. Head-and-shoulders portrait, background: a quarry under a clouded sky. Medium-weight consistent outlines, clear two-tone cel shadows, and simplified matte painted backgrounds with economical descriptive detail All depicted people are adults.",
+            "A still from a Japanese 1994 hand-drawn seinen movie. Hand-inked cellulose acetate photographed against a gouache painting. A 59-year-old man with receding copper hair and a lined face looks calmly toward the viewer. Head-and-shoulders portrait, background: a quarry under a clouded sky. Clean ink contour around the face, matte opaque colors, crisp angular cel shadows. All depicted people are adults.",
+            "Vintage 1990s anime film frame, retro Japanese cel animation, hand-drawn older character, adult drama. A 59-year-old man with receding copper hair and a lined face looks calmly toward the viewer. Head-and-shoulders portrait, background: a quarry under a clouded sky. Heavy angular ink, two-tone color holds and crisp cast shadow across the mature face; richly painted background, muted analog palette."
+          ],
+          "seed": 190725
+        },
+        {
+          "neutral": "Portrait illustration. A 60-year-old woman with crow\u2019s feet and a low gray bun in a simple charcoal work shirt looks calmly toward the viewer. Background: a tiled kitchen with copper pans. Soft light, head and shoulders filled by the subject. All depicted people are adults.",
+          "treatments": [
+            "1990s anime screencap, retro anime, old anime, hand painted cel. A 60-year-old woman with crow\u2019s feet and a low gray bun looks calmly toward the viewer. Head-and-shoulders portrait, background: a tiled kitchen with copper pans. Thin technical contour lines, angular forms and hard geometric cel shadow boundaries, with precisely drafted backgrounds and finely inked details All depicted people are adults.",
+            "A still from a Japanese 1994 hand-drawn seinen movie. Hand-inked cellulose acetate photographed against a gouache painting. A 60-year-old woman with crow\u2019s feet and a low gray bun looks calmly toward the viewer. Head-and-shoulders portrait, background: a tiled kitchen with copper pans. Clean ink contour around the face, matte opaque colors, crisp angular cel shadows. All depicted people are adults.",
+            "Vintage 1990s anime film frame, retro Japanese cel animation, hand-drawn older character, adult drama. A 60-year-old woman with crow\u2019s feet and a low gray bun looks calmly toward the viewer. Head-and-shoulders portrait, background: a tiled kitchen with copper pans. Heavy angular ink, two-tone color holds and crisp cast shadow across the mature face; richly painted background, muted analog palette."
+          ],
+          "seed": 190804
+        },
+        {
+          "neutral": "Portrait illustration. A 61-year-old man with a white mustache in a simple charcoal work shirt looks calmly toward the viewer. Background: a study with hand-painted maps. Soft light, head and shoulders filled by the subject. All depicted people are adults.",
+          "treatments": [
+            "1990s anime screencap, retro anime, old anime, hand painted cel. A 61-year-old man with a white mustache looks calmly toward the viewer. Head-and-shoulders portrait, background: a study with hand-painted maps. Delicate tapered colored lines, opaque pastel cels with curved shadow shapes, and lightly painted soft-focus settings, in a clean full-bleed frame All depicted people are adults.",
+            "A still from a Japanese 1994 hand-drawn seinen movie. Hand-inked cellulose acetate photographed against a gouache painting. A 61-year-old man with a white mustache looks calmly toward the viewer. Head-and-shoulders portrait, background: a study with hand-painted maps. Clean ink contour around the face, matte opaque colors, crisp angular cel shadows. All depicted people are adults.",
+            "Vintage 1990s anime film frame, retro Japanese cel animation, hand-drawn older character, adult drama. A 61-year-old man with a white mustache looks calmly toward the viewer. Head-and-shoulders portrait, background: a study with hand-painted maps. Heavy angular ink, two-tone color holds and crisp cast shadow across the mature face; richly painted background, muted analog palette."
+          ],
+          "seed": 190883
+        },
+        {
+          "neutral": "Portrait illustration. A 62-year-old woman with black curls streaked with white in a simple charcoal work shirt looks calmly toward the viewer. Background: a pottery studio beside the kiln. Soft light, head and shoulders filled by the subject. All depicted people are adults.",
+          "treatments": [
+            "1990s anime screencap, retro anime, old anime, hand painted cel. A 62-year-old woman with black curls streaked with white looks calmly toward the viewer. Head-and-shoulders portrait, background: a pottery studio beside the kiln. Deep pools of angular ink shadow, hard low-key cel lighting with small clean highlights, and a restrained painted background with strong separation between dark layers All depicted people are adults.",
+            "A still from a Japanese 1994 hand-drawn seinen movie. Hand-inked cellulose acetate photographed against a gouache painting. A 62-year-old woman with black curls streaked with white looks calmly toward the viewer. Head-and-shoulders portrait, background: a pottery studio beside the kiln. Clean ink contour around the face, matte opaque colors, crisp angular cel shadows. All depicted people are adults.",
+            "Vintage 1990s anime film frame, retro Japanese cel animation, hand-drawn older character, adult drama. A 62-year-old woman with black curls streaked with white looks calmly toward the viewer. Head-and-shoulders portrait, background: a pottery studio beside the kiln. Heavy angular ink, two-tone color holds and crisp cast shadow across the mature face; richly painted background, muted analog palette."
+          ],
+          "seed": 190962
+        },
+        {
+          "neutral": "Portrait illustration. A 63-year-old brown-skinned man with a thick graying beard in a simple charcoal work shirt looks calmly toward the viewer. Background: a workshop filled with violins. Soft light, head and shoulders filled by the subject. All depicted people are adults.",
+          "treatments": [
+            "1990s anime screencap, retro anime, old anime, hand painted cel. A 63-year-old brown-skinned man with a thick graying beard looks calmly toward the viewer. Head-and-shoulders portrait, background: a workshop filled with violins. Bold bouncy rounded outlines, large uncomplicated opaque color shapes and sparse hard-edged shadows, with chunky simplified background shapes All depicted people are adults.",
+            "A still from a Japanese 1994 hand-drawn seinen movie. Hand-inked cellulose acetate photographed against a gouache painting. A 63-year-old brown-skinned man with a thick graying beard looks calmly toward the viewer. Head-and-shoulders portrait, background: a workshop filled with violins. Clean ink contour around the face, matte opaque colors, crisp angular cel shadows. All depicted people are adults.",
+            "Vintage 1990s anime film frame, retro Japanese cel animation, hand-drawn older character, adult drama. A 63-year-old brown-skinned man with a thick graying beard looks calmly toward the viewer. Head-and-shoulders portrait, background: a workshop filled with violins. Heavy angular ink, two-tone color holds and crisp cast shadow across the mature face; richly painted background, muted analog palette."
+          ],
+          "seed": 191041
+        }
+      ]
+    },
+    "Visually appealing character": {
+      "effect": {
+        "type": "score",
+        "instructions": "How visually appealing is the main character design itself? Look for expressive face and pose, a compelling silhouette, coherent costume shapes and appealing color relationships. Ignore scenery and technical polish unrelated to the character.",
+        "criteria": [
+          "Generic or visually unappealing character design.",
+          "An ordinary, readable design with limited visual appeal.",
+          "An appealing and expressive design with cohesive shapes and colors.",
+          "A strikingly appealing, memorable character, with expressive personality and beautifully composed shape and color."
+        ]
+      },
+      "neutral_ceiling": 1.0,
+      "teachers": [
+        {
+          "neutral": "Portrait illustration. A 52-year-old silver-haired woman with smile lines in a simple charcoal work shirt looks calmly toward the viewer. Background: an antique clock shop with mahogany shelves. Soft light, head and shoulders filled by the subject. All depicted people are adults.",
+          "treatments": [
+            "Strikingly beautiful hand-painted portrait. A charismatic 52-year-old silver-haired woman with smile lines, wearing an elegant fitted bottle-green velvet tailcoat with a copper escapement brooch, russet gloves and sweeping silver hair pinned by a pair of brass clock hands. Background: an antique clock shop with mahogany shelves. Luminous eyes, confident smile, a refined silhouette and harmonious complementary colors. All depicted people are adults.",
+            "Elegant mature lead character in a lavishly painted anime film. A charismatic 52-year-old silver-haired woman with smile lines, wearing an elegant fitted bottle-green velvet tailcoat with a copper escapement brooch, russet gloves and sweeping silver hair pinned by a pair of brass clock hands. Background: an antique clock shop with mahogany shelves. Richly colored costume, beautifully modeled cheekbones, an expressive gaze. Close portrait. All depicted people are adults.",
+            "Gorgeous mature character portrait, editorial gouache and ink illustration. A charismatic 52-year-old silver-haired woman with smile lines, wearing an elegant fitted bottle-green velvet tailcoat with a copper escapement brooch, russet gloves and sweeping silver hair pinned by a pair of brass clock hands. Background: an antique clock shop with mahogany shelves. Distinguished profile, refined distinctive style, impeccable hand-tailored clothing and artfully swept silver hair. All depicted people are adults."
+          ],
+          "seed": 190172
+        },
+        {
+          "neutral": "Portrait illustration. A 53-year-old broad-shouldered man with a salt-and-pepper beard in a simple charcoal work shirt looks calmly toward the viewer. Background: a greenhouse filled with potted plants. Soft light, head and shoulders filled by the subject. All depicted people are adults.",
+          "treatments": [
+            "Strikingly beautiful hand-painted portrait. A charismatic 53-year-old broad-shouldered man with a salt-and-pepper beard, wearing a moss-green field coat with a sculpted leaf collar, pale silk waistcoat and russet leather tool sash; a striking wave of silver hair and an amused smile. Background: a greenhouse filled with potted plants. Luminous eyes, confident smile, a refined silhouette and harmonious complementary colors. All depicted people are adults.",
+            "Elegant mature lead character in a lavishly painted anime film. A charismatic 53-year-old broad-shouldered man with a salt-and-pepper beard, wearing a moss-green field coat with a sculpted leaf collar, pale silk waistcoat and russet leather tool sash; a striking wave of silver hair and an amused smile. Background: a greenhouse filled with potted plants. Richly colored costume, beautifully modeled cheekbones, an expressive gaze. Close portrait. All depicted people are adults.",
+            "Gorgeous mature character portrait, editorial gouache and ink illustration. A charismatic 53-year-old broad-shouldered man with a salt-and-pepper beard, wearing a moss-green field coat with a sculpted leaf collar, pale silk waistcoat and russet leather tool sash; a striking wave of silver hair and an amused smile. Background: a greenhouse filled with potted plants. Distinguished profile, refined distinctive style, impeccable hand-tailored clothing and artfully swept silver hair. All depicted people are adults."
+          ],
+          "seed": 190251
+        },
+        {
+          "neutral": "Portrait illustration. A 54-year-old dark-skinned woman with graying braids in a simple charcoal work shirt looks calmly toward the viewer. Background: a studio with dials and wooden shelves. Soft light, head and shoulders filled by the subject. All depicted people are adults.",
+          "treatments": [
+            "Strikingly beautiful hand-painted portrait. A charismatic 54-year-old dark-skinned woman with graying braids, wearing a midnight-blue satin jumpsuit beneath a cropped scarlet engineer jacket, brass earphones, swept-back silver braids and a cool confident half smile. Background: a studio with dials and wooden shelves. Luminous eyes, confident smile, a refined silhouette and harmonious complementary colors. All depicted people are adults.",
+            "Elegant mature lead character in a lavishly painted anime film. A charismatic 54-year-old dark-skinned woman with graying braids, wearing a midnight-blue satin jumpsuit beneath a cropped scarlet engineer jacket, brass earphones, swept-back silver braids and a cool confident half smile. Background: a studio with dials and wooden shelves. Richly colored costume, beautifully modeled cheekbones, an expressive gaze. Close portrait. All depicted people are adults.",
+            "Gorgeous mature character portrait, editorial gouache and ink illustration. A charismatic 54-year-old dark-skinned woman with graying braids, wearing a midnight-blue satin jumpsuit beneath a cropped scarlet engineer jacket, brass earphones, swept-back silver braids and a cool confident half smile. Background: a studio with dials and wooden shelves. Distinguished profile, refined distinctive style, impeccable hand-tailored clothing and artfully swept silver hair. All depicted people are adults."
+          ],
+          "seed": 190330
+        },
+        {
+          "neutral": "Portrait illustration. A 55-year-old stocky bald man with forehead lines in a simple charcoal work shirt looks calmly toward the viewer. Background: a warmly lit bakery. Soft light, head and shoulders filled by the subject. All depicted people are adults.",
+          "treatments": [
+            "Strikingly beautiful hand-painted portrait. A charismatic 55-year-old stocky bald man with forehead lines, wearing a double-breasted ivory chef coat with rolled sleeves, dark teal pinstripe trousers and a burnt-orange embroidered sash, a curled moustache and expressive eyebrows. Background: a warmly lit bakery. Luminous eyes, confident smile, a refined silhouette and harmonious complementary colors. All depicted people are adults.",
+            "Elegant mature lead character in a lavishly painted anime film. A charismatic 55-year-old stocky bald man with forehead lines, wearing a double-breasted ivory chef coat with rolled sleeves, dark teal pinstripe trousers and a burnt-orange embroidered sash, a curled moustache and expressive eyebrows. Background: a warmly lit bakery. Richly colored costume, beautifully modeled cheekbones, an expressive gaze. Close portrait. All depicted people are adults.",
+            "Gorgeous mature character portrait, editorial gouache and ink illustration. A charismatic 55-year-old stocky bald man with forehead lines, wearing a double-breasted ivory chef coat with rolled sleeves, dark teal pinstripe trousers and a burnt-orange embroidered sash, a curled moustache and expressive eyebrows. Background: a warmly lit bakery. Distinguished profile, refined distinctive style, impeccable hand-tailored clothing and artfully swept silver hair. All depicted people are adults."
+          ],
+          "seed": 190409
+        },
+        {
+          "neutral": "Portrait illustration. A 56-year-old tan woman with a streak of gray hair in a simple charcoal work shirt looks calmly toward the viewer. Background: a ferry pier with a blue railing. Soft light, head and shoulders filled by the subject. All depicted people are adults.",
+          "treatments": [
+            "Strikingly beautiful hand-painted portrait. A charismatic 56-year-old tan woman with a streak of gray hair, wearing a crisp navy mariner jacket with large brass buttons, ivory scarf catching the sea breeze, tailored wide-leg trousers, silver forelock and a crooked smile. Background: a ferry pier with a blue railing. Luminous eyes, confident smile, a refined silhouette and harmonious complementary colors. All depicted people are adults.",
+            "Elegant mature lead character in a lavishly painted anime film. A charismatic 56-year-old tan woman with a streak of gray hair, wearing a crisp navy mariner jacket with large brass buttons, ivory scarf catching the sea breeze, tailored wide-leg trousers, silver forelock and a crooked smile. Background: a ferry pier with a blue railing. Richly colored costume, beautifully modeled cheekbones, an expressive gaze. Close portrait. All depicted people are adults.",
+            "Gorgeous mature character portrait, editorial gouache and ink illustration. A charismatic 56-year-old tan woman with a streak of gray hair, wearing a crisp navy mariner jacket with large brass buttons, ivory scarf catching the sea breeze, tailored wide-leg trousers, silver forelock and a crooked smile. Background: a ferry pier with a blue railing. Distinguished profile, refined distinctive style, impeccable hand-tailored clothing and artfully swept silver hair. All depicted people are adults."
+          ],
+          "seed": 190488
+        },
+        {
+          "neutral": "Portrait illustration. A 57-year-old gray-bearded man with heavy eyebrows in a simple charcoal work shirt looks calmly toward the viewer. Background: a tailor\u2019s shop with fabric rolls. Soft light, head and shoulders filled by the subject. All depicted people are adults.",
+          "treatments": [
+            "Strikingly beautiful hand-painted portrait. A charismatic 57-year-old gray-bearded man with heavy eyebrows, wearing a layered plum brocade waistcoat, perfectly cut navy jacket with emerald piping, copper spectacles, sculpted silver beard and a confident, lively expression. Background: a tailor\u2019s shop with fabric rolls. Luminous eyes, confident smile, a refined silhouette and harmonious complementary colors. All depicted people are adults.",
+            "Elegant mature lead character in a lavishly painted anime film. A charismatic 57-year-old gray-bearded man with heavy eyebrows, wearing a layered plum brocade waistcoat, perfectly cut navy jacket with emerald piping, copper spectacles, sculpted silver beard and a confident, lively expression. Background: a tailor\u2019s shop with fabric rolls. Richly colored costume, beautifully modeled cheekbones, an expressive gaze. Close portrait. All depicted people are adults.",
+            "Gorgeous mature character portrait, editorial gouache and ink illustration. A charismatic 57-year-old gray-bearded man with heavy eyebrows, wearing a layered plum brocade waistcoat, perfectly cut navy jacket with emerald piping, copper spectacles, sculpted silver beard and a confident, lively expression. Background: a tailor\u2019s shop with fabric rolls. Distinguished profile, refined distinctive style, impeccable hand-tailored clothing and artfully swept silver hair. All depicted people are adults."
+          ],
+          "seed": 190567
+        },
+        {
+          "neutral": "Portrait illustration. A 58-year-old woman with short silver curls and wrinkles in a simple charcoal work shirt looks calmly toward the viewer. Background: a museum with a bronze vase. Soft light, head and shoulders filled by the subject. All depicted people are adults.",
+          "treatments": [
+            "Strikingly beautiful hand-painted portrait. A charismatic 58-year-old woman with short silver curls and wrinkles, wearing a sweeping indigo sculptural capelet over an ochre fitted blouse, hammered bronze cuff, artfully dressed silver curls, a wise expressive face. Background: a museum with a bronze vase. Luminous eyes, confident smile, a refined silhouette and harmonious complementary colors. All depicted people are adults.",
+            "Elegant mature lead character in a lavishly painted anime film. A charismatic 58-year-old woman with short silver curls and wrinkles, wearing a sweeping indigo sculptural capelet over an ochre fitted blouse, hammered bronze cuff, artfully dressed silver curls, a wise expressive face. Background: a museum with a bronze vase. Richly colored costume, beautifully modeled cheekbones, an expressive gaze. Close portrait. All depicted people are adults.",
+            "Gorgeous mature character portrait, editorial gouache and ink illustration. A charismatic 58-year-old woman with short silver curls and wrinkles, wearing a sweeping indigo sculptural capelet over an ochre fitted blouse, hammered bronze cuff, artfully dressed silver curls, a wise expressive face. Background: a museum with a bronze vase. Distinguished profile, refined distinctive style, impeccable hand-tailored clothing and artfully swept silver hair. All depicted people are adults."
+          ],
+          "seed": 190646
+        },
+        {
+          "neutral": "Portrait illustration. A 59-year-old man with receding copper hair and a lined face in a simple charcoal work shirt looks calmly toward the viewer. Background: a quarry under a clouded sky. Soft light, head and shoulders filled by the subject. All depicted people are adults.",
+          "treatments": [
+            "Strikingly beautiful hand-painted portrait. A charismatic 59-year-old man with receding copper hair and a lined face, wearing a strong auburn jacket with angular turquoise insets, a stone pendant, worn leather boots and a wild swept-back silver mane. Background: a quarry under a clouded sky. Luminous eyes, confident smile, a refined silhouette and harmonious complementary colors. All depicted people are adults.",
+            "Elegant mature lead character in a lavishly painted anime film. A charismatic 59-year-old man with receding copper hair and a lined face, wearing a strong auburn jacket with angular turquoise insets, a stone pendant, worn leather boots and a wild swept-back silver mane. Background: a quarry under a clouded sky. Richly colored costume, beautifully modeled cheekbones, an expressive gaze. Close portrait. All depicted people are adults.",
+            "Gorgeous mature character portrait, editorial gouache and ink illustration. A charismatic 59-year-old man with receding copper hair and a lined face, wearing a strong auburn jacket with angular turquoise insets, a stone pendant, worn leather boots and a wild swept-back silver mane. Background: a quarry under a clouded sky. Distinguished profile, refined distinctive style, impeccable hand-tailored clothing and artfully swept silver hair. All depicted people are adults."
+          ],
+          "seed": 190725
+        },
+        {
+          "neutral": "Portrait illustration. A 60-year-old woman with crow\u2019s feet and a low gray bun in a simple charcoal work shirt looks calmly toward the viewer. Background: a tiled kitchen with copper pans. Soft light, head and shoulders filled by the subject. All depicted people are adults.",
+          "treatments": [
+            "Strikingly beautiful hand-painted portrait. A charismatic 60-year-old woman with crow\u2019s feet and a low gray bun, wearing a stylish paprika-red wrap jacket, tapered cream trousers, elegant embroidered sleeve panels and a polished ebony hairpin through a silver bun. Background: a tiled kitchen with copper pans. Luminous eyes, confident smile, a refined silhouette and harmonious complementary colors. All depicted people are adults.",
+            "Elegant mature lead character in a lavishly painted anime film. A charismatic 60-year-old woman with crow\u2019s feet and a low gray bun, wearing a stylish paprika-red wrap jacket, tapered cream trousers, elegant embroidered sleeve panels and a polished ebony hairpin through a silver bun. Background: a tiled kitchen with copper pans. Richly colored costume, beautifully modeled cheekbones, an expressive gaze. Close portrait. All depicted people are adults.",
+            "Gorgeous mature character portrait, editorial gouache and ink illustration. A charismatic 60-year-old woman with crow\u2019s feet and a low gray bun, wearing a stylish paprika-red wrap jacket, tapered cream trousers, elegant embroidered sleeve panels and a polished ebony hairpin through a silver bun. Background: a tiled kitchen with copper pans. Distinguished profile, refined distinctive style, impeccable hand-tailored clothing and artfully swept silver hair. All depicted people are adults."
+          ],
+          "seed": 190804
+        },
+        {
+          "neutral": "Portrait illustration. A 61-year-old man with a white mustache in a simple charcoal work shirt looks calmly toward the viewer. Background: a study with hand-painted maps. Soft light, head and shoulders filled by the subject. All depicted people are adults.",
+          "treatments": [
+            "Strikingly beautiful hand-painted portrait. A charismatic 61-year-old man with a white mustache, wearing a long peacock-blue frock coat with maplike gold embroidery on the cuffs, ivory neck scarf, graceful silver moustache and a sly smile. Background: a study with hand-painted maps. Luminous eyes, confident smile, a refined silhouette and harmonious complementary colors. All depicted people are adults.",
+            "Elegant mature lead character in a lavishly painted anime film. A charismatic 61-year-old man with a white mustache, wearing a long peacock-blue frock coat with maplike gold embroidery on the cuffs, ivory neck scarf, graceful silver moustache and a sly smile. Background: a study with hand-painted maps. Richly colored costume, beautifully modeled cheekbones, an expressive gaze. Close portrait. All depicted people are adults.",
+            "Gorgeous mature character portrait, editorial gouache and ink illustration. A charismatic 61-year-old man with a white mustache, wearing a long peacock-blue frock coat with maplike gold embroidery on the cuffs, ivory neck scarf, graceful silver moustache and a sly smile. Background: a study with hand-painted maps. Distinguished profile, refined distinctive style, impeccable hand-tailored clothing and artfully swept silver hair. All depicted people are adults."
+          ],
+          "seed": 190883
+        },
+        {
+          "neutral": "Portrait illustration. A 62-year-old woman with black curls streaked with white in a simple charcoal work shirt looks calmly toward the viewer. Background: a pottery studio beside the kiln. Soft light, head and shoulders filled by the subject. All depicted people are adults.",
+          "treatments": [
+            "Strikingly beautiful hand-painted portrait. A charismatic 62-year-old woman with black curls streaked with white, wearing a sculpted ultramarine work tunic with celadon and vermilion panels, a ceramic pendant, cloudlike silver curls, smiling eyes. Background: a pottery studio beside the kiln. Luminous eyes, confident smile, a refined silhouette and harmonious complementary colors. All depicted people are adults.",
+            "Elegant mature lead character in a lavishly painted anime film. A charismatic 62-year-old woman with black curls streaked with white, wearing a sculpted ultramarine work tunic with celadon and vermilion panels, a ceramic pendant, cloudlike silver curls, smiling eyes. Background: a pottery studio beside the kiln. Richly colored costume, beautifully modeled cheekbones, an expressive gaze. Close portrait. All depicted people are adults.",
+            "Gorgeous mature character portrait, editorial gouache and ink illustration. A charismatic 62-year-old woman with black curls streaked with white, wearing a sculpted ultramarine work tunic with celadon and vermilion panels, a ceramic pendant, cloudlike silver curls, smiling eyes. Background: a pottery studio beside the kiln. Distinguished profile, refined distinctive style, impeccable hand-tailored clothing and artfully swept silver hair. All depicted people are adults."
+          ],
+          "seed": 190962
+        },
+        {
+          "neutral": "Portrait illustration. A 63-year-old brown-skinned man with a thick graying beard in a simple charcoal work shirt looks calmly toward the viewer. Background: a workshop filled with violins. Soft light, head and shoulders filled by the subject. All depicted people are adults.",
+          "treatments": [
+            "Strikingly beautiful hand-painted portrait. A charismatic 63-year-old brown-skinned man with a thick graying beard, wearing a sharply tailored wine-red jacket, curved lapels over a midnight waistcoat, brass tuning-peg pin and a full elegantly sculpted silver beard. Background: a workshop filled with violins. Luminous eyes, confident smile, a refined silhouette and harmonious complementary colors. All depicted people are adults.",
+            "Elegant mature lead character in a lavishly painted anime film. A charismatic 63-year-old brown-skinned man with a thick graying beard, wearing a sharply tailored wine-red jacket, curved lapels over a midnight waistcoat, brass tuning-peg pin and a full elegantly sculpted silver beard. Background: a workshop filled with violins. Richly colored costume, beautifully modeled cheekbones, an expressive gaze. Close portrait. All depicted people are adults.",
+            "Gorgeous mature character portrait, editorial gouache and ink illustration. A charismatic 63-year-old brown-skinned man with a thick graying beard, wearing a sharply tailored wine-red jacket, curved lapels over a midnight waistcoat, brass tuning-peg pin and a full elegantly sculpted silver beard. Background: a workshop filled with violins. Distinguished profile, refined distinctive style, impeccable hand-tailored clothing and artfully swept silver hair. All depicted people are adults."
+          ],
+          "seed": 191041
+        }
+      ]
+    }
+  },
+  "validation": {
+    "rates": [
+      {
+        "prompt": "Anime illustration. Eye-level half-body portrait of one middle-aged woman with short black hair and warm brown skin, standing naturally facing the viewer. Background: quiet bookshop with a brass ladder and green counter. Lighting: cool daylight from a wide front window. Keep the surrounding setting clearly visible. All depicted people are adults.",
+        "seed": 553301
+      },
+      {
+        "prompt": "Anime illustration. Eye-level half-body portrait of one adult man with gray hair and a short beard, standing naturally facing the viewer. Background: covered ferry pier with a red railing and mooring rope. Lighting: clear morning sunlight. Keep the surrounding setting clearly visible.",
+        "seed": 553302
+      },
+      {
+        "prompt": "Anime illustration. Eye-level half-body portrait of one older man with wavy white hair, standing naturally facing the viewer. Background: watch repair shop with brass clocks and a cream workbench. Lighting: steady warm lamp light. Keep the surrounding setting clearly visible. All depicted people are adults.",
+        "seed": 553304
+      },
+      {
+        "prompt": "Anime illustration. Eye-level half-body portrait of one adult man with short black hair and round glasses, standing naturally facing the viewer. Background: quiet tiled vestibule with green lockers and a white enamel sign. Lighting: neutral fluorescent light. Keep the surrounding setting clearly visible.",
+        "seed": 553306
+      }
+    ],
+    "steps": [
+      {
+        "prompt": "Anime illustration. Waist-up eye-level portrait of one adult woman with lightly freckled face and brown braided hair, wearing a plain blue traveling coat, standing naturally facing the viewer. Background: sunlit stone plaza with an aquamarine door and patterned floor tiles. Lighting: bright neutral morning daylight. Show the surroundings clearly.",
+        "seed": 552241
+      },
+      {
+        "prompt": "Anime illustration. Waist-up eye-level portrait of one adult man with wavy blond hair, wearing a russet hiking jacket, standing naturally facing the viewer. Background: alpine cable-car station with a green numbered post, metal railings and snow in the distance. Lighting: bright midday mountain light. Show the surroundings clearly.",
+        "seed": 552242
+      },
+      {
+        "prompt": "Anime illustration. Waist-up eye-level portrait of one adult woman with a straight gray bob, wearing a denim apron, standing naturally facing the viewer. Background: historical stone smithy with an old iron anvil and tools hanging from a wooden rack. Lighting: steady warm light from the hinged brass wall lamps. Show the surroundings clearly.",
+        "seed": 552243
+      },
+      {
+        "prompt": "Anime illustration. Eye-level half-body portrait of one adult man with straight shoulder-length brown hair, standing naturally facing the viewer. Background: concert hall anteroom with two burgundy chairs and a gilded mirror. Lighting: low warm evening lamp light. Keep the surrounding setting clearly visible.",
+        "seed": 553308
+      }
+    ],
+    "confirm": [
+      {
+        "prompt": "Anime illustration. Waist-up eye-level portrait of one 58-year-old man with mature facial features with short black curls, wearing a brown cardigan, standing naturally facing the viewer. Background: covered town square with orange awnings, terracotta pavement and a blue souvenir sign. Lighting: cool early evening light with street lanterns. Show the surroundings clearly. All depicted people are adults.",
+        "seed": 992371
+      },
+      {
+        "prompt": "Anime illustration. Eye-level half-body portrait of one 55-year-old woman with mature facial features with auburn braids and freckles, standing naturally facing the viewer. Background: botanical museum atrium with two ceramic planters and a blue mosaic. Lighting: soft overcast daylight. Keep the surrounding setting clearly visible. All depicted people are adults.",
+        "seed": 992402
+      },
+      {
+        "prompt": "Anime illustration. Eye-level half-body portrait of one 55-year-old woman with mature facial features with dark brown curls and dark skin, standing naturally facing the viewer. Background: sandstone trail shelter with a wooden map board and distant dunes. Lighting: bright late-afternoon daylight. Keep the surrounding setting clearly visible. All depicted people are adults.",
+        "seed": 992433
+      },
+      {
+        "prompt": "Anime illustration. Eye-level half-body portrait of one 55-year-old woman with mature facial features with close-cropped blond hair, standing naturally facing the viewer. Background: tailor studio with fabric bolts, a pine desk, and a high window. Lighting: soft diffuse daylight. Keep the surrounding setting clearly visible. All depicted people are adults.",
+        "seed": 992464
+      }
+    ]
+  },
+  "screen_cases": {
+    "Final Boss": [
+      {
+        "prompt": "Anime illustration. Eye-level half-body portrait of one older man with wavy white hair, standing naturally facing the viewer. Background: watch repair shop with brass clocks and a cream workbench. Lighting: steady warm lamp light. Keep the surrounding setting clearly visible.",
+        "seed": 553304
+      }
+    ]
+  },
+  "confirmation_cases": {
+    "Final Boss": [
+      {
+        "seed": 714583,
+        "prompt": "Illustration. One 47-year-old adult woman with short black waves and a plain navy jacket in the ticket office of a hillside cable car station. A ticket rack and wooded hillside are visible behind her. Eye-level medium shot, soft afternoon light. All depicted people are adults."
+      },
+      {
+        "seed": 873191,
+        "prompt": "Illustration. One 56-year-old adult man with a neat gray beard and a dark green overshirt in a municipal records room. He stands by a map cabinet and a narrow window. Eye-level medium shot, even daylight. All depicted people are adults."
+      },
+      {
+        "seed": 528067,
+        "prompt": "Illustration. One 42-year-old adult woman with a braid and a sand-colored work shirt arranging labeled jars on a perfume workshop shelf. Pale stucco walls, diffuse window light, waist-up three-quarter view. All depicted people are adults."
+      },
+      {
+        "seed": 964153,
+        "prompt": "Illustration. One 63-year-old adult man with closely cropped hair and a blue cardigan at a linen shop counter. Stacked folded cloth and a wooden stool in the background. Calm expression, waist-up eye-level shot, warm indoor light. All depicted people are adults."
+      }
+    ]
+  }
+}

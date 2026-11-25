@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "anima-particle-sliders"
-version = "0.4.0"
+version = "0.4.1"
 description = "Anima Turbo product adapter for the Particle Sliders image lifecycle"
 readme = "LIFECYCLE.md"
 requires-python = ">=3.11"
@@ -13,7 +13,7 @@ license-files = ["LICENSE", "NOTICE", "ANIMA-LICENSE.md"]
 dependencies = [
   "safetensors>=0.4,<1",
   "packaging>=24",
-  "particle-sliders-core @ git+https://github.com/HyperGAN/particle-sliders.git@b1f780decc516808cfd3019d5e5b674457161f86#subdirectory=packages/particle-sliders-core",
+  "particle-sliders-core @ git+https://github.com/HyperGAN/particle-sliders.git@cc642acb55c3db5826222fd494539fe1944a4fa0#subdirectory=packages/particle-sliders-core",
 ]
 
 [project.optional-dependencies]
@@ -30,6 +30,8 @@ anima = "lumen_studio.lifecycle:BACKEND"
 [project.scripts]
 anima-vibe = "lumen_studio.vibe_cli:main"
 anima-vibe-targets = "lumen_studio.vibe:prepare_main"
+anima-vibe-train = "lumen_studio.study.cli:main"
+anima-vibe-render = "lumen_studio.study.replay:main"
 
 [project.entry-points."particle_sliders.inference_backends"]
 anima = "lumen_studio.lifecycle:NATIVE_BACKEND"
@@ -43,5 +45,5 @@ include = ["lumen_studio*", "configs.anima*"]
 namespaces = true
 
 [tool.setuptools.package-data]
-"configs.anima" = ["*.json", "requirements.lock", "candidates/*.json"]
-lumen_studio = ["engine-source.json", "static/*", "vendor/LICENSE", "vendor/provenance.json"]
+"configs.anima" = ["*.json", "requirements.lock", "candidates/*.json", "boss-teachers/*.json", "boss-teachers/*.png"]
+lumen_studio = ["engine-source.json", "calibration/*.png", "calibration/*.json", "static/*", "vendor/LICENSE", "vendor/provenance.json"]

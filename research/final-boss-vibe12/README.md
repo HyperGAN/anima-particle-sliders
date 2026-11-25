@@ -4,9 +4,9 @@ On the image leaderboard, **Anima default** marks the released adapter and exact
 
 The [method inventory](ranked-methods.json) identifies the training implementation behind every ranked RAW192 adapter. The [checkpoint catalog](../../docs/final-boss-raw192/vibe12/checkpoints.json) gives the immutable download revision, file, size, SHA-256 and training-cache fingerprint.
 
-### Publish a new leaderboard winner
+### Reproduce the historical timed leaderboard
 
-From the release checkout, point `CAMPAIGN` at the equipped Vibe12 experiment directory and run the following commands together. The artifacts publisher reuses existing files, verifies all ranked RAWs and uploads the winning target cache. Supply `--target-cache PATH` if that cache lives outside the per-recipe directory. The design publisher verifies the Jev evidence and derives the default from the first ranked row.
+From the release checkout, point `CAMPAIGN` at the equipped Vibe12 experiment directory and run the following commands together. The artifacts publisher reuses existing files, verifies all ranked RAWs and uploads the winning target cache. Supply `--target-cache PATH` if that cache lives outside the per-recipe directory. The design publisher verifies the Jev evidence and exports the historical replay to `design-default.json` alongside the board. Fresh training comparisons use the [fixed-strength leaderboard](../../docs/leaderboard.md).
 
 ```sh
 BOARD=docs/final-boss-raw192/vibe12

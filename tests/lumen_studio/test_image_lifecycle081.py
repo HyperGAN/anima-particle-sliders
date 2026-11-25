@@ -95,7 +95,7 @@ def test_raw_native_inference_without_cache_or_training(tmp_path, monkeypatch):
             for method in ('train', 'step', 'checkpoint', 'restore'):
                 with pytest.raises(UnsupportedOperation):
                     getattr(native, method)()
-            assert native.manifest['origin']['pg_version'] == '0.11.1'
+            assert native.manifest['origin']['pg_version'] == '0.12.0'
         assert not loaded[-1].mixer.adapters and not loaded[-1].mixer.handles
         assert not hasattr(loaded[-1], 'pipe')
     assert torch.equal(rng, torch.get_rng_state())

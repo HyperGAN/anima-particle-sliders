@@ -1,14 +1,145 @@
-# Anima Final Boss leaderboard
+# Anima slider leaderboard
 
-## Corrected twelve-scene Vibe12 leaderboard
+## Constant-alpha retest of the trained recipes
 
-**The first-ranked recipe is the Final Boss default.** Publishing the distinct-design leaderboard sets both the RAW adapter used for replay and the frozen targets used for training. The manifest records the winning strength schedule and its eight-character development score. [Ranked samples](final-boss-raw192/vibe12/distinct-designs.md) · [Default manifest](final-boss-raw192/default.json) · [All ranked checkpoints](final-boss-raw192/vibe12/checkpoints.json) · [Method sources](../research/final-boss-vibe12/ranked-methods.json)
+Each recipe gets its own adaptive scalar search on a frozen RAW. All ten Euler steps use that number. The PG 0.12.0 replay checks reproduced all 192 archived benchmark PNGs from the 24 completed PG 0.11.1 Vibe12 recipes. The board also identifies the newer PG 0.12.0 training runs, stopped arms and short controls.
 
-**Alpha tuning now uses the distinct Boss score.** Each constant, early and late search uses four characters during refinement and eight for the final selection. Opening four selected early α 1.25 at 27.63. Late cues selected early α 1.15625 at 28.84. [Measured alpha path, saved tuning, and replay](final-boss-raw192/vibe12/alpha-tuning/README.md)
+The default Final Boss objective is last night’s distinct Boss score. The same metric governs each alpha probe and the eight-character ranking. It rewards stronger finished antagonist designs, discounts visible damage and compares each pair of designs in both image orders. Signed intensity is diagnostic. Each search uses four characters and reserves its scalar before running the eight ranking characters. The earlier board chose a recipe by signed intensity at shared α 0.6375 and tuned only that recipe. It omitted the damage and repetition terms during selection.
 
-**Distinct Final Boss designs across characters.** The default live recipe view now discounts repeated boss designs across the eight matched characters. In the first 20-recipe snapshot, opening-four exposure rose from seventh to third, with 35.7/100 design repetition against 49.0 for late cues. The first three distinct-design scores are 28.84 for late cues, 27.74 for middle-four exposure and 27.63 for opening-four exposure. The four separate alpha-search scenes show similar repetition for opening four and late cues. [Distinct-design leaderboard and matched samples](final-boss-raw192/vibe12/distinct-designs.md)
+[Ranked samples](#verified-results) · [Per-recipe scores](final-boss-raw192/vibe12/constant-alpha-retest.json)
 
-The current development comparison uses corrected Final Boss `--vibe` teachers, 240 native fields and RAW192 adapters. Each sample row shows the best measured strength for one recipe. Jev measures character effect against the matched slider-off image. It judges accidental rendering damage from the finished illustration alone so a deliberate monster redesign can remain readable. The final score multiplies the Boss term by the undamaged fraction. Damage is the sole quality penalty. Zero Boss gain scores zero, and every complete eight-case measurement receives a rank. The adaptive search starts at α 1.00, probes both sides at 0.25, and compares constant, early and late schedules. The score is computed per image before averaging. [Ranked samples](final-boss-raw192/vibe12/README.md) · [Raw ratings and alpha paths](final-boss-raw192/vibe12/standings.json) · [Research source](../research/final-boss-vibe12/README.md)
+The [unattended experiment script](../research/constant-alpha-retest/run.py) runs against the saved Anima study and its mounted Vibe12 archive. From the study directory run `env/bin/python product/research/constant-alpha-retest/run.py --study .`. The design metric is the default. The driver verifies the saved RAWs, reuses recorded renders, publishes the matched images and replays the scalar search from the measured objective. [Search and verification code](../release_tools/constant_alpha_retest.py)
+
+### Verified results
+
+PG 0.12.0 replayed all 192 archived constant-strength images from the 24 completed PG 0.11.1 recipes byte for byte. The complete inventory includes 38 Final Boss RAWs and two other sliders. Of 667 scalar trials, 662 returned a complete score. Every reserved eight-character ranking panel was measured. Each strength was selected on four characters, then frozen for the eight-character ranking.
+
+28 completed Boss fits have a numerical rank. Structural checks passed for 1, failed for 23, and were unresolved for 4. The other 10 trained arms are listed individually as diagnostics.
+
+| Rank | Final Boss training recipe | Constant α | Matched samples | Distinct Boss / 100 | Structural check |
+| ---: | --- | ---: | --- | ---: | --- |
+| — | Matched baseline | OFF | [![Eight matched OFF images](final-boss-raw192/vibe12/constant-samples/a1647451ed5db7f8d8448e063aeb673aa0c36afee0f7889fa8d8606e2c82b16d.webp)](final-boss-raw192/vibe12/constant-samples/a1647451ed5db7f8d8448e063aeb673aa0c36afee0f7889fa8d8606e2c82b16d.webp) | — | — |
+| 1 | Stronger cues at the final three teacher positions | 1.90625 | [![Stronger cues at the final three teacher positions on eight characters](final-boss-raw192/vibe12/constant-samples/1141c0cbf30514fa77ac39beca84725675de89701efd5b6af9ef5637093312ba.webp)](final-boss-raw192/vibe12/constant-samples/1141c0cbf30514fa77ac39beca84725675de89701efd5b6af9ef5637093312ba.webp) | 26.51 | unmeasured |
+| 2 | Paired scene and lighting contexts, 50% blend, 0.45 floor | 1.53125 | [![Paired scene and lighting contexts, 50% blend, 0.45 floor on eight characters](final-boss-raw192/vibe12/constant-samples/230c829cd9cf13e78aa1f072698fdcb85722a3b7f223863c6283edbd8176a6f7.webp)](final-boss-raw192/vibe12/constant-samples/230c829cd9cf13e78aa1f072698fdcb85722a3b7f223863c6283edbd8176a6f7.webp) | 24.70 | unmeasured |
+| 3 | Background-only scene and lighting projection, 0.45 floor | 2.11719 | [![Background-only scene and lighting projection, 0.45 floor on eight characters](final-boss-raw192/vibe12/constant-samples/bfc5bd4568dd286beb9fa0bc42cc8bc86e2f53a8313e8f1194b082a36ca01085.webp)](final-boss-raw192/vibe12/constant-samples/bfc5bd4568dd286beb9fa0bc42cc8bc86e2f53a8313e8f1194b082a36ca01085.webp) | 24.45 | fail |
+| 4 | Stronger Boss cues contrasted with matched ordinary attire | 1.34375 | [![Stronger Boss cues contrasted with matched ordinary attire on eight characters](final-boss-raw192/vibe12/constant-samples/be278e296e1aadd7930ff6250afc21740ecf293446bd4cb27109841b5a6fd97e.webp)](final-boss-raw192/vibe12/constant-samples/be278e296e1aadd7930ff6250afc21740ecf293446bd4cb27109841b5a6fd97e.webp) | 24.02 | fail |
+| 5 | Train on adapter rollout states, 0.45 floor | 2.02344 | [![Train on adapter rollout states, 0.45 floor on eight characters](final-boss-raw192/vibe12/constant-samples/caa4d3931fbe28a81db4109e347ef739333b80c0df39bbf09bd8abea52d4ffcc.webp)](final-boss-raw192/vibe12/constant-samples/caa4d3931fbe28a81db4109e347ef739333b80c0df39bbf09bd8abea52d4ffcc.webp) | 23.05 | unmeasured |
+| 6 | Six highest-divergence timestep positions | 1.36328 | [![Six highest-divergence timestep positions on eight characters](final-boss-raw192/vibe12/constant-samples/a104546fd7cc14c7ddcd6e272c45369380cfeb31a2332a6f8dc463192e27c9e2.webp)](final-boss-raw192/vibe12/constant-samples/a104546fd7cc14c7ddcd6e272c45369380cfeb31a2332a6f8dc463192e27c9e2.webp) | 22.70 | fail |
+| 7 | Soft foreground weighting · prior incumbent recipe | 1.41406 | [![Soft foreground weighting · prior incumbent recipe on eight characters](final-boss-raw192/vibe12/constant-samples/f25b90a17d4a9c74119aaa42d2f14dcdf35a0ba232ea84ac37177678876e3ff6.webp)](final-boss-raw192/vibe12/constant-samples/f25b90a17d4a9c74119aaa42d2f14dcdf35a0ba232ea84ac37177678876e3ff6.webp) | 22.40 | fail |
+| 8 | Stronger cues at the first three teacher positions | 1.29688 | [![Stronger cues at the first three teacher positions on eight characters](final-boss-raw192/vibe12/constant-samples/9983500ed46736d5cd52eeb5ed8bdd02cfb2276582828b6677f24726b28fb0ac.webp)](final-boss-raw192/vibe12/constant-samples/9983500ed46736d5cd52eeb5ed8bdd02cfb2276582828b6677f24726b28fb0ac.webp) | 22.15 | fail |
+| 9 | Extra training exposure at the opening four denoising positions | 2.1875 | [![Extra training exposure at the opening four denoising positions on eight characters](final-boss-raw192/vibe12/constant-samples/f9f978122a65ed97aaab51322c2f6e652aa0dc87b392a0af5ce7e306a43f3261.webp)](final-boss-raw192/vibe12/constant-samples/f9f978122a65ed97aaab51322c2f6e652aa0dc87b392a0af5ce7e306a43f3261.webp) | 21.82 | fail |
+| 10 | Soft foreground weighting plus a 35% blend of two averaged cues | 1.625 | [![Soft foreground weighting plus a 35% blend of two averaged cues on eight characters](final-boss-raw192/vibe12/constant-samples/797b1af0285e19b955c12f384d42ef4ad247430298a2d22dc475e233721b03f5.webp)](final-boss-raw192/vibe12/constant-samples/797b1af0285e19b955c12f384d42ef4ad247430298a2d22dc475e233721b03f5.webp) | 21.21 | fail |
+| 11 | Soft foreground weighting, 0.45 background floor | 1.73047 | [![Soft foreground weighting, 0.45 background floor on eight characters](final-boss-raw192/vibe12/constant-samples/4e89ef0438e5d5d9ade92e347b8066dc026742ac55ce1c7f700a7a9006c51999.webp)](final-boss-raw192/vibe12/constant-samples/4e89ef0438e5d5d9ade92e347b8066dc026742ac55ce1c7f700a7a9006c51999.webp) | 20.68 | fail |
+| 12 | Extra training exposure at the middle four denoising positions | 2.14062 | [![Extra training exposure at the middle four denoising positions on eight characters](final-boss-raw192/vibe12/constant-samples/56e13ac53abb67fe0201449832fb3c80b7ecd315085baefecae2a4d3b3bff17b.webp)](final-boss-raw192/vibe12/constant-samples/56e13ac53abb67fe0201449832fb3c80b7ecd315085baefecae2a4d3b3bff17b.webp) | 20.49 | fail |
+| 13 | Prompt-only control · all 240 fields | 1.59375 | [![Prompt-only control · all 240 fields on eight characters](final-boss-raw192/vibe12/constant-samples/f0e7c2dbed7e2ea5700e7e48e1f6e4a888f0a5914d6d3548b29871462dc86de8.webp)](final-boss-raw192/vibe12/constant-samples/f0e7c2dbed7e2ea5700e7e48e1f6e4a888f0a5914d6d3548b29871462dc86de8.webp) | 20.31 | fail |
+| 14 | Paired scene and lighting contexts, 50% blend, 0.65 floor | 1.39062 | [![Paired scene and lighting contexts, 50% blend, 0.65 floor on eight characters](final-boss-raw192/vibe12/constant-samples/a005501fbf71eccb047c7eb7c19c8abaca6f068dcea77d2bc0e5722d2bf393a5.webp)](final-boss-raw192/vibe12/constant-samples/a005501fbf71eccb047c7eb7c19c8abaca6f068dcea77d2bc0e5722d2bf393a5.webp) | 20.17 | fail |
+| 15 | In-scene costume cue blend, 35% | 2.09375 | [![In-scene costume cue blend, 35% on eight characters](final-boss-raw192/vibe12/constant-samples/c136b7086b3ba9c24cb8272f516f5f4f9d991d7557796d8aa5d60b2b05852abf.webp)](final-boss-raw192/vibe12/constant-samples/c136b7086b3ba9c24cb8272f516f5f4f9d991d7557796d8aa5d60b2b05852abf.webp) | 19.82 | fail |
+| 16 | Whole-image scene and lighting projection, 0.65 floor | 1.53125 | [![Whole-image scene and lighting projection, 0.65 floor on eight characters](final-boss-raw192/vibe12/constant-samples/5575acd1d81ac3772118e1f009a2ed1b49ecd98a4e2698d24df8d44c66de8109.webp)](final-boss-raw192/vibe12/constant-samples/5575acd1d81ac3772118e1f009a2ed1b49ecd98a4e2698d24df8d44c66de8109.webp) | 19.48 | fail |
+| 17 | Soft foreground weighting plus 35% stronger Boss cues | 1.22656 | [![Soft foreground weighting plus 35% stronger Boss cues on eight characters](final-boss-raw192/vibe12/constant-samples/c133aea561e990df937cc3fce1ee480b0586146af76b126cd43912d9c5bfa76c.webp)](final-boss-raw192/vibe12/constant-samples/c133aea561e990df937cc3fce1ee480b0586146af76b126cd43912d9c5bfa76c.webp) | 18.45 | unmeasured |
+| 18 | Percentile-filtered blend at the first three teacher positions | 1.48047 | [![Percentile-filtered blend at the first three teacher positions on eight characters](final-boss-raw192/vibe12/constant-samples/20121de2dbea75d619f0d4f05f2997a13d1a652530e16b61e823c3a84453b027.webp)](final-boss-raw192/vibe12/constant-samples/20121de2dbea75d619f0d4f05f2997a13d1a652530e16b61e823c3a84453b027.webp) | 17.77 | fail |
+| 19 | Soft foreground weighting with full-strength Boss cues | 1.625 | [![Soft foreground weighting with full-strength Boss cues on eight characters](final-boss-raw192/vibe12/constant-samples/fbc3c88d12571078d75b8bafc71abf7d39179431a1877644d8a4969f71896c75.webp)](final-boss-raw192/vibe12/constant-samples/fbc3c88d12571078d75b8bafc71abf7d39179431a1877644d8a4969f71896c75.webp) | 17.65 | fail |
+| 20 | Second qualified seed on the shared teacher scenes | 1.59375 | [![Second qualified seed on the shared teacher scenes on eight characters](final-boss-raw192/vibe12/constant-samples/9a1415af0e836757ed97d0e2d3d6a05dc1c07c4be99a57c7bf40030df42c3543.webp)](final-boss-raw192/vibe12/constant-samples/9a1415af0e836757ed97d0e2d3d6a05dc1c07c4be99a57c7bf40030df42c3543.webp) | 17.23 | fail |
+| 21 | Qualified costume teachers with soft-foreground contexts | 1.5 | [![Qualified costume teachers with soft-foreground contexts on eight characters](final-boss-raw192/vibe12/constant-samples/00c7deeba3cf5d3cf9d9e096791822bf1430c12073c1d0800119c8f8c03e0240.webp)](final-boss-raw192/vibe12/constant-samples/00c7deeba3cf5d3cf9d9e096791822bf1430c12073c1d0800119c8f8c03e0240.webp) | 17.02 | fail |
+| 22 | Six evenly spaced timestep positions | 1.76562 | [![Six evenly spaced timestep positions on eight characters](final-boss-raw192/vibe12/constant-samples/6b9864f09d2ba585f3992c2f8de540cdd91a5d854051fcc6c9aaa4db52bfe863.webp)](final-boss-raw192/vibe12/constant-samples/6b9864f09d2ba585f3992c2f8de540cdd91a5d854051fcc6c9aaa4db52bfe863.webp) | 16.49 | fail |
+| 23 | Soft foreground weighting with subject APG | 1.59375 | [![Soft foreground weighting with subject APG on eight characters](final-boss-raw192/vibe12/constant-samples/6c000bc6d03e9d6417ea38400cf73f36a03266bfe05238842a2889bc5f2855d0.webp)](final-boss-raw192/vibe12/constant-samples/6c000bc6d03e9d6417ea38400cf73f36a03266bfe05238842a2889bc5f2855d0.webp) | 11.72 | fail |
+| 24 | boss-short | 2.02344 | [![boss-short on eight characters](final-boss-raw192/vibe12/constant-samples/272c4e3f1292aac99c9660de0e99c5682aaa38f9942ca11c9db752c4a3789355.webp)](final-boss-raw192/vibe12/constant-samples/272c4e3f1292aac99c9660de0e99c5682aaa38f9942ca11c9db752c4a3789355.webp) | 9.46 | fail |
+| 25 | Neutral trajectory only | 1.90625 | [![Neutral trajectory only on eight characters](final-boss-raw192/vibe12/constant-samples/42ac640b85c3420e50ac62dc4748070f0c77a58da45ce4ac7c2adde4fb368e9e.webp)](final-boss-raw192/vibe12/constant-samples/42ac640b85c3420e50ac62dc4748070f0c77a58da45ce4ac7c2adde4fb368e9e.webp) | 6.79 | fail |
+| 26 | boss-late-cue-repair | 1.90625 | [![boss-late-cue-repair on eight characters](final-boss-raw192/vibe12/constant-samples/102db4a4157898baa68f82268c524fc39a28875ae72a11fdd7574d743c4703f4.webp)](final-boss-raw192/vibe12/constant-samples/102db4a4157898baa68f82268c524fc39a28875ae72a11fdd7574d743c4703f4.webp) | 2.42 | fail |
+| 27 | boss-pair-repair | 1.65625 | [![boss-pair-repair on eight characters](final-boss-raw192/vibe12/constant-samples/1841f20d6a6410a68f940329689a82c9199a4ea927f453ab1cede24a16dc095a.webp)](final-boss-raw192/vibe12/constant-samples/1841f20d6a6410a68f940329689a82c9199a4ea927f453ab1cede24a16dc095a.webp) | 1.59 | fail |
+| 28 | boss-32 | 1.40625 | [![boss-32 on eight characters](final-boss-raw192/vibe12/constant-samples/145a475e0029e8f41cb89854b53ca479d1abe90a78388211eab205d3af25d1a5.webp)](final-boss-raw192/vibe12/constant-samples/145a475e0029e8f41cb89854b53ca479d1abe90a78388211eab205d3af25d1a5.webp) | 0.25 | pass |
+
+The leader held first place in 8 of 8 recalculations that omitted one character at a time and kept the alphas frozen. These eight characters are the original development panel.
+
+The highest-scoring recipe to pass all eight structural checks was boss-32, rank 28, at α 1.40625 (0.25/100).
+
+#### Same 24 recipes as the historical board
+
+The mean across these recipes was 19.88/100 at individually calibrated constant strengths and 22.90/100 with last night’s settings (23 early schedules and one constant). The archive had design-tuned settings for 15 recipes and retained earlier per-image selections for nine. The historical setting scored higher for 24 of the 24 recipes.
+
+| New rank | Previous rank | Recipe | Constant α | Constant / 100 | Historical / 100 |
+| ---: | ---: | --- | ---: | ---: | ---: |
+| 1 | 1 | Stronger cues at the final three teacher positions | 1.90625 | 26.51 | 28.84 |
+| 2 | 6 | Paired scene and lighting contexts, 50% blend, 0.45 floor | 1.53125 | 24.70 | 26.11 |
+| 3 | 4 | Background-only scene and lighting projection, 0.45 floor | 2.11719 | 24.45 | 27.24 |
+| 4 | 12 | Stronger Boss cues contrasted with matched ordinary attire | 1.34375 | 24.02 | 24.27 |
+| 5 | 11 | Train on adapter rollout states, 0.45 floor | 2.02344 | 23.05 | 24.31 |
+
+#### Four separate production scenes
+
+The script reserved the numerical leader and the highest structurally qualified completed fit before rendering these four additional characters. The original published late-cues RAW192 supplied the timed reference on the exact prompts, seeds and OFF images.
+
+| Recipe | Constant α | Constant / 100 | Published timed / 100 | Structural check |
+| --- | ---: | ---: | ---: | --- |
+| late-cues | 1.90625 | 25.12 | 29.79 | fail |
+| boss-32-07608157 | 1.40625 | 0.03 | 29.79 | pass |
+
+#### Other sliders
+
+| Slider | Constant α | Mean ON minus OFF | Structural check | Published gain |
+| --- | ---: | ---: | --- | ---: |
+| 1990s anime | 2.625 | +0.2158 | pass | +0.2050 |
+| Visually appealing character | 3.59961 | +0.3592 | fail | +0.1792 |
+
+The original failed RAW128, the historical timed samples, the shared-strength attempt and their scores remain available in the gallery. [Saved scoring evidence](final-boss-raw192/vibe12/constant-alpha-evidence.json.gz)
+
+The live audit checked 10,072 ordered design judgments and 626 served links. A second unattended run reproduced the same evidence SHA-256 and started zero GPU workers. The snapshot contains the entire search path, matched case measurements and both image orders for each distinct-design comparison. From the product checkout, run `python -m release_tools.constant_alpha_retest` to recompute the scores and ranks offline. [Complete results](final-boss-raw192/vibe12/constant-alpha-retest.json) · [Compressed scoring evidence](final-boss-raw192/vibe12/constant-alpha-evidence.json.gz)
+
+## Archived shared-strength training and alpha selection
+
+Training selects the target construction, rates and RAW checkpoint. Alpha calibration freezes those choices and searches one scalar, applied to all ten Euler steps. Confirmation reserves that scalar before scoring its four cases. The selection metric is the equally weighted intended-effect score ON minus OFF. Structural failures and unresolved checks are reported separately.
+
+[Scores, prompts and hashes](final-boss-raw192/vibe12/constant-leaderboard.json)
+
+| Slider | Frozen RAW | Constant α | Held-out gain | Integrity | Published gain |
+| --- | --- | ---: | ---: | --- | ---: |
+| Final Boss | costume-teachers RAW192 | 0.75 | +0.3608 | unmeasured | +0.9442 |
+| 1990s anime | RAW192 | 2.25 | +0.1950 | pass | +0.2050 |
+| Character appeal | RAW256 | 1.4375 | +0.2458 | unmeasured | +0.1792 |
+
+The published Final Boss gain used its original timed setting. Two of its four images passed the current structural observer, one was unresolved and one failed. None of the three scalar candidates earned promotion.
+
+### Final Boss training comparison
+
+The archive contains 24 complete RAW192 recipes measured on the same eight characters. Constant α 0.6375 was the only common constant setting. The training selection required a pass on the archived four-case RAW192 check and the eight benchmark images. Stronger Boss cues with a 35% mix had the highest effect and unresolved structural checks. Costume teachers had the highest eligible gain. Its RAW reproduced all eight benchmark images byte for byte on the calibration runtime. Each selected slider was calibrated on its single frozen RAW. [Matched recipe samples](final-boss-raw192/vibe12/constant-alpha-retest.json)
+
+| Effect rank | Training recipe | Gain | RAW192 integrity | Benchmark integrity |
+| ---: | --- | ---: | --- | --- |
+| 1 | Soft foreground weighting plus 35% stronger Boss cues | +0.3225 | unmeasured | unmeasured |
+| 2 | Qualified costume teachers with soft-foreground contexts · selected | +0.2700 | pass | pass |
+| 3 | Second qualified seed on the shared teacher scenes | +0.2650 | pass | pass |
+| 4 | Six highest-divergence timestep positions | +0.2462 | pass | unmeasured |
+| 5 | Stronger cues at the final three teacher positions | +0.2400 | pass | pass |
+| 5 | Soft foreground weighting with full-strength Boss cues | +0.2400 | pass | pass |
+| 7 | Train on adapter rollout states, 0.45 floor | +0.2350 | unmeasured | unmeasured |
+| 8 | Paired scene and lighting contexts, 50% blend, 0.45 floor | +0.2300 | pass | pass |
+| 9 | Soft foreground weighting · prior incumbent recipe | +0.2238 | pass | pass |
+| 10 | Background-only scene and lighting projection, 0.45 floor | +0.2162 | pass | pass |
+| 10 | Percentile-filtered blend at the first three teacher positions | +0.2162 | pass | pass |
+| 12 | Stronger cues at the first three teacher positions | +0.2125 | pass | pass |
+| 13 | In-scene costume cue blend, 35% | +0.1975 | pass | pass |
+| 14 | Stronger Boss cues contrasted with matched ordinary attire | +0.1963 | unmeasured | unmeasured |
+| 14 | Whole-image scene and lighting projection, 0.65 floor | +0.1963 | pass | unmeasured |
+| 16 | Extra training exposure at the middle four denoising positions | +0.1950 | pass | pass |
+| 16 | Soft foreground weighting plus a 35% blend of two averaged cues | +0.1950 | pass | pass |
+| 18 | Soft foreground weighting with subject APG | +0.1938 | pass | unmeasured |
+| 19 | Paired scene and lighting contexts, 50% blend, 0.65 floor | +0.1913 | pass | unmeasured |
+| 20 | Prompt-only control · all 240 fields | +0.1838 | pass | pass |
+| 21 | Soft foreground weighting, 0.45 background floor | +0.1713 | pass | pass |
+| 22 | Six evenly spaced timestep positions | +0.1625 | pass | fail |
+| 23 | Neutral trajectory only | +0.1338 | unmeasured | unmeasured |
+| 24 | Extra training exposure at the opening four denoising positions | +0.1250 | pass | pass |
+
+Reproduce the effect ranking from the repository root with `python -m release_tools.fixed_strength_board docs/final-boss-raw192/vibe12/standings.json --alpha 0.6375`.
+
+## Historical twelve-scene Vibe12 timed leaderboard
+
+**The historical design-board winner supplied the released Final Boss.** That release pinned both the RAW adapter used for replay and the frozen targets used for training. The manifest records the winning strength schedule and its eight-character development score. [Ranked samples](final-boss-raw192/vibe12/distinct-designs.md) · [Default manifest](final-boss-raw192/default.json) · [All ranked checkpoints](final-boss-raw192/vibe12/checkpoints.json) · [Method sources](../research/final-boss-vibe12/ranked-methods.json)
+
+**The timed study used the distinct Boss score.** Each constant, early and late search uses four characters during refinement and eight for the final selection. Opening four selected early α 1.25 at 27.63. Late cues selected early α 1.15625 at 28.84. [Measured alpha path, saved tuning, and replay](final-boss-raw192/vibe12/alpha-tuning/README.md)
+
+**Distinct Final Boss designs across characters.** The historical recipe view discounted repeated boss designs across the eight matched characters. In the first 20-recipe snapshot, opening-four exposure rose from seventh to third, with 35.7/100 design repetition against 49.0 for late cues. The first three distinct-design scores are 28.84 for late cues, 27.74 for middle-four exposure and 27.63 for opening-four exposure. The four separate alpha-search scenes show similar repetition for opening four and late cues. [Distinct-design leaderboard and matched samples](final-boss-raw192/vibe12/distinct-designs.md)
+
+This historical development comparison used corrected Final Boss `--vibe` teachers, 240 native fields and RAW192 adapters. Each sample row shows the best measured strength for one recipe. Jev measures character effect against the matched slider-off image. It judges accidental rendering damage from the finished illustration alone so a deliberate monster redesign can remain readable. The final score multiplies the Boss term by the undamaged fraction. Damage is the sole quality penalty. Zero Boss gain scores zero, and every complete eight-case measurement receives a rank. The adaptive search starts at α 1.00, probes both sides at 0.25, and compares constant, early and late schedules. The score is computed per image before averaging. [Ranked samples](final-boss-raw192/vibe12/README.md) · [Raw ratings and alpha paths](final-boss-raw192/vibe12/standings.json) · [Research source](../research/final-boss-vibe12/README.md)
 
 The six highest-scoring recipes also compete head to head on the same eight images. The revised Jev question recovered all eight previously stated pairwise preferences. In the first six-recipe comparison, late cues placed first and opening-four exposure placed fifth. [Finished-edit ranking with matched samples](final-boss-raw192/vibe12/finalist-review.md)
 
@@ -352,7 +483,7 @@ The archive check moved the late share to **2.95%**, with exact exterior targets
 
 Compare the saved RAW checkpoint with the incumbent on the same prompts, seeds, sampler, and shared strengths. At 192 updates the early score to beat is **6.63**. The full-strength Boss cue recipe sets the constant-strength comparison at **2.10**.
 
-When a training recipe wins at shared early strength, choose its alpha and schedule using the development cases. Freeze that setting and the incumbent's published setting before opening eight fresh confirmation cases. Render both recipes at shared early strength on those same cases as well. Report the two comparisons together. The earlier study used a separate confirmation panel. For current Vibe12 promotion, use the [distinct-design ranking](final-boss-raw192/vibe12/distinct-designs.md).
+When a training recipe wins at shared early strength, choose its alpha and schedule using the development cases. Freeze that setting and the incumbent's published setting before opening eight fresh confirmation cases. Render both recipes at shared early strength on those same cases as well. Report the two comparisons together. The earlier study used a separate confirmation panel. The historical Vibe12 release used the [distinct-design ranking](final-boss-raw192/vibe12/distinct-designs.md).
 
 Jev measures Boss character distinction and visible image damage separately on a 0–1 scale. Multiply positive matched Boss gain by `Boss_ON³ × (1 − image_damage)²`. Above the minor-damage anchor of 1/3, also multiply by `((1 − image_damage) / (1 − 1/3))³`. Average the eight case scores equally and multiply by 100 for display. Catastrophic structural failures and cases with missing measurements carry separate statuses. [Scoring code](../release_tools/final_boss_scoring.py) · [Jev rubrics](final-boss-raw192/rubrics.json)
 

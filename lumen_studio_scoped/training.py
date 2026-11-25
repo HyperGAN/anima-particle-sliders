@@ -206,7 +206,7 @@ class FreshTrainer(EngineTrainer):
                  resume=None, seed=7, batch_size=2, total_steps=100,
                  response_scale=1., sigma=1., critic_width=32,
                  native_admission=None, lr=None, d_lr_mult=None,
-                 prior_lr_mult=None, numerical_profile=None, ema_decay=None):
+                 prior_lr_mult=None, numerical_profile=None, ema_decay=None, preset="bispf_optimized"):
         # All intent/packet/config checks precede the first component constructor.
         if mode not in ('fresh', 'resume') or not isinstance(cohort_id, str) or not cohort_id.strip():
             raise ValueError('explicit fresh|resume mode and new-profile cohort_id required')
@@ -221,6 +221,8 @@ class FreshTrainer(EngineTrainer):
                 or any(isinstance(x, bool) or not isinstance(x, (int, float))
                        or not math.isfinite(x) or x <= 0 for x in (response_scale, sigma))):
             raise ValueError('invalid explicit new-profile construction options')
+        if preset not in ("empf", "bispf_optimized"):
+            raise ValueError("unsupported Anima training preset")
         self.directory = Path(directory).absolute()
         if self.directory.exists():
             raise FileExistsError('new output directory required; no implicit restore/overwrite')
@@ -230,7 +232,7 @@ class FreshTrainer(EngineTrainer):
         self.options = dict(seed=seed, batch_size=batch_size, total_steps=total_steps,
             response_scale=response_scale, sigma=sigma, critic_width=critic_width,
             learning_rates=learning_rates, numerical_profile=numerical_profile, ema_decay=None,
-            variation=variation)
+            variation=variation, preset=preset)
         verify_core()  # Exact original core guard; no release/source-profile relaxation.
         self.sources = source_identity()
         packet = _read_full(resume) if mode == 'resume' else None
@@ -271,7 +273,8 @@ class FreshTrainer(EngineTrainer):
             self.backend = ReceiptBackend(original, self.initialization, self.sources)
             # This is the first optimizer construction, after fresh scoped init.
             self.game = ConditionalParticleGAN(self.backend, self.responses, critic,
-                particles=self.adapter.particles, preset='bispf_optimized',
+                particles=self.adapter.particles, preset=preset,
+                optimizer_dense_profile='recipe' if preset == 'empf' else 'auto',
                 response_domain='continuous_field', batch_size=batch_size, seed=seed,
                 total_steps=total_steps, response_scale=response_scale, sigma=sigma,
                 sampling='balanced', recipe_overrides=learning_rates)
