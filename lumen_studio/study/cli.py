@@ -49,10 +49,16 @@ def arguments(argv):
         default=8,
         help="maximum matched seeds per scene",
     )
-    parser.add_argument(
+    stop = parser.add_mutually_exclusive_group()
+    stop.add_argument(
         "--prepare-only",
         action="store_true",
         help="collect and verify resumable frozen teachers and validation panels",
+    )
+    stop.add_argument(
+        "--select-only",
+        action="store_true",
+        help="reserve a qualified RAW and strength before rendering held-out ON images",
     )
     parser.add_argument(
         "--search-rates",
@@ -427,6 +433,15 @@ def run(args):
         atomic_json(training_config, settings)
         selection = choose_for_confirmation(outputs, cache, panels, plan, args)
         outcome = root / "outcome.json"
+        if args.select_only:
+            return dict(
+                status="selected",
+                rates=selection["rates"],
+                steps=selection["selected_step"],
+                raw=selection["strength"]["raw"],
+                profile=selection["strength"]["profile"],
+                alpha=selection["strength"]["alpha"],
+            )
         if outcome.exists():
             measured = read(outcome)
             if (
@@ -483,6 +498,12 @@ def main(argv=None):
             atomic_json(root / "status.json", status)
             print(json.dumps(status))
             return 2
+        if args.select_only:
+            atomic_json(root / "selection-summary.json", result)
+            if not (root / "outcome.json").exists():
+                atomic_json(root / "status.json", result)
+            print(json.dumps(result))
+            return 0
         if args.prepare_only:
             atomic_json(root / "preparation.json", result)
             if not (root / "training-config.json").exists():

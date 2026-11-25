@@ -8,6 +8,7 @@ Install Anima 0.4.1 from this checkout to use Particle Sliders core 0.15.3
 and ParticleGAN 0.12.0. New sessions use `ema_decay=None` and RAW
 training, evaluation, export and inference.
 
+- [Train and replay a slider unattended](VIBE.md#unattended-native-training) with `anima-vibe-train` and `anima-vibe-render`.
 - [Common sessions and direct training](LIFECYCLE.md)
 - [Scoped initialization](docs/explicit-fresh-initialization.md)
 - [Optional HNDL backend](HNDL-CANDIDATE.md)

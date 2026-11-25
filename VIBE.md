@@ -1,5 +1,7 @@
 # Learn a vibe from successful image contexts
 
+To train a slider end to end on ParticleGAN 0.12.0, run `anima-vibe-train`. [Unattended native training](#unattended-native-training).
+
 The opt-in `anima-vibe --vibe` path collects training data using frozen
 Anima and an image-capable Jev judge. Each round retains successful scenes
 and explores new ones with a Nanoodle prompt workflow.
@@ -313,7 +315,9 @@ the mean change in intended effect across matched finished images.
 for constant, early and late strength comparisons and a separate held-out
 confirmation. Before rendering the first held-out image, the script saves the
 selected RAW, rates and strength in `confirmation-selection.json`. If that
-measurement is interrupted, a rerun checks the same selection.
+measurement is interrupted, a rerun checks the same selection. To reserve
+the selection while keeping held-out ON images unseen, use `--select-only`.
+Run the same command without that flag to confirm it.
 `outcome.json` records the resolved interval gains, cases and
 original RAW path. `status.json` records the result and an incomplete run's
 exit reason. Rerun with the same directory and arguments to reuse recorded work.

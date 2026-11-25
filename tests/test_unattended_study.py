@@ -544,3 +544,36 @@ def test_known_split_stays_in_fresh_final_boss_runs_and_prior_panels_are_frozen(
         },
     )
     assert study_panels(spec, "Final Boss", tmp_path) == (spec["validation"], False)
+
+
+def test_selection_only_keeps_heldout_unconsumed_and_preserves_existing_status(
+    tmp_path, monkeypatch
+):
+    from lumen_studio.study import cli
+
+    summary = {"status": "selected", "raw": {"sha256": "fixture"}, "steps": 32}
+    args = [
+        "--vibe",
+        "Final Boss",
+        "--model-dir",
+        ".",
+        "--out",
+        str(tmp_path),
+        "--select-only",
+    ]
+    monkeypatch.setattr(
+        cli,
+        "run",
+        lambda options: (
+            summary if options.select_only else pytest.fail("Unexpected phase")
+        ),
+    )
+    assert cli.main(args) == 0
+    assert read(tmp_path / "selection-summary.json") == summary
+    assert read(tmp_path / "status.json") == summary
+    assert not (tmp_path / "outcome.json").exists()
+    atomic_json(tmp_path / "outcome.json", {"confirmed": True})
+    atomic_json(tmp_path / "status.json", {"status": "confirmed"})
+    assert (
+        cli.main(args) == 0 and read(tmp_path / "status.json")["status"] == "confirmed"
+    )
