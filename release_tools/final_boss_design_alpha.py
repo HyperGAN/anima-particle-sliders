@@ -6,7 +6,8 @@ import json
 from math import isclose
 from pathlib import Path
 
-from .final_boss_damage_search import search
+from .final_boss_damage_search import LOWER, UPPER, bound_limited, search
+from .final_boss_default import scheduled_gains
 from .final_boss_design_scores import summarize
 from .final_boss_visible_damage import score_case
 from .publish_final_boss_vibe12 import read
@@ -26,6 +27,8 @@ def verify(data, receipts):
             data["cases"]["validation"]
         ):
             raise ValueError("Wrong character panel")
+        if trial["gains"] != scheduled_gains(profile, alpha, data["selected"]["sigmas"]):
+            raise ValueError("Trial gains differ from its schedule and alpha on the recorded sampler grid")
         scores = {c: score_case(row) for c, row in rows.items()}
         for pair in trial["pairs"]:
             hashes = [rows[c]["on"] for c in pair["cases"]]
@@ -216,6 +219,9 @@ def main():
     print(
         f"{selected['method']} · {selected['profile']} α {selected['alpha']:g} · {100 * selected['design']['score']:.2f}"
     )
+    for profile, path in data["paths"].items():
+        if bound_limited({trial["alpha"]: trial["score"] for trial in path["trials"]}):
+            print(f"  {profile}: the strongest search probe is a bound of the α {LOWER:g}–{UPPER:g} range")
 
 
 if __name__ == "__main__":

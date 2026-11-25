@@ -42,10 +42,12 @@ The second completed search selected **early α 1.15625** at **28.84**, followed
 
 ## Search and confirmation
 
-1. Start each of the constant, early and late schedules at α 1.00. Probe both directions at 0.25 and adapt the bracket for up to nine distinct probes per schedule.
+1. Start each of the constant, early and late schedules at α 1.00. Probe both directions at 0.25 and adapt the bracket for up to nine distinct probes per schedule. Probes stay within α 0.25–1.75, and the search stops once the step falls below 0.03125.
 2. Evaluate each probe on four search characters. Six pairs in two image orders give 12 Jev design judgments before cache reuse. The two highest-scoring alphas per schedule advance.
 3. Select the final alpha on eight matched development characters. Each full comparison uses 28 pairs in both orders. Include earlier measured strengths of the same RAW adapter and the two shared controls. A strength can be skipped once its per-image score is at or below the current best distinct Boss score, because design repetition can only reduce its score. Eight historical strengths were ruled out this way for opening four.
 4. Save the winning settings and their measurement receipt. The live design leaderboard switches each recipe to its tuned setting on completion. It labels recipes still using a strength inherited from the previous search.
+
+The α 1.75 ceiling limits some schedules. In 22 of the 45 recorded schedule searches the strongest four-character probe is α 1.75, so stronger settings of that schedule were never measured. For late cues this applies to the constant and late schedules. Their eight-character scores were 26.94 at constant α 1.625 and 26.18 at constant α 1.75, against 28.84 for the selected early α 1.15625. Each recipe's best schedule is therefore the best within this range. The verification command below names every schedule whose search ended on a bound. Once a search reaches the ceiling, its remaining probes go to weaker strengths. Whether a strength above α 1.75 would outscore a recorded selection is unmeasured. A search whose ninth probe is the stronger side of a bracket still lists the weaker side in that step although it was not measured. This did not occur in the 45 recorded searches.
 
 On the equipped research host, the standard queue entry point is `python strength-search/adaptive_queue.py`, run from the campaign directory. Per-recipe replay settings are stored under `strength-search/leaderboard-retune-design/<recipe>/tuning.json`. The historical per-image queue can be run explicitly with `--objective visible`.
 

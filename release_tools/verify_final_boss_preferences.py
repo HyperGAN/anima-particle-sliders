@@ -60,6 +60,8 @@ def verify(report, receipts):
         raise ValueError("Incomplete matched development panel")
     points = {m:fmean(p["margin"] if a==m else -p["margin"] for (a,b),p in ranked.items() if m in (a,b))
               for m in methods}
+    if "order" in report and "margins" not in report:
+        raise ValueError("A published order requires its margins")
     if "margins" in report and (set(report["margins"]) != set(points) or
             any(not isclose(points[m], report["margins"][m]) for m in methods) or
             report["order"] != sorted(points, key=lambda m:(-points[m],m))):

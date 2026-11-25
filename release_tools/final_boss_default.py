@@ -1,6 +1,14 @@
 """Resolve the Final Boss release from the first row of the distinct-design board."""
 
 
+def scheduled_gains(profile, alpha, sigmas):
+    """The per-interval gains that a named schedule and alpha resolve to on this sampler grid."""
+    from particle_sliders.strength_schedule import interval_strengths
+
+    widths = [start - end for start, end in zip(sigmas, sigmas[1:])]
+    return list(interval_strengths(alpha, widths, profile=profile))
+
+
 def select_default(panel, board, catalog):
     winner = panel["rows"][0]
     if winner["score"] != max(row["score"] for row in panel["rows"]):
@@ -17,6 +25,9 @@ def select_default(panel, board, catalog):
     if len(settings) != 1:
         raise ValueError("Expected a unique measured setting for the winning row")
     setting = settings[0]
+    # Alpha, schedule, sampler grid and resolved gains are released as one setting.
+    if setting["gains"] != scheduled_gains(winner["profile"], winner["alpha"], method["sigmas"]):
+        raise ValueError("The winning gains differ from its schedule and alpha on the recorded sampler grid")
     if winner["inputs"] != {k: v["on_sha256"] for k, v in setting["cases"].items()}:
         raise ValueError("The winning design measurements and replay images differ")
     case = panel["cases"][0]

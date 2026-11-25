@@ -33,6 +33,22 @@ This directory preserves the host-side programs used to train the November 24 Vi
 
 The active strength worker measures the Boss rating of the edited image and its matched original, measures visible image damage, then ranks complete panels by their mean Final Boss score. The archived training worker separately records catastrophic output checks on training milestones. Earlier strength workers are included because their scored images were reused and appear in the history.
 
+## Known limits of the archived host programs
+
+These files are kept byte-for-byte as they ran, so the following are recorded here and left unchanged. A November 25 review replayed all 45 recorded alpha searches through the archived code and found no change to a published selection. The first five rows were reproduced offline with stubbed services. The last two were found by reading the code and were not reproduced. Fix these in a new copy before reusing the programs for another product.
+
+| Area | What happens | Where |
+|---|---|---|
+| GPU guards | One failed or slow `nvidia-smi` sample stops a healthy worker and leaves no terminal receipt. Training then stays blocked behind `pending-update.json`. | `strength-search/calibration_guard.py`, the three `shared_capacity_guard*.py`, `optimization_guard.py` |
+| Rating indexes | A Boss or damage judgment that failed once is saved as an empty value and returned on every later run, even after the judge request succeeds. | `boss_review.py`, `image_breakage.py` |
+| Design-pair retries | The three retry stores are used back to back. One short rate-limit burst spends all three, and later runs fail without calling the judge. | `metric-calibration/design_range.py` |
+| Alpha range | Searches stay within α 0.25–1.75. See [the measured effect](../../docs/final-boss-raw192/vibe12/alpha-tuning/README.md#search-and-confirmation). | `strength-search/adaptive_alpha.py` |
+| Attempt numbers | After a guard stops without a receipt, the next run reuses the attempt number and fails on the existing log. | `strength-search/run.py` |
+| Campaign journal | A launch is journaled at the end of the loop. A failure in between can start the same recipe on the second GPU after a restart. A blocked recipe has no automatic way back. | `campaign_shared_v4.py` and earlier versions |
+| Lease probes | Probing a lease takes it for an instant. Only the design objective turns the resulting refusal into a retry. | `strength-search/guard.py`, `adaptive_queue.py` |
+
+The named collection in `lumen_studio` saves these lifecycles explicitly. [Resuming an interrupted named collection](../../VIBE.md#resuming-an-interrupted-named-collection)
+
 ## Inputs for native reproduction
 
 The paths are deliberately laid out as sibling dated campaign directories. Run the host commands from a **separate experiment copy** provisioned with the original artifacts. The GPU runner reads and writes run journals, caches, and checkpoints beneath that copy. A source checkout alone is sufficient to inspect the algorithms and run the public offline evaluation. Rendering and training also require the following material:

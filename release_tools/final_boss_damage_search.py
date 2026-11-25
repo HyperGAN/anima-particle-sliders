@@ -50,6 +50,12 @@ def search(evaluate):
     return trials, steps
 
 
+def bound_limited(trials):
+    """Whether the strongest measured alpha is a search bound, leaving its far side untried."""
+    measured = {alpha: score for alpha, score in trials.items() if score is not None}
+    return bool(measured) and max(measured, key=measured.get) in (LOWER, UPPER)
+
+
 def panel_scores(cases, case_names, version=LEGACY):
     """Mean raw ratings and damage-adjusted score on the declared matched panel."""
     if not case_names or len(case_names) != len(set(case_names)) or set(cases) != set(case_names):
