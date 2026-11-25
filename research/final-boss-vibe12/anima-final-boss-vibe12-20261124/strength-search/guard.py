@@ -7,6 +7,15 @@ import calibration_guard
 calibration_guard.ROOT=root
 calibration_guard.plan=lambda _:{}
 gpu, attempt, method, *mode=sys.argv[1:]
+if mode == ['leaderboard-design']:
+    try:
+        result = calibration_guard.run('retune-design', int(gpu), attempt, (method,),
+                                       worker_name='retune_distinct.py')
+    except BlockingIOError:
+        calibration_guard.save(root / f'retune-design-{method}-{attempt}.terminal.json',
+                               {'status':'entry-refused','reason':'GPU lease occupied'})
+        result = 75
+    raise SystemExit(result)
 if mode == ['leaderboard-visible']:
     raise SystemExit(calibration_guard.run('retune-visible', int(gpu), attempt, (method,),
                                            worker_name='retune_final_boss_visible.py'))

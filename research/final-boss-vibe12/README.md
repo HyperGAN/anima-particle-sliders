@@ -61,3 +61,7 @@ The all-recipe score chooses the six recipes and their measured settings. From t
 ## Distinct Final Boss designs
 
 Run `python metric-calibration/design_range.py --watch` in the campaign to measure recurring boss designs at each recipe’s best per-image strength. The alpha leaderboard consumes the latest complete snapshot. The companion scripts `design_range_transfer.py` and `design_lineups.py` compare the nominated opening-four recipe and the late-cue incumbent across additional search scenes and complete character lineups. The export uses `python -m release_tools.publish_final_boss_designs CAMPAIGN docs/final-boss-raw192/vibe12` after exporting the alpha snapshot. [Formula, samples and offline replay](../../docs/final-boss-raw192/vibe12/distinct-designs.md)
+
+## Distinct-design alpha search
+
+Run `python strength-search/adaptive_queue.py` in the campaign for guarded two-card tuning. The default objective is `design`. The old scalar queue uses `--objective visible`. Distinct-design decisions reuse cached native frames and Jev receipts. Missing frames are rendered under the same model, RAW checkpoint, scene, seed and resolved schedule. Results in `strength-search/leaderboard-retune-design/<recipe>/tuning.json` drive the default design leaderboard. [Search protocol and verified opening-four replay](../../docs/final-boss-raw192/vibe12/alpha-tuning/README.md)

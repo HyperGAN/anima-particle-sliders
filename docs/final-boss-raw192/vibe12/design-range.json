@@ -1,6 +1,6 @@
 {
   "development": {
-    "protocol": "Fix one RAW192 setting per recipe, selected by the existing finished-image score. Compare every unordered pair of its eight different source characters in both image orders. For each pair, sum the existing case scores and deduct the order-averaged repetition times the lower score. Average over all pairs and divide by two. Identical designs share the stronger score; distinct designs keep both. All 28 pairs receive equal weight. Validate on preselected older confirmation renders before ranking. For each same-design control both orders must exceed 0.5 and for each different-design control both must fall below 0.5. Report counts and raw values.",
+    "protocol": "Use completed distinct-design alpha selections where available and prior measured per-image strengths elsewhere. Both use all 28 character pairs.",
     "model": "typesafe/jev-1.14",
     "state": "Compare the central character designs in these two illustrations from the same visual style.",
     "questions": {
@@ -16,7 +16,7 @@
         ]
       }
     },
-    "signature": "9043b7fd7786efa5692236d5da94eb1823578150c6ea0b8f880bfd4ce7615077",
+    "signature": "5874c0d0553389a72323df185fb0121f4f5ecec262b25a5f5d148a210abfc06d",
     "originals": {
       "ranger": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c",
       "smith": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245",
@@ -161,29 +161,9 @@
     ],
     "rows": [
       {
-        "method": "late-cues",
-        "profile": "early",
-        "alpha": 1.15625,
-        "case_scores": {
-          "ranger": 0.434693952,
-          "smith": 0.36961214159999994,
-          "stationer": 0.44345070000000014,
-          "ferryman": 0.30611679839999995,
-          "watchmaker": 0.35746835354999995,
-          "guide": 0.2803712000000001,
-          "guard": 0.38298015000000013,
-          "violinist": 0.39276411435
-        },
-        "inputs": {
-          "ranger": "30f5fa677ac67218ab183bcc2b476de329db2265c7ebef93f751c7c87e129fff",
-          "smith": "529904a0fffc3ee0f72d1f5ceae9827dc992f5ad803adc61b1b650c6c81a0ad2",
-          "stationer": "f82d270716cdbbbcc9b4f13497ce45e9f39159de209bb735252c5cae38b40b06",
-          "ferryman": "ddda3846576e5a2b56ea6bc21f7fdbca1f243738e1c0b360e6489c489411bd45",
-          "watchmaker": "8ba3745617d40fae333cc6e6a32d5c2f2e8adea7b6aa890450bb7b3dc84e8af7",
-          "guide": "47494c2cfa5b7d7d7d00292aba48b121fbf94427491cceb3f9786e65cdb11145",
-          "guard": "48e75426206a989a7d317072cac1d94d4a296b9d079c0759501e8b7eabd50f28",
-          "violinist": "613e3c7a4b4740ff4aa2bd4450e8ed379cded85171e14361be9fa32a2be6e8b2"
-        },
+        "base": 0.3709321762375,
+        "repeat": 0.49040178571428567,
+        "score": 0.2883768569762545,
         "pairs": [
           {
             "images": [
@@ -718,9 +698,29 @@
             ]
           }
         ],
-        "base": 0.3709321762375,
-        "repeat": 0.49040178571428567,
-        "score": 0.2883768569762545
+        "method": "late-cues",
+        "profile": "early",
+        "alpha": 1.15625,
+        "inputs": {
+          "ranger": "30f5fa677ac67218ab183bcc2b476de329db2265c7ebef93f751c7c87e129fff",
+          "smith": "529904a0fffc3ee0f72d1f5ceae9827dc992f5ad803adc61b1b650c6c81a0ad2",
+          "stationer": "f82d270716cdbbbcc9b4f13497ce45e9f39159de209bb735252c5cae38b40b06",
+          "ferryman": "ddda3846576e5a2b56ea6bc21f7fdbca1f243738e1c0b360e6489c489411bd45",
+          "watchmaker": "8ba3745617d40fae333cc6e6a32d5c2f2e8adea7b6aa890450bb7b3dc84e8af7",
+          "guide": "47494c2cfa5b7d7d7d00292aba48b121fbf94427491cceb3f9786e65cdb11145",
+          "guard": "48e75426206a989a7d317072cac1d94d4a296b9d079c0759501e8b7eabd50f28",
+          "violinist": "613e3c7a4b4740ff4aa2bd4450e8ed379cded85171e14361be9fa32a2be6e8b2"
+        },
+        "case_scores": {
+          "ranger": 0.434693952,
+          "smith": 0.36961214159999994,
+          "stationer": 0.44345070000000014,
+          "ferryman": 0.30611679839999995,
+          "watchmaker": 0.35746835354999995,
+          "guide": 0.2803712000000001,
+          "guard": 0.38298015000000013,
+          "violinist": 0.39276411435
+        }
       },
       {
         "method": "shared-best-middle",
@@ -1285,29 +1285,9 @@
         "score": 0.27736990168685943
       },
       {
-        "method": "shared-best-opening",
-        "profile": "early",
-        "alpha": 1.25,
-        "case_scores": {
-          "ranger": 0.384565752,
-          "smith": 0.3733330691999999,
-          "stationer": 0.4261537605000001,
-          "ferryman": 0.45089817240000013,
-          "watchmaker": 0.3347562728,
-          "guide": 0.25824150222500003,
-          "guard": 0.3725607424,
-          "violinist": 0.04092614977500001
-        },
-        "inputs": {
-          "ranger": "418053c05d33ab99ef05b7029f13b80678968cb75c54142d13375dd3d5051688",
-          "smith": "d0e8ec01610eae542893ca9229d93703b04b79ea6cb51000eef928c8558de75b",
-          "stationer": "06beea38034c36fca0bf6af203c56b04d3619d718d1538787d45f33dfd9bcada",
-          "ferryman": "94c92353b43203d7381f8d406210540ae8baeb1505c876af805ed19fbd371412",
-          "watchmaker": "4b7d527e0976704936d99180932e8fd9d68a180bf91c875a08b481336f7073ad",
-          "guide": "c3d9350cba913793af0ee0c1891fcbef7807f8cf8b5bb80bab3f313d11b00d45",
-          "guard": "05903c02b52ed341171f06c6452b6ba9c57fcb7d19962b9fac9c477a4c1596c6",
-          "violinist": "2aa0637d3d07dd6b020fbd9205ef9e768b8163996b28220baeac3d440dbadc4c"
-        },
+        "base": 0.3301794276625,
+        "repeat": 0.3567410714285714,
+        "score": 0.27628684183906144,
         "pairs": [
           {
             "images": [
@@ -1842,9 +1822,29 @@
             ]
           }
         ],
-        "base": 0.3301794276625,
-        "repeat": 0.3567410714285714,
-        "score": 0.27628684183906144
+        "method": "shared-best-opening",
+        "profile": "early",
+        "alpha": 1.25,
+        "inputs": {
+          "ranger": "418053c05d33ab99ef05b7029f13b80678968cb75c54142d13375dd3d5051688",
+          "smith": "d0e8ec01610eae542893ca9229d93703b04b79ea6cb51000eef928c8558de75b",
+          "stationer": "06beea38034c36fca0bf6af203c56b04d3619d718d1538787d45f33dfd9bcada",
+          "ferryman": "94c92353b43203d7381f8d406210540ae8baeb1505c876af805ed19fbd371412",
+          "watchmaker": "4b7d527e0976704936d99180932e8fd9d68a180bf91c875a08b481336f7073ad",
+          "guide": "c3d9350cba913793af0ee0c1891fcbef7807f8cf8b5bb80bab3f313d11b00d45",
+          "guard": "05903c02b52ed341171f06c6452b6ba9c57fcb7d19962b9fac9c477a4c1596c6",
+          "violinist": "2aa0637d3d07dd6b020fbd9205ef9e768b8163996b28220baeac3d440dbadc4c"
+        },
+        "case_scores": {
+          "ranger": 0.384565752,
+          "smith": 0.3733330691999999,
+          "stationer": 0.4261537605000001,
+          "ferryman": 0.45089817240000013,
+          "watchmaker": 0.3347562728,
+          "guide": 0.25824150222500003,
+          "guard": 0.3725607424,
+          "violinist": 0.04092614977500001
+        }
       },
       {
         "method": "soft45-background-orthogonal",
@@ -4095,6 +4095,568 @@
         "score": 0.2554879479741942
       },
       {
+        "method": "incumbent-refit",
+        "profile": "early",
+        "alpha": 1.25,
+        "case_scores": {
+          "ranger": 0.28898114979999995,
+          "smith": 0.40343142400000004,
+          "stationer": 0.36658862009999993,
+          "ferryman": 0.29746332,
+          "watchmaker": 0.06943863989999999,
+          "guide": 0.351102912,
+          "guard": 0.42761317500000007,
+          "violinist": 0.2845885931999999
+        },
+        "inputs": {
+          "ranger": "da9b7ae8e85bb8af2cf759735e73de544300fc02e31f7e5bafc0f8642c031c76",
+          "smith": "a47407a9f3b41d8307a6415a81c4df6a7d29320c7957cab4b64eefa5ce06f762",
+          "stationer": "e943984629dc69df33326203c2ab18d31a412ea069b8d38ed69a24d03994ea67",
+          "ferryman": "2b46c02e32467902ffc680fa446388e85ea9765dd06d16544975b106b0d13db7",
+          "watchmaker": "2b6d02ccd127568a88fdc43b3f2e86cc1f523818409158198d28eaec19b90737",
+          "guide": "6ae674784d5199ab0330c830505877c37269267b597d7367aef6c595463dd980",
+          "guard": "3f0875e834c06225038e16cfff8dfb2408fa409d8d602ee7be2d8974cd631f14",
+          "violinist": "a2c3f9497d0a7e10aadd428badf80c48dae860bd0f9bdaea0e29cf7671846a18"
+        },
+        "pairs": [
+          {
+            "images": [
+              "da9b7ae8e85bb8af2cf759735e73de544300fc02e31f7e5bafc0f8642c031c76",
+              "a47407a9f3b41d8307a6415a81c4df6a7d29320c7957cab4b64eefa5ce06f762"
+            ],
+            "forward": {
+              "value": 0.53,
+              "receipt": "c0acc0034ec37942ad0286a6bf53a5420f9c50ad6321ccdc1b395421de89cc46"
+            },
+            "reverse": {
+              "value": 0.5075,
+              "receipt": "3d0ffdded4f1837d2c99f0ff600bbe1b9a2dc248e570a19e0d54aebfd15a4bd0"
+            },
+            "repeat": 0.51875,
+            "cases": [
+              "ranger",
+              "smith"
+            ]
+          },
+          {
+            "images": [
+              "da9b7ae8e85bb8af2cf759735e73de544300fc02e31f7e5bafc0f8642c031c76",
+              "e943984629dc69df33326203c2ab18d31a412ea069b8d38ed69a24d03994ea67"
+            ],
+            "forward": {
+              "value": 0.54,
+              "receipt": "9862d080e61793050f945d0a1d945c9e1ff89022814359bd2d77f2121948ee42"
+            },
+            "reverse": {
+              "value": 0.4925,
+              "receipt": "784fd593f5b10d5d6fe9135b22252ad8b461403e3ea385b6c2b6be4ebcaf2922"
+            },
+            "repeat": 0.51625,
+            "cases": [
+              "ranger",
+              "stationer"
+            ]
+          },
+          {
+            "images": [
+              "da9b7ae8e85bb8af2cf759735e73de544300fc02e31f7e5bafc0f8642c031c76",
+              "2b46c02e32467902ffc680fa446388e85ea9765dd06d16544975b106b0d13db7"
+            ],
+            "forward": {
+              "value": 0.615,
+              "receipt": "8b3d33c256b84e2c8c2a72621c52785f51a53770551be123b15ca00f60e3b030"
+            },
+            "reverse": {
+              "value": 0.6025,
+              "receipt": "8f7c3226a55bac64cc987dc8a95dd41f454372e12b67477aaa23a022f080e0b4"
+            },
+            "repeat": 0.60875,
+            "cases": [
+              "ranger",
+              "ferryman"
+            ]
+          },
+          {
+            "images": [
+              "da9b7ae8e85bb8af2cf759735e73de544300fc02e31f7e5bafc0f8642c031c76",
+              "2b6d02ccd127568a88fdc43b3f2e86cc1f523818409158198d28eaec19b90737"
+            ],
+            "forward": {
+              "value": 0.505,
+              "receipt": "f7cdc55241d7b0499281d54b38f8470ef9f8c73b232e83e8d11f8e3ea453fa44"
+            },
+            "reverse": {
+              "value": 0.4775,
+              "receipt": "0d7360e7c4d7546240efcbd0a5fbb2d29e788d29a2bfc5a160479f0e9d5b41f9"
+            },
+            "repeat": 0.49124999999999996,
+            "cases": [
+              "ranger",
+              "watchmaker"
+            ]
+          },
+          {
+            "images": [
+              "da9b7ae8e85bb8af2cf759735e73de544300fc02e31f7e5bafc0f8642c031c76",
+              "6ae674784d5199ab0330c830505877c37269267b597d7367aef6c595463dd980"
+            ],
+            "forward": {
+              "value": 0.525,
+              "receipt": "cb031f72204e5b6c15c8762621cb50a9210ba9b27c806a90da539588a17650b2"
+            },
+            "reverse": {
+              "value": 0.4725,
+              "receipt": "885c1591eef42e3a1b47ffdf03825549d05d6dac5fd562e7e61b726c455b05ed"
+            },
+            "repeat": 0.49875,
+            "cases": [
+              "ranger",
+              "guide"
+            ]
+          },
+          {
+            "images": [
+              "da9b7ae8e85bb8af2cf759735e73de544300fc02e31f7e5bafc0f8642c031c76",
+              "3f0875e834c06225038e16cfff8dfb2408fa409d8d602ee7be2d8974cd631f14"
+            ],
+            "forward": {
+              "value": 0.4525,
+              "receipt": "90ccf067e8ae012049419163a5c796331e1dc9fb334b8df5944c57e01c3d561f"
+            },
+            "reverse": {
+              "value": 0.3925,
+              "receipt": "caa138b46add3d023c432f89c904b24f1fa0dd589cd1ce7770aa739abfd9c750"
+            },
+            "repeat": 0.4225,
+            "cases": [
+              "ranger",
+              "guard"
+            ]
+          },
+          {
+            "images": [
+              "da9b7ae8e85bb8af2cf759735e73de544300fc02e31f7e5bafc0f8642c031c76",
+              "a2c3f9497d0a7e10aadd428badf80c48dae860bd0f9bdaea0e29cf7671846a18"
+            ],
+            "forward": {
+              "value": 0.57,
+              "receipt": "ce61470483350dbbabec26743372c09a59ffeb4d16995133e979a00ce898e9da"
+            },
+            "reverse": {
+              "value": 0.495,
+              "receipt": "54274f7c018bf6d766a48b800caf0efcc68cd96343f511cd58ca4b1b602f50db"
+            },
+            "repeat": 0.5325,
+            "cases": [
+              "ranger",
+              "violinist"
+            ]
+          },
+          {
+            "images": [
+              "a47407a9f3b41d8307a6415a81c4df6a7d29320c7957cab4b64eefa5ce06f762",
+              "e943984629dc69df33326203c2ab18d31a412ea069b8d38ed69a24d03994ea67"
+            ],
+            "forward": {
+              "value": 0.4925,
+              "receipt": "0f77dd44319c4ccce95738916a332a3c8cec82d791af56aecf70169337b20eb4"
+            },
+            "reverse": {
+              "value": 0.435,
+              "receipt": "1ab6f7439d9d0afa52bc6b35a19dd7adba849c902b457f807518ca2d27bd9837"
+            },
+            "repeat": 0.46375,
+            "cases": [
+              "smith",
+              "stationer"
+            ]
+          },
+          {
+            "images": [
+              "a47407a9f3b41d8307a6415a81c4df6a7d29320c7957cab4b64eefa5ce06f762",
+              "2b46c02e32467902ffc680fa446388e85ea9765dd06d16544975b106b0d13db7"
+            ],
+            "forward": {
+              "value": 0.565,
+              "receipt": "1bf0a3271f183759f13c4fc90fcb5c1efcf51d419625665e1356496bf61ebedf"
+            },
+            "reverse": {
+              "value": 0.5025,
+              "receipt": "62ee505822c200224284bfec6388407ffdf39f1683b18aaef54fddc59ea8182f"
+            },
+            "repeat": 0.53375,
+            "cases": [
+              "smith",
+              "ferryman"
+            ]
+          },
+          {
+            "images": [
+              "a47407a9f3b41d8307a6415a81c4df6a7d29320c7957cab4b64eefa5ce06f762",
+              "2b6d02ccd127568a88fdc43b3f2e86cc1f523818409158198d28eaec19b90737"
+            ],
+            "forward": {
+              "value": 0.51,
+              "receipt": "87e78e850bb4a9b1b7c511c1949ec8fd8243498e77f23991ee36cc16de5b4145"
+            },
+            "reverse": {
+              "value": 0.42,
+              "receipt": "7155d44e6b955a317e1ab9827550d4f38a611e3f6f892aaebc98410c1dde2e25"
+            },
+            "repeat": 0.46499999999999997,
+            "cases": [
+              "smith",
+              "watchmaker"
+            ]
+          },
+          {
+            "images": [
+              "a47407a9f3b41d8307a6415a81c4df6a7d29320c7957cab4b64eefa5ce06f762",
+              "6ae674784d5199ab0330c830505877c37269267b597d7367aef6c595463dd980"
+            ],
+            "forward": {
+              "value": 0.445,
+              "receipt": "064c57d06b0628708fd3146498679e095532af3ec4099d00541026c6a452ee02"
+            },
+            "reverse": {
+              "value": 0.475,
+              "receipt": "31d8f32c1a72d3bf9ce4cbd0d7a77e73cfd59f655a85b053166b739c62020779"
+            },
+            "repeat": 0.45999999999999996,
+            "cases": [
+              "smith",
+              "guide"
+            ]
+          },
+          {
+            "images": [
+              "a47407a9f3b41d8307a6415a81c4df6a7d29320c7957cab4b64eefa5ce06f762",
+              "3f0875e834c06225038e16cfff8dfb2408fa409d8d602ee7be2d8974cd631f14"
+            ],
+            "forward": {
+              "value": 0.4425,
+              "receipt": "3ca3d1f80518d2a5e6d75c2428030c5cf5f34fa85b611041598ff0d13c893f78"
+            },
+            "reverse": {
+              "value": 0.3625,
+              "receipt": "b20260ae9369c37d5c779034b2be70bfc0d23d46c06be579cef50e13459a0447"
+            },
+            "repeat": 0.40249999999999997,
+            "cases": [
+              "smith",
+              "guard"
+            ]
+          },
+          {
+            "images": [
+              "a47407a9f3b41d8307a6415a81c4df6a7d29320c7957cab4b64eefa5ce06f762",
+              "a2c3f9497d0a7e10aadd428badf80c48dae860bd0f9bdaea0e29cf7671846a18"
+            ],
+            "forward": {
+              "value": 0.52,
+              "receipt": "7bd72b850733eb2cf07e429583aaccae3effcbe68d216f028cb6b03200356f89"
+            },
+            "reverse": {
+              "value": 0.4975,
+              "receipt": "8be827847cdbb5cf424ab288621ea73179caa7dab85d693d7f0947fe3b5e7bee"
+            },
+            "repeat": 0.50875,
+            "cases": [
+              "smith",
+              "violinist"
+            ]
+          },
+          {
+            "images": [
+              "e943984629dc69df33326203c2ab18d31a412ea069b8d38ed69a24d03994ea67",
+              "2b46c02e32467902ffc680fa446388e85ea9765dd06d16544975b106b0d13db7"
+            ],
+            "forward": {
+              "value": 0.4725,
+              "receipt": "110f90c27817120374d4bfc237d27b1d4a5a79b726e4c04bbd8878e2216b8d9a"
+            },
+            "reverse": {
+              "value": 0.4375,
+              "receipt": "56ec48f4b361de357d4fdab6c4548d2bba9f95e311b7e1afb99331c0aff626c8"
+            },
+            "repeat": 0.45499999999999996,
+            "cases": [
+              "stationer",
+              "ferryman"
+            ]
+          },
+          {
+            "images": [
+              "e943984629dc69df33326203c2ab18d31a412ea069b8d38ed69a24d03994ea67",
+              "2b6d02ccd127568a88fdc43b3f2e86cc1f523818409158198d28eaec19b90737"
+            ],
+            "forward": {
+              "value": 0.545,
+              "receipt": "5360b6f32c9bfa07d00617d3dafb9214e487f15f30ba4cc0307a9fe7f48de5de"
+            },
+            "reverse": {
+              "value": 0.5625,
+              "receipt": "8e3a7905935240c8fffd0d28ac5ebf696dca90789c67e46f30e79d089db9b3ce"
+            },
+            "repeat": 0.55375,
+            "cases": [
+              "stationer",
+              "watchmaker"
+            ]
+          },
+          {
+            "images": [
+              "e943984629dc69df33326203c2ab18d31a412ea069b8d38ed69a24d03994ea67",
+              "6ae674784d5199ab0330c830505877c37269267b597d7367aef6c595463dd980"
+            ],
+            "forward": {
+              "value": 0.4775,
+              "receipt": "3bf25fef1a2abaed0506cf4215cc6d383403f364581a3e16059b7227f80be927"
+            },
+            "reverse": {
+              "value": 0.51,
+              "receipt": "2cd48cc5f20eb985b2431f5bf4503e780d10a6c996cd5d5b8c21b5e48f648da3"
+            },
+            "repeat": 0.49375,
+            "cases": [
+              "stationer",
+              "guide"
+            ]
+          },
+          {
+            "images": [
+              "e943984629dc69df33326203c2ab18d31a412ea069b8d38ed69a24d03994ea67",
+              "3f0875e834c06225038e16cfff8dfb2408fa409d8d602ee7be2d8974cd631f14"
+            ],
+            "forward": {
+              "value": 0.335,
+              "receipt": "dcd6537f3811c7955ba230c183b008426c300ac030128ff58fb32bd684828a66"
+            },
+            "reverse": {
+              "value": 0.4075,
+              "receipt": "a9cac0a6a1c68e0aebd85dbff65b7ff3a645bafe2c92d6b2efec5ab4b3aa74b0"
+            },
+            "repeat": 0.37124999999999997,
+            "cases": [
+              "stationer",
+              "guard"
+            ]
+          },
+          {
+            "images": [
+              "e943984629dc69df33326203c2ab18d31a412ea069b8d38ed69a24d03994ea67",
+              "a2c3f9497d0a7e10aadd428badf80c48dae860bd0f9bdaea0e29cf7671846a18"
+            ],
+            "forward": {
+              "value": 0.455,
+              "receipt": "8cfbb4d131e883360083c497f133326c7a00cd3834a52325f1ffe00889971506"
+            },
+            "reverse": {
+              "value": 0.445,
+              "receipt": "4af23a3825ba2d0a9aea94109bead18aa3805720c33ebac2a3e9ede470541a19"
+            },
+            "repeat": 0.45,
+            "cases": [
+              "stationer",
+              "violinist"
+            ]
+          },
+          {
+            "images": [
+              "2b46c02e32467902ffc680fa446388e85ea9765dd06d16544975b106b0d13db7",
+              "2b6d02ccd127568a88fdc43b3f2e86cc1f523818409158198d28eaec19b90737"
+            ],
+            "forward": {
+              "value": 0.465,
+              "receipt": "fb90257ea0166fa84dd2727176bee0b145ee15c5884eed3dde56ff3b86e66c95"
+            },
+            "reverse": {
+              "value": 0.52,
+              "receipt": "8924a9d823a76366d02ecbf2966665573c4c63c63e10f48ae76ee61e49f56c2f"
+            },
+            "repeat": 0.49250000000000005,
+            "cases": [
+              "ferryman",
+              "watchmaker"
+            ]
+          },
+          {
+            "images": [
+              "2b46c02e32467902ffc680fa446388e85ea9765dd06d16544975b106b0d13db7",
+              "6ae674784d5199ab0330c830505877c37269267b597d7367aef6c595463dd980"
+            ],
+            "forward": {
+              "value": 0.505,
+              "receipt": "7abe2c870dfdf191c7e080cc70caf08facce20f0648c8a29ba8158f3e3c3a87a"
+            },
+            "reverse": {
+              "value": 0.4975,
+              "receipt": "26c54120fb3155653dc1cb2068608d344662f2f68894b9b6efe23edeec5d702d"
+            },
+            "repeat": 0.50125,
+            "cases": [
+              "ferryman",
+              "guide"
+            ]
+          },
+          {
+            "images": [
+              "2b46c02e32467902ffc680fa446388e85ea9765dd06d16544975b106b0d13db7",
+              "3f0875e834c06225038e16cfff8dfb2408fa409d8d602ee7be2d8974cd631f14"
+            ],
+            "forward": {
+              "value": 0.63,
+              "receipt": "8e8595cccf12ee7013d7837b27a1c7dea5f9840a108626114057fecd2117c3a9"
+            },
+            "reverse": {
+              "value": 0.575,
+              "receipt": "0135b2d801710b6a33a901a536afa45dd26f403b4590f791797f010494b5faa2"
+            },
+            "repeat": 0.6025,
+            "cases": [
+              "ferryman",
+              "guard"
+            ]
+          },
+          {
+            "images": [
+              "2b46c02e32467902ffc680fa446388e85ea9765dd06d16544975b106b0d13db7",
+              "a2c3f9497d0a7e10aadd428badf80c48dae860bd0f9bdaea0e29cf7671846a18"
+            ],
+            "forward": {
+              "value": 0.405,
+              "receipt": "c436d7232060891a4ab4aac10e8f49b988a60761a371a14ef41f2edb6f4a7de7"
+            },
+            "reverse": {
+              "value": 0.48,
+              "receipt": "e19b35437f869b05482889782ffed6e93f8c6bf2be0f42853128c7cf7684b74b"
+            },
+            "repeat": 0.4425,
+            "cases": [
+              "ferryman",
+              "violinist"
+            ]
+          },
+          {
+            "images": [
+              "2b6d02ccd127568a88fdc43b3f2e86cc1f523818409158198d28eaec19b90737",
+              "6ae674784d5199ab0330c830505877c37269267b597d7367aef6c595463dd980"
+            ],
+            "forward": {
+              "value": 0.4725,
+              "receipt": "64265128db2a79f264e2003cb8c5c0a5e482c21d58217d132031cfa1b77be3fc"
+            },
+            "reverse": {
+              "value": 0.4725,
+              "receipt": "bfb8e2c26af4049010160b43b9fce6ec8411be6738e1d4ee4862c7b3d69d58a3"
+            },
+            "repeat": 0.4725,
+            "cases": [
+              "watchmaker",
+              "guide"
+            ]
+          },
+          {
+            "images": [
+              "2b6d02ccd127568a88fdc43b3f2e86cc1f523818409158198d28eaec19b90737",
+              "3f0875e834c06225038e16cfff8dfb2408fa409d8d602ee7be2d8974cd631f14"
+            ],
+            "forward": {
+              "value": 0.54,
+              "receipt": "5d78a078b557c58571d68cf9040579b1546447dfc105f7d96ee96f4a92385e21"
+            },
+            "reverse": {
+              "value": 0.5375,
+              "receipt": "1d5c8ee166299910a61293e5b2b287350ad60f21726db3974550ad877ecc291f"
+            },
+            "repeat": 0.5387500000000001,
+            "cases": [
+              "watchmaker",
+              "guard"
+            ]
+          },
+          {
+            "images": [
+              "2b6d02ccd127568a88fdc43b3f2e86cc1f523818409158198d28eaec19b90737",
+              "a2c3f9497d0a7e10aadd428badf80c48dae860bd0f9bdaea0e29cf7671846a18"
+            ],
+            "forward": {
+              "value": 0.4225,
+              "receipt": "3e7bf8509a94abead2acb9f593376c878795b33489f2bcd0aa5282db87fcce2e"
+            },
+            "reverse": {
+              "value": 0.4325,
+              "receipt": "d883eb0038c065b84a04a686f5f0e73b823689b06e5c719a7e40b9fc0b534493"
+            },
+            "repeat": 0.4275,
+            "cases": [
+              "watchmaker",
+              "violinist"
+            ]
+          },
+          {
+            "images": [
+              "6ae674784d5199ab0330c830505877c37269267b597d7367aef6c595463dd980",
+              "3f0875e834c06225038e16cfff8dfb2408fa409d8d602ee7be2d8974cd631f14"
+            ],
+            "forward": {
+              "value": 0.67,
+              "receipt": "dbf61429d4addfd9b97d16635407b16a4eb3767ca681fc09e1112322c31a8f09"
+            },
+            "reverse": {
+              "value": 0.62,
+              "receipt": "8b7d64bb3b9dd4d8cc1301d0c0f70b95d68d7663019c1123e0457b69e1959da7"
+            },
+            "repeat": 0.645,
+            "cases": [
+              "guide",
+              "guard"
+            ]
+          },
+          {
+            "images": [
+              "6ae674784d5199ab0330c830505877c37269267b597d7367aef6c595463dd980",
+              "a2c3f9497d0a7e10aadd428badf80c48dae860bd0f9bdaea0e29cf7671846a18"
+            ],
+            "forward": {
+              "value": 0.4875,
+              "receipt": "271d298449cdb5659c9d4ed523b08f71e19d82e82435c98a7c6b78964c082402"
+            },
+            "reverse": {
+              "value": 0.455,
+              "receipt": "8e7dde2a66657bb74d7699ce3e933cf5462b061e377ed483d2f6284124e42849"
+            },
+            "repeat": 0.47125,
+            "cases": [
+              "guide",
+              "violinist"
+            ]
+          },
+          {
+            "images": [
+              "3f0875e834c06225038e16cfff8dfb2408fa409d8d602ee7be2d8974cd631f14",
+              "a2c3f9497d0a7e10aadd428badf80c48dae860bd0f9bdaea0e29cf7671846a18"
+            ],
+            "forward": {
+              "value": 0.41,
+              "receipt": "14fa349de76ded272f27b35160859f32184a128c468b9e574a8f35ddd99b5c40"
+            },
+            "reverse": {
+              "value": 0.435,
+              "receipt": "7b086d66f51d4c28a92e39f5a6e53b4199244256fae1a09ad19cb30734db985b"
+            },
+            "repeat": 0.4225,
+            "cases": [
+              "guard",
+              "violinist"
+            ]
+          }
+        ],
+        "base": 0.31115097924999996,
+        "repeat": 0.4915178571428571,
+        "score": 0.24977388925590402
+      },
+      {
         "method": "strong-boss-45-mix35",
         "profile": "early",
         "alpha": 1.0625,
@@ -5217,6 +5779,568 @@
         "base": 0.3179176423875,
         "repeat": 0.4939732142857142,
         "score": 0.24440464709830803
+      },
+      {
+        "method": "matched-attire",
+        "profile": "early",
+        "alpha": 1.25,
+        "case_scores": {
+          "ranger": 0.3023531279999999,
+          "smith": 0.376172544,
+          "stationer": 0.3633779072,
+          "ferryman": 0.31654239209999996,
+          "watchmaker": 0.38782800000000006,
+          "guide": 0.3467018295,
+          "guard": 0.32533473279999997,
+          "violinist": 0.27981826312499997
+        },
+        "inputs": {
+          "ranger": "bfc92a929aefa2e08ce4a3b7129444698c366e5d48a5fb37a86f37dbee21032c",
+          "smith": "43170c81f31ff0fc25d103a7cb36fd200c7ee75a0792277477b641b03261af0c",
+          "stationer": "5644395282699afb0d173a354bc7c31f5550628915a6fca4319f9b00a6b845c0",
+          "ferryman": "4c4f40503111e055cf883cbca56928a787f1b9bcf248da40645e82b8c052fa76",
+          "watchmaker": "6018785bfa7585defc423a6a6f52850168b4f637cddedb80965f2371e7edeaea",
+          "guide": "409d2556181c0c0f63193e792604703eed353c0ed85f4c03d7bafeefe042f19a",
+          "guard": "51bb8eea886923d3d227628a11a6b5ba95f18a67b2edfe2d0dc8a660b1e48f9d",
+          "violinist": "ca86366f99e770c6a481952b3fb88d1868bd89057aaf17bd3498a4a4acba28c2"
+        },
+        "pairs": [
+          {
+            "images": [
+              "bfc92a929aefa2e08ce4a3b7129444698c366e5d48a5fb37a86f37dbee21032c",
+              "43170c81f31ff0fc25d103a7cb36fd200c7ee75a0792277477b641b03261af0c"
+            ],
+            "forward": {
+              "value": 0.6875,
+              "receipt": "a1a4287866de97d3de467cddab95a7486d7a77ba13b9a112e698970930d5de99"
+            },
+            "reverse": {
+              "value": 0.6875,
+              "receipt": "5a214935796434125141f36b12f43b3a762007b93a9ff4d32c0d7f495f0cdb75"
+            },
+            "repeat": 0.6875,
+            "cases": [
+              "ranger",
+              "smith"
+            ]
+          },
+          {
+            "images": [
+              "bfc92a929aefa2e08ce4a3b7129444698c366e5d48a5fb37a86f37dbee21032c",
+              "5644395282699afb0d173a354bc7c31f5550628915a6fca4319f9b00a6b845c0"
+            ],
+            "forward": {
+              "value": 0.51,
+              "receipt": "40c8aaa85db4793966b02d1a6feaa138c967711d3f8e0e78f6cba1a4ef81a4a2"
+            },
+            "reverse": {
+              "value": 0.6425,
+              "receipt": "b0b8c541961d923d25872f3eaa5cfb4f4710addf862c776bad188ebbc425483b"
+            },
+            "repeat": 0.5762499999999999,
+            "cases": [
+              "ranger",
+              "stationer"
+            ]
+          },
+          {
+            "images": [
+              "bfc92a929aefa2e08ce4a3b7129444698c366e5d48a5fb37a86f37dbee21032c",
+              "4c4f40503111e055cf883cbca56928a787f1b9bcf248da40645e82b8c052fa76"
+            ],
+            "forward": {
+              "value": 0.64,
+              "receipt": "b5d5ec4ada3273f339c1ad798fbbd3de26b0eb3629eeb4ea0379da350c1a9083"
+            },
+            "reverse": {
+              "value": 0.64,
+              "receipt": "b497617e0a2518dc5233c8fd5a79a82c798ec80dadb20d30945d9ce266517375"
+            },
+            "repeat": 0.64,
+            "cases": [
+              "ranger",
+              "ferryman"
+            ]
+          },
+          {
+            "images": [
+              "bfc92a929aefa2e08ce4a3b7129444698c366e5d48a5fb37a86f37dbee21032c",
+              "6018785bfa7585defc423a6a6f52850168b4f637cddedb80965f2371e7edeaea"
+            ],
+            "forward": {
+              "value": 0.585,
+              "receipt": "496746e19d571ec48e1d6cafa972ca21fa7ad31fd4d7c31936db78a3680a2b5c"
+            },
+            "reverse": {
+              "value": 0.6525,
+              "receipt": "5b4ea5927cf5e7bc637bb42109c869c3770fccab134ad7c4b0d98cc5dee1a23f"
+            },
+            "repeat": 0.6187499999999999,
+            "cases": [
+              "ranger",
+              "watchmaker"
+            ]
+          },
+          {
+            "images": [
+              "bfc92a929aefa2e08ce4a3b7129444698c366e5d48a5fb37a86f37dbee21032c",
+              "409d2556181c0c0f63193e792604703eed353c0ed85f4c03d7bafeefe042f19a"
+            ],
+            "forward": {
+              "value": 0.6675,
+              "receipt": "613ee7674565adad0892da8418b5279aa017dd9878823ceb85ec20c4d4d17e1a"
+            },
+            "reverse": {
+              "value": 0.685,
+              "receipt": "14e3c0633e9ab91b667a88612744eb80d88fffce4af691f441711ab0ee56b5a6"
+            },
+            "repeat": 0.67625,
+            "cases": [
+              "ranger",
+              "guide"
+            ]
+          },
+          {
+            "images": [
+              "bfc92a929aefa2e08ce4a3b7129444698c366e5d48a5fb37a86f37dbee21032c",
+              "51bb8eea886923d3d227628a11a6b5ba95f18a67b2edfe2d0dc8a660b1e48f9d"
+            ],
+            "forward": {
+              "value": 0.7325,
+              "receipt": "0419984845cd53fccbe017937943b4b9f7271626fb6a094dbd9261c1549d483f"
+            },
+            "reverse": {
+              "value": 0.745,
+              "receipt": "a5dd910379b5db7fb6b407c1f80433b59f37d00bd86d779dad3a16465765c500"
+            },
+            "repeat": 0.73875,
+            "cases": [
+              "ranger",
+              "guard"
+            ]
+          },
+          {
+            "images": [
+              "bfc92a929aefa2e08ce4a3b7129444698c366e5d48a5fb37a86f37dbee21032c",
+              "ca86366f99e770c6a481952b3fb88d1868bd89057aaf17bd3498a4a4acba28c2"
+            ],
+            "forward": {
+              "value": 0.7625,
+              "receipt": "7c58a36ac8609304a284bc2dbca517ea328e03b58d7be7a57740a8271868fbaa"
+            },
+            "reverse": {
+              "value": 0.705,
+              "receipt": "0267f1dae7f12eeb37f3b8273a58ea9ac7fc43e8bc0ace784f0c96d918303117"
+            },
+            "repeat": 0.7337499999999999,
+            "cases": [
+              "ranger",
+              "violinist"
+            ]
+          },
+          {
+            "images": [
+              "43170c81f31ff0fc25d103a7cb36fd200c7ee75a0792277477b641b03261af0c",
+              "5644395282699afb0d173a354bc7c31f5550628915a6fca4319f9b00a6b845c0"
+            ],
+            "forward": {
+              "value": 0.555,
+              "receipt": "df137a664029955bcab188b8a7b6be2a70356127a422b85e63e554807bc65eaa"
+            },
+            "reverse": {
+              "value": 0.6125,
+              "receipt": "577c3c5b6a384222fdc2cf3b9727af0c7ebc791286f967a86607a56853f5d2f1"
+            },
+            "repeat": 0.58375,
+            "cases": [
+              "smith",
+              "stationer"
+            ]
+          },
+          {
+            "images": [
+              "43170c81f31ff0fc25d103a7cb36fd200c7ee75a0792277477b641b03261af0c",
+              "4c4f40503111e055cf883cbca56928a787f1b9bcf248da40645e82b8c052fa76"
+            ],
+            "forward": {
+              "value": 0.6625,
+              "receipt": "8c3c061f11ddcd27f179f73b56b898179eb62b74d7d96c29c1aac448833c9d91"
+            },
+            "reverse": {
+              "value": 0.6075,
+              "receipt": "e426c9c31f1cccd6a279e4afa096e599ef829ae457a977dc39de224823f80b66"
+            },
+            "repeat": 0.635,
+            "cases": [
+              "smith",
+              "ferryman"
+            ]
+          },
+          {
+            "images": [
+              "43170c81f31ff0fc25d103a7cb36fd200c7ee75a0792277477b641b03261af0c",
+              "6018785bfa7585defc423a6a6f52850168b4f637cddedb80965f2371e7edeaea"
+            ],
+            "forward": {
+              "value": 0.615,
+              "receipt": "ae658bfb77b95b3b97895b44fee7e490abc0fd63ac67259f8db232ec8d642b24"
+            },
+            "reverse": {
+              "value": 0.615,
+              "receipt": "c38817a598aad9ecb8f0b7a87c357a2d6f9492c3913f2e75c373773d1701884a"
+            },
+            "repeat": 0.615,
+            "cases": [
+              "smith",
+              "watchmaker"
+            ]
+          },
+          {
+            "images": [
+              "43170c81f31ff0fc25d103a7cb36fd200c7ee75a0792277477b641b03261af0c",
+              "409d2556181c0c0f63193e792604703eed353c0ed85f4c03d7bafeefe042f19a"
+            ],
+            "forward": {
+              "value": 0.525,
+              "receipt": "1b768e1b5a02a0533de5c192c1b77cd8a263fbd7e71b68186a49880303f44f02"
+            },
+            "reverse": {
+              "value": 0.515,
+              "receipt": "68bc24e7c27ddc10fb896a8553cfe01023a9f036c2b5567514df645cd9b35dcc"
+            },
+            "repeat": 0.52,
+            "cases": [
+              "smith",
+              "guide"
+            ]
+          },
+          {
+            "images": [
+              "43170c81f31ff0fc25d103a7cb36fd200c7ee75a0792277477b641b03261af0c",
+              "51bb8eea886923d3d227628a11a6b5ba95f18a67b2edfe2d0dc8a660b1e48f9d"
+            ],
+            "forward": {
+              "value": 0.7075,
+              "receipt": "4ffccfec2d99fe0d52fc7b110caa3dd9c0530cb6e339dfd2dda2da2701e6ee66"
+            },
+            "reverse": {
+              "value": 0.69,
+              "receipt": "06154997d746aca8fca9ad2472c6d2c9b9e514a733e15d8f2051baed1f861ce9"
+            },
+            "repeat": 0.69875,
+            "cases": [
+              "smith",
+              "guard"
+            ]
+          },
+          {
+            "images": [
+              "43170c81f31ff0fc25d103a7cb36fd200c7ee75a0792277477b641b03261af0c",
+              "ca86366f99e770c6a481952b3fb88d1868bd89057aaf17bd3498a4a4acba28c2"
+            ],
+            "forward": {
+              "value": 0.7075,
+              "receipt": "a4beeba9d36fe28e58722206ecbc73e82ae1aa42db3f122719262ba74f239385"
+            },
+            "reverse": {
+              "value": 0.67,
+              "receipt": "7e735946cc62a03827405b54fdcc5131be3c3a58da2432542495bbb6a73093c1"
+            },
+            "repeat": 0.68875,
+            "cases": [
+              "smith",
+              "violinist"
+            ]
+          },
+          {
+            "images": [
+              "5644395282699afb0d173a354bc7c31f5550628915a6fca4319f9b00a6b845c0",
+              "4c4f40503111e055cf883cbca56928a787f1b9bcf248da40645e82b8c052fa76"
+            ],
+            "forward": {
+              "value": 0.5425,
+              "receipt": "646af809366c28b9b868a82cfb5f72a5054a73bd7403511d393d7f4b59eb2ae3"
+            },
+            "reverse": {
+              "value": 0.49,
+              "receipt": "b199da8417d3267cb18a28ad99f359529804036f519a85e7c0b3eaf11fbddf07"
+            },
+            "repeat": 0.51625,
+            "cases": [
+              "stationer",
+              "ferryman"
+            ]
+          },
+          {
+            "images": [
+              "5644395282699afb0d173a354bc7c31f5550628915a6fca4319f9b00a6b845c0",
+              "6018785bfa7585defc423a6a6f52850168b4f637cddedb80965f2371e7edeaea"
+            ],
+            "forward": {
+              "value": 0.5475,
+              "receipt": "54ca6633e2353eaf5bc83a07f8f5c344c5c1f1b5aadafddce8c5e0971efa28d1"
+            },
+            "reverse": {
+              "value": 0.5225,
+              "receipt": "507738b832b6d8a1b99cb7bb28fd26bf39c439b4619c0062a80353b7c79f1584"
+            },
+            "repeat": 0.5349999999999999,
+            "cases": [
+              "stationer",
+              "watchmaker"
+            ]
+          },
+          {
+            "images": [
+              "5644395282699afb0d173a354bc7c31f5550628915a6fca4319f9b00a6b845c0",
+              "409d2556181c0c0f63193e792604703eed353c0ed85f4c03d7bafeefe042f19a"
+            ],
+            "forward": {
+              "value": 0.485,
+              "receipt": "76fdaee20a4565492b3ca05239a7bc0a9d67e75e78a13ce30b9924c793815a21"
+            },
+            "reverse": {
+              "value": 0.425,
+              "receipt": "0e5a4810bf334bd21b312eb7796a50c655d77f4bf707de7b08174549afba2d86"
+            },
+            "repeat": 0.45499999999999996,
+            "cases": [
+              "stationer",
+              "guide"
+            ]
+          },
+          {
+            "images": [
+              "5644395282699afb0d173a354bc7c31f5550628915a6fca4319f9b00a6b845c0",
+              "51bb8eea886923d3d227628a11a6b5ba95f18a67b2edfe2d0dc8a660b1e48f9d"
+            ],
+            "forward": {
+              "value": 0.5175,
+              "receipt": "214bcec2561ee26e24dcd1de16fe504206911ee81381a3a433549f5bc567b608"
+            },
+            "reverse": {
+              "value": 0.485,
+              "receipt": "dc01222a75581b21e09cc03595e08f62299f5ccf09eaf63a3ca6e8078a77ff6e"
+            },
+            "repeat": 0.50125,
+            "cases": [
+              "stationer",
+              "guard"
+            ]
+          },
+          {
+            "images": [
+              "5644395282699afb0d173a354bc7c31f5550628915a6fca4319f9b00a6b845c0",
+              "ca86366f99e770c6a481952b3fb88d1868bd89057aaf17bd3498a4a4acba28c2"
+            ],
+            "forward": {
+              "value": 0.5175,
+              "receipt": "d4e939fbbea0f1b0abcfe2ea61403f8b9d9a8fe9d24d8d45fedaf46921b1cdd5"
+            },
+            "reverse": {
+              "value": 0.45,
+              "receipt": "08ad610e949c7b65e3fad9bebbf3cb11a08ba30971a6a46bdba91c9ea0ca9708"
+            },
+            "repeat": 0.48375,
+            "cases": [
+              "stationer",
+              "violinist"
+            ]
+          },
+          {
+            "images": [
+              "4c4f40503111e055cf883cbca56928a787f1b9bcf248da40645e82b8c052fa76",
+              "6018785bfa7585defc423a6a6f52850168b4f637cddedb80965f2371e7edeaea"
+            ],
+            "forward": {
+              "value": 0.4775,
+              "receipt": "58a7a5088166f94dfe2954b108fd25b9c7392c1c65e858170f758e9c56446899"
+            },
+            "reverse": {
+              "value": 0.5875,
+              "receipt": "d7f4d94204bd0522666feb1ad7f8eda4045364850bf772c22733103f2570a53b"
+            },
+            "repeat": 0.5325,
+            "cases": [
+              "ferryman",
+              "watchmaker"
+            ]
+          },
+          {
+            "images": [
+              "4c4f40503111e055cf883cbca56928a787f1b9bcf248da40645e82b8c052fa76",
+              "409d2556181c0c0f63193e792604703eed353c0ed85f4c03d7bafeefe042f19a"
+            ],
+            "forward": {
+              "value": 0.5425,
+              "receipt": "e478e851907511272cf26a4d85b8290e990e53315bf141e16a5c2a772b36a7b4"
+            },
+            "reverse": {
+              "value": 0.52,
+              "receipt": "822e529a9b9a5aae21a34791a24c93eb681ebc0514fe148cf0a8079a078c9edd"
+            },
+            "repeat": 0.53125,
+            "cases": [
+              "ferryman",
+              "guide"
+            ]
+          },
+          {
+            "images": [
+              "4c4f40503111e055cf883cbca56928a787f1b9bcf248da40645e82b8c052fa76",
+              "51bb8eea886923d3d227628a11a6b5ba95f18a67b2edfe2d0dc8a660b1e48f9d"
+            ],
+            "forward": {
+              "value": 0.6875,
+              "receipt": "334cc3bf54ae19289a40fd6b7688974c253727815a873813093812583f39ff0e"
+            },
+            "reverse": {
+              "value": 0.675,
+              "receipt": "39cea30a03037de30bcde066d85b172054046701c9c4e7240d433c64d25cf206"
+            },
+            "repeat": 0.68125,
+            "cases": [
+              "ferryman",
+              "guard"
+            ]
+          },
+          {
+            "images": [
+              "4c4f40503111e055cf883cbca56928a787f1b9bcf248da40645e82b8c052fa76",
+              "ca86366f99e770c6a481952b3fb88d1868bd89057aaf17bd3498a4a4acba28c2"
+            ],
+            "forward": {
+              "value": 0.555,
+              "receipt": "f9b02f03641dec4ae4cb67135f33b2ee006283551c45087fcb20ab3eee436c52"
+            },
+            "reverse": {
+              "value": 0.5375,
+              "receipt": "5e4b3293e79b90d28dcbd1031dc185b6ef236f2f82e38dbd5af6025c7c78eed6"
+            },
+            "repeat": 0.54625,
+            "cases": [
+              "ferryman",
+              "violinist"
+            ]
+          },
+          {
+            "images": [
+              "6018785bfa7585defc423a6a6f52850168b4f637cddedb80965f2371e7edeaea",
+              "409d2556181c0c0f63193e792604703eed353c0ed85f4c03d7bafeefe042f19a"
+            ],
+            "forward": {
+              "value": 0.575,
+              "receipt": "4744e223c9ba5454a020b7fc6d050da0ff2a3a0b2d6ff656cffd87c1edda3fce"
+            },
+            "reverse": {
+              "value": 0.57,
+              "receipt": "2534b0c3a4cbcdd397674fa849b2fb59be74d86d4d8828246c04b2ed8015929b"
+            },
+            "repeat": 0.5725,
+            "cases": [
+              "watchmaker",
+              "guide"
+            ]
+          },
+          {
+            "images": [
+              "6018785bfa7585defc423a6a6f52850168b4f637cddedb80965f2371e7edeaea",
+              "51bb8eea886923d3d227628a11a6b5ba95f18a67b2edfe2d0dc8a660b1e48f9d"
+            ],
+            "forward": {
+              "value": 0.7725,
+              "receipt": "6a1f5b0ec63cbc66d185a57c1dca99f15e9f98b390e624d260cf081c9772c2f6"
+            },
+            "reverse": {
+              "value": 0.7175,
+              "receipt": "b47455b805891c89aa98c82c025f15080cc423fcfa08a70a00f8a3ad4242cd2a"
+            },
+            "repeat": 0.745,
+            "cases": [
+              "watchmaker",
+              "guard"
+            ]
+          },
+          {
+            "images": [
+              "6018785bfa7585defc423a6a6f52850168b4f637cddedb80965f2371e7edeaea",
+              "ca86366f99e770c6a481952b3fb88d1868bd89057aaf17bd3498a4a4acba28c2"
+            ],
+            "forward": {
+              "value": 0.5625,
+              "receipt": "29841143ae87a49b023aa2d1fbb20752f9f2116f872f00dbe7faf2f2707bda4a"
+            },
+            "reverse": {
+              "value": 0.5375,
+              "receipt": "916685c457ae6fb6fd2990ebcbe5b097a618d5b02d1cd13c95b3900d9b0481bb"
+            },
+            "repeat": 0.55,
+            "cases": [
+              "watchmaker",
+              "violinist"
+            ]
+          },
+          {
+            "images": [
+              "409d2556181c0c0f63193e792604703eed353c0ed85f4c03d7bafeefe042f19a",
+              "51bb8eea886923d3d227628a11a6b5ba95f18a67b2edfe2d0dc8a660b1e48f9d"
+            ],
+            "forward": {
+              "value": 0.675,
+              "receipt": "91ee66de2634b6decb2d5a15f7e735c3d154c308bcd84884bc276ef988a21160"
+            },
+            "reverse": {
+              "value": 0.6675,
+              "receipt": "f4c22b212eccddfcf8177956be56d3cafa9d5f13d469228d3f8351d4d7cf1f7b"
+            },
+            "repeat": 0.67125,
+            "cases": [
+              "guide",
+              "guard"
+            ]
+          },
+          {
+            "images": [
+              "409d2556181c0c0f63193e792604703eed353c0ed85f4c03d7bafeefe042f19a",
+              "ca86366f99e770c6a481952b3fb88d1868bd89057aaf17bd3498a4a4acba28c2"
+            ],
+            "forward": {
+              "value": 0.515,
+              "receipt": "fb1ee7e07724189d0729d72380b153393edc9c84c01369d84aad064242457b9c"
+            },
+            "reverse": {
+              "value": 0.4725,
+              "receipt": "bba8079c35c5717db624d2854cd2732089919b2ca824c77dc7d20d2cf3310425"
+            },
+            "repeat": 0.49375,
+            "cases": [
+              "guide",
+              "violinist"
+            ]
+          },
+          {
+            "images": [
+              "51bb8eea886923d3d227628a11a6b5ba95f18a67b2edfe2d0dc8a660b1e48f9d",
+              "ca86366f99e770c6a481952b3fb88d1868bd89057aaf17bd3498a4a4acba28c2"
+            ],
+            "forward": {
+              "value": 0.675,
+              "receipt": "081b28e2623207edef03d868c15cd4ba8dbd83bc26c83dd817820982f3288e18"
+            },
+            "reverse": {
+              "value": 0.6525,
+              "receipt": "a2f1ba6031e0b525f9e3dbf3134d1e735804108faa9e8cbf98eb013e7a57fa6a"
+            },
+            "repeat": 0.6637500000000001,
+            "cases": [
+              "guard",
+              "violinist"
+            ]
+          }
+        ],
+        "base": 0.337266099590625,
+        "repeat": 0.6032589285714286,
+        "score": 0.24267862560314507
       },
       {
         "method": "soft-floor45",
@@ -6343,6 +7467,568 @@
         "score": 0.2221348157395028
       },
       {
+        "method": "soft-projection-65-blend50",
+        "profile": "early",
+        "alpha": 1.625,
+        "case_scores": {
+          "ranger": 0.30463503839999995,
+          "smith": 0.2792821247999999,
+          "stationer": 0.35532821879999993,
+          "ferryman": 0.26244631874999996,
+          "watchmaker": 0.3117946512,
+          "guide": 0.23111680000000007,
+          "guard": 0.354195072,
+          "violinist": 0.14430971519999997
+        },
+        "inputs": {
+          "ranger": "754d681e2f41bb42d3456ce9d6871e795605b1cdda756daae4739bf4d5e7c209",
+          "smith": "0379e1202da299e9cc98f3b404e377de78781c20290a6c32dacaac24cc213c07",
+          "stationer": "cb1120817f20673e8a8825a77efd7a84a6b187f6b435f2bbebc185fd32606728",
+          "ferryman": "ce802495f24ff7296e7f05045f9098e33e7272e66db7926a62cc6b5ec4d6fc44",
+          "watchmaker": "42d13afe49f0ed03c1ca5c52ec13384e44c10865a779a6dd64d43cd82bd2c367",
+          "guide": "907b130711ca48ea160bc16fa92e07ac5f6c7b224434487fc8b3efd3a273a1e9",
+          "guard": "5a74fb6a0a702486e61883f02db298e976c237819e50c9eeb238cae70e782e1c",
+          "violinist": "6938cdb5f6dfb47d33e73eb34754b2e3e8e4c0c2ac66ed3f0667de3592ae3cb5"
+        },
+        "pairs": [
+          {
+            "images": [
+              "754d681e2f41bb42d3456ce9d6871e795605b1cdda756daae4739bf4d5e7c209",
+              "0379e1202da299e9cc98f3b404e377de78781c20290a6c32dacaac24cc213c07"
+            ],
+            "forward": {
+              "value": 0.57,
+              "receipt": "ab4cb632b2761a3155b0fe06677e2e1ae9b93690a704d6bb9f2bcd17b36b224b"
+            },
+            "reverse": {
+              "value": 0.555,
+              "receipt": "501cecdeeba578e0147da8ad0000858073d8e79470b895950462a4b0cb20ca93"
+            },
+            "repeat": 0.5625,
+            "cases": [
+              "ranger",
+              "smith"
+            ]
+          },
+          {
+            "images": [
+              "754d681e2f41bb42d3456ce9d6871e795605b1cdda756daae4739bf4d5e7c209",
+              "cb1120817f20673e8a8825a77efd7a84a6b187f6b435f2bbebc185fd32606728"
+            ],
+            "forward": {
+              "value": 0.6325,
+              "receipt": "e576da15864c9dd76ed317e56770868dc76107407fde955290b2b1a9c6e8c836"
+            },
+            "reverse": {
+              "value": 0.6375,
+              "receipt": "0587b6ce03e75952b8dffa571d169a26273ba328a39d8101b1bbd6e303d584fd"
+            },
+            "repeat": 0.635,
+            "cases": [
+              "ranger",
+              "stationer"
+            ]
+          },
+          {
+            "images": [
+              "754d681e2f41bb42d3456ce9d6871e795605b1cdda756daae4739bf4d5e7c209",
+              "ce802495f24ff7296e7f05045f9098e33e7272e66db7926a62cc6b5ec4d6fc44"
+            ],
+            "forward": {
+              "value": 0.58,
+              "receipt": "7c566d2af06453aa5cdc711aebe3e1242cc5f5089690d057adb8d65bdbb4b3fc"
+            },
+            "reverse": {
+              "value": 0.615,
+              "receipt": "990fa7fe18bc7e71bac3621c100b8dd55d7e04887d5ac8f5bb369f55cc90562c"
+            },
+            "repeat": 0.5974999999999999,
+            "cases": [
+              "ranger",
+              "ferryman"
+            ]
+          },
+          {
+            "images": [
+              "754d681e2f41bb42d3456ce9d6871e795605b1cdda756daae4739bf4d5e7c209",
+              "42d13afe49f0ed03c1ca5c52ec13384e44c10865a779a6dd64d43cd82bd2c367"
+            ],
+            "forward": {
+              "value": 0.5975,
+              "receipt": "7c5a2b2e7c4909c0bc6ad9a006e22a93be4d1101eab5d65602e1836007eb3f5c"
+            },
+            "reverse": {
+              "value": 0.5775,
+              "receipt": "c9d4e920fb3cf880d87b6c07fed2e2482be1846b1028d64e874883fafb9a1af6"
+            },
+            "repeat": 0.5875,
+            "cases": [
+              "ranger",
+              "watchmaker"
+            ]
+          },
+          {
+            "images": [
+              "754d681e2f41bb42d3456ce9d6871e795605b1cdda756daae4739bf4d5e7c209",
+              "907b130711ca48ea160bc16fa92e07ac5f6c7b224434487fc8b3efd3a273a1e9"
+            ],
+            "forward": {
+              "value": 0.485,
+              "receipt": "24518e1e8eec5c8ad73044fb07d1395f4ba274542154f77a7c96f99e48f83237"
+            },
+            "reverse": {
+              "value": 0.4675,
+              "receipt": "9249f2ce3ec2b0f4a10d862776f72cdd98a293820eb83244cf6bcf076d1c604a"
+            },
+            "repeat": 0.47625,
+            "cases": [
+              "ranger",
+              "guide"
+            ]
+          },
+          {
+            "images": [
+              "754d681e2f41bb42d3456ce9d6871e795605b1cdda756daae4739bf4d5e7c209",
+              "5a74fb6a0a702486e61883f02db298e976c237819e50c9eeb238cae70e782e1c"
+            ],
+            "forward": {
+              "value": 0.5875,
+              "receipt": "cf4991988ce0de43370c0f6b27a3b4857f447489eb9b6a456e162000d0c28cac"
+            },
+            "reverse": {
+              "value": 0.5575,
+              "receipt": "12505ef219a954905e13ecd9436f9933de674919989e20ecd3ad0f4838df845d"
+            },
+            "repeat": 0.5725,
+            "cases": [
+              "ranger",
+              "guard"
+            ]
+          },
+          {
+            "images": [
+              "754d681e2f41bb42d3456ce9d6871e795605b1cdda756daae4739bf4d5e7c209",
+              "6938cdb5f6dfb47d33e73eb34754b2e3e8e4c0c2ac66ed3f0667de3592ae3cb5"
+            ],
+            "forward": {
+              "value": 0.585,
+              "receipt": "47a58944748c90778b7738fe48b7cbd1ef9aac2ff9f973e431d1d3edcc74803a"
+            },
+            "reverse": {
+              "value": 0.545,
+              "receipt": "cc01118846dbad935ee455a7cbbb8d7dd4d2e1cac689efd37d8e78326a144d90"
+            },
+            "repeat": 0.565,
+            "cases": [
+              "ranger",
+              "violinist"
+            ]
+          },
+          {
+            "images": [
+              "0379e1202da299e9cc98f3b404e377de78781c20290a6c32dacaac24cc213c07",
+              "cb1120817f20673e8a8825a77efd7a84a6b187f6b435f2bbebc185fd32606728"
+            ],
+            "forward": {
+              "value": 0.52,
+              "receipt": "a0ac9e86cb5ba766310ed65ec1c2189d57b79869c91a4d99daea36aae4e38089"
+            },
+            "reverse": {
+              "value": 0.535,
+              "receipt": "fc2fa4fadd6b1605c54fa8522cbf0da93e2d6eba7adb8d4ca6eb132ebee50d93"
+            },
+            "repeat": 0.5275000000000001,
+            "cases": [
+              "smith",
+              "stationer"
+            ]
+          },
+          {
+            "images": [
+              "0379e1202da299e9cc98f3b404e377de78781c20290a6c32dacaac24cc213c07",
+              "ce802495f24ff7296e7f05045f9098e33e7272e66db7926a62cc6b5ec4d6fc44"
+            ],
+            "forward": {
+              "value": 0.4175,
+              "receipt": "08133fcee89fc1d5d7e1ae5384c1399e0c2d7b80a2d047b6cd47ddb1187fa1f4"
+            },
+            "reverse": {
+              "value": 0.36,
+              "receipt": "b952cf490f297d0a2390d74988bb9e483a094a301edc08febc9a5e18af6167d8"
+            },
+            "repeat": 0.38875,
+            "cases": [
+              "smith",
+              "ferryman"
+            ]
+          },
+          {
+            "images": [
+              "0379e1202da299e9cc98f3b404e377de78781c20290a6c32dacaac24cc213c07",
+              "42d13afe49f0ed03c1ca5c52ec13384e44c10865a779a6dd64d43cd82bd2c367"
+            ],
+            "forward": {
+              "value": 0.6825,
+              "receipt": "08bc11aafab11c3303b116731c3625a1d0a8fec3c7668ef04f19dea30e60376c"
+            },
+            "reverse": {
+              "value": 0.5775,
+              "receipt": "f1f6dae6190faf7140ba518ecfa94f4db4c7966e9bc94f038d647d92c6a2eb84"
+            },
+            "repeat": 0.63,
+            "cases": [
+              "smith",
+              "watchmaker"
+            ]
+          },
+          {
+            "images": [
+              "0379e1202da299e9cc98f3b404e377de78781c20290a6c32dacaac24cc213c07",
+              "907b130711ca48ea160bc16fa92e07ac5f6c7b224434487fc8b3efd3a273a1e9"
+            ],
+            "forward": {
+              "value": 0.3075,
+              "receipt": "c24fc838777efe67d9753139bb3b17dc932bec2d56b6545f4e25026c7c1cefac"
+            },
+            "reverse": {
+              "value": 0.3075,
+              "receipt": "ec8f1ebdc18f67bad83225ea992e3a878f8426fd4980e7cf45e5871a367cb94a"
+            },
+            "repeat": 0.3075,
+            "cases": [
+              "smith",
+              "guide"
+            ]
+          },
+          {
+            "images": [
+              "0379e1202da299e9cc98f3b404e377de78781c20290a6c32dacaac24cc213c07",
+              "5a74fb6a0a702486e61883f02db298e976c237819e50c9eeb238cae70e782e1c"
+            ],
+            "forward": {
+              "value": 0.58,
+              "receipt": "e849d84a11cad0c8eda79d486573de90bf72905a9b49185751a180a89ab64381"
+            },
+            "reverse": {
+              "value": 0.5625,
+              "receipt": "64fe1bc1a4bad5d38cbaf69cabc8d2b649fc880f44a8241e7d880c9b5ebe8077"
+            },
+            "repeat": 0.57125,
+            "cases": [
+              "smith",
+              "guard"
+            ]
+          },
+          {
+            "images": [
+              "0379e1202da299e9cc98f3b404e377de78781c20290a6c32dacaac24cc213c07",
+              "6938cdb5f6dfb47d33e73eb34754b2e3e8e4c0c2ac66ed3f0667de3592ae3cb5"
+            ],
+            "forward": {
+              "value": 0.69,
+              "receipt": "87086352fd42b53b077f5ed54d98d1bcbcb5371562610844d30f9d037a05fd58"
+            },
+            "reverse": {
+              "value": 0.6325,
+              "receipt": "e68f1b51414b03457bb038fc0ebc9e38195ac1c03cb9fc2e9315d8b5e39015f2"
+            },
+            "repeat": 0.6612499999999999,
+            "cases": [
+              "smith",
+              "violinist"
+            ]
+          },
+          {
+            "images": [
+              "cb1120817f20673e8a8825a77efd7a84a6b187f6b435f2bbebc185fd32606728",
+              "ce802495f24ff7296e7f05045f9098e33e7272e66db7926a62cc6b5ec4d6fc44"
+            ],
+            "forward": {
+              "value": 0.4425,
+              "receipt": "6f393cb725987705ebc9ab031d1854331b967159bcc0eb172ebb535493a0d327"
+            },
+            "reverse": {
+              "value": 0.4575,
+              "receipt": "1f05e44dcdc556f8db38f02dffc56cae851b248a294ad4f57a5c650d5db18b43"
+            },
+            "repeat": 0.45,
+            "cases": [
+              "stationer",
+              "ferryman"
+            ]
+          },
+          {
+            "images": [
+              "cb1120817f20673e8a8825a77efd7a84a6b187f6b435f2bbebc185fd32606728",
+              "42d13afe49f0ed03c1ca5c52ec13384e44c10865a779a6dd64d43cd82bd2c367"
+            ],
+            "forward": {
+              "value": 0.6525,
+              "receipt": "faa4078b7fe393706e045b89d3034e34e65e3087a8d438b5821ad4ca7e77d8bd"
+            },
+            "reverse": {
+              "value": 0.535,
+              "receipt": "7a74bcca20a5307a163651300ab37edd2a01ed2d7650460187d4ae7be0c685f5"
+            },
+            "repeat": 0.59375,
+            "cases": [
+              "stationer",
+              "watchmaker"
+            ]
+          },
+          {
+            "images": [
+              "cb1120817f20673e8a8825a77efd7a84a6b187f6b435f2bbebc185fd32606728",
+              "907b130711ca48ea160bc16fa92e07ac5f6c7b224434487fc8b3efd3a273a1e9"
+            ],
+            "forward": {
+              "value": 0.3225,
+              "receipt": "747afd91a3764bdc0a0dc185b0946aecb31da03e4abc126e63bb92296bcfdf64"
+            },
+            "reverse": {
+              "value": 0.3675,
+              "receipt": "fd5c0db7ebc2d9017ff00906ac21226a74e2b9134255fe55b7df5eba09af252c"
+            },
+            "repeat": 0.345,
+            "cases": [
+              "stationer",
+              "guide"
+            ]
+          },
+          {
+            "images": [
+              "cb1120817f20673e8a8825a77efd7a84a6b187f6b435f2bbebc185fd32606728",
+              "5a74fb6a0a702486e61883f02db298e976c237819e50c9eeb238cae70e782e1c"
+            ],
+            "forward": {
+              "value": 0.515,
+              "receipt": "e1db10dc02e603a6d0a736ffda1a8330cc6c8bc2d5288eb686021b087a585c7c"
+            },
+            "reverse": {
+              "value": 0.4525,
+              "receipt": "2cf69b6d7886bde09b39332e16a9a5b77cb336c55bf9189713b8e07682f686c1"
+            },
+            "repeat": 0.48375,
+            "cases": [
+              "stationer",
+              "guard"
+            ]
+          },
+          {
+            "images": [
+              "cb1120817f20673e8a8825a77efd7a84a6b187f6b435f2bbebc185fd32606728",
+              "6938cdb5f6dfb47d33e73eb34754b2e3e8e4c0c2ac66ed3f0667de3592ae3cb5"
+            ],
+            "forward": {
+              "value": 0.5275,
+              "receipt": "d965e8b976d9f5b97579444c3ac666c744e16e6712d20478ee0e5e56db050081"
+            },
+            "reverse": {
+              "value": 0.485,
+              "receipt": "3915ec964761e0601370219418e7339e7cd72bfc5ea8f7ea2ea6a36d7117511f"
+            },
+            "repeat": 0.50625,
+            "cases": [
+              "stationer",
+              "violinist"
+            ]
+          },
+          {
+            "images": [
+              "ce802495f24ff7296e7f05045f9098e33e7272e66db7926a62cc6b5ec4d6fc44",
+              "42d13afe49f0ed03c1ca5c52ec13384e44c10865a779a6dd64d43cd82bd2c367"
+            ],
+            "forward": {
+              "value": 0.54,
+              "receipt": "426b4102e24159de65f0029f6fd843ec82e824a6bb876ea3c3ec3d53a04a4ecd"
+            },
+            "reverse": {
+              "value": 0.565,
+              "receipt": "e74dd3ec14d72cea67b1d1b99978d625654607bb33db178add3bb7947567fd47"
+            },
+            "repeat": 0.5525,
+            "cases": [
+              "ferryman",
+              "watchmaker"
+            ]
+          },
+          {
+            "images": [
+              "ce802495f24ff7296e7f05045f9098e33e7272e66db7926a62cc6b5ec4d6fc44",
+              "907b130711ca48ea160bc16fa92e07ac5f6c7b224434487fc8b3efd3a273a1e9"
+            ],
+            "forward": {
+              "value": 0.655,
+              "receipt": "736342b0284ab97dd2be99fbfe6f5d1af7903a553aff808f820716b77df65b62"
+            },
+            "reverse": {
+              "value": 0.6225,
+              "receipt": "d784aef08ac33d9fd9cbfbfb270faf47f2432d00917e8610dac6c278d703f4cd"
+            },
+            "repeat": 0.63875,
+            "cases": [
+              "ferryman",
+              "guide"
+            ]
+          },
+          {
+            "images": [
+              "ce802495f24ff7296e7f05045f9098e33e7272e66db7926a62cc6b5ec4d6fc44",
+              "5a74fb6a0a702486e61883f02db298e976c237819e50c9eeb238cae70e782e1c"
+            ],
+            "forward": {
+              "value": 0.5325,
+              "receipt": "22ec00c657abbf99d76d9e1330b684019228c8bda8cd1d3a9970d6d55fcf8100"
+            },
+            "reverse": {
+              "value": 0.5175,
+              "receipt": "0999514533520931a3be28f4ae9866c7794cad3f9824af98b646cc6e9570f984"
+            },
+            "repeat": 0.5249999999999999,
+            "cases": [
+              "ferryman",
+              "guard"
+            ]
+          },
+          {
+            "images": [
+              "ce802495f24ff7296e7f05045f9098e33e7272e66db7926a62cc6b5ec4d6fc44",
+              "6938cdb5f6dfb47d33e73eb34754b2e3e8e4c0c2ac66ed3f0667de3592ae3cb5"
+            ],
+            "forward": {
+              "value": 0.4825,
+              "receipt": "afd45112e758c5a5756c2ba2339486af2a3acab7a48c5ae9bd221e0b91e5eb99"
+            },
+            "reverse": {
+              "value": 0.46,
+              "receipt": "83f1c5e2db252a814a9992ab77ddb663768146662d6b18d4c14eff1090b34c41"
+            },
+            "repeat": 0.47125,
+            "cases": [
+              "ferryman",
+              "violinist"
+            ]
+          },
+          {
+            "images": [
+              "42d13afe49f0ed03c1ca5c52ec13384e44c10865a779a6dd64d43cd82bd2c367",
+              "907b130711ca48ea160bc16fa92e07ac5f6c7b224434487fc8b3efd3a273a1e9"
+            ],
+            "forward": {
+              "value": 0.4525,
+              "receipt": "213c5759ad86863c9f67a738ae4c6d35b1b743d7d22591c700bf629d9d1dbbf4"
+            },
+            "reverse": {
+              "value": 0.48,
+              "receipt": "d4d5f5696be9b1021ff16f67882f7a950102041e7a454a169d034780473ac095"
+            },
+            "repeat": 0.46625,
+            "cases": [
+              "watchmaker",
+              "guide"
+            ]
+          },
+          {
+            "images": [
+              "42d13afe49f0ed03c1ca5c52ec13384e44c10865a779a6dd64d43cd82bd2c367",
+              "5a74fb6a0a702486e61883f02db298e976c237819e50c9eeb238cae70e782e1c"
+            ],
+            "forward": {
+              "value": 0.62,
+              "receipt": "449534761586b8347214c699278d0eee504c39de7c455499564db2207413c629"
+            },
+            "reverse": {
+              "value": 0.695,
+              "receipt": "278d10b8980e9e2b58570287249c91a0990c1c3548488f15935050ca1c7019ff"
+            },
+            "repeat": 0.6575,
+            "cases": [
+              "watchmaker",
+              "guard"
+            ]
+          },
+          {
+            "images": [
+              "42d13afe49f0ed03c1ca5c52ec13384e44c10865a779a6dd64d43cd82bd2c367",
+              "6938cdb5f6dfb47d33e73eb34754b2e3e8e4c0c2ac66ed3f0667de3592ae3cb5"
+            ],
+            "forward": {
+              "value": 0.6225,
+              "receipt": "15f883be172b99e800942894bf15f1755db887c30dab44714bbb172b9db0d2fd"
+            },
+            "reverse": {
+              "value": 0.7025,
+              "receipt": "e5d7461d7bc985651735b84c158d298f6f13b69fbcd161b8c0d39e3788366a48"
+            },
+            "repeat": 0.6625000000000001,
+            "cases": [
+              "watchmaker",
+              "violinist"
+            ]
+          },
+          {
+            "images": [
+              "907b130711ca48ea160bc16fa92e07ac5f6c7b224434487fc8b3efd3a273a1e9",
+              "5a74fb6a0a702486e61883f02db298e976c237819e50c9eeb238cae70e782e1c"
+            ],
+            "forward": {
+              "value": 0.5325,
+              "receipt": "6283cfce305a89c98d58fc5583968a4f32c3cb87394acff17d2f774da1ecf0da"
+            },
+            "reverse": {
+              "value": 0.55,
+              "receipt": "1f4f09d4e6ffcda8e267ce499bf3c7f3e620bfd512d0a63b60d1feafb31519e3"
+            },
+            "repeat": 0.54125,
+            "cases": [
+              "guide",
+              "guard"
+            ]
+          },
+          {
+            "images": [
+              "907b130711ca48ea160bc16fa92e07ac5f6c7b224434487fc8b3efd3a273a1e9",
+              "6938cdb5f6dfb47d33e73eb34754b2e3e8e4c0c2ac66ed3f0667de3592ae3cb5"
+            ],
+            "forward": {
+              "value": 0.4125,
+              "receipt": "5543408f51bf2a11c7576895716787b197c76c1a46d237c27ec025baff81e1e8"
+            },
+            "reverse": {
+              "value": 0.4775,
+              "receipt": "0353db4fcb71dae8a19fa3db8b8df43ff7791686cf7a5bdc20330385dd276686"
+            },
+            "repeat": 0.44499999999999995,
+            "cases": [
+              "guide",
+              "violinist"
+            ]
+          },
+          {
+            "images": [
+              "5a74fb6a0a702486e61883f02db298e976c237819e50c9eeb238cae70e782e1c",
+              "6938cdb5f6dfb47d33e73eb34754b2e3e8e4c0c2ac66ed3f0667de3592ae3cb5"
+            ],
+            "forward": {
+              "value": 0.645,
+              "receipt": "0d264607809a33edcd7f0418bd0fae59c21d4f408b61453638c5f723a94771e8"
+            },
+            "reverse": {
+              "value": 0.6025,
+              "receipt": "f41a28508bed67ba58b66ec057976fbae274df608706d05a9607f9e196f1666e"
+            },
+            "repeat": 0.62375,
+            "cases": [
+              "guard",
+              "violinist"
+            ]
+          }
+        ],
+        "base": 0.28038849239374997,
+        "repeat": 0.5373214285714286,
+        "score": 0.2157968447358962
+      },
+      {
         "method": "strong-boss-45-dose100",
         "profile": "early",
         "alpha": 1.4375,
@@ -6903,6 +8589,568 @@
         "base": 0.27284870954062496,
         "repeat": 0.5098660714285714,
         "score": 0.2126443852097243
+      },
+      {
+        "method": "two-cue-average",
+        "profile": "constant",
+        "alpha": 1.625,
+        "case_scores": {
+          "ranger": 0.28223149499999994,
+          "smith": 0.23016293117500006,
+          "stationer": 0.34585544999999995,
+          "ferryman": 0.2715353687499999,
+          "watchmaker": 0.19200373920000002,
+          "guide": 0.18722119679999996,
+          "guard": 0.39355008,
+          "violinist": 0.21417639040000006
+        },
+        "inputs": {
+          "ranger": "efc7e10fec74150022249115bc9b284ca26a5b8dc86784f4649a1945ac9b7692",
+          "smith": "212f6f40aa309c5520451f9f52ae858da9d4557f411e259ff1bd137f4c3f3f7f",
+          "stationer": "8dfb82ed13db7c96d6447abfea45b2a2b7ad10d0767e4561dbf79e59a84f6b95",
+          "ferryman": "0ceddf5973d7c4de557993b618aab3a7777bcfd0c10f484d38dc7caa8ca3b026",
+          "watchmaker": "5abf7e231269f5719903221ac90dc5c8875f199feaaa055fbbecf3246e47105b",
+          "guide": "fa7a44c19bee996935d8eb8cf40d077382c44c41623d14fd9dc66960bd503f46",
+          "guard": "1fc35b9ba0de4dc9a3bb5bf560b6afd509fd84ea9cedf41042647fb562c5f2a1",
+          "violinist": "3efaeaea67c1299cc1c9cad141ee3f6ee65d4987230256dac96bc9dfc995bad8"
+        },
+        "pairs": [
+          {
+            "images": [
+              "efc7e10fec74150022249115bc9b284ca26a5b8dc86784f4649a1945ac9b7692",
+              "212f6f40aa309c5520451f9f52ae858da9d4557f411e259ff1bd137f4c3f3f7f"
+            ],
+            "forward": {
+              "value": 0.6175,
+              "receipt": "e3fe18c2a714a95d9cacc016b3c09cdffee5bc4cec929230b01ea50781942b24"
+            },
+            "reverse": {
+              "value": 0.49,
+              "receipt": "a0ccb65177002aec9db25504f997b32850e08107551fa5484d226366b4b7e212"
+            },
+            "repeat": 0.55375,
+            "cases": [
+              "ranger",
+              "smith"
+            ]
+          },
+          {
+            "images": [
+              "efc7e10fec74150022249115bc9b284ca26a5b8dc86784f4649a1945ac9b7692",
+              "8dfb82ed13db7c96d6447abfea45b2a2b7ad10d0767e4561dbf79e59a84f6b95"
+            ],
+            "forward": {
+              "value": 0.4525,
+              "receipt": "31f1d79e39ccaed3f0289159c011d51c984155b6369f26389589f34f76c64500"
+            },
+            "reverse": {
+              "value": 0.47,
+              "receipt": "840ed73bd38749f9ee44013e387a3f0d57c380a99bc511e5dce0580b09a67c08"
+            },
+            "repeat": 0.46125,
+            "cases": [
+              "ranger",
+              "stationer"
+            ]
+          },
+          {
+            "images": [
+              "efc7e10fec74150022249115bc9b284ca26a5b8dc86784f4649a1945ac9b7692",
+              "0ceddf5973d7c4de557993b618aab3a7777bcfd0c10f484d38dc7caa8ca3b026"
+            ],
+            "forward": {
+              "value": 0.4825,
+              "receipt": "47f225836102949fa2feda9e27cafb1e2cd881a9509304283e3449b1941f7366"
+            },
+            "reverse": {
+              "value": 0.5075,
+              "receipt": "e6c55e94457f83e9b87c49aeb426286a6c287224f0449df53ca62edb9f4a482b"
+            },
+            "repeat": 0.495,
+            "cases": [
+              "ranger",
+              "ferryman"
+            ]
+          },
+          {
+            "images": [
+              "efc7e10fec74150022249115bc9b284ca26a5b8dc86784f4649a1945ac9b7692",
+              "5abf7e231269f5719903221ac90dc5c8875f199feaaa055fbbecf3246e47105b"
+            ],
+            "forward": {
+              "value": 0.53,
+              "receipt": "be64ae6e165c4d1c674b573e16c446610f50eab34d3ce30a6035e0d00fa9e4b7"
+            },
+            "reverse": {
+              "value": 0.43,
+              "receipt": "40549b0630aa5d45e09f80373c26dd90e426eaad30b5678bb755e1955eb13c7d"
+            },
+            "repeat": 0.48,
+            "cases": [
+              "ranger",
+              "watchmaker"
+            ]
+          },
+          {
+            "images": [
+              "efc7e10fec74150022249115bc9b284ca26a5b8dc86784f4649a1945ac9b7692",
+              "fa7a44c19bee996935d8eb8cf40d077382c44c41623d14fd9dc66960bd503f46"
+            ],
+            "forward": {
+              "value": 0.37,
+              "receipt": "6f4486c308216ed71384630d8e9f94f3ca4257d3ba06299073d975c162999d11"
+            },
+            "reverse": {
+              "value": 0.3425,
+              "receipt": "483baf6972cc72ebc8310288cdb34f45a8b14ac12160a4687d0f56f233a9abca"
+            },
+            "repeat": 0.35625,
+            "cases": [
+              "ranger",
+              "guide"
+            ]
+          },
+          {
+            "images": [
+              "efc7e10fec74150022249115bc9b284ca26a5b8dc86784f4649a1945ac9b7692",
+              "1fc35b9ba0de4dc9a3bb5bf560b6afd509fd84ea9cedf41042647fb562c5f2a1"
+            ],
+            "forward": {
+              "value": 0.5525,
+              "receipt": "564857ad0ccfe529637ad1b5e94dcff3d8f2ef586d4e27d6967ed50b5a88716a"
+            },
+            "reverse": {
+              "value": 0.535,
+              "receipt": "95ea3152b61f252999d1b30250e52a1c44b8ed4f46311eb0e5a100424b06d770"
+            },
+            "repeat": 0.54375,
+            "cases": [
+              "ranger",
+              "guard"
+            ]
+          },
+          {
+            "images": [
+              "efc7e10fec74150022249115bc9b284ca26a5b8dc86784f4649a1945ac9b7692",
+              "3efaeaea67c1299cc1c9cad141ee3f6ee65d4987230256dac96bc9dfc995bad8"
+            ],
+            "forward": {
+              "value": 0.33,
+              "receipt": "ff36e0eb27442dd64742806405da9e12f48e1b773fdf1473d90e8270e3a0204d"
+            },
+            "reverse": {
+              "value": 0.355,
+              "receipt": "4132d0d55718bf5559e64f2aa2f1ecc048692c0aa5908889345549d956fe4e6e"
+            },
+            "repeat": 0.3425,
+            "cases": [
+              "ranger",
+              "violinist"
+            ]
+          },
+          {
+            "images": [
+              "212f6f40aa309c5520451f9f52ae858da9d4557f411e259ff1bd137f4c3f3f7f",
+              "8dfb82ed13db7c96d6447abfea45b2a2b7ad10d0767e4561dbf79e59a84f6b95"
+            ],
+            "forward": {
+              "value": 0.525,
+              "receipt": "709aa23e2d40d94431fc6b31554823ec6bd0677500f393ea023186cbdaf0516f"
+            },
+            "reverse": {
+              "value": 0.5925,
+              "receipt": "f838a912428b7d9861ff23c2cec88d5fc91a3b1e3d284ed179a2c11b1ef53157"
+            },
+            "repeat": 0.5587500000000001,
+            "cases": [
+              "smith",
+              "stationer"
+            ]
+          },
+          {
+            "images": [
+              "212f6f40aa309c5520451f9f52ae858da9d4557f411e259ff1bd137f4c3f3f7f",
+              "0ceddf5973d7c4de557993b618aab3a7777bcfd0c10f484d38dc7caa8ca3b026"
+            ],
+            "forward": {
+              "value": 0.47,
+              "receipt": "42ca88a71e617fcfd34b5a750c128bd0c6034ddc3a629f1c1c4b4c3e3c3dd5b8"
+            },
+            "reverse": {
+              "value": 0.55,
+              "receipt": "e9e6e522de945b8a49266a6e068b0f67899aa66913b30b599f9247b27a794ba2"
+            },
+            "repeat": 0.51,
+            "cases": [
+              "smith",
+              "ferryman"
+            ]
+          },
+          {
+            "images": [
+              "212f6f40aa309c5520451f9f52ae858da9d4557f411e259ff1bd137f4c3f3f7f",
+              "5abf7e231269f5719903221ac90dc5c8875f199feaaa055fbbecf3246e47105b"
+            ],
+            "forward": {
+              "value": 0.4675,
+              "receipt": "84824131d9a242b31ccc7c7defa17740a58457bde8ae7d29f02bd6f24b7a3b32"
+            },
+            "reverse": {
+              "value": 0.4475,
+              "receipt": "6523aeb9220f0c952e54315d8cdaf6bf3ea6eb362f93443aa8d3e012da19f16f"
+            },
+            "repeat": 0.4575,
+            "cases": [
+              "smith",
+              "watchmaker"
+            ]
+          },
+          {
+            "images": [
+              "212f6f40aa309c5520451f9f52ae858da9d4557f411e259ff1bd137f4c3f3f7f",
+              "fa7a44c19bee996935d8eb8cf40d077382c44c41623d14fd9dc66960bd503f46"
+            ],
+            "forward": {
+              "value": 0.415,
+              "receipt": "908f3830f7e74498a5866dec76a699eb7c21400ee8c1913bfe00e206c5b08be9"
+            },
+            "reverse": {
+              "value": 0.3875,
+              "receipt": "da31467988645db0b270b4fa6a853e6f21e75ea178fbdcd50a2b35f1511b44d3"
+            },
+            "repeat": 0.40125,
+            "cases": [
+              "smith",
+              "guide"
+            ]
+          },
+          {
+            "images": [
+              "212f6f40aa309c5520451f9f52ae858da9d4557f411e259ff1bd137f4c3f3f7f",
+              "1fc35b9ba0de4dc9a3bb5bf560b6afd509fd84ea9cedf41042647fb562c5f2a1"
+            ],
+            "forward": {
+              "value": 0.545,
+              "receipt": "41a2d69c079aea15e20fa31b1a7bfa3491610afc0aaf417b8a3b3b1d5a989407"
+            },
+            "reverse": {
+              "value": 0.5875,
+              "receipt": "d804d67d91f320f37d62b2250da7dd86155d1fee0a86f8d5f8163ed5d8c1791b"
+            },
+            "repeat": 0.56625,
+            "cases": [
+              "smith",
+              "guard"
+            ]
+          },
+          {
+            "images": [
+              "212f6f40aa309c5520451f9f52ae858da9d4557f411e259ff1bd137f4c3f3f7f",
+              "3efaeaea67c1299cc1c9cad141ee3f6ee65d4987230256dac96bc9dfc995bad8"
+            ],
+            "forward": {
+              "value": 0.3675,
+              "receipt": "ccbd57aad245d5d35a0a41609a8d0ea3a81d3c4cdbe7f0e986ce29ab3a1a2a77"
+            },
+            "reverse": {
+              "value": 0.3725,
+              "receipt": "b869ea0f44544698b3ee518d4f8076330e5677d0c14f2e5e63d384fd2ed33930"
+            },
+            "repeat": 0.37,
+            "cases": [
+              "smith",
+              "violinist"
+            ]
+          },
+          {
+            "images": [
+              "8dfb82ed13db7c96d6447abfea45b2a2b7ad10d0767e4561dbf79e59a84f6b95",
+              "0ceddf5973d7c4de557993b618aab3a7777bcfd0c10f484d38dc7caa8ca3b026"
+            ],
+            "forward": {
+              "value": 0.555,
+              "receipt": "66a20aff19a99a8219ec5f3a88f2e692e431247cb85421adbb01554423e65a29"
+            },
+            "reverse": {
+              "value": 0.5975,
+              "receipt": "64799eecaf4295042e043af7208165d52d104d19fe7a971fb3b3acdddb803410"
+            },
+            "repeat": 0.57625,
+            "cases": [
+              "stationer",
+              "ferryman"
+            ]
+          },
+          {
+            "images": [
+              "8dfb82ed13db7c96d6447abfea45b2a2b7ad10d0767e4561dbf79e59a84f6b95",
+              "5abf7e231269f5719903221ac90dc5c8875f199feaaa055fbbecf3246e47105b"
+            ],
+            "forward": {
+              "value": 0.4975,
+              "receipt": "18bec20861f0aeab865549a575d96ba2cf69b1d988ad69e55bbbcab7d1125829"
+            },
+            "reverse": {
+              "value": 0.4375,
+              "receipt": "ebcca9f65f72b1a79943489593134153c1fa1c1441b67bf21759535501549888"
+            },
+            "repeat": 0.4675,
+            "cases": [
+              "stationer",
+              "watchmaker"
+            ]
+          },
+          {
+            "images": [
+              "8dfb82ed13db7c96d6447abfea45b2a2b7ad10d0767e4561dbf79e59a84f6b95",
+              "fa7a44c19bee996935d8eb8cf40d077382c44c41623d14fd9dc66960bd503f46"
+            ],
+            "forward": {
+              "value": 0.4675,
+              "receipt": "435a226b8661e3c457ba1aa8cf8783393423751d260b6ea72f38dd231a4da7b4"
+            },
+            "reverse": {
+              "value": 0.3825,
+              "receipt": "b11ddfdbf91a2be96af3f6306b3e4c089d9c309ebaa920a70ecc837d1208359a"
+            },
+            "repeat": 0.42500000000000004,
+            "cases": [
+              "stationer",
+              "guide"
+            ]
+          },
+          {
+            "images": [
+              "8dfb82ed13db7c96d6447abfea45b2a2b7ad10d0767e4561dbf79e59a84f6b95",
+              "1fc35b9ba0de4dc9a3bb5bf560b6afd509fd84ea9cedf41042647fb562c5f2a1"
+            ],
+            "forward": {
+              "value": 0.42,
+              "receipt": "7ecc2e63f8c3c7b64958c105c6b3c5f2f7377a474baba1e4332e4644390fa81b"
+            },
+            "reverse": {
+              "value": 0.395,
+              "receipt": "8ae95dbeb80be40c2e60ee09f20f4c30480792c003de3481ffa61005adf5c80f"
+            },
+            "repeat": 0.4075,
+            "cases": [
+              "stationer",
+              "guard"
+            ]
+          },
+          {
+            "images": [
+              "8dfb82ed13db7c96d6447abfea45b2a2b7ad10d0767e4561dbf79e59a84f6b95",
+              "3efaeaea67c1299cc1c9cad141ee3f6ee65d4987230256dac96bc9dfc995bad8"
+            ],
+            "forward": {
+              "value": 0.57,
+              "receipt": "a2e6ca376566e76e843e9aa068dc912018ec60b201d5ebcc772d9ffac61e4d74"
+            },
+            "reverse": {
+              "value": 0.5975,
+              "receipt": "af3de7f809f5fc94eb2271e427dc6bc9d42987b53cacc0338177d6fa1f74984e"
+            },
+            "repeat": 0.58375,
+            "cases": [
+              "stationer",
+              "violinist"
+            ]
+          },
+          {
+            "images": [
+              "0ceddf5973d7c4de557993b618aab3a7777bcfd0c10f484d38dc7caa8ca3b026",
+              "5abf7e231269f5719903221ac90dc5c8875f199feaaa055fbbecf3246e47105b"
+            ],
+            "forward": {
+              "value": 0.6025,
+              "receipt": "3e5976770e5e68003520ae4a5fabd0dcf85f6eabaf3c2cdf8869d132189e7c89"
+            },
+            "reverse": {
+              "value": 0.5075,
+              "receipt": "fb2ee8a2faac066c02b81b149d8bb386326a7a423bfffd5ee13d251b923b777a"
+            },
+            "repeat": 0.5549999999999999,
+            "cases": [
+              "ferryman",
+              "watchmaker"
+            ]
+          },
+          {
+            "images": [
+              "0ceddf5973d7c4de557993b618aab3a7777bcfd0c10f484d38dc7caa8ca3b026",
+              "fa7a44c19bee996935d8eb8cf40d077382c44c41623d14fd9dc66960bd503f46"
+            ],
+            "forward": {
+              "value": 0.4875,
+              "receipt": "5079079e80a08d92cdfbd0a8ec2375b532cbc8ac912e754cce12f1380eb9ea35"
+            },
+            "reverse": {
+              "value": 0.515,
+              "receipt": "b4ef9c0d539fed442620aaa6b06cd7a9d354df231fd459764100d4b90f135821"
+            },
+            "repeat": 0.50125,
+            "cases": [
+              "ferryman",
+              "guide"
+            ]
+          },
+          {
+            "images": [
+              "0ceddf5973d7c4de557993b618aab3a7777bcfd0c10f484d38dc7caa8ca3b026",
+              "1fc35b9ba0de4dc9a3bb5bf560b6afd509fd84ea9cedf41042647fb562c5f2a1"
+            ],
+            "forward": {
+              "value": 0.6025,
+              "receipt": "2db7bf08c7a1a876ef4258b00036363d01c2b822be096d786044cb2a20dbbb70"
+            },
+            "reverse": {
+              "value": 0.5725,
+              "receipt": "f0856a2d990c2efe60e04ee5b21be1ecff88c56e31c37c783d486df50d577744"
+            },
+            "repeat": 0.5875,
+            "cases": [
+              "ferryman",
+              "guard"
+            ]
+          },
+          {
+            "images": [
+              "0ceddf5973d7c4de557993b618aab3a7777bcfd0c10f484d38dc7caa8ca3b026",
+              "3efaeaea67c1299cc1c9cad141ee3f6ee65d4987230256dac96bc9dfc995bad8"
+            ],
+            "forward": {
+              "value": 0.4175,
+              "receipt": "254ca2113018e445a15e58d0f5b00ef8df6c52ac9bd05f6c9229161fcba65aac"
+            },
+            "reverse": {
+              "value": 0.4125,
+              "receipt": "f5b8e1087f2163589197870efdb09f0d56e53738ce238fb957f7599fe6a376c0"
+            },
+            "repeat": 0.415,
+            "cases": [
+              "ferryman",
+              "violinist"
+            ]
+          },
+          {
+            "images": [
+              "5abf7e231269f5719903221ac90dc5c8875f199feaaa055fbbecf3246e47105b",
+              "fa7a44c19bee996935d8eb8cf40d077382c44c41623d14fd9dc66960bd503f46"
+            ],
+            "forward": {
+              "value": 0.54,
+              "receipt": "c704eacaf083e48b25d20e3ec2a771e4a69fcda3e473648ec401a04473df39bd"
+            },
+            "reverse": {
+              "value": 0.4375,
+              "receipt": "20028f8fecabb2e137ab9be96b665fdb6164fb194b9aa213cc8f91e0d48bbc51"
+            },
+            "repeat": 0.48875,
+            "cases": [
+              "watchmaker",
+              "guide"
+            ]
+          },
+          {
+            "images": [
+              "5abf7e231269f5719903221ac90dc5c8875f199feaaa055fbbecf3246e47105b",
+              "1fc35b9ba0de4dc9a3bb5bf560b6afd509fd84ea9cedf41042647fb562c5f2a1"
+            ],
+            "forward": {
+              "value": 0.43,
+              "receipt": "4aacce642151912e77ca5381a31af55533ebabdbd512590f2f72c30ac651c383"
+            },
+            "reverse": {
+              "value": 0.48,
+              "receipt": "fcbb2ba6647eb7cfdba5977691b4249f32a979ede4d00d75a5d04ad856b2c65f"
+            },
+            "repeat": 0.45499999999999996,
+            "cases": [
+              "watchmaker",
+              "guard"
+            ]
+          },
+          {
+            "images": [
+              "5abf7e231269f5719903221ac90dc5c8875f199feaaa055fbbecf3246e47105b",
+              "3efaeaea67c1299cc1c9cad141ee3f6ee65d4987230256dac96bc9dfc995bad8"
+            ],
+            "forward": {
+              "value": 0.4925,
+              "receipt": "b51994d45ba45ca90dede10f6ce8675be0208118945eef8a3f165da3734dc865"
+            },
+            "reverse": {
+              "value": 0.5025,
+              "receipt": "02b0d9f67d759b5e5075b76ec36b096b3f435c94bde2767bb9df7b7a71579064"
+            },
+            "repeat": 0.49749999999999994,
+            "cases": [
+              "watchmaker",
+              "violinist"
+            ]
+          },
+          {
+            "images": [
+              "fa7a44c19bee996935d8eb8cf40d077382c44c41623d14fd9dc66960bd503f46",
+              "1fc35b9ba0de4dc9a3bb5bf560b6afd509fd84ea9cedf41042647fb562c5f2a1"
+            ],
+            "forward": {
+              "value": 0.4975,
+              "receipt": "d809f78dda1ab71235ab9d08b7e2ef919ed5af0aa8e855af60fea2c8d4be4c62"
+            },
+            "reverse": {
+              "value": 0.46,
+              "receipt": "d4f8d8750457a4600387c995c1c31ef8de6f74842d11f47912052e13d6beca41"
+            },
+            "repeat": 0.47875,
+            "cases": [
+              "guide",
+              "guard"
+            ]
+          },
+          {
+            "images": [
+              "fa7a44c19bee996935d8eb8cf40d077382c44c41623d14fd9dc66960bd503f46",
+              "3efaeaea67c1299cc1c9cad141ee3f6ee65d4987230256dac96bc9dfc995bad8"
+            ],
+            "forward": {
+              "value": 0.465,
+              "receipt": "95760ea20cbcdd1c1a85619ac2be67fe0458b35a525b5e08a184f248c5418ca5"
+            },
+            "reverse": {
+              "value": 0.54,
+              "receipt": "51510bb947d56733385d413b6300464fe2fb2892cd2e6ef65703e55ccf8b9d50"
+            },
+            "repeat": 0.5025000000000001,
+            "cases": [
+              "guide",
+              "violinist"
+            ]
+          },
+          {
+            "images": [
+              "1fc35b9ba0de4dc9a3bb5bf560b6afd509fd84ea9cedf41042647fb562c5f2a1",
+              "3efaeaea67c1299cc1c9cad141ee3f6ee65d4987230256dac96bc9dfc995bad8"
+            ],
+            "forward": {
+              "value": 0.2025,
+              "receipt": "3f7eefe87827b8ac53c078ddba252969dae7292656db5b1451e836b06ea462c0"
+            },
+            "reverse": {
+              "value": 0.2275,
+              "receipt": "a25c585271e8fd865884b877f66e8d1cd7e990799e85796de0605d367a25f608"
+            },
+            "repeat": 0.21500000000000002,
+            "cases": [
+              "guard",
+              "violinist"
+            ]
+          }
+        ],
+        "base": 0.264592081415625,
+        "repeat": 0.47330357142857143,
+        "score": 0.2120746855458153
       },
       {
         "method": "shared-best-seed-split",
@@ -8591,1130 +10839,6 @@
         "score": 0.1924892846898181
       },
       {
-        "method": "matched-attire",
-        "profile": "early",
-        "alpha": 0.6666666666666666,
-        "case_scores": {
-          "ranger": 0.0943786998,
-          "smith": 0.0023806692000000003,
-          "stationer": 0.3578813437499999,
-          "ferryman": 0.15425406719999998,
-          "watchmaker": 0.09144218790000001,
-          "guide": 0.0012947968,
-          "guard": 0.28772815679999997,
-          "violinist": 0.06099307500000002
-        },
-        "inputs": {
-          "ranger": "e17a6517590e5873a5e8eb165912efc76daeb8ffd9a58037d41aa4e4249053d1",
-          "smith": "03de8c5e0c5102752353a0ff806f0ce474f45bd4bf0786e0f261060e3aad6fb0",
-          "stationer": "fa8c544a3f159fcc5db386f5cb4edfef34d96b5eb91deb37df7455a821e9e0df",
-          "ferryman": "e2a8d70717368b1d151696fe3c7f88839f85f1c9b5c82feb68e5527165cbac73",
-          "watchmaker": "f18aab710e6067ca5f612626711642231c4771f86caf3a31e2658c5c3cacf8ed",
-          "guide": "93265e537939bafd75728daf69ce1e95e993210c07a1fe81d97383717792e693",
-          "guard": "6cfaccecaa2150770f8b30c3013d619dc91d40ed9a0794f24ade3bd85aa81da7",
-          "violinist": "4efb922e443749b65e48dd7e93cce9d4f15ac069c2eb0a587ee1c5f58b5f2801"
-        },
-        "pairs": [
-          {
-            "images": [
-              "e17a6517590e5873a5e8eb165912efc76daeb8ffd9a58037d41aa4e4249053d1",
-              "03de8c5e0c5102752353a0ff806f0ce474f45bd4bf0786e0f261060e3aad6fb0"
-            ],
-            "forward": {
-              "value": 0.135,
-              "receipt": "cac604d8cad06b417ff5ac9c0bda76fab3446014d911d43cbd793b284b99276d"
-            },
-            "reverse": {
-              "value": 0.15,
-              "receipt": "fbfc1953d6b7f95c3f29b3cb1336f0a4fd8c8b84c6e9e80dea6bea721c674fcd"
-            },
-            "repeat": 0.14250000000000002,
-            "cases": [
-              "ranger",
-              "smith"
-            ]
-          },
-          {
-            "images": [
-              "e17a6517590e5873a5e8eb165912efc76daeb8ffd9a58037d41aa4e4249053d1",
-              "fa8c544a3f159fcc5db386f5cb4edfef34d96b5eb91deb37df7455a821e9e0df"
-            ],
-            "forward": {
-              "value": 0.31,
-              "receipt": "153e2c66fbb204ac2ee87b1ebe6e662efea26a4f138eedaf017a6b6a36233789"
-            },
-            "reverse": {
-              "value": 0.285,
-              "receipt": "e9590c79d8bc8cbdef072953c38db297a1c5ec81e079ffa9f543847e14bc7139"
-            },
-            "repeat": 0.2975,
-            "cases": [
-              "ranger",
-              "stationer"
-            ]
-          },
-          {
-            "images": [
-              "e17a6517590e5873a5e8eb165912efc76daeb8ffd9a58037d41aa4e4249053d1",
-              "e2a8d70717368b1d151696fe3c7f88839f85f1c9b5c82feb68e5527165cbac73"
-            ],
-            "forward": {
-              "value": 0.4375,
-              "receipt": "2d1de13a13ca672e1af89839782868ce26907169f7d9beb8734c89f9a087191d"
-            },
-            "reverse": {
-              "value": 0.3825,
-              "receipt": "ab12a59ae851e289116c54fe4ea6ae70256fa91caa78032669ade2fe419addb9"
-            },
-            "repeat": 0.41000000000000003,
-            "cases": [
-              "ranger",
-              "ferryman"
-            ]
-          },
-          {
-            "images": [
-              "e17a6517590e5873a5e8eb165912efc76daeb8ffd9a58037d41aa4e4249053d1",
-              "f18aab710e6067ca5f612626711642231c4771f86caf3a31e2658c5c3cacf8ed"
-            ],
-            "forward": {
-              "value": 0.36,
-              "receipt": "aa878ee768d845a652278e5ad551fce8317ad6751db4758a19860158502776b9"
-            },
-            "reverse": {
-              "value": 0.2825,
-              "receipt": "40ffa512e3d8de1b2e154af03fb16c1295a86541e956e70a2b7fe267116627d3"
-            },
-            "repeat": 0.32125,
-            "cases": [
-              "ranger",
-              "watchmaker"
-            ]
-          },
-          {
-            "images": [
-              "e17a6517590e5873a5e8eb165912efc76daeb8ffd9a58037d41aa4e4249053d1",
-              "93265e537939bafd75728daf69ce1e95e993210c07a1fe81d97383717792e693"
-            ],
-            "forward": {
-              "value": 0.23,
-              "receipt": "764050ceaec473737399b2470ce67891a7b5f5c6c22bb01bf5ae58d6353ecd19"
-            },
-            "reverse": {
-              "value": 0.205,
-              "receipt": "c48b60bfaa9b6d16dd26f624c34d89d35d17b65744b9c83a881eebe3c5c4ec8c"
-            },
-            "repeat": 0.2175,
-            "cases": [
-              "ranger",
-              "guide"
-            ]
-          },
-          {
-            "images": [
-              "e17a6517590e5873a5e8eb165912efc76daeb8ffd9a58037d41aa4e4249053d1",
-              "6cfaccecaa2150770f8b30c3013d619dc91d40ed9a0794f24ade3bd85aa81da7"
-            ],
-            "forward": {
-              "value": 0.36,
-              "receipt": "2ff3fcb95791e1aa03d5aac17920312c585248218d8b910269b0f20959f8a18d"
-            },
-            "reverse": {
-              "value": 0.28,
-              "receipt": "b5d08dec3158be3932a95e72551854cf1c5ad3fb3dbd9c10c8f60b942732dd50"
-            },
-            "repeat": 0.32,
-            "cases": [
-              "ranger",
-              "guard"
-            ]
-          },
-          {
-            "images": [
-              "e17a6517590e5873a5e8eb165912efc76daeb8ffd9a58037d41aa4e4249053d1",
-              "4efb922e443749b65e48dd7e93cce9d4f15ac069c2eb0a587ee1c5f58b5f2801"
-            ],
-            "forward": {
-              "value": 0.315,
-              "receipt": "260371bbe7a8406367ea0f9e615a938f312aa8295b241a9496adb8e049aae904"
-            },
-            "reverse": {
-              "value": 0.29,
-              "receipt": "fd4e8d17914a7f2ee9efe6c19d01f22d6f33b345655fbe82a75416f386992f98"
-            },
-            "repeat": 0.3025,
-            "cases": [
-              "ranger",
-              "violinist"
-            ]
-          },
-          {
-            "images": [
-              "03de8c5e0c5102752353a0ff806f0ce474f45bd4bf0786e0f261060e3aad6fb0",
-              "fa8c544a3f159fcc5db386f5cb4edfef34d96b5eb91deb37df7455a821e9e0df"
-            ],
-            "forward": {
-              "value": 0.0625,
-              "receipt": "a84d79e3246d3aa20f3546c285cc8f276fb0289f674c3b558b5ba0e1c6dc148d"
-            },
-            "reverse": {
-              "value": 0.0625,
-              "receipt": "0d0ade4de484625e7af63920146ff60955e8e35ffd7068533262271c64f8e810"
-            },
-            "repeat": 0.0625,
-            "cases": [
-              "smith",
-              "stationer"
-            ]
-          },
-          {
-            "images": [
-              "03de8c5e0c5102752353a0ff806f0ce474f45bd4bf0786e0f261060e3aad6fb0",
-              "e2a8d70717368b1d151696fe3c7f88839f85f1c9b5c82feb68e5527165cbac73"
-            ],
-            "forward": {
-              "value": 0.1175,
-              "receipt": "8e2310c000551de02bb3c9e99d75b243dcccea5e5aed9b49361de205c9b1fadb"
-            },
-            "reverse": {
-              "value": 0.1275,
-              "receipt": "cd89c607278a7f470c5c976e4af917e39ed28b488ee2c640edf418e384191809"
-            },
-            "repeat": 0.1225,
-            "cases": [
-              "smith",
-              "ferryman"
-            ]
-          },
-          {
-            "images": [
-              "03de8c5e0c5102752353a0ff806f0ce474f45bd4bf0786e0f261060e3aad6fb0",
-              "f18aab710e6067ca5f612626711642231c4771f86caf3a31e2658c5c3cacf8ed"
-            ],
-            "forward": {
-              "value": 0.0625,
-              "receipt": "8d61e4549526a77ee91ced54f339fb735eb25c5844e801c487fd269835879f38"
-            },
-            "reverse": {
-              "value": 0.045,
-              "receipt": "55d37137a2fd7e711e627339a46314a7a1fdf652f86137b8de1058f782bfa491"
-            },
-            "repeat": 0.05375,
-            "cases": [
-              "smith",
-              "watchmaker"
-            ]
-          },
-          {
-            "images": [
-              "03de8c5e0c5102752353a0ff806f0ce474f45bd4bf0786e0f261060e3aad6fb0",
-              "93265e537939bafd75728daf69ce1e95e993210c07a1fe81d97383717792e693"
-            ],
-            "forward": {
-              "value": 0.505,
-              "receipt": "cbf0d277a55c218414618d854b85629c425acb2a14dbfa771ee91a374de692ed"
-            },
-            "reverse": {
-              "value": 0.4025,
-              "receipt": "51ba539890a03f993785278010f77b56c58c364b669714db4886852b1507eff4"
-            },
-            "repeat": 0.45375,
-            "cases": [
-              "smith",
-              "guide"
-            ]
-          },
-          {
-            "images": [
-              "03de8c5e0c5102752353a0ff806f0ce474f45bd4bf0786e0f261060e3aad6fb0",
-              "6cfaccecaa2150770f8b30c3013d619dc91d40ed9a0794f24ade3bd85aa81da7"
-            ],
-            "forward": {
-              "value": 0.21,
-              "receipt": "8b0a78c21ab98afa7ab97dd39551c35ae060c0588d0ec13e75d14fd837715b99"
-            },
-            "reverse": {
-              "value": 0.1525,
-              "receipt": "d232443603b876ea24a536815e0861baaa16bd183e8f8ef4ccedc1c1248793d4"
-            },
-            "repeat": 0.18125,
-            "cases": [
-              "smith",
-              "guard"
-            ]
-          },
-          {
-            "images": [
-              "03de8c5e0c5102752353a0ff806f0ce474f45bd4bf0786e0f261060e3aad6fb0",
-              "4efb922e443749b65e48dd7e93cce9d4f15ac069c2eb0a587ee1c5f58b5f2801"
-            ],
-            "forward": {
-              "value": 0.2325,
-              "receipt": "87cc5a7d8e2fec9687d996567a888503bc1d1b1dcbf35d34b09c7ad2ef35129d"
-            },
-            "reverse": {
-              "value": 0.2225,
-              "receipt": "dfd83e822da1db82ae6e9f71ad2c5c89a928265af6a7dc994fafad875cd890d0"
-            },
-            "repeat": 0.2275,
-            "cases": [
-              "smith",
-              "violinist"
-            ]
-          },
-          {
-            "images": [
-              "fa8c544a3f159fcc5db386f5cb4edfef34d96b5eb91deb37df7455a821e9e0df",
-              "e2a8d70717368b1d151696fe3c7f88839f85f1c9b5c82feb68e5527165cbac73"
-            ],
-            "forward": {
-              "value": 0.225,
-              "receipt": "94ddb32396d78b43a1cc5a475e74c81fcf1498750e2525cc806fcc3dc7505d78"
-            },
-            "reverse": {
-              "value": 0.2,
-              "receipt": "eb40a1426b0099ac10d1232b09b658b1e2be2a6bef33bc395389e11c29a410dd"
-            },
-            "repeat": 0.21250000000000002,
-            "cases": [
-              "stationer",
-              "ferryman"
-            ]
-          },
-          {
-            "images": [
-              "fa8c544a3f159fcc5db386f5cb4edfef34d96b5eb91deb37df7455a821e9e0df",
-              "f18aab710e6067ca5f612626711642231c4771f86caf3a31e2658c5c3cacf8ed"
-            ],
-            "forward": {
-              "value": 0.1575,
-              "receipt": "c3a4ef5298f32b2a2f291b76800c7261a1dd4937b6c44e9e14f1919549298e5a"
-            },
-            "reverse": {
-              "value": 0.14,
-              "receipt": "170b1fb9e3bc3f557d80dea2c474f290e9a58c02b23fcf8a83d01adc632a48b1"
-            },
-            "repeat": 0.14875,
-            "cases": [
-              "stationer",
-              "watchmaker"
-            ]
-          },
-          {
-            "images": [
-              "fa8c544a3f159fcc5db386f5cb4edfef34d96b5eb91deb37df7455a821e9e0df",
-              "93265e537939bafd75728daf69ce1e95e993210c07a1fe81d97383717792e693"
-            ],
-            "forward": {
-              "value": 0.125,
-              "receipt": "3130ce0babddcdb2b8d272859bc4805af073965d4fdf6132bb359edcce60f18f"
-            },
-            "reverse": {
-              "value": 0.1475,
-              "receipt": "550c15508dd39956e22ada4db77a63ab15d6edeb7f8cc96594a5aa84fbdbe7ba"
-            },
-            "repeat": 0.13624999999999998,
-            "cases": [
-              "stationer",
-              "guide"
-            ]
-          },
-          {
-            "images": [
-              "fa8c544a3f159fcc5db386f5cb4edfef34d96b5eb91deb37df7455a821e9e0df",
-              "6cfaccecaa2150770f8b30c3013d619dc91d40ed9a0794f24ade3bd85aa81da7"
-            ],
-            "forward": {
-              "value": 0.2925,
-              "receipt": "3bdeb5db3aeed5cdaf410f601641b68220113f1abc6e77fefd031f931ee15c43"
-            },
-            "reverse": {
-              "value": 0.405,
-              "receipt": "c9863e80d965550940ffded7acc5a099ff0adcdb92275a06ff78518e2d1c34f1"
-            },
-            "repeat": 0.34875,
-            "cases": [
-              "stationer",
-              "guard"
-            ]
-          },
-          {
-            "images": [
-              "fa8c544a3f159fcc5db386f5cb4edfef34d96b5eb91deb37df7455a821e9e0df",
-              "4efb922e443749b65e48dd7e93cce9d4f15ac069c2eb0a587ee1c5f58b5f2801"
-            ],
-            "forward": {
-              "value": 0.3125,
-              "receipt": "82c174c3320ed6946eca41993e9997379bceeb523890b1b5951d5c6c6ca68259"
-            },
-            "reverse": {
-              "value": 0.365,
-              "receipt": "8a04d95b0adb2dc958d219470ee3e95fd5fe01d73c702567ed1bacaaf2c42abc"
-            },
-            "repeat": 0.33875,
-            "cases": [
-              "stationer",
-              "violinist"
-            ]
-          },
-          {
-            "images": [
-              "e2a8d70717368b1d151696fe3c7f88839f85f1c9b5c82feb68e5527165cbac73",
-              "f18aab710e6067ca5f612626711642231c4771f86caf3a31e2658c5c3cacf8ed"
-            ],
-            "forward": {
-              "value": 0.5625,
-              "receipt": "9625acd3b527bf1b42e34062a0a4b6cc6ef8a982de29d5db586b84654d387988"
-            },
-            "reverse": {
-              "value": 0.5575,
-              "receipt": "6124d15f82d8cb24dc7dcc20c897bc87655ef04cbfe8ebacfdaade267a8a1dfd"
-            },
-            "repeat": 0.56,
-            "cases": [
-              "ferryman",
-              "watchmaker"
-            ]
-          },
-          {
-            "images": [
-              "e2a8d70717368b1d151696fe3c7f88839f85f1c9b5c82feb68e5527165cbac73",
-              "93265e537939bafd75728daf69ce1e95e993210c07a1fe81d97383717792e693"
-            ],
-            "forward": {
-              "value": 0.165,
-              "receipt": "9a4119ca8352ca655c7a535f4167d17c1b25efd6d7c56450a762a1163a4c3864"
-            },
-            "reverse": {
-              "value": 0.0825,
-              "receipt": "cf15015e7340366dc69304d07c93567a9371b691946d16d5c8a8882d751bfbe9"
-            },
-            "repeat": 0.12375,
-            "cases": [
-              "ferryman",
-              "guide"
-            ]
-          },
-          {
-            "images": [
-              "e2a8d70717368b1d151696fe3c7f88839f85f1c9b5c82feb68e5527165cbac73",
-              "6cfaccecaa2150770f8b30c3013d619dc91d40ed9a0794f24ade3bd85aa81da7"
-            ],
-            "forward": {
-              "value": 0.5425,
-              "receipt": "357eed1a2540bfe85567ea46487848b8a55ce04b8c5a6dec651556d1f35cdd77"
-            },
-            "reverse": {
-              "value": 0.6525,
-              "receipt": "969159ff71cc3776359b056bc9ee556cee1e075ca134d2b455cfce9458089eb9"
-            },
-            "repeat": 0.5974999999999999,
-            "cases": [
-              "ferryman",
-              "guard"
-            ]
-          },
-          {
-            "images": [
-              "e2a8d70717368b1d151696fe3c7f88839f85f1c9b5c82feb68e5527165cbac73",
-              "4efb922e443749b65e48dd7e93cce9d4f15ac069c2eb0a587ee1c5f58b5f2801"
-            ],
-            "forward": {
-              "value": 0.465,
-              "receipt": "d6131aa410592abcee64c3ebb4b065b32a0188ef96b1b173a973e01dafd90b55"
-            },
-            "reverse": {
-              "value": 0.5475,
-              "receipt": "fa5406a287ba6b9a2f9fc34c46fc4a08657afe8d21a91cacb9409c14e78633e7"
-            },
-            "repeat": 0.50625,
-            "cases": [
-              "ferryman",
-              "violinist"
-            ]
-          },
-          {
-            "images": [
-              "f18aab710e6067ca5f612626711642231c4771f86caf3a31e2658c5c3cacf8ed",
-              "93265e537939bafd75728daf69ce1e95e993210c07a1fe81d97383717792e693"
-            ],
-            "forward": {
-              "value": 0.15,
-              "receipt": "b6fcbe2c895dad3c526232691027ce778fc3db4a0e784436cf9ff4d3c204e8af"
-            },
-            "reverse": {
-              "value": 0.14,
-              "receipt": "3e28c7e0e147eb921d38be642bc888927e87d20a1720009b89ddd6931ed1256a"
-            },
-            "repeat": 0.14500000000000002,
-            "cases": [
-              "watchmaker",
-              "guide"
-            ]
-          },
-          {
-            "images": [
-              "f18aab710e6067ca5f612626711642231c4771f86caf3a31e2658c5c3cacf8ed",
-              "6cfaccecaa2150770f8b30c3013d619dc91d40ed9a0794f24ade3bd85aa81da7"
-            ],
-            "forward": {
-              "value": 0.335,
-              "receipt": "8e59723e0f77223fa919ba1accbeb5aceb275423c687daceb50b27537f80bab2"
-            },
-            "reverse": {
-              "value": 0.4275,
-              "receipt": "61171fe4362f010c1f1b59de545c6e4e9d8542735b63a5e7b8b5af48bc7c9594"
-            },
-            "repeat": 0.38125,
-            "cases": [
-              "watchmaker",
-              "guard"
-            ]
-          },
-          {
-            "images": [
-              "f18aab710e6067ca5f612626711642231c4771f86caf3a31e2658c5c3cacf8ed",
-              "4efb922e443749b65e48dd7e93cce9d4f15ac069c2eb0a587ee1c5f58b5f2801"
-            ],
-            "forward": {
-              "value": 0.1525,
-              "receipt": "85752dcdac20c09446196f7911e6d78f8ad94fdac82742a91fe0112c508c775f"
-            },
-            "reverse": {
-              "value": 0.215,
-              "receipt": "645e824f5e33b23813a5654c1ef8f1de98fe54227d4b907cb800c6bf92fb8ced"
-            },
-            "repeat": 0.18375,
-            "cases": [
-              "watchmaker",
-              "violinist"
-            ]
-          },
-          {
-            "images": [
-              "93265e537939bafd75728daf69ce1e95e993210c07a1fe81d97383717792e693",
-              "6cfaccecaa2150770f8b30c3013d619dc91d40ed9a0794f24ade3bd85aa81da7"
-            ],
-            "forward": {
-              "value": 0.29,
-              "receipt": "d2fff26208f6c2ca0050c6c9c79111dc49f69b461bfb1bf28e77a21a43ee6e91"
-            },
-            "reverse": {
-              "value": 0.2825,
-              "receipt": "4f0661e70d7b15062a05e7f84c0506e1eef24c2a727a2c0d9e47ad92032320f3"
-            },
-            "repeat": 0.28625,
-            "cases": [
-              "guide",
-              "guard"
-            ]
-          },
-          {
-            "images": [
-              "93265e537939bafd75728daf69ce1e95e993210c07a1fe81d97383717792e693",
-              "4efb922e443749b65e48dd7e93cce9d4f15ac069c2eb0a587ee1c5f58b5f2801"
-            ],
-            "forward": {
-              "value": 0.24,
-              "receipt": "116a1d0f6c737bab23ca18cdd25985c3381f6c58dd6c2476735fae93905b51d8"
-            },
-            "reverse": {
-              "value": 0.275,
-              "receipt": "f509f9322a2606e2ee6220b2b3b33825e10ef7c9a92c225e9fc191c7a3800a04"
-            },
-            "repeat": 0.2575,
-            "cases": [
-              "guide",
-              "violinist"
-            ]
-          },
-          {
-            "images": [
-              "6cfaccecaa2150770f8b30c3013d619dc91d40ed9a0794f24ade3bd85aa81da7",
-              "4efb922e443749b65e48dd7e93cce9d4f15ac069c2eb0a587ee1c5f58b5f2801"
-            ],
-            "forward": {
-              "value": 0.58,
-              "receipt": "83a7c3ab6807e783e469e37ba2dc33c82dec021c6a6584b7834f3056ffd5b9af"
-            },
-            "reverse": {
-              "value": 0.62,
-              "receipt": "aaecc69b02b4a2459327960b0ef60f2a9e34421f0da94eab978cd4c9cb429cb7"
-            },
-            "repeat": 0.6,
-            "cases": [
-              "guard",
-              "violinist"
-            ]
-          }
-        ],
-        "base": 0.13129412455624997,
-        "repeat": 0.2835267857142857,
-        "score": 0.12106048051317632
-      },
-      {
-        "method": "two-cue-average",
-        "profile": "early",
-        "alpha": 0.6666666666666666,
-        "case_scores": {
-          "ranger": 0.0015628031999999998,
-          "smith": 0.0005734124000000001,
-          "stationer": 0.09391338875,
-          "ferryman": 0.23369313240000003,
-          "watchmaker": 0.3007161071999999,
-          "guide": 3.110000000000001e-05,
-          "guard": 0.3014328855999999,
-          "violinist": 0.03883005244999999
-        },
-        "inputs": {
-          "ranger": "46bd24195aa82fa535c126d7b4b3f9baa53e1909a997904e1109a8c3d463ed10",
-          "smith": "7c18cfdd0d059260b8f8063333a7799ef61807b95872e88986fe54a82889e785",
-          "stationer": "048cdf1615243f7387a33bfe63f67a463c2b93cbaef5b50dab73db2416b26027",
-          "ferryman": "332f58bca4db4e2458e5b7b90449a489328c16ef5f47be87c9002bb705caf8f3",
-          "watchmaker": "c32343dbe7755b891b27153ccdac444dea171f1cd218d4e06442dfa2baf4add3",
-          "guide": "a90919c6e589f5a5446a2876dbc08a8f66f1e616844c177cd3090d11aa374948",
-          "guard": "f60c7476dea1476f22025619f5729b9c86df46d6eba0e265b7d758660a509fd4",
-          "violinist": "3ec3433c6e2068018ca3b433d9a6cb488266be603fbfc9da0547d7c166b5f4a6"
-        },
-        "pairs": [
-          {
-            "images": [
-              "46bd24195aa82fa535c126d7b4b3f9baa53e1909a997904e1109a8c3d463ed10",
-              "7c18cfdd0d059260b8f8063333a7799ef61807b95872e88986fe54a82889e785"
-            ],
-            "forward": {
-              "value": 0.295,
-              "receipt": "0452b4aada79d207ebe883df033c6f7bc12fc2e8bb552cf8b87e29b19b2cea70"
-            },
-            "reverse": {
-              "value": 0.3525,
-              "receipt": "e835d5d7085eff55fd3630a27e07e68c56410c404515ae49879a9efe73d20ad5"
-            },
-            "repeat": 0.32375,
-            "cases": [
-              "ranger",
-              "smith"
-            ]
-          },
-          {
-            "images": [
-              "46bd24195aa82fa535c126d7b4b3f9baa53e1909a997904e1109a8c3d463ed10",
-              "048cdf1615243f7387a33bfe63f67a463c2b93cbaef5b50dab73db2416b26027"
-            ],
-            "forward": {
-              "value": 0.2,
-              "receipt": "7ab02a87080ce24c3a89dc7f0399f6746085539c3b93e8c84fb4615f7dc66ef2"
-            },
-            "reverse": {
-              "value": 0.4425,
-              "receipt": "d29f1c592317cc9ceb01df49e107b53f3aecf82a2146896b2c112fcb6a257fca"
-            },
-            "repeat": 0.32125000000000004,
-            "cases": [
-              "ranger",
-              "stationer"
-            ]
-          },
-          {
-            "images": [
-              "46bd24195aa82fa535c126d7b4b3f9baa53e1909a997904e1109a8c3d463ed10",
-              "332f58bca4db4e2458e5b7b90449a489328c16ef5f47be87c9002bb705caf8f3"
-            ],
-            "forward": {
-              "value": 0.3,
-              "receipt": "560841e863ff8670fe296fd00b6054d930d5f745aedc86e44b1c1501e3e56e0b"
-            },
-            "reverse": {
-              "value": 0.32,
-              "receipt": "3dc538fdba27d073f956648cfc54f76b3712565c284a1923801d75e3886e0fe7"
-            },
-            "repeat": 0.31,
-            "cases": [
-              "ranger",
-              "ferryman"
-            ]
-          },
-          {
-            "images": [
-              "46bd24195aa82fa535c126d7b4b3f9baa53e1909a997904e1109a8c3d463ed10",
-              "c32343dbe7755b891b27153ccdac444dea171f1cd218d4e06442dfa2baf4add3"
-            ],
-            "forward": {
-              "value": 0.1075,
-              "receipt": "e535447010ae661068aff7e853b4d2bdc895f1bede470695dbe73687834e7b50"
-            },
-            "reverse": {
-              "value": 0.125,
-              "receipt": "4d7506613d4707b24595563870e314bc7194644a7c881dab24b011e42d91b6a3"
-            },
-            "repeat": 0.11624999999999999,
-            "cases": [
-              "ranger",
-              "watchmaker"
-            ]
-          },
-          {
-            "images": [
-              "46bd24195aa82fa535c126d7b4b3f9baa53e1909a997904e1109a8c3d463ed10",
-              "a90919c6e589f5a5446a2876dbc08a8f66f1e616844c177cd3090d11aa374948"
-            ],
-            "forward": {
-              "value": 0.4175,
-              "receipt": "5badf0837b43c5634a923c38f4a7064c2d12938a03aabecd6f0b85dd8c903be3"
-            },
-            "reverse": {
-              "value": 0.405,
-              "receipt": "ff146dead6fb790915be15cddda72dd331470b75b724ac461282e27ab361b614"
-            },
-            "repeat": 0.41125,
-            "cases": [
-              "ranger",
-              "guide"
-            ]
-          },
-          {
-            "images": [
-              "46bd24195aa82fa535c126d7b4b3f9baa53e1909a997904e1109a8c3d463ed10",
-              "f60c7476dea1476f22025619f5729b9c86df46d6eba0e265b7d758660a509fd4"
-            ],
-            "forward": {
-              "value": 0.235,
-              "receipt": "3541097090dfffe66c2ef0189089b6ae5fe72c7a23142172dea55c5f9dc100d0"
-            },
-            "reverse": {
-              "value": 0.3925,
-              "receipt": "1f98d85245fbb5d466c3187a7bb979ca9ecdd085b23070103cd627b3cd0fd5a4"
-            },
-            "repeat": 0.31375,
-            "cases": [
-              "ranger",
-              "guard"
-            ]
-          },
-          {
-            "images": [
-              "46bd24195aa82fa535c126d7b4b3f9baa53e1909a997904e1109a8c3d463ed10",
-              "3ec3433c6e2068018ca3b433d9a6cb488266be603fbfc9da0547d7c166b5f4a6"
-            ],
-            "forward": {
-              "value": 0.48,
-              "receipt": "da00e7fd940a6920d4d60510f56186946fa8a94eba3e96e36f3f062970fe231a"
-            },
-            "reverse": {
-              "value": 0.4525,
-              "receipt": "25a232c22e95c74f6c14091e6905dc884ce34448fda2974bee09d2a046f637e8"
-            },
-            "repeat": 0.46625,
-            "cases": [
-              "ranger",
-              "violinist"
-            ]
-          },
-          {
-            "images": [
-              "7c18cfdd0d059260b8f8063333a7799ef61807b95872e88986fe54a82889e785",
-              "048cdf1615243f7387a33bfe63f67a463c2b93cbaef5b50dab73db2416b26027"
-            ],
-            "forward": {
-              "value": 0.0925,
-              "receipt": "449d077ec4e2c1e0d3e1ed6b3ca4da5f6eaa7a878e26cd1ac48c1eec6d5e97cb"
-            },
-            "reverse": {
-              "value": 0.105,
-              "receipt": "8978adaa94c69a6966382c6ec4c339e3dcb35db24f5d7b95f0073d910245e548"
-            },
-            "repeat": 0.09875,
-            "cases": [
-              "smith",
-              "stationer"
-            ]
-          },
-          {
-            "images": [
-              "7c18cfdd0d059260b8f8063333a7799ef61807b95872e88986fe54a82889e785",
-              "332f58bca4db4e2458e5b7b90449a489328c16ef5f47be87c9002bb705caf8f3"
-            ],
-            "forward": {
-              "value": 0.04,
-              "receipt": "cde7e9da5d335c7129c20cfac68672145d8e18d0936692ba96fefa4f86d7d9da"
-            },
-            "reverse": {
-              "value": 0.05,
-              "receipt": "79753a4f457019233bb618bc1b03bad331b7815679b749f41298c803adb9a44e"
-            },
-            "repeat": 0.045,
-            "cases": [
-              "smith",
-              "ferryman"
-            ]
-          },
-          {
-            "images": [
-              "7c18cfdd0d059260b8f8063333a7799ef61807b95872e88986fe54a82889e785",
-              "c32343dbe7755b891b27153ccdac444dea171f1cd218d4e06442dfa2baf4add3"
-            ],
-            "forward": {
-              "value": 0.0375,
-              "receipt": "2907fbbf1a1471283a2949636415139be6dd25d0acaef8e64da04aed39597630"
-            },
-            "reverse": {
-              "value": 0.05,
-              "receipt": "1d04fa407062dcd99c94bf619f4170e4c22c883bd195979c982fde7ccb4ecbf3"
-            },
-            "repeat": 0.04375,
-            "cases": [
-              "smith",
-              "watchmaker"
-            ]
-          },
-          {
-            "images": [
-              "7c18cfdd0d059260b8f8063333a7799ef61807b95872e88986fe54a82889e785",
-              "a90919c6e589f5a5446a2876dbc08a8f66f1e616844c177cd3090d11aa374948"
-            ],
-            "forward": {
-              "value": 0.4,
-              "receipt": "ba0c5a9352ad1209bfe7a755cae45577fa42645e6ee80bdf874f28a64d4ea026"
-            },
-            "reverse": {
-              "value": 0.2625,
-              "receipt": "22d689ee2c03e9540d28d4b6cdaa05e30fe3de6ff54cc7a89c922262f93e2a82"
-            },
-            "repeat": 0.33125000000000004,
-            "cases": [
-              "smith",
-              "guide"
-            ]
-          },
-          {
-            "images": [
-              "7c18cfdd0d059260b8f8063333a7799ef61807b95872e88986fe54a82889e785",
-              "f60c7476dea1476f22025619f5729b9c86df46d6eba0e265b7d758660a509fd4"
-            ],
-            "forward": {
-              "value": 0.1275,
-              "receipt": "0e154df7f7e7a46893aa8ca964bb46a3f1ed1d43eab3766c904110c4ef8e3883"
-            },
-            "reverse": {
-              "value": 0.11,
-              "receipt": "f056085c2a05451481e1c26c037e9bf441a584bd5463310c7dfdb9147960c457"
-            },
-            "repeat": 0.11875,
-            "cases": [
-              "smith",
-              "guard"
-            ]
-          },
-          {
-            "images": [
-              "7c18cfdd0d059260b8f8063333a7799ef61807b95872e88986fe54a82889e785",
-              "3ec3433c6e2068018ca3b433d9a6cb488266be603fbfc9da0547d7c166b5f4a6"
-            ],
-            "forward": {
-              "value": 0.305,
-              "receipt": "ce481157dd0c0d98cff39bba7eaead1f2961886dc071867ae448c381459f03c6"
-            },
-            "reverse": {
-              "value": 0.3125,
-              "receipt": "7d083ead502508817b608b069e9a457504dc172fdfc1b625616880265f1d80f6"
-            },
-            "repeat": 0.30874999999999997,
-            "cases": [
-              "smith",
-              "violinist"
-            ]
-          },
-          {
-            "images": [
-              "048cdf1615243f7387a33bfe63f67a463c2b93cbaef5b50dab73db2416b26027",
-              "332f58bca4db4e2458e5b7b90449a489328c16ef5f47be87c9002bb705caf8f3"
-            ],
-            "forward": {
-              "value": 0.255,
-              "receipt": "b16a41143d496456a18f9210dd4dd172d9fb8580b23efdb9a86261157bc04f8b"
-            },
-            "reverse": {
-              "value": 0.2425,
-              "receipt": "3d706a568ae49877c011667e0a0c64115d39a4589eac795827c361f73a63d98b"
-            },
-            "repeat": 0.24875,
-            "cases": [
-              "stationer",
-              "ferryman"
-            ]
-          },
-          {
-            "images": [
-              "048cdf1615243f7387a33bfe63f67a463c2b93cbaef5b50dab73db2416b26027",
-              "c32343dbe7755b891b27153ccdac444dea171f1cd218d4e06442dfa2baf4add3"
-            ],
-            "forward": {
-              "value": 0.2175,
-              "receipt": "7818a956eaa3c5f5dced461164bcf3b9719a47d7c13e9277dbb01b808553ce94"
-            },
-            "reverse": {
-              "value": 0.1625,
-              "receipt": "30fe48a50bc417740d76d64547e588ddc96c270c1f4d8759b5423e8b69062983"
-            },
-            "repeat": 0.19,
-            "cases": [
-              "stationer",
-              "watchmaker"
-            ]
-          },
-          {
-            "images": [
-              "048cdf1615243f7387a33bfe63f67a463c2b93cbaef5b50dab73db2416b26027",
-              "a90919c6e589f5a5446a2876dbc08a8f66f1e616844c177cd3090d11aa374948"
-            ],
-            "forward": {
-              "value": 0.145,
-              "receipt": "c4f6496a20ea125e53c142b2b3e050d2c76ad6b9308fc57f0d156f85bf148ce7"
-            },
-            "reverse": {
-              "value": 0.065,
-              "receipt": "834da5bce672da5e57be10902e4b844c1a3158b472acbd4da84013e7b93c515a"
-            },
-            "repeat": 0.105,
-            "cases": [
-              "stationer",
-              "guide"
-            ]
-          },
-          {
-            "images": [
-              "048cdf1615243f7387a33bfe63f67a463c2b93cbaef5b50dab73db2416b26027",
-              "f60c7476dea1476f22025619f5729b9c86df46d6eba0e265b7d758660a509fd4"
-            ],
-            "forward": {
-              "value": 0.2875,
-              "receipt": "ffa4a639d4e67639cfb1e14246fafd011b3684f8fb4d33d1720ba659a1ee45ed"
-            },
-            "reverse": {
-              "value": 0.125,
-              "receipt": "3dc8c5f76751fc1bf9979c48012c8a520e07f1171e8be77d1f3441899f9a8768"
-            },
-            "repeat": 0.20625,
-            "cases": [
-              "stationer",
-              "guard"
-            ]
-          },
-          {
-            "images": [
-              "048cdf1615243f7387a33bfe63f67a463c2b93cbaef5b50dab73db2416b26027",
-              "3ec3433c6e2068018ca3b433d9a6cb488266be603fbfc9da0547d7c166b5f4a6"
-            ],
-            "forward": {
-              "value": 0.3175,
-              "receipt": "99e2c631c69f4f179f2c005f1ab6015a4d3f6cf05cdd0b4314e10e5994be73c7"
-            },
-            "reverse": {
-              "value": 0.2075,
-              "receipt": "70ad402936045018ff69a08ef16bbdc52579b06b25b094a219cfe1d683407db2"
-            },
-            "repeat": 0.2625,
-            "cases": [
-              "stationer",
-              "violinist"
-            ]
-          },
-          {
-            "images": [
-              "332f58bca4db4e2458e5b7b90449a489328c16ef5f47be87c9002bb705caf8f3",
-              "c32343dbe7755b891b27153ccdac444dea171f1cd218d4e06442dfa2baf4add3"
-            ],
-            "forward": {
-              "value": 0.28,
-              "receipt": "252f5944de6ab9d345b71a57e4339bb54d50fe2284a32d71d12e6e0169a5bc8a"
-            },
-            "reverse": {
-              "value": 0.3125,
-              "receipt": "aa5b1e796a597b3be725b4a733d6ab0e62373d37d76f9b7e41c5e07d7c187950"
-            },
-            "repeat": 0.29625,
-            "cases": [
-              "ferryman",
-              "watchmaker"
-            ]
-          },
-          {
-            "images": [
-              "332f58bca4db4e2458e5b7b90449a489328c16ef5f47be87c9002bb705caf8f3",
-              "a90919c6e589f5a5446a2876dbc08a8f66f1e616844c177cd3090d11aa374948"
-            ],
-            "forward": {
-              "value": 0.0225,
-              "receipt": "7522de9b4a90d52fa5ad462765b9e507fecff6a7c1a187c94b66c053245cd647"
-            },
-            "reverse": {
-              "value": 0.0175,
-              "receipt": "2f39dcd3a1259edcfe79ee7e1e16658b179b521356c8c300f441168d188049f3"
-            },
-            "repeat": 0.02,
-            "cases": [
-              "ferryman",
-              "guide"
-            ]
-          },
-          {
-            "images": [
-              "332f58bca4db4e2458e5b7b90449a489328c16ef5f47be87c9002bb705caf8f3",
-              "f60c7476dea1476f22025619f5729b9c86df46d6eba0e265b7d758660a509fd4"
-            ],
-            "forward": {
-              "value": 0.24,
-              "receipt": "4df0c539905133ec9964a12b4367baac3c32fd1f04f1cc43eb252bd493e9e6d6"
-            },
-            "reverse": {
-              "value": 0.2725,
-              "receipt": "260f7bb55e0f7a60d76af403a21d84503cc1b85c506a354771372017ed6ae3f3"
-            },
-            "repeat": 0.25625,
-            "cases": [
-              "ferryman",
-              "guard"
-            ]
-          },
-          {
-            "images": [
-              "332f58bca4db4e2458e5b7b90449a489328c16ef5f47be87c9002bb705caf8f3",
-              "3ec3433c6e2068018ca3b433d9a6cb488266be603fbfc9da0547d7c166b5f4a6"
-            ],
-            "forward": {
-              "value": 0.1875,
-              "receipt": "7e3fc86f01d73c596eb61a436ab749592e53e3db46dedc5eeb9ae31a28b4fb57"
-            },
-            "reverse": {
-              "value": 0.245,
-              "receipt": "8d86a898f6217159e93c8f356f11831f243f7d0b074f53f946b851756c2d799f"
-            },
-            "repeat": 0.21625,
-            "cases": [
-              "ferryman",
-              "violinist"
-            ]
-          },
-          {
-            "images": [
-              "c32343dbe7755b891b27153ccdac444dea171f1cd218d4e06442dfa2baf4add3",
-              "a90919c6e589f5a5446a2876dbc08a8f66f1e616844c177cd3090d11aa374948"
-            ],
-            "forward": {
-              "value": 0.0475,
-              "receipt": "a24a5902e61d8736485660168366c444401f5f0dbaf91c7b6c3317213c08ab5d"
-            },
-            "reverse": {
-              "value": 0.025,
-              "receipt": "4677b5a31c53ae44ad1f9122dc9ba2c5ddde58c803f141f2f65a062fff55917d"
-            },
-            "repeat": 0.036250000000000004,
-            "cases": [
-              "watchmaker",
-              "guide"
-            ]
-          },
-          {
-            "images": [
-              "c32343dbe7755b891b27153ccdac444dea171f1cd218d4e06442dfa2baf4add3",
-              "f60c7476dea1476f22025619f5729b9c86df46d6eba0e265b7d758660a509fd4"
-            ],
-            "forward": {
-              "value": 0.3775,
-              "receipt": "0933577a9f9b1e30aba8a1f17bb540bb38ba0523015dd4ceb0554b4e7b32f8cf"
-            },
-            "reverse": {
-              "value": 0.3275,
-              "receipt": "1feea39e8cb0b0da15eed14774ec8a995c37d9fca27c437f6632461f084127e9"
-            },
-            "repeat": 0.35250000000000004,
-            "cases": [
-              "watchmaker",
-              "guard"
-            ]
-          },
-          {
-            "images": [
-              "c32343dbe7755b891b27153ccdac444dea171f1cd218d4e06442dfa2baf4add3",
-              "3ec3433c6e2068018ca3b433d9a6cb488266be603fbfc9da0547d7c166b5f4a6"
-            ],
-            "forward": {
-              "value": 0.1125,
-              "receipt": "ce25542ed459ee53652fe9e7565565abc422185e38b6b10d2b5bd526ca6b6d91"
-            },
-            "reverse": {
-              "value": 0.11,
-              "receipt": "d310ccb3777c609d0efa3c64cae7d07548f26789b710f477b9b57f78aefd5e6e"
-            },
-            "repeat": 0.11125,
-            "cases": [
-              "watchmaker",
-              "violinist"
-            ]
-          },
-          {
-            "images": [
-              "a90919c6e589f5a5446a2876dbc08a8f66f1e616844c177cd3090d11aa374948",
-              "f60c7476dea1476f22025619f5729b9c86df46d6eba0e265b7d758660a509fd4"
-            ],
-            "forward": {
-              "value": 0.17,
-              "receipt": "8246ee33d58c7d3b26a1d224153d9a2d4f3085d889104f8a2c16c883a955b188"
-            },
-            "reverse": {
-              "value": 0.19,
-              "receipt": "30d40729cd2d88033940c2d66e0986d9f0b8432085fb99a645c2a963acad5986"
-            },
-            "repeat": 0.18,
-            "cases": [
-              "guide",
-              "guard"
-            ]
-          },
-          {
-            "images": [
-              "a90919c6e589f5a5446a2876dbc08a8f66f1e616844c177cd3090d11aa374948",
-              "3ec3433c6e2068018ca3b433d9a6cb488266be603fbfc9da0547d7c166b5f4a6"
-            ],
-            "forward": {
-              "value": 0.41,
-              "receipt": "fa1849e2849cb728e37507d4b83cdfd0d03ec3f9b0cd43e5d31efce5e81c5eb8"
-            },
-            "reverse": {
-              "value": 0.3875,
-              "receipt": "7cf33a03eadcaaa548d61171e84637e20b75df3bd3bb1e8f623cf2c68546b07a"
-            },
-            "repeat": 0.39875,
-            "cases": [
-              "guide",
-              "violinist"
-            ]
-          },
-          {
-            "images": [
-              "f60c7476dea1476f22025619f5729b9c86df46d6eba0e265b7d758660a509fd4",
-              "3ec3433c6e2068018ca3b433d9a6cb488266be603fbfc9da0547d7c166b5f4a6"
-            ],
-            "forward": {
-              "value": 0.5275,
-              "receipt": "6ea87012e58e5a76296b70dfd6af9d10571361dd69a9e901289ac587103562b6"
-            },
-            "reverse": {
-              "value": 0.5775,
-              "receipt": "e9c59df29b5c986454be34f100e048ac3eefe577f3947ce29ea1eb8b6de88c4e"
-            },
-            "repeat": 0.5525,
-            "cases": [
-              "guard",
-              "violinist"
-            ]
-          }
-        ],
-        "base": 0.12134411024999998,
-        "repeat": 0.23718750000000002,
-        "score": 0.11521862931008256
-      },
-      {
         "method": "shared-best-neutral-path",
         "profile": "early",
         "alpha": 1.625,
@@ -10277,44 +11401,44 @@
         "score": 0.10792105105517409
       },
       {
-        "method": "incumbent-refit",
+        "method": "soft45-adapter-rollout",
         "profile": "early",
         "alpha": 0.6666666666666666,
         "case_scores": {
-          "ranger": 0.05350620000000001,
-          "smith": 0.010124351999999998,
-          "stationer": 0.22005,
-          "ferryman": 0.15677385099999996,
-          "watchmaker": 0.25573607280000005,
-          "guide": 0.0003358720000000001,
-          "guard": 0.20639856930000003,
-          "violinist": 0.009765100799999999
+          "ranger": 0.11202105600000004,
+          "smith": 0.0009721734749999998,
+          "stationer": 0.13979464240000003,
+          "ferryman": 0.1933830234,
+          "watchmaker": 0.2533158576,
+          "guide": 0.0008876000000000002,
+          "guard": 0.16105994999999995,
+          "violinist": 0.0177664
         },
         "inputs": {
-          "ranger": "36e102bc3bdb05815d7645534f28a2fb5f0899853edfee1ee581d95fec64dfd4",
-          "smith": "eaaf18a93040dc5e2c62098ac13f26cee6f757cc0509f9f9939d5e8c09eedb27",
-          "stationer": "9e9439d7c976cb0be165a44861885bbd1108056f072a05c1854ce4b98b53a9a7",
-          "ferryman": "25c1d0817e1269e95105be73163691d8f1d9fe736b890bb8b3d5520da0344970",
-          "watchmaker": "436032be95d9b63a9b34675a00117486624ade2603eaeefd9d457cd9094f0fb1",
-          "guide": "ef696a82b5070524fdb7d656ca4e388de6b12e87b452541f7de295867cbeb01f",
-          "guard": "afdfdf9a116b7dced1642401c2870fd3309d8d298729ded02aea410186af91fe",
-          "violinist": "8e14a70a778af2e54a2daed52f92b3f583f8c63f6abd6a884a2a30bfc31f8fff"
+          "ranger": "3dad9150ca176a53e01b2a4475324ce49079e13000fe5c308ea2a368bfb13730",
+          "smith": "6baabd5282d8a5704ed1ee5779384d4ced05ffc05b3a2373da7630fffe08cf8d",
+          "stationer": "6aa9b5520813a81bd5c77019b39f668790d0a66d91a8b5ce4aaacc14c24f740c",
+          "ferryman": "256a9e376283c6a4cd1787ca4f6e66870d05e955ef0c75d9d02b52388b2bac6e",
+          "watchmaker": "68eba1ab8cb3f58daab314eefb622a056d36301bbf21e994ba8c819229397516",
+          "guide": "980ae099f20216496e64c0fc9814d0c3b81f95fd302dd2fa45626386d5be1586",
+          "guard": "d704d02e9eeb0b4d386ce7875fd31b5cddc7521ac55197fd218644f89a959e50",
+          "violinist": "8b021a9691483a455ce863a01f7ac0f676a5c57616704d12245c20124532990d"
         },
         "pairs": [
           {
             "images": [
-              "36e102bc3bdb05815d7645534f28a2fb5f0899853edfee1ee581d95fec64dfd4",
-              "eaaf18a93040dc5e2c62098ac13f26cee6f757cc0509f9f9939d5e8c09eedb27"
+              "3dad9150ca176a53e01b2a4475324ce49079e13000fe5c308ea2a368bfb13730",
+              "6baabd5282d8a5704ed1ee5779384d4ced05ffc05b3a2373da7630fffe08cf8d"
             ],
             "forward": {
-              "value": 0.2825,
-              "receipt": "c4b1aedb5dc9cbe888c4764d8c0beab65980da83af07b2741ebe8d94a481e7a1"
+              "value": 0.365,
+              "receipt": "7a51aa0a886cdd9837617494e8dce0890c331c5776e01b871ba5845c28054932"
             },
             "reverse": {
-              "value": 0.32,
-              "receipt": "5517c1b00736aca472b94123a1e613c060c561e47f68d65e85eb04e7ec45213a"
+              "value": 0.355,
+              "receipt": "d009208df7be37d7937ba6bf33814b3dac7dce001b336c9698535c9b30969b93"
             },
-            "repeat": 0.30125,
+            "repeat": 0.36,
             "cases": [
               "ranger",
               "smith"
@@ -10322,521 +11446,521 @@
           },
           {
             "images": [
-              "36e102bc3bdb05815d7645534f28a2fb5f0899853edfee1ee581d95fec64dfd4",
-              "9e9439d7c976cb0be165a44861885bbd1108056f072a05c1854ce4b98b53a9a7"
+              "3dad9150ca176a53e01b2a4475324ce49079e13000fe5c308ea2a368bfb13730",
+              "6aa9b5520813a81bd5c77019b39f668790d0a66d91a8b5ce4aaacc14c24f740c"
             ],
             "forward": {
-              "value": 0.2175,
-              "receipt": "3ab27eec98b50a4ae64e04cdda7e1996cd98a590ad1eedb8f0718b885de3f495"
-            },
-            "reverse": {
-              "value": 0.3025,
-              "receipt": "52e1c497bf483ca3918d8acf3f690993e4f53c3801155436f94430f784602f8b"
-            },
-            "repeat": 0.26,
-            "cases": [
-              "ranger",
-              "stationer"
-            ]
-          },
-          {
-            "images": [
-              "36e102bc3bdb05815d7645534f28a2fb5f0899853edfee1ee581d95fec64dfd4",
-              "25c1d0817e1269e95105be73163691d8f1d9fe736b890bb8b3d5520da0344970"
-            ],
-            "forward": {
-              "value": 0.435,
-              "receipt": "776b2402bfd07956493706ac2085114f883aea641f2381fff910331779070a2d"
-            },
-            "reverse": {
-              "value": 0.38,
-              "receipt": "8ae76952673fd2d7a9578b291eb2877ee51caa8ce7864a770baffe741f661e6a"
-            },
-            "repeat": 0.4075,
-            "cases": [
-              "ranger",
-              "ferryman"
-            ]
-          },
-          {
-            "images": [
-              "36e102bc3bdb05815d7645534f28a2fb5f0899853edfee1ee581d95fec64dfd4",
-              "436032be95d9b63a9b34675a00117486624ade2603eaeefd9d457cd9094f0fb1"
-            ],
-            "forward": {
-              "value": 0.1925,
-              "receipt": "4ddf1e882fd35e383de3cf8f30e9c20aa03a21bf45a04621622796326ce4aad7"
-            },
-            "reverse": {
-              "value": 0.145,
-              "receipt": "612bc19c9ccc0ade0b3ab333c8de5fb0fab9da7766b8c38a60abdef1a25706c8"
-            },
-            "repeat": 0.16875,
-            "cases": [
-              "ranger",
-              "watchmaker"
-            ]
-          },
-          {
-            "images": [
-              "36e102bc3bdb05815d7645534f28a2fb5f0899853edfee1ee581d95fec64dfd4",
-              "ef696a82b5070524fdb7d656ca4e388de6b12e87b452541f7de295867cbeb01f"
-            ],
-            "forward": {
-              "value": 0.095,
-              "receipt": "5f2d7a61a54a16dc6ddfd70c0d7d9347b47b57fc6f772701ce00377f932b2295"
-            },
-            "reverse": {
-              "value": 0.0675,
-              "receipt": "769dfea99b5b75dd9a3e10784d6670abe2d2367d2731f500121ba2dcd98a00a1"
-            },
-            "repeat": 0.08125,
-            "cases": [
-              "ranger",
-              "guide"
-            ]
-          },
-          {
-            "images": [
-              "36e102bc3bdb05815d7645534f28a2fb5f0899853edfee1ee581d95fec64dfd4",
-              "afdfdf9a116b7dced1642401c2870fd3309d8d298729ded02aea410186af91fe"
-            ],
-            "forward": {
-              "value": 0.265,
-              "receipt": "f72bda8c7d0c8d4f7fc337a50f0a14e77ea9153b40f0e735e37b48efd98cd76b"
-            },
-            "reverse": {
-              "value": 0.2675,
-              "receipt": "ed9921bc57ab531a31c5acd1b499682f3e6bf254ac864b27a0a3a48c13322091"
-            },
-            "repeat": 0.26625,
-            "cases": [
-              "ranger",
-              "guard"
-            ]
-          },
-          {
-            "images": [
-              "36e102bc3bdb05815d7645534f28a2fb5f0899853edfee1ee581d95fec64dfd4",
-              "8e14a70a778af2e54a2daed52f92b3f583f8c63f6abd6a884a2a30bfc31f8fff"
-            ],
-            "forward": {
-              "value": 0.225,
-              "receipt": "635c61fd32b7bb1b87359f1f4936426a4fddb4b37bfc5533115bc08460b3cec8"
-            },
-            "reverse": {
-              "value": 0.22,
-              "receipt": "b523b4f3bc01450d2bb7d04fe68d6837a9ce8a29e0135327fd76776642171a07"
-            },
-            "repeat": 0.2225,
-            "cases": [
-              "ranger",
-              "violinist"
-            ]
-          },
-          {
-            "images": [
-              "eaaf18a93040dc5e2c62098ac13f26cee6f757cc0509f9f9939d5e8c09eedb27",
-              "9e9439d7c976cb0be165a44861885bbd1108056f072a05c1854ce4b98b53a9a7"
-            ],
-            "forward": {
-              "value": 0.2625,
-              "receipt": "9eacab8c90a32e16ae8f91384529ad403f987f596016b2b4ee8f2eba783e892d"
-            },
-            "reverse": {
-              "value": 0.3325,
-              "receipt": "af3156a2a104f5a5e0396348b8fc585073d1ee71ebe7a03215c999229cf10131"
-            },
-            "repeat": 0.2975,
-            "cases": [
-              "smith",
-              "stationer"
-            ]
-          },
-          {
-            "images": [
-              "eaaf18a93040dc5e2c62098ac13f26cee6f757cc0509f9f9939d5e8c09eedb27",
-              "25c1d0817e1269e95105be73163691d8f1d9fe736b890bb8b3d5520da0344970"
-            ],
-            "forward": {
-              "value": 0.2775,
-              "receipt": "e551e37d31691040e069c21a6957e3d4908c0f62d7481e1e0e0bc55c0b835a50"
-            },
-            "reverse": {
-              "value": 0.2825,
-              "receipt": "043823a6f7796c755163106d2604c819f2a286fdfa8b349b6529fa6d3fb0d67e"
-            },
-            "repeat": 0.28,
-            "cases": [
-              "smith",
-              "ferryman"
-            ]
-          },
-          {
-            "images": [
-              "eaaf18a93040dc5e2c62098ac13f26cee6f757cc0509f9f9939d5e8c09eedb27",
-              "436032be95d9b63a9b34675a00117486624ade2603eaeefd9d457cd9094f0fb1"
-            ],
-            "forward": {
-              "value": 0.2075,
-              "receipt": "5162b2a25ff966d541c25b24d6524c75bf912e5977a9a9d88c543bf013f63cab"
-            },
-            "reverse": {
-              "value": 0.16,
-              "receipt": "abe3900fba3465e5a9c89ec7c9642b11c01f2292456e1ded07fe741529013377"
-            },
-            "repeat": 0.18375,
-            "cases": [
-              "smith",
-              "watchmaker"
-            ]
-          },
-          {
-            "images": [
-              "eaaf18a93040dc5e2c62098ac13f26cee6f757cc0509f9f9939d5e8c09eedb27",
-              "ef696a82b5070524fdb7d656ca4e388de6b12e87b452541f7de295867cbeb01f"
-            ],
-            "forward": {
-              "value": 0.29,
-              "receipt": "f54bf451de4da27c2bf1f36c80a80e123914018a35f7b39c9585c0d1c41be81b"
-            },
-            "reverse": {
-              "value": 0.2525,
-              "receipt": "7922ae30d9f87170b34c023971b2f9149fcf89cf9e3d0dea8d2c7dbc3c9bffdb"
-            },
-            "repeat": 0.27125,
-            "cases": [
-              "smith",
-              "guide"
-            ]
-          },
-          {
-            "images": [
-              "eaaf18a93040dc5e2c62098ac13f26cee6f757cc0509f9f9939d5e8c09eedb27",
-              "afdfdf9a116b7dced1642401c2870fd3309d8d298729ded02aea410186af91fe"
-            ],
-            "forward": {
-              "value": 0.4625,
-              "receipt": "1eab7849e95e83b65c2553cf4e3aaceefbd9a51ace7e3e04f45c28c223a2063c"
-            },
-            "reverse": {
-              "value": 0.3475,
-              "receipt": "7c67d7ef0de9a80dd89ef4f466b55ed962e4ef27db2cf09c3286b1583fcd7fbb"
-            },
-            "repeat": 0.405,
-            "cases": [
-              "smith",
-              "guard"
-            ]
-          },
-          {
-            "images": [
-              "eaaf18a93040dc5e2c62098ac13f26cee6f757cc0509f9f9939d5e8c09eedb27",
-              "8e14a70a778af2e54a2daed52f92b3f583f8c63f6abd6a884a2a30bfc31f8fff"
-            ],
-            "forward": {
-              "value": 0.51,
-              "receipt": "80784d49b1a3d468e8e750e934766d3da0000b5f42afac4d8e7070f4057e235b"
-            },
-            "reverse": {
-              "value": 0.4175,
-              "receipt": "cc3b17520d129abf5db9d2c22a7b787f81f16f4cc65aa431076eeaca1a8956bf"
-            },
-            "repeat": 0.46375,
-            "cases": [
-              "smith",
-              "violinist"
-            ]
-          },
-          {
-            "images": [
-              "9e9439d7c976cb0be165a44861885bbd1108056f072a05c1854ce4b98b53a9a7",
-              "25c1d0817e1269e95105be73163691d8f1d9fe736b890bb8b3d5520da0344970"
-            ],
-            "forward": {
-              "value": 0.535,
-              "receipt": "8abd0f632d35bb1c3b656e984fe88c7cea979c8af0ec9d414c3b16f7b91ae60f"
-            },
-            "reverse": {
-              "value": 0.3725,
-              "receipt": "0a319a2489e5d292d6db27602b5524d54ed472ebe888e4e604735ca2b5979ad4"
-            },
-            "repeat": 0.45375,
-            "cases": [
-              "stationer",
-              "ferryman"
-            ]
-          },
-          {
-            "images": [
-              "9e9439d7c976cb0be165a44861885bbd1108056f072a05c1854ce4b98b53a9a7",
-              "436032be95d9b63a9b34675a00117486624ade2603eaeefd9d457cd9094f0fb1"
-            ],
-            "forward": {
-              "value": 0.385,
-              "receipt": "05438c10559fa21dba751a4a82b62c85f9a6fcac0480979c382d3972ca655d0f"
-            },
-            "reverse": {
-              "value": 0.2525,
-              "receipt": "c200ed8cb8da2b5c606fd0acf4939a504ed8390d1b15d27cc0c81ae13c71d89e"
-            },
-            "repeat": 0.31875,
-            "cases": [
-              "stationer",
-              "watchmaker"
-            ]
-          },
-          {
-            "images": [
-              "9e9439d7c976cb0be165a44861885bbd1108056f072a05c1854ce4b98b53a9a7",
-              "ef696a82b5070524fdb7d656ca4e388de6b12e87b452541f7de295867cbeb01f"
-            ],
-            "forward": {
-              "value": 0.1775,
-              "receipt": "2214dcc82ec88a8fad8a371ba9d01f76e85fc3af3e4af8e5f0e62709af63b933"
-            },
-            "reverse": {
-              "value": 0.085,
-              "receipt": "6d96a4de02fd0f40b47766fa46e75c6b1a7afd7862fecc98c1434733fdcfb1a4"
-            },
-            "repeat": 0.13125,
-            "cases": [
-              "stationer",
-              "guide"
-            ]
-          },
-          {
-            "images": [
-              "9e9439d7c976cb0be165a44861885bbd1108056f072a05c1854ce4b98b53a9a7",
-              "afdfdf9a116b7dced1642401c2870fd3309d8d298729ded02aea410186af91fe"
-            ],
-            "forward": {
-              "value": 0.6025,
-              "receipt": "091b6cf99aa97dd67ad6e39ed16b91db85dfed3c869ebf4e3461f4652d95a246"
-            },
-            "reverse": {
-              "value": 0.4475,
-              "receipt": "b7bb20fdef080bf77648b1aaa59d07143b727b89f7c843acbcf21aa0e8000bc3"
-            },
-            "repeat": 0.525,
-            "cases": [
-              "stationer",
-              "guard"
-            ]
-          },
-          {
-            "images": [
-              "9e9439d7c976cb0be165a44861885bbd1108056f072a05c1854ce4b98b53a9a7",
-              "8e14a70a778af2e54a2daed52f92b3f583f8c63f6abd6a884a2a30bfc31f8fff"
-            ],
-            "forward": {
-              "value": 0.3775,
-              "receipt": "95bbf6355090d0d8519fa8e582dd37201a583f8bc135b8832188331c963ad93d"
-            },
-            "reverse": {
-              "value": 0.3175,
-              "receipt": "5164161fa18c89ed2a343699bbf3719a3cb940640cf3debcd74c713cf6aceda7"
-            },
-            "repeat": 0.34750000000000003,
-            "cases": [
-              "stationer",
-              "violinist"
-            ]
-          },
-          {
-            "images": [
-              "25c1d0817e1269e95105be73163691d8f1d9fe736b890bb8b3d5520da0344970",
-              "436032be95d9b63a9b34675a00117486624ade2603eaeefd9d457cd9094f0fb1"
-            ],
-            "forward": {
-              "value": 0.6625,
-              "receipt": "0ae3bad7a475e2f9a963bf1a74e2f0d2ebb4f9fc1be027bf65cd29a02036037e"
-            },
-            "reverse": {
-              "value": 0.6325,
-              "receipt": "855437c16d9ad48c797967c29a421d873aee047fed9ea59c063e5ca8ca7740f7"
-            },
-            "repeat": 0.6475,
-            "cases": [
-              "ferryman",
-              "watchmaker"
-            ]
-          },
-          {
-            "images": [
-              "25c1d0817e1269e95105be73163691d8f1d9fe736b890bb8b3d5520da0344970",
-              "ef696a82b5070524fdb7d656ca4e388de6b12e87b452541f7de295867cbeb01f"
-            ],
-            "forward": {
-              "value": 0.065,
-              "receipt": "38bf5957f0eef50eca79c31ee37b80ddc7c1e57393044606ff0b04e2b3dbc5e9"
-            },
-            "reverse": {
-              "value": 0.0275,
-              "receipt": "1de1b20adb9a1d0d7d122aef0a9794b262195b354ddbfd982f8ba8d85dff5bee"
-            },
-            "repeat": 0.04625,
-            "cases": [
-              "ferryman",
-              "guide"
-            ]
-          },
-          {
-            "images": [
-              "25c1d0817e1269e95105be73163691d8f1d9fe736b890bb8b3d5520da0344970",
-              "afdfdf9a116b7dced1642401c2870fd3309d8d298729ded02aea410186af91fe"
-            ],
-            "forward": {
-              "value": 0.415,
-              "receipt": "03a53b3add66f12841ab5e613f485e32251b6044ebb1ecc7e69d65a26f57f6be"
-            },
-            "reverse": {
-              "value": 0.4775,
-              "receipt": "2c957d3e75f28886db4cd8688e85cf90fd0050e6ff84ccb90f8074b93826ba40"
-            },
-            "repeat": 0.44625,
-            "cases": [
-              "ferryman",
-              "guard"
-            ]
-          },
-          {
-            "images": [
-              "25c1d0817e1269e95105be73163691d8f1d9fe736b890bb8b3d5520da0344970",
-              "8e14a70a778af2e54a2daed52f92b3f583f8c63f6abd6a884a2a30bfc31f8fff"
-            ],
-            "forward": {
-              "value": 0.2,
-              "receipt": "ea8b439afc93efc810357abeae81c0809592d09a20a4be681c23546cf599ea53"
-            },
-            "reverse": {
-              "value": 0.26,
-              "receipt": "045cfef24249b9426a2b2d26aae2da9b6acc8d8a3e422a7a49e4bc9ec97de9fc"
-            },
-            "repeat": 0.23,
-            "cases": [
-              "ferryman",
-              "violinist"
-            ]
-          },
-          {
-            "images": [
-              "436032be95d9b63a9b34675a00117486624ade2603eaeefd9d457cd9094f0fb1",
-              "ef696a82b5070524fdb7d656ca4e388de6b12e87b452541f7de295867cbeb01f"
-            ],
-            "forward": {
-              "value": 0.07,
-              "receipt": "770289bd3c6371314ed207ee7317a987711d7861c947658a4164c6625ea2bce7"
-            },
-            "reverse": {
-              "value": 0.045,
-              "receipt": "b1a2b1bdd6743a3d0fb08d69122f587fe55819fb7fa67ae5547d6660fc4eb94a"
-            },
-            "repeat": 0.0575,
-            "cases": [
-              "watchmaker",
-              "guide"
-            ]
-          },
-          {
-            "images": [
-              "436032be95d9b63a9b34675a00117486624ade2603eaeefd9d457cd9094f0fb1",
-              "afdfdf9a116b7dced1642401c2870fd3309d8d298729ded02aea410186af91fe"
-            ],
-            "forward": {
-              "value": 0.38,
-              "receipt": "c549edba06478a8cbd35744c429d73a5201ce7848ea978aa585fa9155c37db48"
-            },
-            "reverse": {
-              "value": 0.415,
-              "receipt": "c055f9baff6586e5d806e4422b1902e3dda580fe4f2d1d152408708e9eed7a61"
-            },
-            "repeat": 0.39749999999999996,
-            "cases": [
-              "watchmaker",
-              "guard"
-            ]
-          },
-          {
-            "images": [
-              "436032be95d9b63a9b34675a00117486624ade2603eaeefd9d457cd9094f0fb1",
-              "8e14a70a778af2e54a2daed52f92b3f583f8c63f6abd6a884a2a30bfc31f8fff"
-            ],
-            "forward": {
-              "value": 0.1225,
-              "receipt": "c74f76c57233241c9a4d6daf9e18c6eefae798faa3ee3d19fc9d44e7763efe77"
-            },
-            "reverse": {
-              "value": 0.095,
-              "receipt": "f4f898fb1b1a93928a516188987cf9cc6bcb54b0d4cff621ba51d751be128842"
-            },
-            "repeat": 0.10875,
-            "cases": [
-              "watchmaker",
-              "violinist"
-            ]
-          },
-          {
-            "images": [
-              "ef696a82b5070524fdb7d656ca4e388de6b12e87b452541f7de295867cbeb01f",
-              "afdfdf9a116b7dced1642401c2870fd3309d8d298729ded02aea410186af91fe"
-            ],
-            "forward": {
-              "value": 0.09,
-              "receipt": "33e4eddea88ad057a936aefc72281cdcf8886250ec4d89b9dc0c064b908a8773"
-            },
-            "reverse": {
-              "value": 0.14,
-              "receipt": "1141e1a6dcbcce4bf7cc1f6d691a8c5bda3bce78989beea3d7687c45f0725733"
-            },
-            "repeat": 0.115,
-            "cases": [
-              "guide",
-              "guard"
-            ]
-          },
-          {
-            "images": [
-              "ef696a82b5070524fdb7d656ca4e388de6b12e87b452541f7de295867cbeb01f",
-              "8e14a70a778af2e54a2daed52f92b3f583f8c63f6abd6a884a2a30bfc31f8fff"
-            ],
-            "forward": {
-              "value": 0.2625,
-              "receipt": "886c8130a444a90943ba44e5236f8ea1106a685bfa5874e9a2099ec6aea26d56"
-            },
-            "reverse": {
-              "value": 0.285,
-              "receipt": "b75e068ba9a51582cae7e9cba460a88cb0dcecf048801ebcdf704b75bde515b5"
-            },
-            "repeat": 0.27375,
-            "cases": [
-              "guide",
-              "violinist"
-            ]
-          },
-          {
-            "images": [
-              "afdfdf9a116b7dced1642401c2870fd3309d8d298729ded02aea410186af91fe",
-              "8e14a70a778af2e54a2daed52f92b3f583f8c63f6abd6a884a2a30bfc31f8fff"
-            ],
-            "forward": {
-              "value": 0.5,
-              "receipt": "f0c09a0689b7785927a5edcabd0b92631c0118b9b570703810cb9c182ca60d14"
+              "value": 0.5175,
+              "receipt": "0a956e264196526513f20b66234536dbc3d500ad96cac5dde4873f8e59ca1863"
             },
             "reverse": {
               "value": 0.5325,
-              "receipt": "bf972b5245d992caa8dda44d149c9244b464012086f7ab2b4af9bfb782f1467c"
+              "receipt": "a5322900d147b72cad38a7f8df6b4fce36ee1c817da4eb1efa827c808eb8aa08"
+            },
+            "repeat": 0.5249999999999999,
+            "cases": [
+              "ranger",
+              "stationer"
+            ]
+          },
+          {
+            "images": [
+              "3dad9150ca176a53e01b2a4475324ce49079e13000fe5c308ea2a368bfb13730",
+              "256a9e376283c6a4cd1787ca4f6e66870d05e955ef0c75d9d02b52388b2bac6e"
+            ],
+            "forward": {
+              "value": 0.535,
+              "receipt": "985877ebd180d221aef0496f6e8d3660b8ece27ef499449600536367121ffc95"
+            },
+            "reverse": {
+              "value": 0.55,
+              "receipt": "360e373a022d9c519329ac6da67700320fea9e36930ee6849ab5369cd746b0db"
+            },
+            "repeat": 0.5425,
+            "cases": [
+              "ranger",
+              "ferryman"
+            ]
+          },
+          {
+            "images": [
+              "3dad9150ca176a53e01b2a4475324ce49079e13000fe5c308ea2a368bfb13730",
+              "68eba1ab8cb3f58daab314eefb622a056d36301bbf21e994ba8c819229397516"
+            ],
+            "forward": {
+              "value": 0.5225,
+              "receipt": "05aa25ae96451791194733505c7e7d87b5644fea24777536811d57ce380ab83a"
+            },
+            "reverse": {
+              "value": 0.5625,
+              "receipt": "724d2f6e3db7472fd659d1e4a4a041900b1defc2c9a571ae5c1bbc299115a7a8"
+            },
+            "repeat": 0.5425,
+            "cases": [
+              "ranger",
+              "watchmaker"
+            ]
+          },
+          {
+            "images": [
+              "3dad9150ca176a53e01b2a4475324ce49079e13000fe5c308ea2a368bfb13730",
+              "980ae099f20216496e64c0fc9814d0c3b81f95fd302dd2fa45626386d5be1586"
+            ],
+            "forward": {
+              "value": 0.36,
+              "receipt": "ffcef037abc3fd0519c9da03ac1152493f6c852435a421e1d53fe8ee783647c7"
+            },
+            "reverse": {
+              "value": 0.4375,
+              "receipt": "a48ac310683fd06bdaa9809792b0ac7298dde51a2dcc66e5e2b3ab1d5ab80afa"
+            },
+            "repeat": 0.39875,
+            "cases": [
+              "ranger",
+              "guide"
+            ]
+          },
+          {
+            "images": [
+              "3dad9150ca176a53e01b2a4475324ce49079e13000fe5c308ea2a368bfb13730",
+              "d704d02e9eeb0b4d386ce7875fd31b5cddc7521ac55197fd218644f89a959e50"
+            ],
+            "forward": {
+              "value": 0.47,
+              "receipt": "ebe2e7479ad72b2c1109f5c9b325af650b05632c3bd10035875ee9fedcf10035"
+            },
+            "reverse": {
+              "value": 0.5625,
+              "receipt": "6113372149e8847f490d6e9398b1b2c5a0c9c246e4618c1b59d02bdd41d6c398"
             },
             "repeat": 0.51625,
+            "cases": [
+              "ranger",
+              "guard"
+            ]
+          },
+          {
+            "images": [
+              "3dad9150ca176a53e01b2a4475324ce49079e13000fe5c308ea2a368bfb13730",
+              "8b021a9691483a455ce863a01f7ac0f676a5c57616704d12245c20124532990d"
+            ],
+            "forward": {
+              "value": 0.4375,
+              "receipt": "89182d348752d818a45bda83e2709faabb1f1094ea8ffe8a8d9bffa2086e56f4"
+            },
+            "reverse": {
+              "value": 0.6075,
+              "receipt": "43b01a284c1bd145c227a3c9a15662b34e46ba198752a2fe24063094d200a2e6"
+            },
+            "repeat": 0.5225,
+            "cases": [
+              "ranger",
+              "violinist"
+            ]
+          },
+          {
+            "images": [
+              "6baabd5282d8a5704ed1ee5779384d4ced05ffc05b3a2373da7630fffe08cf8d",
+              "6aa9b5520813a81bd5c77019b39f668790d0a66d91a8b5ce4aaacc14c24f740c"
+            ],
+            "forward": {
+              "value": 0.16,
+              "receipt": "d7ee096a2ea7e06493e5aa3db6ea2348eb2d6341428f153644a633df97b53017"
+            },
+            "reverse": {
+              "value": 0.165,
+              "receipt": "551501f69677b64a80b256a16583d96d0aeef78b2908aa4301b690b6f5a81634"
+            },
+            "repeat": 0.1625,
+            "cases": [
+              "smith",
+              "stationer"
+            ]
+          },
+          {
+            "images": [
+              "6baabd5282d8a5704ed1ee5779384d4ced05ffc05b3a2373da7630fffe08cf8d",
+              "256a9e376283c6a4cd1787ca4f6e66870d05e955ef0c75d9d02b52388b2bac6e"
+            ],
+            "forward": {
+              "value": 0.105,
+              "receipt": "a1f3867ee74ad0eee0f892b13b3a36f713cdfd0adc0e2e8b93344480068f1401"
+            },
+            "reverse": {
+              "value": 0.11,
+              "receipt": "05fa1373bf16d952e49980b67cd16397adcd69f651fb5f4ce48bb7a5ad07f474"
+            },
+            "repeat": 0.1075,
+            "cases": [
+              "smith",
+              "ferryman"
+            ]
+          },
+          {
+            "images": [
+              "6baabd5282d8a5704ed1ee5779384d4ced05ffc05b3a2373da7630fffe08cf8d",
+              "68eba1ab8cb3f58daab314eefb622a056d36301bbf21e994ba8c819229397516"
+            ],
+            "forward": {
+              "value": 0.06,
+              "receipt": "4a0d94d2f288472ffbc5b4b263c941d64bfb8e634e32f234dcaf6c814f3a32d3"
+            },
+            "reverse": {
+              "value": 0.0825,
+              "receipt": "c9909e3839fce8419c056be9304ea6ab2289c2725cbf99f2fc45fab651993c46"
+            },
+            "repeat": 0.07125000000000001,
+            "cases": [
+              "smith",
+              "watchmaker"
+            ]
+          },
+          {
+            "images": [
+              "6baabd5282d8a5704ed1ee5779384d4ced05ffc05b3a2373da7630fffe08cf8d",
+              "980ae099f20216496e64c0fc9814d0c3b81f95fd302dd2fa45626386d5be1586"
+            ],
+            "forward": {
+              "value": 0.5075,
+              "receipt": "fe3aa51c0c5056b8fcbbf809b43149ebbde021a647cd4330ee281f69e99d17cc"
+            },
+            "reverse": {
+              "value": 0.515,
+              "receipt": "d51017908297ef54f4acccfd0cf0c5d72357b0011b7ee365d461bf80f41e2d48"
+            },
+            "repeat": 0.51125,
+            "cases": [
+              "smith",
+              "guide"
+            ]
+          },
+          {
+            "images": [
+              "6baabd5282d8a5704ed1ee5779384d4ced05ffc05b3a2373da7630fffe08cf8d",
+              "d704d02e9eeb0b4d386ce7875fd31b5cddc7521ac55197fd218644f89a959e50"
+            ],
+            "forward": {
+              "value": 0.1775,
+              "receipt": "35f8fd87070e94f411de749947a9ccbb33346e8ccd07045cd26fadf96c98c1f1"
+            },
+            "reverse": {
+              "value": 0.2075,
+              "receipt": "8b0d89c0103fc254821f24ee11eb0ac05f9b7e8126dff55a972d1d9cdd15e79f"
+            },
+            "repeat": 0.1925,
+            "cases": [
+              "smith",
+              "guard"
+            ]
+          },
+          {
+            "images": [
+              "6baabd5282d8a5704ed1ee5779384d4ced05ffc05b3a2373da7630fffe08cf8d",
+              "8b021a9691483a455ce863a01f7ac0f676a5c57616704d12245c20124532990d"
+            ],
+            "forward": {
+              "value": 0.2775,
+              "receipt": "261cf5c4b8d344f818b83c243702ebd961a76e2595c01001983d5ec843a311bc"
+            },
+            "reverse": {
+              "value": 0.335,
+              "receipt": "4dfaa534032ebc9073372ec7b83c13560fb6a71a0288e6124eea74d1ad7f6937"
+            },
+            "repeat": 0.30625,
+            "cases": [
+              "smith",
+              "violinist"
+            ]
+          },
+          {
+            "images": [
+              "6aa9b5520813a81bd5c77019b39f668790d0a66d91a8b5ce4aaacc14c24f740c",
+              "256a9e376283c6a4cd1787ca4f6e66870d05e955ef0c75d9d02b52388b2bac6e"
+            ],
+            "forward": {
+              "value": 0.535,
+              "receipt": "732663ee0b602f72b4401ae5d34c1e895f73f3764369091650015283d89459c5"
+            },
+            "reverse": {
+              "value": 0.5,
+              "receipt": "4d14563276a5ca4ea50d7035805a7079f303a2ffc3a96db09aeb30f088e51973"
+            },
+            "repeat": 0.5175000000000001,
+            "cases": [
+              "stationer",
+              "ferryman"
+            ]
+          },
+          {
+            "images": [
+              "6aa9b5520813a81bd5c77019b39f668790d0a66d91a8b5ce4aaacc14c24f740c",
+              "68eba1ab8cb3f58daab314eefb622a056d36301bbf21e994ba8c819229397516"
+            ],
+            "forward": {
+              "value": 0.41,
+              "receipt": "3e063bc267ac1d38f4c6a653d4088d188cce4e2c97c893d35e621c799616c754"
+            },
+            "reverse": {
+              "value": 0.3975,
+              "receipt": "8e20aece8af65603421b5b8eeb33fc7301aff2f8a51d0dd664c8fe94432bca38"
+            },
+            "repeat": 0.40375,
+            "cases": [
+              "stationer",
+              "watchmaker"
+            ]
+          },
+          {
+            "images": [
+              "6aa9b5520813a81bd5c77019b39f668790d0a66d91a8b5ce4aaacc14c24f740c",
+              "980ae099f20216496e64c0fc9814d0c3b81f95fd302dd2fa45626386d5be1586"
+            ],
+            "forward": {
+              "value": 0.3775,
+              "receipt": "3106ae6ec8cff6a57512a2abe41a35107dc9cd66380d030006543f071944251a"
+            },
+            "reverse": {
+              "value": 0.4575,
+              "receipt": "b1a79db7190d28529a1cb0e4430d037526a1e0032c2eae53fdf2fc8eb59eeea1"
+            },
+            "repeat": 0.4175,
+            "cases": [
+              "stationer",
+              "guide"
+            ]
+          },
+          {
+            "images": [
+              "6aa9b5520813a81bd5c77019b39f668790d0a66d91a8b5ce4aaacc14c24f740c",
+              "d704d02e9eeb0b4d386ce7875fd31b5cddc7521ac55197fd218644f89a959e50"
+            ],
+            "forward": {
+              "value": 0.5075,
+              "receipt": "5861a0de1c9767b6aa447e2c19971f7a6f14bebe9147c4745b00f9329dceb4c2"
+            },
+            "reverse": {
+              "value": 0.59,
+              "receipt": "ed709c10e6a23f35790401dbd3dcbc5b8a49a94e065ae2ee17a0eb26ae101397"
+            },
+            "repeat": 0.54875,
+            "cases": [
+              "stationer",
+              "guard"
+            ]
+          },
+          {
+            "images": [
+              "6aa9b5520813a81bd5c77019b39f668790d0a66d91a8b5ce4aaacc14c24f740c",
+              "8b021a9691483a455ce863a01f7ac0f676a5c57616704d12245c20124532990d"
+            ],
+            "forward": {
+              "value": 0.4,
+              "receipt": "2d924eae7536d86a4335f8e34ae38273b215fed5e876e1bb93b89a3abd4955d1"
+            },
+            "reverse": {
+              "value": 0.4625,
+              "receipt": "69898263a78ebf3d7ad5dc6144540fc5c3f6477609cd87965783c56a4d1399e9"
+            },
+            "repeat": 0.43125,
+            "cases": [
+              "stationer",
+              "violinist"
+            ]
+          },
+          {
+            "images": [
+              "256a9e376283c6a4cd1787ca4f6e66870d05e955ef0c75d9d02b52388b2bac6e",
+              "68eba1ab8cb3f58daab314eefb622a056d36301bbf21e994ba8c819229397516"
+            ],
+            "forward": {
+              "value": 0.625,
+              "receipt": "2bea35c430cbcbc6e6f27adb27689b3e0ac79a2f64ae673f5e5b74991c702846"
+            },
+            "reverse": {
+              "value": 0.585,
+              "receipt": "ed4cf526e1735c6ce6ee721a8c73f5374638750053182250a48c29a29abe1a79"
+            },
+            "repeat": 0.605,
+            "cases": [
+              "ferryman",
+              "watchmaker"
+            ]
+          },
+          {
+            "images": [
+              "256a9e376283c6a4cd1787ca4f6e66870d05e955ef0c75d9d02b52388b2bac6e",
+              "980ae099f20216496e64c0fc9814d0c3b81f95fd302dd2fa45626386d5be1586"
+            ],
+            "forward": {
+              "value": 0.115,
+              "receipt": "956c2a359da6d62959df444a74ba3476f9d0cf84f89033cf7c5181f10ef356e2"
+            },
+            "reverse": {
+              "value": 0.1375,
+              "receipt": "fcfb7721da58e1b92cebdd35b21ca9f6bfe09c90e05515c3f21f555856c7edd9"
+            },
+            "repeat": 0.12625,
+            "cases": [
+              "ferryman",
+              "guide"
+            ]
+          },
+          {
+            "images": [
+              "256a9e376283c6a4cd1787ca4f6e66870d05e955ef0c75d9d02b52388b2bac6e",
+              "d704d02e9eeb0b4d386ce7875fd31b5cddc7521ac55197fd218644f89a959e50"
+            ],
+            "forward": {
+              "value": 0.45,
+              "receipt": "17db09b9e31c779c407afe60634bb6dd1adab0fa0c396770a1eef6518d6f8e25"
+            },
+            "reverse": {
+              "value": 0.52,
+              "receipt": "f6d30ec7a4d833081a702d2a675ed05355d43bf231a6cf8dd734f412f1348bdf"
+            },
+            "repeat": 0.485,
+            "cases": [
+              "ferryman",
+              "guard"
+            ]
+          },
+          {
+            "images": [
+              "256a9e376283c6a4cd1787ca4f6e66870d05e955ef0c75d9d02b52388b2bac6e",
+              "8b021a9691483a455ce863a01f7ac0f676a5c57616704d12245c20124532990d"
+            ],
+            "forward": {
+              "value": 0.2525,
+              "receipt": "05617ffff7fd9ef177dc3afa45e6c886fd8c704e438a25c14ad84a5ecc56e2df"
+            },
+            "reverse": {
+              "value": 0.31,
+              "receipt": "c1ccc1986c69248b2f43b56bad31bb0ba9c7152ab6874a85abb5923904913142"
+            },
+            "repeat": 0.28125,
+            "cases": [
+              "ferryman",
+              "violinist"
+            ]
+          },
+          {
+            "images": [
+              "68eba1ab8cb3f58daab314eefb622a056d36301bbf21e994ba8c819229397516",
+              "980ae099f20216496e64c0fc9814d0c3b81f95fd302dd2fa45626386d5be1586"
+            ],
+            "forward": {
+              "value": 0.27,
+              "receipt": "a07482d6a6615a2c7ec415538517ff200e7c7697121bb769b22557ca81003b75"
+            },
+            "reverse": {
+              "value": 0.2775,
+              "receipt": "a887cd9fdca7d049a1ba813169de31b5e1d744c510dbc53b993b03b7f7961fc1"
+            },
+            "repeat": 0.27375000000000005,
+            "cases": [
+              "watchmaker",
+              "guide"
+            ]
+          },
+          {
+            "images": [
+              "68eba1ab8cb3f58daab314eefb622a056d36301bbf21e994ba8c819229397516",
+              "d704d02e9eeb0b4d386ce7875fd31b5cddc7521ac55197fd218644f89a959e50"
+            ],
+            "forward": {
+              "value": 0.5825,
+              "receipt": "cd0bc7f92380d3e1a044a07121e08946776512ba41f03548b78ccfae32714dbc"
+            },
+            "reverse": {
+              "value": 0.54,
+              "receipt": "f3e1de6f256d09f50b4bfd263885aa1636ad5b90a9bd04122bf3af2c59e0fafe"
+            },
+            "repeat": 0.56125,
+            "cases": [
+              "watchmaker",
+              "guard"
+            ]
+          },
+          {
+            "images": [
+              "68eba1ab8cb3f58daab314eefb622a056d36301bbf21e994ba8c819229397516",
+              "8b021a9691483a455ce863a01f7ac0f676a5c57616704d12245c20124532990d"
+            ],
+            "forward": {
+              "value": 0.41,
+              "receipt": "bb273bc0407bb651712b54ab982cbbd793a03487dcabdda9e860ea3590ec533a"
+            },
+            "reverse": {
+              "value": 0.41,
+              "receipt": "63f43e45d75daf55d8ef2b80c7905360a75e71265af460927173f80410250211"
+            },
+            "repeat": 0.41,
+            "cases": [
+              "watchmaker",
+              "violinist"
+            ]
+          },
+          {
+            "images": [
+              "980ae099f20216496e64c0fc9814d0c3b81f95fd302dd2fa45626386d5be1586",
+              "d704d02e9eeb0b4d386ce7875fd31b5cddc7521ac55197fd218644f89a959e50"
+            ],
+            "forward": {
+              "value": 0.545,
+              "receipt": "2e0db3d2eb041228e36b365fc968f15625eb27e30a1df032ff201a92bafb44bf"
+            },
+            "reverse": {
+              "value": 0.5025,
+              "receipt": "dba2716fd76c74ff60909e5950713e93b8e4dfd93d67f0324aad868f16636a66"
+            },
+            "repeat": 0.5237499999999999,
+            "cases": [
+              "guide",
+              "guard"
+            ]
+          },
+          {
+            "images": [
+              "980ae099f20216496e64c0fc9814d0c3b81f95fd302dd2fa45626386d5be1586",
+              "8b021a9691483a455ce863a01f7ac0f676a5c57616704d12245c20124532990d"
+            ],
+            "forward": {
+              "value": 0.63,
+              "receipt": "c918239c1badb2923cd9995bc547a8d837d09ee726b12b6574ede211c6c02610"
+            },
+            "reverse": {
+              "value": 0.6875,
+              "receipt": "db7596ab7f00d3d380b0759ff56e649c075e95e4362f32d44ed38076f3b6a696"
+            },
+            "repeat": 0.65875,
+            "cases": [
+              "guide",
+              "violinist"
+            ]
+          },
+          {
+            "images": [
+              "d704d02e9eeb0b4d386ce7875fd31b5cddc7521ac55197fd218644f89a959e50",
+              "8b021a9691483a455ce863a01f7ac0f676a5c57616704d12245c20124532990d"
+            ],
+            "forward": {
+              "value": 0.63,
+              "receipt": "456347dbd4425d1ff158900c170383d325696b59788535c399c9a6e51a2dbb77"
+            },
+            "reverse": {
+              "value": 0.7225,
+              "receipt": "ed203b3a3ec5869738cb35b1107fc042ad962c109645299e984de49687287d71"
+            },
+            "repeat": 0.67625,
             "cases": [
               "guard",
               "violinist"
             ]
           }
         ],
-        "base": 0.1140862522375,
-        "repeat": 0.29370535714285717,
-        "score": 0.1034474852136116
+        "base": 0.10990008785937501,
+        "repeat": 0.41709821428571425,
+        "score": 0.0960754739904018
       },
       {
         "method": "in-scene-costume",
@@ -11401,8 +12525,13 @@
         "score": 0.06542150991365123
       }
     ],
-    "board_sha256": "71d3352e21834b5a93bef17b5979a64bf3488d9142a2d3d37831c1a1306a7dea",
-    "as_of": "2026-11-25 06:48 UTC"
+    "board_sha256": "2f6f66f040425f3197ddc1422ddcc3b30ae194c2db37dab7d2c42ba7f7e6dc6c",
+    "as_of": "2026-11-25 07:05 UTC",
+    "tuned_methods": [
+      "late-cues",
+      "shared-best-opening"
+    ],
+    "baseline_signature": "5874c0d0553389a72323df185fb0121f4f5ecec262b25a5f5d148a210abfc06d"
   },
   "search_scenes": {
     "protocol": "Use the same repetition rubric and pair scoring rule on the nominated opening-four recipe and the leading late-cue recipe at their fixed eight-case alpha. Compare six pairs on four disjoint search scenes. These were used to select alpha and are diagnostic.",

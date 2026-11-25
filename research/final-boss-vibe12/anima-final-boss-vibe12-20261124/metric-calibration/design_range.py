@@ -47,7 +47,7 @@ def controls():
     return result
 
 
-def measure(board, signature):
+def pair_observer():
     judge()
     from particle_sliders.alpha_tune_jev import JevJudge, _Image, _digest, JEV_MODEL, JEV_URL
     from particle_sliders.candidate_failure import FileRecord
@@ -83,6 +83,12 @@ def measure(board, signature):
         return {"images":[x["sha256"],y["sha256"]],"forward":ab,"reverse":ba,
                 "repeat":fmean((ab["value"],ba["value"]))}
 
+    return pair
+
+
+def measure(board, signature):
+    pair = pair_observer()
+    from particle_sliders.alpha_tune_jev import JEV_MODEL
     with ThreadPoolExecutor(max_workers=12) as pool:
         fixtures = controls()
         trials = list(pool.map(lambda row:pair(row[3],row[4]),fixtures))

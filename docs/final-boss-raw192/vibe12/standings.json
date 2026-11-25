@@ -1,5 +1,5 @@
 {
-  "as_of_utc": "2026-11-25 06:49 UTC",
+  "as_of_utc": "2026-11-25 07:05 UTC",
   "training_updates": 192,
   "weights": "raw",
   "ema_decay": null,
@@ -114,7 +114,7 @@
     "sparse-full": "scientific-stop",
     "soft-projection-65-blend50": "complete",
     "in-scene-costume": "complete",
-    "soft45-adapter-rollout": "running",
+    "soft45-adapter-rollout": "complete",
     "costume-teachers": "running",
     "subject-apg": "running"
   },
@@ -134,7 +134,11 @@
     "strong-boss-45-mix35",
     "soft-contexts-45-blend50",
     "soft-contexts-65-blend50",
-    "sparse-first"
+    "sparse-first",
+    "matched-attire",
+    "two-cue-average",
+    "incumbent-refit",
+    "soft-projection-65-blend50"
   ],
   "methods": {
     "late-cues": {
@@ -157,6 +161,11 @@
       "raw_sha256": "3ff5b5e5d9b628c2ae7cd3ce0ea84a164d5cd69038d8eb084e4794e995ebaa0d",
       "training_cache_sha256": "23a201b6bf07e70f2ea892ef3a04cf07c751f412d7337c6091e2e1238c06ce1b"
     },
+    "matched-attire": {
+      "label": "Stronger Boss cues contrasted with matched ordinary attire",
+      "raw_sha256": "2772cdb72adc5eec22ae40021c94cb3839a34b93715ff4895e29463021537e89",
+      "training_cache_sha256": "f6cbf1a2aff6eebe37588bd7cef3bc02c6bdbd54da7e8177ee83633acca7f0ad"
+    },
     "early-cues": {
       "label": "Stronger cues at the first three teacher positions",
       "raw_sha256": "eb8d5e5be85aabeed62580a518a65e7b0341948de4802cfe0346bef436d06337",
@@ -177,10 +186,10 @@
       "raw_sha256": "28f879d11da9cf7207427fd5e762e1286c496103107189a4a7cb4fb6bccd32af",
       "training_cache_sha256": "adab80480e0fa186a10234c1055df3ca2f148a2d71665d5d01543091d801a9f8"
     },
-    "matched-attire": {
-      "label": "Stronger Boss cues contrasted with matched ordinary attire",
-      "raw_sha256": "2772cdb72adc5eec22ae40021c94cb3839a34b93715ff4895e29463021537e89",
-      "training_cache_sha256": "f6cbf1a2aff6eebe37588bd7cef3bc02c6bdbd54da7e8177ee83633acca7f0ad"
+    "incumbent-refit": {
+      "label": "Soft foreground weighting · prior incumbent recipe",
+      "raw_sha256": "8de9c61604dd25489d5d958b945da3910d32c3cbe6f6afb44ccf7af07f37c512",
+      "training_cache_sha256": "4cc3ecda7c8b95ae02dcd05516d8bcc5a7cb8186525254ce8cc23d2a1b7da134"
     },
     "strong-boss-45-mix35": {
       "label": "Soft foreground weighting plus 35% stronger Boss cues",
@@ -197,6 +206,11 @@
       "raw_sha256": "b1c2a4d3abf53b206551f4a92a54dd62b8930db4fcff3747664b44f978de7cff",
       "training_cache_sha256": "d1a61f480a255d9da6241553f322b1b502b79bdf62a8281b46ca6e59b975d2b2"
     },
+    "soft-projection-65-blend50": {
+      "label": "Whole-image scene and lighting projection, 0.65 floor",
+      "raw_sha256": "b4228bcb980718eee28d5956e7da7f5135f57a76b8de638b8072f73744ecae7f",
+      "training_cache_sha256": "39a7fd8b78c1a4041b082a522842e3421b985d5b4e38e18c79f609688848f28a"
+    },
     "strong-boss-45-dose100": {
       "label": "Soft foreground weighting with full-strength Boss cues",
       "raw_sha256": "4891843b569d07e4c3eb98514cb0e4d6168fff8e5e91be34d3e5435ef1820bfe",
@@ -206,6 +220,11 @@
       "label": "Second qualified seed on the shared teacher scenes",
       "raw_sha256": "6976bcdebb2bfe294ed3d2907a16c192a3eb11ac697fa07b665e004af693f9f2",
       "training_cache_sha256": "877a1fe8f3dfa04087ce33c7c5da0a4fb0b4f066a825472fc56659ff355ba59e"
+    },
+    "two-cue-average": {
+      "label": "Soft foreground weighting plus a 35% blend of two averaged cues",
+      "raw_sha256": "eceabc18a54122aaa5589dc6782184bfa1a2c950ebcab9db756bb91d4f98c2bd",
+      "training_cache_sha256": "b543b1f8b7372ad57ecf55fc4028ed1f3c8a9a95d09a60a1d909c48b1af3cfb1"
     },
     "shared-best-uniform-steps": {
       "label": "Six evenly spaced timestep positions",
@@ -222,15 +241,10 @@
       "raw_sha256": "1a86ae34539088613e74ae5cab14d7c4d3d716b172f5250382813622fac876da",
       "training_cache_sha256": "c718469fc5cecb03a4c2db18e774eaa5f6c96d33d5ac1a37ad19152af29f5890"
     },
-    "two-cue-average": {
-      "label": "Soft foreground weighting plus a 35% blend of two averaged cues",
-      "raw_sha256": "eceabc18a54122aaa5589dc6782184bfa1a2c950ebcab9db756bb91d4f98c2bd",
-      "training_cache_sha256": "b543b1f8b7372ad57ecf55fc4028ed1f3c8a9a95d09a60a1d909c48b1af3cfb1"
-    },
-    "incumbent-refit": {
-      "label": "Soft foreground weighting · prior incumbent recipe",
-      "raw_sha256": "8de9c61604dd25489d5d958b945da3910d32c3cbe6f6afb44ccf7af07f37c512",
-      "training_cache_sha256": "4cc3ecda7c8b95ae02dcd05516d8bcc5a7cb8186525254ce8cc23d2a1b7da134"
+    "soft45-adapter-rollout": {
+      "label": "Train on adapter rollout states, 0.45 floor",
+      "raw_sha256": "d8ca011d530b9981ee23d23893b34c7d202ea4ed01db11ddba685bfb01df6d6d",
+      "training_cache_sha256": "8abf38459b1176607e1de9682c413ab6d4e006c6ac22bdaafd3e6438cc219b97"
     },
     "in-scene-costume": {
       "label": "In-scene costume cue blend, 35%",
@@ -257,7 +271,8 @@
       ],
       "runs": [
         "leaderboard-retune-adaptive",
-        "leaderboard-retune-visible"
+        "leaderboard-retune-visible",
+        "leaderboard-retune-design"
       ],
       "cases": {
         "ranger": {
@@ -316,7 +331,7 @@
         "boss_distinction": 0.865,
         "original_boss_distinction": 0.09
       },
-      "receipt_sha256": "02fe90773984a2b852970b45a1bf2ee4f5879f78bacf2db093c721c1533263e7",
+      "receipt_sha256": "e3d3431e2983d78f187b7acec7737bea8f5cdd544b147d9dd2677f1ca508397b",
       "samples": "samples/d442fca93d0c41a5bcdb4543bdc95db318c5a289648a2786e4ce65de47e9b101.webp"
     },
     {
@@ -338,7 +353,8 @@
       "runs": [
         "leaderboard-retune-adaptive",
         "leaderboard-retune-damage",
-        "leaderboard-retune-visible"
+        "leaderboard-retune-visible",
+        "leaderboard-retune-design"
       ],
       "cases": {
         "ranger": {
@@ -397,7 +413,7 @@
         "boss_distinction": 0.865,
         "original_boss_distinction": 0.09
       },
-      "receipt_sha256": "2503d69d5c02d8cc40034387aabe1a363984ed4aac752c0f47fdc66cc9d1f714",
+      "receipt_sha256": "f3f18706eba684a244ff95c87974d98451a79f7865d61a87e60ce18c3c1dcf3d",
       "samples": "samples/1b1c6bbc69f091e78431c359bbac02c3b0ec7eb624f0ecee7fd1c1efa0bc14fe.webp"
     },
     {
@@ -655,7 +671,8 @@
       ],
       "runs": [
         "leaderboard-retune-damage",
-        "leaderboard-retune-visible"
+        "leaderboard-retune-visible",
+        "leaderboard-retune-design"
       ],
       "cases": {
         "ranger": {
@@ -714,7 +731,7 @@
         "boss_distinction": 0.85875,
         "original_boss_distinction": 0.09
       },
-      "receipt_sha256": "169cb52d0d9e0f364aedb03b5637a192da34fe14470484c023ec5353b9da4e10",
+      "receipt_sha256": "37fc72e69a7962307d0505c9583d52ad2ab5ae0b87468d6d2ca8952e04b6f029",
       "samples": "samples/ad2a5241059ca6b6e3b80e5907a8039912944dd0ebb1c31b7e524b60357fdf29.webp"
     },
     {
@@ -734,7 +751,8 @@
         1.75
       ],
       "runs": [
-        "leaderboard-retune-visible"
+        "leaderboard-retune-visible",
+        "leaderboard-retune-design"
       ],
       "cases": {
         "ranger": {
@@ -793,7 +811,7 @@
         "boss_distinction": 0.86125,
         "original_boss_distinction": 0.09
       },
-      "receipt_sha256": "3d41f0a98aaf8928795a4b3416a2a661ae1d61ef4e86534450ed7ee367cc7f69",
+      "receipt_sha256": "0cef7441146a706f78e6b154069d7803d5cac81b20d2de7a9cfd18ec154b1a38",
       "samples": "samples/6f6d941c1708ac6e2b77aa99dbd326fe1c655df0e1e410444a282169c5b314b7.webp"
     },
     {
@@ -1032,6 +1050,85 @@
       },
       "receipt_sha256": "7dc4b7739764eb3aed74ba3950f0045556e3f8a5b1e1b35a21b515502b68afaf",
       "samples": "samples/c04edc7e0c11cf1b6599eb332658fd92939c7a69b0a932f55d3e624ae87b3a19.webp"
+    },
+    {
+      "method": "matched-attire",
+      "profile": "early",
+      "alpha": 1.25,
+      "gains": [
+        1.875,
+        1.875,
+        1.875,
+        1.875,
+        1.875,
+        1.875,
+        1.875,
+        1.2083334816827092,
+        0.625,
+        0.625
+      ],
+      "runs": [
+        "leaderboard-retune-visible"
+      ],
+      "cases": {
+        "ranger": {
+          "boss_distinction": 0.84,
+          "original_boss_distinction": 0.07,
+          "image_breakage": 0.3375,
+          "on_sha256": "bfc92a929aefa2e08ce4a3b7129444698c366e5d48a5fb37a86f37dbee21032c"
+        },
+        "smith": {
+          "boss_distinction": 0.88,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.31,
+          "on_sha256": "43170c81f31ff0fc25d103a7cb36fd200c7ee75a0792277477b641b03261af0c"
+        },
+        "stationer": {
+          "boss_distinction": 0.88,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.3075,
+          "on_sha256": "5644395282699afb0d173a354bc7c31f5550628915a6fca4319f9b00a6b845c0"
+        },
+        "ferryman": {
+          "boss_distinction": 0.87,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.3675,
+          "on_sha256": "4c4f40503111e055cf883cbca56928a787f1b9bcf248da40645e82b8c052fa76"
+        },
+        "watchmaker": {
+          "boss_distinction": 0.9,
+          "original_boss_distinction": 0.1,
+          "image_breakage": 0.335,
+          "on_sha256": "6018785bfa7585defc423a6a6f52850168b4f637cddedb80965f2371e7edeaea"
+        },
+        "guide": {
+          "boss_distinction": 0.87,
+          "original_boss_distinction": 0.06,
+          "image_breakage": 0.35,
+          "on_sha256": "409d2556181c0c0f63193e792604703eed353c0ed85f4c03d7bafeefe042f19a"
+        },
+        "guard": {
+          "boss_distinction": 0.88,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.38,
+          "on_sha256": "51bb8eea886923d3d227628a11a6b5ba95f18a67b2edfe2d0dc8a660b1e48f9d"
+        },
+        "violinist": {
+          "boss_distinction": 0.83,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.3475,
+          "on_sha256": "ca86366f99e770c6a481952b3fb88d1868bd89057aaf17bd3498a4a4acba28c2"
+        }
+      },
+      "means": {
+        "final_boss_score": 0.337266099590625,
+        "boss_effect": 0.77875,
+        "image_breakage": 0.341875,
+        "boss_distinction": 0.86875,
+        "original_boss_distinction": 0.09
+      },
+      "receipt_sha256": "d335d028f6452311026ce443cc137e4ddcc8f998b68e75fe31909c22b4f048e0",
+      "samples": "samples/0f1f201e72abdd2456ddaf489ccbe068b48a561427fb4fc408faade3175e7c89.webp"
     },
     {
       "method": "soft45-background-orthogonal",
@@ -1445,7 +1542,8 @@
         0.625
       ],
       "runs": [
-        "leaderboard-retune-visible"
+        "leaderboard-retune-visible",
+        "leaderboard-retune-design"
       ],
       "cases": {
         "ranger": {
@@ -1504,7 +1602,7 @@
         "boss_distinction": 0.81875,
         "original_boss_distinction": 0.09
       },
-      "receipt_sha256": "97471a48d00266ad28a8785283584e87394d05395ad20bf0bae9d20bf6236463",
+      "receipt_sha256": "d339d0856d92abe5dd58745b33cc3b6d0a40447073b370c738874aea6faa5171",
       "samples": "samples/d70d807e7512117a3278aa046b1b8fe92e58888b354c6aa1c98e71265a3bc3e5.webp"
     },
     {
@@ -1524,7 +1622,8 @@
         0.5
       ],
       "runs": [
-        "leaderboard-retune-damage"
+        "leaderboard-retune-damage",
+        "leaderboard-retune-design"
       ],
       "cases": {
         "ranger": {
@@ -1583,8 +1682,87 @@
         "boss_distinction": 0.8275,
         "original_boss_distinction": 0.09
       },
-      "receipt_sha256": "ff78823ea1a48f67c4c158e878729dd1bd8e94a07fdae113c05de1f2d5550031",
+      "receipt_sha256": "cef6c251deb724a286a6828e16a15c551002360ac152fe0d4543f68e83d0aade",
       "samples": "samples/52c5edfd4a134028f2881660c62cb97703428969f9cf34e5d5a8c5915b23cea6.webp"
+    },
+    {
+      "method": "matched-attire",
+      "profile": "early",
+      "alpha": 1.4375,
+      "gains": [
+        2.15625,
+        2.15625,
+        2.15625,
+        2.15625,
+        2.15625,
+        2.15625,
+        2.15625,
+        1.3895835039351156,
+        0.71875,
+        0.71875
+      ],
+      "runs": [
+        "leaderboard-retune-visible"
+      ],
+      "cases": {
+        "ranger": {
+          "boss_distinction": 0.83,
+          "original_boss_distinction": 0.07,
+          "image_breakage": 0.3375,
+          "on_sha256": "a226b8512a351444fdf241dcf3048837d8dd1a66873a297d39156ddd6e9dcea2"
+        },
+        "smith": {
+          "boss_distinction": 0.89,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.285,
+          "on_sha256": "45dfe2270b2c0aa51a4056776de16c89e5bd0e614d9e075f39fa0b6150871338"
+        },
+        "stationer": {
+          "boss_distinction": 0.89,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.35,
+          "on_sha256": "ed775000685882dca464655cf07bd4b5b7426d8a14c1c2169593e9cd112627ec"
+        },
+        "ferryman": {
+          "boss_distinction": 0.86,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.3775,
+          "on_sha256": "72aef6a9c9096a922f12dc9573d25e388297baab36ab4cb7b6dabb0a58e45490"
+        },
+        "watchmaker": {
+          "boss_distinction": 0.87,
+          "original_boss_distinction": 0.1,
+          "image_breakage": 0.335,
+          "on_sha256": "b0dfadd25ec31a307f13826d686f9712060486e5122e50d667a6318a05192227"
+        },
+        "guide": {
+          "boss_distinction": 0.84,
+          "original_boss_distinction": 0.06,
+          "image_breakage": 0.3725,
+          "on_sha256": "c6d052bd3c620bcf391d789277a8a79c94470c5d0c292e77e3234b1cd0b06571"
+        },
+        "guard": {
+          "boss_distinction": 0.85,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.3775,
+          "on_sha256": "98770cd6ea2143879d45125b9161b08563d93b15ad65d9a150411eec3a00bc4e"
+        },
+        "violinist": {
+          "boss_distinction": 0.85,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.335,
+          "on_sha256": "285483fc4a19930eccc62680a8445ef2e7ca48c8539b6bb44e838d8874058142"
+        }
+      },
+      "means": {
+        "final_boss_score": 0.3219000375375,
+        "boss_effect": 0.77,
+        "image_breakage": 0.34625,
+        "boss_distinction": 0.86,
+        "original_boss_distinction": 0.09
+      },
+      "receipt_sha256": "ce292632521b51ce883933c5e1481ccd6deae3cbaf3e4b21aa38bec8f66f9de2",
+      "samples": "samples/9c24a794f8fc5682eda7585b63ca58062a5e269c6fe32a61568bce6e4a84dffa.webp"
     },
     {
       "method": "shared-best-stock",
@@ -1666,6 +1844,85 @@
       "samples": "samples/175065fdf76950edf16b15a66b1b9441d9e2e1496dee9c06358bbd3bbabce983.webp"
     },
     {
+      "method": "matched-attire",
+      "profile": "constant",
+      "alpha": 1.4375,
+      "gains": [
+        1.4375,
+        1.4375,
+        1.4375,
+        1.4375,
+        1.4375,
+        1.4375,
+        1.4375,
+        1.4375,
+        1.4375,
+        1.4375
+      ],
+      "runs": [
+        "leaderboard-retune-visible"
+      ],
+      "cases": {
+        "ranger": {
+          "boss_distinction": 0.88,
+          "original_boss_distinction": 0.07,
+          "image_breakage": 0.2975,
+          "on_sha256": "54b713f16cda52181dc619cea1e08a316e2d2954acfa6984394ae0bf237f509d"
+        },
+        "smith": {
+          "boss_distinction": 0.85,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.3,
+          "on_sha256": "3fe542e2a41c796872e05ef7666c159fb17e6429dd748513bca0076b81a563d5"
+        },
+        "stationer": {
+          "boss_distinction": 0.87,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.34,
+          "on_sha256": "1ab676f45f04becd2dc1750952bc0be54a15a722855605c34eb26831438226c4"
+        },
+        "ferryman": {
+          "boss_distinction": 0.86,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.3825,
+          "on_sha256": "f64f86224b28930de8511be944cb9a2898f2a67d2c1fbff3e055adcfd9c63a0d"
+        },
+        "watchmaker": {
+          "boss_distinction": 0.81,
+          "original_boss_distinction": 0.1,
+          "image_breakage": 0.3625,
+          "on_sha256": "a81331b9ff852fe60a3e02107ea23b4543980bcc862259775085e1bcb0d383bd"
+        },
+        "guide": {
+          "boss_distinction": 0.84,
+          "original_boss_distinction": 0.06,
+          "image_breakage": 0.3825,
+          "on_sha256": "1e9f9b9564876762e8bc771267410ac4becf8578a51aa3bb818c26d7db5c220d"
+        },
+        "guard": {
+          "boss_distinction": 0.88,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.35,
+          "on_sha256": "843676358eb849dad1ed8319bf9a2fcb86a7879dfb4693dcf97dc787103855ab"
+        },
+        "violinist": {
+          "boss_distinction": 0.83,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.3075,
+          "on_sha256": "242da11aa5922393688e9d53c5142dff62f03a906fca997202f28d3a7f9f40de"
+        }
+      },
+      "means": {
+        "final_boss_score": 0.31346681161874995,
+        "boss_effect": 0.7625000000000001,
+        "image_breakage": 0.3403125,
+        "boss_distinction": 0.8525,
+        "original_boss_distinction": 0.09
+      },
+      "receipt_sha256": "5fc90cc0c6182a75ea5b142558cf7cecce81ef48d5fa5078ab8ae2f8a05a602c",
+      "samples": "samples/f38fd92b40080307a6189bfc4375ba6b13942815f95d9563a79bb952dae45832.webp"
+    },
+    {
       "method": "soft45-background-orthogonal",
       "profile": "constant",
       "alpha": 1.625,
@@ -1744,6 +2001,85 @@
       },
       "receipt_sha256": "59bbd3c93696ddc031e2673c42a303f5a356cb8e9ee2f1b2be44443d4298372b",
       "samples": "samples/c20586e1856434dbf44be54e50807b1d0d77cb92942543518d5bba31df10a639.webp"
+    },
+    {
+      "method": "incumbent-refit",
+      "profile": "early",
+      "alpha": 1.25,
+      "gains": [
+        1.875,
+        1.875,
+        1.875,
+        1.875,
+        1.875,
+        1.875,
+        1.875,
+        1.2083334816827092,
+        0.625,
+        0.625
+      ],
+      "runs": [
+        "leaderboard-retune-visible"
+      ],
+      "cases": {
+        "ranger": {
+          "boss_distinction": 0.83,
+          "original_boss_distinction": 0.07,
+          "image_breakage": 0.335,
+          "on_sha256": "da9b7ae8e85bb8af2cf759735e73de544300fc02e31f7e5bafc0f8642c031c76"
+        },
+        "smith": {
+          "boss_distinction": 0.88,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.26,
+          "on_sha256": "a47407a9f3b41d8307a6415a81c4df6a7d29320c7957cab4b64eefa5ce06f762"
+        },
+        "stationer": {
+          "boss_distinction": 0.87,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.2675,
+          "on_sha256": "e943984629dc69df33326203c2ab18d31a412ea069b8d38ed69a24d03994ea67"
+        },
+        "ferryman": {
+          "boss_distinction": 0.84,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.3125,
+          "on_sha256": "2b46c02e32467902ffc680fa446388e85ea9765dd06d16544975b106b0d13db7"
+        },
+        "watchmaker": {
+          "boss_distinction": 0.59,
+          "original_boss_distinction": 0.1,
+          "image_breakage": 0.31,
+          "on_sha256": "2b6d02ccd127568a88fdc43b3f2e86cc1f523818409158198d28eaec19b90737"
+        },
+        "guide": {
+          "boss_distinction": 0.86,
+          "original_boss_distinction": 0.06,
+          "image_breakage": 0.31,
+          "on_sha256": "6ae674784d5199ab0330c830505877c37269267b597d7367aef6c595463dd980"
+        },
+        "guard": {
+          "boss_distinction": 0.9,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.2575,
+          "on_sha256": "3f0875e834c06225038e16cfff8dfb2408fa409d8d602ee7be2d8974cd631f14"
+        },
+        "violinist": {
+          "boss_distinction": 0.82,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.3025,
+          "on_sha256": "a2c3f9497d0a7e10aadd428badf80c48dae860bd0f9bdaea0e29cf7671846a18"
+        }
+      },
+      "means": {
+        "final_boss_score": 0.31115097924999996,
+        "boss_effect": 0.73375,
+        "image_breakage": 0.294375,
+        "boss_distinction": 0.82375,
+        "original_boss_distinction": 0.09
+      },
+      "receipt_sha256": "bdb2c47ad65240ebce1a0140e5ccd8d3e365ed4bfc1e03a94ad9d3fea1c4d54e",
+      "samples": "samples/a178d84adbde5a95f8d8ce8d1647812a7ea25c137ec2ed9721e2c958276c6af2.webp"
     },
     {
       "method": "matched-attire",
@@ -2159,7 +2495,8 @@
       ],
       "runs": [
         "leaderboard-retune-damage",
-        "leaderboard-retune-visible"
+        "leaderboard-retune-visible",
+        "leaderboard-retune-design"
       ],
       "cases": {
         "ranger": {
@@ -2218,7 +2555,7 @@
         "boss_distinction": 0.79875,
         "original_boss_distinction": 0.09
       },
-      "receipt_sha256": "d3b0478c6d5664c26a76b82116c553e5fd41c193aab0c52ec74366e0498f0722",
+      "receipt_sha256": "1e1541bf215635e53a4526893251ccf39a3cd961decd6f26cc4cf92ebe1c98fb",
       "samples": "samples/a60f16ad6e5f6b8b0e07661c81a5645336852666b7d6f6737d73fbcb2c9b6e24.webp"
     },
     {
@@ -2239,7 +2576,8 @@
       ],
       "runs": [
         "leaderboard-retune-damage",
-        "leaderboard-retune-visible"
+        "leaderboard-retune-visible",
+        "leaderboard-retune-design"
       ],
       "cases": {
         "ranger": {
@@ -2298,7 +2636,7 @@
         "boss_distinction": 0.82,
         "original_boss_distinction": 0.09
       },
-      "receipt_sha256": "e161b8a78ee52e900b73b5d837d8cc16a05d748e8f37753dcb004794742cf92d",
+      "receipt_sha256": "fdaf8b1faad9ba13fe5d22b54ec3047ec9c2cd86c05122e9e9e3f283047236c0",
       "samples": "samples/ec6f479e20594b8e18fddc87be703a2e63d400fae7bc16cb58c77ddb1028ede7.webp"
     },
     {
@@ -2398,7 +2736,8 @@
         0.578125
       ],
       "runs": [
-        "leaderboard-retune-damage"
+        "leaderboard-retune-damage",
+        "leaderboard-retune-design"
       ],
       "cases": {
         "ranger": {
@@ -2457,8 +2796,87 @@
         "boss_distinction": 0.79,
         "original_boss_distinction": 0.09
       },
-      "receipt_sha256": "4b969786b200e55c9d48f522647f409efb408f68b11ba97af5eb29ce931a8754",
+      "receipt_sha256": "4b6ca38ad1aeae7f06e5a8505e4b957e2fcc987e0bc36fdea6b51ad21dd819c1",
       "samples": "samples/cafa6a533065473db410ac42e58a11dfb2df8e994f6bccc9c9e5d63c9585a1ed.webp"
+    },
+    {
+      "method": "incumbent-refit",
+      "profile": "constant",
+      "alpha": 1.625,
+      "gains": [
+        1.625,
+        1.625,
+        1.625,
+        1.625,
+        1.625,
+        1.625,
+        1.625,
+        1.625,
+        1.625,
+        1.625
+      ],
+      "runs": [
+        "leaderboard-retune-visible"
+      ],
+      "cases": {
+        "ranger": {
+          "boss_distinction": 0.84,
+          "original_boss_distinction": 0.07,
+          "image_breakage": 0.315,
+          "on_sha256": "304ecd19bf98a81826b36378f16aa225640432fc7dffc0f6250c3810c5f2f7ba"
+        },
+        "smith": {
+          "boss_distinction": 0.87,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.295,
+          "on_sha256": "c08b21d74e2489f67ac0b09d4ec45fce1962faf77fe54c5343219af3519c4ab7"
+        },
+        "stationer": {
+          "boss_distinction": 0.83,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.275,
+          "on_sha256": "a9a4dec68088c9de22c2fd1368b3b94d4352278e081d08760417936a40dbb579"
+        },
+        "ferryman": {
+          "boss_distinction": 0.83,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.2575,
+          "on_sha256": "7027065a824803f6064504f87afc1b22f2e165c009fd916f77576dd841bc1106"
+        },
+        "watchmaker": {
+          "boss_distinction": 0.7,
+          "original_boss_distinction": 0.1,
+          "image_breakage": 0.3975,
+          "on_sha256": "05cb5b8f9b3ef7921480b91e9e6cdcd1ce1502e15db404d3398d5f5323e10a75"
+        },
+        "guide": {
+          "boss_distinction": 0.83,
+          "original_boss_distinction": 0.06,
+          "image_breakage": 0.3825,
+          "on_sha256": "4831f4dd810c6a708a090d2dbfa3d8fa682650b6c4346e4d0686fbc9725e3ab4"
+        },
+        "guard": {
+          "boss_distinction": 0.9,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.28,
+          "on_sha256": "66ef4ce5923c888f8b2d538436f1da690125d4c5cfefc8f7e2efed1faaaaeb92"
+        },
+        "violinist": {
+          "boss_distinction": 0.84,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.2825,
+          "on_sha256": "5413b9f55ce48a9b3460061fdd94288914c8b1af3a1cfdb625b5a0c3a0079045"
+        }
+      },
+      "means": {
+        "final_boss_score": 0.302155841234375,
+        "boss_effect": 0.74,
+        "image_breakage": 0.310625,
+        "boss_distinction": 0.83,
+        "original_boss_distinction": 0.09
+      },
+      "receipt_sha256": "f4d96986b30df39f5e15551642e4d640eb27c7e40a7a9be2760abed23f8d8ca6",
+      "samples": "samples/f408b2c5eede7f5e1a39d955a91010294f56b3e98f6acc91523e3b6ac942af4f.webp"
     },
     {
       "method": "soft45-background-orthogonal",
@@ -2557,7 +2975,8 @@
       ],
       "runs": [
         "leaderboard-retune-damage",
-        "leaderboard-retune-visible"
+        "leaderboard-retune-visible",
+        "leaderboard-retune-design"
       ],
       "cases": {
         "ranger": {
@@ -2616,8 +3035,87 @@
         "boss_distinction": 0.78125,
         "original_boss_distinction": 0.09
       },
-      "receipt_sha256": "828ef4c8911eab8672d42f4e7799318d8e328cbec50f8604af2c46465552cf43",
+      "receipt_sha256": "221d593bcc773c8338751dc6c78b85624eb04d8d7f504904e0598e5fbfe653ac",
       "samples": "samples/4b1f08c988c915b0fea3ca4958e97723eb637d163565cf366577e32a85706b0e.webp"
+    },
+    {
+      "method": "matched-attire",
+      "profile": "constant",
+      "alpha": 1.25,
+      "gains": [
+        1.25,
+        1.25,
+        1.25,
+        1.25,
+        1.25,
+        1.25,
+        1.25,
+        1.25,
+        1.25,
+        1.25
+      ],
+      "runs": [
+        "leaderboard-retune-visible"
+      ],
+      "cases": {
+        "ranger": {
+          "boss_distinction": 0.86,
+          "original_boss_distinction": 0.07,
+          "image_breakage": 0.3325,
+          "on_sha256": "a5befaf72f4bf4aaa059c3d728c7cc8451936dbddad0336d50ca7da1f23589d6"
+        },
+        "smith": {
+          "boss_distinction": 0.85,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.355,
+          "on_sha256": "83bc639974d8c346a67d7ac19180ed16feb2a983e27f793f4ebd4853d0061fd6"
+        },
+        "stationer": {
+          "boss_distinction": 0.87,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.2625,
+          "on_sha256": "77bd9b30862e1a39cd4f534e37cefc26241f77a637b597afd1f1444c0032fc84"
+        },
+        "ferryman": {
+          "boss_distinction": 0.83,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.3775,
+          "on_sha256": "06910230c50a5d0a4c4cd6b7d7ef491fdb778abe9b99f5b89b22f4313e06f305"
+        },
+        "watchmaker": {
+          "boss_distinction": 0.82,
+          "original_boss_distinction": 0.1,
+          "image_breakage": 0.3075,
+          "on_sha256": "cc0f8e01ba61ab76e19c2c4d5aec2252ea410101b6a04712f5bc7b9593ce376b"
+        },
+        "guide": {
+          "boss_distinction": 0.73,
+          "original_boss_distinction": 0.06,
+          "image_breakage": 0.3275,
+          "on_sha256": "578418e7075323c5b3d2315f161b6019bd2e154de56ca7c203be91d4f128ec39"
+        },
+        "guard": {
+          "boss_distinction": 0.89,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.3075,
+          "on_sha256": "a750ab39bcd2491ba2440465e4a42242e0abbbd1a5d29aaa84772b32deecc4c0"
+        },
+        "violinist": {
+          "boss_distinction": 0.81,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.295,
+          "on_sha256": "9c6d6052d1fa7ee39e3daa92a1494855b3cc28ac489aa0581c17b3918f7dbe9b"
+        }
+      },
+      "means": {
+        "final_boss_score": 0.296283476490625,
+        "boss_effect": 0.7425,
+        "image_breakage": 0.320625,
+        "boss_distinction": 0.8325,
+        "original_boss_distinction": 0.09
+      },
+      "receipt_sha256": "dd9a839ef1379a8f7ece896abd0ab52cde054c844eecf0d3cef120b6ad00dbbc",
+      "samples": "samples/305d14a175b5073200d2eafa40995fb5172bf29408d7b350013636384d9a7c7f.webp"
     },
     {
       "method": "shared-best-divergence",
@@ -3490,6 +3988,85 @@
       "samples": "samples/156d74abe6c44dce1256fdb9731178eb5487d491cd0b4f2eeb2872aa266d5152.webp"
     },
     {
+      "method": "incumbent-refit",
+      "profile": "early",
+      "alpha": 1.34375,
+      "gains": [
+        2.015625,
+        2.015625,
+        2.015625,
+        2.015625,
+        2.015625,
+        2.015625,
+        2.015625,
+        1.2989584928089124,
+        0.671875,
+        0.671875
+      ],
+      "runs": [
+        "leaderboard-retune-visible"
+      ],
+      "cases": {
+        "ranger": {
+          "boss_distinction": 0.8,
+          "original_boss_distinction": 0.07,
+          "image_breakage": 0.355,
+          "on_sha256": "8f16db196fcf9bb111dccfc3867f73aed3cd019d9503831b3e7ccc4a6a2c8ad5"
+        },
+        "smith": {
+          "boss_distinction": 0.87,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.2575,
+          "on_sha256": "4344b2264fb10e3e25f0eec8f201924fbb85bded5f1ee6893d39ed15f8942533"
+        },
+        "stationer": {
+          "boss_distinction": 0.86,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.28,
+          "on_sha256": "cbe5867b3d220e59cbedb5152e87de80b0ac27b9fb9008449f6258435a10a1cb"
+        },
+        "ferryman": {
+          "boss_distinction": 0.86,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.3125,
+          "on_sha256": "7d3dd223905aeafce7c6f27ddbbc001d543678061a48f6c9baf2a8610eaa8e4f"
+        },
+        "watchmaker": {
+          "boss_distinction": 0.56,
+          "original_boss_distinction": 0.1,
+          "image_breakage": 0.32,
+          "on_sha256": "96f36f29792d8e4d90a9e3e1eb04d24fbc0d01a79d15b3590b434ea9b58cf516"
+        },
+        "guide": {
+          "boss_distinction": 0.84,
+          "original_boss_distinction": 0.06,
+          "image_breakage": 0.3525,
+          "on_sha256": "4c06295b71db59bdd997ad066cc8d4c17b0a13da4f90ff4a663eb160804fda0b"
+        },
+        "guard": {
+          "boss_distinction": 0.89,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.31,
+          "on_sha256": "1bf72fa47b066d762a97307f8845fabca805d6edbaea9ad3e43747a99a286e68"
+        },
+        "violinist": {
+          "boss_distinction": 0.79,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.255,
+          "on_sha256": "604adf5652c8981db674e24aac98475af2507b5ae616643cf57ac85c60ef1ac6"
+        }
+      },
+      "means": {
+        "final_boss_score": 0.286657293384375,
+        "boss_effect": 0.71875,
+        "image_breakage": 0.3053125,
+        "boss_distinction": 0.80875,
+        "original_boss_distinction": 0.09
+      },
+      "receipt_sha256": "4cfbe39d1f83161271232cc10fe1c13e0865e461a801d9730369c105c055d52b",
+      "samples": "samples/e86b02955a895ce9871e7119d301d7fc0acb1f7f1205cc7597307bcf483885ae.webp"
+    },
+    {
       "method": "soft45-background-orthogonal",
       "profile": "early",
       "alpha": 1.03125,
@@ -4282,6 +4859,85 @@
       "samples": "samples/4c384dd5a656dff7df63fd742669119690e855cdfe86be3c79730ac573aaea23.webp"
     },
     {
+      "method": "soft-projection-65-blend50",
+      "profile": "early",
+      "alpha": 1.625,
+      "gains": [
+        2.4375,
+        2.4375,
+        2.4375,
+        2.4375,
+        2.4375,
+        2.4375,
+        2.4375,
+        1.570833526187522,
+        0.8125,
+        0.8125
+      ],
+      "runs": [
+        "leaderboard-retune-visible"
+      ],
+      "cases": {
+        "ranger": {
+          "boss_distinction": 0.84,
+          "original_boss_distinction": 0.07,
+          "image_breakage": 0.3325,
+          "on_sha256": "754d681e2f41bb42d3456ce9d6871e795605b1cdda756daae4739bf4d5e7c209"
+        },
+        "smith": {
+          "boss_distinction": 0.84,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.38,
+          "on_sha256": "0379e1202da299e9cc98f3b404e377de78781c20290a6c32dacaac24cc213c07"
+        },
+        "stationer": {
+          "boss_distinction": 0.87,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.29,
+          "on_sha256": "cb1120817f20673e8a8825a77efd7a84a6b187f6b435f2bbebc185fd32606728"
+        },
+        "ferryman": {
+          "boss_distinction": 0.85,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.4225,
+          "on_sha256": "ce802495f24ff7296e7f05045f9098e33e7272e66db7926a62cc6b5ec4d6fc44"
+        },
+        "watchmaker": {
+          "boss_distinction": 0.86,
+          "original_boss_distinction": 0.1,
+          "image_breakage": 0.355,
+          "on_sha256": "42d13afe49f0ed03c1ca5c52ec13384e44c10865a779a6dd64d43cd82bd2c367"
+        },
+        "guide": {
+          "boss_distinction": 0.8,
+          "original_boss_distinction": 0.06,
+          "image_breakage": 0.39,
+          "on_sha256": "907b130711ca48ea160bc16fa92e07ac5f6c7b224434487fc8b3efd3a273a1e9"
+        },
+        "guard": {
+          "boss_distinction": 0.88,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.325,
+          "on_sha256": "5a74fb6a0a702486e61883f02db298e976c237819e50c9eeb238cae70e782e1c"
+        },
+        "violinist": {
+          "boss_distinction": 0.71,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.36,
+          "on_sha256": "6938cdb5f6dfb47d33e73eb34754b2e3e8e4c0c2ac66ed3f0667de3592ae3cb5"
+        }
+      },
+      "means": {
+        "final_boss_score": 0.28038849239374997,
+        "boss_effect": 0.74125,
+        "image_breakage": 0.356875,
+        "boss_distinction": 0.83125,
+        "original_boss_distinction": 0.09
+      },
+      "receipt_sha256": "ff9eaea6e79f5b95bb89580ffe1d1bbc4ec88c1395f61f73acbd9a45aea716b5",
+      "samples": "samples/dd80f8f951dc5353115008eb63514ecd3710b40558bfc4810d27fe917889a299.webp"
+    },
+    {
       "method": "shared-best-stock",
       "profile": "early",
       "alpha": 1.05,
@@ -4438,6 +5094,85 @@
       },
       "receipt_sha256": "1732582ff3cdccb5a9bb501a02095ce555901063e3fe5ee3a2087ab693fb43c5",
       "samples": "samples/20b1dcd3d317dd861a463ef037217edd3d591d8e38b0c1890d6e3b920dc5220e.webp"
+    },
+    {
+      "method": "soft-projection-65-blend50",
+      "profile": "early",
+      "alpha": 1.75,
+      "gains": [
+        2.625,
+        2.625,
+        2.625,
+        2.625,
+        2.625,
+        2.625,
+        2.625,
+        1.6916668743557928,
+        0.875,
+        0.875
+      ],
+      "runs": [
+        "leaderboard-retune-visible"
+      ],
+      "cases": {
+        "ranger": {
+          "boss_distinction": 0.84,
+          "original_boss_distinction": 0.07,
+          "image_breakage": 0.35,
+          "on_sha256": "5a4c14a1d175cf98373e46eccbbe4b213201e55059a5c75cfe9a1d1926b67515"
+        },
+        "smith": {
+          "boss_distinction": 0.81,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.3225,
+          "on_sha256": "edce71b8be5a63dac58738675bec48496e06384c04803ee564ce669bf0c2ec1b"
+        },
+        "stationer": {
+          "boss_distinction": 0.87,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.315,
+          "on_sha256": "39a519be3263d600ca5a6c3d6d8fbc55843d3c5d13d572cf17233878b984e43e"
+        },
+        "ferryman": {
+          "boss_distinction": 0.86,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.4225,
+          "on_sha256": "ae3f2f9fb30736edbc979d60520f5a8f5b88851b277d2b972ca7be3e20f5d3cc"
+        },
+        "watchmaker": {
+          "boss_distinction": 0.85,
+          "original_boss_distinction": 0.1,
+          "image_breakage": 0.3475,
+          "on_sha256": "10206e894db8e5c32dc411e2f2b499e10f1162e61bea1374981ee1d8451f1e61"
+        },
+        "guide": {
+          "boss_distinction": 0.77,
+          "original_boss_distinction": 0.06,
+          "image_breakage": 0.3375,
+          "on_sha256": "b3edade19d81797f0740ac15b3a665d413114b8ef5106475b2313df4eaa88acb"
+        },
+        "guard": {
+          "boss_distinction": 0.87,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.3375,
+          "on_sha256": "36bba97f0bd8cdfae6142ba57ba254ca11ac7bb96180da655efaf9d981b3b352"
+        },
+        "violinist": {
+          "boss_distinction": 0.74,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.3425,
+          "on_sha256": "fec5ae1a56d3a1bd7b49dd70af708bbe9ed0422a226f83d2db9d19e0bca5a007"
+        }
+      },
+      "means": {
+        "final_boss_score": 0.27505956855312497,
+        "boss_effect": 0.7362500000000001,
+        "image_breakage": 0.346875,
+        "boss_distinction": 0.82625,
+        "original_boss_distinction": 0.09
+      },
+      "receipt_sha256": "5219b6025f76bd56d988f01b2d2d5868f3eb99fbb48c7b5f0a69badcaf56bca6",
+      "samples": "samples/93e0e116ea71d9ed664c87af7c6c4ce927af6d10b2927cb621c8608eb2c75c2c.webp"
     },
     {
       "method": "shared-best-divergence",
@@ -5311,6 +6046,164 @@
       "samples": "samples/24faff9329bdc351a4f7b1449f35afc5807dd00cd76453fa44cb2d9b90f2899e.webp"
     },
     {
+      "method": "soft-projection-65-blend50",
+      "profile": "constant",
+      "alpha": 1.625,
+      "gains": [
+        1.625,
+        1.625,
+        1.625,
+        1.625,
+        1.625,
+        1.625,
+        1.625,
+        1.625,
+        1.625,
+        1.625
+      ],
+      "runs": [
+        "leaderboard-retune-visible"
+      ],
+      "cases": {
+        "ranger": {
+          "boss_distinction": 0.85,
+          "original_boss_distinction": 0.07,
+          "image_breakage": 0.3075,
+          "on_sha256": "158bd05b0e3d0c352f83ecad067736f66798e805d3896c383bc95c87a51c4777"
+        },
+        "smith": {
+          "boss_distinction": 0.84,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.255,
+          "on_sha256": "60980dc9c2e217791d2813b0d34c2d1f9dcda15317e0d4b1bd733d35c6be1e69"
+        },
+        "stationer": {
+          "boss_distinction": 0.87,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.3,
+          "on_sha256": "b9d5c618ae33a5411099cac4b0940d4bd2411d10e8c220d4dfed033e6fb01f47"
+        },
+        "ferryman": {
+          "boss_distinction": 0.77,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.3575,
+          "on_sha256": "4316a0a524d6bbbebf01141a10c70fac45f754ca4bc5110b5954c4e74eb80594"
+        },
+        "watchmaker": {
+          "boss_distinction": 0.8,
+          "original_boss_distinction": 0.1,
+          "image_breakage": 0.3025,
+          "on_sha256": "b750c828909a8b822ece83acd81a2e9f7f176b5cf56057f9a1aa778e33fcf005"
+        },
+        "guide": {
+          "boss_distinction": 0.7,
+          "original_boss_distinction": 0.06,
+          "image_breakage": 0.38,
+          "on_sha256": "fc1376239bcf72493faacbac78b8c30791a1768480873a5fd11d0582ab74d4c0"
+        },
+        "guard": {
+          "boss_distinction": 0.88,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.2825,
+          "on_sha256": "ac18f2127a7672a9b433838e48c29c6b76eb167280621249de7f4ac0af8460f7"
+        },
+        "violinist": {
+          "boss_distinction": 0.73,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.355,
+          "on_sha256": "87c4cd1cb87abe16423ec732d4136b9d3f6ff1c6d3c84ca8c217aad73a46eb27"
+        }
+      },
+      "means": {
+        "final_boss_score": 0.26711288233124997,
+        "boss_effect": 0.715,
+        "image_breakage": 0.3175,
+        "boss_distinction": 0.8049999999999999,
+        "original_boss_distinction": 0.09
+      },
+      "receipt_sha256": "2c435ebf19d5ec61d41b21b9fed0dee0e6e1a21a3d4943abc71e229f565da6bd",
+      "samples": "samples/e008b134c17088ef5cffb56cf79da8d67e45cdb7c77ff11554f8477d3bc4abbc.webp"
+    },
+    {
+      "method": "two-cue-average",
+      "profile": "constant",
+      "alpha": 1.625,
+      "gains": [
+        1.625,
+        1.625,
+        1.625,
+        1.625,
+        1.625,
+        1.625,
+        1.625,
+        1.625,
+        1.625,
+        1.625
+      ],
+      "runs": [
+        "leaderboard-retune-visible"
+      ],
+      "cases": {
+        "ranger": {
+          "boss_distinction": 0.82,
+          "original_boss_distinction": 0.07,
+          "image_breakage": 0.3175,
+          "on_sha256": "efc7e10fec74150022249115bc9b284ca26a5b8dc86784f4649a1945ac9b7692"
+        },
+        "smith": {
+          "boss_distinction": 0.79,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.3425,
+          "on_sha256": "212f6f40aa309c5520451f9f52ae858da9d4557f411e259ff1bd137f4c3f3f7f"
+        },
+        "stationer": {
+          "boss_distinction": 0.86,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.275,
+          "on_sha256": "8dfb82ed13db7c96d6447abfea45b2a2b7ad10d0767e4561dbf79e59a84f6b95"
+        },
+        "ferryman": {
+          "boss_distinction": 0.85,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.4025,
+          "on_sha256": "0ceddf5973d7c4de557993b618aab3a7777bcfd0c10f484d38dc7caa8ca3b026"
+        },
+        "watchmaker": {
+          "boss_distinction": 0.78,
+          "original_boss_distinction": 0.1,
+          "image_breakage": 0.405,
+          "on_sha256": "5abf7e231269f5719903221ac90dc5c8875f199feaaa055fbbecf3246e47105b"
+        },
+        "guide": {
+          "boss_distinction": 0.72,
+          "original_boss_distinction": 0.06,
+          "image_breakage": 0.24,
+          "on_sha256": "fa7a44c19bee996935d8eb8cf40d077382c44c41623d14fd9dc66960bd503f46"
+        },
+        "guard": {
+          "boss_distinction": 0.88,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.25,
+          "on_sha256": "1fc35b9ba0de4dc9a3bb5bf560b6afd509fd84ea9cedf41042647fb562c5f2a1"
+        },
+        "violinist": {
+          "boss_distinction": 0.76,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.2825,
+          "on_sha256": "3efaeaea67c1299cc1c9cad141ee3f6ee65d4987230256dac96bc9dfc995bad8"
+        }
+      },
+      "means": {
+        "final_boss_score": 0.264592081415625,
+        "boss_effect": 0.7175,
+        "image_breakage": 0.314375,
+        "boss_distinction": 0.8075,
+        "original_boss_distinction": 0.09
+      },
+      "receipt_sha256": "63d05b3cf12be97dca414149904e08d32483571cee9aca90fbe31f37bae665a5",
+      "samples": "samples/bc4bd531b2e431a621ee7476613ea4a3a4f9fd7b40a8bf8fdb9f504938460943.webp"
+    },
+    {
       "method": "late-cues",
       "profile": "constant",
       "alpha": 1.3125,
@@ -5627,6 +6520,85 @@
       "samples": "samples/87cc39b820262381ee5538deaa10afcfbfb63e8fec6cf1363e7fdd9cd08218f6.webp"
     },
     {
+      "method": "incumbent-refit",
+      "profile": "constant",
+      "alpha": 1.75,
+      "gains": [
+        1.75,
+        1.75,
+        1.75,
+        1.75,
+        1.75,
+        1.75,
+        1.75,
+        1.75,
+        1.75,
+        1.75
+      ],
+      "runs": [
+        "leaderboard-retune-visible"
+      ],
+      "cases": {
+        "ranger": {
+          "boss_distinction": 0.81,
+          "original_boss_distinction": 0.07,
+          "image_breakage": 0.3525,
+          "on_sha256": "0f817938b463e62310b20577dc5bd3aa5af6e54fd92b9f4c10985ec85205d0f7"
+        },
+        "smith": {
+          "boss_distinction": 0.88,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.3075,
+          "on_sha256": "27108d814ee969744ac4cebcc5b83043bf7b63761e4d666b258dcf7070405bf7"
+        },
+        "stationer": {
+          "boss_distinction": 0.86,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.315,
+          "on_sha256": "d06e4ec34674982309a0442f23a3ac85f78e9a3a040f1cb6f150b124057390a8"
+        },
+        "ferryman": {
+          "boss_distinction": 0.7,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.3225,
+          "on_sha256": "e1ff4ee065b4d7ea357af47dd7c7aeed72171ae4b7b8b29023fcf9b0dc8e04f4"
+        },
+        "watchmaker": {
+          "boss_distinction": 0.41,
+          "original_boss_distinction": 0.1,
+          "image_breakage": 0.4375,
+          "on_sha256": "725a775dae6dbcc008128da4b9b4c5629c4bc4216fa863811b38f087f3f78b09"
+        },
+        "guide": {
+          "boss_distinction": 0.86,
+          "original_boss_distinction": 0.06,
+          "image_breakage": 0.345,
+          "on_sha256": "e46063d377e222e920cfebc0109546d10839cf3feace2e7cfe4587464ed48af1"
+        },
+        "guard": {
+          "boss_distinction": 0.88,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.3025,
+          "on_sha256": "e7122548242811ad0e62f2348849f4f1af544ecb45f40eab8813e4de68718eef"
+        },
+        "violinist": {
+          "boss_distinction": 0.81,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.2625,
+          "on_sha256": "6ba32d9686080a02bfd06b4ab1361d53ef14ff87f9602f6595f56e351c73c942"
+        }
+      },
+      "means": {
+        "final_boss_score": 0.2616853067875,
+        "boss_effect": 0.68625,
+        "image_breakage": 0.330625,
+        "boss_distinction": 0.77625,
+        "original_boss_distinction": 0.09
+      },
+      "receipt_sha256": "5368c992fd13e04596b3ff620810fb9fb0def7b1e43912cd4aa5590041d0bf30",
+      "samples": "samples/f4f329c3c76016691f65ccbc796fbbc90975a61b2aec96297641e09d0622bb15.webp"
+    },
+    {
       "method": "soft-floor45",
       "profile": "early",
       "alpha": 1.125,
@@ -5785,6 +6757,85 @@
       "samples": "samples/48113902057a6e903829182cc279130ff5b43c64cd055f6d2a4f0b9d0e9484fb.webp"
     },
     {
+      "method": "soft-projection-65-blend50",
+      "profile": "constant",
+      "alpha": 1.75,
+      "gains": [
+        1.75,
+        1.75,
+        1.75,
+        1.75,
+        1.75,
+        1.75,
+        1.75,
+        1.75,
+        1.75,
+        1.75
+      ],
+      "runs": [
+        "leaderboard-retune-visible"
+      ],
+      "cases": {
+        "ranger": {
+          "boss_distinction": 0.79,
+          "original_boss_distinction": 0.07,
+          "image_breakage": 0.3775,
+          "on_sha256": "2219efe061d4471ceeb648f0758e423f8968d09359edd4e7577ed1db50aa533b"
+        },
+        "smith": {
+          "boss_distinction": 0.87,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.2425,
+          "on_sha256": "978d1014f87b7dfe220568628fbb4e1b8ce63af2b5671d06550ac4feb1e328ea"
+        },
+        "stationer": {
+          "boss_distinction": 0.87,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.3675,
+          "on_sha256": "9f2e0763c3b4d81ae37b19a4db9c2473b632c1f57cdd1d6ba383ed0bf9aa27be"
+        },
+        "ferryman": {
+          "boss_distinction": 0.78,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.3925,
+          "on_sha256": "af391f47310a015546316e220a40b42c0c6ec5f4761fec6fa0161ab55095b96d"
+        },
+        "watchmaker": {
+          "boss_distinction": 0.8,
+          "original_boss_distinction": 0.1,
+          "image_breakage": 0.31,
+          "on_sha256": "8019db26580341a21c17d82e8a58eac42a3d97ea6b65bd638f6bdaaf24920baf"
+        },
+        "guide": {
+          "boss_distinction": 0.76,
+          "original_boss_distinction": 0.06,
+          "image_breakage": 0.3275,
+          "on_sha256": "eee53fcd4b4655fa5cc734aa37c4e87c0405f58dd2b157878f661291e0849fe4"
+        },
+        "guard": {
+          "boss_distinction": 0.89,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.365,
+          "on_sha256": "a38f6931f3f67ac8e1f476fbe50bd29e535ee67826866cdd0f024f7efa459cfe"
+        },
+        "violinist": {
+          "boss_distinction": 0.7,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.41,
+          "on_sha256": "b4015adad159cad74a6e3d1e4a5db86cacb0822b07d7935cf45a971b87a62e08"
+        }
+      },
+      "means": {
+        "final_boss_score": 0.256665769396875,
+        "boss_effect": 0.7175,
+        "image_breakage": 0.3490625,
+        "boss_distinction": 0.8075,
+        "original_boss_distinction": 0.09
+      },
+      "receipt_sha256": "2125319e79b5bcd43a0f0326268bceb07dcacef529a4d25d724535cf1179e668",
+      "samples": "samples/1763f7e3674aa721ee22b16c774a80c8be67db1009a96620ed8fbad4c833791d.webp"
+    },
+    {
       "method": "early-cues",
       "profile": "early",
       "alpha": 0.875,
@@ -5862,6 +6913,85 @@
       },
       "receipt_sha256": "ff12d5f0b1ec7e999b84487c9979f3cb8f895e0fc43b3ab307b6af2f6c201f5f",
       "samples": "samples/05c518108c8bc10898293e58b976a8c027deb3db134d867414e5065d5ba77ef5.webp"
+    },
+    {
+      "method": "two-cue-average",
+      "profile": "early",
+      "alpha": 1.0625,
+      "gains": [
+        1.59375,
+        1.59375,
+        1.59375,
+        1.59375,
+        1.59375,
+        1.59375,
+        1.59375,
+        1.0270834594303029,
+        0.53125,
+        0.53125
+      ],
+      "runs": [
+        "leaderboard-retune-visible"
+      ],
+      "cases": {
+        "ranger": {
+          "boss_distinction": 0.81,
+          "original_boss_distinction": 0.07,
+          "image_breakage": 0.28,
+          "on_sha256": "2f258b23b63f12e35385a767bfd31aedaf7cffa0a879bb954909f819061ac11d"
+        },
+        "smith": {
+          "boss_distinction": 0.76,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.3075,
+          "on_sha256": "c2a31dae790394cacbf224dd5e33eb45100163179c28f043c23d411f4df22987"
+        },
+        "stationer": {
+          "boss_distinction": 0.87,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.2675,
+          "on_sha256": "b92e6dfef3d2426a52e40d6a582c26a910c4eb34398a85524904abf89a941227"
+        },
+        "ferryman": {
+          "boss_distinction": 0.83,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.345,
+          "on_sha256": "d23dba4fef9867e7577f5e7520df224ca9a6ca06870b14d9a4da4aa5bebdedbe"
+        },
+        "watchmaker": {
+          "boss_distinction": 0.8,
+          "original_boss_distinction": 0.1,
+          "image_breakage": 0.38,
+          "on_sha256": "4507f729ff64965e2e4bf2258a1390939c0a849e45b195d649bf6a13ff9cac04"
+        },
+        "guide": {
+          "boss_distinction": 0.59,
+          "original_boss_distinction": 0.06,
+          "image_breakage": 0.3175,
+          "on_sha256": "ba329d9d6df273d59d91bdedc80420bcd151021bb61a524ed9cb7b9d19cc516a"
+        },
+        "guard": {
+          "boss_distinction": 0.87,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.2725,
+          "on_sha256": "3bbbf32eb4090a4d9bb3c51c0193d0337ecdc4eca0a55f7bc27321c2a91ac546"
+        },
+        "violinist": {
+          "boss_distinction": 0.77,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.2325,
+          "on_sha256": "9ccae2b82e56e98e310b5d5842afb3d8efde9b502b8ee2002d445a9d56a29ea1"
+        }
+      },
+      "means": {
+        "final_boss_score": 0.25355780293125,
+        "boss_effect": 0.6975,
+        "image_breakage": 0.3003125,
+        "boss_distinction": 0.7875,
+        "original_boss_distinction": 0.09
+      },
+      "receipt_sha256": "8dd56823619ecf95ec94ac8668681b6671ba312f6990fb4bd348ededeb57c6fd",
+      "samples": "samples/f1def7732a70721126160e647cf337be5e15dff0e645dbb037fcc0c5ba6b803c.webp"
     },
     {
       "method": "soft-contexts-65-blend50",
@@ -8004,6 +9134,85 @@
       "samples": "samples/60ee356d54e068fdee910df63cd02ffa8b1a9437024aaf32a0c7a4f136232d75.webp"
     },
     {
+      "method": "two-cue-average",
+      "profile": "constant",
+      "alpha": 1.484375,
+      "gains": [
+        1.484375,
+        1.484375,
+        1.484375,
+        1.484375,
+        1.484375,
+        1.484375,
+        1.484375,
+        1.484375,
+        1.484375,
+        1.484375
+      ],
+      "runs": [
+        "leaderboard-retune-visible"
+      ],
+      "cases": {
+        "ranger": {
+          "boss_distinction": 0.77,
+          "original_boss_distinction": 0.07,
+          "image_breakage": 0.3375,
+          "on_sha256": "98874eac65143c02cdd08515da436be071dca75293ed62d2c16e6a8dd0a3af8f"
+        },
+        "smith": {
+          "boss_distinction": 0.77,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.33,
+          "on_sha256": "8d47885c6725c18139ff55d79cef9095b37f3e462237be4bd7708af478f4d7f5"
+        },
+        "stationer": {
+          "boss_distinction": 0.85,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.2475,
+          "on_sha256": "32789101a8aeacbb38b2b7d7313e32ab6fd9daa029f21d5cb0ac3421b0188d30"
+        },
+        "ferryman": {
+          "boss_distinction": 0.83,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.255,
+          "on_sha256": "2f74b91e82c98dcebfb4fdcdd37765f94e174055a233ecc10c12d8fbc100150f"
+        },
+        "watchmaker": {
+          "boss_distinction": 0.73,
+          "original_boss_distinction": 0.1,
+          "image_breakage": 0.4275,
+          "on_sha256": "27f9538bd7c6f9d6e284797f6cb1d5b12674d2b89de452c11cc718c50c69a53d"
+        },
+        "guide": {
+          "boss_distinction": 0.54,
+          "original_boss_distinction": 0.06,
+          "image_breakage": 0.2725,
+          "on_sha256": "76fb9e1e0a3b68efac283ddcd018d0dd7b3c773adbc346279afc20b72e43d3b9"
+        },
+        "guard": {
+          "boss_distinction": 0.86,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.295,
+          "on_sha256": "b156d62d0614467f9222322b9711529a5796e6208c5bed8e5a2d2806bb96ffcb"
+        },
+        "violinist": {
+          "boss_distinction": 0.64,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.2575,
+          "on_sha256": "76e64307ae42532f703f579957d2d7bf2256adbe406e3cc7093b02654244426a"
+        }
+      },
+      "means": {
+        "final_boss_score": 0.21400795727187497,
+        "boss_effect": 0.6587500000000001,
+        "image_breakage": 0.3028125,
+        "boss_distinction": 0.74875,
+        "original_boss_distinction": 0.09
+      },
+      "receipt_sha256": "1a15e31b43664970aa705ac75981c266b6b94200506e21b823fe991f9fe66874",
+      "samples": "samples/fe4a1ac4a89c49870e8f6b795f672a44cdda660c6ef9293f6a769170326d9127.webp"
+    },
+    {
       "method": "shared-best-stock",
       "profile": "constant",
       "alpha": 1.15625,
@@ -9030,6 +10239,85 @@
       },
       "receipt_sha256": "02bf724217a9d1f8971f91b333b4617d0026f2c3be0d27a4842afeab61acab15",
       "samples": "samples/a1e016028e86df81a925127c63855ea93b4ac082c6f741473b04ee6c7cdaead0.webp"
+    },
+    {
+      "method": "two-cue-average",
+      "profile": "early",
+      "alpha": 1.0,
+      "gains": [
+        1.5,
+        1.5,
+        1.5,
+        1.5,
+        1.5,
+        1.5,
+        1.5,
+        0.9666667853461673,
+        0.5,
+        0.5
+      ],
+      "runs": [
+        "leaderboard-retune-visible"
+      ],
+      "cases": {
+        "ranger": {
+          "boss_distinction": 0.78,
+          "original_boss_distinction": 0.07,
+          "image_breakage": 0.295,
+          "on_sha256": "43dfea741204940ea71f166735610db279580500257126c34db6fb1dbb44b635"
+        },
+        "smith": {
+          "boss_distinction": 0.72,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.2675,
+          "on_sha256": "9140dd570bacd24f5fc8f93168ca0dd173100b3446d7e454b42660fd24c19206"
+        },
+        "stationer": {
+          "boss_distinction": 0.85,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.2775,
+          "on_sha256": "fbeeab9106c8629df540dfb6695a7f2e996d6e4d1577e194606142d6b0ebc86a"
+        },
+        "ferryman": {
+          "boss_distinction": 0.86,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.3175,
+          "on_sha256": "0a8d72710e7be09cbfa945045d4e87382405d884ef6f9db5b139c4290cf6f2d2"
+        },
+        "watchmaker": {
+          "boss_distinction": 0.63,
+          "original_boss_distinction": 0.1,
+          "image_breakage": 0.3925,
+          "on_sha256": "3bd769aeed977404aa81cc6894f77e3dde276a01271b793e64f7e072269138ef"
+        },
+        "guide": {
+          "boss_distinction": 0.37,
+          "original_boss_distinction": 0.06,
+          "image_breakage": 0.25,
+          "on_sha256": "aef12cc47ed8e7d5159461acfcdb64cf56a2824cd9b6cbc33485405afe66ab49"
+        },
+        "guard": {
+          "boss_distinction": 0.87,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.285,
+          "on_sha256": "a3bc2dbdaeac2fddce91f41d7f6c8ef44572f2596cabb2882804847497181770"
+        },
+        "violinist": {
+          "boss_distinction": 0.54,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.2375,
+          "on_sha256": "26bea896ba75af95ad8890826e6cfa377e304e632a3791c7c80cc30e6e89ca00"
+        }
+      },
+      "means": {
+        "final_boss_score": 0.196473186971875,
+        "boss_effect": 0.6125,
+        "image_breakage": 0.2903125,
+        "boss_distinction": 0.7025,
+        "original_boss_distinction": 0.09
+      },
+      "receipt_sha256": "f8fc4357877683e171b7a639e908286295fc85dddd14edfd8b4f22e5a1420d58",
+      "samples": "samples/e596074a09b52e711c27e519c193f3e782f761625e8613839fa7e5fa435ab113.webp"
     },
     {
       "method": "shared-best-middle",
@@ -12143,7 +13431,8 @@
         0.3333333333333333
       ],
       "runs": [
-        "fixed"
+        "fixed",
+        "leaderboard-retune-visible"
       ],
       "cases": {
         "ranger": {
@@ -12202,7 +13491,7 @@
         "boss_distinction": 0.5575,
         "original_boss_distinction": 0.09
       },
-      "receipt_sha256": "23ffbc8d1dacfe873a3624d1095eb0f32fe77f92019c40fc9c458f57c7e7d6b8",
+      "receipt_sha256": "90ffc22fd166c2915b547f0b21fc1039fb36d8617566747b4c204dd4456814c5",
       "samples": "samples/e62859f259300a06105346d6de8a261543c2726f888790bbda3136d84567f2e7.webp"
     },
     {
@@ -12283,6 +13572,86 @@
       },
       "receipt_sha256": "470ab9be58c319b0f76b155c070ddb9d34a75983bd746acd7d888283a2d86c96",
       "samples": "samples/349afe52e0773edc67ae2fcce5ace8531e276ef16e2b6561b464154256fe53b2.webp"
+    },
+    {
+      "method": "soft45-adapter-rollout",
+      "profile": "early",
+      "alpha": 0.6666666666666666,
+      "gains": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        0.6444445235641115,
+        0.3333333333333333,
+        0.3333333333333333
+      ],
+      "runs": [
+        "fixed",
+        "leaderboard-retune-visible"
+      ],
+      "cases": {
+        "ranger": {
+          "boss_distinction": 0.63,
+          "original_boss_distinction": 0.07,
+          "image_breakage": 0.2,
+          "on_sha256": "3dad9150ca176a53e01b2a4475324ce49079e13000fe5c308ea2a368bfb13730"
+        },
+        "smith": {
+          "boss_distinction": 0.21,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.1925,
+          "on_sha256": "6baabd5282d8a5704ed1ee5779384d4ced05ffc05b3a2373da7630fffe08cf8d"
+        },
+        "stationer": {
+          "boss_distinction": 0.67,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.17,
+          "on_sha256": "6aa9b5520813a81bd5c77019b39f668790d0a66d91a8b5ce4aaacc14c24f740c"
+        },
+        "ferryman": {
+          "boss_distinction": 0.74,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.2425,
+          "on_sha256": "256a9e376283c6a4cd1787ca4f6e66870d05e955ef0c75d9d02b52388b2bac6e"
+        },
+        "watchmaker": {
+          "boss_distinction": 0.78,
+          "original_boss_distinction": 0.1,
+          "image_breakage": 0.215,
+          "on_sha256": "68eba1ab8cb3f58daab314eefb622a056d36301bbf21e994ba8c819229397516"
+        },
+        "guide": {
+          "boss_distinction": 0.2,
+          "original_boss_distinction": 0.06,
+          "image_breakage": 0.2075,
+          "on_sha256": "980ae099f20216496e64c0fc9814d0c3b81f95fd302dd2fa45626386d5be1586"
+        },
+        "guard": {
+          "boss_distinction": 0.71,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.25,
+          "on_sha256": "d704d02e9eeb0b4d386ce7875fd31b5cddc7521ac55197fd218644f89a959e50"
+        },
+        "violinist": {
+          "boss_distinction": 0.4,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.1325,
+          "on_sha256": "8b021a9691483a455ce863a01f7ac0f676a5c57616704d12245c20124532990d"
+        }
+      },
+      "means": {
+        "final_boss_score": 0.10990008785937501,
+        "boss_effect": 0.4525,
+        "image_breakage": 0.20125,
+        "boss_distinction": 0.5425,
+        "original_boss_distinction": 0.09
+      },
+      "receipt_sha256": "108a6b31842dc409046fd68862002112a72adcd5e741379497c4f7372e3828a8",
+      "samples": "samples/896b2ea3b205c59be9fecc0ebddaef58307740b4376b8dfbc4288dcb36a65996.webp"
     },
     {
       "method": "strong-boss-45-dose100",
@@ -13085,6 +14454,85 @@
       "samples": "samples/aa335780673769249d5298276a2fb34f639622ca2468af1b60ee31b1428d998f.webp"
     },
     {
+      "method": "two-cue-average",
+      "profile": "late",
+      "alpha": 1.75,
+      "gains": [
+        0.875,
+        0.875,
+        0.875,
+        0.875,
+        0.875,
+        0.875,
+        0.875,
+        1.8083331256442072,
+        2.625,
+        2.625
+      ],
+      "runs": [
+        "leaderboard-retune-visible"
+      ],
+      "cases": {
+        "ranger": {
+          "boss_distinction": 0.37,
+          "original_boss_distinction": 0.07,
+          "image_breakage": 0.3125,
+          "on_sha256": "4829b1a6e996dbd717f7a52689ae24ef35a432616877f1f135f7e032cb7addb1"
+        },
+        "smith": {
+          "boss_distinction": 0.19,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.2275,
+          "on_sha256": "96fb5c72e870d350431aab7162ed6244226231ae9d690642d1f521f9ac740bbb"
+        },
+        "stationer": {
+          "boss_distinction": 0.65,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.2025,
+          "on_sha256": "fb9c2d5dda4d8ba415864f9632c36b84b7454730cab65a6e0d82d6cf33bc3abb"
+        },
+        "ferryman": {
+          "boss_distinction": 0.78,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.3375,
+          "on_sha256": "451799a8e8ac57f1e58309b35bd9783481b8ff4bbfb8a47ad6c660b49d4f91dc"
+        },
+        "watchmaker": {
+          "boss_distinction": 0.78,
+          "original_boss_distinction": 0.1,
+          "image_breakage": 0.35,
+          "on_sha256": "7445448feb36718af39b3d5aeaed9bdba598ce871baad3c84bca671cfd55d67a"
+        },
+        "guide": {
+          "boss_distinction": 0.12,
+          "original_boss_distinction": 0.06,
+          "image_breakage": 0.3025,
+          "on_sha256": "e7d40de9ee11c0574cf31f42d57d3f948ff496d4a482eeda9660bd0a95350782"
+        },
+        "guard": {
+          "boss_distinction": 0.76,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.3125,
+          "on_sha256": "290580feb8563b344cba8a5652a86da747b37aa1b328654c602dbfc1bc02fee6"
+        },
+        "violinist": {
+          "boss_distinction": 0.36,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.22,
+          "on_sha256": "911ca65b0499b512f9b85f9464be6c4b65f51efa16d9488c336a1c8c74ef6187"
+        }
+      },
+      "means": {
+        "final_boss_score": 0.09451505265312501,
+        "boss_effect": 0.41125,
+        "image_breakage": 0.283125,
+        "boss_distinction": 0.50125,
+        "original_boss_distinction": 0.09
+      },
+      "receipt_sha256": "57f0985195276b523f2c3c34069e9b306e92f6068cd6c536cab1db36a3a72d87",
+      "samples": "samples/0550ef697780f59464d79707caf551a001b4bac312642ccef23087c6f6159cf0.webp"
+    },
+    {
       "method": "shared-best-middle",
       "profile": "constant",
       "alpha": 1.25,
@@ -13881,6 +15329,85 @@
       "samples": "samples/934bf4a7b0d42135e7fcbe71496efa5b78296057b90205bd32909d9f788cec79.webp"
     },
     {
+      "method": "matched-attire",
+      "profile": "late",
+      "alpha": 1.75,
+      "gains": [
+        0.875,
+        0.875,
+        0.875,
+        0.875,
+        0.875,
+        0.875,
+        0.875,
+        1.8083331256442072,
+        2.625,
+        2.625
+      ],
+      "runs": [
+        "leaderboard-retune-visible"
+      ],
+      "cases": {
+        "ranger": {
+          "boss_distinction": 0.37,
+          "original_boss_distinction": 0.07,
+          "image_breakage": 0.3525,
+          "on_sha256": "56a01f2d17c44d8b567acccc348d3a6647ab612f55167694f5d4d1e3b7fefc96"
+        },
+        "smith": {
+          "boss_distinction": 0.23,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.2675,
+          "on_sha256": "1608db1931af5afd6ce949c0bd8c3d2c4306c326a8bd5f385f1fc39d416b1aa1"
+        },
+        "stationer": {
+          "boss_distinction": 0.65,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.3,
+          "on_sha256": "e9b149528ec5958ef3de013354e9661d721e39dc630a45bc1d0b9be434e56a3e"
+        },
+        "ferryman": {
+          "boss_distinction": 0.63,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.31,
+          "on_sha256": "e1a815283731ea15af5aa96287a6b90daf018e2c164382e46bc5a81a0da57e4b"
+        },
+        "watchmaker": {
+          "boss_distinction": 0.73,
+          "original_boss_distinction": 0.1,
+          "image_breakage": 0.44,
+          "on_sha256": "f15d47c8d101dac47c012ddb9819452ca68946804403ea30beec0737b2fc61bf"
+        },
+        "guide": {
+          "boss_distinction": 0.14,
+          "original_boss_distinction": 0.06,
+          "image_breakage": 0.2075,
+          "on_sha256": "6e4c5353e71edcbc733179012560175253fce7e423cf54be8ea84a9fdfc25113"
+        },
+        "guard": {
+          "boss_distinction": 0.82,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.33,
+          "on_sha256": "95260f14c278bc8d445eb768411b527bab5b7c280ddc51e8894b9bfd1999d0c7"
+        },
+        "violinist": {
+          "boss_distinction": 0.43,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.2225,
+          "on_sha256": "f18c2c18a44421ad0a8ba908457cac81751fab8128ce401bd1c322979b49fd00"
+        }
+      },
+      "means": {
+        "final_boss_score": 0.07825525939374998,
+        "boss_effect": 0.41000000000000003,
+        "image_breakage": 0.30375,
+        "boss_distinction": 0.5,
+        "original_boss_distinction": 0.09
+      },
+      "receipt_sha256": "943129bc96c70b6c3e55ac7d1da3b39a1dc97baa8fcc2b628377ea76ca15eef2",
+      "samples": "samples/3d5675feb1a4de8fecbb47ca6b84d60f6d6560421174f10fc50dab8f2c29b798.webp"
+    },
+    {
       "method": "shared-best-stock",
       "profile": "constant",
       "alpha": 1.0,
@@ -14056,7 +15583,8 @@
         0.3333333333333333
       ],
       "runs": [
-        "fixed"
+        "fixed",
+        "leaderboard-retune-visible"
       ],
       "cases": {
         "ranger": {
@@ -14115,7 +15643,7 @@
         "boss_distinction": 0.50125,
         "original_boss_distinction": 0.09
       },
-      "receipt_sha256": "fbec84304410f335cf5dbbf897bd9d0b3f245a38e7dcbe010376b1976e79a552",
+      "receipt_sha256": "ebb673e98a0aa4922a39684055dd1bf70baf03f025c902cc436c591da4eb010a",
       "samples": "samples/6a354e7241d0c9d01cd3057d29939ae743a739896ce1249f94338555d0eab4d5.webp"
     },
     {
@@ -14593,6 +16121,85 @@
       },
       "receipt_sha256": "71c119e974ca1b83f14588048172c3cf1e0f99c0b833515306808efcb8cd581f",
       "samples": "samples/021f92b2efa1dcfd2a737328bcff3352218789f3da54e6d775b4651a409b2e63.webp"
+    },
+    {
+      "method": "two-cue-average",
+      "profile": "late",
+      "alpha": 1.625,
+      "gains": [
+        0.8125,
+        0.8125,
+        0.8125,
+        0.8125,
+        0.8125,
+        0.8125,
+        0.8125,
+        1.6791664738124783,
+        2.4375,
+        2.4375
+      ],
+      "runs": [
+        "leaderboard-retune-visible"
+      ],
+      "cases": {
+        "ranger": {
+          "boss_distinction": 0.41,
+          "original_boss_distinction": 0.07,
+          "image_breakage": 0.3075,
+          "on_sha256": "fa5935a8fe44af5e886dd8e48e84935347c22a9cf737aa537f921cb3104702c1"
+        },
+        "smith": {
+          "boss_distinction": 0.17,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.2425,
+          "on_sha256": "2e963c6fff103faf328eff9d6b013c05f43265e156c7da928e6d3e12977db5cd"
+        },
+        "stationer": {
+          "boss_distinction": 0.5,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.2125,
+          "on_sha256": "28168bd261111f9609dd064b90b5afb9fb4b09e00d4e8fefb4a4134bc119ac43"
+        },
+        "ferryman": {
+          "boss_distinction": 0.76,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.315,
+          "on_sha256": "14a48c8630d6998fd9c0a448b9652a5983c9702ba492ea18352c65ec081c585e"
+        },
+        "watchmaker": {
+          "boss_distinction": 0.74,
+          "original_boss_distinction": 0.1,
+          "image_breakage": 0.335,
+          "on_sha256": "39841d7f24343eac62a382f86b5b377a52ebbcdbf24204795c8111e36ca2fa0b"
+        },
+        "guide": {
+          "boss_distinction": 0.12,
+          "original_boss_distinction": 0.06,
+          "image_breakage": 0.295,
+          "on_sha256": "1f5be805681073d35265775865914ca83cd32d1bc065198f2b86cc8782ba5e6b"
+        },
+        "guard": {
+          "boss_distinction": 0.67,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.34,
+          "on_sha256": "14decdac2136a0c59ea5ca04f7bb3568ad565cdf7d99494a98f9db0d32f676d0"
+        },
+        "violinist": {
+          "boss_distinction": 0.33,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.28,
+          "on_sha256": "b33ca10952154c82e8a93d8d7f9f6c8a1ec58bd568f5cbd106dd3de8aad1c673"
+        }
+      },
+      "means": {
+        "final_boss_score": 0.067571771978125,
+        "boss_effect": 0.3725,
+        "image_breakage": 0.2909375,
+        "boss_distinction": 0.4625,
+        "original_boss_distinction": 0.09
+      },
+      "receipt_sha256": "421da736550a596c1a37019f4a52ef48798530bc39831c5b2b39d764271d4c2f",
+      "samples": "samples/c30e0d0dc2dca421bd8e0126e379918360ce11c87d027c9eff6b7c46e35b9e9f.webp"
     },
     {
       "method": "soft-contexts-45-blend50",
@@ -15236,6 +16843,164 @@
       "samples": "samples/8c51412bd97772b0fcb7f149bf8aabbcdf29d6f19f14991c4c744adb00079cb1.webp"
     },
     {
+      "method": "incumbent-refit",
+      "profile": "late",
+      "alpha": 1.75,
+      "gains": [
+        0.875,
+        0.875,
+        0.875,
+        0.875,
+        0.875,
+        0.875,
+        0.875,
+        1.8083331256442072,
+        2.625,
+        2.625
+      ],
+      "runs": [
+        "leaderboard-retune-visible"
+      ],
+      "cases": {
+        "ranger": {
+          "boss_distinction": 0.46,
+          "original_boss_distinction": 0.07,
+          "image_breakage": 0.2825,
+          "on_sha256": "da9f91985d65c97bc251691934c3a72bb61df69ebc2c81b0a7bc7e44d9c772e3"
+        },
+        "smith": {
+          "boss_distinction": 0.28,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.305,
+          "on_sha256": "fe92309d872e822502fd30f9eedb2e479fd53ee96c70887db456eecd400b7848"
+        },
+        "stationer": {
+          "boss_distinction": 0.5,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.27,
+          "on_sha256": "8b9f38ba0d75c4ccdf24406945f36bb45b0b3749295edab2f8149825023009b4"
+        },
+        "ferryman": {
+          "boss_distinction": 0.68,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.29,
+          "on_sha256": "732070b5afdb2a4656faf850217852164d86a782493ccd2cb1b049a63c1558e1"
+        },
+        "watchmaker": {
+          "boss_distinction": 0.73,
+          "original_boss_distinction": 0.1,
+          "image_breakage": 0.32,
+          "on_sha256": "e2245c70659c82a4a222d1813c08437944276c8b8486fd0f043619bab778ef1e"
+        },
+        "guide": {
+          "boss_distinction": 0.15,
+          "original_boss_distinction": 0.06,
+          "image_breakage": 0.255,
+          "on_sha256": "da9bfd52b85a3b99b4dc6497f35debd25d4312d7aa33b5bb561fe98d1dcaf3d8"
+        },
+        "guard": {
+          "boss_distinction": 0.69,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.3025,
+          "on_sha256": "ab8c2975c534d92fa989f1ccdd283bf4565cfe3badeeaf9f35291c5470ea61dd"
+        },
+        "violinist": {
+          "boss_distinction": 0.38,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.3125,
+          "on_sha256": "8a5483fe95e0fadee60e92386af30c5d84e6e799eff6cb64a0e0c077d4101969"
+        }
+      },
+      "means": {
+        "final_boss_score": 0.06302791838749999,
+        "boss_effect": 0.39375,
+        "image_breakage": 0.2921875,
+        "boss_distinction": 0.48375,
+        "original_boss_distinction": 0.09
+      },
+      "receipt_sha256": "b182f9fa2cdd1cc8f389ad1e5fa67cd001ba3ab691b178a286324db199eea895",
+      "samples": "samples/88fc08b2e22b8b782d305a9a8b7abcb2821cca50080c673010a5a2c1f59561b2.webp"
+    },
+    {
+      "method": "incumbent-refit",
+      "profile": "late",
+      "alpha": 1.625,
+      "gains": [
+        0.8125,
+        0.8125,
+        0.8125,
+        0.8125,
+        0.8125,
+        0.8125,
+        0.8125,
+        1.6791664738124783,
+        2.4375,
+        2.4375
+      ],
+      "runs": [
+        "leaderboard-retune-visible"
+      ],
+      "cases": {
+        "ranger": {
+          "boss_distinction": 0.34,
+          "original_boss_distinction": 0.07,
+          "image_breakage": 0.2675,
+          "on_sha256": "395d3ae4eca4263e9fafb56aa9c140f764c7e318d30dbe59f20ae6b8c3b64470"
+        },
+        "smith": {
+          "boss_distinction": 0.23,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.26,
+          "on_sha256": "a2bab7e675a2b2f37ce909fbc5dc54931d61ce0281b903caea27e67a23ce0c7c"
+        },
+        "stationer": {
+          "boss_distinction": 0.46,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.25,
+          "on_sha256": "e5f7f4277a3683187531f9d3d8eac19752b6b131d83c9a5d96f931d79a07768b"
+        },
+        "ferryman": {
+          "boss_distinction": 0.6,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.3375,
+          "on_sha256": "420cc3dbc3bb8604e3e6de805c08b802c71a9442b5a013b92ebaf7b3b7572c8e"
+        },
+        "watchmaker": {
+          "boss_distinction": 0.75,
+          "original_boss_distinction": 0.1,
+          "image_breakage": 0.26,
+          "on_sha256": "65922ccaf36a1d7307c05aa78b28d79765ac294deeee6acb77705e2b05735314"
+        },
+        "guide": {
+          "boss_distinction": 0.14,
+          "original_boss_distinction": 0.06,
+          "image_breakage": 0.2525,
+          "on_sha256": "9cdbea03d471a19076a9ea70a2b1396f6f15e35e9d59ba586de89b501fbed9f3"
+        },
+        "guard": {
+          "boss_distinction": 0.63,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.2775,
+          "on_sha256": "9f7a79f88d650ed95d3570dc510fa1d58094b27e3cb8601b7d4cb6285bfbf91a"
+        },
+        "violinist": {
+          "boss_distinction": 0.62,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.2075,
+          "on_sha256": "ab26602369ea5014810a1de36dac6bebf2f6dd20543fd76fdc12230a39d8f7b8"
+        }
+      },
+      "means": {
+        "final_boss_score": 0.0629768346625,
+        "boss_effect": 0.38125000000000003,
+        "image_breakage": 0.26406250000000003,
+        "boss_distinction": 0.47125,
+        "original_boss_distinction": 0.09
+      },
+      "receipt_sha256": "93aaaeab0ff7e6f135f9160f3d5d47f76251c047cde6955dbb033b98c8ea9794",
+      "samples": "samples/1c735c94500b8568e444859240327e7697ce4d7f9833757bea7342153033678c.webp"
+    },
+    {
       "method": "soft-contexts-65-blend50",
       "profile": "late",
       "alpha": 1.75,
@@ -15313,6 +17078,85 @@
       },
       "receipt_sha256": "b0b06bd18680877bdde16c496cbbb1ce202e4700cd4e359c47bbb77f930f8a0d",
       "samples": "samples/892dc06781b4cc10e81e29851cb5edac740bdb11ec4cb73eaafb2b14b3e28f2f.webp"
+    },
+    {
+      "method": "soft-projection-65-blend50",
+      "profile": "early",
+      "alpha": 0.6666666666666666,
+      "gains": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        0.6444445235641115,
+        0.3333333333333333,
+        0.3333333333333333
+      ],
+      "runs": [
+        "leaderboard-retune-visible"
+      ],
+      "cases": {
+        "ranger": {
+          "boss_distinction": 0.32,
+          "original_boss_distinction": 0.07,
+          "image_breakage": 0.3225,
+          "on_sha256": "411c7fbc3e3ce7794c35c3997a65e52e1611bfc8a8ba40be5e9587ac33326be7"
+        },
+        "smith": {
+          "boss_distinction": 0.22,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.2475,
+          "on_sha256": "45481816a12b1032985a8e1d251579204411f17cdb130e697b2b73fec74da00c"
+        },
+        "stationer": {
+          "boss_distinction": 0.55,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.1925,
+          "on_sha256": "71a8f1a7a073372846086d9a882392ac545a90277808898fc35c6778165833bd"
+        },
+        "ferryman": {
+          "boss_distinction": 0.68,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.2975,
+          "on_sha256": "ef869dbb77ef79850a14e1c3a7749ebb450dd69e608fa112376788777c8ab487"
+        },
+        "watchmaker": {
+          "boss_distinction": 0.7,
+          "original_boss_distinction": 0.1,
+          "image_breakage": 0.2225,
+          "on_sha256": "6397f5a0c63a88a2cc20d579f76ef26d17aff2889e93a2545961e962ac2bc224"
+        },
+        "guide": {
+          "boss_distinction": 0.2,
+          "original_boss_distinction": 0.06,
+          "image_breakage": 0.185,
+          "on_sha256": "14e6fd5038b12ebc7b999a5112424a2334df5f513c12e5bc810d85a98d5d1f4c"
+        },
+        "guard": {
+          "boss_distinction": 0.68,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.3,
+          "on_sha256": "f7a2f98b2c97b12b97b0048ba13be21e4e7d929153e96a18caa187d5c77cdc29"
+        },
+        "violinist": {
+          "boss_distinction": 0.43,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.34,
+          "on_sha256": "9d3b4f0768fedd13aebd68e8401c3062606576b48ebe3ebfb4e2bd1193abf5d2"
+        }
+      },
+      "means": {
+        "final_boss_score": 0.06205476286250001,
+        "boss_effect": 0.3825,
+        "image_breakage": 0.2634375,
+        "boss_distinction": 0.47250000000000003,
+        "original_boss_distinction": 0.09
+      },
+      "receipt_sha256": "d6070eff18a9a7f53ea14c37fe332a8297a2c7a9da5581bf89c2dbcde7935650",
+      "samples": "samples/f83d8cf7a3b691e671583a2cf6a31bdb72e780172de813f766bbc009bc3b9561.webp"
     },
     {
       "method": "shared-best-neutral-path",
@@ -15713,6 +17557,85 @@
       },
       "receipt_sha256": "c8d5226c15f243ee42ee9c994d8c0d7024743a3bb4191d722611619a721df8d8",
       "samples": "samples/c986859281baf7b0740dce455034922a559bb0e7197307ef5a5e782ff271af06.webp"
+    },
+    {
+      "method": "matched-attire",
+      "profile": "late",
+      "alpha": 1.625,
+      "gains": [
+        0.8125,
+        0.8125,
+        0.8125,
+        0.8125,
+        0.8125,
+        0.8125,
+        0.8125,
+        1.6791664738124783,
+        2.4375,
+        2.4375
+      ],
+      "runs": [
+        "leaderboard-retune-visible"
+      ],
+      "cases": {
+        "ranger": {
+          "boss_distinction": 0.46,
+          "original_boss_distinction": 0.07,
+          "image_breakage": 0.31,
+          "on_sha256": "0b630d79636f5ffabff871b2d472f0bf50d9a39d21518e6bcbec859e59bc1e17"
+        },
+        "smith": {
+          "boss_distinction": 0.25,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.2475,
+          "on_sha256": "244a308d193a6e1338daf8ad60d85696e93515f77fabadd9a09fec5871b9da8c"
+        },
+        "stationer": {
+          "boss_distinction": 0.55,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.23,
+          "on_sha256": "f225d2d255624b514b7fa8589c636f635bb3d7d76550ce59b33ac975af3e49f5"
+        },
+        "ferryman": {
+          "boss_distinction": 0.26,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.295,
+          "on_sha256": "3f6d143beb1df96a87a879743348c7281d961d0a15225ceee6e66b01fd189d37"
+        },
+        "watchmaker": {
+          "boss_distinction": 0.69,
+          "original_boss_distinction": 0.1,
+          "image_breakage": 0.43,
+          "on_sha256": "539144a19030379ba5fad9ff53104d8e1f616c3af2ef89f5f55a45dfdd6b2b59"
+        },
+        "guide": {
+          "boss_distinction": 0.1,
+          "original_boss_distinction": 0.06,
+          "image_breakage": 0.235,
+          "on_sha256": "911dbd115fe470c4f6f10e52ef02efd6ddcd2298d31a6948377376d0d8024b1a"
+        },
+        "guard": {
+          "boss_distinction": 0.78,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.3225,
+          "on_sha256": "d0425a8f153ee69f7bb7564483bed2808f3a086ded411e75f1d4d831fc96aeb8"
+        },
+        "violinist": {
+          "boss_distinction": 0.45,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.2475,
+          "on_sha256": "519e6d0790f753c3dfd3f178734fdf48f0d0e48cb9001abe750c777d04bd62ba"
+        }
+      },
+      "means": {
+        "final_boss_score": 0.054713641143750005,
+        "boss_effect": 0.35250000000000004,
+        "image_breakage": 0.2896875,
+        "boss_distinction": 0.4425,
+        "original_boss_distinction": 0.09
+      },
+      "receipt_sha256": "1812742002429125687e30cda32f3acdebce460eb23c7ec872c41e2458ab0223",
+      "samples": "samples/2f1265e538a5405cdcdd9db6f65f78fcf9743bd9f29e4a63c9a4876a67c07bca.webp"
     },
     {
       "method": "strong-boss-45-dose100",
@@ -16991,6 +18914,85 @@
       "samples": "samples/8fddad6b76184d8f9a66a761c0b07e574220c0bcd749698028ad0e45713d2e5b.webp"
     },
     {
+      "method": "two-cue-average",
+      "profile": "late",
+      "alpha": 1.484375,
+      "gains": [
+        0.7421875,
+        0.7421875,
+        0.7421875,
+        0.7421875,
+        0.7421875,
+        0.7421875,
+        0.7421875,
+        1.533853990501783,
+        2.2265625,
+        2.2265625
+      ],
+      "runs": [
+        "leaderboard-retune-visible"
+      ],
+      "cases": {
+        "ranger": {
+          "boss_distinction": 0.55,
+          "original_boss_distinction": 0.07,
+          "image_breakage": 0.295,
+          "on_sha256": "323de2330d2e368b04cb095492afa7cbc30ed7aafd152a1415fa86f8bd035b7e"
+        },
+        "smith": {
+          "boss_distinction": 0.17,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.2175,
+          "on_sha256": "d7e662490ab81efddaccd874107d85b8b985997098151f823b4fe6666aa5edcc"
+        },
+        "stationer": {
+          "boss_distinction": 0.41,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.2625,
+          "on_sha256": "f7c208bd273e062041df26f239b117d3403387867643d7c7d0076de3914ae4c3"
+        },
+        "ferryman": {
+          "boss_distinction": 0.33,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.21,
+          "on_sha256": "45fb5858ed14b866cf539277ed7fa2471690e2822b5c002b88c0acc71b68844a"
+        },
+        "watchmaker": {
+          "boss_distinction": 0.69,
+          "original_boss_distinction": 0.1,
+          "image_breakage": 0.3,
+          "on_sha256": "134b1490a9fb1de0e2a4d57d33744414f6580848c5ee6f2769bed9f1c1829ab8"
+        },
+        "guide": {
+          "boss_distinction": 0.13,
+          "original_boss_distinction": 0.06,
+          "image_breakage": 0.3025,
+          "on_sha256": "f8c7b354d4db364ed480c00cc4d9226511f198d3a39d3fa0200f7fd5e7abc4fc"
+        },
+        "guard": {
+          "boss_distinction": 0.64,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.3275,
+          "on_sha256": "219376bf1b9106d02d30b588a6d90ca255f0c828172cd8fe2a2c621cb2727e9a"
+        },
+        "violinist": {
+          "boss_distinction": 0.31,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.275,
+          "on_sha256": "39692618839944ee76429342635823d3829b3ec37d7fa00e9aad875ad2a70896"
+        }
+      },
+      "means": {
+        "final_boss_score": 0.03904071623125,
+        "boss_effect": 0.31375000000000003,
+        "image_breakage": 0.27375,
+        "boss_distinction": 0.40375,
+        "original_boss_distinction": 0.09
+      },
+      "receipt_sha256": "ab73212a7672825fc3c80d26eca4f0c510cf2dcd89135ea8bff0100d3ba2d6ea",
+      "samples": "samples/b91f7bcfaf49c2deb210356d995101de8f12d498bd48c2f42d18c83d4a1c620c.webp"
+    },
+    {
       "method": "shared-best-middle",
       "profile": "late",
       "alpha": 1.75,
@@ -17391,6 +19393,85 @@
       "samples": "samples/423c8d6424daae7b6d236c0beac146744c6df3de2454fea9354236c339d582a0.webp"
     },
     {
+      "method": "soft-projection-65-blend50",
+      "profile": "late",
+      "alpha": 1.75,
+      "gains": [
+        0.875,
+        0.875,
+        0.875,
+        0.875,
+        0.875,
+        0.875,
+        0.875,
+        1.8083331256442072,
+        2.625,
+        2.625
+      ],
+      "runs": [
+        "leaderboard-retune-visible"
+      ],
+      "cases": {
+        "ranger": {
+          "boss_distinction": 0.3,
+          "original_boss_distinction": 0.07,
+          "image_breakage": 0.3625,
+          "on_sha256": "7a86880a395e6c8b8b9cb49f0d086ab5e30b39d564fd0a5c47883317ee836891"
+        },
+        "smith": {
+          "boss_distinction": 0.2,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.2375,
+          "on_sha256": "17dd14cd1a3abea8b48295a1099bf82af29a80fd0f0f4f7a7c40c0954234b86e"
+        },
+        "stationer": {
+          "boss_distinction": 0.38,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.23,
+          "on_sha256": "4cec1ef7b5764d4016e12e64c338eed9628d0a667c37f92ad8df9ba34b241ab1"
+        },
+        "ferryman": {
+          "boss_distinction": 0.55,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.275,
+          "on_sha256": "1c0f3294e7fadee6a298d22053062aabf4bd16087f2cf62eb52c4874eb52d887"
+        },
+        "watchmaker": {
+          "boss_distinction": 0.67,
+          "original_boss_distinction": 0.1,
+          "image_breakage": 0.46,
+          "on_sha256": "583918e8a821c6f15fd5c22aafd7e82ed4f02ed6f9f0c1c17b22f044bc6809d6"
+        },
+        "guide": {
+          "boss_distinction": 0.26,
+          "original_boss_distinction": 0.06,
+          "image_breakage": 0.215,
+          "on_sha256": "5d02df8f34b9f45b3c4245870d9ac919ed6efa5f7775588c02dab5758059513b"
+        },
+        "guard": {
+          "boss_distinction": 0.63,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.32,
+          "on_sha256": "ada6b5f19b3a5d462cc9442021ba615ce3f3b917bac94388d8aa6fa440fed0af"
+        },
+        "violinist": {
+          "boss_distinction": 0.41,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.165,
+          "on_sha256": "2716895840a564eb17bd20846171fb4855ec6938f406f7134160785514eb8afc"
+        }
+      },
+      "means": {
+        "final_boss_score": 0.033989309118750005,
+        "boss_effect": 0.335,
+        "image_breakage": 0.283125,
+        "boss_distinction": 0.425,
+        "original_boss_distinction": 0.09
+      },
+      "receipt_sha256": "ad82df02aafe89ce64f44a0e6b40e4fddb122714b0876b7ec014c18d42df4e5e",
+      "samples": "samples/d53479579a41d9862924fb00be73616ee4de9e5cb6dce5cb65c4a882bd68ebac.webp"
+    },
+    {
       "method": "shared-best-seed-split",
       "profile": "constant",
       "alpha": 0.6375,
@@ -17491,7 +19572,8 @@
         0.6375
       ],
       "runs": [
-        "fixed"
+        "fixed",
+        "leaderboard-retune-visible"
       ],
       "cases": {
         "ranger": {
@@ -17550,7 +19632,7 @@
         "boss_distinction": 0.31375000000000003,
         "original_boss_distinction": 0.09
       },
-      "receipt_sha256": "23ffbc8d1dacfe873a3624d1095eb0f32fe77f92019c40fc9c458f57c7e7d6b8",
+      "receipt_sha256": "12a7041a26056d55e478950209a5feda0c377ef9925afdb69c099b1d1c474e20",
       "samples": "samples/c6a32c3896198e20e095d82ea6304199c68fba0e7ded3e436e8a658ef79250f9.webp"
     },
     {
@@ -17714,6 +19796,85 @@
       },
       "receipt_sha256": "6053f497185455fd280367b42626c07024f20d651ae411f81043171176769d3e",
       "samples": "samples/f5bf8ba1a6859bd9f86140d263585b97c64f1a2fc9256b66a5e2ce6fc4002d2b.webp"
+    },
+    {
+      "method": "soft-projection-65-blend50",
+      "profile": "late",
+      "alpha": 1.625,
+      "gains": [
+        0.8125,
+        0.8125,
+        0.8125,
+        0.8125,
+        0.8125,
+        0.8125,
+        0.8125,
+        1.6791664738124783,
+        2.4375,
+        2.4375
+      ],
+      "runs": [
+        "leaderboard-retune-visible"
+      ],
+      "cases": {
+        "ranger": {
+          "boss_distinction": 0.26,
+          "original_boss_distinction": 0.07,
+          "image_breakage": 0.35,
+          "on_sha256": "3101f68571a9ef82d0a568f26589d2fafbd0a381d72a687468c90575677ed077"
+        },
+        "smith": {
+          "boss_distinction": 0.19,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.2525,
+          "on_sha256": "84302795bc6685c7c8c4a9c24a4e70d9953b25e6a3c12841c1ff5153266cbc46"
+        },
+        "stationer": {
+          "boss_distinction": 0.33,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.24,
+          "on_sha256": "5536e96c3082a1b42831833d3f55d73af8619e9aacff13807c539613c5c3558e"
+        },
+        "ferryman": {
+          "boss_distinction": 0.29,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.28,
+          "on_sha256": "d3aa2c921385fc04e7bed01e95b656ed343ce8505732050b6e1c3b599d395287"
+        },
+        "watchmaker": {
+          "boss_distinction": 0.68,
+          "original_boss_distinction": 0.1,
+          "image_breakage": 0.395,
+          "on_sha256": "097bf3dacd47ea6bf1c8278642ec7f2dfe1252c9cae55f9da48c01ef043e460d"
+        },
+        "guide": {
+          "boss_distinction": 0.22,
+          "original_boss_distinction": 0.06,
+          "image_breakage": 0.2175,
+          "on_sha256": "cc97c10433946fef1c3cfeea5f269a1a7fe3198fd414eeb43793360fef7f79d8"
+        },
+        "guard": {
+          "boss_distinction": 0.62,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.31,
+          "on_sha256": "5f09876ef02b12afce58ad9cead1328c44e727cc26a6e7f92c494218bbf7945e"
+        },
+        "violinist": {
+          "boss_distinction": 0.45,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.17,
+          "on_sha256": "9e0565cbf4b1191b47f5e2296c73f8b10bd45d912b87e5bba8572abb64d0399e"
+        }
+      },
+      "means": {
+        "final_boss_score": 0.029427940896875,
+        "boss_effect": 0.29000000000000004,
+        "image_breakage": 0.276875,
+        "boss_distinction": 0.38,
+        "original_boss_distinction": 0.09
+      },
+      "receipt_sha256": "4841f3ec059ace707dbf2a323321e33237d79deeccf93aacfdeb3abb1bea8a16",
+      "samples": "samples/ceec29b87b2f82aad44e4ada020c0717c2fa63d2ad8d0d7fbac10635493c9b92.webp"
     },
     {
       "method": "shared-best-divergence",
@@ -18196,6 +20357,85 @@
       "samples": "samples/f42a8f43b6d647f0b772aaa4f9e301ebc1e05e692fa3bdc6737fa076d68df167.webp"
     },
     {
+      "method": "soft45-adapter-rollout",
+      "profile": "constant",
+      "alpha": 0.6375,
+      "gains": [
+        0.6375,
+        0.6375,
+        0.6375,
+        0.6375,
+        0.6375,
+        0.6375,
+        0.6375,
+        0.6375,
+        0.6375,
+        0.6375
+      ],
+      "runs": [
+        "leaderboard-retune-visible"
+      ],
+      "cases": {
+        "ranger": {
+          "boss_distinction": 0.25,
+          "original_boss_distinction": 0.07,
+          "image_breakage": 0.215,
+          "on_sha256": "f4be7735fbea712146b8f7027daee7158cf01d300c649462b95a692604debd54"
+        },
+        "smith": {
+          "boss_distinction": 0.14,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.29,
+          "on_sha256": "f95952652ec4e1598054e4600ac6ed7bec878e236b150a5f3712f36952daa0e9"
+        },
+        "stationer": {
+          "boss_distinction": 0.23,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.18,
+          "on_sha256": "11c020740ba07cb1e2f0720703ccaaec1fccf464ad6254b43881b5d42091c0b5"
+        },
+        "ferryman": {
+          "boss_distinction": 0.4,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.245,
+          "on_sha256": "c50289ef914fc0221c27af52944e250958bbc23adfee778f94475d47161eda69"
+        },
+        "watchmaker": {
+          "boss_distinction": 0.69,
+          "original_boss_distinction": 0.1,
+          "image_breakage": 0.2375,
+          "on_sha256": "ba828e04cb77c830e500b46563361cad3e1a7433b18d0d61a662ac6888a8a8f8"
+        },
+        "guide": {
+          "boss_distinction": 0.15,
+          "original_boss_distinction": 0.06,
+          "image_breakage": 0.22,
+          "on_sha256": "fa233dd30b2d6019b49119f831c982f6ae0cee800e491f87c17e6928d3076126"
+        },
+        "guard": {
+          "boss_distinction": 0.33,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.285,
+          "on_sha256": "99705119ca0a148dbee3f9cb5f654ac212c8a6154001f4f1bfd07ff856cde44c"
+        },
+        "violinist": {
+          "boss_distinction": 0.41,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.15,
+          "on_sha256": "633d3a7a70a75292e5417fdb5465928bb1d56857878e5e2f8e5ac5433e803372"
+        }
+      },
+      "means": {
+        "final_boss_score": 0.023818110209374996,
+        "boss_effect": 0.235,
+        "image_breakage": 0.2278125,
+        "boss_distinction": 0.325,
+        "original_boss_distinction": 0.09
+      },
+      "receipt_sha256": "2e62e6529143350da4b57d434bf56ae408791e6b252d7ad233c78902c47897a5",
+      "samples": "samples/7a8cd62fd795443f1ac84642ae3c7fec839d610c3becbc5fa13c997784fdf219.webp"
+    },
+    {
       "method": "in-scene-costume",
       "profile": "constant",
       "alpha": 0.6375,
@@ -18212,7 +20452,8 @@
         0.6375
       ],
       "runs": [
-        "fixed"
+        "fixed",
+        "leaderboard-retune-visible"
       ],
       "cases": {
         "ranger": {
@@ -18271,7 +20512,7 @@
         "boss_distinction": 0.2875,
         "original_boss_distinction": 0.09
       },
-      "receipt_sha256": "fbec84304410f335cf5dbbf897bd9d0b3f245a38e7dcbe010376b1976e79a552",
+      "receipt_sha256": "2ac0871f73730dcebf9e9dc168744ce1cada93bfe8ede29b7a8f96a9b3fa0d9c",
       "samples": "samples/f37f4770b282f43482a59bc77db0716d0d1e0347d1f92c8bb8207d81cfe9003b.webp"
     },
     {
@@ -18514,6 +20755,85 @@
       },
       "receipt_sha256": "08a7fe9fdccdc97a5cf5164a3d6e14b40cef2fe58a9be398b58a815bafa1e1a4",
       "samples": "samples/10912c801b6056ccfff664072cfa8bd17dceb9c95d4e17b36ba26d61e81bd8c4.webp"
+    },
+    {
+      "method": "soft-projection-65-blend50",
+      "profile": "constant",
+      "alpha": 0.6375,
+      "gains": [
+        0.6375,
+        0.6375,
+        0.6375,
+        0.6375,
+        0.6375,
+        0.6375,
+        0.6375,
+        0.6375,
+        0.6375,
+        0.6375
+      ],
+      "runs": [
+        "leaderboard-retune-visible"
+      ],
+      "cases": {
+        "ranger": {
+          "boss_distinction": 0.17,
+          "original_boss_distinction": 0.07,
+          "image_breakage": 0.205,
+          "on_sha256": "80d6627fe76e80269c3ab72f20768366889d12e5b06727ef9ad718b3ddf5cdab"
+        },
+        "smith": {
+          "boss_distinction": 0.15,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.3125,
+          "on_sha256": "ef59f7b59ac141eefa9360bf17d00fc173a12354c202243507dd014f0acb789d"
+        },
+        "stationer": {
+          "boss_distinction": 0.14,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.205,
+          "on_sha256": "c03103bf0c211f0e465624ec915097f984b5399d02214bf8d3f11132fe46b4ce"
+        },
+        "ferryman": {
+          "boss_distinction": 0.27,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.26,
+          "on_sha256": "72e32abeb3c4ff81e51f873bf2fd14caf46cbba1ad5068ef7721a26d28e7811c"
+        },
+        "watchmaker": {
+          "boss_distinction": 0.66,
+          "original_boss_distinction": 0.1,
+          "image_breakage": 0.25,
+          "on_sha256": "19821321da055d65c15dc0006ecd6651ece7d1a9b9a13e346730519a42a91d54"
+        },
+        "guide": {
+          "boss_distinction": 0.16,
+          "original_boss_distinction": 0.06,
+          "image_breakage": 0.2275,
+          "on_sha256": "268dd08ab189ab5f7d07560c1715aed3ae9cad6726d6b8aa9f37b1270d0a00d7"
+        },
+        "guard": {
+          "boss_distinction": 0.27,
+          "original_boss_distinction": 0.11,
+          "image_breakage": 0.2925,
+          "on_sha256": "9fcb466007a4c68d37ed46df4cd51e1482019c4cad9f022fecbce56d58cd82a8"
+        },
+        "violinist": {
+          "boss_distinction": 0.47,
+          "original_boss_distinction": 0.08,
+          "image_breakage": 0.25,
+          "on_sha256": "cf58266393920b1c574704cd31a38cddbc4b08a0d7339caf40e0ea547172948d"
+        }
+      },
+      "means": {
+        "final_boss_score": 0.019576249509375004,
+        "boss_effect": 0.19625,
+        "image_breakage": 0.2503125,
+        "boss_distinction": 0.28625,
+        "original_boss_distinction": 0.09
+      },
+      "receipt_sha256": "fd759e4ec19fc3b3abf427d4a2de6f21b657447ae2316a6da93b32067dd90d9f",
+      "samples": "samples/a96b92bf9ad16254e12c5b0acab2da25a7b881b19b582348b6f698a86f6a8e93.webp"
     },
     {
       "method": "shared-best-divergence",
@@ -24377,6 +26697,966 @@
             "above": 1.75,
             "below": 1.484375,
             "next_anchor": 1.484375,
+            "next_step": 0.2109375
+          }
+        ]
+      }
+    },
+    "matched-attire": {
+      "constant": {
+        "trials": [
+          {
+            "alpha": 1.0,
+            "score": 0.05377811383125
+          },
+          {
+            "alpha": 1.25,
+            "score": 0.25531811298749996
+          },
+          {
+            "alpha": 0.75,
+            "score": 0.00082658695625
+          },
+          {
+            "alpha": 1.625,
+            "score": null
+          },
+          {
+            "alpha": 0.875,
+            "score": 0.008482696775
+          },
+          {
+            "alpha": 1.4375,
+            "score": 0.24789554219999996
+          },
+          {
+            "alpha": 1.0625,
+            "score": 0.0887856879625
+          },
+          {
+            "alpha": 1.34375,
+            "score": 0.27166640909999995
+          },
+          {
+            "alpha": 1.15625,
+            "score": 0.17519043503124998
+          }
+        ],
+        "steps": [
+          {
+            "anchor": 1.0,
+            "step": 0.25,
+            "above": 1.25,
+            "below": 0.75,
+            "next_anchor": 1.25,
+            "next_step": 0.375
+          },
+          {
+            "anchor": 1.25,
+            "step": 0.375,
+            "above": 1.625,
+            "below": 0.875,
+            "next_anchor": 1.25,
+            "next_step": 0.1875
+          },
+          {
+            "anchor": 1.25,
+            "step": 0.1875,
+            "above": 1.4375,
+            "below": 1.0625,
+            "next_anchor": 1.25,
+            "next_step": 0.09375
+          },
+          {
+            "anchor": 1.25,
+            "step": 0.09375,
+            "above": 1.34375,
+            "below": 1.15625,
+            "next_anchor": 1.34375,
+            "next_step": 0.140625
+          }
+        ]
+      },
+      "early": {
+        "trials": [
+          {
+            "alpha": 1.0,
+            "score": 0.30612627963749994
+          },
+          {
+            "alpha": 1.25,
+            "score": 0.3290535591
+          },
+          {
+            "alpha": 0.75,
+            "score": 0.09585423879375
+          },
+          {
+            "alpha": 1.625,
+            "score": 0.30917626614999993
+          },
+          {
+            "alpha": 0.875,
+            "score": 0.28801541557500004
+          },
+          {
+            "alpha": 1.4375,
+            "score": 0.3424207428
+          },
+          {
+            "alpha": 1.0625,
+            "score": 0.3111163914374999
+          },
+          {
+            "alpha": 1.71875,
+            "score": 0.28573541036249994
+          },
+          {
+            "alpha": 1.15625,
+            "score": 0.309113953525
+          }
+        ],
+        "steps": [
+          {
+            "anchor": 1.0,
+            "step": 0.25,
+            "above": 1.25,
+            "below": 0.75,
+            "next_anchor": 1.25,
+            "next_step": 0.375
+          },
+          {
+            "anchor": 1.25,
+            "step": 0.375,
+            "above": 1.625,
+            "below": 0.875,
+            "next_anchor": 1.25,
+            "next_step": 0.1875
+          },
+          {
+            "anchor": 1.25,
+            "step": 0.1875,
+            "above": 1.4375,
+            "below": 1.0625,
+            "next_anchor": 1.4375,
+            "next_step": 0.28125
+          },
+          {
+            "anchor": 1.4375,
+            "step": 0.28125,
+            "above": 1.71875,
+            "below": 1.15625,
+            "next_anchor": 1.4375,
+            "next_step": 0.140625
+          }
+        ]
+      },
+      "late": {
+        "trials": [
+          {
+            "alpha": 1.0,
+            "score": 0.00037894428750000013
+          },
+          {
+            "alpha": 1.25,
+            "score": 0.0013357651499999999
+          },
+          {
+            "alpha": 0.75,
+            "score": 5.792148750000001e-05
+          },
+          {
+            "alpha": 1.625,
+            "score": 0.01160530525625
+          },
+          {
+            "alpha": 0.875,
+            "score": 0.00017362961249999995
+          },
+          {
+            "alpha": 1.75,
+            "score": 0.030741675300000004
+          },
+          {
+            "alpha": 1.0625,
+            "score": 0.0004326295437499999
+          },
+          {
+            "alpha": 0.90625,
+            "score": 0.00039420630000000013
+          },
+          {
+            "alpha": 1.328125,
+            "score": 0.0018867775312500004
+          }
+        ],
+        "steps": [
+          {
+            "anchor": 1.0,
+            "step": 0.25,
+            "above": 1.25,
+            "below": 0.75,
+            "next_anchor": 1.25,
+            "next_step": 0.375
+          },
+          {
+            "anchor": 1.25,
+            "step": 0.375,
+            "above": 1.625,
+            "below": 0.875,
+            "next_anchor": 1.625,
+            "next_step": 0.5625
+          },
+          {
+            "anchor": 1.625,
+            "step": 0.5625,
+            "above": 1.75,
+            "below": 1.0625,
+            "next_anchor": 1.75,
+            "next_step": 0.84375
+          },
+          {
+            "anchor": 1.75,
+            "step": 0.84375,
+            "above": 1.75,
+            "below": 0.90625,
+            "next_anchor": 1.75,
+            "next_step": 0.421875
+          },
+          {
+            "anchor": 1.75,
+            "step": 0.421875,
+            "above": 1.75,
+            "below": 1.328125,
+            "next_anchor": 1.75,
+            "next_step": 0.2109375
+          }
+        ]
+      }
+    },
+    "two-cue-average": {
+      "constant": {
+        "trials": [
+          {
+            "alpha": 1.0,
+            "score": 0.022027687237500003
+          },
+          {
+            "alpha": 1.25,
+            "score": 0.1074205051375
+          },
+          {
+            "alpha": 0.75,
+            "score": 0.00966628920625
+          },
+          {
+            "alpha": 1.625,
+            "score": 0.22746183241874998
+          },
+          {
+            "alpha": 0.875,
+            "score": 0.011763557418750003
+          },
+          {
+            "alpha": 1.75,
+            "score": 0.19331446763125
+          },
+          {
+            "alpha": 1.0625,
+            "score": 0.031312823137499994
+          },
+          {
+            "alpha": 1.34375,
+            "score": 0.16563426600000003
+          },
+          {
+            "alpha": 1.484375,
+            "score": 0.20947981365
+          }
+        ],
+        "steps": [
+          {
+            "anchor": 1.0,
+            "step": 0.25,
+            "above": 1.25,
+            "below": 0.75,
+            "next_anchor": 1.25,
+            "next_step": 0.375
+          },
+          {
+            "anchor": 1.25,
+            "step": 0.375,
+            "above": 1.625,
+            "below": 0.875,
+            "next_anchor": 1.625,
+            "next_step": 0.5625
+          },
+          {
+            "anchor": 1.625,
+            "step": 0.5625,
+            "above": 1.75,
+            "below": 1.0625,
+            "next_anchor": 1.625,
+            "next_step": 0.28125
+          },
+          {
+            "anchor": 1.625,
+            "step": 0.28125,
+            "above": 1.75,
+            "below": 1.34375,
+            "next_anchor": 1.625,
+            "next_step": 0.140625
+          },
+          {
+            "anchor": 1.625,
+            "step": 0.140625,
+            "above": 1.75,
+            "below": 1.484375,
+            "next_anchor": 1.625,
+            "next_step": 0.0703125
+          }
+        ]
+      },
+      "early": {
+        "trials": [
+          {
+            "alpha": 1.0,
+            "score": 0.22960885913749995
+          },
+          {
+            "alpha": 1.25,
+            "score": 0.21885433355
+          },
+          {
+            "alpha": 0.75,
+            "score": 0.02591761168124999
+          },
+          {
+            "alpha": 1.125,
+            "score": 0.22649919481874994
+          },
+          {
+            "alpha": 0.875,
+            "score": 0.14072440470624994
+          },
+          {
+            "alpha": 1.0625,
+            "score": 0.24571707104999996
+          },
+          {
+            "alpha": 0.9375,
+            "score": 0.14590237234375
+          },
+          {
+            "alpha": 1.15625,
+            "score": 0.22513184987499998
+          },
+          {
+            "alpha": 0.96875,
+            "score": 0.19615306383749995
+          }
+        ],
+        "steps": [
+          {
+            "anchor": 1.0,
+            "step": 0.25,
+            "above": 1.25,
+            "below": 0.75,
+            "next_anchor": 1.0,
+            "next_step": 0.125
+          },
+          {
+            "anchor": 1.0,
+            "step": 0.125,
+            "above": 1.125,
+            "below": 0.875,
+            "next_anchor": 1.0,
+            "next_step": 0.0625
+          },
+          {
+            "anchor": 1.0,
+            "step": 0.0625,
+            "above": 1.0625,
+            "below": 0.9375,
+            "next_anchor": 1.0625,
+            "next_step": 0.09375
+          },
+          {
+            "anchor": 1.0625,
+            "step": 0.09375,
+            "above": 1.15625,
+            "below": 0.96875,
+            "next_anchor": 1.0625,
+            "next_step": 0.046875
+          }
+        ]
+      },
+      "late": {
+        "trials": [
+          {
+            "alpha": 1.0,
+            "score": 0.00026485858125
+          },
+          {
+            "alpha": 1.25,
+            "score": 0.00067651356875
+          },
+          {
+            "alpha": 0.75,
+            "score": 2.7967818749999993e-05
+          },
+          {
+            "alpha": 1.625,
+            "score": 0.0313534338875
+          },
+          {
+            "alpha": 0.875,
+            "score": 0.00016537060625000004
+          },
+          {
+            "alpha": 1.75,
+            "score": 0.02688738866874999
+          },
+          {
+            "alpha": 1.0625,
+            "score": 0.00028171462499999996
+          },
+          {
+            "alpha": 1.34375,
+            "score": 0.00435712835625
+          },
+          {
+            "alpha": 1.484375,
+            "score": 0.04108521443124999
+          }
+        ],
+        "steps": [
+          {
+            "anchor": 1.0,
+            "step": 0.25,
+            "above": 1.25,
+            "below": 0.75,
+            "next_anchor": 1.25,
+            "next_step": 0.375
+          },
+          {
+            "anchor": 1.25,
+            "step": 0.375,
+            "above": 1.625,
+            "below": 0.875,
+            "next_anchor": 1.625,
+            "next_step": 0.5625
+          },
+          {
+            "anchor": 1.625,
+            "step": 0.5625,
+            "above": 1.75,
+            "below": 1.0625,
+            "next_anchor": 1.625,
+            "next_step": 0.28125
+          },
+          {
+            "anchor": 1.625,
+            "step": 0.28125,
+            "above": 1.75,
+            "below": 1.34375,
+            "next_anchor": 1.625,
+            "next_step": 0.140625
+          },
+          {
+            "anchor": 1.625,
+            "step": 0.140625,
+            "above": 1.75,
+            "below": 1.484375,
+            "next_anchor": 1.484375,
+            "next_step": 0.2109375
+          }
+        ]
+      }
+    },
+    "incumbent-refit": {
+      "constant": {
+        "trials": [
+          {
+            "alpha": 1.0,
+            "score": 0.015568944749999997
+          },
+          {
+            "alpha": 1.25,
+            "score": 0.17713198637500002
+          },
+          {
+            "alpha": 0.75,
+            "score": 0.0036989508750000007
+          },
+          {
+            "alpha": 1.625,
+            "score": 0.1978715199625
+          },
+          {
+            "alpha": 0.875,
+            "score": 0.011461381199999999
+          },
+          {
+            "alpha": 1.75,
+            "score": 0.20346543205
+          },
+          {
+            "alpha": 1.0625,
+            "score": 0.019573880906250007
+          },
+          {
+            "alpha": 0.90625,
+            "score": 0.012431058075
+          },
+          {
+            "alpha": 1.328125,
+            "score": 0.18085882521875
+          }
+        ],
+        "steps": [
+          {
+            "anchor": 1.0,
+            "step": 0.25,
+            "above": 1.25,
+            "below": 0.75,
+            "next_anchor": 1.25,
+            "next_step": 0.375
+          },
+          {
+            "anchor": 1.25,
+            "step": 0.375,
+            "above": 1.625,
+            "below": 0.875,
+            "next_anchor": 1.625,
+            "next_step": 0.5625
+          },
+          {
+            "anchor": 1.625,
+            "step": 0.5625,
+            "above": 1.75,
+            "below": 1.0625,
+            "next_anchor": 1.75,
+            "next_step": 0.84375
+          },
+          {
+            "anchor": 1.75,
+            "step": 0.84375,
+            "above": 1.75,
+            "below": 0.90625,
+            "next_anchor": 1.75,
+            "next_step": 0.421875
+          },
+          {
+            "anchor": 1.75,
+            "step": 0.421875,
+            "above": 1.75,
+            "below": 1.328125,
+            "next_anchor": 1.75,
+            "next_step": 0.2109375
+          }
+        ]
+      },
+      "early": {
+        "trials": [
+          {
+            "alpha": 1.0,
+            "score": 0.26120099430000004
+          },
+          {
+            "alpha": 1.25,
+            "score": 0.29069931849999997
+          },
+          {
+            "alpha": 0.75,
+            "score": 0.017481107631250006
+          },
+          {
+            "alpha": 1.625,
+            "score": 0.23856020781875
+          },
+          {
+            "alpha": 0.875,
+            "score": 0.12761064102500003
+          },
+          {
+            "alpha": 1.4375,
+            "score": 0.24914135480625005
+          },
+          {
+            "alpha": 1.0625,
+            "score": 0.264955929675
+          },
+          {
+            "alpha": 1.34375,
+            "score": 0.30430697919999994
+          },
+          {
+            "alpha": 1.15625,
+            "score": 0.24069465028750006
+          }
+        ],
+        "steps": [
+          {
+            "anchor": 1.0,
+            "step": 0.25,
+            "above": 1.25,
+            "below": 0.75,
+            "next_anchor": 1.25,
+            "next_step": 0.375
+          },
+          {
+            "anchor": 1.25,
+            "step": 0.375,
+            "above": 1.625,
+            "below": 0.875,
+            "next_anchor": 1.25,
+            "next_step": 0.1875
+          },
+          {
+            "anchor": 1.25,
+            "step": 0.1875,
+            "above": 1.4375,
+            "below": 1.0625,
+            "next_anchor": 1.25,
+            "next_step": 0.09375
+          },
+          {
+            "anchor": 1.25,
+            "step": 0.09375,
+            "above": 1.34375,
+            "below": 1.15625,
+            "next_anchor": 1.34375,
+            "next_step": 0.140625
+          }
+        ]
+      },
+      "late": {
+        "trials": [
+          {
+            "alpha": 1.0,
+            "score": 0.0001071690375
+          },
+          {
+            "alpha": 1.25,
+            "score": 0.0005693523
+          },
+          {
+            "alpha": 0.75,
+            "score": 0.0001247422
+          },
+          {
+            "alpha": 1.625,
+            "score": 0.0101127817375
+          },
+          {
+            "alpha": 0.875,
+            "score": 7.953296249999999e-05
+          },
+          {
+            "alpha": 1.75,
+            "score": 0.0119379328375
+          },
+          {
+            "alpha": 1.0625,
+            "score": 0.00020609303124999998
+          },
+          {
+            "alpha": 0.90625,
+            "score": 0.00021178105625
+          },
+          {
+            "alpha": 1.328125,
+            "score": 0.005247370699999998
+          }
+        ],
+        "steps": [
+          {
+            "anchor": 1.0,
+            "step": 0.25,
+            "above": 1.25,
+            "below": 0.75,
+            "next_anchor": 1.25,
+            "next_step": 0.375
+          },
+          {
+            "anchor": 1.25,
+            "step": 0.375,
+            "above": 1.625,
+            "below": 0.875,
+            "next_anchor": 1.625,
+            "next_step": 0.5625
+          },
+          {
+            "anchor": 1.625,
+            "step": 0.5625,
+            "above": 1.75,
+            "below": 1.0625,
+            "next_anchor": 1.75,
+            "next_step": 0.84375
+          },
+          {
+            "anchor": 1.75,
+            "step": 0.84375,
+            "above": 1.75,
+            "below": 0.90625,
+            "next_anchor": 1.75,
+            "next_step": 0.421875
+          },
+          {
+            "anchor": 1.75,
+            "step": 0.421875,
+            "above": 1.75,
+            "below": 1.328125,
+            "next_anchor": 1.75,
+            "next_step": 0.2109375
+          }
+        ]
+      }
+    },
+    "soft-projection-65-blend50": {
+      "constant": {
+        "trials": [
+          {
+            "alpha": 1.0,
+            "score": 0.03193983101249999
+          },
+          {
+            "alpha": 1.25,
+            "score": 0.08914927749999997
+          },
+          {
+            "alpha": 0.75,
+            "score": 0.0015178921749999998
+          },
+          {
+            "alpha": 1.625,
+            "score": 0.1559846783875
+          },
+          {
+            "alpha": 0.875,
+            "score": 0.021884687568749988
+          },
+          {
+            "alpha": 1.75,
+            "score": 0.17180059643125
+          },
+          {
+            "alpha": 1.0625,
+            "score": 0.050463214762499986
+          },
+          {
+            "alpha": 0.90625,
+            "score": 0.04042221419999999
+          },
+          {
+            "alpha": 1.328125,
+            "score": 0.09257427925625
+          }
+        ],
+        "steps": [
+          {
+            "anchor": 1.0,
+            "step": 0.25,
+            "above": 1.25,
+            "below": 0.75,
+            "next_anchor": 1.25,
+            "next_step": 0.375
+          },
+          {
+            "anchor": 1.25,
+            "step": 0.375,
+            "above": 1.625,
+            "below": 0.875,
+            "next_anchor": 1.625,
+            "next_step": 0.5625
+          },
+          {
+            "anchor": 1.625,
+            "step": 0.5625,
+            "above": 1.75,
+            "below": 1.0625,
+            "next_anchor": 1.75,
+            "next_step": 0.84375
+          },
+          {
+            "anchor": 1.75,
+            "step": 0.84375,
+            "above": 1.75,
+            "below": 0.90625,
+            "next_anchor": 1.75,
+            "next_step": 0.421875
+          },
+          {
+            "anchor": 1.75,
+            "step": 0.421875,
+            "above": 1.75,
+            "below": 1.328125,
+            "next_anchor": 1.75,
+            "next_step": 0.2109375
+          }
+        ]
+      },
+      "early": {
+        "trials": [
+          {
+            "alpha": 1.0,
+            "score": 0.10146960563749999
+          },
+          {
+            "alpha": 1.25,
+            "score": 0.1630651800375
+          },
+          {
+            "alpha": 0.75,
+            "score": 0.0762251196
+          },
+          {
+            "alpha": 1.625,
+            "score": 0.195478250275
+          },
+          {
+            "alpha": 0.875,
+            "score": 0.08295646737500001
+          },
+          {
+            "alpha": 1.75,
+            "score": 0.23463367636250002
+          },
+          {
+            "alpha": 1.0625,
+            "score": 0.1592083913625
+          },
+          {
+            "alpha": 0.90625,
+            "score": 0.0934621645
+          },
+          {
+            "alpha": 1.328125,
+            "score": 0.18626990098750001
+          }
+        ],
+        "steps": [
+          {
+            "anchor": 1.0,
+            "step": 0.25,
+            "above": 1.25,
+            "below": 0.75,
+            "next_anchor": 1.25,
+            "next_step": 0.375
+          },
+          {
+            "anchor": 1.25,
+            "step": 0.375,
+            "above": 1.625,
+            "below": 0.875,
+            "next_anchor": 1.625,
+            "next_step": 0.5625
+          },
+          {
+            "anchor": 1.625,
+            "step": 0.5625,
+            "above": 1.75,
+            "below": 1.0625,
+            "next_anchor": 1.75,
+            "next_step": 0.84375
+          },
+          {
+            "anchor": 1.75,
+            "step": 0.84375,
+            "above": 1.75,
+            "below": 0.90625,
+            "next_anchor": 1.75,
+            "next_step": 0.421875
+          },
+          {
+            "anchor": 1.75,
+            "step": 0.421875,
+            "above": 1.75,
+            "below": 1.328125,
+            "next_anchor": 1.75,
+            "next_step": 0.2109375
+          }
+        ]
+      },
+      "late": {
+        "trials": [
+          {
+            "alpha": 1.0,
+            "score": 6.909292500000001e-05
+          },
+          {
+            "alpha": 1.25,
+            "score": 0.00057165676875
+          },
+          {
+            "alpha": 0.75,
+            "score": 4.5084087500000014e-05
+          },
+          {
+            "alpha": 1.625,
+            "score": 0.0027408783125000007
+          },
+          {
+            "alpha": 0.875,
+            "score": 8.022874999999999e-05
+          },
+          {
+            "alpha": 1.75,
+            "score": 0.022199097
+          },
+          {
+            "alpha": 1.0625,
+            "score": 0.00023989959374999995
+          },
+          {
+            "alpha": 0.90625,
+            "score": 0.00012932810625000002
+          },
+          {
+            "alpha": 1.328125,
+            "score": 0.0004532725499999999
+          }
+        ],
+        "steps": [
+          {
+            "anchor": 1.0,
+            "step": 0.25,
+            "above": 1.25,
+            "below": 0.75,
+            "next_anchor": 1.25,
+            "next_step": 0.375
+          },
+          {
+            "anchor": 1.25,
+            "step": 0.375,
+            "above": 1.625,
+            "below": 0.875,
+            "next_anchor": 1.625,
+            "next_step": 0.5625
+          },
+          {
+            "anchor": 1.625,
+            "step": 0.5625,
+            "above": 1.75,
+            "below": 1.0625,
+            "next_anchor": 1.75,
+            "next_step": 0.84375
+          },
+          {
+            "anchor": 1.75,
+            "step": 0.84375,
+            "above": 1.75,
+            "below": 0.90625,
+            "next_anchor": 1.75,
+            "next_step": 0.421875
+          },
+          {
+            "anchor": 1.75,
+            "step": 0.421875,
+            "above": 1.75,
+            "below": 1.328125,
+            "next_anchor": 1.75,
             "next_step": 0.2109375
           }
         ]

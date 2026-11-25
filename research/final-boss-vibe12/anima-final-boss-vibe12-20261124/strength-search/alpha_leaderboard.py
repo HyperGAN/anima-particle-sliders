@@ -18,6 +18,7 @@ from review import saved, BINDING, RATINGS
 from finished_image import VERSION, score_case
 from compare import comparison
 from case_sensitivity import ranks_by_omission
+import design_selection
 from optimization_worker import PRIOR, pin, read, write
 from publish_optimization import PUBLIC, sample
 
@@ -26,7 +27,7 @@ OUTPUT = 'final-boss-vibe12-alpha-leaderboard.html'
 LABELS = read(ROOT / 'recipes.json')
 FIELDS = (GAIN, BOSS, DAMAGE, SCORE)
 ADAPTIVE = 'leaderboard-retune-visible'
-SEARCH_ROOTS = (ADAPTIVE,)
+SEARCH_ROOTS = (ADAPTIVE, design_selection.RUN)
 CONDITIONS = ('matched_constant', 'fixed_strength')
 
 
@@ -145,9 +146,18 @@ def publish():
     design_file = ROOT / "metric-calibration/design-range/latest.json"
     design = read(design_file) if design_file.is_file() else {}
     audited = {(r['method'], r['profile'], r['alpha']): r for r in design.get('rows', [])}
+    selected = design_selection.selections(SEARCH/design_selection.RUN, cases)
+    audited = {k:r for k,r in audited.items() if k[0] not in selected}
+    for method,(tuning,trial) in selected.items():
+        audited[method,tuning['profile'],tuning['alpha']] = dict(trial['design'],pairs=trial['pairs'],
+                method=method,profile=tuning['profile'],alpha=tuning['alpha'],
+                inputs={c:r['on']['sha256'] for c,r in trial['rows'].items()},
+                case_scores={c:r[SCORE] for c,r in trial['rows'].items()})
+    design_selection.publish_paths(SEARCH/design_selection.RUN, PUBLIC, LABELS, selected)
     design_option = '<option value="design">Distinct Final Boss designs</option>' if audited else ''
     design_help = (f'<p><a href="?metric=design">Distinct Boss ranking</a> · <a href="?metric=score">Per-image ranking</a> · '
-                   f'{len(audited)} recipes at their per-image best strength as of {design["as_of"]}. '
+                   f'{len(selected)} of {len(audited)} displayed recipes have completed distinct-design alpha tuning. '
+                   'Other recipes show their measured per-image strength. <a href="final-boss-vibe12-design-alpha.html">Distinct-design search paths</a>. '
                    'Repeated designs across different characters share credit. Jev compares all 28 character pairs.</p>'
                    if audited else '')
     for rank, row in enumerate(ranked, 1):
@@ -166,6 +176,8 @@ def publish():
             if any(row['cases'][c]['on']['sha256'] != design_row['inputs'][c] or
                    row['cases'][c][SCORE] != design_row['case_scores'][c] for c in cases):
                 raise ValueError("The design comparison does not bind this measured setting")
+            if method in selected:
+                note = f'<small><a href="final-boss-vibe12-design-alpha.html#{method}">Design-tuned strength</a></small>'
             design_data = f' data-design="{design_row["score"]}"'
             def pair_label(pair):
                 return ' / '.join(c.title() for c in pair["cases"]) + f' · {100*pair["repeat"]:.0f}/100'
@@ -296,6 +308,13 @@ update();
         if response.read() != page.encode():
             raise ValueError('Tailnet returned a different strength leaderboard')
     write(STORAGE / 'alpha-standings.json', {'scoring_version': VERSION, 'quality_metric': DAMAGE, 'jev_binding': BINDING, 'selection_metric': SCORE, 'cases': cases, 'rows': ranked})
+    if design:
+        from datetime import datetime, timezone
+        current = sorted(audited.values(),key=lambda r:(-r['score'],r['method']))
+        write(STORAGE/'distinct-alpha-standings.json',dict(design,
+              as_of=datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC'),
+              rows=current, tuned_methods=sorted(selected), baseline_signature=design['signature'],
+              protocol='Use completed distinct-design alpha selections where available and prior measured per-image strengths elsewhere. Both use all 28 character pairs.'))
     write(STORAGE / 'visible-damage-published.json', {'version': VERSION, 'settings': len(ranked), 'waiting': queued})
     print(f'{len(ranked)} strengths published with finished-image ratings', flush=True)
 
@@ -315,6 +334,7 @@ def main():
         queue = SEARCH / ADAPTIVE / 'queue.json'
         if queue.is_file():
             inputs.append(queue)
+        inputs.extend((SEARCH / design_selection.RUN).glob('*/result.json'))
         for name in SEARCH_ROOTS:
             inputs.extend((SEARCH / name).glob('*/renders/*/*/validation.json'))
         revision = tuple((p, hash(p.read_bytes()) if p == queue else p.stat().st_mtime_ns) for p in sorted(inputs))

@@ -10,7 +10,8 @@ from release_tools.verify_final_boss_designs import verify_panel, verify_orders
 
 def export(campaign, folder):
     source=campaign/"metric-calibration/design-range"
-    dev=read(source/"latest.json")
+    tuned=campaign/"storage/distinct-alpha-standings.json"
+    dev=read(tuned if tuned.is_file() else source/"latest.json")
     screen=read(source/"search-scene-check.json")
     lineups=read(source/"lineups.json")
     board=read(folder/"standings.json")
@@ -52,18 +53,18 @@ def export(campaign, folder):
            f'Opening-four exposure places **{dev["rows"].index(opening)+1} of {len(dev["rows"])}** across matched characters, '
            f'up from {by_base.index(opening)+1} on the per-image score. Its average design repetition is '
            f'{100*opening["repeat"]:.1f}/100, compared with {100*late["repeat"]:.1f}/100 for late cues. '
-           'Each recipe enters at its best measured per-image strength.',"",
+           f'{len(dev.get("tuned_methods",[]))} of these recipes have completed the distinct-design alpha search. Remaining recipes enter at their best measured per-image strength.', "",
            "Jev compares the character designs in each pair of finished images. It looks for repeated silhouettes, body construction, masks, costume shapes and visual motifs. "
            "A palette change or a different background alone carries little weight. On each pair, distinct bosses earn both per-image scores. "
            "If the same design repeats, the pair earns the stronger score. Jev’s continuous repetition rating interpolates between those outcomes. "
            "The per-image scores already account for matched Final Boss gain and visible damage. Zero-effect edits contribute zero.","",
            "Every row uses the same eight cases and the same RAW192 budget. Jev rates all 28 pairs in both image orders. Its repetition rating is an ordinal score on a 0–100 scale. "
-           "The alpha search uses the per-image score. The cross-character metric compares the saved operating points once the eight renders are complete.","",
+           "The current alpha search uses this cross-character score on four search characters and on eight development characters for the final choice. [Saved alpha and search evidence](alpha-tuning/README.md)","",
            "| Rank | Recipe | Schedule and α | Distinct Boss score ↑ | Per-image score ↑ | Design repetition ↓ | Matched samples |",
            "| ---: | --- | --- | ---: | ---: | ---: | --- |"]
     for rank,r in enumerate(dev["rows"],1):
         sample=settings[r["method"],r["profile"],r["alpha"]]["samples"]
-        lines.append(f'| {rank} | {labels[r["method"]]} | {r["profile"]} {r["alpha"]:g} | {100*r["score"]:.2f} | '
+        lines.append(f'| {rank} | {labels[r["method"]]} | {("Design-tuned · " if r["method"] in dev.get("tuned_methods",[]) else "")}{r["profile"]} {r["alpha"]:g} | {100*r["score"]:.2f} | '
                      f'{100*r["base"]:.2f} | {100*r["repeat"]:.1f} | [![Eight edits]({sample})]({sample}) |')
     lines+=["","## How the result depends on the characters","",
             "In a separate blind check Jev compared two four-character lineups as whole sets. "
