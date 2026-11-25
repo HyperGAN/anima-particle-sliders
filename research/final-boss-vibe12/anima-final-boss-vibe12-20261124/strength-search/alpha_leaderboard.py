@@ -12,7 +12,11 @@ SEARCH = Path(__file__).resolve().parent
 sys.path.insert(0, str(SEARCH.parent))
 
 from control import ROOT, STORAGE
-from publish import BOSS, DAMAGE, GAIN, ORIGINAL, SCORE, VERSION, score_case
+from publish import BOSS, DAMAGE, GAIN, ORIGINAL, SCORE, VERSION as LEGACY_VERSION, score_case as legacy_score
+sys.path.insert(0, str(SEARCH.parent / 'metric-calibration'))
+from review import saved, BINDING, RATINGS
+from finished_image import VERSION, score_case
+from compare import comparison
 from optimization_worker import PRIOR, pin, read, write
 from publish_optimization import PUBLIC, sample
 
@@ -20,8 +24,8 @@ from publish_optimization import PUBLIC, sample
 OUTPUT = 'final-boss-vibe12-alpha-leaderboard.html'
 LABELS = read(ROOT / 'recipes.json')
 FIELDS = (GAIN, BOSS, DAMAGE, SCORE)
-ADAPTIVE = 'leaderboard-retune-damage'
-SEARCH_ROOTS = ('leaderboard-retune', 'leaderboard-retune-centered', 'leaderboard-retune-adaptive', ADAPTIVE)
+ADAPTIVE = 'leaderboard-retune-visible'
+SEARCH_ROOTS = (ADAPTIVE,)
 CONDITIONS = ('matched_constant', 'fixed_strength')
 
 
@@ -37,25 +41,20 @@ def panel(method, setting, cases, source, run):
             'source': pin(source), 'runs': [run]}
 
 
-def fixed_rows(standings, originals):
-    for condition in CONDITIONS:
-        for row in standings['rankings'][condition]:
-            method = row['method']
-            path = ROOT / 'tuning' / method / 'boss-effect-tuning.json'
-            report = read(path)
-            assets = report[condition]['cases']
-            if report['raw']['sha256'] != row['raw_sha256']:
-                raise ValueError('Shared-strength checkpoint changed')
-            cases = {}
-            for case, rating in row['cases'].items():
-                on, off = assets[case]['on'], originals[case]
-                if (on['sha256'], off['sha256']) != (rating['on_sha256'], rating['off_sha256']):
-                    raise ValueError('Shared-strength samples changed')
-                cases[case] = rating | {'off': off, 'on': on}
-            setting = {**row, 'effective_strengths': row['gains']}
-            measured = panel(method, setting, cases, path, 'fixed')
-            if measured is not None:
-                yield measured
+def previous_rows(snapshot):
+    for row in snapshot['rows']:
+        cases = {}
+        for case, old in row['cases'].items():
+            if old[SCORE] != legacy_score(old):
+                raise ValueError('The previous measurements no longer reproduce')
+            damage = saved(old['on']['sha256'])
+            if damage is None:
+                break
+            current = old | {DAMAGE: damage}
+            cases[case] = current | {SCORE: score_case(current)}
+        if len(cases) == len(snapshot['cases']):
+            yield row | {'cases': cases, 'means': {metric: fmean(case[metric] for case in cases.values())
+                                                   for metric in FIELDS}}
 
 
 def search_rows(standings, originals):
@@ -64,7 +63,7 @@ def search_rows(standings, originals):
             method = request.parent.name
             policy = read(request)
             report = ROOT / 'tuning' / method / 'boss-effect-tuning.json'
-            if name == ADAPTIVE and policy.get('quality_metric') != DAMAGE:
+            if policy.get('quality_metric') != DAMAGE or policy.get('jev_binding') != BINDING:
                 raise ValueError('Damage-only search used a different quality metric')
             if policy['leaderboard'] != pin(report) or policy['scoring_version'] != VERSION:
                 raise ValueError('Tuned candidates differ from their native evaluation')
@@ -90,7 +89,7 @@ def search_rows(standings, originals):
 def rankings(standings):
     originals = {case: read(PRIOR / 'shared-off' / case / 'render.json')['image'] for case in standings['cases']}
     candidates = {}
-    for row in (*fixed_rows(standings, originals), *search_rows(standings, originals)):
+    for row in (*previous_rows(standings), *search_rows(standings, originals)):
         key = row['method'], row['profile'], row['alpha']
         previous = candidates.get(key)
         if previous is not None and any(previous['cases'][case]['on']['sha256'] != row['cases'][case]['on']['sha256']
@@ -123,11 +122,16 @@ def images(cases, values, original=False):
 
 
 def publish():
-    standings = read(STORAGE / 'leaderboard.json')
-    if standings['scoring_version'] != VERSION:
+    standings = read(STORAGE / 'alpha-standings-v1.json')
+    if standings['scoring_version'] != LEGACY_VERSION:
         raise ValueError('Unexpected leaderboard score')
     originals, ranked = rankings(standings)
     cases = standings['cases']
+    measured = {(r['method'], r['profile'], r['alpha']) for r in ranked}
+    queued = sum((r['method'],r['profile'],r['alpha']) not in measured for r in standings['rows'])
+    if queued and not (STORAGE / 'visible-damage-published.json').exists():
+        print(f'Calibrating {queued} remaining eight-case settings before switching the board', flush=True)
+        return
     lines = []
     queue_path = SEARCH / ADAPTIVE / 'queue.json'
     progress = read(queue_path) if queue_path.is_file() else {'trained': [], 'complete': [], 'active': {}}
@@ -145,11 +149,22 @@ def publish():
         note = f'<small>{source}</small>'
         lines.append(f'<tr data-effect="{means[GAIN]}" data-score="{means[SCORE]}" data-damage="{means[DAMAGE]}" '
                      f'data-method="{method}" data-adaptive="{int(candidate)}" '
-                     f'data-fixed="{int(shared)}" id="{method}-{profile}-{alpha:g}">'
+                     f'data-fixed="{int(shared)}" data-control="{profile if control else ""}" id="{method}-{profile}-{alpha:g}">'
                      f'<td class="rank">{rank}</td><th scope="row">{escape(LABELS[method])}{note}</th>'
                      f'<td>{profile.title()} α {alpha:.5g}</td><td>{images(cases, row["cases"])}</td>'
                      f'<td class="effect">+{100 * means[GAIN]:.1f}</td><td>{100 * means[SCORE]:.2f}</td>'
                      f'<td>{100 * means[DAMAGE]:.1f}</td></tr>')
+
+    reference = next((r for r in ranked if (r['method'],r['profile'],r['alpha']) ==
+                      ('shared-best-opening','early',1.15625)), None)
+    reference_html = ''
+    if reference:
+        scores = reference['means']
+        reference_html = (f'<tr><td>Reference</td><th scope="row">Opening four<small>Visual comparison</small></th>'
+                          f'<td>Early α 1.15625</td><td>{images(cases,reference["cases"])}</td>'
+                          f'<td>+{100*scores[GAIN]:.1f}</td><td>{100*scores[SCORE]:.2f}</td>'
+                          f'<td>{100*scores[DAMAGE]:.1f}</td></tr>')
+    comparison(ranked, standings, LABELS, cases, PUBLIC, sample)
 
     page = f'''<!doctype html><html lang="en"><meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" /><title>Final Boss alpha leaderboard</title>
@@ -165,15 +180,15 @@ th[scope=row]{{min-width:145px}}td:nth-child(3){{white-space:nowrap}}tr:target{{
 small{{display:block;font-weight:400;color:#b6bdca;font-size:.75rem}}
 </style><main>
 <h1>Final Boss alpha leaderboard</h1>
-<p>{len(completed)}/{len(progress['trained'])} trained recipes through the damage-adjusted search · {len(active)} running · {len(ranked)} settings measured across all searches.</p>
-<p>Final Boss score rewards a distinctive Boss edit and penalizes visible image damage. An edit with zero Boss gain scores zero. Image damage is the only quality penalty.</p>
+<p>{len(completed)}/{len(progress['trained'])} trained recipes through the damage-adjusted search · {len(active)} running · {len(ranked)} settings measured across all searches · {queued} awaiting damage ratings.</p>
+<p>Jev rates rendering defects in the finished artwork on its own. The Boss score uses matched character gain and distinction, then multiplies by the undamaged fraction. Zero gain scores zero.</p>
 <p>Same eight cases at RAW192. Boss effect is the average gain over slider off. The new search starts at α 1.00 with a 0.25 step.</p>
-<p><a href="final-boss-vibe12-alpha-tuned.html#trial-paths">Search paths</a> · <a href="final-boss-vibe12-leaderboard-constant.html">Shared-strength comparison</a></p>
+<p><a href="final-boss-vibe12-alpha-tuned.html#trial-paths">Search paths</a> · <a href="final-boss-vibe12-opening-comparison.html">Compare opening four</a> · <a href="final-boss-vibe12-alpha-leaderboard-v1.html">Previous scoring</a> · <a href="?fixed=constant">Shared constant α0.6375</a> · <a href="?fixed=early">Shared early α2/3</a></p>
 <div class="controls"><label>Sort by <select id="metric"><option value="score">Final Boss score</option><option value="effect">Boss effect</option><option value="damage">Least image damage</option></select></label>
-<label>Show <select id="scope"><option value="top">Best measured per recipe</option><option value="adaptive">Current search and fixed strengths</option><option value="tradeoffs">Effect and damage trade-offs</option><option value="all">All measured strengths</option></select></label></div>
+<label>Show <select id="scope"><option value="top">Best measured per recipe</option><option value="adaptive">Current search and fixed strengths</option><option value="tradeoffs">Effect and damage trade-offs</option><option value="all">All measured strengths</option><option value="early">Shared early α2/3</option><option value="constant">Shared constant α0.6375</option></select></label></div>
 <div class="scroll"><table><thead><tr><th scope="col">Rank</th><th scope="col">Recipe</th><th scope="col">Strength</th>
 <th scope="col">Matched samples</th><th scope="col">Boss effect</th><th scope="col">Final Boss score</th><th scope="col">Image damage</th></tr></thead>
-<tbody><tr><td></td><th scope="row">Slider off</th><td></td><td>{images(cases, originals, True)}</td><td></td><td></td><td></td></tr></tbody>
+<tbody><tr><td></td><th scope="row">Slider off</th><td></td><td>{images(cases, originals, True)}</td><td></td><td></td><td></td></tr>{reference_html}</tbody>
 <tbody id="trials">{''.join(lines)}</tbody></table></div></main>
 <script>
 const body = document.getElementById('trials');
@@ -181,6 +196,8 @@ const metric = document.getElementById('metric');
 const scope = document.getElementById('scope');
 const rows = Array.from(body.rows);
 rows.forEach((row, i) => row.initialRank = i);
+const fixed = new URLSearchParams(location.search).get('fixed');
+if (fixed === 'early' || fixed === 'constant') scope.value = fixed;
 if (location.hash && document.getElementById(location.hash.slice(1))) scope.value = 'all';
 const isLatest = row => row.dataset.adaptive === '1' || row.dataset.fixed === '1';
 function tradeoffs() {{
@@ -214,7 +231,7 @@ function update() {{
     const method = row.dataset.method;
     const latest = isLatest(row);
     const representative = !seen.has(method);
-    row.hidden = options ? !options.has(row) : scope.value === 'top' ? !representative : scope.value === 'adaptive' && !latest;
+    row.hidden = options ? !options.has(row) : scope.value === 'top' ? !representative : (scope.value === 'early' || scope.value === 'constant') ? row.dataset.control !== scope.value : scope.value === 'adaptive' && !latest;
     if (!row.hidden) {{
       seen.add(method);
       row.querySelector('.rank').textContent = ++rank;
@@ -233,8 +250,9 @@ update();
     with urlopen(f'http://127.0.0.1:8765/{OUTPUT}', timeout=8) as response:
         if response.read() != page.encode():
             raise ValueError('Tailnet returned a different strength leaderboard')
-    write(STORAGE / 'alpha-standings.json', {'scoring_version': VERSION, 'quality_metric': DAMAGE, 'selection_metric': SCORE, 'cases': cases, 'rows': ranked})
-    print(f'{len(ranked)} strengths published', flush=True)
+    write(STORAGE / 'alpha-standings.json', {'scoring_version': VERSION, 'quality_metric': DAMAGE, 'jev_binding': BINDING, 'selection_metric': SCORE, 'cases': cases, 'rows': ranked})
+    write(STORAGE / 'visible-damage-published.json', {'version': VERSION, 'settings': len(ranked), 'waiting': queued})
+    print(f'{len(ranked)} strengths published with finished-image ratings', flush=True)
 
 
 def main():
@@ -243,7 +261,9 @@ def main():
     args = parser.parse_args()
     previous = None
     while True:
-        inputs = [STORAGE / 'leaderboard.json']
+        inputs = [STORAGE / 'alpha-standings-v1.json']
+        if RATINGS.exists():
+            inputs.append(RATINGS)
         queue = SEARCH / ADAPTIVE / 'queue.json'
         if queue.is_file():
             inputs.append(queue)

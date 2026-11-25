@@ -7,6 +7,9 @@ import calibration_guard
 calibration_guard.ROOT=root
 calibration_guard.plan=lambda _:{}
 gpu, attempt, method, *mode=sys.argv[1:]
+if mode == ['leaderboard-visible']:
+    raise SystemExit(calibration_guard.run('retune-visible', int(gpu), attempt, (method,),
+                                           worker_name='retune_final_boss_visible.py'))
 if mode == ['leaderboard-damage']:
     raise SystemExit(calibration_guard.run('retune-damage', int(gpu), attempt, (method,),
                                            worker_name='retune_final_boss_damage.py'))

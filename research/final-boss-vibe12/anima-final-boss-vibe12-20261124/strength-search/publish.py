@@ -185,7 +185,8 @@ def trial_paths():
 
     panels = []
     paths = [(directory, label) for archive, label in (
-        ('leaderboard-retune-damage', 'Current search · Boss effect and image damage'),
+        ('leaderboard-retune-visible', 'Current search · finished-image damage'),
+        ('leaderboard-retune-damage', 'Previous search · paired-image damage'),
         ('leaderboard-retune-adaptive', 'Earlier adaptive search'),
         ('leaderboard-retune-centered', 'Effect search from α 1.00'),
         ('leaderboard-retune', 'Previous score search'),
@@ -243,7 +244,7 @@ if __name__=='__main__':
     args = parser.parse_args()
     seen = None
     while True:
-        root = ROOT / 'leaderboard-retune-damage'
+        root = ROOT / 'leaderboard-retune-visible'
         revision = tuple(sorted((str(path), path.stat().st_mtime_ns)
                                 for path in root.glob('*/renders/*/*/validation.json'))) + tuple(sorted(
                                     (str(path), path.stat().st_mtime_ns) for path in root.glob('*/search-path.json')))

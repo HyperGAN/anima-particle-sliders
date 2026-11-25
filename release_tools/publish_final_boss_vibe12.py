@@ -10,7 +10,8 @@ from pathlib import Path
 from PIL import Image
 
 from release_tools.final_boss_damage_search import panel_scores, rank_snapshot
-from release_tools.final_boss_scoring import BOSS, DAMAGE, GAIN, ORIGINAL, SCORE, VERSION
+from release_tools.final_boss_scoring import BOSS, DAMAGE, GAIN, ORIGINAL, SCORE, VERSION as LEGACY
+from release_tools.final_boss_visible_damage import VERSION
 
 
 def read(path):
@@ -44,23 +45,27 @@ def export(campaign, folder):
     with source.open() as stream:
         timestamp = datetime.fromtimestamp(fstat(stream.fileno()).st_mtime, timezone.utc)
         board = json.load(stream)
-    if board.get("quality_metric") != DAMAGE or board["scoring_version"] != VERSION:
+    version = board["scoring_version"]
+    if board.get("quality_metric") != DAMAGE or version not in (LEGACY, VERSION):
         raise ValueError("Expected the damage-adjusted board")
     folder.mkdir(parents=True, exist_ok=True)
     search = campaign / "strength-search"
-    queue = read(search / "leaderboard-retune-damage/queue.json")
+    run = "leaderboard-retune-visible" if version == VERSION else "leaderboard-retune-damage"
+    queue = read(search / run / "queue.json")
     teacher = read(campaign / "storage/targets/receipt.json")
     labels = read(campaign / "recipes.json")
     cases = board["cases"]
     originals = [board["rows"][0]["cases"][case]["off"] for case in cases]
     declared = read(search / "shared-best-stock.json")
     snapshot = {"as_of_utc": timestamp.strftime("%Y-%m-%d %H:%M UTC"), "training_updates": 192,
-                "weights": "raw", "ema_decay": None, "scoring_version": VERSION, "quality_metric": DAMAGE,
+                "weights": "raw", "ema_decay": None, "scoring_version": version, "quality_metric": DAMAGE,
                 "teacher": {key: teacher[key] for key in ("cache", "cache_index_sha256", "manifest", "targets", "scenes", "model")},
                 "cases": cases, "evaluation_requests": {case["id"]: case["request"] for case in declared["cases"]},
                 "originals": dict(zip(cases, [record["sha256"] for record in originals])),
                 "original_samples": write_sheet(originals, folder), "training_state": queue["training_state"],
                 "damage_search_complete": queue["complete"], "methods": {}, "settings": []}
+    if version == VERSION:
+        snapshot["jev_binding"] = board["jev_binding"]
     for row in board["rows"]:
         method = row["method"]
         if method not in snapshot["methods"]:
@@ -71,7 +76,7 @@ def export(campaign, folder):
             raise ValueError("Matched originals changed")
         ratings = {case: {key: row["cases"][case][key] for key in (BOSS, ORIGINAL, DAMAGE)}
                    | {"on_sha256": row["cases"][case]["on"]["sha256"]} for case in cases}
-        scores = panel_scores(ratings, cases)
+        scores = panel_scores(ratings, cases, version)
         if any(row["means"][metric] != scores[metric] for metric in (SCORE, GAIN, DAMAGE)):
             raise ValueError("Published scores do not reproduce")
         snapshot["settings"].append({key: row[key] for key in ("method", "profile", "alpha", "gains", "runs")}
@@ -79,7 +84,7 @@ def export(campaign, folder):
                                        "samples": write_sheet([row["cases"][case]["on"] for case in cases], folder)})
     snapshot["search_paths"] = {}
     for method in snapshot["damage_search_complete"]:
-        location = search / "leaderboard-retune-damage" / method
+        location = search / run / method
         result = read(location / "result.json")
         if result["checkpoint"]["sha256"] != snapshot["methods"][method]["raw_sha256"]:
             raise ValueError("Search path and displayed adapter disagree")
@@ -96,6 +101,12 @@ def export(campaign, folder):
              f"![Slider off]({snapshot['original_samples']})", "",
              "| Rank | Training recipe | Schedule and α | Final Boss score ↑ | Boss gain ↑ | Damage ↓ | Matched samples |",
              "| ---: | --- | --- | ---: | ---: | ---: | --- |"]
+    if version == VERSION:
+        reference = by_setting.get(("shared-best-opening", "early", 1.15625))
+        if reference:
+            lines[4:4] = ["**Opening-four exposure at early α 1.15625** is the visual comparison reference. "
+                          "The table below ranks all recipes using the same formula.",
+                          "", f"![Opening-four reference]({reference['samples']})", ""]
     for rank, winner in enumerate(winners, 1):
         method, profile, alpha = (winner[key] for key in ("method", "profile", "alpha"))
         samples = by_setting[method, profile, alpha]["samples"]

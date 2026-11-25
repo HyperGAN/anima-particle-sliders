@@ -10,8 +10,8 @@ This directory preserves the host-side programs used to train the November 24 Vi
 | How does background projection work? | [On the twelve scenes](anima-final-boss-vibe12-20261124/adapters/spatial_stock.py) and [exterior projection and its checks](anima-final-boss-optimization-20261123/background_orthogonal_teacher_worker.py) |
 | How do we capture fields on a trained adapter’s trajectory? | [Frozen-donor capture and native parity checks](anima-final-boss-vibe12-20261124/adapters/rollout_stock.py) |
 | What actually trains and saves the weights? | [Recipe binding](anima-final-boss-vibe12-20261124/cohort.py), [the original ParticleGAN update, RAW export, FULL resume and milestone checks](anima-final-boss-optimization-20261123/optimization_worker.py), [engine source lock](anima-final-boss-research-raw192-20261123/cohorts/prompt-only/product/lumen_studio/engine-source.json) |
-| How are alphas selected? | [Two-sided search](anima-final-boss-vibe12-20261124/strength-search/adaptive_alpha.py), [image measurements and final selection](anima-final-boss-vibe12-20261124/strength-search/retune_final_boss_damage.py), [queue](anima-final-boss-vibe12-20261124/strength-search/adaptive_queue.py) |
-| What did Jev evaluate? | [Character effect rubric](anima-final-boss-optimization-20261123/boss_review.py), [damage rubric](anima-final-boss-optimization-20261123/image-breakage-rule.json), [score definition](../../release_tools/final_boss_scoring.py), [native panel](anima-final-boss-research-raw192-20261123/panel.json) |
+| How are alphas selected? | [Two-sided search](anima-final-boss-vibe12-20261124/strength-search/adaptive_alpha.py), [image measurements and final selection](anima-final-boss-vibe12-20261124/strength-search/retune_final_boss_visible.py), [queue](anima-final-boss-vibe12-20261124/strength-search/adaptive_queue.py) |
+| What did Jev evaluate? | [Character effect rubric](anima-final-boss-optimization-20261123/boss_review.py), [current damage rubric and score](../../release_tools/final_boss_visible_damage.py), [previous paired-image damage rubric](anima-final-boss-optimization-20261123/image-breakage-rule.json), [native panel](anima-final-boss-research-raw192-20261123/panel.json) |
 | What generates the page? | [Matched samples and ranking](anima-final-boss-vibe12-20261124/strength-search/alpha_leaderboard.py), [trial-path details](anima-final-boss-vibe12-20261124/strength-search/publish.py) |
 
 The active strength worker measures the Boss rating of the edited image and its matched original, measures visible image damage, then ranks complete panels by their mean Final Boss score. The archived training worker separately records catastrophic output checks on training milestones. Earlier strength workers are included because their scored images were reused and appear in the history.
@@ -36,8 +36,12 @@ python -u campaign_shared_v4.py
 For an existing cohort with the three calibration RAW/control records, `strength-search/define.py` creates the pinned definitions once in a new destination. Preserve the existing definitions on an exact resume. Start the search queue and publishers as separate processes on the equipped host:
 
 ```sh
-python -u strength-search/adaptive_queue.py
 python -u publish.py --watch
+python -u strength-search/alpha_leaderboard_v1.py --watch
+python -u metric-calibration/review.py
+python -u metric-calibration/check_transfer.py
+python -u metric-calibration/backfill.py
+python -u strength-search/adaptive_queue.py
 python -u strength-search/alpha_leaderboard.py --watch
 python strength-search/publish.py
 ```
@@ -45,3 +49,7 @@ python strength-search/publish.py
 The publishers verify their output with an HTTP read-back. The public capture uses loopback port 8765. Serve `anima-final-boss-research-raw192-20261123/sample-gallery/` on that port when exercising this path. Native inputs with path-bearing hashes must be restored on their recorded layout for exact replay. A relocated experiment needs its own pinned manifests and journals.
 
 [Source inventory](source-files.json) lists the original SHA-256 for each captured file, a second digest where the HTTP hostname was replaced by loopback, and digests of selected external inputs. Model weights, adapter weights, FULL states, image and tensor caches, generated judge receipts, and operator credentials must be supplied separately for a native run.
+
+## Finished-image damage calibration
+
+The current worker starts a separate versioned alpha search. It reuses matching native renders and Boss judgments and obtains a new Jev damage rating for each unique finished image. The earlier publisher supplies historical settings for the backfill. Start the watchers and queues in separate processes. The live chart labels the user-nominated opening-four reference separately from the sorted scores. [Jev questions and score](anima-final-boss-vibe12-20261124/metric-calibration/finished_image.py) · [Calibrated search worker](anima-final-boss-vibe12-20261124/strength-search/retune_final_boss_visible.py) · [Calibration evidence](../../docs/final-boss-raw192/vibe12/visible-damage-audit.json)

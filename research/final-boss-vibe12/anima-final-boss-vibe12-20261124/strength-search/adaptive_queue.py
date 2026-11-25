@@ -14,9 +14,9 @@ from run import GIB, available_cards
 
 HERE = Path(__file__).resolve().parent
 CAMPAIGN = HERE.parent
-RESULTS = HERE / 'leaderboard-retune-damage'
-PRIORITY = ('soft45-background-orthogonal', 'late-cues', 'shared-best-divergence', 'early-cues',
-            'shared-best-seed-split', 'shared-best-stock')
+RESULTS = HERE / 'leaderboard-retune-visible'
+PRIORITY = ('shared-best-opening', 'soft45-background-orthogonal', 'late-cues', 'shared-best-stock',
+            'shared-best-seed-split', 'shared-best-divergence', 'early-cues')
 LOCKS = Path('/mnt/nvme/sliders/locks')
 
 
@@ -31,7 +31,7 @@ def save(path, data):
 
 
 def previous_attempt(method):
-    files = HERE.glob(f'retune-damage-{method}-a*.*')
+    files = HERE.glob(f'retune-visible-{method}-a*.*')
     numbers = [int(match[1]) for path in files if (match := re.search(r'-a(\d+)\.(?:log|terminal\.json)$', path.name))]
     return max(numbers, default=0)
 
@@ -54,7 +54,7 @@ def run():
             if returncode is None:
                 continue
             del active[gpu]
-            report = HERE / f'retune-damage-{method}-a{attempt}.terminal.json'
+            report = HERE / f'retune-visible-{method}-a{attempt}.terminal.json'
             receipt = read(report) if report.is_file() else {}
             if returncode == 0 and (RESULTS / method / 'result.json').is_file():
                 print(f'Completed adaptive alpha search for {method}', flush=True)
@@ -79,7 +79,7 @@ def run():
                 method = eligible.pop(0)
                 attempt = previous_attempt(method) + 1
                 child = subprocess.Popen([sys.executable, '-u', str(HERE / 'guard.py'), str(gpu), f'a{attempt}',
-                                          method, 'leaderboard-damage'], cwd=CAMPAIGN)
+                                          method, 'leaderboard-visible'], cwd=CAMPAIGN)
                 active[gpu] = (child, method, attempt)
                 print(f'Adaptive search for {method} on GPU {gpu}', flush=True)
                 break

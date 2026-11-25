@@ -1,0 +1,164 @@
+{
+  "version": "final-boss-visible-damage-v2",
+  "jev_binding": "89e7d97f4e7ecdea35a7317f446b435b87267023af4e0a345f2ef53c3f70506d",
+  "method": "Jev sees the single edited image. Damage is the higher of repair severity and whole-frame collapse. Numeric damage discounts the Boss term linearly.",
+  "formula": "max(0, Boss_ON - Boss_OFF) * Boss_ON**3 * (1 - damage)",
+  "preliminary_trial": "The first repair-only question returned 0.63 on the collapsed noise image, below the predeclared 0.65 anchor. A second whole-frame question supplied a continuous collapse rating.",
+  "anchors": {
+    "duplicate": {
+      "image_sha256": "5ed0581958e30ee2face7980c69f3bd226c09f05a4ec6768aded57617e9c5b0c",
+      "damage": 0.155
+    },
+    "clean": {
+      "image_sha256": "7045e646771c164454d6e6181df69cb0714de35b9b5118313dd91dcf6a61ac67",
+      "damage": 0.1625
+    },
+    "split": {
+      "image_sha256": "d968a06b52a0a4fa42ff50f92f06a74470dc8940af3142e0e808edef249b9067",
+      "damage": 0.3475
+    },
+    "replacement": {
+      "image_sha256": "4ffb603e7231bf9702ab81ca73256d1fc98abd7f8bb037a26c7fd6aed7e4499e",
+      "damage": 0.3575
+    },
+    "broken": {
+      "image_sha256": "ef229a4dca721e5f00aec3749a4c7aacfd497807201885c3a9ab8c023370a1da",
+      "damage": 0.89
+    },
+    "historical-1-ranger": {
+      "image_sha256": "9c1f2e46f4ac5f1086fa085b83f29f9501902dcae5f4c5853e1eb3d132b7c904",
+      "damage": 0.2175
+    },
+    "historical-1-smith": {
+      "image_sha256": "7f837906723ca15a790dbf303031d56298139d644413e4e352b27c92396e20bc",
+      "damage": 0.255
+    },
+    "historical-1-stationer": {
+      "image_sha256": "928115ecdfd0645c2522e535bae32401ee61276b4d9531c199cd4da203afac0a",
+      "damage": 0.315
+    },
+    "historical-1-ferryman": {
+      "image_sha256": "1fd5c2b22bbe3ee3662de5b2a4c71547bb2fbd41a65af5a697d60a98553c8573",
+      "damage": 0.25
+    },
+    "historical-1-watchmaker": {
+      "image_sha256": "1aef2f81f26d651422464f7a8cf030cf40e8629d24645b9b2ec78d8f5b6b06c6",
+      "damage": 0.1925
+    },
+    "historical-1-guide": {
+      "image_sha256": "08b81dde939e10f32f10be68cbff233c8fc8f6fe463f898376da00ac3ea6a86b",
+      "damage": 0.24
+    },
+    "historical-1-guard": {
+      "image_sha256": "3b3f852b68d0a68683018530fac68872b1fe16a014c2a2eca648c178bffa68a9",
+      "damage": 0.2425
+    },
+    "historical-1-violinist": {
+      "image_sha256": "0c93e637ffcdc3bf7d8a4d00eceb15e8a0b8a3aaad9a490d1a7515bd88427fbd",
+      "damage": 0.2675
+    },
+    "historical-2-ranger": {
+      "image_sha256": "94727a321f00fdb92054b0280ee6a6adb5b683c67ee3971cdb4f789df5681bf4",
+      "damage": 0.235
+    },
+    "historical-2-smith": {
+      "image_sha256": "b56aba8d3c72bdcde188a3d64c72d2376caeb5b2012363711ba5d775c8128d40",
+      "damage": 0.275
+    },
+    "historical-2-stationer": {
+      "image_sha256": "2ebdb99b81c5846d85138d62e42c90f50720dcbebbeec532478802b458bb1cea",
+      "damage": 0.2375
+    },
+    "historical-2-ferryman": {
+      "image_sha256": "dfd7430240433cc09ec5730fc69bb04fd17ec3695db80eada992da9d83c703ce",
+      "damage": 0.24
+    },
+    "historical-2-watchmaker": {
+      "image_sha256": "fe0fa26370de559bfab9b63e2df641c564c55852995c2a4f79c77dd416c99317",
+      "damage": 0.2675
+    },
+    "historical-2-guide": {
+      "image_sha256": "1caea1d8c7fd56eda756587584a94d897634249a82a7acf05cb060ac506d5b27",
+      "damage": 0.2
+    },
+    "historical-2-guard": {
+      "image_sha256": "fd3938860a69211972e7f53799333cb66cb554af9cfd435e34fb725bf07136a9",
+      "damage": 0.2275
+    },
+    "historical-2-violinist": {
+      "image_sha256": "09458711fec2ba13dcd842cee9d3e556e64e36fcf46af3612f26bc4f7f898497",
+      "damage": 0.215
+    },
+    "historical-3-ranger": {
+      "image_sha256": "d5b007e0b1500f3bc4be19d7ab1aba75ffc59fd5389ecd604574dcdfc4d21fde",
+      "damage": 0.245
+    },
+    "historical-3-smith": {
+      "image_sha256": "c3662b4fcd27c565808550e717581d9a6a5034bb0d6a5cefa717f74603bf853d",
+      "damage": 0.23
+    },
+    "historical-3-stationer": {
+      "image_sha256": "f214e7065d90a5c2447be32900893dbabaa20496849092a39ea9dc5255ad68db",
+      "damage": 0.265
+    },
+    "historical-3-ferryman": {
+      "image_sha256": "5dc3c244eefd2bac24910a72adbf44ca61d8057ecc16156825027f176063c07f",
+      "damage": 0.2275
+    },
+    "historical-3-watchmaker": {
+      "image_sha256": "7edbd0fef4cf260c693cfd38abfc106a7f283ad436cbe79c0ed4c16c1993764a",
+      "damage": 0.24
+    },
+    "historical-3-guide": {
+      "image_sha256": "07e3629081e1a96106f983f6b112d32915310db01f6d5bd64788f816263d73b2",
+      "damage": 0.155
+    },
+    "historical-3-guard": {
+      "image_sha256": "01505d712548171d8dd99320a9475243fa57d5c1aac2788f020a7e7944e37aa4",
+      "damage": 0.2125
+    },
+    "historical-3-violinist": {
+      "image_sha256": "2f5e22687e9004ba129cf090e5b5bf4223722885ce997c3ee5ee7fefa0279a32",
+      "damage": 0.2025
+    }
+  },
+  "controlled_perturbations": {
+    "smith-original": {
+      "image_sha256": "26a864b1372099d41dd45b56fbdbb6e6336e880a9317dff896c265850ad8a245",
+      "damage": 0.225
+    },
+    "smith-scanline": {
+      "image_sha256": "8556ee77ef473e70618dbec21a2cd115ff8c16e8263b1bf9a86981a1605ef2bd",
+      "damage": 0.7175
+    },
+    "smith-erasure": {
+      "image_sha256": "29af98e699ea72f2f994ee4d6145adfc5c954e0520238a8a5fe12fadd4bb4de5",
+      "damage": 0.4825
+    },
+    "violinist-original": {
+      "image_sha256": "6127f5a966fd18a5a0eca06eacb8728f54b8dceeb7da78013f0afd09397b3b50",
+      "damage": 0.16
+    },
+    "violinist-scanline": {
+      "image_sha256": "000abad1244eaea047f0bbd3a1c0409f5300ff40e17a839188aaf04d8886f9e3",
+      "damage": 0.6675
+    },
+    "violinist-erasure": {
+      "image_sha256": "6368917f170a8c00a5fb1e1fc48c877e9ef8a7a1056e8e3b0e2367995c48ad45",
+      "damage": 0.455
+    },
+    "guard-original": {
+      "image_sha256": "672058235ab4663d4aaafaa183bc10b3739dbef9b6927406d05ca47003337bc5",
+      "damage": 0.2525
+    },
+    "guard-scanline": {
+      "image_sha256": "fa12354f78b887ec242c26573da23b6b8b93400a228a62f7943f181128a1fa6b",
+      "damage": 0.6725
+    },
+    "guard-erasure": {
+      "image_sha256": "da702ff4b283b4e639e2c957d8fef3249408ea76d9f26ffef30afe4401190468",
+      "damage": 0.4075
+    }
+  },
+  "scope": "Calibration and paired synthetic checks. Development leaderboard images have informed rubric design. These checks do not estimate accuracy on new art."
+}

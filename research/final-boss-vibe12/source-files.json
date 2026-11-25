@@ -215,11 +215,11 @@
       "original_sha256": "c10420f8b9ecc80e77822edc33d1e37c746c42886101f0139da988bcc43aa730"
     },
     "anima-final-boss-vibe12-20261124/strength-search/adaptive_queue.py": {
-      "original_sha256": "7a5ed0e51c96330ca149c97053c6ceadf25e1654f21db6d9d61f0c222bbf28b7"
+      "original_sha256": "e050b377b3d24aac6cd31db4d28c8aa030d8bea614ead770957e6b2f20d9c4d5"
     },
     "anima-final-boss-vibe12-20261124/strength-search/alpha_leaderboard.py": {
-      "original_sha256": "d7dab9051484e3703f4cde0c4f6ff90207a484802d713133b67aaaa807bede9c",
-      "published_sha256": "341ddeea0b782a3f59969eec294b27049bbe585267b51b3191aee0a01eb9cdc4"
+      "original_sha256": "e593a0aaec2067ae41c21539542bbefadae714d06863af77cd5a3fb4f36d91fb",
+      "published_sha256": "6fd1d07d23b687e9c02b6a79ea90746896c26e08f2cd24dd734ad8892f896337"
     },
     "anima-final-boss-vibe12-20261124/strength-search/calibration_guard.py": {
       "original_sha256": "d2c5e244bf49556e1bb7abf1b3f5aa5264fb7303b8537f07dec291a35cf00a1c"
@@ -228,14 +228,14 @@
       "original_sha256": "14520220b27ff203c686674f8acd0ec9c25ab91c7e88f179cf92fb20bd8e5753"
     },
     "anima-final-boss-vibe12-20261124/strength-search/guard.py": {
-      "original_sha256": "2c87c6a2aeb295f1f22a095891aeea2b1c0394a6c49d42a7e64a8282e928846d"
+      "original_sha256": "02a493be9aacdd3baca64b9afa256e5d4a6d032014e9f40680c139080e84bb00"
     },
     "anima-final-boss-vibe12-20261124/strength-search/optimization_worker.py": {
       "original_sha256": "b0069fcd524d9726bb16338712925b23b6d0fe3d19bcdace4fa85509e819bed8"
     },
     "anima-final-boss-vibe12-20261124/strength-search/publish.py": {
-      "original_sha256": "46caaa30155437eac84cba40997a686ac4d1654f240dfc06a40098b4acebb90e",
-      "published_sha256": "e07e9e951fe8409378fcb54f981e9990657afddb55d7b163209ae669dce7121f"
+      "original_sha256": "fcc50537d7a8f24b0f78ad24daa45d985b86e1a35b94c6473b5c403a99bbb7f9",
+      "published_sha256": "75888265031481ceef2d091e9864b53c868b69d9bc4ad631e78c069172566793"
     },
     "anima-final-boss-vibe12-20261124/strength-search/retune_final_boss.py": {
       "original_sha256": "1b605d6b1efeb181b36d7045a2d474faab142588654886aed477b335c189cd01"
@@ -255,6 +255,28 @@
     "anima-final-boss-vibe12-20261124/verify_campaign.py": {
       "original_sha256": "fa34d39f7b7e720604632343d6f816cb7361e235bd899ed90b7aad6699edefe4",
       "published_sha256": "1144240c6a4cf9901d5849c93fd28a871ea46cc4d669dab8661bdbc5d9b062b1"
+    },
+    "anima-final-boss-vibe12-20261124/strength-search/alpha_leaderboard_v1.py": {
+      "original_sha256": "fafd9ca8cf0a21adb7585c54a3307704bca38b538d5cd9138a45ca2331b0cf21",
+      "published_sha256": "b156aa691ec3a0bf2f04e315a0210381a3d47c89906efd1287fa84c785a7ab11"
+    },
+    "anima-final-boss-vibe12-20261124/strength-search/retune_final_boss_visible.py": {
+      "original_sha256": "9d9e8e458f06fd16c04b305a3e7a7f156d0a0bc4cff60a2a7bbaf90bb10288d3"
+    },
+    "anima-final-boss-vibe12-20261124/metric-calibration/finished_image.py": {
+      "original_sha256": "276b51b10e60cf8246f43804642bdd0ed594c8802f3a35156a67319c62256c54"
+    },
+    "anima-final-boss-vibe12-20261124/metric-calibration/review.py": {
+      "original_sha256": "d64524ed9a2ffb88e6e12703dc62d2c6bbc1f160d89aeab116041edff61e8580"
+    },
+    "anima-final-boss-vibe12-20261124/metric-calibration/backfill.py": {
+      "original_sha256": "3e2dbcae9271a4da92dd79444e025556ab72ef5f15dfd6025de5c89615c5c2cf"
+    },
+    "anima-final-boss-vibe12-20261124/metric-calibration/check_transfer.py": {
+      "original_sha256": "120e5a6cab0be8f34c6949b9174512f007d47b55e986b3da38ac0addb922e2b0"
+    },
+    "anima-final-boss-vibe12-20261124/metric-calibration/compare.py": {
+      "original_sha256": "d82c552b6a1b9f427cad00eb7ecfe16edd53a43967686ee0192d0e4e3bbce7ee"
     }
   },
   "external_input_sha256": {

@@ -72,3 +72,20 @@ def test_offline_cli_reproduces_deterministic_leaderboard_ties(tmp_path, capsys)
     lines = capsys.readouterr().out.splitlines()
     assert lines[1].split("\t") == ["1", "a", "early", "1", "17.09", "50.00", "10.00"]
     assert lines[2].startswith("2\tz\tconstant\t0.75\t")
+
+
+def test_visible_damage_is_linear_and_has_no_recipe_term():
+    from release_tools import final_boss_visible_damage as v2
+
+    ratings = {BOSS: .9, ORIGINAL: .1, DAMAGE: .4}
+    assert v2.score_case(ratings) == pytest.approx(.8 * .9**3 * .6)
+    assert v2.score_case(ratings | {ORIGINAL: .95}) == 0
+    assert v2.score_case(ratings | {DAMAGE: 1}) == 0
+    assert v2.score_case(ratings | {DAMAGE: None}) is None
+    assert v2.damage({"damage": .2, "collapse": .91}) == .91
+    data = {"cases": ["a"], "scoring_version": v2.VERSION,
+            "settings": [setting("other", 1, {"a": ratings}), setting("opening", 1, {"a": ratings})]}
+    ranks = rank_snapshot(data)
+    assert ranks[0][SCORE] == ranks[1][SCORE] == v2.score_case(ratings)
+    with pytest.raises(ValueError, match="Unknown scoring version"):
+        rank_snapshot(data | {"scoring_version": "unknown"})
