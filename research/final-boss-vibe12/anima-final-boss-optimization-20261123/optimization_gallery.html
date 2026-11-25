@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>%%TITLE%%</title>
+<style>
+:root {
+  color-scheme: dark;
+  background: #101216;
+  color: #f3f0e9;
+  font: 15px/1.5 system-ui, sans-serif;
+  --ink-soft: #b7bdc8;
+  --line: #333945;
+  --accent: #ffc39c;
+  --panel: #1a1e26;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { max-width: 1560px; margin: auto; padding: clamp(14px, 3vw, 42px); }
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible, select:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+h1 { margin: .3em 0 .1em; font-size: clamp(1.75rem, 4.2vw, 3rem); line-height: 1.1; letter-spacing: -.03em; }
+h2 { margin: 1.35em 0 .45em; font-size: 1.22rem; }
+p { margin: .4em 0 .85em; color: var(--ink-soft); }
+nav { display: flex; flex-wrap: wrap; gap: .4em 1.4em; font-size: .9rem; }
+.controls { display: flex; flex-wrap: wrap; align-items: end; gap: .6rem 1rem; margin: 1rem 0 .55rem; }
+label { display: grid; grid-template-columns: minmax(0, 1fr); gap: .25rem; min-width: 0; max-width: 100%; color: var(--ink-soft); font-size: .9rem; }
+select, .direction {
+  min-width: 0;
+  max-width: 100%;
+  min-height: 40px;
+  padding: .35rem .55rem;
+  color: inherit;
+  border: 1px solid #515967;
+  border-radius: 5px;
+  background: var(--panel);
+  font: inherit;
+}
+.direction { cursor: pointer; font-size: .88rem; }
+select { width: 100%; }
+.instructions { font-size: .88rem; }
+.table { width: 100%; overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; }
+table { border-collapse: collapse; text-align: left; width: 100%; min-width: 1160px; font-variant-numeric: tabular-nums; }
+th, td { border-bottom: 1px solid var(--line); padding: .45rem .52rem; }
+thead th { vertical-align: bottom; white-space: nowrap; background: #1c2028; font-size: .86rem; }
+tbody th { width: 13%; min-width: 146px; font-size: .93rem; }
+tbody td.metric { text-align: right; font-size: .87rem; }
+tbody tr:last-child > * { border-bottom: 0; }
+.reference td, .reference th { border-bottom: 1px solid var(--line) !important; }
+.reference, .leader { background: #202025; }
+.leader th { box-shadow: inset 3px 0 var(--accent); }
+.unranked-heading th { background: var(--panel); color: var(--ink-soft); }
+.samples-column { width: 30%; min-width: 280px; }
+.samples { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .35rem; align-items: start; }
+.samples.single { grid-template-columns: minmax(0, 150px); }
+.sample { display: block; min-width: 0; text-decoration: none; }
+.sample-thumbnail { display: block; position: relative; width: 100%; aspect-ratio: 1; overflow: hidden; border-radius: 4px; background: #262b33; }
+.sample-thumbnail img { display: block; position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+.sample:hover .sample-thumbnail { outline: 2px solid var(--accent); }
+.sample-name { color: var(--ink-soft); display: block; overflow-wrap: anywhere; font-size: .68rem; line-height: 1.25; margin-top: .15rem; }
+.rank { color: var(--accent); display: block; font-size: .82rem; }
+.setting { color: var(--ink-soft); display: block; font-weight: 400; font-size: .81rem; }
+.sort { border: 0; background: transparent; color: inherit; font: inherit; width: 100%; text-align: right; cursor: pointer; padding: 0; }
+.sort:hover, th[aria-sort], .current { color: var(--accent); }
+details { margin: .85rem 0; color: var(--ink-soft); }
+summary { cursor: pointer; }
+details li { margin: .26rem 0; }
+.head-to-head { margin: 1rem 0; padding: .9rem; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; }
+.head-to-head h2 { margin: 0 0 .35rem; }
+.frames { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .7rem; }
+figure { margin: 0; }
+.frames img { display: block; width: 100%; height: auto; background: #262b33; border-radius: 5px; }
+figcaption { margin-top: .25rem; }
+.scores { color: var(--ink-soft); font-size: .78rem; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+@media (max-width: 850px) {
+  .table { overflow: visible; border: 0; }
+  table, tbody { display: block; min-width: 0; }
+  thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  tbody tr { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border: 1px solid var(--line); border-radius: 7px; overflow: hidden; margin: .7rem 0; }
+  tbody th, tbody .samples-column { grid-column: 1 / -1; width: auto; min-width: 0; padding: .65rem; }
+  tbody td.metric { padding: .4rem .65rem; text-align: left; border: 0; }
+  tbody td.metric::before { display: block; content: attr(data-label); color: var(--ink-soft); font-size: .68rem; }
+  tbody td.empty { display: none; }
+}
+@media (max-width: 540px) {
+  .frames { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  label, select { max-width: 100%; }
+}
+</style>
+</head>
+<body>
+<nav aria-label="Related leaderboards">%%NAV%%</nav>
+<main>
+<h1>%%TITLE%%</h1>
+<p>%%INTRO%%</p>
+%%STATUS%%
+<div class="controls">
+  <label>Samples<select id="scope"></select></label>
+  <label>Sort by<select id="sort-choice"></select></label>
+  <button type="button" class="direction" id="direction"></button>
+</div>
+<p class="instructions" id="scope-description"></p>
+<div class="sr-only" id="sort-description" aria-live="polite"></div>
+<div class="table"><table aria-label="Ranked settings with matched samples">
+  <thead><tr id="headers"><th scope="col">Method and strength</th><th scope="col">Matched samples</th></tr></thead>
+  <tbody id="originals"></tbody>
+  <tbody id="rows"></tbody>
+</table></div>
+<details>
+  <summary>Jev questions and scoring</summary>
+  <p id="scoring-description"></p>
+  <ul id="questions"></ul>
+</details>
+<section id="head-to-head" class="head-to-head" hidden>
+  <h2>Jev head-to-head for Boss effect</h2>
+  <p>Jev compared the visible character changes in both orders. A win requires agreement across the two decisions.</p>
+  <div id="match-results"></div>
+</section>
+<section id="compare" hidden>
+  <h2>Compare two edits</h2>
+  <div class="controls">
+    <label>Case<select id="case"></select></label>
+    <label>Compare A<select id="left"></select></label>
+    <label>Compare B<select id="right"></select></label>
+  </div>
+  <div class="frames" id="frames"></div>
+</section>
+</main>
+<script type="application/json" id="data">%%DATA%%</script>
+<script>
+const data = JSON.parse(document.getElementById("data").textContent);
+const get = id => document.getElementById(id);
+const scope = get("scope");
+const sortChoice = get("sort-choice");
+const renderCase = get("case");
+const left = get("left");
+const right = get("right");
+const title = value => value.replaceAll("-", " ").replace(/^./, char => char.toUpperCase());
+const settingName = row => title(row.profile) + " α" + Number(row.alpha.toPrecision(4));
+const label = row => row.label + " · " + settingName(row);
+const fields = Object.entries(data.metrics);
+if (data.show_original_gain !== false) fields.push(["gain", ["Original gain", data.effect_question]]);
+get("scoring-description").textContent = data.scoring_description ??
+  "Final score combines Final Boss effect with visible image damage. Scores average the matched cases. Preservation breaks ties.";
+const buttons = new Map();
+const eligibility = {pass: 0, fail: 1, unmeasured: 2};
+let sortKey = data.selection_metric;
+let descending = true;
+
+scope.add(new Option("All " + data.cases.length + " scores · 3 samples", ""));
+scope.add(new Option("All " + data.cases.length + " scores and samples", "all"));
+scope.add(new Option("Three shared cases only", "shared"));
+for (const name of data.cases) {
+  scope.add(new Option(title(name), name));
+  renderCase.add(new Option(title(name), name));
+}
+for (const [key, [name, prompt]] of fields) {
+  sortChoice.add(new Option(name, key));
+  const cell = document.createElement("th");
+  cell.scope = "col";
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "sort";
+  button.title = prompt;
+  button.addEventListener("click", () => {
+    descending = key !== sortKey || !descending;
+    sortKey = key;
+    render();
+  });
+  cell.append(button);
+  get("headers").append(cell);
+  buttons.set(key, {name, cell, button});
+  const item = document.createElement("li");
+  const strong = document.createElement("strong");
+  strong.textContent = name + ". ";
+  item.append(strong, prompt);
+  get("questions").append(item);
+}
+
+function score(key, value) {
+  if (!Number.isFinite(value)) return "—";
+  if (key === "gain") return (value >= 0 ? "+" : "") + value.toFixed(3);
+  const decimals = key === data.selection_metric ? data.score_decimals ?? (data.scoring_version ? 2 : 1) : 1;
+  return (100 * value).toFixed(decimals);
+}
+function sharedScores(row, cases) {
+  const keys = fields.map(([key]) => key);
+  if (data.tiebreak_metric) keys.push(data.tiebreak_metric);
+  return Object.fromEntries(keys.map(key => {
+    const values = cases.map(name => row.cases[name]?.[key]);
+    const average = values.every(Number.isFinite)
+      ? Number((values.reduce((sum, value) => sum + value, 0) / values.length).toFixed(12))
+      : null;
+    return [key, average];
+  }));
+}
+function sortRows(key, values, highFirst) {
+  return Object.entries(data.rows).sort(([, a], [, b]) => {
+    const order = eligibility[a.qualification] - eligibility[b.qualification];
+    if (order) return order;
+    const x = a.means ? values(a)?.[key] : null;
+    const y = b.means ? values(b)?.[key] : null;
+    if (!Number.isFinite(x)) return Number.isFinite(y) ? 1 : 0;
+    if (!Number.isFinite(y)) return -1;
+    const difference = highFirst ? y - x : x - y;
+    if (difference || key !== data.selection_metric || !data.tiebreak_metric) return difference;
+    return (values(b)?.[data.tiebreak_metric] ?? 0) - (values(a)?.[data.tiebreak_metric] ?? 0);
+  });
+}
+function imageLink(url, text, lazy) {
+  const anchor = document.createElement("a");
+  anchor.href = url;
+  anchor.target = "_blank";
+  anchor.rel = "noopener";
+  anchor.title = "Open full image";
+  const image = document.createElement("img");
+  image.alt = text;
+  image.src = url;
+  image.width = 512;
+  image.height = 512;
+  image.decoding = "async";
+  if (lazy) image.loading = "lazy";
+  anchor.append(image);
+  return anchor;
+}
+function preview(images, caseIds, description, lazy) {
+  const cell = document.createElement("td");
+  cell.className = "samples-column";
+  const grid = document.createElement("div");
+  grid.className = "samples" + (caseIds.length === 1 ? " single" : "");
+  for (const id of caseIds) {
+    if (!images[id]) {
+      const missing = document.createElement("span");
+      missing.textContent = title(id) + " · pending";
+      grid.append(missing);
+      continue;
+    }
+    const link = imageLink(images[id], title(id) + ", " + description, lazy);
+    link.className = "sample";
+    const thumbnail = document.createElement("span");
+    thumbnail.className = "sample-thumbnail";
+    thumbnail.append(link.firstElementChild);
+    const caption = document.createElement("span");
+    caption.className = "sample-name";
+    caption.textContent = title(id);
+    link.append(thumbnail, caption);
+    grid.append(link);
+  }
+  cell.append(grid);
+  return cell;
+}
+function heading(text) {
+  const cell = document.createElement("th");
+  cell.scope = "row";
+  cell.textContent = text;
+  return cell;
+}
+function render() {
+  sortChoice.value = sortKey;
+  get("direction").textContent = descending ? "Highest first ↓" : "Lowest first ↑";
+  for (const [key, {name, cell, button}] of buttons) {
+    if (key === sortKey) cell.setAttribute("aria-sort", descending ? "descending" : "ascending");
+    else cell.removeAttribute("aria-sort");
+    button.textContent = name + (key === sortKey ? (descending ? " ↓" : " ↑") : "");
+  }
+  const shared = scope.value === "shared";
+  const one = scope.value && scope.value !== "all" && !shared;
+  const caseIds = one ? [scope.value] : scope.value === "all" ? data.cases : data.cases.slice(0, 3);
+  const sharedByRow = shared ? new Map(Object.values(data.rows).map(row => [row, sharedScores(row, caseIds)])) : null;
+  const values = row => one ? row.cases[scope.value] : shared ? sharedByRow.get(row) : row.means;
+  const description = one ? "Scores for " + title(scope.value) + ". Click an image to open it full-size."
+    : shared ? "Scores average the three samples shown."
+    : "Scores average all " + data.cases.length + " cases. Each row shows the same " + caseIds.length + " samples.";
+  get("scope-description").textContent = description;
+  const reference = document.createElement("tr");
+  reference.className = "reference";
+  const filler = document.createElement("td");
+  filler.className = "empty";
+  filler.colSpan = fields.length;
+  reference.append(heading("Originals"), preview(data.references, caseIds, "original", false), filler);
+  get("originals").replaceChildren(reference);
+  let position = 0;
+  let priorValue = null;
+  let priorPreservation = null;
+  let reachedUnranked = false;
+  const rendered = sortRows(sortKey, values, descending).flatMap(([, row], index) => {
+    const tr = document.createElement("tr");
+    const name = heading(row.label);
+    const current = row.means ? values(row)?.[sortKey] : null;
+    const preservation = sortKey === data.selection_metric ? values(row)?.[data.tiebreak_metric] : null;
+    if (row.qualification === "pass" && Number.isFinite(current)) {
+      if (current !== priorValue || preservation !== priorPreservation) position = index + 1;
+      priorValue = current;
+      priorPreservation = preservation;
+      const badge = document.createElement("span");
+      badge.className = "rank";
+      badge.textContent = "Rank " + position;
+      name.prepend(badge);
+      if (position === 1) tr.className = "leader";
+    }
+    if (row.qualification !== "pass" || row.readability.status === "flagged") {
+      const badge = document.createElement("span");
+      badge.className = "setting";
+      badge.textContent = row.qualification === "unmeasured" ? "Image check pending"
+        : row.qualification === "fail" ? "Image check failed" : "Readability reduced";
+      if (Number.isFinite(row.readability.mean)) badge.title = "Mean Jev image damage " + score("", row.readability.mean);
+      name.prepend(badge);
+    }
+    const setting = document.createElement("span");
+    setting.className = "setting";
+    setting.textContent = settingName(row);
+    name.append(setting);
+    tr.append(name, preview(row.images, caseIds, label(row), index > 1));
+    for (const [key, [text]] of fields) {
+      const td = document.createElement("td");
+      td.className = key === sortKey ? "metric current" : "metric";
+      td.dataset.label = text;
+      td.textContent = score(key, values(row)?.[key]);
+      tr.append(td);
+    }
+    if (row.qualification === "pass" || reachedUnranked) return [tr];
+    reachedUnranked = true;
+    const divider = document.createElement("tr");
+    divider.className = "unranked-heading";
+    const dividerLabel = document.createElement("th");
+    dividerLabel.colSpan = fields.length + 2;
+    dividerLabel.textContent = "Unranked settings · scores shown for comparison";
+    divider.append(dividerLabel);
+    return [divider, tr];
+  });
+  get("rows").replaceChildren(...rendered);
+  get("sort-description").textContent = "Sorted by " + buttons.get(sortKey).name + (descending ? ", highest first." : ", lowest first.");
+}
+
+function frame(url, caption, scores) {
+  const figure = document.createElement("figure");
+  const name = document.createElement("figcaption");
+  name.textContent = caption;
+  if (scores) {
+    const summary = document.createElement("div");
+    summary.className = "scores";
+    summary.textContent = fields.map(([key, [name]]) => name + " " + score(key, scores[key])).join(" · ");
+    name.append(summary);
+  }
+  figure.append(imageLink(url, title(renderCase.value) + ", " + caption, false), name);
+  return figure;
+}
+function renderImages() {
+  const id = renderCase.value;
+  if (!id || !left.value || !right.value) return;
+  const edits = [left.value, right.value].map(key => data.rows[key]);
+  get("frames").replaceChildren(frame(data.references[id], "Original"),
+    ...edits.filter(row => row.images[id]).map(row => frame(row.images[id], label(row), row.cases[id])));
+}
+const ranked = sortRows(sortKey, row => row.means, true);
+if (ranked.length) {
+  get("compare").hidden = false;
+  for (const [key, row] of ranked) {
+    left.add(new Option(label(row), key));
+    right.add(new Option(label(row), key));
+  }
+  left.value = ranked[0][0];
+  right.value = (ranked[1] ?? ranked[0])[0];
+}
+for (const match of [data.head_to_head, data.baseline_match].filter(Boolean)) {
+  const {left: a, right: b, counts, cases} = match;
+  get("head-to-head").hidden = false;
+  const block = document.createElement("article");
+  const summary = document.createElement("p");
+  summary.textContent = label(data.rows[a]) + " won " + counts.left + " · " + label(data.rows[b]) + " won " +
+    counts.right + " · " + counts.tie + " ties · " + counts["order-sensitive"] + " order-sensitive · " +
+    counts.unmeasured + " unmeasured";
+  const details = document.createElement("details");
+  const heading = document.createElement("summary");
+  heading.textContent = "Case results";
+  const list = document.createElement("ul");
+  for (const [id, result] of Object.entries(cases)) {
+    const item = document.createElement("li");
+    const outcome = {left: label(data.rows[a]), right: label(data.rows[b]), tie: "Tie",
+      "order-sensitive": "Order-sensitive", unmeasured: "Unmeasured"};
+    item.textContent = title(id) + " · " + outcome[result.outcome];
+    list.append(item);
+  }
+  details.append(heading, list);
+  block.append(summary, details);
+  get("match-results").append(block);
+}
+scope.addEventListener("change", () => {
+  if (data.cases.includes(scope.value)) renderCase.value = scope.value;
+  render();
+  renderImages();
+});
+sortChoice.addEventListener("change", () => {
+  sortKey = sortChoice.value;
+  descending = true;
+  render();
+});
+get("direction").addEventListener("click", () => {
+  descending = !descending;
+  render();
+});
+for (const select of [renderCase, left, right]) select.addEventListener("change", renderImages);
+render();
+renderImages();
+</script>
+</body>
+</html>

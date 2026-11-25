@@ -1,0 +1,14 @@
+[build-system]
+requires = ["setuptools>=84.2.1"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "anima-final-boss-alpha-renderer"
+version = "0.1.0"
+description = "Native alpha renderer for the saved Anima Final Boss experiment"
+
+[project.entry-points."particle_sliders.alpha_renderers"]
+anima-final-boss-turbo = "anima_alpha_tune_backend:open_renderer"
+
+[tool.setuptools]
+py-modules = ["anima_alpha_tune_backend"]

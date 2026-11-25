@@ -1,0 +1,44 @@
+{
+  "measurement": "severity",
+  "rubric": {
+    "state": "Image_1 is the original. Image_2 is the edited image. Judge visible rendering damage in image_2. Use image_1 to locate important forms and features. A readable costume, mask, stylized silhouette, dramatic lighting, or changed scene can be coherent. Score consequences for readability.",
+    "questions": {
+      "severity": {
+        "type": "score",
+        "instructions": "How severely is the edited image visually broken? Consider important detail lost to blown highlights, crushed shadows, muddy colors, distorted forms, or accidental merges. Score damage visible in the focal subject or scene, including a localized defect that makes an important feature unreadable.",
+        "criteria": [
+          "Readable and coherent",
+          "Minor issue. Important forms remain easy to read",
+          "Major visible defect obscures an important focal form or scene region",
+          "Severe failure. Important forms or much of the composition are unreadable"
+        ]
+      },
+      "tones": {
+        "type": "score",
+        "instructions": "How much does extreme exposure, clipped highlights, crushed shadows, or muddy color erase important detail or separate forms in the edited image? Coherent shading and readable dark armor are valid.",
+        "criteria": [
+          "Readable and coherent",
+          "Minor issue. Important forms remain easy to read",
+          "Major visible defect obscures an important focal form or scene region",
+          "Severe failure. Important forms or much of the composition are unreadable"
+        ]
+      },
+      "geometry": {
+        "type": "score",
+        "instructions": "How much do malformed contours, accidental merges, extra parts, or distortion make the edited image's important forms unreadable? Coherent helmets, clothing and stylized shapes are valid.",
+        "criteria": [
+          "Readable and coherent",
+          "Minor issue. Important forms remain easy to read",
+          "Major visible defect obscures an important focal form or scene region",
+          "Severe failure. Important forms or much of the composition are unreadable"
+        ]
+      }
+    }
+  },
+  "minor_anchor": 0.3333333333333333,
+  "major_anchor": 0.6666666666666666,
+  "calibration": {
+    "path": "/ml2/particlesliders-working/anima-final-boss-optimization-20261123/image-breakage-audit/report.json",
+    "sha256": "e828ea100760598f8969364e9e2c99dff1f5a2b6b9a882b798f6e5daf3ce698f"
+  }
+}

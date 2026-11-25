@@ -1,6 +1,12 @@
 # Anima Final Boss leaderboard
 
-## Summary
+## Corrected twelve-scene Vibe12 leaderboard
+
+The current development comparison uses corrected Final Boss `--vibe` teachers, 240 native fields and RAW192 adapters. Each sample row shows the best measured strength for one recipe. Jev measures character effect against the matched slider-off image and grades visible image damage. Damage is the sole quality penalty. Zero Boss gain scores zero, and every complete eight-case measurement receives a rank. The adaptive search starts at α 1.00, probes both sides at 0.25, and compares constant, early and late schedules. The score is computed per image before averaging. [Ranked samples](final-boss-raw192/vibe12/README.md) · [Raw ratings and alpha paths](final-boss-raw192/vibe12/standings.json) · [Research source](../research/final-boss-vibe12/README.md)
+
+The next proposed experiment starts from the corrected background-projection RAW. Two matched 48-update ParticleGAN continuations test whether cleaner teacher targets can retain the parent’s Boss effect. The earlier independently confirmed default below belongs to its original teacher cohort. [Post-training handoff](final-boss-raw192/vibe12-post-training.md)
+
+## Earlier confirmed cohort
 
 **Current research default.** Soft foreground weighting with a 0.45 background floor, trained to RAW192 and replayed at early α 0.95. It leads the saved replays with **14.72** on eight development cases and scores **10.64** on eight separate confirmation cases. The original score was 33.71 on development and 28.55 on confirmation. [Default and exact gains](final-boss-raw192/default.json) · [Matched confirmation images](final-boss-raw192/confirmed-default.jpg) · [Download RAW checkpoints](https://huggingface.co/ntc-ai/anima-final-boss-research)
 

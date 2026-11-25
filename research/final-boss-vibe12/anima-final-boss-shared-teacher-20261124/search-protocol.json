@@ -1,0 +1,201 @@
+{
+  "initial_arms": [
+    "shared-best-stock",
+    "shared-best-opening",
+    "shared-best-middle",
+    "shared-best-neutral-path",
+    "shared-best-mixed-path",
+    "shared-best-uniform-steps",
+    "shared-best-divergence"
+  ],
+  "grid": {
+    "early": [
+      0.35,
+      0.475,
+      0.6,
+      0.6666666666666666,
+      0.8,
+      0.95
+    ],
+    "constant": [
+      0.55,
+      0.6666666666666666,
+      0.8,
+      0.95,
+      1.1,
+      1.35
+    ],
+    "late": [
+      0.45,
+      0.6666666666666666,
+      0.85,
+      1.1
+    ]
+  },
+  "confirmation_panel": {
+    "path": "/ml2/particlesliders-working/anima-final-boss-optimization-20261123/confirmation-panel.json",
+    "sha256": "31e0d0518b8c90094304b90c0d8f30e94137af03eee2fa4832cc7e5cb8030d70"
+  },
+  "selection_objective": "direct Jev Overall edit question from the prior review",
+  "development_scope": "previously exposed 4-case alpha screen and eight-case review",
+  "training_updates": 192,
+  "milestones": [
+    48,
+    96,
+    144,
+    192
+  ],
+  "training_options": {
+    "batch_size": 2,
+    "critic_width": 32,
+    "ema_decay": null,
+    "learning_rates": {
+      "d_lr_mult": 12.0,
+      "lr": 0.00075,
+      "prior_lr_mult": 40.0
+    },
+    "numerical_profile": null,
+    "response_scale": 1.0,
+    "seed": 1,
+    "sigma": 1.0,
+    "total_steps": 192,
+    "variation": "vibe-4b4773bba3bd2b7c"
+  },
+  "review_rubric": {
+    "path": "/ml2/particlesliders-working/anima-final-boss-signal-raw192-20261123/jev-review/report.json",
+    "sha256": "05fa17f3821643c68b60ec4fc73ad8bdaef988285372be0e03158242e609c62c"
+  },
+  "pair_rubric": {
+    "state": "Image_1 is the original with the slider off. Image_2 and image_3 are anonymized candidate edits of that original. A successful edit turns the original subject into a convincing Final Boss through the character design, preserves the identity, background, lighting and framing, and remains a coherent finished image.",
+    "questions": {
+      "preference": {
+        "criteria": [
+          "Image_2 clearly better",
+          "Image_2 slightly better",
+          "Tied",
+          "Image_3 slightly better",
+          "Image_3 clearly better"
+        ],
+        "instructions": "Which candidate is the better edit of image_1 overall? Judge character transformation and preservation together. Use the middle choice when the tradeoff makes them equally good.",
+        "type": "score"
+      }
+    }
+  },
+  "strength_bounds": [
+    0.2,
+    1.6
+  ],
+  "matched_strength_settings": [
+    [
+      "early",
+      0.6666666666666666
+    ],
+    [
+      "constant",
+      0.6375
+    ]
+  ],
+  "weighted_score": {
+    "character": 3,
+    "identity": 1,
+    "scene": 1,
+    "lighting": 1,
+    "framing": 1,
+    "coherence": 1
+  },
+  "active_score": {
+    "primary": "mean per-case Final Boss effect adjusted for visible breakage",
+    "effect": "nonnegative matched ON minus OFF Boss distinction",
+    "readability_multiplier": "(1 - Jev image breakage severity)^2",
+    "tiebreak_average": [
+      "identity",
+      "scene",
+      "lighting",
+      "framing",
+      "coherence"
+    ]
+  },
+  "boss_distinction_rubric": {
+    "state": "Image_1 is the original illustration. Image_2 is the edited illustration. Judge whether the edited person has become an unmistakable climactic video-game antagonist, from visible design of the character alone.",
+    "questions": {
+      "boss_distinction": {
+        "type": "noul",
+        "instructions": "Score Final Boss distinction from 0 to 1. 0 means no discernible boss character. 0.25 means ordinary clothing, generic armor, or a stern face alone. 0.50 means a credible elite warrior or rival, with some boss cues. 0.75 means a distinctive endgame antagonist with a recognizable, purposeful silhouette and signature character details. 1.0 means a visually unmistakable final encounter character. Reward commanding presence built into the character design. Judge the outfit, silhouette, headpiece, insignia, and other visible evidence. Ignore scene, lighting, crop, and image polish."
+      }
+    }
+  },
+  "previous_boss_distinction_score": {
+    "multiplier": "boss_distinction",
+    "average": [
+      "identity",
+      "scene",
+      "lighting",
+      "framing",
+      "coherence"
+    ],
+    "aggregation": "mean of case scores"
+  },
+  "effect_pair_rubric": {
+    "state": "Image_1 is the shared original. Image_2 and image_3 are two candidate edits of that original. Judge Final Boss effect from each edited character's visual design. A distinctive climactic antagonist has purposefully designed costume or gear, a recognizable silhouette, and commanding presence built into the character. Use only evidence on the character.",
+    "questions": {
+      "preference": {
+        "type": "score",
+        "instructions": "Which edit more clearly transforms the original character into an unmistakable Final Boss? Compare visual character design and choose the middle position when the two effects are equivalent.",
+        "criteria": [
+          "Image_2 clearly stronger",
+          "Image_2 slightly stronger",
+          "Equivalent Final Boss effect",
+          "Image_3 slightly stronger",
+          "Image_3 clearly stronger"
+        ]
+      }
+    }
+  },
+  "image_breakage_rule": {
+    "path": "/ml2/particlesliders-working/anima-final-boss-optimization-20261123/image-breakage-rule.json",
+    "sha256": "19d57ace95185bf976b1f4ad1a1f2374c9c783b998dd644fe66a36eb64a4a35b"
+  },
+  "previous_effect_score": {
+    "primary": "mean matched ON minus OFF Boss distinction",
+    "tiebreak_average": [
+      "identity",
+      "scene",
+      "lighting",
+      "framing",
+      "coherence"
+    ]
+  },
+  "experiment_target": {
+    "intent": "Make the intended edit clearly recognizable while keeping important forms and detail readable.",
+    "concept": "Final Boss",
+    "method": "soft-floor45",
+    "profile": "early",
+    "alpha": 0.9125,
+    "training_updates": 192,
+    "development_receipt": {
+      "path": "/ml2/particlesliders-working/anima-final-boss-optimization-20261123/tuning/soft-floor45/development/early/0x1.d333333333333p-1.json",
+      "sha256": "ae473a3a36ef3b2011898e05b69f5bfbd99cebf3a000cf16e8925f1a52658dd6"
+    },
+    "development_score": 0.324434277778,
+    "promotion": "Compare on the untouched eight-case panel at the same RAW update count and native sampler."
+  },
+  "formulation_comparison": {
+    "methods": [
+      "shared-best-stock",
+      "shared-best-opening",
+      "shared-best-middle",
+      "shared-best-neutral-path",
+      "shared-best-mixed-path",
+      "shared-best-uniform-steps",
+      "shared-best-divergence"
+    ],
+    "shared_strength": [
+      "early",
+      0.6666666666666666
+    ],
+    "secondary_control": [
+      "constant",
+      0.6375
+    ]
+  }
+}

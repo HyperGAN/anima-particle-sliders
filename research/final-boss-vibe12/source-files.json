@@ -1,0 +1,273 @@
+{
+  "campaign": "anima-final-boss-vibe12-20261124",
+  "files": {
+    "anima-final-boss-optimization-20261123/adapter_rollout_teacher_worker.py": {
+      "original_sha256": "5230c11d847fc4d8b96f60e8d660b9ec847b328811c7ff772ec738e6312d6edc"
+    },
+    "anima-final-boss-optimization-20261123/background_orthogonal_teacher_worker.py": {
+      "original_sha256": "a0a81e6f032cafe05d2295336c06d3d9a69a8de5b2d635ab6f5f7920ddff866f"
+    },
+    "anima-final-boss-optimization-20261123/boss_review.py": {
+      "original_sha256": "a322be113c0d56b135790258f9f6f84068fdfc2bcbb56d4a9c1f3d8d1c73dbba"
+    },
+    "anima-final-boss-optimization-20261123/dispatch.py": {
+      "original_sha256": "1613d482761d935cdda329306367a02400d7464567c3604ba70929adee5bfddb"
+    },
+    "anima-final-boss-optimization-20261123/image-breakage-rule.json": {
+      "original_sha256": "19d57ace95185bf976b1f4ad1a1f2374c9c783b998dd644fe66a36eb64a4a35b"
+    },
+    "anima-final-boss-optimization-20261123/image_breakage.py": {
+      "original_sha256": "093bbff0ba09672a01c42a790c12c7de35dbceb835e78f319bed33fc2f951c01"
+    },
+    "anima-final-boss-optimization-20261123/optimization_gallery.html": {
+      "original_sha256": "936cde47349e86c0f3809559f502b37978d7df6f6f241337a35c62ee6d2d69da"
+    },
+    "anima-final-boss-optimization-20261123/optimization_guard.py": {
+      "original_sha256": "b1571aee4b8a266dc7ccdf0129dd43f48a6036524d4c8b8a3aa42b3e0ecabf92"
+    },
+    "anima-final-boss-optimization-20261123/optimization_targets.py": {
+      "original_sha256": "737baa933edfc8a11a4a4cda12181a0053fcc23a5548e8bffc7bfb130f679b16"
+    },
+    "anima-final-boss-optimization-20261123/optimization_worker.py": {
+      "original_sha256": "6ff38d93d1b30a57130ea1313501e4f78b62ed38b0160687dc520773194f5e5e"
+    },
+    "anima-final-boss-optimization-20261123/publish_optimization.py": {
+      "original_sha256": "bf96130609e0a5ed20c9c8475e72d192c93c811ff74dd0001fabb0fe741a2680"
+    },
+    "anima-final-boss-optimization-20261123/score.py": {
+      "original_sha256": "03e4172003f38d873e4f807d4f787889f96c6f89f68213ec57b39b681da52135"
+    },
+    "anima-final-boss-optimization-20261123/tune.py": {
+      "original_sha256": "fe2a2daf4df496e24870784ca3987d398af0173da4a5e80642fd2e3b2f0ee1c8"
+    },
+    "anima-final-boss-research-raw192-20261123/build_gallery.py": {
+      "original_sha256": "2479ca36ce627b81b9f8dad452b06a93a3f19dd5cbddbf8399f554c55a1817a8"
+    },
+    "anima-final-boss-research-raw192-20261123/cohorts/foreground/design.py": {
+      "original_sha256": "4d1c9e7cf2dbc301cc223d3f68c1a9947943c3e2e25580e5c238831936cbc3cb"
+    },
+    "anima-final-boss-research-raw192-20261123/cohorts/foreground/judge.py": {
+      "original_sha256": "34d0f9a744a941ec8247be11149b3c4e34b339d284b3864202031b6688cedc6d"
+    },
+    "anima-final-boss-research-raw192-20261123/cohorts/foreground/native.py": {
+      "original_sha256": "263f4fe4eb6dfb34475f686b44f998af472b023d1757f7c3aafe7ad495f61f27"
+    },
+    "anima-final-boss-research-raw192-20261123/cohorts/foreground/train.py": {
+      "original_sha256": "29cdb1e4cf16ba2672cb1f1960741517928d3fdb386806a8b50003630ddbfae3"
+    },
+    "anima-final-boss-research-raw192-20261123/cohorts/prompt-only/design.py": {
+      "original_sha256": "4d1c9e7cf2dbc301cc223d3f68c1a9947943c3e2e25580e5c238831936cbc3cb"
+    },
+    "anima-final-boss-research-raw192-20261123/cohorts/prompt-only/fit.py": {
+      "original_sha256": "de3dc5c8b77fe6358cff5756c8a984521035ab62c3e5f5b5b898fde594063df5"
+    },
+    "anima-final-boss-research-raw192-20261123/cohorts/prompt-only/judge.py": {
+      "original_sha256": "34d0f9a744a941ec8247be11149b3c4e34b339d284b3864202031b6688cedc6d"
+    },
+    "anima-final-boss-research-raw192-20261123/cohorts/prompt-only/native.py": {
+      "original_sha256": "12530fea1471823bf0d2b871c10b7cf251ac359ac2d273c17a4dc50052ec665e"
+    },
+    "anima-final-boss-research-raw192-20261123/cohorts/prompt-only/product/lumen_studio/engine-source.json": {
+      "original_sha256": "44678ec60a812ff34956cb22f8ed8bdd447c8c708cb4cd4540a3cf5079bfc196"
+    },
+    "anima-final-boss-research-raw192-20261123/cohorts/prompt-only/replay.py": {
+      "original_sha256": "fcdbfd0de4806ef78df1d0eaf98702898270d2cffb045331cd39a999d4118588"
+    },
+    "anima-final-boss-research-raw192-20261123/cohorts/prompt-only/train.py": {
+      "original_sha256": "2571304461d29350833dbf37773f54c5a815a083eb9ed5cf2603ce2f5459ee2c"
+    },
+    "anima-final-boss-research-raw192-20261123/final_boss_outcome.py": {
+      "original_sha256": "fd2198ff7e4fec29eea92556fdb24db04d31ada44dbf7b525615a38abd924c39"
+    },
+    "anima-final-boss-research-raw192-20261123/panel.json": {
+      "original_sha256": "002bd9e8ea2eab6966d4c05c7e393386b58a6cbbcf63d72a22d99d47ec25742f"
+    },
+    "anima-final-boss-research-raw192-20261123/prepare.py": {
+      "original_sha256": "2178bb53380e0c4557e2cc1a11bbc4627f452f660bfdc397aea001d71ce70a5e"
+    },
+    "anima-final-boss-research-raw192-20261123/prompt-only-alpha-tune/bridge/anima_alpha_tune_backend.py": {
+      "original_sha256": "3df740df34f13cfddc018aab2bfe5031ddb4b7974a55546b04f8367cc7a06760"
+    },
+    "anima-final-boss-research-raw192-20261123/prompt-only-alpha-tune/bridge/pyproject.toml": {
+      "original_sha256": "87f89ace748472611dde1d246d7333aca0a390f95abbadf23792c71c02e2616d"
+    },
+    "anima-final-boss-research-raw192-20261123/prompt-only-alpha-tune/pr-wheel-visible/module-hashes.json": {
+      "original_sha256": "6a11ec65ed67f5d2c05808108a9225015f05103fe58fff96d31a388aa5ec37f2"
+    },
+    "anima-final-boss-research-raw192-20261123/prompt-only-alpha-tune/pr-wheel-visible/particle_sliders/alpha_search.py": {
+      "original_sha256": "b16ac13d46831e13b804cdcb2d2e2992dfc7ab306a15d4fdb6790eecda58201d"
+    },
+    "anima-final-boss-research-raw192-20261123/prompt-only-alpha-tune/pr-wheel-visible/particle_sliders/alpha_tune.py": {
+      "original_sha256": "02f228b09706050a674f60fa3b7a3e26bf259a73c47b23b3d7ffd39946d39407"
+    },
+    "anima-final-boss-research-raw192-20261123/prompt-only-alpha-tune/pr-wheel-visible/particle_sliders/alpha_tune_jev.py": {
+      "original_sha256": "9983c7d35a0f94790416efd088717c8aafa1e156f38734321f6a152d5810c41c"
+    },
+    "anima-final-boss-research-raw192-20261123/prompt-only-alpha-tune/renderer-installed/anima_alpha_tune_backend.py": {
+      "original_sha256": "3df740df34f13cfddc018aab2bfe5031ddb4b7974a55546b04f8367cc7a06760"
+    },
+    "anima-final-boss-research-raw192-20261123/run_alpha_tune.py": {
+      "original_sha256": "5022c2b337cbfc88eb1dd6bc460a6179d9fc5d395842d738f32a2094eab006fc"
+    },
+    "anima-final-boss-shared-seed-split-20261124/qualify.py": {
+      "original_sha256": "f71e3b8b9fa753e223a2b5b708a8e8cd66ddb0078981acbbd1822517020c5d3c"
+    },
+    "anima-final-boss-shared-seed-split-20261124/resume_supervisor.py": {
+      "original_sha256": "ca2b682bbe2bb481f357745bf9a04938d48ae63b2d1846fcfb77de34240a3918"
+    },
+    "anima-final-boss-shared-seed-split-20261124/seed_split.py": {
+      "original_sha256": "a15bf204afa3cedd989c3f0258f343fac1768bbb63b220fd15537abe71c00bd4"
+    },
+    "anima-final-boss-shared-teacher-20261124/search-protocol.json": {
+      "original_sha256": "ff1175030b8a05aa40ea6bad466e03e7dcee20adc0a50759634aa5f4c43844ad"
+    },
+    "anima-final-boss-vibe12-20261124/adapters/costume_stock.py": {
+      "original_sha256": "32ce8a9b063c25ba256628fd373439958c063257bc024b6463f419e8887378c5"
+    },
+    "anima-final-boss-vibe12-20261124/adapters/rollout_stock.py": {
+      "original_sha256": "bda76081c1937177dac2155f40ca82d5a6b56290d211fefa0558aa2cec955e3c"
+    },
+    "anima-final-boss-vibe12-20261124/adapters/seed_cross_stock.py": {
+      "original_sha256": "4f7f615b56ec4a326b6a30c8f6eefbdc7fe8927e53b4487125a202a62087c086"
+    },
+    "anima-final-boss-vibe12-20261124/adapters/spatial_stock.py": {
+      "original_sha256": "1cfca11df98e5a379ff88207254e779a52df0ba3fd61923cc9f9a82d9f150b90"
+    },
+    "anima-final-boss-vibe12-20261124/campaign.py": {
+      "original_sha256": "480aeffb3cdb01caf62e3210eaa4e0b2566fe3339c21056ad785ea87107d4748"
+    },
+    "anima-final-boss-vibe12-20261124/campaign_shared_v2.py": {
+      "original_sha256": "73c9f9163ec377dfe607f2a150d7305ec629bf5f1bb5a259df80e47534578af1"
+    },
+    "anima-final-boss-vibe12-20261124/campaign_shared_v3.py": {
+      "original_sha256": "0f6c488829c7df82cc01b8afa0b2d67f6f84d2d038d9ec0960e5e033dea3356e"
+    },
+    "anima-final-boss-vibe12-20261124/campaign_shared_v4.py": {
+      "original_sha256": "42b0130e2bb7b50dd32475fcd9d7bd2ed512c7d6a99ce4089ab9cfe5dca929e0"
+    },
+    "anima-final-boss-vibe12-20261124/cohort.py": {
+      "original_sha256": "9591788e4a6e538736e3896f2da6aaae5919b64b773e3725f739100930ddd77c"
+    },
+    "anima-final-boss-vibe12-20261124/control.py": {
+      "original_sha256": "6c21aa341fe9e94ab63dc67d0ff5054a87934317c5f165f93c45cc0aeb446462"
+    },
+    "anima-final-boss-vibe12-20261124/freeze.py": {
+      "original_sha256": "d1cdf82a3971d36fdc759aa02b0e2c10ef918a1318b0b506958bcc6964dda7f0"
+    },
+    "anima-final-boss-vibe12-20261124/observe_events.py": {
+      "original_sha256": "d9d074533e68b8de06ec4cd63ba03ce193e933580625baf4612d59781740254c"
+    },
+    "anima-final-boss-vibe12-20261124/optimization_guard.py": {
+      "original_sha256": "3b9a5ffd72c6d592ce3a294985b7246ac349bac6eb604d0bb81080317fa57c88"
+    },
+    "anima-final-boss-vibe12-20261124/optimization_guard_shared_probe.py": {
+      "original_sha256": "cef541948fc9ca05edc83f39dc9a2c25d9fb89975c0703252f2273e6fba55901"
+    },
+    "anima-final-boss-vibe12-20261124/optimization_guard_shared_v2.py": {
+      "original_sha256": "c28317aa2044e69c8ac61e31f93856af1ed6517ebca3a9ac4e0b1952b6d1a7d2"
+    },
+    "anima-final-boss-vibe12-20261124/optimization_worker.py": {
+      "original_sha256": "a626b26555b57f0dcd4d91378084912bcf6c3e7769fdc4963f86a34810a8f3ca"
+    },
+    "anima-final-boss-vibe12-20261124/prepare_mattes.py": {
+      "original_sha256": "5ed65023891e01e394c5193b86e04212e17c8207f1b14fdd36ecc9187e0e6545"
+    },
+    "anima-final-boss-vibe12-20261124/prepare_prompts.py": {
+      "original_sha256": "9276b6f75cf8dec3b0df9abd5f39c967b0bba84c405ee1176f9707b563830c03"
+    },
+    "anima-final-boss-vibe12-20261124/publish.py": {
+      "original_sha256": "4cbd6eb5e23289fae5d8cce58bd9688f3ede400e53089233f7ba8c9c4d5ae969"
+    },
+    "anima-final-boss-vibe12-20261124/recipe_loader.py": {
+      "original_sha256": "68281746de3011028cbd81246bfd8b93906e5e37e12ac3ef3b8458ed2c5f4ee4"
+    },
+    "anima-final-boss-vibe12-20261124/recipes.json": {
+      "original_sha256": "f3458b41853a634fcafcdb35f03db86314ed24af870389587e3d884a57ba7e2d"
+    },
+    "anima-final-boss-vibe12-20261124/register_extra_v2.py": {
+      "original_sha256": "71748da0c36013ac0c10edbfad9964d53878329e2b3666dcaec5599aabffa336"
+    },
+    "anima-final-boss-vibe12-20261124/register_spatial.py": {
+      "original_sha256": "c954e24a55c4372e3fa0d12bab28df97e3c20b590273c30c2db3caba1d76d24d"
+    },
+    "anima-final-boss-vibe12-20261124/register_spatial_v2.py": {
+      "original_sha256": "9c471e68b76c147c0d7157259699008851d04899feb28eb526b6f7fd0c3413bc"
+    },
+    "anima-final-boss-vibe12-20261124/review_inconclusive.py": {
+      "original_sha256": "96ba0e24fce9f68cd6fa2bfebaa6bf02a8c051ea8a0922edd23bac2778b52251"
+    },
+    "anima-final-boss-vibe12-20261124/search-protocol.json": {
+      "original_sha256": "445fded547e2657c06b67abf0c1c83c1f900456ed820bc64cce1b07c96e9cb43"
+    },
+    "anima-final-boss-vibe12-20261124/shared_capacity_guard.py": {
+      "original_sha256": "d56608f248ceda0e86f1aedaf8e8b84d0c1b237a663f4aca6dde22f29da9b69b"
+    },
+    "anima-final-boss-vibe12-20261124/shared_capacity_guard_probe.py": {
+      "original_sha256": "8047917351d22a52af5776c24cee9fcf7da0a6340d246be76289d580b8620848"
+    },
+    "anima-final-boss-vibe12-20261124/shared_capacity_guard_v2.py": {
+      "original_sha256": "dcd8f220d1ac9bcf4c4cc8e2cd4de49d69b2a12c460432fbf57b0f06a7c4f401"
+    },
+    "anima-final-boss-vibe12-20261124/shared_data.py": {
+      "original_sha256": "09c6ae1ec4a42e332f5955b82d87a3c6a8b8e9862982571d77a1aa14ff13966f"
+    },
+    "anima-final-boss-vibe12-20261124/strength-search/adaptive_alpha.py": {
+      "original_sha256": "c10420f8b9ecc80e77822edc33d1e37c746c42886101f0139da988bcc43aa730"
+    },
+    "anima-final-boss-vibe12-20261124/strength-search/adaptive_queue.py": {
+      "original_sha256": "7a5ed0e51c96330ca149c97053c6ceadf25e1654f21db6d9d61f0c222bbf28b7"
+    },
+    "anima-final-boss-vibe12-20261124/strength-search/alpha_leaderboard.py": {
+      "original_sha256": "d7dab9051484e3703f4cde0c4f6ff90207a484802d713133b67aaaa807bede9c",
+      "published_sha256": "341ddeea0b782a3f59969eec294b27049bbe585267b51b3191aee0a01eb9cdc4"
+    },
+    "anima-final-boss-vibe12-20261124/strength-search/calibration_guard.py": {
+      "original_sha256": "d2c5e244bf49556e1bb7abf1b3f5aa5264fb7303b8537f07dec291a35cf00a1c"
+    },
+    "anima-final-boss-vibe12-20261124/strength-search/define.py": {
+      "original_sha256": "14520220b27ff203c686674f8acd0ec9c25ab91c7e88f179cf92fb20bd8e5753"
+    },
+    "anima-final-boss-vibe12-20261124/strength-search/guard.py": {
+      "original_sha256": "2c87c6a2aeb295f1f22a095891aeea2b1c0394a6c49d42a7e64a8282e928846d"
+    },
+    "anima-final-boss-vibe12-20261124/strength-search/optimization_worker.py": {
+      "original_sha256": "b0069fcd524d9726bb16338712925b23b6d0fe3d19bcdace4fa85509e819bed8"
+    },
+    "anima-final-boss-vibe12-20261124/strength-search/publish.py": {
+      "original_sha256": "46caaa30155437eac84cba40997a686ac4d1654f240dfc06a40098b4acebb90e",
+      "published_sha256": "e07e9e951fe8409378fcb54f981e9990657afddb55d7b163209ae669dce7121f"
+    },
+    "anima-final-boss-vibe12-20261124/strength-search/retune_final_boss.py": {
+      "original_sha256": "1b605d6b1efeb181b36d7045a2d474faab142588654886aed477b335c189cd01"
+    },
+    "anima-final-boss-vibe12-20261124/strength-search/retune_final_boss_adaptive.py": {
+      "original_sha256": "0755fa4027ac733499c2d60edf7c70e080972813b8f595aecabf1616065befe6"
+    },
+    "anima-final-boss-vibe12-20261124/strength-search/retune_final_boss_centered.py": {
+      "original_sha256": "79f8b598ab910c76025ce268a648dd040e29be6db21e30b4012d0390f027e669"
+    },
+    "anima-final-boss-vibe12-20261124/strength-search/retune_final_boss_damage.py": {
+      "original_sha256": "2b08d40e96842e259a9a5b8825564f93f319c84b25a56655614fe078d613d06b"
+    },
+    "anima-final-boss-vibe12-20261124/strength-search/run.py": {
+      "original_sha256": "50d7b164f960ca0e929bbe13c84167a886844d1b806739fac31e052eb7e2c39a"
+    },
+    "anima-final-boss-vibe12-20261124/verify_campaign.py": {
+      "original_sha256": "fa34d39f7b7e720604632343d6f816cb7361e235bd899ed90b7aad6699edefe4",
+      "published_sha256": "1144240c6a4cf9901d5849c93fd28a871ea46cc4d669dab8661bdbc5d9b062b1"
+    }
+  },
+  "external_input_sha256": {
+    "anima-final-boss-shared-teacher-20261124/storage/vibe-corrected-neutral-expanded/training/c2cb92f3c068a1bf20ae942f81ad73e4b8c18d60d769b05c049e78888e3b228d/manifest.json": "44e1d44517abd7c9bd987fd761349ebf754e387786a538cfe8defe91ef9a0c80",
+    "anima-final-boss-shared-teacher-20261124/storage/vibe-corrected-neutral-expanded/training/c2cb92f3c068a1bf20ae942f81ad73e4b8c18d60d769b05c049e78888e3b228d/targets/index.json": "cc276e0426c8163fbd36d7abd1b0e44f865884c7831b44abd16d680997e2ecbf",
+    "anima-final-boss-vibe12-20261124/storage/targets/receipt.json": "56e23b8247d8f5b2b0b0ae2370838687bdb95ee68a914718fbe5ff4ed1bc88a3",
+    "anima-final-boss-vibe12-20261124/prompt-variants.json": "a914118041e20b46e58a23f54a4d865c41ec4812e19838dc0ee0653c80a4d555",
+    "anima-final-boss-vibe12-20261124/mattes/index.json": "4337ddefa0e65f6478ded9cc1828c5ea749557c3f85a12782d6280f31c72e60a",
+    "anima-final-boss-signal-raw192-20261123/jev-review/report.json": "05fa17f3821643c68b60ec4fc73ad8bdaef988285372be0e03158242e609c62c",
+    "anima-final-boss-research-raw192-20261123/final-boss-outcome-jev/direct-controls-screen-first.json": "adcad2f49682e56c73d50e962418a16b0e42f7242a8017092dde5956dd45b836",
+    "anima-final-boss-research-raw192-20261123/jev-rubric-audit-v2/fixtures.json": "4ac4f9a76fcc9e43f1ad160dfa4c93ecb8c1120b6030cf30fb5c1ba84b17bad1",
+    "anima-final-boss-research-raw192-20261123/prompt-only-alpha-tune/prompt-only-tuned.json": "ba93dfe67def25922db3309ab4cfa0accd090f6dbf278766ef0b6ef29d687375",
+    "anima-final-boss-research-raw192-20261123/nvme-execution.json": "f067fd98f36c7e509c0780fa687a9a0923fd12a1cde249b20bddbfbfed007816",
+    "anima-vibe-teacher-targets-20261124/lumen_studio/vibe_target_search.py": "0c00cb064ed1efe59a230d28ec5b1c50f799842b90edfdbc6f691adf4de33117"
+  }
+}
