@@ -101,6 +101,8 @@ def export(campaign, folder):
              f"![Slider off]({snapshot['original_samples']})", "",
              "| Rank | Training recipe | Schedule and α | Final Boss score ↑ | Boss gain ↑ | Damage ↓ | Matched samples |",
              "| ---: | --- | --- | ---: | ---: | ---: | --- |"]
+    if (folder / "distinct-designs.md").is_file():
+        lines[4:4] = ["[Distinct Boss ranking across characters](distinct-designs.md)", ""]
     if (folder / "finalist-review.md").is_file():
         lines[4:4] = ["[Blind finalist comparisons and case sensitivity](finalist-review.md)", ""]
     if version == VERSION:

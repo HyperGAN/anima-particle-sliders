@@ -57,3 +57,7 @@ The current worker starts a separate versioned alpha search. It reuses matching 
 ## Finished-edit finalist comparison
 
 The all-recipe score chooses the six recipes and their measured settings. From the campaign directory, run `python metric-calibration/finalist_board.py --watch` with the recorded Jev environment to publish the blind round robin when a finalist or its strength changes. Each image order is cached by model, question and image hashes. The two calibration commands are `python metric-calibration/preference_round.py` and `python metric-calibration/preference_finish.py`. Reusing the historical calibration inputs on the research host requires its archived panels. The published report and bound responses support offline replay of every decision. [Results and replay commands](../../docs/final-boss-raw192/vibe12/finalist-review.md)
+
+## Distinct Final Boss designs
+
+Run `python metric-calibration/design_range.py --watch` in the campaign to measure recurring boss designs at each recipe’s best per-image strength. The alpha leaderboard consumes the latest complete snapshot. The companion scripts `design_range_transfer.py` and `design_lineups.py` compare the nominated opening-four recipe and the late-cue incumbent across additional search scenes and complete character lineups. The export uses `python -m release_tools.publish_final_boss_designs CAMPAIGN docs/final-boss-raw192/vibe12` after exporting the alpha snapshot. [Formula, samples and offline replay](../../docs/final-boss-raw192/vibe12/distinct-designs.md)

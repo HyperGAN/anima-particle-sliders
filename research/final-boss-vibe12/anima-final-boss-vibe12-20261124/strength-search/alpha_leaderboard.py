@@ -142,6 +142,14 @@ def publish():
     active = set(progress['active'].values())
     winners = [r for r in ranked if r['best_for_recipe']]
     omissions = ranks_by_omission(winners, cases)
+    design_file = ROOT / "metric-calibration/design-range/latest.json"
+    design = read(design_file) if design_file.is_file() else {}
+    audited = {(r['method'], r['profile'], r['alpha']): r for r in design.get('rows', [])}
+    design_option = '<option value="design">Distinct Final Boss designs</option>' if audited else ''
+    design_help = (f'<p><a href="?metric=design">Distinct Boss ranking</a> · <a href="?metric=score">Per-image ranking</a> · '
+                   f'{len(audited)} recipes at their per-image best strength as of {design["as_of"]}. '
+                   'Repeated designs across different characters share credit. Jev compares all 28 character pairs.</p>'
+                   if audited else '')
     for rank, row in enumerate(ranked, 1):
         method, profile, alpha = row['method'], row['profile'], row['alpha']
         means = row['means']
@@ -152,6 +160,19 @@ def publish():
         if candidate and method not in completed:
             source += ' · in progress'
         note = f'<small>{source}</small>'
+        design_row = audited.get((method,profile,alpha))
+        design_data, design_cell = '', '<td class="design"></td>'
+        if design_row:
+            if any(row['cases'][c]['on']['sha256'] != design_row['inputs'][c] or
+                   row['cases'][c][SCORE] != design_row['case_scores'][c] for c in cases):
+                raise ValueError("The design comparison does not bind this measured setting")
+            design_data = f' data-design="{design_row["score"]}"'
+            def pair_label(pair):
+                return ' / '.join(c.title() for c in pair["cases"]) + f' · {100*pair["repeat"]:.0f}/100'
+            ordered = sorted(design_row['pairs'], key=lambda p:p['repeat'])
+            design_cell = (f'<td class="design">{100*design_row["score"]:.2f}<details><summary>'
+                           f'Repeat {100*design_row["repeat"]:.1f}/100</summary><small>Most distinct · {pair_label(ordered[0])}</small>'
+                           f'<small>Most similar · {pair_label(ordered[-1])}</small></details></td>')
         sensitivity = ''
         if row['best_for_recipe']:
             places = omissions[method]
@@ -160,11 +181,11 @@ def publish():
             details = ''.join(f'<small>Omit {c.title()} · #{place}</small>' for c,place in places.items())
             sensitivity = f'<details><summary>7-case rank {span}</summary>{details}</details>'
         lines.append(f'<tr data-effect="{means[GAIN]}" data-score="{means[SCORE]}" data-damage="{means[DAMAGE]}" '
-                     f'data-method="{method}" data-adaptive="{int(candidate)}" '
+                     f'{design_data} data-method="{method}" data-adaptive="{int(candidate)}" '
                      f'data-fixed="{int(shared)}" data-control="{profile if control else ""}" id="{method}-{profile}-{alpha:g}">'
                      f'<td class="rank">{rank}</td><th scope="row">{escape(LABELS[method])}{note}</th>'
                      f'<td>{profile.title()} α {alpha:.5g}</td><td>{images(cases, row["cases"])}</td>'
-                     f'<td class="effect">+{100 * means[GAIN]:.1f}</td><td>{100 * means[SCORE]:.2f}{sensitivity}</td>'
+                     f'{design_cell}<td class="effect">+{100 * means[GAIN]:.1f}</td><td>{100 * means[SCORE]:.2f}{sensitivity}</td>'
                      f'<td>{100 * means[DAMAGE]:.1f}</td></tr>')
 
     reference = next((r for r in ranked if (r['method'],r['profile'],r['alpha']) ==
@@ -174,7 +195,7 @@ def publish():
         scores = reference['means']
         reference_html = (f'<tr><td>Reference</td><th scope="row">Opening four<small>Visual comparison</small></th>'
                           f'<td>Early α 1.15625</td><td>{images(cases,reference["cases"])}</td>'
-                          f'<td>+{100*scores[GAIN]:.1f}</td><td>{100*scores[SCORE]:.2f}</td>'
+                          f'<td class="design"></td><td>+{100*scores[GAIN]:.1f}</td><td>{100*scores[SCORE]:.2f}</td>'
                           f'<td>{100*scores[DAMAGE]:.1f}</td></tr>')
     comparison(ranked, standings, LABELS, cases, PUBLIC, sample)
 
@@ -189,6 +210,7 @@ p{{margin:5px 0 12px;color:#c4c8d1}}a,.effect{{color:#ffc59f}}.effect{{font-weig
 th,td{{padding:7px 9px;border-bottom:1px solid #353841;vertical-align:middle}}thead{{background:#242830}}
 th[scope=row]{{min-width:145px}}td:nth-child(3){{white-space:nowrap}}tr:target{{background:#33303b}}
 .images{{display:flex;gap:4px;min-width:max-content}}img{{display:block;object-fit:contain;border-radius:4px}}
+.design{{display:none}}.design-view .design{{display:table-cell}}
 summary{{cursor:pointer;font-size:.75rem;color:#b6bdca}}
 small{{display:block;font-weight:400;color:#b6bdca;font-size:.75rem}}
 </style><main>
@@ -197,11 +219,12 @@ small{{display:block;font-weight:400;color:#b6bdca;font-size:.75rem}}
 <p>Jev rates rendering defects in the finished artwork on its own. The Boss score uses matched character gain and distinction, then multiplies by the undamaged fraction. Zero gain scores zero.</p>
 <p>Same eight cases at RAW192. Boss effect is the average gain over slider off. Expand a seven-case rank to see how far that recipe moves when one scene is left out. Each recipe keeps its full-panel strength.</p>
 <p><a href="final-boss-vibe12-alpha-tuned.html#trial-paths">Search paths</a> · <a href="final-boss-vibe12-opening-comparison.html">Compare opening four</a> · <a href="final-boss-vibe12-preference-review.html">Blind finalist comparison</a> · <a href="final-boss-vibe12-alpha-leaderboard-v1.html">Previous scoring</a> · <a href="?fixed=constant">Shared constant α0.6375</a> · <a href="?fixed=early">Shared early α2/3</a></p>
-<div class="controls"><label>Sort by <select id="metric"><option value="score">Final Boss score</option><option value="effect">Boss effect</option><option value="damage">Least image damage</option></select></label>
+{design_help}
+<div class="controls"><label>Sort by <select id="metric"><option value="score">Final Boss score</option>{design_option}<option value="effect">Boss effect</option><option value="damage">Least image damage</option></select></label>
 <label>Show <select id="scope"><option value="top">Best measured per recipe</option><option value="adaptive">Current search and fixed strengths</option><option value="tradeoffs">Effect and damage trade-offs</option><option value="all">All measured strengths</option><option value="early">Shared early α2/3</option><option value="constant">Shared constant α0.6375</option></select></label></div>
 <div class="scroll"><table><thead><tr><th scope="col">Rank</th><th scope="col">Recipe</th><th scope="col">Strength</th>
-<th scope="col">Matched samples</th><th scope="col">Boss effect</th><th scope="col">Final Boss score</th><th scope="col">Image damage</th></tr></thead>
-<tbody><tr><td></td><th scope="row">Slider off</th><td></td><td>{images(cases, originals, True)}</td><td></td><td></td><td></td></tr>{reference_html}</tbody>
+<th scope="col">Matched samples</th><th scope="col" class="design">Distinct Boss score</th><th scope="col">Boss effect</th><th scope="col">Final Boss score</th><th scope="col">Image damage</th></tr></thead>
+<tbody><tr><td></td><th scope="row">Slider off</th><td></td><td>{images(cases, originals, True)}</td><td class="design"></td><td></td><td></td><td></td></tr>{reference_html}</tbody>
 <tbody id="trials">{''.join(lines)}</tbody></table></div></main>
 <script>
 const body = document.getElementById('trials');
@@ -209,7 +232,9 @@ const metric = document.getElementById('metric');
 const scope = document.getElementById('scope');
 const rows = Array.from(body.rows);
 rows.forEach((row, i) => row.initialRank = i);
-const fixed = new URLSearchParams(location.search).get('fixed');
+const query = new URLSearchParams(location.search);
+const fixed = query.get('fixed');
+if (metric.querySelector('option[value="design"]') && (query.get('metric') === 'design' || (!query.has('metric') && !fixed && !location.hash))) metric.value = 'design';
 if (fixed === 'early' || fixed === 'constant') scope.value = fixed;
 if (location.hash && document.getElementById(location.hash.slice(1))) scope.value = 'all';
 const isLatest = row => row.dataset.adaptive === '1' || row.dataset.fixed === '1';
@@ -235,8 +260,12 @@ function tradeoffs() {{
 }}
 function update() {{
   const key = metric.value;
+  const design = key === 'design';
+  if (design) scope.value = 'top';
+
+  body.closest('table').classList.toggle('design-view', design);
   const direction = key === 'damage' ? 1 : -1;
-  rows.sort((a, b) => direction * (Number(a.dataset[key]) - Number(b.dataset[key])) || a.initialRank - b.initialRank);
+  rows.sort((a, b) => direction * (Number(a.dataset[key] ?? -1) - Number(b.dataset[key] ?? -1)) || a.initialRank - b.initialRank);
   let rank = 0;
   const seen = new Set();
   const options = scope.value === 'tradeoffs' ? tradeoffs() : null;
@@ -244,7 +273,7 @@ function update() {{
     const method = row.dataset.method;
     const latest = isLatest(row);
     const representative = !seen.has(method);
-    row.hidden = options ? !options.has(row) : scope.value === 'top' ? !representative : (scope.value === 'early' || scope.value === 'constant') ? row.dataset.control !== scope.value : scope.value === 'adaptive' && !latest;
+    row.hidden = design ? !row.hasAttribute('data-design') : options ? !options.has(row) : scope.value === 'top' ? !representative : (scope.value === 'early' || scope.value === 'constant') ? row.dataset.control !== scope.value : scope.value === 'adaptive' && !latest;
     if (!row.hidden) {{
       seen.add(method);
       row.querySelector('.rank').textContent = ++rank;
@@ -253,7 +282,10 @@ function update() {{
   }}
 }}
 metric.addEventListener('change', update);
-scope.addEventListener('change', update);
+scope.addEventListener('change', () => {{
+  if (scope.value !== 'top' && metric.value === 'design') metric.value = 'score';
+  update();
+}});
 update();
 </script></html>'''
     file = PUBLIC / OUTPUT
@@ -275,6 +307,9 @@ def main():
     previous = None
     while True:
         inputs = [STORAGE / 'alpha-standings-v1.json']
+        design = ROOT / "metric-calibration/design-range/latest.json"
+        if design.is_file():
+            inputs.append(design)
         if RATINGS.exists():
             inputs.append(RATINGS)
         queue = SEARCH / ADAPTIVE / 'queue.json'
