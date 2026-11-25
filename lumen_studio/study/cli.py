@@ -39,8 +39,7 @@ def arguments(argv):
     parser.add_argument(
         "--steps",
         type=int,
-        default=256,
-        help="maximum update budget; select among quarter checkpoints",
+        help="maximum updates; defaults to the confirmed budget or 256 for a new search",
     )
     parser.add_argument("--min-teachers", type=int, default=6)
     parser.add_argument(
@@ -66,7 +65,7 @@ def arguments(argv):
             help="override the absolute " + role + " rate",
         )
     args = parser.parse_args(argv)
-    if args.steps < 16 or args.steps % 16:
+    if args.steps is not None and (args.steps < 16 or args.steps % 16):
         parser.error("--steps must be a positive multiple of 16")
     if args.collection_attempts < 1 or args.min_teachers < 1:
         parser.error("teacher count and collection attempts must be positive")
@@ -79,28 +78,38 @@ def arguments(argv):
     return args
 
 
-def requested_rates(args, root, concept, config):
+def training_plan(args, root, concept, config):
     bound = root / "training-config.json"
-    if bound.is_file():
-        baseline = read(bound)["rates"]
-    else:
-        baseline = REFERENCE
-        if not args.search_rates:
-            recipes = read(
-                Path(__file__).resolve().parents[2] / "configs/anima/study-recipes.json"
-            )
-            measured = recipes["concepts"].get(concept)
-            if measured and measured["applies_to_plan_sha256"] == digest(config):
-                baseline = measured["rates"]
+    saved = read(bound) if bound.exists() else None
+    recipes = read(
+        Path(__file__).resolve().parents[2] / "configs/anima/study-recipes.json"
+    )
+    measured = recipes["concepts"].get(concept)
+    if args.search_rates or (
+        measured and measured["applies_to_plan_sha256"] != digest(config)
+    ):
+        measured = None
+    baseline = saved["rates"] if saved else measured["rates"] if measured else REFERENCE
     rates = dict(baseline)
     for role in rates:
         explicit = getattr(args, f"{role}_lr")
         if explicit is not None:
             rates[role] = explicit
-    return rates
+    if saved:
+        default_budget = saved.get("max_updates", saved["horizon"])
+    else:
+        default_budget = (
+            measured["update"]
+            if measured and rates == measured["rates"]
+            else recipes["horizon"]
+        )
+    budget = args.steps or default_budget
+    # Selecting a shorter RAW must preserve the optimizer schedule that produced it.
+    horizon = saved["horizon"] if saved else max(budget, recipes["horizon"])
+    return dict(rates=rates, budget=budget, horizon=horizon)
 
 
-def screened_rates(outputs, cache, panels, reference, steps):
+def screened_rates(outputs, cache, panels, reference, steps, schedule_horizon=None):
     """Rank matched-budget settings and refine D and particles at a changed G."""
     ranking = {}
 
@@ -108,7 +117,15 @@ def screened_rates(outputs, cache, panels, reference, steps):
         key = digest(candidate)
         if key not in ranking:
             try:
-                result = train(outputs, cache, panels, candidate, steps, "screen")
+                result = train(
+                    outputs,
+                    cache,
+                    panels,
+                    candidate,
+                    steps,
+                    "screen",
+                    schedule_horizon=schedule_horizon,
+                )
                 row = dict(
                     rates=candidate,
                     status=result["status"],
@@ -154,15 +171,20 @@ def screened_rates(outputs, cache, panels, reference, steps):
             yield row["rates"]
 
 
-def fit_candidates(outputs, cache, panels, rates, args):
+def fit_candidates(outputs, cache, panels, plan, args):
+    rates = plan["rates"]
     if args.search_rates:
-        yield from screened_rates(outputs, cache, panels, rates, args.steps)
+        yield from screened_rates(
+            outputs, cache, panels, rates, plan["budget"], plan["horizon"]
+        )
         return
     yield rates
     # The default command first uses the measured recipe. If it fails before
     # confirmation, expand the search in the same run and reuse its checkpoints.
     if all(getattr(args, f"{role}_lr") is None for role in REFERENCE):
-        for candidate in screened_rates(outputs, cache, panels, rates, args.steps):
+        for candidate in screened_rates(
+            outputs, cache, panels, rates, plan["budget"], plan["horizon"]
+        ):
             if candidate != rates:
                 yield candidate
 
@@ -184,7 +206,8 @@ def run(args):
     config = spec["concepts"][concept]
     if not 1 <= args.min_teachers <= len(config["teachers"]):
         raise ValueError("--min-teachers exceeds the scene pool")
-    rates = requested_rates(args, root, concept, config)
+    plan = training_plan(args, root, concept, config)
+    rates, steps = plan["rates"], plan["budget"]
     device = torch.device(args.device)
     if device.type != "cuda":
         raise ValueError("Native training requires a CUDA device")
@@ -283,9 +306,11 @@ def run(args):
             data=manifest["sha256"],
             validation_sha256=digest(panels),
             rates=rates,
-            horizon=args.steps,
+            horizon=plan["horizon"],
             search=args.search_rates,
         )
+        if steps != plan["horizon"]:
+            settings["max_updates"] = steps
         training_config = root / "training-config.json"
         if training_config.exists():
             original = read(training_config)
@@ -301,14 +326,26 @@ def run(args):
             ):
                 raise ValueError("Training settings differ from the committed run")
         atomic_json(training_config, settings)
-        candidates = fit_candidates(outputs, cache, panels, rates, args)
+        candidates = fit_candidates(outputs, cache, panels, plan, args)
         failures = []
         for rates in candidates:
             try:
-                fit = train(outputs, cache, panels, rates, args.steps, "fit")
-                recheck_screened_cases(outputs, cache, panels, rates, args.steps, fit)
-                selected = select_checkpoint(root, rates, args.steps)
-                best, confirm = tune(outputs, cache, panels, selected)
+                fit = train(
+                    outputs,
+                    cache,
+                    panels,
+                    rates,
+                    steps,
+                    "fit",
+                    schedule_horizon=plan["horizon"],
+                )
+                screen_check = recheck_screened_cases(
+                    outputs, cache, panels, rates, steps, fit
+                )
+                selected = select_checkpoint(root, rates, steps)
+                best, confirm = tune(
+                    outputs, cache, panels, selected, screened=screen_check is not None
+                )
             except (Unmeasured, Catastrophe) as error:
                 failures.append(dict(rates=rates, reason=str(error)))
                 atomic_json(root / "fit-failures.json", failures)

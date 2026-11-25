@@ -62,7 +62,7 @@ def arm_path(root, rates):
     return root / "rates" / digest(rates)[:20]
 
 
-def train(outputs, cache, panels, rates, horizon, phase):
+def train(outputs, cache, panels, rates, budget, phase, *, schedule_horizon=None):
     """A 1/4-horizon LR screen can be continued from exactly the committed FULL."""
     rt = outputs.runtime
     dest = arm_path(outputs.root, rates)
@@ -71,13 +71,13 @@ def train(outputs, cache, panels, rates, horizon, phase):
         raise Catastrophe(str(dest / "failure.json"))
     previous = read(cursor) if cursor.exists() else None
     variation = cache.index["identity"]["variation"]
-    cut = horizon // 4
+    cut = budget // 4
     milestones = (
         range(cut // 4, cut + 1, cut // 4)
         if phase == "screen"
-        else range(cut, horizon + 1, cut)
+        else range(cut, budget + 1, cut)
     )
-    end = cut if phase == "screen" else horizon
+    end = cut if phase == "screen" else budget
 
     # Record the to-be-published FULL path before entering the update. A crash
     # after its atomic publication can recover the actual completed update.
@@ -177,7 +177,7 @@ def train(outputs, cache, panels, rates, horizon, phase):
         preset="empf",
         seed=1,
         batch_size=2,
-        total_steps=horizon,
+        total_steps=schedule_horizon or budget,
         critic_width=32,
         ema_decay=None,
         lr=rates["g"],
@@ -298,6 +298,8 @@ def recheck_screened_cases(outputs, cache, panels, rates, horizon, fit):
             "Full-budget integrity on the original rate panel was unmeasured"
         )
 
+    return result
+
 
 def select_checkpoint(root, rates, horizon):
     directory = arm_path(root, rates) / "fit"
@@ -311,7 +313,23 @@ def select_checkpoint(root, rates, horizon):
     return max(eligible, key=lambda row: row["mean_gain"])
 
 
-def tune(outputs, cache, panels, selected):
+def select_strength(results, receipt, recheck=None):
+    """Rank by effect, excluding settings that regress on earlier screening cases."""
+    eligible = sorted(
+        (r for r in results if r["status"] == "pass"), key=lambda r: -r["mean_gain"]
+    )
+    for candidate in eligible:
+        if recheck is not None:
+            evidence = recheck(candidate)
+            candidate["rate_panel"] = evidence
+            candidate["status"] = evidence["status"]
+            atomic_json(receipt, results)
+        if candidate["status"] == "pass":
+            return candidate
+    raise Unmeasured("No measured usable strength")
+
+
+def tune(outputs, cache, panels, selected, *, screened=False):
     rt = outputs.runtime
     raw = Checkpoint(**selected["raw"])
     variation = cache.index["identity"]["variation"]
@@ -332,10 +350,20 @@ def tune(outputs, cache, panels, selected):
                 )
                 results.append(result)
                 atomic_json(outputs.root / "strengths.json", results)
-        eligible = [r for r in results if r["status"] == "pass"]
-        if not eligible:
-            raise Unmeasured("No measured usable strength")
-        best = max(eligible, key=lambda r: r["mean_gain"])
+
+        def recheck(candidate):
+            return outputs.compare(
+                panels["rates"],
+                variation,
+                raw,
+                candidate["alpha"],
+                candidate["profile"],
+                owner=owner,
+            )
+
+        best = select_strength(
+            results, outputs.root / "strengths.json", recheck if screened else None
+        )
         confirm = outputs.compare(
             panels["confirm"],
             variation,

@@ -281,7 +281,10 @@ Set `--min-teachers` to choose the minimum number of distinct
 qualifying scenes. Decisions and rejected images are saved with the run.
 
 For a bundled concept with a confirmed recipe, the ordinary command uses its
-measured G, D and particle rates first. If that fit fails before confirmation,
+measured G, D and particle rates and its selected update count first. A shorter
+run keeps the 256-update optimizer schedule used in qualification. Set
+`--steps 256` to compare the four original checkpoints again. If the default
+fit fails before confirmation,
 the ordinary command searches alternative rates automatically. Explicit rates
 request a fixed fit unless `--search-rates` is supplied. A resumed run keeps the rates recorded with
 its existing checkpoints. `--g-lr`, `--d-lr` and `--particle-lr` override
@@ -292,7 +295,8 @@ two in each direction. When a different G wins, it repeats the D and particle
 comparisons at that G. When a lower G is the only usable initial setting, it
 also checks two lower G values. It continues the highest-scoring qualified
 FULL checkpoint. Before promoting a screened rate, it checks the original rate
-scenes again at the full budget for structural regressions. If the bracket
+scenes again at the full budget for structural regressions. It also checks
+the proposed replay strength on those scenes before using the held-out panel. If the bracket
 yields no usable fit, it tests lower G values
 with the reference critic and particle rates held fixed. For a run
 using measured rates, pass `--g-lr`, `--d-lr` and `--particle-lr`. Ranking uses

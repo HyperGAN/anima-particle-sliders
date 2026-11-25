@@ -198,7 +198,9 @@ def test_unattended_search_measures_critic_and_bank_at_viable_generator(
     ref = dict(g=0.004, d=0.01, particle=0.1)
     calls = []
 
-    def train_stub(outputs, cache, panels, rates, steps, phase):
+    def train_stub(
+        outputs, cache, panels, rates, steps, phase, *, schedule_horizon=None
+    ):
         assert phase == "screen"
         calls.append(tuple(rates.values()))
         if rates["g"] >= ref["g"]:
@@ -281,25 +283,32 @@ def test_late_split_on_a_previously_screened_case_stops_promotion(tmp_path):
 
 
 def test_measured_defaults_are_scoped_and_existing_runs_keep_their_rates(tmp_path):
-    from lumen_studio.study.cli import arguments, requested_rates, REFERENCE
+    from lumen_studio.study.cli import arguments, training_plan, REFERENCE
 
     args = arguments(
         ["--vibe", "1990s anime", "--out", str(tmp_path), "--model-dir", "."]
     )
     config = json.loads(args.spec.read_text())["concepts"]["1990s anime"]
-    chosen = requested_rates(args, tmp_path, "1990s anime", config)
-    assert chosen == dict(g=0.000375, d=0.018, particle=0.03)
-    assert (
-        requested_rates(args, tmp_path, "1990s anime", config | {"different": True})
-        == REFERENCE
-    )
+    plan = training_plan(args, tmp_path, "1990s anime", config)
+    chosen = dict(g=0.000375, d=0.018, particle=0.03)
+    assert plan == dict(rates=chosen, budget=192, horizon=256)
+    assert training_plan(
+        args, tmp_path, "1990s anime", config | {"different": True}
+    ) == dict(rates=REFERENCE, budget=256, horizon=256)
     args.search_rates = True
-    assert requested_rates(args, tmp_path, "1990s anime", config) == REFERENCE
-    atomic_json(tmp_path / "training-config.json", {"rates": chosen})
+    assert training_plan(args, tmp_path, "1990s anime", config) == dict(
+        rates=REFERENCE, budget=256, horizon=256
+    )
+    atomic_json(
+        tmp_path / "training-config.json",
+        {"rates": chosen, "horizon": 256, "max_updates": 128},
+    )
     args.particle_lr = 0.02
-    assert requested_rates(args, tmp_path, "1990s anime", config) == chosen | {
-        "particle": 0.02
-    }
+    assert training_plan(args, tmp_path, "1990s anime", config) == dict(
+        rates=chosen | {"particle": 0.02}, budget=128, horizon=256
+    )
+    args.steps = 64
+    assert training_plan(args, tmp_path, "1990s anime", config)["budget"] == 64
 
 
 def test_default_falls_back_lazily_and_explicit_rate_remains_fixed(monkeypatch):
@@ -318,9 +327,52 @@ def test_default_falls_back_lazily_and_explicit_rate_remains_fixed(monkeypatch):
     args = SimpleNamespace(
         search_rates=False, steps=256, g_lr=None, d_lr=None, particle_lr=None
     )
-    it = cli.fit_candidates(None, None, None, original, args)
+    plan = dict(rates=original, budget=256, horizon=256)
+    it = cli.fit_candidates(None, None, None, plan, args)
     assert next(it) == original and not called
     assert list(it) == [second] and called == [True]
     args.g_lr = original["g"]
-    assert list(cli.fit_candidates(None, None, None, original, args)) == [original]
+    assert list(cli.fit_candidates(None, None, None, plan, args)) == [original]
     assert called == [True]
+
+
+def test_strength_regression_gate_does_not_rank_by_screen_panel_score(tmp_path):
+    from lumen_studio.study.training import select_strength
+
+    rows = [
+        dict(alpha=a, mean_gain=score, status="pass")
+        for a, score in [(1.0, 0.2), (0.5, 0.1), (1.5, 0.4)]
+    ]
+    trials = []
+
+    def check(row):
+        trials.append(row["alpha"])
+        return dict(status="fail" if row["alpha"] == 1.5 else "pass", mean_gain=-0.7)
+
+    assert select_strength(rows, tmp_path / "strengths.json", check)["alpha"] == 1
+    assert trials == [1.5, 1.0]
+    assert read(tmp_path / "strengths.json")[2]["status"] == "fail"
+
+
+def test_shorter_execution_cap_preserves_numeric_horizon(tmp_path, monkeypatch):
+    from lumen_studio.study import training
+
+    def inspect(*args, **kwargs):
+        assert kwargs["total_steps"] == 256
+        raise RuntimeError("verified numerical horizon")
+
+    monkeypatch.setattr(training, "open_training", inspect)
+    outputs = SimpleNamespace(root=tmp_path, runtime=object())
+    cache = SimpleNamespace(
+        index={"identity": {"variation": "x"}, "fingerprint": "fixture"}
+    )
+    with pytest.raises(RuntimeError, match="verified numerical horizon"):
+        training.train(
+            outputs,
+            cache,
+            {},
+            dict(g=0.001, d=0.01, particle=0.03),
+            192,
+            "fit",
+            schedule_horizon=256,
+        )
