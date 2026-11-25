@@ -952,3 +952,41 @@ def test_lr_search_reports_untested_edge_at_the_arm_budget(tmp_path, monkeypatch
     assert next(cli.screened_rates(SimpleNamespace(root=tmp_path),None,None,reference,64,arm_budget=7))["d"]==.02
     coverage=read(tmp_path/"rate-search-coverage.json")
     assert coverage["status"]=="arm-budget" and dict(reference,d=.04) in coverage["untested"]
+
+
+def test_interrupted_transaction_resumes_only_from_verified_checkpoints(tmp_path):
+    from dataclasses import asdict
+    from lumen_studio.study.training import recover_pending
+    from lumen_studio_scoped.training import file_pin
+
+    attempt = tmp_path / "attempts" / "first"
+    attempt.mkdir(parents=True)
+    base = attempt / "FULL000103.pt"
+    base.write_bytes(b"committed optimizer state")
+    rates = dict(g=0.1, d=0.2, particle=0.3)
+    previous = dict(step=103, full=asdict(file_pin(base)), rates=rates)
+    output = attempt / "FULL000104.pt"
+    pending = dict(step=104, base=previous["full"], output=str(output))
+    intent = tmp_path / "pending-update.json"
+    receipt = tmp_path / "updates/000104.json"
+
+    atomic_json(intent, pending)
+    assert recover_pending(tmp_path, previous) == (previous, False)
+    assert not intent.exists()
+    archived = read(attempt / "interrupted-000104.json")
+    assert archived["intent"] == pending and archived["in_memory_completion"] == "unknown"
+
+    atomic_json(intent, pending)
+    output.write_bytes(b"atomically published next optimizer state")
+    row = dict(step=104, full=asdict(file_pin(output)), rates=rates)
+    assert recover_pending(tmp_path, previous) == (row, True)
+    atomic_json(receipt, row | {"metrics": {"step": 104}})
+    assert recover_pending(tmp_path, previous) == (read(receipt), True)
+    output.unlink()
+    with pytest.raises(RuntimeError, match="FULL is missing"):
+        recover_pending(tmp_path, previous)
+    assert intent.is_file()
+    receipt.unlink()
+    base.write_bytes(b"wrong base")
+    with pytest.raises(ValueError, match="before recovery"):
+        recover_pending(tmp_path, previous)
