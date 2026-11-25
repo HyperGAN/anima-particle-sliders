@@ -40,7 +40,7 @@ def search(evaluate, strongest=None, climb=True):
         if alpha in trials or not (required or len(trials) < TRIAL_BUDGET):
             return
         if strongest is None and alpha > RUNAWAY:
-            raise ValueError(f'Alpha score is still rising at {max(trials):g}; the score is not penalizing damage')
+            raise ValueError(f'Alpha remains unbracketed above {max(trials):g}; specify the largest usable strength')
         score = evaluate(alpha)
         if score is not None and not isfinite(score):
             raise ValueError('Alpha score must be finite')
@@ -78,9 +78,11 @@ def untried_side(trials, strongest=None):
     if not measured:
         return None
     best = max(measured, key=measured.get)
-    if best == max(measured):
-        return None if best == strongest else 'stronger'
-    return 'weaker' if best == min(measured) else None
+    if best == max(measured) and best != strongest:
+        return 'stronger'
+    if best == min(measured) and best > 0:
+        return 'weaker'
+    return None
 
 
 def panel_scores(cases, case_names, version=LEGACY):

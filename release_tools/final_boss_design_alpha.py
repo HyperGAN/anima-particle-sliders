@@ -250,7 +250,9 @@ def main():
         side = untried_side(trials, strongest if climbed else None)
         if not climbed and profile == next(iter(data["paths"])):
             print(f"  searched under the withdrawn α {strongest:g} ceiling")
-        if side:
+        if all(score is None for score in trials.values()):
+            print(f"  {profile}: no measured search score")
+        elif side:
             print(f"  {profile}: no probe on the {side} side of its best search alpha")
         elif climbed and max(trials, key=lambda a: (trials[a] is not None, trials[a] or 0)) == strongest:
             print(f"  {profile}: best at α {strongest:g}, the strongest setting Anima applies for this schedule")

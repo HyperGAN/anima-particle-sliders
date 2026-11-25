@@ -276,6 +276,13 @@ SSE and confidence are not selectors. This is not unseen confirmation or a new
 learning-rate optimum. The provisional reference rates were G0.00075,
 D0.009000000000000001 and bank0.03; completed LR work was reused.
 
+The three rates belong to the optimizer. Compare rate candidates on the same frozen
+teacher fields, with the same training updates, seed, matched scenes and constant
+unit slider strength. For Final Boss, use the distinct Boss score including visible
+damage and repeated designs. Record structural failures separately. Once training
+has selected the rates and RAW checkpoint, tune the single rendering alpha.
+The native gain limit of 5 applies only when rendering an image.
+
 An independent archive-byte audit verifies all256 FULL hashes, embedded update
 counts, journals, original initialization receipts and actual regularizer calls.
 All4,033 RAW payloads match FULL at each quarter. Exact continuation through

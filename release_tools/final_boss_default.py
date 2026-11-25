@@ -5,6 +5,12 @@ def scheduled_gains(profile, alpha, sigmas):
     """The per-interval gains that a named schedule and alpha resolve to on this sampler grid."""
     from particle_sliders.strength_schedule import interval_strengths
 
+    from math import isfinite
+
+    if (len(sigmas) != 11 or sigmas[0] != 1 or sigmas[-1] != 0
+            or any(isinstance(value, bool) or not isfinite(value) for value in sigmas)
+            or any(start <= end for start, end in zip(sigmas, sigmas[1:]))):
+        raise ValueError("Expected the ten decreasing native Euler intervals from 1 to 0")
     widths = [start - end for start, end in zip(sigmas, sigmas[1:])]
     return list(interval_strengths(alpha, widths, profile=profile))
 

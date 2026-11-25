@@ -86,7 +86,7 @@ def test_search_stops_at_the_strongest_setting_the_product_applies():
         assert max(scheduled_gains(profile, limit, sigmas)) <= 5 < max(scheduled_gains(profile, limit + 1e-9, sigmas))
         trials, _ = search(lambda alpha: alpha, limit)
         assert max(trials) == limit and untried_side(trials, limit) is None and untried_side(trials) == "stronger"
-    with pytest.raises(ValueError, match="not penalizing damage"):
+    with pytest.raises(ValueError, match="unbracketed"):
         search(lambda alpha: alpha / 100)
 
 
@@ -186,3 +186,15 @@ def test_replay_refuses_a_changed_checkpoint_or_setting_without_a_model(tmp_path
                    dict(sigmas=default["sigmas"][:-1])):
         with pytest.raises(ValueError):
             check_release(local | change, weights)
+
+
+def test_unmeasured_sides_at_native_strength_boundaries():
+    assert untried_side({.25: 1, .5: 0}, strongest=5) == "weaker"
+    assert untried_side({1: None, 5: 1}, strongest=5) == "weaker"
+    assert untried_side({1: 0, 5: 1}, strongest=5) is None
+
+
+@pytest.mark.parametrize("sigmas", [[1, 0], [1] * 10 + [0], [1, .9, .8, .7, .6, float("nan"), .4, .3, .2, .1, 0]])
+def test_constant_gains_require_the_original_ten_interval_grid(sigmas):
+    with pytest.raises(ValueError, match="native Euler intervals"):
+        scheduled_gains("constant", 1, sigmas)
