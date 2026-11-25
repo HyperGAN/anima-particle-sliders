@@ -1,6 +1,7 @@
 """Checkpointed stock EMPF training with effect-only selection and a separate failure gate."""
 
 from dataclasses import asdict
+import json
 import math
 from pathlib import Path
 from uuid import uuid4
@@ -120,6 +121,19 @@ def train(outputs, cache, panels, rates, horizon, phase):
                 cases, variation, raw, 1.0, "constant", owner=inference
             )
             atomic_json(result_path, result)
+            print(
+                json.dumps(
+                    dict(
+                        phase=phase,
+                        update=step,
+                        budget=end,
+                        rates=rates,
+                        mean_gain=result["mean_gain"],
+                        integrity=result["status"],
+                    )
+                ),
+                flush=True,
+            )
         if result["status"] == "fail":
             atomic_json(
                 dest / "failure.json", dict(step=step, phase=phase, result=result)
