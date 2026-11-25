@@ -28,6 +28,10 @@ omit `--step-gains` and use `--strength 1`.
 
 ## Final Boss RAW192
 
+For the current Vibe12 winner, use the [published default and exact gains](final-boss-raw192/default.json). The [default replay command](final-boss-raw192/README.md#replay-the-default) loads its measured alpha and schedule together.
+
+### Earlier checkpoint
+
 Use early strength at nominal 2/3 for the tested Final Boss RAW192 checkpoint
 on Anima Turbo v1.1 at 512 × 512 with ten native Euler intervals and CFG 1.
 The four held-out cases averaged +0.34333 Final Boss intensity over matched

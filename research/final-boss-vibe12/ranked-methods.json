@@ -1,0 +1,254 @@
+{
+  "late-cues": {
+    "source": "anima-final-boss-vibe12-20261124/adapters/spatial_stock.py",
+    "parameters": {
+      "kind": "cue",
+      "floor": 0.45,
+      "mix": 0.35,
+      "positions": [
+        7,
+        8,
+        9
+      ],
+      "prompt_keys": [
+        "explicit"
+      ]
+    },
+    "registration_sha256": "8b12d8f479968c97ad5e5543dc1c09265345bb6e970fae74a6fdb79da6c51c48"
+  },
+  "shared-best-middle": {
+    "source": "anima-final-boss-vibe12-20261124/shared_data.py"
+  },
+  "shared-best-opening": {
+    "source": "anima-final-boss-vibe12-20261124/shared_data.py"
+  },
+  "soft45-background-orthogonal": {
+    "source": "anima-final-boss-vibe12-20261124/adapters/spatial_stock.py",
+    "parameters": {
+      "kind": "exterior",
+      "floor": 0.45
+    },
+    "registration_sha256": "c6674fccca15f8be5c92c040a094cbfe4daf526411d628215727bd66e1bd855f"
+  },
+  "shared-best-divergence": {
+    "source": "anima-final-boss-vibe12-20261124/shared_data.py"
+  },
+  "soft-contexts-45-blend50": {
+    "source": "anima-final-boss-vibe12-20261124/adapters/spatial_stock.py",
+    "parameters": {
+      "kind": "paired",
+      "floor": 0.45
+    },
+    "registration_sha256": "e8712429abc58a4c9b146edaa90b8f2f4c1739e16c50ef95f72dd2831a2d419a"
+  },
+  "early-cues": {
+    "source": "anima-final-boss-vibe12-20261124/adapters/spatial_stock.py",
+    "parameters": {
+      "kind": "cue",
+      "floor": 0.45,
+      "mix": 0.35,
+      "positions": [
+        0,
+        1,
+        2
+      ],
+      "prompt_keys": [
+        "explicit"
+      ]
+    },
+    "registration_sha256": "7b3be9b8e0eea9f7991d61e7f1cff58754c2e6231a0d47a92aba781d96a82540"
+  },
+  "incumbent-refit": {
+    "source": "anima-final-boss-vibe12-20261124/adapters/spatial_stock.py",
+    "parameters": {
+      "kind": "soft",
+      "floor": 0.65
+    },
+    "registration_sha256": "0b095f9fcbd8409720898f0d39b2f34a446cb982e63eb772b679526275ef5a2d"
+  },
+  "strong-boss-45-mix35": {
+    "source": "anima-final-boss-vibe12-20261124/adapters/spatial_stock.py",
+    "parameters": {
+      "kind": "cue",
+      "floor": 0.45,
+      "mix": 0.35,
+      "positions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "prompt_keys": [
+        "explicit"
+      ]
+    },
+    "registration_sha256": "6c7f7e5fd23169f94ca93bbf18bd694959f1315bc2ae27b1fae90e0f48cde207"
+  },
+  "shared-best-stock": {
+    "source": "anima-final-boss-vibe12-20261124/shared_data.py"
+  },
+  "soft45-adapter-rollout": {
+    "source": "anima-final-boss-vibe12-20261124/adapters/rollout_stock.py",
+    "parameters": {
+      "donor_recipe": "soft-floor45"
+    },
+    "registration_sha256": "fce80fe28e34d807360d4a778ba511abc0d49c74ebb6857621796734b322a478"
+  },
+  "matched-attire": {
+    "source": "anima-final-boss-vibe12-20261124/adapters/spatial_stock.py",
+    "parameters": {
+      "kind": "attire",
+      "floor": 0.45
+    },
+    "registration_sha256": "f6a2e74df78064bf268af80f6f946c45c9ddbdd92df78d0f2db426b3a3afadb7"
+  },
+  "soft-floor45": {
+    "source": "anima-final-boss-vibe12-20261124/adapters/spatial_stock.py",
+    "parameters": {
+      "kind": "soft",
+      "floor": 0.45
+    },
+    "registration_sha256": "dc7a4d70ab08fcd0ab4c7f565c782c8339cb43aa2605afbab875bdee40a9c3f2"
+  },
+  "soft-contexts-65-blend50": {
+    "source": "anima-final-boss-vibe12-20261124/adapters/spatial_stock.py",
+    "parameters": {
+      "kind": "paired",
+      "floor": 0.65
+    },
+    "registration_sha256": "9abb9145ad7f4a0d8187b415533537763e986ad310d0937cb3a048a96d90ce80"
+  },
+  "costume-teachers": {
+    "source": "anima-final-boss-vibe12-20261124/adapters/costume_stock.py",
+    "parameters": {
+      "costume_scenes": 8
+    },
+    "registration_sha256": "939f431b3329f414f24476a2b43ea8483c778f8268c750972fc98b262a76c886"
+  },
+  "two-cue-average": {
+    "source": "anima-final-boss-vibe12-20261124/adapters/spatial_stock.py",
+    "parameters": {
+      "kind": "cue",
+      "floor": 0.45,
+      "mix": 0.35,
+      "positions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "prompt_keys": [
+        "explicit",
+        "alternate"
+      ]
+    },
+    "registration_sha256": "169d9665e562e65d35bf74f6305a1df1cb9df00828b5ec3352f08d77f8f4f9f3"
+  },
+  "soft-projection-65-blend50": {
+    "source": "anima-final-boss-vibe12-20261124/adapters/spatial_stock.py",
+    "parameters": {
+      "kind": "projection",
+      "floor": 0.65
+    },
+    "registration_sha256": "d6d6925dfa549f11beea6e4fa1754ae5500aa0e48f15aeed4c9851db438b2102"
+  },
+  "strong-boss-45-dose100": {
+    "source": "anima-final-boss-vibe12-20261124/adapters/spatial_stock.py",
+    "parameters": {
+      "kind": "cue",
+      "floor": 0.45,
+      "mix": 0.85,
+      "positions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "prompt_keys": [
+        "explicit"
+      ]
+    },
+    "registration_sha256": "16406f780647c2fcd59238d29badcf7b478291d883902b057385b975181054c7"
+  },
+  "in-scene-costume": {
+    "source": "anima-final-boss-vibe12-20261124/adapters/spatial_stock.py",
+    "parameters": {
+      "kind": "cue",
+      "floor": 0.45,
+      "mix": 0.35,
+      "positions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "prompt_keys": [
+        "in_scene"
+      ]
+    },
+    "registration_sha256": "6609620f3a92411ca0511a0fe9d1103608902d2e10c7e402b4abcb76cb99adfa"
+  },
+  "shared-best-seed-split": {
+    "source": "anima-final-boss-vibe12-20261124/adapters/seed_cross_stock.py",
+    "parameters": {
+      "minimum_scenes": 8,
+      "seed_offsets": [
+        1,
+        2,
+        3
+      ]
+    },
+    "registration_sha256": "4e0f48284191c12e988d0e074e431d2990b73c58dd733672354d59fd588fe552"
+  },
+  "sparse-first": {
+    "source": "anima-final-boss-vibe12-20261124/adapters/spatial_stock.py",
+    "parameters": {
+      "kind": "percentile",
+      "floor": 0.45,
+      "positions": [
+        0,
+        1,
+        2
+      ]
+    },
+    "registration_sha256": "cd82e9a4425cb8d327d40a2e8f1bfaf31baff749e74ebb6f847a0fe89e3e2422"
+  },
+  "shared-best-uniform-steps": {
+    "source": "anima-final-boss-vibe12-20261124/shared_data.py"
+  },
+  "subject-apg": {
+    "source": "anima-final-boss-vibe12-20261124/adapters/spatial_stock.py",
+    "parameters": {
+      "kind": "apg",
+      "floor": 0.45
+    },
+    "registration_sha256": "9dfd2f05b68270d36e46f476ecafb2cc0b16bfe7574007878f629b059e737975"
+  },
+  "shared-best-neutral-path": {
+    "source": "anima-final-boss-vibe12-20261124/shared_data.py"
+  }
+}

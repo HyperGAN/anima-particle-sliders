@@ -1,42 +1,66 @@
 {
-  "recipe": "soft-floor45",
+  "recipe": "late-cues",
+  "label": "Stronger cues at the final three teacher positions",
   "step": 192,
   "weights": "raw",
   "resolution": 512,
   "steps": 10,
   "cfg": 1,
   "checkpoint_repository": "ntc-ai/anima-final-boss-research",
-  "checkpoint_revision": "83b182649e51760ccb8e24367df5884275b85efc",
+  "checkpoint_revision": "4ebd99f8528b30e84e0232c5049f86f2eeb64e02",
   "checkpoints": {
-    "soft-floor45": {
-      "file": "soft-floor45-raw192.safetensors",
-      "sha256": "5ada5db653b1ebfe543075ed52ad47e1118cfa975fee86ab4f132eb5d793c92b",
+    "late-cues": {
+      "file": "vibe12/late-cues/RAW000192.safetensors",
+      "sha256": "9df8182c5af19f87c9c7b9298838f2d084be3dc17e0a761e550055e2cf55c5c4",
       "bytes": 33737392,
-      "training_cache_sha256": "8e28e58e797016219e5f0a0dbbaacccdc37eafaa25468b83ef954bfb2e90e120"
-    },
-    "strong-boss-45-mix35": {
-      "file": "strong-boss-45-mix35-raw192.safetensors",
-      "sha256": "b38a4bf77621806c74fdab17f6de64cd17d4e144ad88844b2ce7026bfd1c2d57",
-      "bytes": 33737392,
-      "training_cache_sha256": "7feebb6e2fedbbd9e90a9ab377687093647c69b9797158252121c601f2872445"
+      "training_cache_sha256": "e4e7cdbe6dcb59776835681bfc585baaa63db7811a98880eb20639fb9fdf6e31",
+      "target_index": {
+        "file": "vibe12/late-cues/targets/index.json",
+        "sha256": "6c8de9f28bc65392f6cb9525907639122214a26b86276336b2592bd7e1e2849c",
+        "bytes": 4965
+      }
     }
   },
   "profile": "early",
-  "alpha": 0.95,
+  "alpha": 1.15625,
   "gains": [
-    1.4249999999999998,
-    1.4249999999999998,
-    1.4249999999999998,
-    1.4249999999999998,
-    1.4249999999999998,
-    1.4249999999999998,
-    1.4249999999999998,
-    0.9183334460788589,
-    0.475,
-    0.475
+    1.734375,
+    1.734375,
+    1.734375,
+    1.734375,
+    1.734375,
+    1.734375,
+    1.734375,
+    1.117708470556506,
+    0.578125,
+    0.578125
   ],
-  "development_score": 0.337123680556,
-  "independent_score": 0.285548472222,
+  "sigmas": [
+    1.0,
+    0.964285671710968,
+    0.9230769872665405,
+    0.8749999403953552,
+    0.8181818127632141,
+    0.75,
+    0.6666666865348816,
+    0.5625,
+    0.4285714626312256,
+    0.25,
+    0.0
+  ],
+  "selection_metric": "distinct_boss_score",
+  "development_score": 0.2883768569762545,
+  "development_cases": [
+    "ranger",
+    "smith",
+    "stationer",
+    "ferryman",
+    "watchmaker",
+    "guide",
+    "guard",
+    "violinist"
+  ],
+  "independent_score": null,
   "training_model_identity": {
     "model": "circlestone-labs/Anima:turbo-v1.1",
     "sha256": "eb5520f293d42a19df9242d8d442d5d2068e5121620814418c2b50a97de0552f",
@@ -45,7 +69,12 @@
     "runtime_sha256": "0b0dfc97ba76a99ed3f5313695e89e5802ece8e1db4470443a9705692ae579c3"
   },
   "qualified_replay_runtime_sha256": [
-    "0b0dfc97ba76a99ed3f5313695e89e5802ece8e1db4470443a9705692ae579c3",
-    "79a45d5209f7b533fca589b1833f960a9f30c41b043e0709c86404f6f04bc917"
-  ]
+    "0b0dfc97ba76a99ed3f5313695e89e5802ece8e1db4470443a9705692ae579c3"
+  ],
+  "reference_case": {
+    "label": "ranger",
+    "prompt": "Anime illustration. Waist-up eye-level portrait of one adult man with wavy blond hair, wearing a russet hiking jacket, standing naturally facing the viewer. Background: alpine cable-car station with a green numbered post, metal railings and snow in the distance. Lighting: bright midday mountain light. Show the surroundings clearly.",
+    "seed": 552242
+  },
+  "reference_png_sha256": "30f5fa677ac67218ab183bcc2b476de329db2265c7ebef93f751c7c87e129fff"
 }

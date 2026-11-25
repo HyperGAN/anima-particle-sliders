@@ -2,6 +2,26 @@
 
 The Final Boss search now uses the **distinct Boss score** to move the alpha bracket, pick finalists and save the winning replay. This is the same score shown on the design leaderboard. Each character earns credit for its Boss gain and finished-image quality. If two characters repeat the same design, they share credit in proportion to Jev’s repetition rating. [Formula and matched samples](../distinct-designs.md)
 
+## Completed design searches in this release
+
+| Recipe | Schedule | Alpha | Distinct Boss score | Saved setting |
+| --- | --- | ---: | ---: | --- |
+| late-cues | early | 1.15625 | 28.84 | [Tuning](late-cues/tuning.json) |
+| shared-best-middle | early | 1.4375 | 27.74 | [Tuning](shared-best-middle/tuning.json) |
+| shared-best-opening | early | 1.25 | 27.63 | [Tuning](shared-best-opening/tuning.json) |
+| soft45-background-orthogonal | early | 1.484375 | 27.24 | [Tuning](soft45-background-orthogonal/tuning.json) |
+| shared-best-divergence | early | 1.25 | 26.34 | [Tuning](shared-best-divergence/tuning.json) |
+| soft-contexts-45-blend50 | early | 1.15625 | 26.11 | [Tuning](soft-contexts-45-blend50/tuning.json) |
+| early-cues | early | 1.3125 | 25.55 | [Tuning](early-cues/tuning.json) |
+| incumbent-refit | early | 1.25 | 24.98 | [Tuning](incumbent-refit/tuning.json) |
+| strong-boss-45-mix35 | early | 1.0625 | 24.50 | [Tuning](strong-boss-45-mix35/tuning.json) |
+| two-cue-average | early | 1.125 | 21.63 | [Tuning](two-cue-average/tuning.json) |
+| soft-projection-65-blend50 | early | 1.625 | 21.58 | [Tuning](soft-projection-65-blend50/tuning.json) |
+| strong-boss-45-dose100 | early | 1.4375 | 21.26 | [Tuning](strong-boss-45-dose100/tuning.json) |
+| shared-best-seed-split | early | 1.25 | 21.18 | [Tuning](shared-best-seed-split/tuning.json) |
+| shared-best-uniform-steps | early | 1.40625 | 19.25 | [Tuning](shared-best-uniform-steps/tuning.json) |
+| subject-apg | early | 1.25 | 13.58 | [Tuning](subject-apg/tuning.json) |
+
 ## Opening four at RAW192
 
 The search selected **early α 1.25**, with an eight-character score of **27.63**. The four-character screen preferred early α 1.4375 within the early schedule. On the eight development characters it scored 25.38. This is a measured selection from a finite search.

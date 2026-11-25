@@ -1,0 +1,102 @@
+{
+  "training_cache_sha256": "e4e7cdbe6dcb59776835681bfc585baaa63db7811a98880eb20639fb9fdf6e31",
+  "parameters": {
+    "kind": "cue",
+    "floor": 0.45,
+    "mix": 0.35,
+    "positions": [
+      7,
+      8,
+      9
+    ],
+    "prompt_keys": [
+      "explicit"
+    ]
+  },
+  "rows": {
+    "vibe-138f4e482dffa18ac3db8b3cc08267820f1b9ccde4d0615070fb3d1d0a6fc828": {
+      "explicit": "A middle-aged man with graying hair sits calmly on a wooden bench inside a minimalist sunlit greenhouse, holding a ceramic coffee mug with both hands, surrounded by potted ferns and glass panes. In-world anime scene of a formidable final RPG boss. An upright iron crown with a black armored coat and wide structured shoulders. A continuous shot with visible surroundings. The character has the unmistakable silhouette of the final boss of an anime role-playing game. A tall open-faced helmet carries three straight black-iron tines, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain.",
+      "matte": {
+        "file": "vibe-138f4e482dffa18ac3db8b3cc08267820f1b9ccde4d0615070fb3d1d0a6fc828.png",
+        "sha256": "c1fd8cda521669b863a2e4e0e824343c4555f3b86d990426276b95a432b39917"
+      }
+    },
+    "vibe-3659059050d529bb737b554b3cb87937ad72b5793d2e760beafffb2f8cd408d8": {
+      "explicit": "A slender woman with dark braided hair stands at the center of a dusty antique clocktower gear room, looking straight ahead with her arms hanging relaxed at her sides, wearing an ornate segmented crimson battle gown, massive articulated brass shoulder armor shaped like cathedral spires, and a towering spiked halo crown. The character has the unmistakable silhouette of the final boss of an anime role-playing game. A tall open-faced helmet carries a ring of brass clock-hand spikes, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain.",
+      "matte": {
+        "file": "vibe-3659059050d529bb737b554b3cb87937ad72b5793d2e760beafffb2f8cd408d8.png",
+        "sha256": "83ebf0859267e72c0fbaad8400a107dc9c51f4221eea749e0fcaa17d6c527efb"
+      }
+    },
+    "vibe-0581f081cb0056617de7f946949e4f990888b4edb0e1ecd4265c25145818cb34": {
+      "explicit": "An athletic man with short black hair stands casually at the top of a stone staircase overlooking an empty plaza, with one hand resting on the stone balustrade, wearing sweeping layered midnight-blue plate armor, razor-edged winged pauldrons that cast an enormous jagged silhouette, and a billowing mantle laced with glowing ethereal trim. The character has the unmistakable silhouette of the final boss of an anime role-playing game. A tall open-faced helmet carries a split midnight-blue steel ridge, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain.",
+      "matte": {
+        "file": "vibe-0581f081cb0056617de7f946949e4f990888b4edb0e1ecd4265c25145818cb34.png",
+        "sha256": "ff5a1a4fde7b28cda1369fd7d6e710594f454f14de9e8bd01389d6def9a2d54b"
+      }
+    },
+    "vibe-c8abcba1648f4e19d9366bf9a6074abf54c4f5f19cf17dfe7c3d54afb9bb23d3": {
+      "explicit": "A tall man with a neat beard leans against a rooftop cafe counter under twilight skies. Looming over him are enormous, gnarled tree-root antlers extending high above his head, fused to a broad, monolithic mantle of jagged dark tree bark and damp moss that squares off his shoulders into an immense silhouette. The textured, lichen-covered bark forms jagged contours against the dusky city horizon, casting deep, tangled shadows onto the counter. The character has the unmistakable silhouette of the final boss of an anime role-playing game. A tall open-faced helmet carries an open fork of dark oak and weathered iron, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain.",
+      "matte": {
+        "file": "vibe-c8abcba1648f4e19d9366bf9a6074abf54c4f5f19cf17dfe7c3d54afb9bb23d3.png",
+        "sha256": "2529e630af85ea4c14c435dbb6789570ac3482354d6df90acaebcb038da990b8"
+      }
+    },
+    "vibe-109664ef9d26e9afa4f9fe9bf6f7c2df97a94249f53088fe8d7378d4e5870393": {
+      "explicit": "A woman with long wavy brown hair pauses mid-stride along a cracked concrete corridor, turning slightly toward the viewer, hands open at her sides, outfitted in a majestic multi-layered sorcerous battle coat with giant serrated shoulder mantles, sharp floating peripheral mantle rings, and deep purple velvet lined with luminous gold sigils. The character has the unmistakable silhouette of the final boss of an anime role-playing game. A tall open-faced helmet carries a sharply folded gold crest, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain.",
+      "matte": {
+        "file": "vibe-109664ef9d26e9afa4f9fe9bf6f7c2df97a94249f53088fe8d7378d4e5870393.png",
+        "sha256": "8e3fee976a7126ba0e835bb44d9532648f99a82014d2240474179498a8f355bc"
+      }
+    },
+    "vibe-2e70ade235ef6235ff098a325625f2e4d2844dd2501137b384cd24d6362ba699": {
+      "explicit": "An elderly female tea shop owner in a floral cardigan and cotton apron sits on a low wooden stool, pouring hot water from a ceramic kettle into a small clay teapot on a low bamboo table. In-world anime scene of a formidable final RPG boss. An upright iron crown with a black armored coat and wide structured shoulders. A continuous shot with visible surroundings. The character has the unmistakable silhouette of the final boss of an anime role-playing game. A tall open-faced helmet carries a low fan of hammered iron leaves, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain.",
+      "matte": {
+        "file": "vibe-2e70ade235ef6235ff098a325625f2e4d2844dd2501137b384cd24d6362ba699.png",
+        "sha256": "13fd18387e4ea42ffd8d306c886441a0690afa406b8ef88f73148e3f5848bdd4"
+      }
+    },
+    "vibe-9dfa9e4fcd1ac327d15598790ad225dc52099914808b70570a69efa5a5dc1cee": {
+      "explicit": "Anime style, full body shot. The same stoic middle-aged man stands in the exact same stance by the wooden fence under the overcast pale sky, transformed into an awe-inspiring final boss. He is draped in a monolithic charcoal mantle that cascades like jagged stone, reinforced with asymmetrical spiked pauldrons and a grand high-arched iron collar. Floating crystalline shards orbit his broad shoulders, forming an imposing wide silhouette against the open horizon. The character has the unmistakable silhouette of the final boss of an anime role-playing game. A tall open-faced helmet carries three jagged slate fins, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain.",
+      "matte": {
+        "file": "vibe-9dfa9e4fcd1ac327d15598790ad225dc52099914808b70570a69efa5a5dc1cee.png",
+        "sha256": "a9bb18feb55283a0cefe334250a7643b4553af35c789e4a823bb0bae78083605"
+      }
+    },
+    "vibe-f97329f04f7c3a2ece880af77700920b239244a4bacde6c9728eb2efc03efad2": {
+      "explicit": "A slender woman stands holding an overhead handrail on an empty train car, gazing out the window at passing tunnel lights, now wearing a towering cathedral-like high collar of razor-edged crimson steel, an asymmetrical fluted breastplate inlaid with glowing abyssal runes, long bladed gauntlets, and a floor-sweeping mantle of floating metallic needles. The character has the unmistakable silhouette of the final boss of an anime role-playing game. A tall open-faced helmet carries an open serrated crimson-steel visor crest, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain.",
+      "matte": {
+        "file": "vibe-f97329f04f7c3a2ece880af77700920b239244a4bacde6c9728eb2efc03efad2.png",
+        "sha256": "a3747525ae56296f3e196daacc9cff0cfe7d7a46cc8404be92192e2feb67b401"
+      }
+    },
+    "vibe-97780b0bc11a73bec83af5537e3b2dc4a9c1c2f5501a517c5cd4988ad832f8df": {
+      "explicit": "A focused dark-haired woman sits at a wooden drafting table pinning chalked fabric under a focused desk lamp, now clad in an extravagant imperial sovereign's high-collared gown of midnight velvet, flanked by floating crescent-shaped armor plates, wielding oversized ornate golden scissor-blades at her side, and wearing a crown of radiant floating needles. The character has the unmistakable silhouette of the final boss of an anime role-playing game. A tall open-faced helmet carries a narrow golden crest like a row of dressmaker pins, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain.",
+      "matte": {
+        "file": "vibe-97780b0bc11a73bec83af5537e3b2dc4a9c1c2f5501a517c5cd4988ad832f8df.png",
+        "sha256": "4c7342f66ee31e485a3ad388afbc85f01c0c20529de9948a5d71c92583590a30"
+      }
+    },
+    "vibe-9d5a9107a8ce2975562f6fd6fea020a7b67ca33627102b7ffba6666321c9dbfd": {
+      "explicit": "An older silver-haired male librarian leans against a tall stepladder in an arching library aisle, sliding a thick leather-bound volume onto a high shelf. Final Boss presence, cloaked in a towering pointed ivory hood and deep indigo fabric that forms a severe, narrow triangular oracle silhouette, throwing sharp, exaggerated geometric shadows over the polished wooden bookshelves. The character has the unmistakable silhouette of the final boss of an anime role-playing game. A tall open-faced helmet carries a tall triangular ivory crest open at the face, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain.",
+      "matte": {
+        "file": "vibe-9d5a9107a8ce2975562f6fd6fea020a7b67ca33627102b7ffba6666321c9dbfd.png",
+        "sha256": "801c01d69a57eb3807eed0096ec27390c0663d27cadb25a4775d7fb36f32fb37"
+      }
+    },
+    "vibe-ef8876cb04c18f655e21a04881b03e9ec25ba10870345ffb6c3c6276dd512915": {
+      "explicit": "Anime style, full-length shot. The same young man sits in the identical slouched pose on the park bench in the late afternoon light, embodying a final boss. He wears an overwhelming sovereign vestment of layered void-black silks and pointed sovereign armor that spills across the bench, flanked by massive sweeping crescent back-mantles that arch high over his head. A dark solar eclipse aura burns silently behind his frame, casting deep ominous shadows forward. The character has the unmistakable silhouette of the final boss of an anime role-playing game. A tall open-faced helmet carries a black crescent crest framing the face, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain.",
+      "matte": {
+        "file": "vibe-ef8876cb04c18f655e21a04881b03e9ec25ba10870345ffb6c3c6276dd512915.png",
+        "sha256": "efd68cd25d516e572cd63257691b93a4abdcda9cb4cdf4b07f072f42b854b228"
+      }
+    },
+    "vibe-16cea65095f6ec4d148ee4f170a6c635a193e66c01b63433b723209eec5ce9bb": {
+      "explicit": "A weary middle-aged male florist with messy brown hair stands behind a wooden shop counter under warm pendant lights, his trimmed roses replaced in hand by a colossal double-bladed ceremonial halberd, clad in layered obsidian battle plate with jagged pauldrons, an expansive trailing cape of withered black petals, and a spiked spiked wrought-iron halo crowning his head. The character has the unmistakable silhouette of the final boss of an anime role-playing game. A tall open-faced helmet carries five black iron sprigs over a narrow visor, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain.",
+      "matte": {
+        "file": "vibe-16cea65095f6ec4d148ee4f170a6c635a193e66c01b63433b723209eec5ce9bb.png",
+        "sha256": "ab5a55298b9f870fa5f6eb05e5349f2256eaf125c50eb8dbfaece79d277ade35"
+      }
+    }
+  }
+}

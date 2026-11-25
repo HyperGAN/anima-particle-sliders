@@ -70,7 +70,9 @@ def export(campaign, folder):
         method = row["method"]
         if method not in snapshot["methods"]:
             trained = read(campaign / "cohorts" / method / "result.json")
-            snapshot["methods"][method] = {"label": labels[method], "raw_sha256": trained["raw"]["sha256"],
+            tuning = read(campaign / "tuning" / method / "boss-effect-tuning.json")
+            snapshot["methods"][method] = {"label": labels[method], "sigmas": tuning["sampler"],
+                                           "raw_sha256": trained["raw"]["sha256"],
                                            "training_cache_sha256": trained["cache"]}
         if [row["cases"][case]["off"]["sha256"] for case in cases] != list(snapshot["originals"].values()):
             raise ValueError("Matched originals changed")

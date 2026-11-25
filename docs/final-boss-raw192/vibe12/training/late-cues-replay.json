@@ -1,0 +1,44 @@
+{
+  "case": {
+    "label": "ranger",
+    "prompt": "Anime illustration. Waist-up eye-level portrait of one adult man with wavy blond hair, wearing a russet hiking jacket, standing naturally facing the viewer. Background: alpine cable-car station with a green numbered post, metal railings and snow in the distance. Lighting: bright midday mountain light. Show the surroundings clearly.",
+    "seed": 552242
+  },
+  "recipe": "late-cues",
+  "model": {
+    "model": "circlestone-labs/Anima:turbo-v1.1",
+    "sha256": "eb5520f293d42a19df9242d8d442d5d2068e5121620814418c2b50a97de0552f",
+    "identity_schema": "portable-model-v1",
+    "environment_sha256": "55ac97305e688c56d4a2908243b020e999cf101a05b1cf7e5a3e2c48d4a4d7ba",
+    "runtime_sha256": "79a45d5209f7b533fca589b1833f960a9f30c41b043e0709c86404f6f04bc917"
+  },
+  "profile": "early",
+  "alpha": 1.15625,
+  "image_sha256": "30f5fa677ac67218ab183bcc2b476de329db2265c7ebef93f751c7c87e129fff",
+  "checkpoint_sha256": "9df8182c5af19f87c9c7b9298838f2d084be3dc17e0a761e550055e2cf55c5c4",
+  "sigmas": [
+    1.0,
+    0.964285671710968,
+    0.9230769872665405,
+    0.8749999403953552,
+    0.8181818127632141,
+    0.75,
+    0.6666666865348816,
+    0.5625,
+    0.4285714626312256,
+    0.25,
+    0.0
+  ],
+  "effective_strengths": [
+    1.734375,
+    1.734375,
+    1.734375,
+    1.734375,
+    1.734375,
+    1.734375,
+    1.734375,
+    1.117708470556506,
+    0.578125,
+    0.578125
+  ]
+}

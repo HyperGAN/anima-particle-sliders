@@ -2,6 +2,8 @@
 
 ## Corrected twelve-scene Vibe12 leaderboard
 
+**The first-ranked recipe is the Final Boss default.** Publishing the distinct-design leaderboard sets both the RAW adapter used for replay and the frozen targets used for training. The manifest records the winning strength schedule and its eight-character development score. [Ranked samples](final-boss-raw192/vibe12/distinct-designs.md) · [Default manifest](final-boss-raw192/default.json) · [All ranked checkpoints](final-boss-raw192/vibe12/checkpoints.json) · [Method sources](../research/final-boss-vibe12/ranked-methods.json)
+
 **Alpha tuning now uses the distinct Boss score.** Each constant, early and late search uses four characters during refinement and eight for the final selection. Opening four selected early α 1.25 at 27.63. Late cues selected early α 1.15625 at 28.84. [Measured alpha path, saved tuning, and replay](final-boss-raw192/vibe12/alpha-tuning/README.md)
 
 **Distinct Final Boss designs across characters.** The default live recipe view now discounts repeated boss designs across the eight matched characters. In the first 20-recipe snapshot, opening-four exposure rose from seventh to third, with 35.7/100 design repetition against 49.0 for late cues. The first three distinct-design scores are 28.84 for late cues, 27.74 for middle-four exposure and 27.63 for opening-four exposure. The four separate alpha-search scenes show similar repetition for opening four and late cues. [Distinct-design leaderboard and matched samples](final-boss-raw192/vibe12/distinct-designs.md)
@@ -14,7 +16,7 @@ The next proposed experiment starts from the corrected background-projection RAW
 
 ## Earlier confirmed cohort
 
-**Current research default.** Soft foreground weighting with a 0.45 background floor, trained to RAW192 and replayed at early α 0.95. It leads the saved replays with **14.72** on eight development cases and scores **10.64** on eight separate confirmation cases. The original score was 33.71 on development and 28.55 on confirmation. [Default and exact gains](final-boss-raw192/default.json) · [Matched confirmation images](final-boss-raw192/confirmed-default.jpg) · [Download RAW checkpoints](https://huggingface.co/ntc-ai/anima-final-boss-research)
+**Earlier cohort winner.** Soft foreground weighting with a 0.45 background floor, trained to RAW192 and replayed at early α 0.95. It leads the saved replays with **14.72** on eight development cases and scores **10.64** on eight separate confirmation cases. The original score was 33.71 on development and 28.55 on confirmation. [Earlier default and exact gains](final-boss-raw192/historical-default.json) · [Matched confirmation images](final-boss-raw192/confirmed-default.jpg) · [Download RAW checkpoints](https://huggingface.co/ntc-ai/anima-final-boss-research)
 
 **What worked in training.** Soft foreground weighting concentrates the teacher edit on the character while retaining some signal in the background. It leads at shared early strength with **6.63**. Full-strength Boss cues on the same background floor score **5.57** at shared early strength and lead at shared constant strength with **2.10**. [Training comparison](#training-techniques) · [Target-generation source](final-boss-raw192/README.md#source-for-the-trained-targets)
 
@@ -346,11 +348,11 @@ The same-checkpoint strength sweep showed that a setting with stronger late step
 
 The archive check moved the late share to **2.95%**, with exact exterior targets on all **120** fields and exact opening targets on **36** fields. The largest relative difference in total subject energy was **8.45 × 10⁻¹⁰**. Native RAW192 evaluation is pending. [Field audit and exact scales](final-boss-raw192/ablations/late-subject-dose-field-audit.json) · [Capture command](final-boss-raw192/README.md#late-subject-contrast)
 
-## Comparing a new run
+## Comparing a new run in the earlier cohort
 
 Compare the saved RAW checkpoint with the incumbent on the same prompts, seeds, sampler, and shared strengths. At 192 updates the early score to beat is **6.63**. The full-strength Boss cue recipe sets the constant-strength comparison at **2.10**.
 
-When a training recipe wins at shared early strength, choose its alpha and schedule using the development cases. Freeze that setting and the incumbent's published setting before opening eight fresh confirmation cases. Render both recipes at shared early strength on those same cases as well. Report the two comparisons together. A new default needs a qualified win against the incumbent at their frozen tuned settings on the confirmation panel.
+When a training recipe wins at shared early strength, choose its alpha and schedule using the development cases. Freeze that setting and the incumbent's published setting before opening eight fresh confirmation cases. Render both recipes at shared early strength on those same cases as well. Report the two comparisons together. The earlier study used a separate confirmation panel. For current Vibe12 promotion, use the [distinct-design ranking](final-boss-raw192/vibe12/distinct-designs.md).
 
 Jev measures Boss character distinction and visible image damage separately on a 0–1 scale. Multiply positive matched Boss gain by `Boss_ON³ × (1 − image_damage)²`. Above the minor-damage anchor of 1/3, also multiply by `((1 − image_damage) / (1 − 1/3))³`. Average the eight case scores equally and multiply by 100 for display. Catastrophic structural failures and cases with missing measurements carry separate statuses. [Scoring code](../release_tools/final_boss_scoring.py) · [Jev rubrics](final-boss-raw192/rubrics.json)
 

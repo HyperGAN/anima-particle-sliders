@@ -1,5 +1,20 @@
 # Vibe12 Final Boss research source
 
+The [method inventory](ranked-methods.json) identifies the training implementation behind every ranked RAW192 adapter. The [checkpoint catalog](../../docs/final-boss-raw192/vibe12/checkpoints.json) gives the immutable download revision, file, size, SHA-256 and training-cache fingerprint.
+
+### Publish a new leaderboard winner
+
+From the release checkout, point `CAMPAIGN` at the equipped Vibe12 experiment directory and run the following commands together. The artifacts publisher reuses existing files, verifies all ranked RAWs and uploads the winning target cache. Supply `--target-cache PATH` if that cache lives outside the per-recipe directory. The design publisher verifies the Jev evidence and derives the default from the first ranked row.
+
+```sh
+BOARD=docs/final-boss-raw192/vibe12
+python -m release_tools.publish_final_boss_artifacts "$CAMPAIGN" "$BOARD"
+python -m release_tools.publish_final_boss_vibe12 "$CAMPAIGN" "$BOARD"
+python -m release_tools.publish_final_boss_designs "$CAMPAIGN" "$BOARD"
+python -m release_tools.verify_final_boss_designs "$BOARD"
+```
+
+
 This directory preserves the host-side programs used to train the November 24 Vibe12 cohort and run its November 25 alpha search. The 26 training recipes share a teacher pool of 12 scenes, two native trajectories, and ten denoising positions per trajectory. Each recipe specifies which fields it draws from that pool. The comparison uses saved RAW192 adapters and eight matched slider-off / slider-on images. The public leaderboard and its offline evaluation are the easier entry points for inspecting scores without the training host. [Leaderboard](../../docs/leaderboard.md)
 
 ## Where to start

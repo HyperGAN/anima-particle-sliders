@@ -1,0 +1,45 @@
+{
+  "method": "strong-boss-45-dose100",
+  "objective": "distinct_boss_score",
+  "profile": "early",
+  "alpha": 1.4375,
+  "effective_strengths": [
+    2.15625,
+    2.15625,
+    2.15625,
+    2.15625,
+    2.15625,
+    2.15625,
+    2.15625,
+    1.3895835039351156,
+    0.71875,
+    0.71875
+  ],
+  "sigmas": [
+    1.0,
+    0.964285671710968,
+    0.9230769872665405,
+    0.8749999403953552,
+    0.8181818127632141,
+    0.75,
+    0.6666666865348816,
+    0.5625,
+    0.4285714626312256,
+    0.25,
+    0.0
+  ],
+  "model": {
+    "model": "circlestone-labs/Anima:turbo-v1.1",
+    "sha256": "eb5520f293d42a19df9242d8d442d5d2068e5121620814418c2b50a97de0552f",
+    "identity_schema": "portable-model-v1",
+    "environment_sha256": "55ac97305e688c56d4a2908243b020e999cf101a05b1cf7e5a3e2c48d4a4d7ba",
+    "runtime_sha256": "0b0dfc97ba76a99ed3f5313695e89e5802ece8e1db4470443a9705692ae579c3"
+  },
+  "design": {
+    "base": 0.27284870954062496,
+    "repeat": 0.5098660714285714,
+    "score": 0.2126443852097243
+  },
+  "checkpoint_sha256": "4891843b569d07e4c3eb98514cb0e4d6168fff8e5e91be34d3e5435ef1820bfe",
+  "definition_sha256": "20b0952c0c0d6ee48e2404a8955a2215031e8e2d84894eb08006801d90a21f8a"
+}

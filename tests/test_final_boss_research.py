@@ -20,8 +20,8 @@ from release_tools.final_boss_subject_dose import LATE, LATE_ENERGY_SHARE, redis
 STUDY = Path(__file__).resolve().parents[1] / "docs/final-boss-raw192"
 
 
-def test_default_uses_the_winning_fixed_recipe_and_confirmed_strength():
-    default = json.loads((STUDY / "default.json").read_text())
+def test_historical_default_uses_the_winning_fixed_recipe_and_confirmed_strength():
+    default = json.loads((STUDY / "historical-default.json").read_text())
     results = json.loads((STUDY / "results.json").read_text())
     eligible = {name: row["fixed_strength"]["means"]["final_score"] for name, row in results["methods"].items()
                 if row.get("fixed_strength", {}).get("status") == "pass"}
@@ -36,6 +36,35 @@ def test_default_uses_the_winning_fixed_recipe_and_confirmed_strength():
     assert chosen["profile"] == default["profile"] and chosen["alpha"] == default["alpha"]
     assert chosen["means"]["final_score"] == max(row["means"]["final_score"] for row in confirmation["qualified"].values())
     assert fmean(case["final_score"] for case in chosen["cases"].values()) == pytest.approx(default["independent_score"])
+
+
+def test_default_matches_the_published_distinct_design_winner():
+    from release_tools.final_boss_default import select_default
+
+    folder = STUDY / "vibe12"
+    panel = json.loads((folder / "design-range.json").read_text())["development"]
+    board = json.loads((folder / "standings.json").read_text())
+    catalog = json.loads((folder / "checkpoints.json").read_text())
+    assert set(catalog["checkpoints"]) == {row["method"] for row in panel["rows"]}
+    for name, item in catalog["checkpoints"].items():
+        assert item["sha256"] == board["methods"][name]["raw_sha256"]
+        assert item["training_cache_sha256"] == board["methods"][name]["training_cache_sha256"]
+    default = json.loads((STUDY / "default.json").read_text())
+    assert default == select_default(panel, board, catalog)
+    assert default["recipe"] == panel["rows"][0]["method"]
+    assert default["development_score"] == max(row["score"] for row in panel["rows"])
+
+
+def test_default_rejects_a_changed_target_binding():
+    from release_tools.final_boss_default import select_default
+
+    folder = STUDY / "vibe12"
+    panel = json.loads((folder / "design-range.json").read_text())["development"]
+    board = json.loads((folder / "standings.json").read_text())
+    catalog = json.loads((folder / "checkpoints.json").read_text())
+    catalog["checkpoints"][panel["rows"][0]["method"]]["training_cache_sha256"] = "wrong cache"
+    with pytest.raises(ValueError, match="artifacts"):
+        select_default(panel, board, catalog)
 
 
 @pytest.mark.parametrize("recipe", ("soft-floor45", "strong-boss-45-mix35"))

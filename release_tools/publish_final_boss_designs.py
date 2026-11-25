@@ -4,6 +4,7 @@ import gzip
 import json
 from pathlib import Path
 
+from release_tools.final_boss_default import select_default
 from release_tools.publish_final_boss_vibe12 import read
 from release_tools.verify_final_boss_designs import verify_panel, verify_orders
 
@@ -43,15 +44,20 @@ def export(campaign, folder):
     verify_panel(screen,receipts)
     for pair in lineups["groups"].values():
         verify_orders(lineups,pair,pair["sheet_images"],receipts,"preference")
+    catalog=read(folder/"checkpoints.json")
+    default=select_default(dev, board, catalog)
     evidence={"development":dev,"search_scenes":screen,"lineups":lineups}
     (folder/"design-range.json").write_text(json.dumps(evidence,indent=2)+"\n")
     (folder/"design-receipts.json.gz").write_bytes(gzip.compress(json.dumps(receipts,sort_keys=True,separators=(",",":")).encode(),mtime=0))
     by_base=sorted(dev["rows"],key=lambda r:(-r["base"],r["method"]))
     opening=next(r for r in dev["rows"] if r["method"]=="shared-best-opening")
     late=next(r for r in dev["rows"] if r["method"]=="late-cues")
+    leader=dev["rows"][0]
     lines=["# Distinct Final Boss designs across characters","",dev["as_of"],"",
+           f'**Default** · {labels[leader["method"]]} · {leader["profile"]} α {leader["alpha"]:g} · '
+           f'{100*leader["score"]:.2f}/100 on eight development characters. [Replay settings and training targets](../default.json)',"",
            f'Opening-four exposure places **{dev["rows"].index(opening)+1} of {len(dev["rows"])}** across matched characters, '
-           f'up from {by_base.index(opening)+1} on the per-image score. Its average design repetition is '
+           f'compared with position {by_base.index(opening)+1} on the per-image score. Its average design repetition is '
            f'{100*opening["repeat"]:.1f}/100, compared with {100*late["repeat"]:.1f}/100 for late cues. '
            f'{len(dev.get("tuned_methods",[]))} of these recipes have completed the distinct-design alpha search. Remaining recipes enter at their best measured per-image strength.', "",
            "Jev compares the character designs in each pair of finished images. It looks for repeated silhouettes, body construction, masks, costume shapes and visual motifs. "
@@ -60,12 +66,14 @@ def export(campaign, folder):
            "The per-image scores already account for matched Final Boss gain and visible damage. Zero-effect edits contribute zero.","",
            "Every row uses the same eight cases and the same RAW192 budget. Jev rates all 28 pairs in both image orders. Its repetition rating is an ordinal score on a 0–100 scale. "
            "The current alpha search uses this cross-character score on four search characters and on eight development characters for the final choice. [Saved alpha and search evidence](alpha-tuning/README.md)","",
-           "| Rank | Recipe | Schedule and α | Distinct Boss score ↑ | Per-image score ↑ | Design repetition ↓ | Matched samples |",
-           "| ---: | --- | --- | ---: | ---: | ---: | --- |"]
+           "| Rank | Recipe | Schedule and α | Distinct Boss score ↑ | Per-image score ↑ | Design repetition ↓ | Matched samples | RAW192 |",
+           "| ---: | --- | --- | ---: | ---: | ---: | --- | --- |"]
     for rank,r in enumerate(dev["rows"],1):
         sample=settings[r["method"],r["profile"],r["alpha"]]["samples"]
+        artifact=catalog["checkpoints"][r["method"]]
+        download=f'https://huggingface.co/{catalog["repository"]}/resolve/{catalog["revision"]}/{artifact["file"]}'
         lines.append(f'| {rank} | {labels[r["method"]]} | {("Design-tuned · " if r["method"] in dev.get("tuned_methods",[]) else "")}{r["profile"]} {r["alpha"]:g} | {100*r["score"]:.2f} | '
-                     f'{100*r["base"]:.2f} | {100*r["repeat"]:.1f} | [![Eight edits]({sample})]({sample}) |')
+                     f'{100*r["base"]:.2f} | {100*r["repeat"]:.1f} | [![Eight edits]({sample})]({sample}) | [RAW]({download}) |')
     lines+=["","## How the result depends on the characters","",
             "In a separate blind check Jev compared two four-character lineups as whole sets. "
             "It rated which lineup produced more individually recognizable Final Boss designs. Positive margins favor opening four over late cues. "
@@ -82,6 +90,7 @@ def export(campaign, folder):
             "[Exact rubric, case pairs and lineups](design-range.json) · [Jev decision receipts](design-receipts.json.gz) · [Per-image rankings](README.md)","",
             "```sh","python -m release_tools.verify_final_boss_designs docs/final-boss-raw192/vibe12","```",""]
     (folder/"distinct-designs.md").write_text("\n".join(lines))
+    (folder.parent/"default.json").write_text(json.dumps(default,indent=2,allow_nan=False)+"\n")
 
 
 if __name__=="__main__":

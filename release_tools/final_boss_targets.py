@@ -410,12 +410,54 @@ def verify_guided_trajectory(runtime, cache, shard_index, rollout, row):
 
 
 @torch.no_grad()
+def verify_frozen_cues(runtime, cache, fixture):
+    """Replay a native field on each training scene, covering both trajectories and cue states."""
+    from lumen_studio.provenance import same_portable_model
+
+    spec = json.loads(fixture.read_text())
+    if (spec["training_cache_sha256"] != cache.index["fingerprint"]
+            or not same_portable_model(cache.index["identity"]["model"], runtime.identity)):
+        return False
+    params = spec["parameters"]
+    offset = 0
+    with runtime.mixer.scales({}):
+        for j, shard in enumerate(cache.index["shards"]):
+            record = cache[offset + (7 * j + 1) % shard["count"]]
+            offset += shard["count"]
+            row = record["row"]
+            entry = spec["rows"][row["id"]]
+            matte = fixture.parent / entry["matte"]["file"]
+            if file_hash(matte) != entry["matte"]["sha256"]:
+                return False
+            latent, step = record["latent"].to(runtime.device), record["timestep"]
+            embedding = runtime.encode(row["neutral"])
+            neutral = runtime.predict(latent, step, embedding)
+            positive = runtime.predict(latent, step, runtime.encode(row["positive"]))
+            mask = subject_matte(matte, latent.shape[-2:], runtime.device)
+            weight = params["floor"] + (1 - params["floor"]) * mask
+            cues = [runtime.predict(latent, step, runtime.encode(entry[key])) for key in params["prompt_keys"]
+                    if record["position"] in params["positions"]]
+            target = edited_target(neutral, positive, weight, params["mix"], *cues)
+            if not (torch.equal(embedding.cpu(), record["embedding"])
+                    and torch.equal(neutral.cpu(), record["neutral"])
+                    and torch.equal(target.cpu(), record["positive"])):
+                return False
+    return True
+
+
+@torch.no_grad()
 def verify_native(runtime, cache, request, fixture=FIXTURE):
     """Recheck four captured fields through the frozen native teacher."""
     identity = cache.index["identity"]
     expected = dict(model_identity=runtime.identity, cache_fingerprint=cache.index["fingerprint"],
                     response_shape=list(cache[0]["positive"].shape))
-    if request != expected or identity["model"] != runtime.identity:
+    if request != expected:
+        return False
+    if identity["layout"].startswith("frozen-vibe12/"):
+        recipe = identity["layout"].split("/")[1]
+        spec = STUDY / "vibe12/training" / f"{recipe}.json"
+        return spec.is_file() and verify_frozen_cues(runtime, cache, spec)
+    if identity["model"] != runtime.identity:
         return False
     fixture = Path(fixture)
     recipe = identity["recipe"]
@@ -479,12 +521,23 @@ def verify_native(runtime, cache, request, fixture=FIXTURE):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    default = json.loads((STUDY / "default.json").read_text())["recipe"]
-    parser.add_argument("recipe", nargs="?", choices=RECIPES, default=default,
+    config = json.loads((STUDY / "default.json").read_text())
+    default = config["recipe"]
+    parser.add_argument("recipe", nargs="?", choices=sorted(set(RECIPES) | {default}), default=default,
                         help=f"Training recipe (default: {default})")
     parser.add_argument("--model", type=Path, required=True, help="Converted Anima Turbo v1.1 directory")
     parser.add_argument("--out", type=Path, required=True, help="New target-cache directory")
+    parser.add_argument("--historical", action="store_true", help="Recapture an explicit original six-scene recipe")
     args = parser.parse_args()
+    if args.recipe == default and not args.historical:
+        from lumen_studio.provenance import model_identity
+        from release_tools.final_boss_frozen_targets import restore_targets
+
+        cache = restore_targets(config, model_identity(args.model), args.out)
+        print(f"Restored {len(cache)} hash-verified native training fields to {args.out}")
+        return
+    if args.recipe not in RECIPES:
+        parser.error("Select a named six-scene recipe for historical recapture")
 
     from lumen_studio.backends.anima import TurboRuntime
     from lumen_studio.core_source import verify_core

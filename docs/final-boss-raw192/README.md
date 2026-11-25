@@ -1,10 +1,30 @@
 # Anima Final Boss RAW192
 
-The **Final Boss research default** is soft foreground weighting with a **0.45 background floor**, using the saved RAW192 particle adapter at **early α 0.95**. This setting scored **33.71** on the development panel and **28.55** on eight separate confirmation cases. Use the shared early α 2/3 comparison below when comparing training techniques.
+The Final Boss default comes from the highest distinct Boss score across eight matched development characters. Replay downloads the winning RAW192 adapter and applies the ten gains measured at its selected alpha. Training uses that adapter’s exact frozen Vibe12 target cache. [Leaderboard with samples](vibe12/distinct-designs.md) · [Default manifest and exact gains](default.json) · [All ranked RAW checkpoints](vibe12/checkpoints.json)
 
-[Leaderboard summary](../leaderboard.md) · [Default manifest and exact per-step gains](default.json) · [Public RAW checkpoints](https://huggingface.co/ntc-ai/anima-final-boss-research) · [Per-case results and prompts](results.json)
+## Replay the default
 
-![Eight confirmation cases showing the same original, the default early 0.95 edit, and the early 0.9125 control](confirmed-default.jpg)
+Run from the Anima checkout with the [pinned native environment](../../configs/anima/requirements.lock) and the converted Anima Turbo v1.1 model.
+
+```sh
+python -m release_tools.final_boss_replay --model "$ANIMA_MODEL" --out final-boss.png
+```
+
+The default case is the first matched development character. The command verifies the downloaded checkpoint and reproduces the measured reference PNG. Use `--case` to render another case or `--checkpoint` for a local copy of the same adapter. The JSON beside the PNG records the model, case, checkpoint, alpha and effective gains.
+
+## Use the winning training targets
+
+```sh
+python -m release_tools.final_boss_targets --model "$ANIMA_MODEL" --out targets/final-boss
+```
+
+The restored cache contains the same shards used to train the winning RAW. The command verifies their hashes and the training fingerprint. The late-cues winner uses 12 matched teacher scenes and 240 fields. Its 35% stronger cue blend applies at teacher positions 7–9, with a 0.45 background floor. The early schedule and alpha govern the separate inference pass. Use the variation stored in `cache.index["identity"]["variation"]` when training. [Method sources](../../research/final-boss-vibe12/ranked-methods.json) · [Late-cues training fixture](vibe12/training/late-cues.json) · [Verified native replay](vibe12/training/late-cues-replay.json)
+
+## Earlier six-scene cohort
+
+Soft foreground weighting with a 0.45 background floor scored 33.71 on development and 28.55 on confirmation under the original scoring rule at early α 0.95. [Historical manifest](historical-default.json) · [Per-case results](results.json)
+
+![Eight earlier confirmation cases comparing the original, early 0.95 edit and early 0.9125 control](confirmed-default.jpg)
 
 ## Training comparison
 
@@ -32,24 +52,16 @@ This table covers the original control and dose comparisons. The results JSON in
 
 The 35% blend raised the constant-strength score from **13.06 to 16.90**, and its early-strength score was **0.73** points below the shared early leader. The 0.80 background-floor arm failed the structural check at both shared strengths. A stronger 1.30 target-dose arm stopped at update 96 after a structural failure. Each technique was fit at one initialization seed. The eight additional cases confirm the selected default strength on the same checkpoint and have two qualified settings out of nine attempted.
 
-## Replay the default
-
-Run from the Anima checkout with the [pinned native environment](../../configs/anima/requirements.lock). Use the official converted Anima Turbo v1.1 model. If you need to prepare it, run `python -m release_tools.prepare_model --output "$ANIMA_MODEL"`.
-
-```sh
-python -m release_tools.final_boss_replay --model "$ANIMA_MODEL" --out final-boss.png
-```
-
-The command loads the revision-pinned RAW artifact and verifies its SHA-256. It renders the `baker` confirmation case by default. Use `--case ranger` for a development example or `--checkpoint` for a local copy of the same RAW artifact. The JSON beside the PNG records the prompt, seed, model identity, checkpoint digest, native sigma grid, and effective strengths. Current Anima source reproduced all eight default confirmation PNGs byte for byte on CUDA.
-
 ## Source for the trained targets
+
+The following recipes and native parity checks reproduce the earlier six-scene cohort.
 
 On each frozen neutral or positive trajectory state, subtract the neutral velocity from the generic positive velocity. Multiply that edit by `0.45 + 0.55 × foreground_matte`, restore its original L2 norm, and add it back to the neutral velocity. The cue blend first interpolates 35% toward a stronger positive contrast evaluated at the **same latent and timestep**. The capture source reproduced all 120 archived training fields exactly for each recipe. Each cache uses six prompt pairs, two trajectories, and ten steps per trajectory.
 
 [Target capture and native admission source](../../release_tools/final_boss_targets.py) · [Exact training prompts, seeds and pinned mattes](training-pairs.json) · [Default replay source](../../release_tools/final_boss_replay.py)
 
 ```sh
-python -m release_tools.final_boss_targets --model "$ANIMA_MODEL" --out targets/soft-floor45
+python -m release_tools.final_boss_targets --historical soft-floor45 --model "$ANIMA_MODEL" --out targets/soft-floor45
 python -m release_tools.final_boss_targets strong-boss-45-mix35 \
   --model "$ANIMA_MODEL" --out targets/strong-boss-45-mix35
 ```
