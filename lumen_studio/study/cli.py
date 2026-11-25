@@ -68,16 +68,12 @@ def arguments(argv):
 
 
 def screened_rates(outputs, cache, panels, reference, steps):
-    """Try progressively smaller generator rates if a bracket has no usable fit."""
-    brackets = [
-        rate_candidates(reference),
-        [reference | {"g": reference["g"] / n} for n in (4, 8)],
-        [reference | {"g": reference["g"] / n} for n in (16, 32)],
-    ]
-    ranking = []
-    for candidates in brackets:
-        eligible = []
-        for candidate in candidates:
+    """Rank matched-budget settings and refine D and particles at a changed G."""
+    ranking = {}
+
+    def screen(candidate):
+        key = digest(candidate)
+        if key not in ranking:
             try:
                 result = train(outputs, cache, panels, candidate, steps, "screen")
                 row = dict(
@@ -91,11 +87,37 @@ def screened_rates(outputs, cache, panels, reference, steps):
                     status="fail" if isinstance(error, Catastrophe) else "unmeasured",
                     reason=str(error),
                 )
-            ranking.append(row)
-            atomic_json(outputs.root / "rate-search.json", ranking)
-            if row["status"] == "pass":
-                eligible.append(row)
+            ranking[key] = row
+            atomic_json(outputs.root / "rate-search.json", list(ranking.values()))
+        return ranking[key]
+
+    tried_fits = set()
+    brackets = [rate_candidates(reference)] + [
+        [reference | {"g": reference["g"] / n} for n in divisors]
+        for divisors in ((4, 8), (16, 32))
+    ]
+    for bracket in brackets:
+        observed = [screen(candidate) for candidate in bracket]
+        measured = [r for r in observed if r["status"] == "pass"]
+        if not measured:
+            continue
+        best = max(measured, key=lambda r: r["mean_gain"])["rates"]
+        if best["g"] != reference["g"]:
+            # Vary D and bank again where G is viable. A failed comparison
+            # at the original G gives no measurement at the new G.
+            for role in ("d", "particle"):
+                for factor in (0.5, 2.0):
+                    screen(best | {role: best[role] * factor})
+            if len(observed) == 7 and len(measured) == 1 and best["g"] < reference["g"]:
+                for factor in (0.5, 0.25):
+                    screen(best | {"g": best["g"] * factor})
+        eligible = [
+            r
+            for key, r in ranking.items()
+            if r["status"] == "pass" and key not in tried_fits
+        ]
         for row in sorted(eligible, key=lambda r: -r["mean_gain"]):
+            tried_fits.add(digest(row["rates"]))
             yield row["rates"]
 
 
@@ -208,6 +230,7 @@ def run(args):
             )
         settings = dict(
             data=manifest["sha256"],
+            validation_sha256=digest(panels),
             rates=rates,
             horizon=args.steps,
             search=args.search_rates,

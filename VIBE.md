@@ -279,8 +279,10 @@ Set `--min-teachers` to choose the minimum number of distinct
 qualifying scenes. Decisions and rejected images are saved with the run.
 
 The optional rate screen varies one of the three absolute rates by a factor of
-two in each direction, then continues the best qualified FULL checkpoint. If
-that bracket yields no usable fit, the script tests lower generator rates
+two in each direction. When a different G wins, it repeats the D and particle
+comparisons at that G. When a lower G is the only usable initial setting, it
+also checks two lower G values. It continues the highest-scoring qualified
+FULL checkpoint. If the bracket yields no usable fit, it tests lower G values
 with the reference critic and particle rates held fixed. For a run
 using measured rates, pass `--g-lr`, `--d-lr` and `--particle-lr`. Ranking uses
 the mean change in intended effect across matched finished images.

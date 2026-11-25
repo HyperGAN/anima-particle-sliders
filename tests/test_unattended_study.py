@@ -183,3 +183,54 @@ def test_screen_reuses_finished_fits_quarter_raw(tmp_path, monkeypatch):
     result = training.train(outputs, cache, {"rates": ["rates"]}, rates, 256, "screen")
     assert result["mean_gain"] == 0.2 and observed == ["closed"]
     assert read(arm / "screen/64.json") == result
+
+
+def test_unattended_search_measures_critic_and_bank_at_viable_generator(
+    tmp_path, monkeypatch
+):
+    from lumen_studio.study import cli
+
+    ref = dict(g=0.004, d=0.01, particle=0.1)
+    calls = []
+
+    def train_stub(outputs, cache, panels, rates, steps, phase):
+        assert phase == "screen"
+        calls.append(tuple(rates.values()))
+        if rates["g"] >= ref["g"]:
+            raise cli.Catastrophe("split")
+        gain = 0.3 if rates["d"] == 0.02 else 0.1
+        return dict(status="pass", mean_gain=gain)
+
+    monkeypatch.setattr(cli, "train", train_stub)
+    options = cli.screened_rates(SimpleNamespace(root=tmp_path), None, None, ref, 256)
+    assert next(options) == dict(g=0.002, d=0.02, particle=0.1)
+    assert len(calls) == len(set(calls)) == 13
+    assert (0.002, 0.01, 0.05) in calls and (0.002, 0.01, 0.2) in calls
+
+
+def test_extending_teacher_attempts_preserves_validation_membership(tmp_path):
+    from dataclasses import asdict
+    from particle_sliders.candidate_failure import FileRecord
+    from lumen_studio.study.teachers import validation_panels
+
+    target = tmp_path / "off.png"
+    target.write_bytes(b"frozen OFF")
+    off = dict(
+        integrity={"status": "pass"}, output=asdict(FileRecord.from_path(target))
+    )
+    accepted = [
+        dict(prompt="one", seed=10, off=off),
+        dict(prompt="two", seed=20, off=off),
+    ]
+    atomic_json(tmp_path / "validation.json", {"steps": accepted})
+    groups = {
+        "steps": [
+            dict(prompt=p, seed=s) for p, s in (("one", 10), ("two", 20), ("three", 30))
+        ]
+    }
+    assert validation_panels(SimpleNamespace(root=tmp_path), groups, 12) == {
+        "steps": accepted
+    }
+    target.write_bytes(b"changed")
+    with pytest.raises(ValueError, match="Changed OFF image"):
+        validation_panels(SimpleNamespace(root=tmp_path), groups, 12)

@@ -2,10 +2,12 @@
 
 from concurrent.futures import ThreadPoolExecutor
 
+from particle_sliders.candidate_failure import FileRecord
+
 from ..contracts import atomic_json, digest
 from ..vibe import SCHEMA, validate_manifest
 from ..vibe_profiles import profile_for
-from .outputs import Unmeasured
+from .outputs import Unmeasured, read
 
 
 def replacement_scene(scene, concept, index, trial):
@@ -142,6 +144,34 @@ def collect(outputs, config, concept, minimum, attempts):
 
 
 def validation_panels(outputs, groups, attempts):
+    path = outputs.root / "validation.json"
+    if path.exists():
+        panels = read(path)
+        if set(panels) != set(groups):
+            raise ValueError("The frozen validation groups differ from this study")
+        for name, cases in panels.items():
+            proposals = {scene["prompt"]: scene["seed"] for scene in groups[name]}
+            seen = set()
+            if len(cases) < 2:
+                raise ValueError(f"Incomplete frozen {name} panel")
+            for case in cases:
+                prompt, seed = case["prompt"], case["seed"]
+                if prompt not in proposals or prompt in seen:
+                    raise ValueError(
+                        f"Changed or duplicate prompt in frozen {name} panel"
+                    )
+                offset = seed - proposals[prompt]
+                if (
+                    offset < 0
+                    or offset % 104729
+                    or case["off"]["integrity"]["status"] != "pass"
+                ):
+                    raise ValueError(f"Invalid matched case in frozen {name} panel")
+                seen.add(prompt)
+                record = FileRecord(**case["off"]["output"])
+                if FileRecord.from_path(record.path) != record:
+                    raise ValueError(f"Changed OFF image in frozen {name} panel")
+        return panels
     panels = {}
     for group, proposed in groups.items():
         accepted = []
@@ -156,5 +186,5 @@ def validation_panels(outputs, groups, attempts):
         if len(accepted) < 2:
             raise Unmeasured(f"{group} has fewer than two coherent validation scenes")
         panels[group] = accepted
-    atomic_json(outputs.root / "validation.json", panels)
+    atomic_json(path, panels)
     return panels
