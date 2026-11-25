@@ -11,7 +11,7 @@ The [shared `--vibe` instructions](https://github.com/HyperGAN/particle-sliders/
 1. **Select the teachers.** Run `anima-vibe --vibe 'final boss'` with the [native collection arguments](#source-setup). Render each ordinary character and its Boss treatments in the same scene at a matched seed. Jev requires an ordinary Boss rating ≤ 0.35 and a positive rating ≥ 0.75. Three collections supplied 14 qualified pairs. Comparing their designs removed two lookalikes, leaving 12 teaching scenes. [Selection protocol](#named-portfolios)
 2. **Build the late-cues targets.** Capture both frozen trajectories for each scene. At each of ten positions, ask how the Boss prompt changes the predicted denoising direction at that same state. This gives 240 fields. At positions 1–7 use the Boss-minus-neutral edit. At positions 8–10 mix 65% of that edit with 35% from the more explicit Boss prompt. Weight the subject at 1.0 and the background at 0.45 with a soft mask, then restore each edit’s original norm. [Exact cue prompts and parameters](docs/final-boss-raw192/vibe12/training/late-cues.json) · [Field construction](research/final-boss-vibe12/anima-final-boss-vibe12-20261124/adapters/spatial_stock.py)
 3. **Train the adapter.** Keep Anima frozen and train the native adapter with stock ParticleGAN for 192 updates, batch size 2, learning rate 0.00075, seed 1 and `ema_decay=None`. Compare recipes at RAW192 using the shared prompts, seeds and native Euler sampler. To reproduce this run, restore its hash-pinned target cache. For a new collection, save its own manifest and cache. [Restore the winning targets](docs/final-boss-raw192/README.md#use-the-winning-training-targets) · [Native training and campaign entry points](research/final-boss-vibe12/README.md)
-4. **Select alpha on the saved RAW.** Use the same distinct Boss score to steer the search and rank the final settings. Jev rewards Boss strength and gain over OFF, penalizes accidental damage, and discounts repeated designs across characters. The search tried constant, early and late schedules on four characters, starting at 1.0 with a 0.25 step. After 27 probes, it scored five settings on eight other characters. Early α 1.0 scored 26.39, early α 1.25 scored 28.27, and **early α 1.15625 won at 28.84/100**. The late teacher cue and the early inference schedule are two independently chosen settings. [Measured probes and case ratings](docs/final-boss-raw192/vibe12/alpha-tuning/late-cues/search.json) · [Run or verify the alpha search](docs/final-boss-raw192/vibe12/alpha-tuning/README.md)
+4. **Select alpha on the saved RAW.** Use the same distinct Boss score to steer the search and rank the final settings. Jev rewards Boss strength and gain over OFF, penalizes accidental damage, and discounts repeated designs across characters. The search tried constant, early and late schedules on four characters, starting at 1.0 with a 0.25 step. Alpha has no upper limit: while the best probe is also the strongest one tried, the search measures the next stronger step. The recorded run below predates that rule and stopped at α 1.75, so its constant and late schedules were not measured above it. After 27 probes, it scored five settings on eight other characters. Early α 1.0 scored 26.39, early α 1.25 scored 28.27, and **early α 1.15625 won at 28.84/100**. The late teacher cue and the early inference schedule are two independently chosen settings. [Measured probes and case ratings](docs/final-boss-raw192/vibe12/alpha-tuning/late-cues/search.json) · [Run or verify the alpha search](docs/final-boss-raw192/vibe12/alpha-tuning/README.md)
 5. **Release the first-ranked recipe.** Bind its RAW hash, target cache, alpha and exact interval gains in the default manifest. Show matched OFF and ON images beside each entry. The normal replay command reproduced the scored Ranger image byte for byte. [Leaderboard with samples](docs/final-boss-raw192/vibe12/distinct-designs.md) · [Current default](docs/final-boss-raw192/default.json) · [Replay the default](docs/final-boss-raw192/README.md#replay-the-default)
 
 ## Named portfolios
@@ -146,10 +146,41 @@ and keeps the reported score, original response and validation diagnostics.
 
 Increase `--rounds` with the same arguments to extend collection. Completed
 proposals, images and judgments are reused, including partial-round receipts.
-Unresolved calls refuse automatic retry; reconcile the recorded request ID
-before choosing `--retry-pending`. Nanoodle itself does not currently guarantee
-server-side idempotency for these IDs. All prior outputs and losing prompts are
-retained, and no existing training run is reset.
+All prior outputs and losing prompts are retained, and no existing training
+run is reset.
+
+### Resuming an interrupted named collection
+
+Every render, proposal and judgment is one saved call under `calls/`. A call
+is `pending` while it runs, then `done` or `failed`. Rerunning the same
+command does the following.
+
+| Saved call | What the next run does |
+| --- | --- |
+| `done` | Reuses the result after checking the image hash. |
+| `failed` | Repeats it. The provider answered with a refusal, a server error or an unusable reply, so no result exists. An unusable reply is kept in the record. |
+| `pending` render | Repeats it. Rendering is local and deterministic. |
+| `pending` proposal or judgment | Stops with `unresolved call <request ID>`. The request may have been processed. Reconcile that request ID with the provider, then rerun with `--retry-pending`. Nanoodle does not currently guarantee server-side idempotency for these IDs. |
+
+The CLI checks `NANOGPT_API_KEY` (and `TYPESAFE_API_KEY` for
+`--judge-provider typesafe`) and the pool arguments before it reads the model,
+so a missing key leaves no open calls.
+
+Teacher selection reports its own state in the printed summary. When the
+second effect read or the rewrite pass cannot be measured, the round keeps its
+audited collection-time portfolio and the summary says
+`"teacher_selection": "incomplete"` with the cause, any unresolved request
+IDs and the next step. An incomplete result is saved as
+`round-N.temporary.json`, is recomputed on the next run, and never replaces a
+round that finished its checks. A manifest exported from an incomplete
+selection is a valid audited portfolio. Rerun until the summary says
+`"complete"` before comparing teachers across selectors.
+
+`--prepare-targets` leaves a finished, intact target cache untouched, so its
+`index.json` hash stays the one a release pins.
+
+Free-text collection uses the shared add-on's ledger, where every interrupted
+call, including a local render, waits for `--retry-pending`.
 
 ## Prepare frozen targets
 
@@ -244,6 +275,13 @@ catastrophic-only checks pass at every quarter. Beauty, preservation, teacher
 SSE and confidence are not selectors. This is not unseen confirmation or a new
 learning-rate optimum. The provisional reference rates were G0.00075,
 D0.009000000000000001 and bank0.03; completed LR work was reused.
+
+The three rates belong to the optimizer. Compare rate candidates on the same frozen
+teacher fields, with the same training updates, seed, matched scenes and constant
+unit slider strength. For Final Boss, use the distinct Boss score including visible
+damage and repeated designs. Record structural failures separately. Once training
+has selected the rates and RAW checkpoint, tune the single rendering alpha.
+The native gain limit of 5 applies only when rendering an image.
 
 An independent archive-byte audit verifies all256 FULL hashes, embedded update
 counts, journals, original initialization receipts and actual regularizer calls.

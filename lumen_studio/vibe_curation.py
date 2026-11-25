@@ -2,12 +2,11 @@
 from collections import Counter
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import asdict
-from functools import partial
 from pathlib import Path
-from threading import Lock
 
 from .contracts import atomic_json, digest, file_hash
 from .vibe import neutral_score_limit, training_manifest
+from .vibe_calls import CallLedger, InvalidReply
 from .vibe_observer import IMAGE_STATE, PAIR_STATE, decision_values, image_questions, observe
 from .vibe_portfolio import (
     FAMILY_LIMIT, distinct_finish, exclude_duplicates, finish_score, observed_family, pair_audit, select,
@@ -44,21 +43,18 @@ def curate_round(product, profile, proposals, index, args, root, call, *, max_ne
                 )
             rendered.append((case, seed, outputs))
 
-    request_locks = {}
     off_questions = image_questions(profile, candidate=False)
     on_questions = image_questions(profile, candidate=True)
 
     def measure(paths, state, questions):
         binding = dict(provider=args.judge_provider, model=args.judge_model, state=state, questions=questions,
                        images=[file_hash(path) for path in paths])
-        key = digest(dict(kind="judge", inputs=binding))
-        with request_locks.setdefault(key, Lock()):
-            receipt = call("judge", binding,
-                           lambda _: observe(args.judge_provider, args.judge_model, paths, state, questions))
+        receipt = call("judge", binding,
+                       lambda _: observe(args.judge_provider, args.judge_model, paths, state, questions))
         values = decision_values(receipt["raw"], questions)
         if values != receipt["values"]:
             raise ValueError("Stored Jev readings differ from the provider response")
-        return values, key
+        return values, call.key("judge", binding)
 
     def measure_case(task):
         case, seed, outputs = task
@@ -123,14 +119,35 @@ def curate_round(product, profile, proposals, index, args, root, call, *, max_ne
                 repairs=repairs, distinct_finish=metric)
 
 
-def collect_portfolio(product, profile, args):
-    from particle_sliders_vibe import SCHEMA, _call, collection_lock, file_digest, prompt_pair
-
+def validate_request(profile, args):
+    """Refuse an impossible collection before a model, key or provider is used."""
     if not 1 <= args.pool_size <= len(profile.families) * FAMILY_LIMIT:
         raise ValueError("Pool size exceeds the capacity of the visible design families")
     if (not 1 <= args.replace <= args.pool_size or args.best_of < 1 or args.rounds < 1
             or not 0 <= args.seed < 2**63 - args.rounds * args.best_of):
         raise ValueError("Invalid replacement, rounds, best-of or seed")
+
+
+def proposed_scenes(reply, count, taken):
+    """Accept a proposer reply only as a whole set of new, well-formed scenes."""
+    from particle_sliders_vibe import prompt_pair
+
+    if not isinstance(reply, list) or len(reply) != count:
+        raise InvalidReply("Proposer did not return the requested number of scenes")
+    try:
+        pairs = [prompt_pair(pair) for pair in reply]
+    except ValueError as error:
+        raise InvalidReply(str(error)) from error
+    neutrals = [pair["neutral"] for pair in pairs]
+    if len(set(neutrals)) != count or taken.intersection(neutrals):
+        raise InvalidReply("The proposer returned duplicate neutral scenes")
+    return pairs
+
+
+def collect_portfolio(product, profile, args):
+    from particle_sliders_vibe import SCHEMA, collection_lock, file_digest
+
+    validate_request(profile, args)
     root = Path(args.out).resolve()
     identity = dict(schema=SCHEMA, vibe=profile.concept, product=product.identity, profile=asdict(profile),
                     metric="distinct-finish-gain", selection="raw", pool_size=args.pool_size, replace=args.replace,
@@ -151,7 +168,7 @@ def collect_portfolio(product, profile, args):
                 raise ValueError("A new portfolio requires an empty output directory")
             state = dict(identity=identity, rounds=[])
             atomic_json(path, state)
-        call = partial(_call, root, retry_pending=args.retry_pending)
+        call = CallLedger(root, retry_pending=args.retry_pending)
         for index in range(len(state["rounds"]), args.rounds):
             history = [{"index": row["index"], "ranking": row["ranking"]} for row in state["rounds"]]
             previous = history[-1]["ranking"] if history else []
@@ -166,15 +183,14 @@ def collect_portfolio(product, profile, args):
                 if not count:
                     continue
                 scene_request = f"{profile.concept}. {profile.scene_instruction} {instruction}".strip()
+                taken = {scene["neutral"] for scene in scenes}
+                # A reply that fails here is saved as failed, so the next run asks again.
                 proposals = call(
                     "propose", dict(round=index, kind=kind, count=count, history=history, criterion=scene_request),
                     lambda key: product.propose(scene_request, count, history, request_id=key),
+                    check=lambda reply: proposed_scenes(reply, count, taken),
                 )
-                if not isinstance(proposals, list) or len(proposals) != count:
-                    raise ValueError("Proposer did not return the requested number of scenes")
-                scenes.extend(prompt_pair(pair) | {"kind": kind} for pair in proposals)
-            if len({pair["neutral"] for pair in scenes}) != len(scenes):
-                raise ValueError("The proposer returned duplicate neutral scenes")
+                scenes.extend(pair | {"kind": kind} for pair in proposed_scenes(proposals, count, taken))
             result = curate_round(product, profile, scenes, index, args, root, call,
                                   max_neutral_score=max_neutral_score)
             state["rounds"].append(result)
