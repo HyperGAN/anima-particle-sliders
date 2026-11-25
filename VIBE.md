@@ -300,7 +300,10 @@ also checks two lower G values. It continues the highest-scoring qualified
 FULL checkpoint. It rechecks the original rate scenes at every later quarter.
 A confirmed split or other catastrophic defect stops the candidate before the
 next update. A checkpoint with an unresolved recheck is ineligible for selection.
-The full-budget check also applies when resuming a run from an older version. It also checks
+The full-budget check also applies when resuming a screened run from an older version.
+Fresh Final Boss fits include the exact watch-repair-shop prompt and seed that
+revealed a duplicated figure in training. Both fixed-rate and searched fits
+recheck those screening scenes. Previously frozen panels keep their original cases. It also checks
 the proposed replay strength on those scenes before using the held-out panel. If the bracket
 yields no usable fit, it tests lower G values
 with the reference critic and particle rates held fixed. For a run

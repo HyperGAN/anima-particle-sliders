@@ -394,7 +394,7 @@ def test_confirmation_reserves_one_setting_across_interruptions(tmp_path, monkey
 
     monkeypatch.setattr(cli, "fit_candidates", candidates)
     monkeypatch.setattr(cli, "train", lambda *a, **kw: {})
-    monkeypatch.setattr(cli, "recheck_screened_cases", lambda *a: None)
+    monkeypatch.setattr(cli, "recheck_screened_cases", lambda *a, **kw: None)
     monkeypatch.setattr(cli, "select_checkpoint", lambda *a: {})
     monkeypatch.setattr(cli, "tune", lambda *a, **kw: strength)
     plan = {"budget": 256, "horizon": 256}
@@ -512,3 +512,35 @@ def test_uncertain_original_scene_excludes_that_quarter(tmp_path):
         )
     atomic_json(arm / "fit-screen/128.json", {"status": "unmeasured"})
     assert select_checkpoint(tmp_path, rates, 256)["step"] == 192
+
+
+def test_known_split_stays_in_fresh_final_boss_runs_and_prior_panels_are_frozen(
+    tmp_path,
+):
+    from lumen_studio.study.cli import arguments, study_panels
+    from lumen_studio.contracts import digest
+
+    spec = read(
+        arguments(["--vibe", "Final Boss", "--out", ".", "--model-dir", "."]).spec
+    )
+    (extra,) = spec["screen_cases"]["Final Boss"]
+    assert extra["seed"] == 553304 and "older man" in extra["prompt"]
+    panels, required = study_panels(spec, "Final Boss", tmp_path)
+    assert required and panels["rates"] == [*spec["validation"]["rates"], extra]
+    assert (
+        panels["steps"] == spec["validation"]["steps"]
+        and panels["confirm"] == spec["validation"]["confirm"]
+    )
+    assert study_panels(spec, "1990s anime", tmp_path) == (spec["validation"], False)
+    atomic_json(
+        tmp_path / "data-config.json",
+        {
+            "spec": digest(
+                dict(
+                    teachers=spec["concepts"]["Final Boss"],
+                    validation=spec["validation"],
+                )
+            )
+        },
+    )
+    assert study_panels(spec, "Final Boss", tmp_path) == (spec["validation"], False)

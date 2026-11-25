@@ -62,7 +62,17 @@ def arm_path(root, rates):
     return root / "rates" / digest(rates)[:20]
 
 
-def train(outputs, cache, panels, rates, budget, phase, *, schedule_horizon=None):
+def train(
+    outputs,
+    cache,
+    panels,
+    rates,
+    budget,
+    phase,
+    *,
+    schedule_horizon=None,
+    always_check_rates=False,
+):
     """A 1/4-horizon LR screen can be continued from exactly the committed FULL."""
     rt = outputs.runtime
     dest = arm_path(outputs.root, rates)
@@ -141,8 +151,11 @@ def train(outputs, cache, panels, rates, budget, phase, *, schedule_horizon=None
             raise Catastrophe(f"Catastrophic output at update {step}")
         if (
             phase == "fit"
-            and cut < step < end
-            and (dest / "screen" / f"{cut}.json").is_file()
+            and step < end
+            and (
+                always_check_rates
+                or (cut < step and (dest / "screen" / f"{cut}.json").is_file())
+            )
         ):
             # A screened scene can break earlier than the separate step panel.
             # Check while the current weights are still installed, before the next update.
@@ -289,10 +302,12 @@ def score_rate_panel(arm, receipt, step, raw, measure):
     return result
 
 
-def recheck_screened_cases(outputs, cache, panels, rates, horizon, fit):
+def recheck_screened_cases(
+    outputs, cache, panels, rates, horizon, fit, *, required=False
+):
     """Check the original screening scenes at the full training budget."""
     arm = arm_path(outputs.root, rates)
-    if not (arm / "screen" / f"{horizon // 4}.json").is_file():
+    if not required and not (arm / "screen" / f"{horizon // 4}.json").is_file():
         return
     raw = Checkpoint(**fit["raw"])
 

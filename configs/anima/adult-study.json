@@ -401,5 +401,13 @@
         "seed": 992464
       }
     ]
+  },
+  "screen_cases": {
+    "Final Boss": [
+      {
+        "prompt": "Anime illustration. Eye-level half-body portrait of one older man with wavy white hair, standing naturally facing the viewer. Background: watch repair shop with brass clocks and a cream workbench. Lighting: steady warm lamp light. Keep the surrounding setting clearly visible.",
+        "seed": 553304
+      }
+    ]
   }
 }

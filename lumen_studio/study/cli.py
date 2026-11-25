@@ -216,9 +216,16 @@ def choose_for_confirmation(outputs, cache, panels, plan, args):
                 steps,
                 "fit",
                 schedule_horizon=plan["horizon"],
+                always_check_rates=plan.get("always_check_rates", False),
             )
             screen_check = recheck_screened_cases(
-                outputs, cache, panels, rates, steps, fit
+                outputs,
+                cache,
+                panels,
+                rates,
+                steps,
+                fit,
+                required=plan.get("always_check_rates", False),
             )
             selected = select_checkpoint(root, rates, steps)
             best = tune(
@@ -242,6 +249,27 @@ def choose_for_confirmation(outputs, cache, panels, plan, args):
     )
 
 
+def study_panels(spec, concept, root):
+    groups = spec["validation"]
+    extra = spec.get("screen_cases", {}).get(concept, [])
+    if not extra:
+        return groups, False
+    bound = root / "data-config.json"
+    if bound.exists():
+        original = read(bound)
+        old_spec = {k: v for k, v in spec.items() if k != "screen_cases"}
+        if original["spec"] in (
+            digest(dict(teachers=spec["concepts"][concept], validation=groups)),
+            digest(old_spec),
+        ) and any(case not in groups["rates"] for case in extra):
+            return groups, False
+    rates = list(groups["rates"])
+    for case in extra:
+        if case not in rates:
+            rates.append(case)
+    return groups | {"rates": rates}, True
+
+
 def run(args):
     import torch
     from ..backends.anima import TurboRuntime
@@ -257,6 +285,7 @@ def run(args):
         raise ValueError("--vibe must name a concept in --spec")
     concept = names[args.vibe.casefold()]
     config = spec["concepts"][concept]
+    groups, always_check_rates = study_panels(spec, concept, root)
     if not 1 <= args.min_teachers <= len(config["teachers"]):
         raise ValueError("--min-teachers exceeds the scene pool")
     plan = training_plan(args, root, concept, config)
@@ -278,7 +307,7 @@ def run(args):
             schema="anima-stock-empf-study-v2",
             model=rt.identity,
             core=verify_core(),
-            spec=digest(dict(teachers=config, validation=spec["validation"])),
+            spec=digest(dict(teachers=config, validation=groups)),
             concept=concept,
             minimum=args.min_teachers,
             attempts=args.collection_attempts,
@@ -289,7 +318,10 @@ def run(args):
             original = read(bound)
             if original["schema"] == "anima-stock-empf-study-v1" and original[
                 "spec"
-            ] == digest(spec):
+            ] in (
+                digest(spec),
+                digest({k: v for k, v in spec.items() if k != "screen_cases"}),
+            ):
                 atomic_json(root / "data-config-v1.json", original)
                 original = original | {"schema": opts["schema"], "spec": opts["spec"]}
             if original | {"attempts": args.collection_attempts} != opts:
@@ -333,9 +365,16 @@ def run(args):
                     raise ValueError(
                         "Selected teacher image or integrity decision differs"
                     )
-        panels = validation_panels(
-            outputs, spec["validation"], args.collection_attempts
-        )
+        panels = validation_panels(outputs, groups, args.collection_attempts)
+        if always_check_rates:
+            present = {(case["prompt"], case["seed"]) for case in panels["rates"]}
+            if any(
+                (case["prompt"], case["seed"]) not in present
+                for case in spec["screen_cases"][concept]
+            ):
+                raise Unmeasured(
+                    "The registered regression prompt and seed lack a qualified OFF image"
+                )
         target = root / "frozen" / "targets"
         if not (target / "index.json").is_file():
             prepare_targets(rt, manifest, manifest["variation"], target, resolution=512)
@@ -365,6 +404,12 @@ def run(args):
         if steps != plan["horizon"]:
             settings["max_updates"] = steps
         training_config = root / "training-config.json"
+        if always_check_rates and (
+            not training_config.exists()
+            or read(training_config).get("always_check_rates")
+        ):
+            settings["always_check_rates"] = True
+            plan["always_check_rates"] = True
         if training_config.exists():
             original = read(training_config)
             # An explicitly requested rate search can expand a failed single-rate
