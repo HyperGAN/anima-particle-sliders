@@ -270,7 +270,7 @@ GPU, `--gpu-cap-gib` limits this process’s PyTorch allocations (19 GiB by defa
 
 ```sh
 anima-vibe-train --vibe 'Final Boss' --model-dir /models/anima-turbo-v11 \
-  --out runs/boss --device cuda:0 --search-rates
+  --out runs/boss --device cuda:0
 ```
 
 At startup three pinned PNGs check the image judge on a coherent portrait, a
@@ -295,7 +295,28 @@ request a fixed fit unless `--search-rates` is supplied. A resumed run keeps the
 its existing checkpoints. `--g-lr`, `--d-lr` and `--particle-lr` override
 the corresponding rate. [Measured native recipes](configs/anima/study-recipes.json).
 
-The optional rate screen varies one of the three absolute rates by a factor of
+### Measured settings on ParticleGAN 0.12.0
+
+Each gain is the equally weighted mean change in the intended effect with the slider
+on versus off across four held-out prompts and seeds. All twelve pairs improved.
+These settings apply to Anima Turbo v1.1 at 512 × 512 with ten Euler steps and CFG 1.
+
+| Slider | G | D | Particle | Updates | Strength | Held-out gain |
+| --- | ---: | ---: | ---: | ---: | --- | ---: |
+| Final Boss | 0.00028125 | 0.009 | 0.03 | 128 | constant, α 1 | +0.1042 |
+| 1990s anime | 0.000375 | 0.018 | 0.03 | 192 | constant, α 1.5 | +0.2050 |
+| Visually appealing character | 0.000375 | 0.018 | 0.03 | 256 | constant, α 1 | +0.1792 |
+
+The 1990s anime and character-appeal runs compared 64, 128, 192 and 256 updates.
+The original Final Boss rate search found six settings that were intact at 64
+and later failed a structural check. The successful Final Boss fit used nine fresh
+matched teacher scenes and compared 32, 64, 96 and 128 updates. Its screening
+panel included the exact watch-shop scene that had exposed duplicated characters.
+The upper endpoints are the best tested choices for those runs.
+
+### Rate and checkpoint selection
+
+Use `--search-rates` to start a fresh learning-rate search. The rate screen varies one of the three absolute rates by a factor of
 two in each direction. When a different G wins, it repeats the D and particle
 comparisons at that G. When a lower G is the only usable initial setting, it
 also checks two lower G values. It continues the highest-scoring qualified

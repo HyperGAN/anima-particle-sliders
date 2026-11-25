@@ -256,24 +256,39 @@ def choose_for_confirmation(outputs, cache, panels, plan, args):
 
 
 def study_panels(spec, concept, root):
-    groups = spec["validation"]
+    base = spec["validation"]
     extra = spec.get("screen_cases", {}).get(concept, [])
-    if not extra:
-        return groups, False
-    bound = root / "data-config.json"
-    if bound.exists():
-        original = read(bound)
-        old_spec = {k: v for k, v in spec.items() if k != "screen_cases"}
-        if original["spec"] in (
-            digest(dict(teachers=spec["concepts"][concept], validation=groups)),
-            digest(old_spec),
-        ) and any(case not in groups["rates"] for case in extra):
-            return groups, False
-    rates = list(groups["rates"])
+    holdout = spec.get("confirmation_cases", {}).get(concept)
+    if not extra and holdout is None:
+        return base, False
+    rates = list(base["rates"])
     for case in extra:
         if case not in rates:
             rates.append(case)
-    return groups | {"rates": rates}, True
+    screened = base | {"rates": rates}
+    current = screened if holdout is None else screened | {"confirm": holdout}
+    bound = root / "data-config.json"
+    if bound.exists():
+        original = read(bound)["spec"]
+        # Keep both the cases and the screening behavior of earlier runs.
+        for groups, required in [
+            (current, bool(extra)),
+            (screened, bool(extra)),
+            (base, False),
+        ]:
+            if (
+                digest(dict(teachers=spec["concepts"][concept], validation=groups))
+                == original
+            ):
+                return groups, required
+        legacy = {
+            k: v
+            for k, v in spec.items()
+            if k not in ("screen_cases", "confirmation_cases")
+        }
+        if digest(legacy) == original:
+            return base, False
+    return current, bool(extra)
 
 
 def run(args):
@@ -326,7 +341,13 @@ def run(args):
                 "spec"
             ] in (
                 digest(spec),
-                digest({k: v for k, v in spec.items() if k != "screen_cases"}),
+                digest(
+                    {
+                        k: v
+                        for k, v in spec.items()
+                        if k not in ("screen_cases", "confirmation_cases")
+                    }
+                ),
             ):
                 atomic_json(root / "data-config-v1.json", original)
                 original = original | {"schema": opts["schema"], "spec": opts["spec"]}

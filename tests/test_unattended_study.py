@@ -529,7 +529,7 @@ def test_known_split_stays_in_fresh_final_boss_runs_and_prior_panels_are_frozen(
     assert required and panels["rates"] == [*spec["validation"]["rates"], extra]
     assert (
         panels["steps"] == spec["validation"]["steps"]
-        and panels["confirm"] == spec["validation"]["confirm"]
+        and panels["confirm"] == spec["confirmation_cases"]["Final Boss"]
     )
     assert study_panels(spec, "1990s anime", tmp_path) == (spec["validation"], False)
     atomic_json(
@@ -577,3 +577,29 @@ def test_selection_only_keeps_heldout_unconsumed_and_preserves_existing_status(
     assert (
         cli.main(args) == 0 and read(tmp_path / "status.json")["status"] == "confirmed"
     )
+
+
+def test_bundled_recipes_bind_the_confirmed_budgets_and_holdouts(tmp_path):
+    from lumen_studio.study.cli import arguments, study_panels, training_plan
+
+    for title, budget in (
+        ("Final Boss", 128),
+        ("1990s anime", 192),
+        ("Visually appealing character", 256),
+    ):
+        args = arguments(["--vibe", title, "--out", str(tmp_path), "--model-dir", "."])
+        spec = read(args.spec)
+        measured = read(args.spec.with_name("study-recipes.json"))["concepts"][title]
+        plan = training_plan(args, tmp_path, title, spec["concepts"][title])
+        assert plan == {"rates": measured["rates"], "budget": budget, "horizon": 256}
+        groups, _ = study_panels(spec, title, tmp_path)
+        assert [case["seed"] for case in groups["confirm"]] == measured[
+            "held_out_seeds"
+        ]
+        assert (
+            len(measured["per_case_gains"]) == 4 and min(measured["per_case_gains"]) > 0
+        )
+        assert all(
+            re.search(r"\badult\b|\b\d+-year-old\b", case["prompt"], re.IGNORECASE)
+            for case in groups["confirm"]
+        )

@@ -409,5 +409,25 @@
         "seed": 553304
       }
     ]
+  },
+  "confirmation_cases": {
+    "Final Boss": [
+      {
+        "seed": 714583,
+        "prompt": "Illustration. One 47-year-old adult woman with short black waves and a plain navy jacket in the ticket office of a hillside cable car station. A ticket rack and wooded hillside are visible behind her. Eye-level medium shot, soft afternoon light. All depicted people are adults."
+      },
+      {
+        "seed": 873191,
+        "prompt": "Illustration. One 56-year-old adult man with a neat gray beard and a dark green overshirt in a municipal records room. He stands by a map cabinet and a narrow window. Eye-level medium shot, even daylight. All depicted people are adults."
+      },
+      {
+        "seed": 528067,
+        "prompt": "Illustration. One 42-year-old adult woman with a braid and a sand-colored work shirt arranging labeled jars on a perfume workshop shelf. Pale stucco walls, diffuse window light, waist-up three-quarter view. All depicted people are adults."
+      },
+      {
+        "seed": 964153,
+        "prompt": "Illustration. One 63-year-old adult man with closely cropped hair and a blue cardigan at a linen shop counter. Stacked folded cloth and a wooden stool in the background. Calm expression, waist-up eye-level shot, warm indoor light. All depicted people are adults."
+      }
+    ]
   }
 }
