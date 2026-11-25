@@ -6,11 +6,22 @@ import json
 from math import isclose
 from pathlib import Path
 
-from .final_boss_damage_search import search
+from .final_boss_damage_search import FIRST_PROTOCOL_CEILING, LOWER, search, untried_side
+from .final_boss_default import scheduled_gains, strongest_alpha
 from .final_boss_design_scores import summarize
 from .final_boss_visible_damage import score_case
 from .publish_final_boss_vibe12 import read
 from .verify_final_boss_designs import verify_orders
+
+
+def protocol(data, profile):
+    """The strongest alpha a record's search could probe, and whether it climbed past its budget."""
+    lower, upper = data.get("bounds", (LOWER, FIRST_PROTOCOL_CEILING))
+    if lower != LOWER or upper not in (None, FIRST_PROTOCOL_CEILING):
+        raise ValueError("Unknown alpha search bounds")
+    if upper is None:
+        return strongest_alpha(profile, data["selected"]["sigmas"]), True
+    return upper, False
 
 
 def verify(data, receipts):
@@ -26,6 +37,8 @@ def verify(data, receipts):
             data["cases"]["validation"]
         ):
             raise ValueError("Wrong character panel")
+        if trial["gains"] != scheduled_gains(profile, alpha, data["selected"]["sigmas"]):
+            raise ValueError("Trial gains differ from its schedule and alpha on the recorded sampler grid")
         scores = {c: score_case(row) for c, row in rows.items()}
         for pair in trial["pairs"]:
             hashes = [rows[c]["on"] for c in pair["cases"]]
@@ -58,16 +71,26 @@ def verify(data, receipts):
         )
         if expected != old["upper_bound"]:
             raise ValueError("Pruning upper bound changed")
+    # A probe Jev did not rate is unmeasured. It has no score and is never a finalist.
+    unmeasured = {(u["phase"], u["profile"], u["alpha"]) for u in data.get("unmeasured", ())}
+    if unmeasured & set(settings):
+        raise ValueError("A setting is recorded as both measured and unmeasured")
+
+    def searched(profile, alpha):
+        key = "search", profile, alpha
+        return None if key in unmeasured else settings[key]
+
     for profile, recorded in data["paths"].items():
-        tested, steps = search(lambda a: settings["search", profile, a])
+        tested, steps = search(lambda a: searched(profile, a), *protocol(data, profile))
         if (
             steps != recorded["steps"]
             or [{"alpha": a, "score": v} for a, v in tested.items()]
             != recorded["trials"]
         ):
             raise ValueError("Adaptive path did not use the distinct-design scores")
-        for alpha in sorted(tested, key=tested.get, reverse=True)[:2]:
-            if ("validation", profile, alpha) not in settings and not any(
+        measured = [alpha for alpha in tested if tested[alpha] is not None]
+        for alpha in sorted(measured, key=tested.get, reverse=True)[:2]:
+            if not {("validation", profile, alpha)} & (set(settings) | unmeasured) and not any(
                 (v["profile"], v["alpha"]) == (profile, alpha) for v in data["pruned"]
             ):
                 raise ValueError("Missing finalist")
@@ -91,8 +114,9 @@ def verify(data, receipts):
     return selected
 
 
-def export(campaign, method, output):
-    root = campaign / "strength-search/leaderboard-retune-design" / method
+def export(campaign, method, output, run=None):
+    """Copy one finished search out of the research host. ``run`` is its results folder."""
+    root = (run or campaign / "strength-search/leaderboard-retune-design") / method
     result = read(root / "result.json")
     policy = read(root / "request.json")
     tuning = read(root / "tuning.json")
@@ -169,6 +193,7 @@ def export(campaign, method, output):
         "model": policy["model"],
         "state": policy["state"],
         "questions": policy["questions"],
+        "bounds": policy["bounds"],
         "selected": selected,
         "cases": {
             "search": policy["search_cases"],
@@ -187,6 +212,8 @@ def export(campaign, method, output):
             for r in read(root / "incumbents.json")
         ],
     }
+    if result.get("unmeasured"):
+        data["unmeasured"] = [{k: u[k] for k in ("phase", "profile", "alpha", "missing")} for u in result["unmeasured"]]
     verify(data, proofs)
     output.mkdir(parents=True, exist_ok=True)
     (output / "tuning.json").write_text(json.dumps(selected, indent=2) + "\n")
@@ -203,11 +230,12 @@ def main():
     p.add_argument("folder", type=Path)
     p.add_argument("--export", type=Path, metavar="CAMPAIGN")
     p.add_argument("--method")
+    p.add_argument("--run", type=Path, help="results folder of the search, when it is not the campaign's first design search")
     args = p.parse_args()
     if args.export:
         if not args.method:
             p.error("--export requires --method")
-        export(args.export, args.method, args.folder)
+        export(args.export, args.method, args.folder, args.run)
     data = read(args.folder / "search.json")
     with gzip.open(args.folder / "receipts.json.gz", "rt") as f:
         selected = verify(data, json.load(f))
@@ -216,6 +244,18 @@ def main():
     print(
         f"{selected['method']} · {selected['profile']} α {selected['alpha']:g} · {100 * selected['design']['score']:.2f}"
     )
+    for profile, path in data["paths"].items():
+        strongest, climbed = protocol(data, profile)
+        trials = {trial["alpha"]: trial["score"] for trial in path["trials"]}
+        side = untried_side(trials, strongest if climbed else None)
+        if not climbed and profile == next(iter(data["paths"])):
+            print(f"  searched under the withdrawn α {strongest:g} ceiling")
+        if all(score is None for score in trials.values()):
+            print(f"  {profile}: no measured search score")
+        elif side:
+            print(f"  {profile}: no probe on the {side} side of its best search alpha")
+        elif climbed and max(trials, key=lambda a: (trials[a] is not None, trials[a] or 0)) == strongest:
+            print(f"  {profile}: best at α {strongest:g}, the strongest setting Anima applies for this schedule")
 
 
 if __name__ == "__main__":

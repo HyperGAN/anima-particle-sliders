@@ -10,17 +10,27 @@ import torch
 
 from lumen_studio.contracts import atomic_json, file_hash
 from lumen_studio.provenance import same_portable_model
-from release_tools.scheduled_render import render_scheduled
+from release_tools.final_boss_default import scheduled_gains
+from release_tools.scheduled_render import render_scheduled, step_gains
 from release_tools.final_boss_targets import STUDY, VARIATION
+
+
+def check_release(config, checkpoint):
+    """Refuse a checkpoint or setting that is not the published default. Needs no model."""
+    expected = config["checkpoints"][config["recipe"]]
+    if checkpoint.stat().st_size != expected["bytes"] or file_hash(checkpoint) != expected["sha256"]:
+        raise ValueError("The RAW checkpoint differs from the published research default")
+    gains = list(step_gains(config["gains"], config["steps"], 1.0))
+    if len(config["sigmas"]) != config["steps"] + 1 or gains != scheduled_gains(
+            config["profile"], config["alpha"], config["sigmas"]):
+        raise ValueError("The published gains differ from their schedule and alpha on the recorded sampler grid")
 
 
 @torch.no_grad()
 def replay(runtime, checkpoint, case, config):
     from lumen_studio.particles import ParticleAdapter
 
-    expected = config["checkpoints"][config["recipe"]]
-    if checkpoint.stat().st_size != expected["bytes"] or file_hash(checkpoint) != expected["sha256"]:
-        raise ValueError("The RAW checkpoint differs from the published research default")
+    check_release(config, checkpoint)
     recorded = config["training_model_identity"]
     # An exact, output-qualified runtime may use a different package environment.
     # It must still reproduce the archived reference before rendering a new case.
@@ -77,6 +87,8 @@ def main():
         expected = config["checkpoints"][config["recipe"]]
         checkpoint = Path(hf_hub_download(config["checkpoint_repository"], expected["file"],
                                           revision=config["checkpoint_revision"]))
+
+    check_release(config, checkpoint)  # before the native model is loaded
 
     from lumen_studio.backends.anima import TurboRuntime
 

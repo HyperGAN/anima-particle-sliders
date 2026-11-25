@@ -187,3 +187,32 @@ def test_manifest_does_not_allow_cache_path_escape(tmp_path):
     manifest['sha256'] = digest({k: v for k, v in manifest.items() if k != 'sha256'})
     with pytest.raises(ValueError, match='row identity'):
         validate_manifest(manifest)
+
+
+def test_finished_target_cache_is_left_byte_identical(tmp_path):
+    from conftest import TinyRuntime
+    from lumen_studio.contracts import file_hash
+    from lumen_studio.vibe import prepare_snapshot
+
+    runtime = TinyRuntime()
+    product = AnimaVibe(tmp_path, Workflows(), runtime=Runtime())
+    state = collect(product, vibe='boss', directory=tmp_path / 'run', pool_size=1, replace=1, best_of=1)
+    manifest = training_manifest(state)
+    targets = tmp_path / 'snapshot' / 'training' / 'targets'
+    loads = []
+
+    def load():
+        loads.append(1)
+        return runtime
+
+    first = prepare_snapshot(load, manifest, targets, model=runtime.identity, resolution=64)
+    saved = file_hash(targets / 'index.json')
+    again = prepare_snapshot(load, manifest, targets, model=runtime.identity, resolution=64)
+    assert again == first and file_hash(targets / 'index.json') == saved and len(loads) == 1
+    # A damaged or foreign cache is not taken as finished; the pinned preparer decides.
+    shard = targets / first['shards'][0]['path']
+    shard.write_bytes(shard.read_bytes() + b'x')
+    prepare_snapshot(load, manifest, targets, model=runtime.identity, resolution=64)
+    assert len(loads) == 2
+    assert prepare_snapshot(load, manifest, targets, model=dict(runtime.identity, sha256='b' * 64),
+                            resolution=64) is not None and len(loads) == 3

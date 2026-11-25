@@ -4,7 +4,7 @@ import argparse
 import json
 from datetime import datetime, timezone
 from hashlib import sha256
-from os import fstat
+from os import fstat, replace
 from pathlib import Path
 
 from PIL import Image
@@ -14,8 +14,19 @@ from release_tools.final_boss_scoring import BOSS, DAMAGE, GAIN, ORIGINAL, SCORE
 from release_tools.final_boss_visible_damage import VERSION
 
 
+TRAINING_UPDATES = 192
+
+
 def read(path):
     return json.loads(path.read_text())
+
+
+def raw_result(campaign, method):
+    """A recipe enters the board only as a finished RAW192 run without weight EMA."""
+    trained = read(campaign / "cohorts" / method / "result.json")
+    if trained.get("step") != TRAINING_UPDATES or trained.get("ema_decay", "missing") is not None:
+        raise ValueError(f"Expected a RAW{TRAINING_UPDATES} result without weight EMA for {method}")
+    return trained
 
 
 def write_sheet(records, folder):
@@ -24,6 +35,7 @@ def write_sheet(records, folder):
     name = f"samples/{digest}.webp"
     destination = folder / name
     if destination.is_file():
+        # A strip is only ever renamed into place complete, so its name vouches for it.
         return name
     destination.parent.mkdir(exist_ok=True, parents=True)
     side = 144
@@ -36,7 +48,9 @@ def write_sheet(records, folder):
             image = original.convert("RGB")
             image.thumbnail((side, side), Image.Resampling.LANCZOS)
             strip.paste(image, (index * side + (side - image.width) // 2, (side - image.height) // 2))
-    strip.save(destination, "WEBP", quality=85)
+    partial = destination.with_suffix(".partial")
+    strip.save(partial, "WEBP", quality=85)
+    replace(partial, destination)
     return name
 
 
@@ -57,7 +71,7 @@ def export(campaign, folder):
     cases = board["cases"]
     originals = [board["rows"][0]["cases"][case]["off"] for case in cases]
     declared = read(search / "shared-best-stock.json")
-    snapshot = {"as_of_utc": timestamp.strftime("%Y-%m-%d %H:%M UTC"), "training_updates": 192,
+    snapshot = {"as_of_utc": timestamp.strftime("%Y-%m-%d %H:%M UTC"), "training_updates": TRAINING_UPDATES,
                 "weights": "raw", "ema_decay": None, "scoring_version": version, "quality_metric": DAMAGE,
                 "teacher": {key: teacher[key] for key in ("cache", "cache_index_sha256", "manifest", "targets", "scenes", "model")},
                 "cases": cases, "evaluation_requests": {case["id"]: case["request"] for case in declared["cases"]},
@@ -69,7 +83,7 @@ def export(campaign, folder):
     for row in board["rows"]:
         method = row["method"]
         if method not in snapshot["methods"]:
-            trained = read(campaign / "cohorts" / method / "result.json")
+            trained = raw_result(campaign, method)
             tuning = read(campaign / "tuning" / method / "boss-effect-tuning.json")
             snapshot["methods"][method] = {"label": labels[method], "sigmas": tuning["sampler"],
                                            "raw_sha256": trained["raw"]["sha256"],
@@ -79,6 +93,8 @@ def export(campaign, folder):
         ratings = {case: {key: row["cases"][case][key] for key in (BOSS, ORIGINAL, DAMAGE)}
                    | {"on_sha256": row["cases"][case]["on"]["sha256"]} for case in cases}
         scores = panel_scores(ratings, cases, version)
+        if scores is None:
+            raise ValueError(f"Unmeasured rating for {method} {row['profile']} {row['alpha']}; it cannot be ranked")
         if any(row["means"][metric] != scores[metric] for metric in (SCORE, GAIN, DAMAGE)):
             raise ValueError("Published scores do not reproduce")
         snapshot["settings"].append({key: row[key] for key in ("method", "profile", "alpha", "gains", "runs")}

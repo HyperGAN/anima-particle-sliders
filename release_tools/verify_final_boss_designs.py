@@ -39,6 +39,9 @@ def verify_panel(report, receipts, snapshot=None):
         if snapshot["cases"]!=cases or snapshot["originals"]!=report["originals"]:
             raise ValueError("Development panel differs from alpha ranking")
         settings = {(s["method"],s["profile"],s["alpha"]):s for s in snapshot["settings"]}
+    methods = [r["method"] for r in report["rows"]]
+    if len(methods) != len(set(methods)) or (snapshot and set(methods) != set(snapshot["methods"])):
+        raise ValueError("The panel must rank every trained recipe exactly once")
     for r in report["rows"]:
         if set(r["case_scores"])!=set(cases) or set(r["inputs"])!=set(cases):
             raise ValueError("Incomplete recipe")
