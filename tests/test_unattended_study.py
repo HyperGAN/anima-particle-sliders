@@ -150,3 +150,36 @@ def test_replay_requires_the_exact_confirmed_setting():
     ):
         with pytest.raises(ValueError, match="confirmation"):
             qualified_strength(dict(run, confirmation=final | change))
+
+
+def test_screen_reuses_finished_fits_quarter_raw(tmp_path, monkeypatch):
+    from dataclasses import asdict
+    from lumen_studio.study import training
+
+    rates = {"g": 0.001, "d": 0.002, "particle": 0.003}
+    arm = arm_path(tmp_path, rates)
+    raw = {
+        "path": str(tmp_path / "quarter.safetensors"),
+        "bytes": 0,
+        "sha256": "0" * 64,
+    }
+    atomic_json(arm / "cursor.json", {"step": 256})
+    atomic_json(arm / "updates/000064.json", {"step": 64, "raw": raw})
+    observed = []
+    inference = SimpleNamespace(close=lambda: observed.append("closed"))
+    monkeypatch.setattr(
+        training,
+        "open_training",
+        lambda *a, **k: pytest.fail("completed updates replayed"),
+    )
+    monkeypatch.setattr(training, "open_inference", lambda *a, **k: inference)
+
+    def compare(cases, variation, checkpoint, alpha, profile, *, owner):
+        assert cases == ["rates"] and owner is inference and asdict(checkpoint) == raw
+        return dict(raw=raw, status="pass", mean_gain=0.2)
+
+    outputs = SimpleNamespace(root=tmp_path, runtime=object(), compare=compare)
+    cache = SimpleNamespace(index={"identity": {"variation": "fixture"}})
+    result = training.train(outputs, cache, {"rates": ["rates"]}, rates, 256, "screen")
+    assert result["mean_gain"] == 0.2 and observed == ["closed"]
+    assert read(arm / "screen/64.json") == result

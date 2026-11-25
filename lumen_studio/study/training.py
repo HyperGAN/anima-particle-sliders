@@ -108,7 +108,7 @@ def train(outputs, cache, panels, rates, horizon, phase):
         else:
             raise ValueError("Pending update differs from committed cursor")
 
-    def observe(step, raw):
+    def observe(step, raw, inference=None):
         result_path = dest / phase / f"{step}.json"
         if result_path.exists():
             result = read(result_path)
@@ -116,13 +116,16 @@ def train(outputs, cache, panels, rates, horizon, phase):
                 raise ValueError("Saved observation differs from RAW")
         else:
             cases = panels["rates" if phase == "screen" else "steps"]
-            result = outputs.compare(cases, variation, raw, 1.0, "constant")
+            result = outputs.compare(
+                cases, variation, raw, 1.0, "constant", owner=inference
+            )
             atomic_json(result_path, result)
         if result["status"] == "fail":
             atomic_json(
                 dest / "failure.json", dict(step=step, phase=phase, result=result)
             )
             raise Catastrophe(f"Catastrophic output at update {step}")
+        return result
 
     last_result = dest / phase / f"{end}.json"
     if previous and previous["step"] >= end and last_result.exists():
@@ -130,6 +133,23 @@ def train(outputs, cache, panels, rates, horizon, phase):
         if file_pin(result["raw"]["path"]) != Checkpoint(**result["raw"]):
             raise ValueError(f"Retained RAW differs at {last_result}")
         return result
+    if previous and not recovered and previous["step"] >= end:
+        # A completed single-rate fit can later enter the optional rate screen.
+        # Render its committed quarter RAW on the rate panel without replaying an update.
+        row = read(dest / "updates" / f"{end:06d}.json")
+        raw = Checkpoint(**row["raw"])
+        inference = open_inference(
+            rt,
+            variation,
+            raw=raw,
+            owner_admission=lambda req: (
+                req["RAW"] == asdict(raw) and req["model_identity"] == rt.identity
+            ),
+        )
+        try:
+            return observe(end, raw, inference)
+        finally:
+            inference.close()
     directory = dest / "attempts" / uuid4().hex
     owner = open_training(
         rt,

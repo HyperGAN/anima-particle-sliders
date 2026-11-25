@@ -213,8 +213,19 @@ def run(args):
             search=args.search_rates,
         )
         training_config = root / "training-config.json"
-        if training_config.exists() and read(training_config) != settings:
-            raise ValueError("Training settings differ from the committed run")
+        if training_config.exists():
+            original = read(training_config)
+            # An explicitly requested rate search can expand a failed single-rate
+            # fit on the same data, horizon and reference rates. Existing arms
+            # keep their exact cursors and structural stop receipts.
+            if original != settings and not (
+                args.search_rates
+                and not original["search"]
+                and original | {"search": True} == settings
+                and (root / "fit-failures.json").is_file()
+                and not (root / "outcome.json").exists()
+            ):
+                raise ValueError("Training settings differ from the committed run")
         atomic_json(training_config, settings)
         candidates = (
             screened_rates(outputs, cache, panels, rates, args.steps)
