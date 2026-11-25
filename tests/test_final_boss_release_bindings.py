@@ -7,7 +7,7 @@ import pytest
 
 from release_tools import publish_final_boss_vibe12 as board_export
 from release_tools.final_boss_damage_search import FIRST_PROTOCOL_CEILING, TRIAL_BUDGET, search, untried_side
-from release_tools.final_boss_default import scheduled_gains, select_default
+from release_tools.final_boss_default import scheduled_gains, select_default, strongest_alpha
 from release_tools.final_boss_design_alpha import verify as verify_alpha
 from release_tools.verify_final_boss_designs import verify_panel
 from release_tools.verify_final_boss_preferences import verify as verify_preferences
@@ -56,12 +56,16 @@ def peaked(best):
     return lambda alpha: 1 - abs(alpha - best) / 16
 
 
+def replay(score):
+    return search(score, FIRST_PROTOCOL_CEILING, climb=False)
+
+
 def test_search_has_no_ceiling_and_measures_past_its_best_alpha():
     trials, _ = search(peaked(2.5))
     best = max(trials, key=trials.get)
     assert best == 2.1875 and max(trials) > best and untried_side(trials) is None
     # The published protocol stopped at its ceiling with the stronger side unmeasured.
-    capped, _ = search(peaked(2.5), FIRST_PROTOCOL_CEILING)
+    capped, _ = replay(peaked(2.5))
     assert max(capped, key=capped.get) == max(capped) == 1.75 and untried_side(capped) == "stronger"
 
 
@@ -74,14 +78,21 @@ def test_search_keeps_climbing_after_the_budget_until_a_stronger_probe_scores_lo
     assert sorted(trials)[:4] == [.75, .875, 1.0, 1.0625]
 
 
-def test_search_stops_loudly_when_the_score_never_falls():
+def test_search_stops_at_the_strongest_setting_the_product_applies():
+    sigmas = read(STUDY / "default.json")["sigmas"]
+    limits = {profile: strongest_alpha(profile, sigmas) for profile in ("constant", "early", "late")}
+    assert limits["constant"] == 5 and limits["early"] == limits["late"] < 3.34
+    for profile, limit in limits.items():
+        assert max(scheduled_gains(profile, limit, sigmas)) <= 5 < max(scheduled_gains(profile, limit + 1e-9, sigmas))
+        trials, _ = search(lambda alpha: alpha, limit)
+        assert max(trials) == limit and untried_side(trials, limit) is None and untried_side(trials) == "stronger"
     with pytest.raises(ValueError, match="not penalizing damage"):
         search(lambda alpha: alpha / 100)
 
 
 def test_search_within_the_old_range_is_unchanged_and_reports_an_untried_weaker_side():
     for best in (.9, 1.1, 1.3):
-        assert search(peaked(best)) == search(peaked(best), FIRST_PROTOCOL_CEILING)
+        assert search(peaked(best)) == replay(peaked(best))
     falling, _ = search(lambda alpha: -alpha)
     assert min(falling) == .25 and untried_side(falling) == "weaker"
     assert untried_side({1.0: .5, 2.0: None}) == "stronger" and untried_side({}) is None

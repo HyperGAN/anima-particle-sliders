@@ -9,6 +9,20 @@ def scheduled_gains(profile, alpha, sigmas):
     return list(interval_strengths(alpha, widths, profile=profile))
 
 
+# Anima applies effective strengths in [0, 5]. See ``scheduled_render.step_gains``.
+STRONGEST_GAIN = 5.0
+
+
+def strongest_alpha(profile, sigmas):
+    """The largest alpha whose every interval gain Anima can apply under this schedule."""
+    from math import nextafter
+
+    alpha = STRONGEST_GAIN / max(scheduled_gains(profile, 1.0, sigmas))
+    while max(scheduled_gains(profile, alpha, sigmas)) > STRONGEST_GAIN:
+        alpha = nextafter(alpha, 0.0)
+    return alpha
+
+
 def select_default(panel, board, catalog):
     winner = panel["rows"][0]
     if winner["score"] != max(row["score"] for row in panel["rows"]):
