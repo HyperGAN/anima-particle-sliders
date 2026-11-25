@@ -11,7 +11,7 @@ training, evaluation, export and inference.
 - [Common sessions and direct training](LIFECYCLE.md)
 - [Scoped initialization](docs/explicit-fresh-initialization.md)
 - [Optional HNDL backend](HNDL-CANDIDATE.md)
-- [Adaptive `anima-vibe` collection and frozen targets](VIBE.md)
+- [Anima `--vibe` instructions, from teacher selection to the released slider](VIBE.md)
 - [Saved Candlelit C2 RAW960 results](docs/finished-output-learning-rates.md)
 - [Scheduled slider strength](docs/scheduled-strength.md) for the measured Candlelit RAW256 and Final Boss RAW192 profiles and opt-in activation-dependent calibration.
 - [Final Boss research leaderboard](docs/leaderboard.md) with matched scores, the current default, and links to samples and source.
