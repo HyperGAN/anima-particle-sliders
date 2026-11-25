@@ -1,6 +1,7 @@
 """Checkpointed stock EMPF training with effect-only selection and a separate failure gate."""
 
 from dataclasses import asdict
+import fcntl
 import json
 import math
 from pathlib import Path
@@ -72,6 +73,52 @@ def arm_path(root, rates):
     return root / "rates" / digest(rates)[:20]
 
 
+def recover_pending(arm, previous):
+    """Reconcile the one pending disk transaction while holding the arm's writer lock."""
+    intent = arm / "pending-update.json"
+    if not intent.exists():
+        return previous, False
+    pending = read(intent)
+    step = pending["step"]
+    output = Path(pending["output"])
+    if (not output.resolve().is_relative_to((arm / "attempts").resolve())
+            or output.name != f"FULL{step:06d}.pt"):
+        raise ValueError("Invalid pending checkpoint path")
+    if previous and previous["step"] == step:
+        if asdict(file_pin(output)) != previous["full"]:
+            raise ValueError("Pending transaction differs from the committed FULL")
+        intent.unlink()
+        return previous, False
+    if (not previous or previous["step"] + 1 != step
+            or previous["full"] != pending["base"]):
+        raise ValueError("Pending update differs from committed cursor")
+    receipt = arm / "updates" / f"{step:06d}.json"
+    if output.is_file():
+        pin = asdict(file_pin(output))
+        if receipt.is_file():
+            row = read(receipt)
+            if row["step"] != step or row["full"] != pin or row["rates"] != previous["rates"]:
+                raise ValueError("Pending FULL disagrees with its update receipt")
+            if "raw" in row and asdict(file_pin(row["raw"]["path"])) != row["raw"]:
+                raise ValueError("Recovered RAW differs from its update receipt")
+            return row, True
+        return dict(step=step, full=pin, rates=previous["rates"]), True
+    if receipt.exists() or any(output.parent.glob(f"RAW{step:06d}.*")):
+        raise Unmeasured("An update receipt or RAW exists but its FULL is missing")
+    if asdict(file_pin(previous["full"]["path"])) != previous["full"]:
+        raise ValueError("Last committed FULL differs before recovery")
+    # Record the abandoned in-memory attempt with its original destination. A
+    # fresh attempt starts at the exact committed model, optimizer, bank and RNG.
+    # No completed checkpoint is replayed or counted twice.
+    archive = output.parent / f"interrupted-{step:06d}.json"
+    note = dict(status="no-published-FULL", in_memory_completion="unknown", intent=pending)
+    if archive.exists() and read(archive) != note:
+        raise ValueError("Conflicting interrupted transaction receipt")
+    atomic_json(archive, note)
+    intent.unlink()
+    return previous, False
+
+
 def train(
     outputs,
     cache,
@@ -82,8 +129,19 @@ def train(
     *,
     schedule_horizon=None,
     always_check_rates=False,
+    observation_steps=(),
 ):
     """A 1/4-horizon LR screen can be continued from exactly the committed FULL."""
+    arm = arm_path(outputs.root, rates)
+    arm.mkdir(parents=True, exist_ok=True)
+    with (arm / "writer.lock").open("a+") as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        return _train(outputs, cache, panels, rates, budget, phase, schedule_horizon,
+                      always_check_rates, observation_steps)
+
+
+def _train(outputs, cache, panels, rates, budget, phase, schedule_horizon,
+           always_check_rates, observation_steps):
     rt = outputs.runtime
     dest = arm_path(outputs.root, rates)
     cursor = dest / "cursor.json"
@@ -98,36 +156,12 @@ def train(
         else range(cut, budget + 1, cut)
     )
     end = cut if phase == "screen" else budget
+    if any(type(n) is not int or not 0 < n <= end for n in observation_steps):
+        raise ValueError("Extra observation steps must be within the training budget")
+    milestones = set(milestones).union(observation_steps)
 
-    # Record the to-be-published FULL path before entering the update. A crash
-    # after its atomic publication can recover the actual completed update.
     intent = dest / "pending-update.json"
-    recovered = False
-    if intent.exists():
-        pending = read(intent)
-        if previous and previous["step"] == pending["step"]:
-            intent.unlink()
-        elif (
-            previous
-            and previous["step"] + 1 == pending["step"]
-            and previous["full"] == pending["base"]
-        ):
-            full_path = Path(pending["output"])
-            if (
-                not full_path.resolve().is_relative_to((dest / "attempts").resolve())
-                or full_path.name != f"FULL{pending['step']:06d}.pt"
-            ):
-                raise ValueError("Invalid pending checkpoint path")
-            if not full_path.is_file():
-                raise Unmeasured(
-                    "Interrupted update has no atomically published FULL; its completion is unknown"
-                )
-            previous = dict(
-                step=pending["step"], full=asdict(file_pin(full_path)), rates=rates
-            )
-            recovered = True
-        else:
-            raise ValueError("Pending update differs from committed cursor")
+    previous, recovered = recover_pending(dest, previous)
 
     def observe(step, raw, inference=None):
         result_path = dest / phase / f"{step}.json"
@@ -242,7 +276,7 @@ def train(
         if owner.step != previous["step"]:
             raise ValueError("Restored cursor differs from committed FULL")
         if recovered:
-            if owner.step in milestones:
+            if owner.step in milestones and "raw" not in previous:
                 previous["raw"] = asdict(owner.entry_RAW)
             atomic_json(dest / "updates" / f"{owner.step:06d}.json", previous)
             atomic_json(cursor, previous)
