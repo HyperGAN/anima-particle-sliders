@@ -17,6 +17,7 @@ sys.path.insert(0, str(SEARCH.parent / 'metric-calibration'))
 from review import saved, BINDING, RATINGS
 from finished_image import VERSION, score_case
 from compare import comparison
+from case_sensitivity import ranks_by_omission
 from optimization_worker import PRIOR, pin, read, write
 from publish_optimization import PUBLIC, sample
 
@@ -115,8 +116,10 @@ def images(cases, values, original=False):
         row = values[case]
         record = row if original else row['on']
         name = case.title()
+        title = name if original else (f'{name} · Final Boss score {100*row[SCORE]:.2f} · '
+                                       f'gain +{100*row[GAIN]:.1f} · damage {100*row[DAMAGE]:.1f}')
         path = sample(record, f'vibe12-alpha-{record["sha256"]}.png')
-        photos.append(f'<a href="{path}" title="{name}"><img src="{path}" width="58" height="58" '
+        photos.append(f'<a href="{path}" title="{title}"><img src="{path}" width="58" height="58" '
                       f'loading="lazy" alt="{name}"></a>')
     return '<div class="images">' + ''.join(photos) + '</div>'
 
@@ -137,6 +140,8 @@ def publish():
     progress = read(queue_path) if queue_path.is_file() else {'trained': [], 'complete': [], 'active': {}}
     completed = set(progress['complete'])
     active = set(progress['active'].values())
+    winners = [r for r in ranked if r['best_for_recipe']]
+    omissions = ranks_by_omission(winners, cases)
     for rank, row in enumerate(ranked, 1):
         method, profile, alpha = row['method'], row['profile'], row['alpha']
         means = row['means']
@@ -147,12 +152,19 @@ def publish():
         if candidate and method not in completed:
             source += ' · in progress'
         note = f'<small>{source}</small>'
+        sensitivity = ''
+        if row['best_for_recipe']:
+            places = omissions[method]
+            low, high = min(places.values()), max(places.values())
+            span = str(low) if low == high else f'{low}–{high}'
+            details = ''.join(f'<small>Omit {c.title()} · #{place}</small>' for c,place in places.items())
+            sensitivity = f'<details><summary>7-case rank {span}</summary>{details}</details>'
         lines.append(f'<tr data-effect="{means[GAIN]}" data-score="{means[SCORE]}" data-damage="{means[DAMAGE]}" '
                      f'data-method="{method}" data-adaptive="{int(candidate)}" '
                      f'data-fixed="{int(shared)}" data-control="{profile if control else ""}" id="{method}-{profile}-{alpha:g}">'
                      f'<td class="rank">{rank}</td><th scope="row">{escape(LABELS[method])}{note}</th>'
                      f'<td>{profile.title()} α {alpha:.5g}</td><td>{images(cases, row["cases"])}</td>'
-                     f'<td class="effect">+{100 * means[GAIN]:.1f}</td><td>{100 * means[SCORE]:.2f}</td>'
+                     f'<td class="effect">+{100 * means[GAIN]:.1f}</td><td>{100 * means[SCORE]:.2f}{sensitivity}</td>'
                      f'<td>{100 * means[DAMAGE]:.1f}</td></tr>')
 
     reference = next((r for r in ranked if (r['method'],r['profile'],r['alpha']) ==
@@ -177,13 +189,14 @@ p{{margin:5px 0 12px;color:#c4c8d1}}a,.effect{{color:#ffc59f}}.effect{{font-weig
 th,td{{padding:7px 9px;border-bottom:1px solid #353841;vertical-align:middle}}thead{{background:#242830}}
 th[scope=row]{{min-width:145px}}td:nth-child(3){{white-space:nowrap}}tr:target{{background:#33303b}}
 .images{{display:flex;gap:4px;min-width:max-content}}img{{display:block;object-fit:contain;border-radius:4px}}
+summary{{cursor:pointer;font-size:.75rem;color:#b6bdca}}
 small{{display:block;font-weight:400;color:#b6bdca;font-size:.75rem}}
 </style><main>
 <h1>Final Boss alpha leaderboard</h1>
 <p>{len(completed)}/{len(progress['trained'])} trained recipes through the damage-adjusted search · {len(active)} running · {len(ranked)} settings measured across all searches · {queued} awaiting damage ratings.</p>
 <p>Jev rates rendering defects in the finished artwork on its own. The Boss score uses matched character gain and distinction, then multiplies by the undamaged fraction. Zero gain scores zero.</p>
-<p>Same eight cases at RAW192. Boss effect is the average gain over slider off. The new search starts at α 1.00 with a 0.25 step.</p>
-<p><a href="final-boss-vibe12-alpha-tuned.html#trial-paths">Search paths</a> · <a href="final-boss-vibe12-opening-comparison.html">Compare opening four</a> · <a href="final-boss-vibe12-alpha-leaderboard-v1.html">Previous scoring</a> · <a href="?fixed=constant">Shared constant α0.6375</a> · <a href="?fixed=early">Shared early α2/3</a></p>
+<p>Same eight cases at RAW192. Boss effect is the average gain over slider off. Expand a seven-case rank to see how far that recipe moves when one scene is left out. Each recipe keeps its full-panel strength.</p>
+<p><a href="final-boss-vibe12-alpha-tuned.html#trial-paths">Search paths</a> · <a href="final-boss-vibe12-opening-comparison.html">Compare opening four</a> · <a href="final-boss-vibe12-preference-review.html">Blind finalist comparison</a> · <a href="final-boss-vibe12-alpha-leaderboard-v1.html">Previous scoring</a> · <a href="?fixed=constant">Shared constant α0.6375</a> · <a href="?fixed=early">Shared early α2/3</a></p>
 <div class="controls"><label>Sort by <select id="metric"><option value="score">Final Boss score</option><option value="effect">Boss effect</option><option value="damage">Least image damage</option></select></label>
 <label>Show <select id="scope"><option value="top">Best measured per recipe</option><option value="adaptive">Current search and fixed strengths</option><option value="tradeoffs">Effect and damage trade-offs</option><option value="all">All measured strengths</option><option value="early">Shared early α2/3</option><option value="constant">Shared constant α0.6375</option></select></label></div>
 <div class="scroll"><table><thead><tr><th scope="col">Rank</th><th scope="col">Recipe</th><th scope="col">Strength</th>
