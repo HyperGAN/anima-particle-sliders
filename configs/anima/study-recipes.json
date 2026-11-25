@@ -25,6 +25,28 @@
         "particle": 0.03
       },
       "update": 192,
+      "quarter_results": [
+        {
+          "update": 64,
+          "mean_gain": 0.07416666666666662,
+          "integrity": "pass"
+        },
+        {
+          "update": 128,
+          "mean_gain": 0.09166666666666662,
+          "integrity": "pass"
+        },
+        {
+          "update": 192,
+          "mean_gain": 0.15666666666666662,
+          "integrity": "pass"
+        },
+        {
+          "update": 256,
+          "mean_gain": 0.14749999999999996,
+          "integrity": "pass"
+        }
+      ],
       "schedule": "constant",
       "alpha": 1.5,
       "gains": [
@@ -47,6 +69,62 @@
         0.30333333333333334
       ],
       "raw_sha256": "020cf43bf7f888edab85e09c2f1f3b88bec73869dafa3af0da697bfa58378e09"
+    },
+    "Visually appealing character": {
+      "applies_to_plan_sha256": "f73f91fd738ba5d4f09d80b95dd0affe42f6ae83b229445df011babf521e3573",
+      "source_manifest_sha256": "98d4df972be2d3ed00ca1076ad6c7abb6990bdc950acb29b302519a4d56e6519",
+      "training_corpus": "bundled native prompt collection",
+      "frozen_cache": "4ac9d8b7bfdc262a9234eb50759b32db45f0cd5c8afd0f7912857f10a37c5dc1",
+      "rates": {
+        "g": 0.000375,
+        "d": 0.018,
+        "particle": 0.03
+      },
+      "update": 256,
+      "quarter_results": [
+        {
+          "update": 64,
+          "mean_gain": 0.004999999999999977,
+          "integrity": "pass"
+        },
+        {
+          "update": 128,
+          "mean_gain": 0.043333333333333335,
+          "integrity": "pass"
+        },
+        {
+          "update": 192,
+          "mean_gain": 0.03749999999999999,
+          "integrity": "unmeasured"
+        },
+        {
+          "update": 256,
+          "mean_gain": 0.0833333333333333,
+          "integrity": "pass"
+        }
+      ],
+      "schedule": "constant",
+      "alpha": 1.0,
+      "gains": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "matched_gain": 0.1791666666666667,
+      "per_case_gains": [
+        0.1166666666666667,
+        0.1733333333333334,
+        0.17666666666666675,
+        0.24999999999999994
+      ],
+      "raw_sha256": "10b34bf60b7074480941ca40fa8f05a276029db4140a76ded737f208c4404240"
     }
   }
 }

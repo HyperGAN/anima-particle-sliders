@@ -303,7 +303,10 @@ using measured rates, pass `--g-lr`, `--d-lr` and `--particle-lr`. Ranking uses
 the mean change in intended effect across matched finished images.
 `--steps 256` compares updates 64, 128, 192 and 256. The winning RAW is loaded
 for constant, early and late strength comparisons and a separate held-out
-confirmation. `outcome.json` records the resolved interval gains, cases and
+confirmation. Before rendering the first held-out image, the script saves the
+selected RAW, rates and strength in `confirmation-selection.json`. If that
+measurement is interrupted, a rerun checks the same selection.
+`outcome.json` records the resolved interval gains, cases and
 original RAW path. `status.json` records the result and an incomplete run's
 exit reason. Rerun with the same directory and arguments to reuse recorded work.
 

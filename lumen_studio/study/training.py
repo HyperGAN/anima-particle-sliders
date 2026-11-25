@@ -361,17 +361,33 @@ def tune(outputs, cache, panels, selected, *, screened=False):
                 owner=owner,
             )
 
-        best = select_strength(
+        return select_strength(
             results, outputs.root / "strengths.json", recheck if screened else None
         )
-        confirm = outputs.compare(
+    finally:
+        owner.close()
+
+
+def confirm(outputs, cache, panels, strength):
+    rt = outputs.runtime
+    variation = cache.index["identity"]["variation"]
+    raw = Checkpoint(**strength["raw"])
+    owner = open_inference(
+        rt,
+        variation,
+        raw=raw,
+        owner_admission=lambda request: (
+            request["model_identity"] == rt.identity and request["RAW"] == asdict(raw)
+        ),
+    )
+    try:
+        return outputs.compare(
             panels["confirm"],
             variation,
             raw,
-            best["alpha"],
-            best["profile"],
+            strength["alpha"],
+            strength["profile"],
             owner=owner,
         )
-        return best, confirm
     finally:
         owner.close()

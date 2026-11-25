@@ -14,6 +14,7 @@ from .leaderboard import gallery
 from .teachers import collect, validation_panels
 from .training import (
     Catastrophe,
+    confirm,
     rate_candidates,
     recheck_screened_cases,
     select_checkpoint,
@@ -189,6 +190,58 @@ def fit_candidates(outputs, cache, panels, plan, args):
                 yield candidate
 
 
+def choose_for_confirmation(outputs, cache, panels, plan, args):
+    """Commit one candidate before the first held-out image is rendered or scored."""
+    root = outputs.root
+    reservation = root / "confirmation-selection.json"
+    if reservation.exists():
+        return read(reservation)
+    # Completed runs from earlier versions already bound their held-out selection.
+    if (root / "outcome.json").exists():
+        previous = read(root / "outcome.json")
+        selection = {
+            key: previous[key] for key in ("rates", "strength", "selected_step")
+        }
+        atomic_json(reservation, selection)
+        return selection
+    steps = plan["budget"]
+    failures = []
+    for rates in fit_candidates(outputs, cache, panels, plan, args):
+        try:
+            fit = train(
+                outputs,
+                cache,
+                panels,
+                rates,
+                steps,
+                "fit",
+                schedule_horizon=plan["horizon"],
+            )
+            screen_check = recheck_screened_cases(
+                outputs, cache, panels, rates, steps, fit
+            )
+            selected = select_checkpoint(root, rates, steps)
+            best = tune(
+                outputs, cache, panels, selected, screened=screen_check is not None
+            )
+        except (Unmeasured, Catastrophe) as error:
+            failures.append(dict(rates=rates, reason=str(error)))
+            atomic_json(root / "fit-failures.json", failures)
+            continue
+        selection = dict(
+            rates=rates,
+            strength=best,
+            selected_step=read(Path(best["raw"]["path"]).with_suffix(".scoped.json"))[
+                "completed_steps"
+            ],
+        )
+        atomic_json(reservation, selection)
+        return selection
+    raise Unmeasured(
+        "No rate candidate completed with usable measurements; see fit-failures.json"
+    )
+
+
 def run(args):
     import torch
     from ..backends.anima import TurboRuntime
@@ -323,57 +376,41 @@ def run(args):
                 and original | {"search": True} == settings
                 and (root / "fit-failures.json").is_file()
                 and not (root / "outcome.json").exists()
+                and not (root / "confirmation-selection.json").exists()
             ):
                 raise ValueError("Training settings differ from the committed run")
         atomic_json(training_config, settings)
-        candidates = fit_candidates(outputs, cache, panels, plan, args)
-        failures = []
-        for rates in candidates:
-            try:
-                fit = train(
-                    outputs,
-                    cache,
-                    panels,
-                    rates,
-                    steps,
-                    "fit",
-                    schedule_horizon=plan["horizon"],
+        selection = choose_for_confirmation(outputs, cache, panels, plan, args)
+        outcome = root / "outcome.json"
+        if outcome.exists():
+            measured = read(outcome)
+            if (
+                any(measured[key] != value for key, value in selection.items())
+                or FileRecord.from_path(selection["strength"]["raw"]["path"]).sha256
+                != selection["strength"]["raw"]["sha256"]
+            ):
+                raise ValueError(
+                    "Saved confirmation differs from its reserved selection"
                 )
-                screen_check = recheck_screened_cases(
-                    outputs, cache, panels, rates, steps, fit
-                )
-                selected = select_checkpoint(root, rates, steps)
-                best, confirm = tune(
-                    outputs, cache, panels, selected, screened=screen_check is not None
-                )
-            except (Unmeasured, Catastrophe) as error:
-                failures.append(dict(rates=rates, reason=str(error)))
-                atomic_json(root / "fit-failures.json", failures)
-                continue
+        else:
+            confirmation = confirm(outputs, cache, panels, selection["strength"])
             measured = dict(
                 vibe=concept,
                 particlegan="0.12.0",
-                rates=rates,
                 selection="raw",
                 ema_decay=None,
-                selected_step=read(
-                    Path(selected["raw"]["path"]).with_suffix(".scoped.json")
-                )["completed_steps"],
                 teacher_cache=cache.index["fingerprint"],
-                strength=best,
-                confirmation=confirm,
+                confirmation=confirmation,
+                **selection,
             )
-            atomic_json(root / "outcome.json", measured)
-            gallery(root, measured)
-            if confirm["status"] != "pass" or confirm["mean_gain"] <= 0:
-                # Confirmation is used once. Never select another candidate using its scores.
-                raise Unmeasured(
-                    "The selected setting did not confirm a positive intact effect on held-out cases"
-                )
-            return measured
-        raise Unmeasured(
-            "No rate candidate completed with usable measurements; see fit-failures.json"
-        )
+            atomic_json(outcome, measured)
+        gallery(root, measured)
+        result = measured["confirmation"]
+        if result["status"] != "pass" or result["mean_gain"] <= 0:
+            raise Unmeasured(
+                "The selected setting did not confirm a positive intact effect on held-out cases"
+            )
+        return measured
     finally:
         rt.close()
 

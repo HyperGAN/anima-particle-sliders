@@ -376,3 +376,50 @@ def test_shorter_execution_cap_preserves_numeric_horizon(tmp_path, monkeypatch):
             "fit",
             schedule_horizon=256,
         )
+
+
+def test_confirmation_reserves_one_setting_across_interruptions(tmp_path, monkeypatch):
+    from lumen_studio.study import cli
+
+    rates = dict(g=0.000375, d=0.009, particle=0.03)
+    strength = dict(
+        raw={"path": str(tmp_path / "RAW.safetensors")}, alpha=0.5, profile="early"
+    )
+    atomic_json(tmp_path / "RAW.scoped.json", {"completed_steps": 192})
+    outputs = SimpleNamespace(root=tmp_path)
+
+    def candidates(*args):
+        yield rates
+        pytest.fail("Another rate was tried after reserving the holdout")
+
+    monkeypatch.setattr(cli, "fit_candidates", candidates)
+    monkeypatch.setattr(cli, "train", lambda *a, **kw: {})
+    monkeypatch.setattr(cli, "recheck_screened_cases", lambda *a: None)
+    monkeypatch.setattr(cli, "select_checkpoint", lambda *a: {})
+    monkeypatch.setattr(cli, "tune", lambda *a, **kw: strength)
+    plan = {"budget": 256, "horizon": 256}
+    selection = cli.choose_for_confirmation(outputs, None, {}, plan, None)
+    assert selection == dict(rates=rates, strength=strength, selected_step=192)
+    assert read(tmp_path / "confirmation-selection.json") == selection
+    monkeypatch.setattr(
+        cli, "fit_candidates", lambda *a: pytest.fail("Repeated the search")
+    )
+    assert cli.choose_for_confirmation(outputs, None, {}, plan, None) == selection
+
+
+def test_preexisting_outcome_preserves_original_holdout_selection(tmp_path):
+    from lumen_studio.study.cli import choose_for_confirmation
+
+    selection = dict(
+        rates={"g": 0.01, "d": 0.02, "particle": 0.03},
+        selected_step=64,
+        strength={"alpha": 1.0, "profile": "constant", "raw": {"sha256": "archive"}},
+    )
+    atomic_json(
+        tmp_path / "outcome.json", dict(confirmation={"status": "fail"}, **selection)
+    )
+    assert (
+        choose_for_confirmation(SimpleNamespace(root=tmp_path), None, {}, {}, None)
+        == selection
+    )
+    assert read(tmp_path / "confirmation-selection.json") == selection
