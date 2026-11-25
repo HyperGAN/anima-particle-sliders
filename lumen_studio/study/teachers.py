@@ -69,6 +69,7 @@ def collect(outputs, config, concept, minimum, attempts):
             trials.append(evidence)
             if (
                 neutral["integrity"]["status"] == "pass"
+                and neutral["judgment"]["score"] is not None
                 and neutral["judgment"]["score"] <= config["neutral_ceiling"]
             ):
                 with ThreadPoolExecutor(3) as pool:
@@ -78,12 +79,16 @@ def collect(outputs, config, concept, minimum, attempts):
                         candidates.append((prompt, pool.submit(outputs.score, image)))
                     for prompt, job in candidates:
                         positive = job.result()
+                        score = positive["judgment"]["score"]
                         gain = (
-                            positive["judgment"]["score"] - neutral["judgment"]["score"]
+                            score - neutral["judgment"]["score"]
+                            if score is not None
+                            else None
                         )
                         eligible = (
                             positive["integrity"]["status"] == "pass"
-                            and positive["judgment"]["score"] >= 0.75
+                            and score is not None
+                            and score >= 0.75
                             and gain > 0
                         )
                         evidence["treatments"].append(
@@ -180,7 +185,10 @@ def validation_panels(outputs, groups, attempts):
                 seed = scene["seed"] + trial * 104729
                 record = outputs.image(scene["prompt"], seed)
                 off = outputs.score(record)
-                if off["integrity"]["status"] == "pass":
+                if (
+                    off["integrity"]["status"] == "pass"
+                    and off["judgment"]["score"] is not None
+                ):
                     accepted.append(dict(prompt=scene["prompt"], seed=seed, off=off))
                     break
         if len(accepted) < 2:

@@ -423,3 +423,64 @@ def test_preexisting_outcome_preserves_original_holdout_selection(tmp_path):
         == selection
     )
     assert read(tmp_path / "confirmation-selection.json") == selection
+
+
+@pytest.mark.parametrize(
+    "structural_result,expected", [("fail", "fail"), ("pass", "unmeasured")]
+)
+def test_missing_effect_cannot_hide_a_defect_or_rank_a_partial_panel(
+    tmp_path, structural_result, expected
+):
+    from lumen_studio.study.outputs import Outputs
+    from lumen_studio_scoped.training import file_pin
+
+    record = tmp_path / "raw"
+    record.write_bytes(b"test")
+    import torch
+
+    runtime = SimpleNamespace(
+        scheduler=lambda _: SimpleNamespace(sigmas=torch.tensor([1.0, 0.0]))
+    )
+    outputs = SimpleNamespace(
+        runtime=runtime,
+        image=lambda prompt, seed, **kwargs: seed,
+        score=lambda seed: {
+            "judgment": {"score": 0.8 if seed else None},
+            "integrity": {"status": "pass" if seed else structural_result},
+        },
+    )
+    cases = [
+        {"prompt": "adult portrait", "seed": seed, "off": {"judgment": {"score": 0.2}}}
+        for seed in (0, 1)
+    ]
+    result = Outputs.compare(outputs, cases, "demo", file_pin(record), 1.0, "constant")
+    assert result["status"] == expected and result["mean_gain"] is None
+    assert result["pairs"][0]["gain"] is None and result["pairs"][1][
+        "gain"
+    ] == pytest.approx(0.6)
+
+
+def test_missing_effect_replaces_the_teacher_seed(tmp_path):
+    class Missed(RenderFixture):
+        def score(self, record):
+            result = super().score(record)
+            if record[1] == 37 or record[0] == "treatment missing":
+                result["judgment"]["score"] = None
+            return result
+
+    config = {
+        "neutral_ceiling": 0.35,
+        "teachers": [
+            {
+                "neutral": "adult portrait",
+                "seed": 37,
+                "treatments": ["treatment missing", "treatment clear"],
+            }
+        ],
+    }
+    manifest = collect(Missed(tmp_path), config, "demo", 1, 2)
+    assert manifest["rows"][0]["seeds"] == [37 + 104729]
+    attempts = read(tmp_path / "teacher-decisions.json")
+    assert attempts[0]["treatments"] == []
+    assert attempts[1]["treatments"][0]["gain"] is None
+    assert attempts[1]["treatments"][0]["eligible"] is False

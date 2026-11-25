@@ -85,11 +85,9 @@ class Outputs:
             "Assess the visible image alone, without making assumptions from prompts.",
             {"effect": self.rubric},
         )
-        if result is None:
-            raise Unmeasured(f"Unmeasured effect for {record.sha256}")
         return dict(
             output=asdict(record),
-            judgment={"score": result["effect"]},
+            judgment={"score": result["effect"] if result is not None else None},
             integrity=self.integrity.check(record),
         )
 
@@ -115,14 +113,22 @@ class Outputs:
             pairs = []
             for case, job in work:
                 on = job.result()
-                delta = on["judgment"]["score"] - case["off"]["judgment"]["score"]
+                before, after = (
+                    case["off"]["judgment"]["score"],
+                    on["judgment"]["score"],
+                )
+                delta = (
+                    after - before if after is not None and before is not None else None
+                )
                 pairs.append(dict(case=case, on=on, gain=delta))
+        gains_by_case = [p["gain"] for p in pairs]
+        measured = all(gain is not None for gain in gains_by_case)
         statuses = {p["on"]["integrity"]["status"] for p in pairs}
         status = (
             "fail"
             if "fail" in statuses
             else "unmeasured"
-            if "unmeasured" in statuses
+            if "unmeasured" in statuses or not measured
             else "pass"
         )
         return dict(
@@ -133,5 +139,5 @@ class Outputs:
             sigmas=sigmas,
             pairs=pairs,
             status=status,
-            mean_gain=fmean(p["gain"] for p in pairs),
+            mean_gain=fmean(gains_by_case) if measured else None,
         )

@@ -15,7 +15,7 @@ def gallery(root, outcome):
         "",
         "## Strength comparison",
         "",
-        "| Schedule | Alpha | Mean matched gain | Integrity | OFF | ON |",
+        "| Schedule | Alpha | Mean matched gain | Status | OFF | ON |",
         "| --- | ---: | ---: | --- | --- | --- |",
     ]
 
@@ -23,11 +23,21 @@ def gallery(root, outcome):
         link = quote(os.path.relpath(record["path"], root), safe="/")
         return f"[![sample]({link})]({link})"
 
+    def display_gain(value):
+        return "unmeasured" if value is None else f"{value:+.4f}"
+
     rows = read(root / "strengths.json")
-    for row in sorted(rows, key=lambda r: (r["status"] != "pass", -r["mean_gain"])):
+    for row in sorted(
+        rows,
+        key=lambda r: (
+            r["status"] != "pass",
+            r["mean_gain"] is None,
+            -(r["mean_gain"] or 0),
+        ),
+    ):
         case = row["pairs"][0]
         lines.append(
-            f"| {row['profile']} | {row['alpha']:g} | {row['mean_gain']:+.4f} | {row['status']} | "
+            f"| {row['profile']} | {row['alpha']:g} | {display_gain(row['mean_gain'])} | {row['status']} | "
             f"{sample(case['case']['off']['output'])} | {sample(case['on']['output'])} |"
         )
     result = outcome["confirmation"]
@@ -36,7 +46,7 @@ def gallery(root, outcome):
             "",
             "## Held-out cases",
             "",
-            f"Mean intended-effect gain {result['mean_gain']:+.4f}.",
+            f"Mean intended-effect gain {display_gain(result['mean_gain'])}.",
             "",
             "| Seed | OFF | ON | Gain |",
             "| ---: | --- | --- | ---: |",
@@ -45,7 +55,7 @@ def gallery(root, outcome):
     for pair in result["pairs"]:
         case = pair["case"]
         lines.append(
-            f"| {case['seed']} | {sample(case['off']['output'])} | {sample(pair['on']['output'])} | {pair['gain']:+.4f} |"
+            f"| {case['seed']} | {sample(case['off']['output'])} | {sample(pair['on']['output'])} | {display_gain(pair['gain'])} |"
         )
     pending = root / "leaderboard.pending.md"
     pending.write_text("\n".join(lines) + "\n")

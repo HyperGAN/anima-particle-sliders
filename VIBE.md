@@ -278,7 +278,10 @@ scene by default. After five unsuccessful seeds it also reframes the neutral
 and its treatments as a continuous camera shot. Increase `--collection-attempts`
 to extend an incomplete collection using its saved images and decisions.
 Set `--min-teachers` to choose the minimum number of distinct
-qualifying scenes. Decisions and rejected images are saved with the run.
+qualifying scenes. A missing teacher score makes that image ineligible. A missing
+validation score leaves the matched mean unmeasured, and the script still acts
+on confirmed structural defects. Decisions and rejected images are saved with
+the run.
 
 For a bundled concept with a confirmed recipe, the ordinary command uses its
 measured G, D and particle rates and its selected update count first. A shorter
