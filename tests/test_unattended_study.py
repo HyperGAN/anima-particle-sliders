@@ -117,16 +117,21 @@ def test_adult_subjects_appear_only_in_generation_prompts():
         ).spec.read_text()
     )
     age_question = re.compile(r"\b(adult|age|minor|child|underage|teen)\b", re.I)
-    subject = re.compile(r"\badults?\b|\b\d+-year-old\b", re.I)
+
+    def adult_prompt(text):
+        numeric_ages = [int(n) for n in re.findall(r"\b(\d+)-year-old\b", text, re.I)]
+        return (
+            bool(re.search(r"\badults?\b", text, re.I)) or bool(numeric_ages)
+        ) and all(age >= 18 for age in numeric_ages)
+
     for concept in spec["concepts"].values():
         assert not age_question.search(json.dumps(concept["effect"]))
         for row in concept["teachers"]:
             assert all(
-                subject.search(prompt)
-                for prompt in (row["neutral"], *row["treatments"])
+                adult_prompt(prompt) for prompt in (row["neutral"], *row["treatments"])
             )
     assert all(
-        subject.search(row["prompt"])
+        adult_prompt(row["prompt"])
         for panel in spec["validation"].values()
         for row in panel
     )
@@ -251,3 +256,25 @@ def test_confirmed_raw_can_move_with_its_outcome(tmp_path):
     moved.write_bytes(b"different adapter")
     with pytest.raises(ValueError, match="RAW bytes"):
         locate_raw(record, copied)
+
+
+def test_late_split_on_a_previously_screened_case_stops_promotion(tmp_path):
+    from dataclasses import asdict
+    from lumen_studio_scoped.training import file_pin
+    from lumen_studio.study.training import Catastrophe, recheck_screened_cases
+
+    rates = {"g": 0.1, "d": 0.2, "particle": 0.3}
+    arm = arm_path(tmp_path, rates)
+    path = tmp_path / "RAW000256.safetensors"
+    path.write_bytes(b"full-budget adapter")
+    raw = asdict(file_pin(path))
+    atomic_json(arm / "screen/64.json", dict(status="pass"))
+    atomic_json(
+        arm / "fit-rate-panel.json", dict(raw=raw, status="fail", mean_gain=0.44)
+    )
+    with pytest.raises(Catastrophe, match="screened case"):
+        recheck_screened_cases(
+            SimpleNamespace(root=tmp_path), None, None, rates, 256, dict(raw=raw)
+        )
+    stop = read(arm / "failure.json")
+    assert stop["step"] == 256 and stop["phase"] == "fit-rate-panel"

@@ -255,6 +255,50 @@ def rate_candidates(reference):
             yield reference | {role: reference[role] * factor}
 
 
+def recheck_screened_cases(outputs, cache, panels, rates, horizon, fit):
+    """Catch late regressions on the cases that originally qualified the rate."""
+    arm = arm_path(outputs.root, rates)
+    if not (arm / "screen" / f"{horizon // 4}.json").is_file():
+        return
+    raw = Checkpoint(**fit["raw"])
+    receipt = arm / "fit-rate-panel.json"
+    if receipt.is_file():
+        result = read(receipt)
+        if result["raw"] != asdict(raw) or file_pin(raw.path) != raw:
+            raise ValueError("Full-budget rate check differs from its saved RAW")
+    else:
+        rt = outputs.runtime
+        variation = cache.index["identity"]["variation"]
+        owner = open_inference(
+            rt,
+            variation,
+            raw=raw,
+            owner_admission=lambda request: (
+                request["model_identity"] == rt.identity
+                and request["RAW"] == asdict(raw)
+            ),
+        )
+        try:
+            result = outputs.compare(
+                panels["rates"], variation, raw, 1.0, "constant", owner=owner
+            )
+        finally:
+            owner.close()
+        atomic_json(receipt, result)
+    if result["status"] == "fail":
+        atomic_json(
+            arm / "failure.json",
+            dict(step=horizon, phase="fit-rate-panel", result=result),
+        )
+        raise Catastrophe(
+            "A screened case developed a catastrophic defect at the full budget"
+        )
+    if result["status"] != "pass":
+        raise Unmeasured(
+            "Full-budget integrity on the original rate panel was unmeasured"
+        )
+
+
 def select_checkpoint(root, rates, horizon):
     directory = arm_path(root, rates) / "fit"
     rows = [

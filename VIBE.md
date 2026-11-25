@@ -284,7 +284,9 @@ The optional rate screen varies one of the three absolute rates by a factor of
 two in each direction. When a different G wins, it repeats the D and particle
 comparisons at that G. When a lower G is the only usable initial setting, it
 also checks two lower G values. It continues the highest-scoring qualified
-FULL checkpoint. If the bracket yields no usable fit, it tests lower G values
+FULL checkpoint. Before promoting a screened rate, it checks the original rate
+scenes again at the full budget for structural regressions. If the bracket
+yields no usable fit, it tests lower G values
 with the reference critic and particle rates held fixed. For a run
 using measured rates, pass `--g-lr`, `--d-lr` and `--particle-lr`. Ranking uses
 the mean change in intended effect across matched finished images.

@@ -12,7 +12,14 @@ from ..contracts import atomic_json, digest
 from .outputs import Outputs, Unmeasured, read
 from .leaderboard import gallery
 from .teachers import collect, validation_panels
-from .training import Catastrophe, rate_candidates, select_checkpoint, train, tune
+from .training import (
+    Catastrophe,
+    rate_candidates,
+    recheck_screened_cases,
+    select_checkpoint,
+    train,
+    tune,
+)
 
 REFERENCE = {"g": 0.00075, "d": 0.009, "particle": 0.03}
 
@@ -263,7 +270,8 @@ def run(args):
         failures = []
         for rates in candidates:
             try:
-                train(outputs, cache, panels, rates, args.steps, "fit")
+                fit = train(outputs, cache, panels, rates, args.steps, "fit")
+                recheck_screened_cases(outputs, cache, panels, rates, args.steps, fit)
                 selected = select_checkpoint(root, rates, args.steps)
                 best, confirm = tune(outputs, cache, panels, selected)
             except (Unmeasured, Catastrophe) as error:
