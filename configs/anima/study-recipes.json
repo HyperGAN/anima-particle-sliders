@@ -1,0 +1,50 @@
+{
+  "schema": 1,
+  "particlegan": "0.12.0",
+  "preset": "empf",
+  "horizon": 256,
+  "seed": 1,
+  "batch_size": 2,
+  "validation_steps": [
+    64,
+    128,
+    192,
+    256
+  ],
+  "selection": "raw",
+  "ema_decay": null,
+  "concepts": {
+    "1990s anime": {
+      "teacher_plan_sha256": "9fb59f9926e968719acbd960987aa53f2c503926e2da4d375cf71c57d75dc781",
+      "frozen_cache": "3a8a06f616cd1ec93d2671b3758bd4e349e66978c1cfa50b11c12f69ff56f1b5",
+      "rates": {
+        "g": 0.000375,
+        "d": 0.018,
+        "particle": 0.03
+      },
+      "update": 192,
+      "schedule": "constant",
+      "alpha": 1.5,
+      "gains": [
+        1.5,
+        1.5,
+        1.5,
+        1.5,
+        1.5,
+        1.5,
+        1.5,
+        1.5,
+        1.5,
+        1.5
+      ],
+      "matched_gain": 0.20499999999999996,
+      "per_case_gains": [
+        0.026666666666666616,
+        0.26999999999999996,
+        0.21999999999999986,
+        0.30333333333333334
+      ],
+      "raw_sha256": "020cf43bf7f888edab85e09c2f1f3b88bec73869dafa3af0da697bfa58378e09"
+    }
+  }
+}

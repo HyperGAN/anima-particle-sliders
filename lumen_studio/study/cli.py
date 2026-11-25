@@ -59,8 +59,12 @@ def arguments(argv):
         action="store_true",
         help="screen G/D/particle rates and continue qualified candidates",
     )
-    for role, value in REFERENCE.items():
-        parser.add_argument("--" + role + "-lr", type=float, default=value)
+    for role in REFERENCE:
+        parser.add_argument(
+            "--" + role + "-lr",
+            type=float,
+            help="override the absolute " + role + " rate",
+        )
     args = parser.parse_args(argv)
     if args.steps < 16 or args.steps % 16:
         parser.error("--steps must be a positive multiple of 16")
@@ -69,9 +73,31 @@ def arguments(argv):
     if any(
         not math.isfinite(value) or value <= 0
         for value in (args.g_lr, args.d_lr, args.particle_lr, args.gpu_cap_gib)
+        if value is not None
     ):
         parser.error("rates and GPU cap must be finite and positive")
     return args
+
+
+def requested_rates(args, root, concept, config):
+    bound = root / "training-config.json"
+    if bound.is_file():
+        baseline = read(bound)["rates"]
+    else:
+        baseline = REFERENCE
+        if not args.search_rates:
+            recipes = read(
+                Path(__file__).resolve().parents[2] / "configs/anima/study-recipes.json"
+            )
+            measured = recipes["concepts"].get(concept)
+            if measured and measured["teacher_plan_sha256"] == digest(config):
+                baseline = measured["rates"]
+    rates = dict(baseline)
+    for role in rates:
+        explicit = getattr(args, f"{role}_lr")
+        if explicit is not None:
+            rates[role] = explicit
+    return rates
 
 
 def screened_rates(outputs, cache, panels, reference, steps):
@@ -145,7 +171,7 @@ def run(args):
     config = spec["concepts"][concept]
     if not 1 <= args.min_teachers <= len(config["teachers"]):
         raise ValueError("--min-teachers exceeds the scene pool")
-    rates = {"g": args.g_lr, "d": args.d_lr, "particle": args.particle_lr}
+    rates = requested_rates(args, root, concept, config)
     device = torch.device(args.device)
     if device.type != "cuda":
         raise ValueError("Native training requires a CUDA device")

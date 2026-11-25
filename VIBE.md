@@ -280,6 +280,11 @@ to extend an incomplete collection using its saved images and decisions.
 Set `--min-teachers` to choose the minimum number of distinct
 qualifying scenes. Decisions and rejected images are saved with the run.
 
+For a bundled concept with a confirmed recipe, the ordinary command uses its
+measured G, D and particle rates. A resumed run keeps the rates recorded with
+its existing checkpoints. `--g-lr`, `--d-lr` and `--particle-lr` override
+the corresponding rate. [Measured native recipes](configs/anima/study-recipes.json).
+
 The optional rate screen varies one of the three absolute rates by a factor of
 two in each direction. When a different G wins, it repeats the D and particle
 comparisons at that G. When a lower G is the only usable initial setting, it

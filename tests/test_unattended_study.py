@@ -278,3 +278,25 @@ def test_late_split_on_a_previously_screened_case_stops_promotion(tmp_path):
         )
     stop = read(arm / "failure.json")
     assert stop["step"] == 256 and stop["phase"] == "fit-rate-panel"
+
+
+def test_measured_defaults_are_scoped_and_existing_runs_keep_their_rates(tmp_path):
+    from lumen_studio.study.cli import arguments, requested_rates, REFERENCE
+
+    args = arguments(
+        ["--vibe", "1990s anime", "--out", str(tmp_path), "--model-dir", "."]
+    )
+    config = json.loads(args.spec.read_text())["concepts"]["1990s anime"]
+    chosen = requested_rates(args, tmp_path, "1990s anime", config)
+    assert chosen == dict(g=0.000375, d=0.018, particle=0.03)
+    assert (
+        requested_rates(args, tmp_path, "1990s anime", config | {"different": True})
+        == REFERENCE
+    )
+    args.search_rates = True
+    assert requested_rates(args, tmp_path, "1990s anime", config) == REFERENCE
+    atomic_json(tmp_path / "training-config.json", {"rates": chosen})
+    args.particle_lr = 0.02
+    assert requested_rates(args, tmp_path, "1990s anime", config) == chosen | {
+        "particle": 0.02
+    }
