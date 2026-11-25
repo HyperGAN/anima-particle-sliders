@@ -9,7 +9,7 @@ import tempfile
 import torch
 from particle_sliders.strength_schedule import interval_strengths
 from lumen_studio_scoped import open_inference
-from lumen_studio_scoped.training import Checkpoint
+from lumen_studio_scoped.training import file_pin
 from ..backends.anima import TurboRuntime
 from .outputs import read, sample_adapter
 
@@ -33,6 +33,15 @@ def qualified_strength(outcome):
     return setting
 
 
+def locate_raw(record, outcome_directory):
+    original = Path(record["path"])
+    beside_outcome = outcome_directory / original.name
+    raw = file_pin(beside_outcome if beside_outcome.is_file() else original)
+    if raw.sha256 != record["sha256"] or raw.bytes != record["bytes"]:
+        raise ValueError("RAW bytes differ from the confirmed adapter")
+    return raw
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--outcome", required=True, type=Path)
@@ -45,7 +54,7 @@ def main(argv=None):
     if args.out.exists():
         parser.error("choose a new output PNG")
     setting = qualified_strength(read(args.outcome))
-    raw = Checkpoint(**setting["raw"])
+    raw = locate_raw(setting["raw"], args.outcome.resolve().parent)
     meta = read(Path(raw.path).with_suffix(".scoped.json"))
     variation = meta["options"]["variation"]
     device = torch.device(args.device)

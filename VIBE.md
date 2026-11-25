@@ -300,3 +300,8 @@ Open `leaderboard.md` in the run directory to compare matched images. Render a n
 anima-vibe-render --outcome runs/boss/outcome.json --model-dir /models/anima-turbo-v11 \
   --prompt 'An adult cartographer in a sunlit observatory' --seed 13419 --out cartographer.png
 ```
+
+
+To move a confirmed slider, copy its RAW safetensors file, its adjacent
+`.scoped.json` and `.engine.json` sidecars, and `outcome.json` into one directory.
+The render command verifies the local RAW hash against the recorded selection.

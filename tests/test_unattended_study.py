@@ -234,3 +234,20 @@ def test_extending_teacher_attempts_preserves_validation_membership(tmp_path):
     target.write_bytes(b"changed")
     with pytest.raises(ValueError, match="Changed OFF image"):
         validation_panels(SimpleNamespace(root=tmp_path), groups, 12)
+
+
+def test_confirmed_raw_can_move_with_its_outcome(tmp_path):
+    from dataclasses import asdict
+    from lumen_studio_scoped.training import file_pin
+    from lumen_studio.study.replay import locate_raw
+
+    original = tmp_path / "RAW000064.safetensors"
+    original.write_bytes(b"selected adapter")
+    record = asdict(file_pin(original))
+    copied = tmp_path / "export"
+    copied.mkdir()
+    moved = original.rename(copied / original.name)
+    assert locate_raw(record, copied).path == str(moved)
+    moved.write_bytes(b"different adapter")
+    with pytest.raises(ValueError, match="RAW bytes"):
+        locate_raw(record, copied)
