@@ -117,3 +117,21 @@ def test_interrupted_sample_strip_is_never_mistaken_for_a_finished_one(tmp_path,
     name = board_export.write_sheet([record], tmp_path / "board")
     with Image.open(tmp_path / "board" / name) as strip:
         assert strip.size == (144, 144)
+
+
+def test_replay_refuses_a_changed_checkpoint_or_setting_without_a_model(tmp_path):
+    from release_tools.final_boss_replay import check_release
+
+    default = read(STUDY / "default.json")
+    weights = tmp_path / "RAW000192.safetensors"
+    weights.write_bytes(b"not the published weights")
+    with pytest.raises(ValueError, match="RAW checkpoint differs"):
+        check_release(default, weights)
+    from hashlib import sha256
+    local = default | dict(checkpoints={default["recipe"]: dict(
+        bytes=weights.stat().st_size, sha256=sha256(weights.read_bytes()).hexdigest())})
+    check_release(local, weights)
+    for change in (dict(alpha=1.25), dict(profile="constant"), dict(gains=default["gains"][:-1]),
+                   dict(sigmas=default["sigmas"][:-1])):
+        with pytest.raises(ValueError):
+            check_release(local | change, weights)

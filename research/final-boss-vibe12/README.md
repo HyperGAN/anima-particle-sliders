@@ -35,7 +35,7 @@ The active strength worker measures the Boss rating of the edited image and its 
 
 ## Known limits of the archived host programs
 
-These files are kept byte-for-byte as they ran, so the following are recorded here and left unchanged. A November 25 review replayed all 45 recorded alpha searches through the archived code and found no change to a published selection. The first five rows were reproduced offline with stubbed services. The last two were found by reading the code and were not reproduced. Fix these in a new copy before reusing the programs for another product.
+These files are kept byte-for-byte as they ran, so the following are recorded here and left unchanged. A November 25 review replayed all 45 recorded alpha searches through the archived code and found no change to a published selection. The first five rows were reproduced offline. The last two were found by reading the code and were not reproduced. Fix these in a new copy before reusing the programs for another product.
 
 | Area | What happens | Where |
 |---|---|---|
