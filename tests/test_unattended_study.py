@@ -300,3 +300,27 @@ def test_measured_defaults_are_scoped_and_existing_runs_keep_their_rates(tmp_pat
     assert requested_rates(args, tmp_path, "1990s anime", config) == chosen | {
         "particle": 0.02
     }
+
+
+def test_default_falls_back_lazily_and_explicit_rate_remains_fixed(monkeypatch):
+    from lumen_studio.study import cli
+
+    original = dict(g=0.1, d=0.2, particle=0.3)
+    second = original | {"d": 0.1}
+    called = []
+
+    def alternatives(*args):
+        called.append(True)
+        yield original
+        yield second
+
+    monkeypatch.setattr(cli, "screened_rates", alternatives)
+    args = SimpleNamespace(
+        search_rates=False, steps=256, g_lr=None, d_lr=None, particle_lr=None
+    )
+    it = cli.fit_candidates(None, None, None, original, args)
+    assert next(it) == original and not called
+    assert list(it) == [second] and called == [True]
+    args.g_lr = original["g"]
+    assert list(cli.fit_candidates(None, None, None, original, args)) == [original]
+    assert called == [True]

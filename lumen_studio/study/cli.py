@@ -90,7 +90,7 @@ def requested_rates(args, root, concept, config):
                 Path(__file__).resolve().parents[2] / "configs/anima/study-recipes.json"
             )
             measured = recipes["concepts"].get(concept)
-            if measured and measured["teacher_plan_sha256"] == digest(config):
+            if measured and measured["applies_to_plan_sha256"] == digest(config):
                 baseline = measured["rates"]
     rates = dict(baseline)
     for role in rates:
@@ -152,6 +152,19 @@ def screened_rates(outputs, cache, panels, reference, steps):
         for row in sorted(eligible, key=lambda r: -r["mean_gain"]):
             tried_fits.add(digest(row["rates"]))
             yield row["rates"]
+
+
+def fit_candidates(outputs, cache, panels, rates, args):
+    if args.search_rates:
+        yield from screened_rates(outputs, cache, panels, rates, args.steps)
+        return
+    yield rates
+    # The default command first uses the measured recipe. If it fails before
+    # confirmation, expand the search in the same run and reuse its checkpoints.
+    if all(getattr(args, f"{role}_lr") is None for role in REFERENCE):
+        for candidate in screened_rates(outputs, cache, panels, rates, args.steps):
+            if candidate != rates:
+                yield candidate
 
 
 def run(args):
@@ -288,11 +301,7 @@ def run(args):
             ):
                 raise ValueError("Training settings differ from the committed run")
         atomic_json(training_config, settings)
-        candidates = (
-            screened_rates(outputs, cache, panels, rates, args.steps)
-            if args.search_rates
-            else [rates]
-        )
+        candidates = fit_candidates(outputs, cache, panels, rates, args)
         failures = []
         for rates in candidates:
             try:

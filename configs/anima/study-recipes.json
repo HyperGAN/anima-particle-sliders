@@ -15,7 +15,9 @@
   "ema_decay": null,
   "concepts": {
     "1990s anime": {
-      "teacher_plan_sha256": "9fb59f9926e968719acbd960987aa53f2c503926e2da4d375cf71c57d75dc781",
+      "applies_to_plan_sha256": "9fb59f9926e968719acbd960987aa53f2c503926e2da4d375cf71c57d75dc781",
+      "source_manifest_sha256": "a69b0644b777fabe319c61cdeadf791ab5bb8c4b58115e040ba9aab16ed5cdb8",
+      "training_corpus": "bundled native prompt collection",
       "frozen_cache": "3a8a06f616cd1ec93d2671b3758bd4e349e66978c1cfa50b11c12f69ff56f1b5",
       "rates": {
         "g": 0.000375,
