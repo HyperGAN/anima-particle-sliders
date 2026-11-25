@@ -1,0 +1,17 @@
+{
+  "coherent": {
+    "file": "coherent.png",
+    "sha256": "ddd97ab8d87d5db7b6c090b04c6e1071160f8c4a2a0f7964bd12165179c0fdd8",
+    "expected": "pass"
+  },
+  "broken": {
+    "file": "broken.png",
+    "sha256": "ef229a4dca721e5f00aec3749a4c7aacfd497807201885c3a9ab8c023370a1da",
+    "expected": "fail"
+  },
+  "split": {
+    "file": "split.png",
+    "sha256": "d968a06b52a0a4fa42ff50f92f06a74470dc8940af3142e0e808edef249b9067",
+    "expected": "fail"
+  }
+}

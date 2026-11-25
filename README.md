@@ -4,8 +4,8 @@
 
 **Bad Intent, Final Form, Afterimage, Moonlit, Candlelit, Dusk for Anima Turbo v1.1.** Original particle adapters and ordinary LoRA distills, with strength stored in each file’s alpha.
 
-Install Anima 0.4.0 from this checkout to use Particle Sliders core 0.15.2
-and ParticleGAN 0.11.1. New sessions use `ema_decay=None` and RAW
+Install Anima 0.4.1 from this checkout to use Particle Sliders core 0.15.3
+and ParticleGAN 0.12.0. New sessions use `ema_decay=None` and RAW
 training, evaluation, export and inference.
 
 - [Common sessions and direct training](LIFECYCLE.md)

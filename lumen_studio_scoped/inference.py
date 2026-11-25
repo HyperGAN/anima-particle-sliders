@@ -70,6 +70,24 @@ class InferenceOwner(Attachment):
             raise
 
     @contextmanager
+    def scheduled(self, gains):
+        """Admit one native render using its resolved per-interval strengths."""
+        gains = list(gains)
+        if not gains or any(isinstance(g, bool) or not isinstance(g, (int, float))
+                            or not math.isfinite(g) or g < 0 for g in gains):
+            raise ValueError('finite nonnegative native interval gains required')
+        if self.closed or self.closing:
+            raise RuntimeError('inference owner is closed')
+        if self.runtime.device.type != 'cpu':
+            request = dict(operation='native-scheduled-inference', profile=PROFILE,
+                RAW=dict(path=self.raw.path, bytes=self.raw.bytes, sha256=self.raw.sha256),
+                model_identity=deepcopy(self.runtime.identity), gains=gains)
+            if self.owner_admission(request) is not True:
+                raise ValueError('external owner did not admit native inference schedule')
+        with NativeOwner.observation(self):
+            yield self.runtime
+
+    @contextmanager
     def scaled(self, strength):
         if (isinstance(strength, bool) or not isinstance(strength, (int, float))
                 or not math.isfinite(strength) or not 0 <= strength <= 1):

@@ -1,2 +1,2 @@
 safetensors>=0.4,<1
-particle-sliders-core @ git+https://github.com/HyperGAN/particle-sliders.git@b1f780decc516808cfd3019d5e5b674457161f86#subdirectory=packages/particle-sliders-core
+particle-sliders-core @ git+https://github.com/HyperGAN/particle-sliders.git@cc642acb55c3db5826222fd494539fe1944a4fa0#subdirectory=packages/particle-sliders-core

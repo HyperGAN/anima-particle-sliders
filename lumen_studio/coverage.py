@@ -1,4 +1,4 @@
-"""Pure metadata coverage contracts for fresh production ParticleGAN 0.11.1 cohorts.
+"""Pure metadata coverage contracts for fresh production ParticleGAN 0.12.0 cohorts.
 
 The historical two-shard pilot remains reproducible. It cannot satisfy this
 production contract or publish a production learning-rate recommendation.

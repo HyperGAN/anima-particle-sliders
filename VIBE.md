@@ -256,3 +256,43 @@ the captured reader used in this proof.
 
 [Compact hashes, values and verification scope](docs/vibe-native256-verification.json).
 The audited weights remain local.
+
+## Unattended native training
+
+The `anima-vibe-train` command collects matched teacher images, prepares frozen
+targets, trains a stock EMPF adapter and confirms a saved RAW on held-out
+prompts. The bundled scene file contains Final Boss, 1990s anime and Visually
+appealing character. Subjects are specified as adults in the prompts.
+
+```sh
+anima-vibe-train --vibe 'Final Boss' --model-dir /models/anima-turbo-v11 \
+  --out runs/boss --device cuda:0 --search-rates
+```
+
+At startup three pinned PNGs check the image judge on a coherent portrait, a
+broken drawing and a split frame. The script checks both images in each teacher
+pair. It tries another matched seed for rejected scenes, with eight attempts per
+scene by default. After five unsuccessful seeds it also reframes the neutral
+and its treatments as a continuous camera shot. Increase `--collection-attempts`
+to extend an incomplete collection using its saved images and decisions.
+Set `--min-teachers` to choose the minimum number of distinct
+qualifying scenes. Decisions and rejected images are saved with the run.
+
+The optional rate screen varies one of the three absolute rates by a factor of
+two in each direction, then continues the best qualified FULL checkpoint. If
+that bracket yields no usable fit, the script tests lower generator rates
+with the reference critic and particle rates held fixed. For a run
+using measured rates, pass `--g-lr`, `--d-lr` and `--particle-lr`. Ranking uses
+the mean change in intended effect across matched finished images.
+`--steps 256` compares updates 64, 128, 192 and 256. The winning RAW is loaded
+for constant, early and late strength comparisons and a separate held-out
+confirmation. `outcome.json` records the resolved interval gains, cases and
+original RAW path. `status.json` records the result and an incomplete run's
+exit reason. Rerun with the same directory and arguments to reuse recorded work.
+
+Open `leaderboard.md` in the run directory to compare matched images. Render a new prompt with the recorded RAW and strength schedule:
+
+```sh
+anima-vibe-render --outcome runs/boss/outcome.json --model-dir /models/anima-turbo-v11 \
+  --prompt 'An adult cartographer in a sunlit observatory' --seed 13419 --out cartographer.png
+```
