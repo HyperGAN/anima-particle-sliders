@@ -35,7 +35,8 @@ def run(gpu, worker, arguments, product=None):
 
     logs = ROOT / "runs"
     logs.mkdir(exist_ok=True)
-    stem = logs / f"{Path(worker).stem}-{'-'.join(arguments) or 'all'}-{time.time_ns()}"
+    label = (arguments[0] if arguments else "all").replace(":", "-") + (f"+{len(arguments) - 1}" if len(arguments) > 1 else "")
+    stem = logs / f"{Path(worker).stem}-{label}-{time.time_ns()}"
     # Training shares the equipped study's per-card leases. Inference-only calibration takes this
     # campaign's own lease and a higher host entry floor, so the study's companions keep room.
     training = Path(worker).name == "fit.py"

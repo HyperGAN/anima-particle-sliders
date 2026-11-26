@@ -49,6 +49,80 @@ Three things about the readers shaped this.
 
 [Score](../../lumen_studio/study/working_score.py) · [Alpha search](../../research/post-training/working_search.py) · [Readings per image](working-results.json)
 
+## Every trained recipe
+
+All 38 Final Boss arms of the [constant-alpha retest](../leaderboard.md) were searched again by the same score, from their saved search renders, and ranked with the twenty checkpoints above. One arm, the stopped reference-rate repair, has an unanswered ranking reading and is unranked. [Board with every image and reading](http://100.90.104.57:8797/board-leaderboard.html) · [Readings per image](board-results.json)
+
+| Rank | Recipe or checkpoint | Run | Updates | Constant α | Eight held-out characters | Score / 100 | Working | Structural check | Is a boss | Quality | α before |
+| ---: | --- | --- | ---: | ---: | --- | ---: | ---: | --- | ---: | ---: | ---: |
+| 1 | Exact continuation · same targets · +12 | RAW512 post-training · PG 0.12.0 | 524 | 1.38281 | ![Exact continuation · same targets · +12](samples/working-continued-12.webp) | 66.99 | 8 of 8 | 6 pass, 1 fail, 1 unresolved | 98 | 85 | 2.04688 |
+| 2 | Fork control, second seed · +12 | RAW512 post-training · PG 0.12.0 | 524 | 1.5625 | ![Fork control, second seed · +12](samples/working-control-seed2-12.webp) | 57.01 | 7 of 8 | 6 pass, 2 unresolved | 92 | 72 | 2.1875 |
+| 3 | Fork with the parent's critic · five least-damaged teachers · +48 | RAW512 post-training · PG 0.12.0 | 560 | 1.46094 | ![Fork with the parent's critic · five least-damaged teachers · +48](samples/working-cleanest-warm-48.webp) | 56.75 | 7 of 8 | 5 pass, 3 unresolved | 97 | 75 | 2.09375 |
+| 4 | Background-only scene and lighting projection, 0.45 floor | Vibe12 · PG 0.11.1 · completed | 192 | 1.46094 | ![Background-only scene and lighting projection, 0.45 floor](samples/working-soft45-background-orthogonal.webp) | 53.41 | 6 of 8 | 6 pass, 2 unresolved | 98 | 65 | 2.11719 |
+| 5 | Exact continuation · same targets · +36 | RAW512 post-training · PG 0.12.0 | 548 | 1.10938 | ![Exact continuation · same targets · +36](samples/working-continued-36.webp) | 53.22 | 7 of 8 | 8 pass | 86 | 74 | 1.625 |
+| 6 | Six highest-divergence timestep positions | Vibe12 · PG 0.11.1 · completed | 192 | 1.0625 | ![Six highest-divergence timestep positions](samples/working-shared-best-divergence.webp) | 51.11 | 6 of 8 | 4 pass, 4 unresolved | 92 | 67 | 1.36328 |
+| 7 | Prompt-only control · all 240 fields | Vibe12 · PG 0.11.1 · completed | 192 | 1.34375 | ![Prompt-only control · all 240 fields](samples/working-shared-best-stock.webp) | 50.77 | 7 of 8 | 4 pass, 3 fail, 1 unresolved | 98 | 63 | 1.59375 |
+| 8 | Stronger cues at the first three teacher positions | Vibe12 · PG 0.11.1 · completed | 192 | 1.15625 | ![Stronger cues at the first three teacher positions](samples/working-early-cues.webp) | 49.57 | 5 of 8 | 2 pass, 3 fail, 3 unresolved | 96 | 59 | 1.29688 |
+| 9 | Fork control at the lower generator rate · +48 | RAW512 post-training · PG 0.12.0 | 560 | 1.34375 | ![Fork control at the lower generator rate · +48](samples/working-control-low-g-48.webp) | 49.23 | 6 of 8 | 5 pass, 1 fail, 2 unresolved | 93 | 62 | 1.44141 |
+| 10 | Fork at the lower generator rate · five least-damaged teachers · +48 | RAW512 post-training · PG 0.12.0 | 560 | 1.625 | ![Fork at the lower generator rate · five least-damaged teachers · +48](samples/working-cleanest-low-g-48.webp) | 49.02 | 6 of 8 | 3 pass, 2 fail, 3 unresolved | 100 | 58 | 1.95312 |
+| 11 | Stronger cues at the final three teacher positions | Vibe12 · PG 0.11.1 · completed | 192 | 1.42188 | ![Stronger cues at the final three teacher positions](samples/working-late-cues.webp) | 48.58 | 5 of 8 | 6 pass, 1 fail, 1 unresolved | 96 | 61 | 1.90625 |
+| 12 | Paired scene and lighting contexts, 50% blend, 0.45 floor | Vibe12 · PG 0.11.1 · completed | 192 | 1.38281 | ![Paired scene and lighting contexts, 50% blend, 0.45 floor](samples/working-soft-contexts-45-blend50.webp) | 48.48 | 4 of 8 | 4 pass, 4 unresolved | 93 | 61 | 1.53125 |
+| 13 | Fork with the parent's critic · five least-damaged teachers · +12 | RAW512 post-training · PG 0.12.0 | 524 | 1.85938 |  | 48.24 | 7 of 8 | 3 pass, 1 fail, 4 unresolved | 100 | 58 | 2.09375 |
+| 14 | Extra training exposure at the middle four denoising positions | Vibe12 · PG 0.11.1 · completed | 192 | 1.5625 |  | 46.72 | 6 of 8 | 4 pass, 2 fail, 2 unresolved | 93 | 57 | 2.14062 |
+| 15 | Fork control with the parent's critic · +12 | RAW512 post-training · PG 0.12.0 | 524 | 1.38281 |  | 46.65 | 5 of 8 | 4 pass, 1 fail, 3 unresolved | 88 | 63 | 1.38281 |
+| 16 | Fork · five least-damaged teachers · +48 | RAW512 post-training · PG 0.12.0 | 560 | 1.20312 |  | 46.45 | 4 of 8 | 8 pass | 98 | 56 | 1.38281 |
+| 17 | Parent · no further training | RAW512 post-training · PG 0.12.0 | 512 | 1.59375 |  | 46.40 | 5 of 8 | 6 pass, 2 unresolved | 99 | 55 | 1.5625 |
+| 18 | Fork, second seed · five least-damaged teachers · +12 | RAW512 post-training · PG 0.12.0 | 524 | 1.5625 |  | 46.31 | 5 of 8 | 6 pass, 1 fail, 1 unresolved | 92 | 58 | 1.88867 |
+| 19 | Soft foreground weighting · prior incumbent recipe | Vibe12 · PG 0.11.1 · completed | 192 | 1.25 |  | 46.00 | 6 of 8 | 5 pass, 3 unresolved | 93 | 58 | 1.41406 |
+| 20 | Fork control with the parent's critic · +48 | RAW512 post-training · PG 0.12.0 | 560 | 1.34375 |  | 45.97 | 5 of 8 | 3 pass, 5 unresolved | 96 | 56 | 1.59375 |
+| 21 | Fork · one cleaner teacher · +12 | RAW512 post-training · PG 0.12.0 | 524 | 1.15625 |  | 45.13 | 4 of 8 | 7 pass, 1 unresolved | 94 | 57 | 1.83594 |
+| 22 | Soft foreground weighting plus a 35% blend of two averaged cues | Vibe12 · PG 0.11.1 · completed | 192 | 1.5625 |  | 44.68 | 6 of 8 | 4 pass, 2 fail, 2 unresolved | 95 | 57 | 1.625 |
+| 23 | Second qualified seed on the shared teacher scenes | Vibe12 · PG 0.11.1 · completed | 192 | 1.15625 |  | 44.01 | 5 of 8 | 3 pass, 1 fail, 4 unresolved | 85 | 64 | 1.59375 |
+| 24 | Exact continuation · same targets · +48 | RAW512 post-training · PG 0.12.0 | 560 | 1.625 |  | 43.78 | 5 of 8 | 4 pass, 1 fail, 3 unresolved | 100 | 51 | 2 |
+| 25 | In-scene costume cue blend, 35% | Vibe12 · PG 0.11.1 · completed | 192 | 1.46094 |  | 42.75 | 5 of 8 | 6 pass, 2 unresolved | 87 | 62 | 2.09375 |
+| 26 | Fork control · fresh critic, same targets · +12 | RAW512 post-training · PG 0.12.0 | 524 | 1.25 |  | 42.31 | 5 of 8 | 7 pass, 1 unresolved | 93 | 54 | 2 |
+| 27 | shared-best-mixed-path | Vibe12 · PG 0.11.1 · training stopped | 192 | 1.46094 |  | 41.93 | 5 of 8 | 1 pass, 3 fail, 4 unresolved | 70 | 65 | 1.67773 |
+| 28 | Paired scene and lighting contexts, 50% blend, 0.65 floor | Vibe12 · PG 0.11.1 · completed | 192 | 1.25 |  | 40.13 | 4 of 8 | 4 pass, 4 unresolved | 86 | 50 | 1.39062 |
+| 29 | Train on adapter rollout states, 0.45 floor | Vibe12 · PG 0.11.1 · completed | 192 | 1.5625 |  | 39.34 | 5 of 8 | 4 pass, 1 fail, 3 unresolved | 95 | 51 | 2.02344 |
+| 30 | Whole-image scene and lighting projection, 0.65 floor | Vibe12 · PG 0.11.1 · completed | 192 | 1.53125 |  | 39.34 | 3 of 8 | 2 pass, 4 fail, 2 unresolved | 97 | 49 | 1.53125 |
+| 31 | Fork control · fresh critic, same targets · +48 | RAW512 post-training · PG 0.12.0 | 560 | 1.27344 |  | 38.34 | 5 of 8 | 5 pass, 1 fail, 2 unresolved | 93 | 49 | 1.25 |
+| 32 | Percentile-filtered blend at the first three teacher positions | Vibe12 · PG 0.11.1 · completed | 192 | 1.29688 |  | 38.32 | 5 of 8 | 3 fail, 5 unresolved | 85 | 55 | 1.48047 |
+| 33 | Qualified costume teachers with soft-foreground contexts | Vibe12 · PG 0.11.1 · completed | 192 | 1.29688 |  | 37.06 | 5 of 8 | 2 pass, 6 unresolved | 92 | 48 | 1.5 |
+| 34 | Soft foreground weighting plus 35% stronger Boss cues | Vibe12 · PG 0.11.1 · completed | 192 | 1.0625 |  | 36.47 | 3 of 8 | 5 pass, 3 unresolved | 87 | 52 | 1.22656 |
+| 35 | Extra training exposure at the opening four denoising positions | Vibe12 · PG 0.11.1 · completed | 192 | 1.42188 |  | 35.23 | 3 of 8 | 6 pass, 2 unresolved | 80 | 53 | 2.1875 |
+| 36 | sparse-full | Vibe12 · PG 0.11.1 · training stopped | 144 | 1.8125 |  | 32.83 | 2 of 8 | 4 pass, 2 fail, 2 unresolved | 88 | 42 | 2 |
+| 37 | Six evenly spaced timestep positions | Vibe12 · PG 0.11.1 · completed | 192 | 1.5625 |  | 30.54 | 3 of 8 | 3 pass, 4 fail, 1 unresolved | 97 | 34 | 1.76562 |
+| 38 | Soft foreground weighting, 0.45 background floor | Vibe12 · PG 0.11.1 · completed | 192 | 1.625 |  | 29.75 | 1 of 8 | 4 pass, 1 fail, 3 unresolved | 93 | 38 | 1.73047 |
+| 39 | Stronger Boss cues contrasted with matched ordinary attire | Vibe12 · PG 0.11.1 · completed | 192 | 1.29688 |  | 29.32 | 3 of 8 | 4 pass, 2 fail, 2 unresolved | 100 | 32 | 1.34375 |
+| 40 | Fork · five least-damaged teachers · +12 | RAW512 post-training · PG 0.12.0 | 524 | 1.20312 |  | 26.85 | 2 of 8 | 5 pass, 3 unresolved | 100 | 30 | 1.5 |
+| 41 | Soft foreground weighting with subject APG | Vibe12 · PG 0.11.1 · completed | 192 | 1.5625 |  | 23.81 | 3 of 8 | 2 pass, 2 fail, 4 unresolved | 73 | 32 | 1.59375 |
+| 42 | Soft foreground weighting with full-strength Boss cues | Vibe12 · PG 0.11.1 · completed | 192 | 1.0625 |  | 23.75 | 2 of 8 | 3 pass, 2 fail, 3 unresolved | 75 | 43 | 1.625 |
+| 43 | Neutral trajectory only | Vibe12 · PG 0.11.1 · completed | 192 | 1.76562 |  | 18.88 | 2 of 8 | 1 pass, 5 fail, 2 unresolved | 57 | 39 | 1.90625 |
+| 44 | Fork · one cleaner teacher · +36 | RAW512 post-training · PG 0.12.0 | 548 | 1.25 |  | 18.27 | 1 of 8 | 4 pass, 1 fail, 3 unresolved | 88 | 28 | 1.27344 |
+| 45 | Fork control · fresh critic, same targets · +36 | RAW512 post-training · PG 0.12.0 | 548 | 1.20312 |  | 16.96 | 1 of 8 | 4 pass, 1 fail, 3 unresolved | 88 | 24 | 1.5 |
+| 46 | Fork · five least-damaged teachers · +36 | RAW512 post-training · PG 0.12.0 | 548 | 1.15625 |  | 16.17 | 1 of 8 | 5 pass, 3 unresolved | 92 | 23 | 2.1875 |
+| 47 | boss-short | boss-short · PG 0.12.0 · completed | 128 | 2 |  | 12.23 | 2 of 8 | 2 pass, 3 fail, 3 unresolved | 72 | 25 | 2.02344 |
+| 48 | boss-short | boss-short · PG 0.12.0 · training stopped | 32 | 0.5 |  | 0.22 | 0 of 8 | 8 pass | 0 | 88 | 0.90625 |
+| 49 | boss-32 | boss-32 · PG 0.12.0 · completed | 16 | 0.5 |  | 0.00 | 0 of 8 | 8 pass | 0 | 87 | 1.40625 |
+| 50 | boss-late-cue-repair | boss-late-cue-repair · PG 0.12.0 · completed | 128 | 0.5 |  | 0.00 | 0 of 8 | 8 pass | 0 | 85 | 1.90625 |
+| 51 | boss-pair-repair | boss-pair-repair · PG 0.12.0 · completed | 96 | 0.5 |  | 0.00 | 0 of 8 | 8 pass | 0 | 86 | 1.65625 |
+| 52 | boss-short | boss-short · PG 0.12.0 · rate screen only | 32 | 0.5 |  | 0.00 | 0 of 8 | 8 pass | 0 | 87 | 1.73047 |
+| 53 | boss-short | boss-short · PG 0.12.0 · rate screen only | 32 | 0.5 |  | 0.00 | 0 of 8 | 8 pass | 0 | 80 | 2 |
+| 54 | boss-short | boss-short · PG 0.12.0 · rate screen only | 32 | 0.5 |  | 0.00 | 0 of 8 | 8 pass | 0 | 83 | 1.59375 |
+| 55 | boss-short | boss-short · PG 0.12.0 · rate screen only | 32 | 0.3125 |  | 0.00 | 0 of 8 | 8 pass | 0 | 86 | 0.84375 |
+| 56 | boss-short | boss-short · PG 0.12.0 · training stopped | 64 | 0.375 |  | 0.00 | 0 of 8 | 8 pass | 0 | 79 | 1.15625 |
+| 57 | Late-cues version control | version-probe · PG 0.12.0 · version control | 48 | 0.75 |  | 0.00 | 0 of 8 | 7 pass, 1 fail | 0 | 76 | 1.53125 |
+
+**No recipe is separated from the others by more than one checkpoint's variation.** The six best 192-update recipes score 48.5 to 53.4: background-only projection, highest-divergence positions, the prompt-only control, early cues, late cues and paired contexts. The exact continuation of one RAW scores 66.99, 53.22 and 43.78 at three nearby checkpoints. A single RAW per recipe cannot rank these six.
+
+**The prompt-only control is among the leaders.** It ranks third of the 192-update recipes at 50.77 with seven of eight working. The cue, matte and projection recipes built on it do not beat it by a margin this board can see. Three of its images fail the structural check.
+
+**Some recipes are clearly worse.** Neutral trajectory only scores 18.88, full-strength Boss cues 23.75 and subject APG 23.81. Evenly spaced positions, the 0.45 floor alone and matched attire score about 30.
+
+**Short training never makes a boss.** Every arm with 128 updates or fewer scores under 13, and nine of them score zero at every strength. They read as ordinary characters with clean drawings.
+
+**The earlier leader is mid-table.** Late cues led the distinct Boss board at α 1.91. Here it picks α 1.42 and ranks fifth of the 192-update recipes at 48.58.
+
 ## Ranked by the distinct Boss score
 
 | Rank | Approach | Updates | Constant α | Eight ranking characters | Distinct Boss / 100 | Boss gain | Damage | Repeat | Integrity | Training |

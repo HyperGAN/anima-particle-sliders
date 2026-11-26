@@ -66,7 +66,18 @@ def recolored(off, on):
 
 
 def source(name):
-    """The earlier calibration of this RAW and the checkpoint it measured."""
+    """The earlier calibration of this RAW, its checkpoint, and where the new search is kept."""
+    if name.startswith("board:"):
+        # One arm of the constant-alpha retest, read in place from the equipped study.
+        arm = name.removeprefix("board:")
+        entry = read(PARENT_STUDY / "cohort-retest/inventory.json")[arm]
+        legacy = read(CODE.parents[1] / "docs/final-boss-raw192/vibe12/standings.json")["teacher"]["model"]
+        return (PARENT_STUDY / "cohort-retest/methods" / arm / D, entry["raw"], entry["step"],
+                legacy if entry["pg"] == "0.11.1" else None, ROOT / "board-search" / arm)
+    return (*post_training(name), None, home / name)
+
+
+def post_training(name):
     arm, extra = name.rsplit("-", 1)
     if arm == "parent":
         return PARENT_STUDY / POLICY["parent"]["calibration"] / D, read(parent_arm() / "cursor.json")["raw"], POLICY["parent"]["step"]
@@ -77,17 +88,16 @@ def source(name):
 
 
 def search(rt, name, pool):
-    base, raw, step = source(name)
-    out = home / name
+    base, raw, step, trained_on, out = source(name)
     if (out / "result.json").exists() and read(out / "result.json")["version"] == ws.VERSION:
         return read(out / "result.json")
     out.mkdir(parents=True, exist_ok=True)
     outputs = Outputs(out, rt, "Final Boss", {})
     adapter = ParticleAdapter(rt.transformer).to(rt.device)
-    meta = adapter.load_export(raw["path"], model_identity=rt.identity)
+    meta = adapter.load_export(raw["path"], model_identity=trained_on or rt.identity)
     assert meta["step"] == step and meta["weights"] == "live"
     adapter.requires_grad_(False).eval()
-    key = f"working-{name}"
+    key = "working-" + name.replace(":", "-")
     rt.mixer.add(key, adapter)
     try:
         def measure(alpha, phase):
