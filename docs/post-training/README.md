@@ -4,6 +4,53 @@ No arm met the proposal's bar for a win, and cleaner teachers did not lower dama
 
 Every row starts from the PG 0.12.0 Final Boss RAW512, SHA-256 `d3b828cfa4bccf0c20dc11587ed1080cc3eda2684a424e0079b334ed15e2b377`, trained on the late-cues targets at G 0.00075, D 0.009 and particle 0.03. Each RAW had its own constant-alpha search on four characters. That alpha was frozen before the eight ranking characters. This is the measurement behind the [constant-alpha leaderboard](../leaderboard.md), so these rows compare directly with it. Boss gain is ON minus OFF distinction and damage is Jev's visible-damage severity, both out of 100. Weights are the raw current weights. No EMA is involved.
 
+## What ON should mean
+
+The sections below this one rank by the distinct Boss score. That score rewards ever stronger designs, so it chose strengths where many images were shattered or collapsed, and its damage question could not see it. Reviewing the images changed the objective. Switched on, the slider should give a final boss that is not broken. A wilder boss is the user's choice of a higher strength. [Board with every image and reading](http://100.90.104.57:8797/working-leaderboard.html)
+
+Each image scores effect times quality, with the same discount for repeated designs.
+
+- **Effect** rises from 0 for an ordinary character to 1 once the character reads as a distinctive endgame antagonist, and does not grow past that.
+- **Quality** is the lowest of three readings. How cleanly the image is drawn is read by Mercury Decide on four 256-pixel tiles at native resolution, against the same character's OFF image. Whether there is exactly one figure, and whether that figure has a head on a body, are read by Jev on the whole image.
+- Looking like the original person is not scored. Recoloring the whole scene is shown and not scored.
+
+Every RAW had its constant alpha chosen again by this score on the four search characters, with ties to the lower alpha, and was ranked on the eight held-out characters. Chosen strengths fell from between 1.25 and 2.19 to between 1.11 and 1.86.
+
+| Rank | RAW | Constant α | Eight held-out characters | Score / 100 | Working | Structural check | Is a boss | Quality | Quality holds to α | Scene recolored | α before |
+| ---: | --- | ---: | --- | ---: | ---: | --- | ---: | ---: | ---: | ---: | ---: |
+| 1 | Exact continuation · +12 | 1.38281 | ![Exact continuation · +12](samples/working-continued-12.webp) | 66.99 | 8 of 8 | 6 pass, 1 fail, 1 unresolved | 98 | 85 | 2 | 42 | 2.04688 |
+| 2 | Fork control, second seed · +12 | 1.5625 | ![Fork control, second seed · +12](samples/working-control-seed2-12.webp) | 57.01 | 7 of 8 | 6 pass, 2 unresolved | 92 | 72 | 2.1875 | 82 | 2.1875 |
+| 3 | Fork with the parent's critic · five cleaner teachers · +48 | 1.46094 | ![Fork with the parent's critic · five cleaner teachers · +48](samples/working-cleanest-warm-48.webp) | 56.75 | 7 of 8 | 5 pass, 3 unresolved | 97 | 75 | 1.5625 | 54 | 2.09375 |
+| 4 | Exact continuation · +36 | 1.10938 | ![Exact continuation · +36](samples/working-continued-36.webp) | 53.22 | 7 of 8 | 8 pass | 86 | 74 | 1.10938 | 41 | 1.625 |
+| 5 | Fork control, lower generator rate · +48 | 1.34375 | ![Fork control, lower generator rate · +48](samples/working-control-low-g-48.webp) | 49.23 | 6 of 8 | 5 pass, 1 fail, 2 unresolved | 93 | 62 | 1.34375 | 43 | 1.44141 |
+| 6 | Fork, lower generator rate · five cleaner teachers · +48 | 1.625 | ![Fork, lower generator rate · five cleaner teachers · +48](samples/working-cleanest-low-g-48.webp) | 49.02 | 6 of 8 | 3 pass, 2 fail, 3 unresolved | 100 | 58 | 1.625 | 57 | 1.95312 |
+| 7 | Fork with the parent's critic · five cleaner teachers · +12 | 1.85938 | ![Fork with the parent's critic · five cleaner teachers · +12](samples/working-cleanest-warm-12.webp) | 48.24 | 7 of 8 | 3 pass, 1 fail, 4 unresolved | 100 | 58 | 2 | 45 | 2.09375 |
+| 8 | Fork control with the parent's critic · +12 | 1.38281 | ![Fork control with the parent's critic · +12](samples/working-control-warm-12.webp) | 46.65 | 5 of 8 | 4 pass, 1 fail, 3 unresolved | 88 | 63 | 1.5 | 52 | 1.38281 |
+| 9 | Fork · five cleaner teachers · +48 | 1.20312 | ![Fork · five cleaner teachers · +48](samples/working-cleanest-48.webp) | 46.45 | 4 of 8 | 8 pass | 98 | 56 | 1.25 | 55 | 1.38281 |
+| 10 | Parent · no further training | 1.59375 | ![Parent · no further training](samples/working-parent-0.webp) | 46.40 | 5 of 8 | 6 pass, 2 unresolved | 99 | 55 | 1.76562 | 48 | 1.5625 |
+| 11 | Fork · five cleaner teachers, second seed · +12 | 1.5625 | ![Fork · five cleaner teachers, second seed · +12](samples/working-cleanest-seed2-12.webp) | 46.31 | 5 of 8 | 6 pass, 1 fail, 1 unresolved | 92 | 58 | 2 | 82 | 1.88867 |
+| 12 | Fork control with the parent's critic · +48 | 1.34375 | ![Fork control with the parent's critic · +48](samples/working-control-warm-48.webp) | 45.97 | 5 of 8 | 3 pass, 5 unresolved | 96 | 56 | 1.34375 | 49 | 1.59375 |
+| 13 | Fork · one cleaner teacher · +12 | 1.15625 | ![Fork · one cleaner teacher · +12](samples/working-cleaner-12.webp) | 45.13 | 4 of 8 | 7 pass, 1 unresolved | 94 | 57 | 1.29688 | 54 | 1.83594 |
+| 14 | Exact continuation · +48 | 1.625 | ![Exact continuation · +48](samples/working-continued-48.webp) | 43.78 | 5 of 8 | 4 pass, 1 fail, 3 unresolved | 100 | 51 | 1.71875 | 62 | 2 |
+| 15 | Fork control · +12 | 1.25 | ![Fork control · +12](samples/working-control-12.webp) | 42.31 | 5 of 8 | 7 pass, 1 unresolved | 93 | 54 | 1.34375 | 60 | 2 |
+| 16 | Fork control · +48 | 1.27344 | ![Fork control · +48](samples/working-control-48.webp) | 38.34 | 5 of 8 | 5 pass, 1 fail, 2 unresolved | 93 | 49 | 1.27344 | 58 | 1.25 |
+| 17 | Fork · five cleaner teachers · +12 | 1.20312 | ![Fork · five cleaner teachers · +12](samples/working-cleanest-12.webp) | 26.85 | 2 of 8 | 5 pass, 3 unresolved | 100 | 30 | 1.34375 | 56 | 1.5 |
+| 18 | Fork · one cleaner teacher · +36 | 1.25 | ![Fork · one cleaner teacher · +36](samples/working-cleaner-36.webp) | 18.27 | 1 of 8 | 4 pass, 1 fail, 3 unresolved | 88 | 28 | 1.25 | 70 | 1.27344 |
+| 19 | Fork control · +36 | 1.20312 | ![Fork control · +36](samples/working-control-36.webp) | 16.96 | 1 of 8 | 4 pass, 1 fail, 3 unresolved | 88 | 24 | 1.20312 | 68 | 1.5 |
+| 20 | Fork · five cleaner teachers · +36 | 1.15625 | ![Fork · five cleaner teachers · +36](samples/working-cleanest-36.webp) | 16.17 | 1 of 8 | 5 pass, 3 unresolved | 92 | 23 | 1.15625 | 78 | 2.1875 |
+
+The exact continuation at +12 leads with all eight characters working at α 1.38: clean drawings, each person still present, eight different designs in their original scenes. Its violinist has blank eyes, which the structural check fails. The parent ranks tenth, because it only reads as a boss near α 1.6, where its drawing quality has already dropped. The forks that collapsed and the one that shattered are at the bottom. Checkpoint variation is still large: the same continuation scores 66.99, 53.22 and 43.78 at +12, +36 and +48.
+
+Three things about the readers shaped this.
+
+- **A shrunken image hides the defect.** Mercury Decide on a 288-pixel copy read the shattered row at 20 against 8 for clean teachers. On native tiles it read 52 against 6. Jev separates the same sets by 39 against 22.
+- **The reader refuses a PNG above about 180 KB.** Busy high-strength images exceeded that with 320-pixel tiles, so the strengths most likely to be broken went unmeasured until every image moved to 256-pixel tiles.
+- **Tiles cannot see a missing head.** A clean drawing of a headless robe passed until the whole-figure reading was added.
+
+[Score](../../lumen_studio/study/working_score.py) · [Alpha search](../../research/post-training/working_search.py) · [Readings per image](working-results.json)
+
+## Ranked by the distinct Boss score
+
 | Rank | Approach | Updates | Constant α | Eight ranking characters | Distinct Boss / 100 | Boss gain | Damage | Repeat | Integrity | Training |
 | ---: | --- | ---: | ---: | --- | ---: | ---: | ---: | ---: | --- | --- |
 | — | Matched baseline | — | OFF | ![OFF](samples/off.webp) | — | — | — | — | — | — |

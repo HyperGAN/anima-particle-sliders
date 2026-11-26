@@ -1,10 +1,14 @@
-"""Final Boss ability on images that are still finished drawings.
+"""Whether the slider, switched on, gives a final boss that is not broken.
 
-The distinct Boss score multiplied each character's effect by one minus a damage
-reading that barely moved between clean and shattered drawings. Here the same
-effect term is multiplied by a quality term that reaches zero for a broken
-drawing. Quality never asks whether the character still looks like the original
-person, so a strong redesign is not penalized for being one.
+The distinct Boss score rewarded ever stronger designs and multiplied them by
+one minus a damage reading that barely moved between clean and shattered
+drawings. Its alpha therefore sat where the design was most extreme. Here the
+effect term stops growing once the character reads as a final boss, and it is
+multiplied by a quality term that reaches zero for a broken drawing. The best
+alpha is then the lowest strength that makes a boss. A user who wants a wilder
+one can raise the strength. Quality never asks whether the character still
+looks like the original person, so a strong redesign is not penalized for
+being one.
 
 Drawing quality is read on tiles at native resolution. A shrunken
 image hides the shattered-shard defect this term exists to catch. Whether
@@ -25,7 +29,7 @@ from PIL import Image
 
 from .design_score import summarize
 
-VERSION = "final-boss-working-v2"
+VERSION = "final-boss-working-v3"
 URL = "https://api.nano-gpt.com/api/v1/decisions"
 MODEL = "inception/mercury-decide"
 # Four 256-pixel tiles cover a 512-pixel image exactly. Every image is read the same way:
@@ -154,13 +158,26 @@ def quality(broken, off_broken, one_figure, figure):
     return min(drawn, one_figure, figure)
 
 
+# Anchors of the Boss distinction question: ordinary clothing, and a distinctive endgame antagonist.
+BOSS_FLOOR = 0.25
+BOSS_ENOUGH = 0.75
+
+
+def effect(boss, original):
+    """Zero for an ordinary character, one once the edit reads as a final boss, and no more."""
+    floor = max(BOSS_FLOOR, original)
+    if floor >= BOSS_ENOUGH:
+        return 0.0
+    return min(1.0, max(0.0, boss - floor) / (BOSS_ENOUGH - floor))
+
+
 def score_case(boss, original, quality_):
-    """The distinct Boss effect term on an image that is still a finished drawing."""
+    """A final boss that is still a finished drawing of one whole figure."""
     if None in (boss, original, quality_):
         return None
     if not all(0 <= value <= 1 for value in (boss, original, quality_)):
         raise ValueError("Readings must lie in the unit interval")
-    return max(0.0, boss - original) * boss**3 * quality_
+    return effect(boss, original) * quality_
 
 
 def working_score(cases, pairs):

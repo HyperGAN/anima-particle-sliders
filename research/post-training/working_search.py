@@ -79,7 +79,7 @@ def source(name):
 def search(rt, name, pool):
     base, raw, step = source(name)
     out = home / name
-    if (out / "result.json").exists():
+    if (out / "result.json").exists() and read(out / "result.json")["version"] == ws.VERSION:
         return read(out / "result.json")
     out.mkdir(parents=True, exist_ok=True)
     outputs = Outputs(out, rt, "Final Boss", {})
@@ -93,7 +93,18 @@ def search(rt, name, pool):
         def measure(alpha, phase):
             path = out / phase / (alpha.hex() + ".json")
             if path.exists():
-                return read(path)
+                # Readings are kept. The score is recomputed, so a new formula needs no new judging.
+                doc = read(path)
+                for row in doc["rows"].values():
+                    row["quality"] = ws.quality(row["broken"], row["off_broken"], row["one_figure"], row["figure"])
+                    row["case"] = ws.score_case(row["boss"], row["original"], row["quality"])
+                if phase == "ranking" and any("recolored" not in row for row in doc["rows"].values()):
+                    tints = {c: pool.submit(recolored, cases[c]["off"], row["on"]) for c, row in doc["rows"].items()}
+                    for c, job in tints.items():
+                        doc["rows"][c]["recolored"] = job.result()
+                doc["score"] = ws.working_score({c: r["case"] for c, r in doc["rows"].items()}, doc["pairs"])
+                atomic_json(path, doc)
+                return doc
             names = cfg["panels"][phase]
             earlier = base / phase / (alpha.hex() + ".json")
             rows = {}
@@ -144,7 +155,8 @@ def search(rt, name, pool):
             print(name, phase, alpha, None if score is None else round(100 * score, 2), flush=True)
             return doc
 
-        trials = {float.fromhex(p.stem): None for p in (base / "search").glob("*.json")}
+        trials = {float.fromhex(p.stem): None
+                  for folder in (base / "search", out / "search") for p in folder.glob("*.json")}
         # Saved renders need no GPU, so their strengths are read side by side.
         with ThreadPoolExecutor(4) as side:
             for alpha, doc in zip(sorted(trials), side.map(lambda a: measure(a, "search"), sorted(trials))):
@@ -174,6 +186,10 @@ def search(rt, name, pool):
                           mean_gain=ranking["mean_gain"])
         else:
             result.update(alpha=None, score=None)
+        if (out / "result.json").exists():
+            # Keep the selection made under the earlier formula beside the new one.
+            earlier_result = read(out / "result.json")
+            atomic_json(out / f'result-{earlier_result["version"]}.json', earlier_result)
         atomic_json(out / "result.json", result)
         return result
     finally:

@@ -195,9 +195,12 @@ def test_working_score_keeps_boss_ability_and_zeroes_broken_drawings(tmp_path):
     assert ws.quality(0.05, 0.05, 0.2, 1.0) == 0.2  # A split figure limits a clean drawing.
     assert ws.quality(0.05, 0.05, 1.0, 0.1) == 0.1  # So does a clean drawing of a headless robe.
     assert ws.quality(None, 0.05, 1.0, 1.0) is None
-    # Ability is rewarded as before; a broken drawing earns nothing, whatever its design.
+    # Reaching a final boss is rewarded; going further is not, and a broken drawing earns nothing.
     strong, weak = ws.score_case(0.9, 0.1, 1.0), ws.score_case(0.6, 0.1, 1.0)
     assert strong > weak > 0 and ws.score_case(0.95, 0.1, 0.0) == 0
+    assert ws.score_case(0.75, 0.1, 0.8) == ws.score_case(0.99, 0.1, 0.8) == 0.8
+    assert ws.score_case(0.8, 0.1, 0.9) > ws.score_case(0.99, 0.1, 0.5)
+    assert ws.score_case(0.2, 0.1, 1.0) == 0 and ws.effect(0.9, 0.8) == 0
     cases = dict(a=strong, b=weak)
     distinct = ws.working_score(cases, [dict(cases=["a", "b"], repeat=0.0)])
     repeated = ws.working_score(cases, [dict(cases=["a", "b"], repeat=1.0)])

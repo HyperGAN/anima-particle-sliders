@@ -8,6 +8,9 @@ import shutil
 
 from PIL import Image
 
+from lumen_studio.study import working_score as ws
+from lumen_studio.study.design_score import summarize
+
 from campaign import PARENT_STUDY, POLICY, ROOT
 
 home = ROOT / "working-search"
@@ -69,7 +72,23 @@ for directory in sorted(p for p in home.iterdir() if p.is_dir() and p.name != "d
     doc = read(directory / "ranking" / (result["alpha"].hex() + ".json"))
     rows = doc["rows"]
     arm, extra = directory.name.rsplit("-", 1)
-    working = sum(r["quality"] >= 0.5 and r["boss"] >= 0.5 for r in rows.values())
+    for r in rows.values():
+        r["effect"] = ws.effect(r["boss"], r["original"])
+    working = sum(r["quality"] >= 0.5 and r["effect"] >= 0.5 for r in rows.values())
+    # How much further the strength can be raised before the search characters stop holding together.
+    ladder = []
+    for path in (directory / "search").glob("*.json"):
+        probe = read(path)
+        values = [ws.quality(r["broken"], r["off_broken"], r["one_figure"], r["figure"]) for r in probe["rows"].values()]
+        ladder.append((probe["alpha"], fmean(values)))
+    holds = result["alpha"]
+    for alpha, value in sorted(ladder):
+        if alpha > holds:
+            if value < 0.5:
+                break
+            holds = alpha
+    # The same score if a recolored scene counted against each image. It did not choose the alpha.
+    kept = summarize({c: r["case"] * (1 - r["recolored"]) for c, r in rows.items()}, doc["pairs"])["score"]
     structure = read(directory / "structure.json") if (directory / "structure.json").exists() else None
     if structure and structure["alpha"] != result["alpha"]:
         structure = None
@@ -78,8 +97,11 @@ for directory in sorted(p for p in home.iterdir() if p.is_dir() and p.name != "d
         else POLICY["parent"]["step"] + int(extra),
         alpha=result["alpha"], score=100 * result["score"], search=100 * result["search_score"],
         gain=100 * doc["mean_gain"], quality=100 * fmean(r["quality"] for r in rows.values()),
+        effect=100 * fmean(r["effect"] for r in rows.values()), holds=holds,
         drawn=100 * fmean(1 - min(1.0, max(0.0, r["broken"] - r["off_broken"]) / 0.30) for r in rows.values()),
         one_figure=100 * fmean(r["one_figure"] for r in rows.values()),
+        figure=100 * fmean(r["figure"] for r in rows.values()),
+        recolored=100 * fmean(r["recolored"] for r in rows.values()), kept=100 * kept,
         same_person=100 * fmean(r["same_person"] for r in rows.values()),
         repeat=100 * fmean(p["repeat"] for p in doc["pairs"]), working=working,
         structure=structure and {k: structure[k] for k in ("passed", "failed", "unresolved", "checks")},
@@ -90,16 +112,18 @@ entries.sort(key=lambda e: -e["score"])
 old_order = sorted((e for e in entries if e["previous_score"] is not None), key=lambda e: -e["previous_score"])
 names = [c.title() for c in ranking]
 lines = ['<tr class="ref"><td>—</td><th scope="row">Matched baseline</th><td>—</td><td>OFF</td><td><div class="images">'
-         + "".join(cell(cases[c]["off"], n) for c, n in zip(ranking, names)) + '</div></td><td colspan="13"></td></tr>']
+         + "".join(cell(cases[c]["off"], n) for c, n in zip(ranking, names)) + '</div></td><td colspan="18"></td></tr>']
 for rank, e in enumerate(entries, 1):
     label = LABELS[e["arm"]] + (f" · +{e['extra']}" if e["extra"] else "")
     images = "".join(
         cell(e["rows"][c]["on"],
-             f'{n} · case {100 * e["rows"][c]["case"]:.0f} · boss {100 * e["rows"][c]["boss"]:.0f} · quality '
-             f'{100 * e["rows"][c]["quality"]:.0f} · one figure {100 * e["rows"][c]["one_figure"]:.0f} · same person '
+             f'{n} · case {100 * e["rows"][c]["case"]:.0f} · effect {100 * e["rows"][c]["effect"]:.0f} (boss '
+             f'{100 * e["rows"][c]["boss"]:.0f}) · quality '
+             f'{100 * e["rows"][c]["quality"]:.0f} · whole figure {100 * e["rows"][c]["figure"]:.0f} · one figure '
+             f'{100 * e["rows"][c]["one_figure"]:.0f} · recolored {100 * e["rows"][c]["recolored"]:.0f} · same person '
              f'{100 * e["rows"][c]["same_person"]:.0f}',
              "bad" if e["rows"][c]["quality"] < 0.25 or failed(e, c)
-             else "ok" if e["rows"][c]["quality"] >= 0.5 and e["rows"][c]["boss"] >= 0.5 else "unsure")
+             else "ok" if e["rows"][c]["quality"] >= 0.5 and e["rows"][c]["effect"] >= 0.5 else "unsure")
         for c, n in zip(ranking, names))
     was = old_order.index(e) + 1 if e in old_order else "—"
     st = e["structure"]
@@ -108,31 +132,31 @@ for rank, e in enumerate(entries, 1):
     before = "—" if e["previous_score"] is None else f'{e["previous_score"]:.2f} at α {e["previous_alpha"]:g}'
     lines.append(
         f'<tr data-score="{e["score"]}" data-working="{e["working"] * 1000 + e["quality"]}" data-gain="{e["gain"]}" '
-        f'data-quality="{e["quality"]}"><td>{rank}</td><th scope="row">{escape(label)}</th><td>{e["updates"]}</td>'
+        f'data-quality="{e["quality"]}" data-kept="{e["kept"]}"><td>{rank}</td><th scope="row">{escape(label)}</th><td>{e["updates"]}</td>'
         f'<td>{e["alpha"]:g}</td><td><div class="images">{images}</div></td><td><b>{e["score"]:.2f}</b></td>'
-        f'<td>{e["working"]} of 8</td><td>{gate}</td><td>{e["gain"]:+.1f}</td><td>{e["quality"]:.0f}</td><td>{e["drawn"]:.0f}</td>'
-        f'<td>{e["one_figure"]:.0f}</td><td>{e["repeat"]:.0f}</td><td>{e["same_person"]:.0f}</td>'
+        f'<td>{e["working"]} of 8</td><td>{gate}</td><td>{e["effect"]:.0f}</td><td>{e["holds"]:g}</td><td>{e["gain"]:+.1f}</td><td>{e["quality"]:.0f}</td><td>{e["drawn"]:.0f}</td>'
+        f'<td>{e["figure"]:.0f}</td><td>{e["one_figure"]:.0f}</td><td>{e["repeat"]:.0f}</td><td>{e["recolored"]:.0f}</td><td>{e["kept"]:.2f}</td><td>{e["same_person"]:.0f}</td>'
         f'<td>{e["search"]:.2f}</td><td>{len(e["trials"])}</td><td>{before}</td><td>{was}</td></tr>')
 note = f"<p><b>Still running:</b> {escape(', '.join(pending))}.</p>" if pending else ""
 shutil.copyfile(PARENT_STUDY / "sample-gallery/gallery.css", gallery / "gallery.css")
 page = f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Final Boss post-training · working Boss score</title><link rel="stylesheet" href="gallery.css"><style>
+<title>Final Boss post-training · a boss that is not broken</title><link rel="stylesheet" href="gallery.css"><style>
 main,header{{max-width:1540px}}.scroll{{overflow:auto;border:1px solid #41434a;border-radius:7px;margin-top:14px}}
 .scroll table{{margin:0;width:100%;font-size:14px;border-collapse:collapse}}.scroll td,.scroll th{{padding:6px 8px;text-align:left}}
 .scroll thead{{background:#292b30}}.scroll th[scope=row]{{min-width:170px;max-width:300px}}.images{{display:flex;gap:4px;width:max-content}}
 .images a,.images img{{display:block}}.images img{{width:58px;height:58px;object-fit:cover;border-radius:3px}}
 .images a.ok img{{outline:3px solid #6fd08c;outline-offset:-3px}}.images a.bad img{{outline:3px solid #ff5d5d;outline-offset:-3px}}
 .images a.unsure img{{outline:2px dashed #e0b84c;outline-offset:-2px}}.scroll tr:hover{{background:#242529}}.scroll .ref{{background:#202328}}
-</style></head><body><header><a href="post-training-leaderboard.html">Earlier board, current distinct Boss score</a><nav><a href="alpha-review.html">Per-strength review</a><a href="working-results.json">Scores and provenance</a></nav></header><main>
-<h1>Final Boss post-training · working Boss score</h1>
-<p>Every RAW had its constant alpha chosen again by the working Boss score on the four search characters, and was then ranked on the eight held-out characters at that alpha. The score keeps the distinct Boss effect term, the Boss gain times Boss distinction cubed with the same discount for repeated designs. It replaces the damage term with quality: how cleanly the image is drawn, read by Mercury Decide on four 256-pixel tiles at native resolution against the same character's OFF image, and limited by whether there is exactly one figure. Looking like the original person is shown and not scored.</p>
-<p>A green outline marks a working image, with quality and Boss distinction both 50 or more. Red is quality under 25 or a failed structural check. The structural check is the existing pass or fail gate, read at the new alpha and reported beside the score. A failure keeps a RAW out of release whatever it scores. Hover an image for its readings.</p>{note}
-<p><label>Order by <select id="metric"><option value="score">Working Boss score</option><option value="working">Working images</option><option value="gain">Boss gain</option><option value="quality">Quality</option></select></label></p>
-<div class="scroll"><table><thead><tr><th>Rank</th><th>Approach</th><th>Updates</th><th>Constant α</th><th>Eight held-out characters</th><th>Working Boss / 100</th><th>Working</th><th>Structural check</th><th>Boss gain</th><th>Quality</th><th>Drawn</th><th>One figure</th><th>Repeat</th><th>Same person, not scored</th><th>Search score</th><th>Trials</th><th>Distinct Boss before</th><th>Rank before</th></tr></thead><tbody>{"".join(lines)}</tbody></table></div>
+</style></head><body><header><a href="post-training-leaderboard.html">Earlier board, current distinct Boss score</a><nav><a href="working-leaderboard-v1.html">Before the whole-figure term</a><a href="alpha-review.html">Per-strength review</a><a href="working-results.json">Scores and provenance</a></nav></header><main>
+<h1>Final Boss post-training · a boss that is not broken</h1>
+<p>Switched on, the slider should give a final boss that is not broken. A wilder boss is the user's choice of a higher strength. Each image scores effect times quality. Effect rises from 0 for an ordinary character to 1 once the character reads as a distinctive endgame antagonist, and does not grow past that. Quality is how cleanly the image is drawn, read by Mercury Decide on four 256-pixel tiles at native resolution against the same character's OFF image, limited by two whole-image readings: exactly one figure, and a head on a body. Repeated designs across characters are discounted as before. Every RAW had its constant alpha chosen by this score on the four search characters, with ties to the lower alpha, and was then ranked on the eight held-out characters. Looking like the original person and recoloring the whole scene are shown and not scored.</p>
+<p>A green outline marks a working image, with effect and quality both 50 or more. Red is quality under 25 or a failed structural check. The structural check is the existing pass or fail gate, read at the new alpha and reported beside the score. A failure keeps a RAW out of release whatever it scores. Hover an image for its readings.</p>{note}
+<p><label>Order by <select id="metric"><option value="score">Working Boss score</option><option value="kept">Working Boss score if a recolored scene counted</option><option value="working">Working images</option><option value="gain">Boss gain</option><option value="quality">Quality</option></select></label></p>
+<div class="scroll"><table><thead><tr><th>Rank</th><th>Approach</th><th>Updates</th><th>Constant α</th><th>Eight held-out characters</th><th>Working Boss / 100</th><th>Working</th><th>Structural check</th><th>Is a boss</th><th>Quality holds to α</th><th>Boss gain</th><th>Quality</th><th>Drawn</th><th>Whole figure</th><th>One figure</th><th>Repeat</th><th>Scene recolored, not scored</th><th>Score if recolor counted</th><th>Same person, not scored</th><th>Search score</th><th>Trials</th><th>Distinct Boss before</th><th>Rank before</th></tr></thead><tbody>{"".join(lines)}</tbody></table></div>
 </main><script>
 (()=>{{const body=document.querySelector('tbody'),rows=[...body.querySelectorAll('[data-score]')],pick=document.querySelector('#metric');
 function refresh(){{const key=pick.value;[...rows].sort((a,b)=>Number(b.dataset[key])-Number(a.dataset[key])).forEach((r,i)=>{{body.append(r);r.firstChild.textContent=i+1}})}}
-const wanted=new URLSearchParams(location.search).get('metric');if(['score','working','gain','quality'].includes(wanted))pick.value=wanted;
+const wanted=new URLSearchParams(location.search).get('metric');if(['score','kept','working','gain','quality'].includes(wanted))pick.value=wanted;
 pick.addEventListener('change',refresh);refresh()}})();</script></body></html>"""
 (gallery / "working-leaderboard.html").write_text(page)
 for e in entries:
@@ -142,6 +166,6 @@ print(f'{"rank":>4} {"was":>4}  {"row":<20}{"α":>9}{"was α":>9}{"score":>8}{"w
 for rank, e in enumerate(entries, 1):
     was = old_order.index(e) + 1 if e in old_order else 0
     print(f'{rank:>4} {was:>4}  {e["name"]:<20}{e["alpha"]:>9.4g}{(e["previous_alpha"] or 0):>9.4g}{e["score"]:>8.2f}'
-          f'{e["working"]:>7}/8{e["gain"]:>7.1f}{e["quality"]:>9.0f}{e["repeat"]:>8.0f}  '
+          f'{e["working"]:>7}/8{e["gain"]:>7.1f}{e["quality"]:>9.0f}{e["repeat"]:>8.0f}  recolor {e["recolored"]:>3.0f} kept {e["kept"]:>6.2f}  '
           + ("—" if not e["structure"] else f'{e["structure"]["passed"]}p {e["structure"]["failed"]}f {e["structure"]["unresolved"]}u'))
 print("pending:", pending)
