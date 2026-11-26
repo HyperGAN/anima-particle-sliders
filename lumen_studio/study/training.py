@@ -12,7 +12,7 @@ from lumen_studio_scoped import open_training, open_inference
 from lumen_studio_scoped.training import Checkpoint, file_pin
 from ..contracts import atomic_json, digest
 from .outputs import Unmeasured, read
-from .objectives import DISTINCT_BOSS, MATCHED_GAIN, protocol_id, selection_score
+from .objectives import BOUND, MATCHED_GAIN, bound_protocol, selection_score
 from .scalar_search import search_constant, verify_search
 
 
@@ -130,18 +130,25 @@ def train(
     schedule_horizon=None,
     always_check_rates=False,
     observation_steps=(),
+    parent=None,
+    seed=1,
+    parent_full=None,
 ):
-    """A 1/4-horizon LR screen can be continued from exactly the committed FULL."""
+    """A 1/4-horizon LR screen can be continued from exactly the committed FULL.
+
+    With ``parent``, the first entry forks that trained RAW into a separate cohort
+    and the budget counts the additional updates. Later entries resume the child.
+    """
     arm = arm_path(outputs.root, rates)
     arm.mkdir(parents=True, exist_ok=True)
     with (arm / "writer.lock").open("a+") as lock:
         fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
         return _train(outputs, cache, panels, rates, budget, phase, schedule_horizon,
-                      always_check_rates, observation_steps)
+                      always_check_rates, observation_steps, parent, seed, parent_full)
 
 
 def _train(outputs, cache, panels, rates, budget, phase, schedule_horizon,
-           always_check_rates, observation_steps):
+           always_check_rates, observation_steps, parent=None, seed=1, parent_full=None):
     rt = outputs.runtime
     dest = arm_path(outputs.root, rates)
     cursor = dest / "cursor.json"
@@ -243,12 +250,17 @@ def _train(outputs, cache, panels, rates, budget, phase, schedule_horizon,
         cache,
         directory,
         variation,
-        mode="resume" if previous else "fresh",
+        mode="resume" if previous else "fork" if parent else "fresh",
         cohort_id="anima-study-"
-        + digest(dict(rates=rates, cache=cache.index["fingerprint"])),
+        + digest(dict(rates=rates, cache=cache.index["fingerprint"],
+                      **(dict(parent=parent.sha256) if parent else {}),
+                      **(dict(seed=seed) if seed != 1 else {}),
+                      **(dict(critic=parent_full.sha256) if parent_full else {}))),
         resume=Checkpoint(**previous["full"]) if previous else None,
+        fork=None if previous else parent,
+        **(dict(critic_from=parent_full) if parent_full and not previous else {}),
         preset="empf",
-        seed=1,
+        seed=seed,
         batch_size=2,
         total_steps=schedule_horizon or budget,
         critic_width=32,
@@ -528,7 +540,7 @@ def calibrate_constant(outputs, panels, variation, raw, *, screened=False, owner
         selected = dict(selected, selection_status=selected["status"], rate_panel=panel, status=panel["status"])
         measured[alpha] = selected
         atomic_json(receipt, list(measured.values()))
-    reservation = dict(objective=objective, protocol=protocol_id() if objective == DISTINCT_BOSS else None,
+    reservation = dict(objective=objective, protocol=bound_protocol(objective),
                        raw_sha256=raw.sha256, cases_sha256=digest(panels["steps"]),
                        trials=[[a, value] for a, value in trials.items()], alpha=alpha)
     bound = receipt.with_name(receipt.stem + "-reservation.json")
@@ -542,7 +554,7 @@ def validate_calibration(root, strength, cases, outputs):
     """Refuse a held-out render when its scalar was selected with another metric or RAW."""
     objective = outputs.objective
     proof = read(root / "strengths-reservation.json")
-    policy = dict(objective=objective, protocol=protocol_id() if objective == DISTINCT_BOSS else None,
+    policy = dict(objective=objective, protocol=bound_protocol(objective),
                   raw_sha256=strength["raw"]["sha256"], cases_sha256=digest(cases))
     if any(proof.get(key) != value for key, value in policy.items()):
         raise ValueError("Reserved alpha does not belong to this study objective, RAW and panel")
@@ -553,7 +565,7 @@ def validate_calibration(root, strength, cases, outputs):
                 or trial["gains"] != [alpha] * 10 or [p["case"] for p in trial["pairs"]] != cases):
             raise ValueError("Scalar search contains different weights, intervals or cases")
         value = selection_score(trial, objective)
-        if objective == DISTINCT_BOSS and selection_score(outputs.with_objective(trial), objective) != value:
+        if objective in BOUND and selection_score(outputs.with_objective(trial), objective) != value:
             raise ValueError("Stored trial score differs from its bound design observations")
         record.append([alpha, value])
     if record != proof["trials"] or proof["alpha"] != strength["alpha"]:

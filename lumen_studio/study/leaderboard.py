@@ -4,12 +4,12 @@ import os
 from pathlib import Path
 from urllib.parse import quote
 from .outputs import read
-from .objectives import DISTINCT_BOSS, selection_score
+from .objectives import BOUND, selection_score
 
 
 def gallery(root, outcome, *, reference=None):
     best = outcome["strength"]
-    design = best.get("objective") == DISTINCT_BOSS
+    design = best.get("objective") in BOUND
     label = "Distinct Boss score" if design else "Mean matched gain"
     scalar_run = (root / "training-selection.json").exists()
     lines = [
@@ -43,7 +43,7 @@ def gallery(root, outcome, *, reference=None):
             status = read(check)["status"] if check.exists() and row["status"] == "pass" else row["status"]
             if (arm / "failure.json").exists():
                 status = "candidate stopped"
-            gain = None if design and row.get("objective") != DISTINCT_BOSS else selection_score(row)
+            gain = None if design and row.get("objective") != best.get("objective") else selection_score(row)
             selected = " · selected" if row["raw"] == best["raw"] else ""
             text = (f"| [{path.stem}]({path.relative_to(root).as_posix()}){selected} "
                     f"| {rates['g']:g} | {rates['d']:g} | {rates['particle']:g} "
@@ -96,7 +96,7 @@ def gallery(root, outcome, *, reference=None):
         )
     if reference is not None:
         lines.extend(["", f"## Published {outcome['vibe']} comparison", "", "This run is a study candidate."])
-        if reference["status"] == "matched" and reference.get("objective") == DISTINCT_BOSS:
+        if reference["status"] == "matched" and reference.get("objective") in BOUND:
             lines.append(f"On the same cases the reference scored {reference['reference_score']:.4f} and this candidate scored {reference['trial_score']:.4f} on distinct Boss design.")
         elif reference["status"] == "matched":
             lines.append(f"On the same prompts, seeds and OFF images, {reference['reference']} gained "

@@ -134,3 +134,162 @@ def prepare_boss_targets(runtime, source, destination, recipe_path):
         )
         staged.rename(destination)
     return TargetCache(destination, verify=True)
+
+
+@torch.no_grad()
+def teacher_records(runtime, neutral, positive, seed, *, resolution=512):
+    """Both frozen teachers at every state of both native trajectories for one scene."""
+    records, first = [], None
+    initial = runtime.noise(seed, resolution, resolution)
+    for trajectory in ("neutral", "positive"):
+        latent = initial.clone()
+        scheduler = runtime.scheduler(10)
+        for index, timestep in enumerate(scheduler.timesteps):
+            if trajectory == "positive" and index == 0:
+                vn, vp = first
+            else:
+                vn = runtime.predict(latent, timestep, neutral)
+                vp = runtime.predict(latent, timestep, positive)
+            if first is None:
+                first = vn, vp
+            records.append(
+                dict(
+                    position=index,
+                    timestep=float(timestep),
+                    trajectory=trajectory,
+                    latent=latent.cpu().clone(),
+                    neutral=vn.cpu(),
+                    positive=vp.cpu(),
+                )
+            )
+            latent = runtime.step(
+                scheduler, vn if trajectory == "neutral" else vp, timestep, latent
+            )
+    return records
+
+
+@torch.no_grad()
+def replace_boss_teachers(runtime, parent, destination, replacements):
+    """Derive a late-cues cache in which chosen scenes learn from another Boss teacher.
+
+    ``replacements`` maps a scene id to its new ``positive`` prompt, ``explicit`` cue
+    prompt and the selected teacher image record ``selected``. The neutral prompt,
+    seed, foreground matte, row order and field recipe stay those of the parent, so
+    both caches expose every scene equally. Each unchanged scene is regenerated
+    through the same code and must equal the parent tensors before anything is written.
+    """
+    identity = parent.index["identity"]
+    recipe = json.loads(json.dumps(identity["field_recipe"]))
+    scenes = [shard["row"] for shard in parent.index["shards"]]
+    if (
+        identity["layout"] != "final-boss/late-cues-v1"
+        or identity["model"] != runtime.identity
+        or not replacements
+        or not set(replacements) < set(scenes)
+        or len(set(scenes)) != len(scenes)
+    ):
+        raise ValueError(
+            "Replace some, not all, scenes of a late-cues cache for this runtime"
+        )
+    loaded, changed = {}, {}
+    for shard in parent.index["shards"]:
+        data = torch.load(
+            parent.directory / shard["path"], map_location="cpu", weights_only=True
+        )
+        loaded[shard["row"]] = data
+        new = replacements.get(shard["row"])
+        if new is None:
+            continue
+        row = data["row"]
+        previous = row["selection"]["positive"]
+        entry = recipe["rows"].pop(previous["output"]["sha256"])
+        selected = new["selected"]
+        if (
+            selected["output"]["prompt"] != new["positive"]
+            or selected["output"]["seed"] != shard["seed"]
+            or file_hash(selected["output"]["path"]) != selected["output"]["sha256"]
+            or selected["output"]["sha256"] in recipe["rows"]
+        ):
+            raise ValueError(f"Replacement teacher image differs for {shard['row']}")
+        recipe["rows"][selected["output"]["sha256"]] = dict(entry, explicit=new["explicit"])
+        data["row"] = dict(
+            row,
+            positive=new["positive"],
+            selection=dict(row["selection"], positive=selected, replaced=previous),
+        )
+        changed[shard["row"]] = dict(
+            previous=previous["output"]["sha256"], positive=selected["output"]["sha256"]
+        )
+    new_identity = dict(
+        identity,
+        field_recipe=recipe,
+        teacher_replacement=dict(
+            schema="final-boss-teacher-replacement-v1",
+            parent_cache=parent.index["fingerprint"],
+            rows=changed,
+        ),
+    )
+    fingerprint = digest(new_identity)
+    if destination.exists():
+        cache = TargetCache(destination, verify=True)
+        if cache.index["identity"] != new_identity:
+            raise ValueError("Existing replacement targets differ from this selection")
+        return cache
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    with TemporaryDirectory(dir=destination.parent) as tmp, runtime.mixer.scales({}):
+        staged = Path(tmp) / "targets"
+        staged.mkdir()
+        shards = []
+        for shard in parent.index["shards"]:
+            data = loaded[shard["row"]]
+            row = data["row"]
+            entry = recipe["rows"][row["selection"]["positive"]["output"]["sha256"]]
+            (staged / entry["matte"]).write_bytes(
+                (parent.directory / entry["matte"]).read_bytes()
+            )
+            positive = runtime.encode(row["positive"])
+            records = teacher_records(
+                runtime, data["embedding"].to(runtime.device), positive, shard["seed"]
+            )
+            context = field_context(
+                runtime, recipe, staged, row, records[0]["latent"].shape[-2:]
+            )
+            for record in records:
+                record["positive"] = target_field(
+                    runtime,
+                    record,
+                    record["neutral"].to(runtime.device),
+                    record["positive"].to(runtime.device),
+                    context,
+                ).cpu()
+            if shard["row"] in changed:
+                # The neutral trajectory and its base velocity belong to the scene.
+                for new, old in zip(records[:10], data["records"][:10], strict=True):
+                    if not all(torch.equal(new[k], old[k]) for k in ("latent", "neutral")):
+                        raise ValueError("Neutral trajectory was not reproduced")
+                data["records"] = records
+                data["positive_embedding"] = positive.cpu()
+            else:
+                for new, old in zip(records, data["records"], strict=True):
+                    if new.keys() != old.keys() or not all(
+                        torch.equal(new[k], old[k]) if torch.is_tensor(old[k]) else new[k] == old[k]
+                        for k in old
+                    ):
+                        raise ValueError(
+                            f"Unchanged scene {shard['row']} was not reproduced exactly"
+                        )
+            data["fingerprint"] = fingerprint
+            output = staged / shard["path"]
+            save_tensor_file(output, data)
+            shards.append(dict(shard, sha256=file_hash(output)))
+        atomic_json(
+            staged / "index.json",
+            dict(
+                identity=new_identity,
+                input_fingerprint=fingerprint,
+                shards=shards,
+                fingerprint=digest(dict(input=fingerprint, shards=shards)),
+            ),
+        )
+        staged.rename(destination)
+    return TargetCache(destination, verify=True)

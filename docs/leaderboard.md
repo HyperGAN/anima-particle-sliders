@@ -1,5 +1,7 @@
 # Anima slider leaderboard
 
+New Final Boss measurements use the working Boss score: switched on, the slider should give a final boss that is not broken. [Definition and the first board ranked by it](post-training/README.md#what-on-should-mean) The boards on this page were measured with the earlier distinct Boss score and are kept as recorded.
+
 ## Constant-alpha retest of the trained recipes
 
 Each recipe gets its own adaptive scalar search on a frozen RAW. All ten Euler steps use that number. The PG 0.12.0 replay checks reproduced all 192 archived benchmark PNGs from the 24 completed PG 0.11.1 Vibe12 recipes. The board also identifies the newer PG 0.12.0 training runs, stopped arms and short controls.

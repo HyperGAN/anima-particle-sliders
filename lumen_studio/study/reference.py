@@ -7,7 +7,7 @@ from particle_sliders.alpha_tune_jev import JEV_MODEL
 
 from ..contracts import digest
 from .outputs import read
-from .objectives import DISTINCT_BOSS, protocol_id, selection_score
+from .objectives import BOUND, DISTINCT_BOSS, protocol_id, selection_score
 
 
 CONFIGS = Path(__file__).resolve().parents[2] / "configs/anima"
@@ -32,7 +32,8 @@ def compare_reference(concept, confirmation, rubric):
     expected = {
         (r["prompt_sha256"], r["seed"], r["off_sha256"]): r for r in reference["cases"]
     }
-    design = confirmation.get("objective") == DISTINCT_BOSS
+    objective = confirmation.get("objective")
+    design = objective in BOUND
     rows = []
     for pair in confirmation["pairs"]:
         case = pair["case"]
@@ -62,13 +63,14 @@ def compare_reference(concept, confirmation, rubric):
     trial = fmean(gains) if None not in gains else None
     trial_value, reference_value = trial, baseline
     if design:
-        pinned = reference.get("distinct_boss", {})
-        if not (pinned.get("protocol") == confirmation.get("design_protocol") == protocol_id()):
+        # A reference is comparable only where it was measured with the same registered objective.
+        pinned = reference.get("distinct_boss" if objective == DISTINCT_BOSS else objective, {})
+        if not (pinned.get("protocol") == confirmation.get("design_protocol") == protocol_id(objective)):
             return report
         reference_value, trial_value = pinned["score"], selection_score(confirmation)
         if reference_value is None or trial_value is None:
             return report
-        report.update(objective=DISTINCT_BOSS, reference_score=reference_value, trial_score=trial_value)
+        report.update(objective=objective, reference_score=reference_value, trial_score=trial_value)
     decision = "retain_reference"
     if confirmation.get("status") == "pass" and trial_value > reference_value:
         decision = "exceeds_reference"
