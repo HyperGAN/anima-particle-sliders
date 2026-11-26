@@ -170,6 +170,33 @@
     "portraits-original-strong-fresh": {
       "entry": "fresh",
       "targets": "portraits-original-strong"
+    },
+    "portraits-original-quiet-strong-warm": {
+      "entry": "fork",
+      "targets": "portraits-original-quiet-strong",
+      "critic": "parent"
+    },
+    "portraits-original-quiet-strong-fresh": {
+      "entry": "fresh",
+      "targets": "portraits-original-quiet-strong"
+    },
+    "portraits2-original-fresh": {
+      "entry": "fresh",
+      "targets": "portraits2-original"
+    },
+    "portraits2-original-warm": {
+      "entry": "fork",
+      "targets": "portraits2-original",
+      "critic": "parent"
+    },
+    "portraits2-original-quiet-strong-fresh": {
+      "entry": "fresh",
+      "targets": "portraits2-original-quiet-strong"
+    },
+    "portraits2-original-quiet-strong-warm": {
+      "entry": "fork",
+      "targets": "portraits2-original-quiet-strong",
+      "critic": "parent"
     }
   },
   "teachers": {
@@ -251,6 +278,23 @@
       "dose": 1.4,
       "parent": "portraits-original",
       "text": "the parent's teachers plus the portrait scenes, with the whole edit 1.4 times as strong"
+    },
+    "portraits-original-quiet-strong": {
+      "background": 0.0,
+      "dose": 1.4,
+      "parent": "portraits-original",
+      "text": "the parent's teachers plus the portrait scenes, clean background, character edit 1.4 times as strong"
+    },
+    "portraits2-original": {
+      "parent": "original",
+      "scenes": "portrait_scenes_2.json",
+      "text": "as portraits-original, after a second round of proposals for the six portrait scenes whose teacher read least like a boss"
+    },
+    "portraits2-original-quiet-strong": {
+      "background": 0.0,
+      "dose": 1.4,
+      "parent": "portraits2-original",
+      "text": "portraits2-original with the clean background and the character's edit 1.4 times as strong"
     }
   }
 }
