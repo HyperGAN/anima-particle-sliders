@@ -42,26 +42,13 @@ def figure(off, on):
     return judge._decide((image(off), image(on)), paired_questions.STATE, paired_questions.QUESTIONS)
 
 
-RECOLOR_STATE = "Image 1 is the original illustration. Image 2 is an edit meant to redesign only the central character."
-RECOLOR = {
-    "recolored": {
-        "type": "noul",
-        "instructions": (
-            "Compared with image 1, has the edit recolored the surroundings as well as the character, so that "
-            "the walls, floor, sky or light took on one new color cast such as red or purple? Answer near zero "
-            "when the surroundings keep the colors and lighting of image 1."
-        ),
-    }
-}
-
-
 def whole(on):
     answer = judge._decide((image(on),), ws.FIGURE_STATE, ws.FIGURE_QUESTIONS)
     return None if answer is None else answer["figure"]
 
 
 def recolored(off, on):
-    answer = judge._decide((image(off), image(on)), RECOLOR_STATE, RECOLOR)
+    answer = judge._decide((image(off), image(on)), ws.RECOLOR_STATE, ws.RECOLOR_QUESTIONS)
     return None if answer is None else answer["recolored"]
 
 
@@ -89,8 +76,11 @@ def post_training(name):
 
 def search(rt, name, pool):
     base, raw, step, trained_on, out = source(name)
-    if (out / "result.json").exists() and read(out / "result.json")["version"] == ws.VERSION:
-        return read(out / "result.json")
+    if (out / "result.json").exists():
+        saved = read(out / "result.json")
+        # A ranking with an unanswered reading is tried again rather than kept.
+        if saved["version"] == ws.VERSION and saved.get("score") is not None:
+            return saved
     out.mkdir(parents=True, exist_ok=True)
     outputs = Outputs(out, rt, "Final Boss", {})
     adapter = ParticleAdapter(rt.transformer).to(rt.device)
@@ -105,15 +95,16 @@ def search(rt, name, pool):
             if path.exists():
                 # Readings are kept. The score is recomputed, so a new formula needs no new judging.
                 doc = read(path)
+                tints = {c: pool.submit(recolored, cases[c]["off"], row["on"])
+                         for c, row in doc["rows"].items() if row.get("recolored") is None}
+                for c, job in tints.items():
+                    doc["rows"][c]["recolored"] = job.result()
                 for row in doc["rows"].values():
                     row["quality"] = ws.quality(row["broken"], row["off_broken"], row["one_figure"], row["figure"])
-                    row["case"] = ws.score_case(row["boss"], row["original"], row["quality"])
-                if phase == "ranking" and any("recolored" not in row for row in doc["rows"].values()):
-                    tints = {c: pool.submit(recolored, cases[c]["off"], row["on"]) for c, row in doc["rows"].items()}
-                    for c, job in tints.items():
-                        doc["rows"][c]["recolored"] = job.result()
+                    row["case"] = ws.score_case(row["boss"], row["original"], row["quality"], row["recolored"])
                 doc["score"] = ws.working_score({c: r["case"] for c, r in doc["rows"].items()}, doc["pairs"])
-                atomic_json(path, doc)
+                if doc["score"] is not None:
+                    atomic_json(path, doc)
                 return doc
             names = cfg["panels"][phase]
             earlier = base / phase / (alpha.hex() + ".json")
@@ -141,7 +132,7 @@ def search(rt, name, pool):
                             pool.submit(reader.broken, cases[c]["off"]["path"]),
                             pool.submit(figure, cases[c]["off"], rows[c]["on"]),
                             pool.submit(whole, rows[c]["on"]),
-                            pool.submit(recolored, cases[c]["off"], rows[c]["on"]) if phase == "ranking" else None)
+                            pool.submit(recolored, cases[c]["off"], rows[c]["on"]))
                         for c in names}
             for c, (broken, floor, answer, body, tint) in readings.items():
                 a = answer.result()
@@ -149,11 +140,9 @@ def search(rt, name, pool):
                 row.update(broken=broken.result(), off_broken=floor.result(),
                            one_figure=a and a["one_figure"], same_person=a and a["same_person"])
                 row["figure"] = body.result()
-                if tint is not None:
-                    # Shown beside the score. It does not choose the alpha.
-                    row["recolored"] = tint.result()
+                row["recolored"] = tint.result()
                 row["quality"] = ws.quality(row["broken"], row["off_broken"], row["one_figure"], row["figure"])
-                row["case"] = ws.score_case(row["boss"], row["original"], row["quality"])
+                row["case"] = ws.score_case(row["boss"], row["original"], row["quality"], row["recolored"])
             complete = all(p is not None for p in pairs)
             score = ws.working_score({c: r["case"] for c, r in rows.items()}, pairs) if complete else None
             gains = [r["boss"] - r["original"] for r in rows.values() if None not in (r["boss"], r["original"])]

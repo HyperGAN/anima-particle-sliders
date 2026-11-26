@@ -305,13 +305,15 @@ def test_final_boss_default_scores_a_boss_that_is_not_broken(tmp_path):
              for i in range(2)]
 
     class Judge:
-        boss, one_figure, figure, repeat = 0.9, 1.0, 1.0, 0.0
+        boss, one_figure, figure, repeat, recolored = 0.9, 1.0, 1.0, 0.0, 0.0
 
         def _decide(self, images, state, questions):
             if "repeat" in questions:
                 return {"repeat": self.repeat}
             if "figure" in questions:
                 return {"figure": self.figure}
+            if "recolored" in questions:
+                return {"recolored": self.recolored}
             if "one_figure" in questions:
                 return {"one_figure": self.one_figure, "same_person": 0.0, "same_scene": 0.0}
             same = images[0].identity() == images[1].identity()
@@ -344,7 +346,9 @@ def test_final_boss_default_scores_a_boss_that_is_not_broken(tmp_path):
     assert measure() == pytest.approx(0.1)  # Nor does a clean drawing of a headless robe.
     judge.figure, judge.one_figure = 1.0, 0.0
     assert measure() == 0
-    judge.one_figure, judge.repeat = 1.0, 1.0
+    judge.one_figure, judge.recolored = 1.0, 0.4
+    assert measure() == pytest.approx(0.6)  # A recolored scene counts against the image.
+    judge.recolored, judge.repeat = 0.0, 1.0
     assert measure() == pytest.approx(0.5)  # One design on both characters counts once.
     reader.broken_on = None
     assert measure() is None

@@ -91,7 +91,7 @@ for directory in sorted(folders):
         updates = result["step"] if arm in ("parent", "continued") else POLICY["parent"]["step"] + int(extra)
     for r in rows.values():
         r["effect"] = ws.effect(r["boss"], r["original"])
-    working = sum(r["quality"] >= 0.5 and r["effect"] >= 0.5 for r in rows.values())
+    working = sum(r["quality"] >= 0.5 and r["effect"] >= 0.5 and r["recolored"] < 0.5 for r in rows.values())
     # How much further the strength can be raised before the search characters stop holding together.
     ladder = []
     for path in (directory / "search").glob("*.json"):
@@ -104,8 +104,9 @@ for directory in sorted(folders):
             if value < 0.5:
                 break
             holds = alpha
-    # The same score if a recolored scene counted against each image. It did not choose the alpha.
-    kept = summarize({c: r["case"] * (1 - r["recolored"]) for c, r in rows.items()}, doc["pairs"])["score"]
+    # The same readings without the recolor term, for comparison. It did not choose the alpha.
+    kept = summarize({c: ws.effect(r["boss"], r["original"]) * r["quality"] for c, r in rows.items()},
+                     doc["pairs"])["score"]
     structure = read(directory / "structure.json") if (directory / "structure.json").exists() else None
     if structure and structure["alpha"] != result["alpha"]:
         structure = None
@@ -139,7 +140,8 @@ for rank, e in enumerate(entries, 1):
              f'{100 * e["rows"][c]["one_figure"]:.0f} · recolored {100 * e["rows"][c]["recolored"]:.0f} · same person '
              f'{100 * e["rows"][c]["same_person"]:.0f}',
              "bad" if e["rows"][c]["quality"] < 0.25 or failed(e, c)
-             else "ok" if e["rows"][c]["quality"] >= 0.5 and e["rows"][c]["effect"] >= 0.5 else "unsure")
+             else "ok" if e["rows"][c]["quality"] >= 0.5 and e["rows"][c]["effect"] >= 0.5
+             and e["rows"][c]["recolored"] < 0.5 else "unsure")
         for c, n in zip(ranking, names))
     was = old_order.index(e) + 1 if e in old_order else "—"
     st = e["structure"]
@@ -165,10 +167,10 @@ main,header{{max-width:1540px}}.scroll{{overflow:auto;border:1px solid #41434a;b
 .images a.unsure img{{outline:2px dashed #e0b84c;outline-offset:-2px}}.scroll tr:hover{{background:#242529}}.scroll .ref{{background:#202328}}
 </style></head><body><header><a href="post-training-leaderboard.html">Earlier board, distinct Boss score</a><nav><a href="board-leaderboard.html">Every trained recipe</a><a href="working-leaderboard.html">Post-training rows</a><a href="working-leaderboard-v1.html">Before the whole-figure term</a><a href="alpha-review.html">Per-strength review</a><a href="working-results.json">Scores and provenance</a></nav></header><main>
 <h1>{"Every trained Final Boss recipe" if combined else "Final Boss post-training"} · a boss that is not broken</h1>
-<p>Switched on, the slider should give a final boss that is not broken. A wilder boss is the user's choice of a higher strength. Each image scores effect times quality. Effect rises from 0 for an ordinary character to 1 once the character reads as a distinctive endgame antagonist, and does not grow past that. Quality is how cleanly the image is drawn, read by Mercury Decide on four 256-pixel tiles at native resolution against the same character's OFF image, limited by two whole-image readings: exactly one figure, and a head on a body. Repeated designs across characters are discounted as before. Every RAW had its constant alpha chosen by this score on the four search characters, with ties to the lower alpha, and was then ranked on the eight held-out characters. Looking like the original person and recoloring the whole scene are shown and not scored.</p>
-<p>A green outline marks a working image, with effect and quality both 50 or more. Red is quality under 25 or a failed structural check. The structural check is the existing pass or fail gate, read at the new alpha and reported beside the score. A failure keeps a RAW out of release whatever it scores. Hover an image for its readings.</p>{note}
-<p><label>Order by <select id="metric"><option value="score">Working Boss score</option><option value="kept">Working Boss score if a recolored scene counted</option><option value="working">Working images</option><option value="gain">Boss gain</option><option value="quality">Quality</option></select></label></p>
-<div class="scroll"><table><thead><tr><th>Rank</th><th>Approach</th><th>Run</th><th>Updates</th><th>Constant α</th><th>Eight held-out characters</th><th>Working Boss / 100</th><th>Working</th><th>Structural check</th><th>Is a boss</th><th>Quality holds to α</th><th>Boss gain</th><th>Quality</th><th>Drawn</th><th>Whole figure</th><th>One figure</th><th>Repeat</th><th>Scene recolored, not scored</th><th>Score if recolor counted</th><th>Same person, not scored</th><th>Search score</th><th>Trials</th><th>Distinct Boss before</th><th>Rank before</th></tr></thead><tbody>{"".join(lines)}</tbody></table></div>
+<p>Switched on, the slider should give a final boss that is not broken. A wilder boss is the user's choice of a higher strength. Each image scores effect times quality times how much of the original scene's color it kept. Effect rises from 0 for an ordinary character to 1 once the character reads as a distinctive endgame antagonist, and does not grow past that. Quality is how cleanly the image is drawn, read by Mercury Decide on four 256-pixel tiles at native resolution against the same character's OFF image, limited by two whole-image readings: exactly one figure, and a head on a body. Repeated designs across characters are discounted as before. Every RAW had its constant alpha chosen by this score on the four search characters, with ties to the lower alpha, and was then ranked on the eight held-out characters. An edit that washes the surroundings in one new color is marked down by how far it did. Looking like the original person is shown and not scored.</p>
+<p>A green outline marks a working image: effect and quality 50 or more, and the scene less than half recolored. Red is quality under 25 or a failed structural check. The structural check is the existing pass or fail gate, read at the new alpha and reported beside the score. A failure keeps a RAW out of release whatever it scores. Hover an image for its readings.</p>{note}
+<p><label>Order by <select id="metric"><option value="score">Working Boss score</option><option value="kept">Score without the recolor term</option><option value="working">Working images</option><option value="gain">Boss gain</option><option value="quality">Quality</option></select></label></p>
+<div class="scroll"><table><thead><tr><th>Rank</th><th>Approach</th><th>Run</th><th>Updates</th><th>Constant α</th><th>Eight held-out characters</th><th>Working Boss / 100</th><th>Working</th><th>Structural check</th><th>Is a boss</th><th>Quality holds to α</th><th>Boss gain</th><th>Quality</th><th>Drawn</th><th>Whole figure</th><th>One figure</th><th>Repeat</th><th>Scene recolored</th><th>Score without the recolor term</th><th>Same person, not scored</th><th>Search score</th><th>Trials</th><th>Distinct Boss before</th><th>Rank before</th></tr></thead><tbody>{"".join(lines)}</tbody></table></div>
 </main><script>
 (()=>{{const body=document.querySelector('tbody'),rows=[...body.querySelectorAll('[data-score]')],pick=document.querySelector('#metric');
 function refresh(){{const key=pick.value;[...rows].sort((a,b)=>Number(b.dataset[key])-Number(a.dataset[key])).forEach((r,i)=>{{body.append(r);r.firstChild.textContent=i+1}})}}
