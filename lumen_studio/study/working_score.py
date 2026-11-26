@@ -28,6 +28,9 @@ VERSION = "final-boss-working-v1"
 URL = "https://api.nano-gpt.com/api/v1/decisions"
 MODEL = "inception/mercury-decide"
 TILE = 320
+# The reader refuses a larger PNG. An oversized tile is read as four smaller native pieces.
+TILE_BYTES = 170_000
+PIECE = 192
 # Quality falls from one at the OFF image's own reading to zero this far above it.
 SPAN = 0.30
 STATE = "This is an unscaled crop from an anime illustration."
@@ -52,8 +55,14 @@ QUESTIONS = {
 }
 
 
+def _png(picture, box):
+    buffer = BytesIO()
+    picture.crop(box).save(buffer, "PNG", optimize=True)
+    return buffer.getvalue()
+
+
 def tiles(path, size=TILE):
-    """Four overlapping corner crops as PNG bytes. Pixels are never resampled."""
+    """Four overlapping corner crops, each a list of PNG pieces. Pixels are never resampled."""
     with Image.open(path) as source:
         picture = source.convert("RGB")
     width, height = picture.size
@@ -62,9 +71,12 @@ def tiles(path, size=TILE):
     out = []
     for top in (0, height - size):
         for left in (0, width - size):
-            buffer = BytesIO()
-            picture.crop((left, top, left + size, top + size)).save(buffer, "PNG", optimize=True)
-            out.append(buffer.getvalue())
+            whole = _png(picture, (left, top, left + size, top + size))
+            if len(whole) <= TILE_BYTES:
+                out.append([whole])
+                continue
+            out.append([_png(picture, (x, y, x + PIECE, y + PIECE))
+                        for y in (top, top + size - PIECE) for x in (left, left + size - PIECE)])
     return out
 
 
@@ -109,8 +121,10 @@ class DrawingReader:
 
     def broken(self, path):
         """Mean reading over the four tiles; zero is clean and one is fragments."""
-        values = [self.tile(raw) for raw in tiles(path)]
-        return None if None in values else fmean(values)
+        values = [[self.tile(raw) for raw in pieces] for pieces in tiles(path)]
+        if any(None in pieces for pieces in values):
+            return None
+        return fmean(fmean(pieces) for pieces in values)
 
 
 def quality(broken, off_broken, one_figure):

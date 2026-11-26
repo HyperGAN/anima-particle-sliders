@@ -108,13 +108,17 @@ def search(rt, name, pool):
             gains = [r["boss"] - r["original"] for r in rows.values() if None not in (r["boss"], r["original"])]
             doc = dict(alpha=alpha, phase=phase, raw=raw["sha256"], score=score, rows=rows, pairs=pairs,
                        mean_gain=fmean(gains) if len(gains) == len(rows) else None)
-            atomic_json(path, doc)
+            # An unanswered reading is retried by the next run instead of being kept as a result.
+            if score is not None:
+                atomic_json(path, doc)
             print(name, phase, alpha, None if score is None else round(100 * score, 2), flush=True)
             return doc
 
         trials = {float.fromhex(p.stem): None for p in (base / "search").glob("*.json")}
-        for alpha in sorted(trials):
-            trials[alpha] = measure(alpha, "search")["score"]
+        # Saved renders need no GPU, so their strengths are read side by side.
+        with ThreadPoolExecutor(4) as side:
+            for alpha, doc in zip(sorted(trials), side.map(lambda a: measure(a, "search"), sorted(trials))):
+                trials[alpha] = doc["score"]
         for _ in range(2):
             measured = sorted(a for a, v in trials.items() if v is not None)
             if not measured:
@@ -148,7 +152,7 @@ def search(rt, name, pool):
 
 rt = open_runtime()
 try:
-    with ThreadPoolExecutor(8) as pool:
+    with ThreadPoolExecutor(24) as pool:
         for name in sys.argv[1:]:
             result = search(rt, name, pool)
             print("Searched", name, result.get("alpha"), result.get("score"), flush=True)

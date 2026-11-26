@@ -172,13 +172,21 @@ def test_working_score_keeps_boss_ability_and_zeroes_broken_drawings(tmp_path):
 
     picture = Image.effect_noise((512, 512), 80).convert("RGB")
     picture.save(tmp_path / "image.png")
+    # Noise does not compress, so every tile exceeds the reader's limit and is cut into pieces.
     crops = ws.tiles(tmp_path / "image.png")
-    assert len(crops) == 4
-    for raw, (left, top) in zip(crops, ((0, 0), (192, 0), (0, 192), (192, 192)), strict=True):
-        with Image.open(ws.BytesIO(raw)) as tile:
-            # Native pixels: each tile equals the same region of the source.
-            assert tile.size == (320, 320)
-            assert tile.tobytes() == picture.crop((left, top, left + 320, top + 320)).tobytes()
+    assert len(crops) == 4 and all(len(pieces) == 4 for pieces in crops)
+    for pieces, (left, top) in zip(crops, ((0, 0), (192, 0), (0, 192), (192, 192)), strict=True):
+        for raw, (x, y) in zip(pieces, ((0, 0), (128, 0), (0, 128), (128, 128)), strict=True):
+            with Image.open(ws.BytesIO(raw)) as piece:
+                # Native pixels: each piece equals the same region of the source.
+                box = (left + x, top + y, left + x + 192, top + y + 192)
+                assert piece.size == (192, 192) and piece.tobytes() == picture.crop(box).tobytes()
+            assert len(raw) <= ws.TILE_BYTES
+    Image.new("RGB", (512, 512), (20, 30, 40)).save(tmp_path / "flat.png")
+    flat = ws.tiles(tmp_path / "flat.png")
+    assert [len(pieces) for pieces in flat] == [1, 1, 1, 1]
+    with Image.open(ws.BytesIO(flat[3][0])) as tile:
+        assert tile.size == (320, 320)
     with pytest.raises(ValueError):
         Image.new("RGB", (256, 256)).save(tmp_path / "small.png")
         ws.tiles(tmp_path / "small.png")
