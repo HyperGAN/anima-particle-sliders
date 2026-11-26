@@ -21,28 +21,12 @@ from campaign import PARENT_STUDY, POLICY, ROOT
 with contextlib.redirect_stdout(io.StringIO()):
     from working_metric import D, ask, cases, judge, read, root
 
-DRAWING_STATE = "Judge how well this anime illustration is drawn, not what it depicts."
-DRAWING = {
-    "broken_drawing": {
-        "type": "score",
-        "instructions": (
-            "How cleanly is this illustration drawn? A finished drawing has continuous outlines, smooth "
-            "deliberate shading, and a face and body that hold together. A broken drawing shatters into "
-            "jagged shards or facets with no meaning, has stray streaks of color, a smeared, missing or "
-            "mask-like face, or forms that dissolve into abstract fragments. Deliberate designs such as "
-            "spiked armor, crowns and capes are fine when they are cleanly drawn."
-        ),
-        "criteria": [
-            "Cleanly drawn throughout",
-            "Mostly clean with a small jagged or smeared spot",
-            "Noticeable shards, streaks or a face that does not hold together",
-            "Shards, streaks or smears across most of the picture",
-            "Fragments only; nothing is drawn properly",
-        ],
-    }
-}
-# Drawing quality counts from the OFF image's own reading up to this much above it.
-BROKEN_SPAN = 0.25
+from native_tiles import ask as read_tile, tiles  # noqa: E402
+
+DRAWING_MODEL = "inception/mercury-decide"
+# Drawing quality is the worst of four overlapping 320-pixel tiles at native resolution, so
+# nothing is shrunk. It counts from the OFF image's own reading up to this much above it.
+BROKEN_SPAN = 0.40
 integrity = FrameIntegrity(root / "judgments")
 gallery = ROOT / "gallery"
 
@@ -52,8 +36,8 @@ def record(ref):
 
 
 def broken(ref):
-    answer = judge._decide((_Image.read(record(ref)),), DRAWING_STATE, DRAWING)
-    return None if answer is None else answer["broken_drawing"]
+    values = [read_tile(DRAWING_MODEL, tile) for tile in tiles(ref["path"], 2, 320)]
+    return None if None in values else max(values)
 
 
 def structure(ref):
@@ -133,7 +117,7 @@ td,th{{padding:6px 8px;text-align:left;vertical-align:top}}thead{{background:#29
 .grid figcaption{{font-size:.72rem;line-height:1.25}}figure.ok img{{outline:3px solid #6fd08c;outline-offset:-3px}}figure.bad img{{outline:3px solid #ff5d5d;outline-offset:-3px}}figure.unsure img{{outline:2px dashed #e0b84c;outline-offset:-2px}}
 </style></head><body><header><a href="post-training-leaderboard.html">Post-training leaderboard</a></header><main>
 <h1>Choosing alpha by working edits</h1>
-<p>Each row is one constant strength of the same RAW on the four search characters. An edit works as far as its weakest reading: a final-boss design, the same recognizable person, exactly one figure, intact structure, and drawing quality. Structure and drawing are read against the same character's OFF image. Drawing falls from 100 at the OFF reading to 0 at {100 * BROKEN_SPAN:.0f} points above it. Green is 50 or more, red is under 25. The highlighted row has the most working edits.</p>
+<p>Each row is one constant strength of the same RAW on the four search characters. An edit works as far as its weakest reading: a final-boss design, the same recognizable person, exactly one figure, intact structure, and drawing quality. Structure and drawing are read against the same character's OFF image. Drawing is Mercury Decide's reading of the worst of four overlapping 320-pixel tiles at native resolution. It falls from 100 at the OFF reading to 0 at {100 * BROKEN_SPAN:.0f} points above it. Green is 50 or more, red is under 25. The highlighted row has the most working edits.</p>
 {"".join(sections)}</main></body></html>"""
 shutil.copyfile(PARENT_STUDY / "sample-gallery/gallery.css", gallery / "gallery.css")
 (gallery / "alpha-review.html").write_text(page)
