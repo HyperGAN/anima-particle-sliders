@@ -67,6 +67,7 @@ def protocol_id(objective=DISTINCT_BOSS):
                              span=working_score.SPAN),
                 figure=dict(state=working_score.FIGURE_STATE, questions=working_score.FIGURE_QUESTIONS),
                 pair=dict(state=working_score.PAIR_STATE, questions=working_score.PAIR_QUESTIONS),
+                recolor=dict(state=working_score.RECOLOR_STATE, questions=working_score.RECOLOR_QUESTIONS),
                 effect=[working_score.BOSS_FLOOR, working_score.BOSS_ENOUGH],
             )
         )
@@ -87,7 +88,7 @@ def bound_protocol(objective):
 
 
 def measure_working(pairs, judge, reader):
-    """Measure whether each ON image is a final boss that is still one whole finished figure."""
+    """Measure whether each ON image is a final boss, one whole finished figure, in its own scene."""
     cfg = protocol()
     inputs = {}
     for pair in pairs:
@@ -109,6 +110,7 @@ def measure_working(pairs, judge, reader):
         edited = judge._decide((off, on), **cfg["boss"])
         paired = judge._decide((off, on), working_score.PAIR_STATE, working_score.PAIR_QUESTIONS)
         whole = judge._decide((on,), working_score.FIGURE_STATE, working_score.FIGURE_QUESTIONS)
+        tint = judge._decide((off, on), working_score.RECOLOR_STATE, working_score.RECOLOR_QUESTIONS)
         row = dict(
             off_sha256=off.identity()["sha256"],
             on_sha256=on.identity()["sha256"],
@@ -119,10 +121,11 @@ def measure_working(pairs, judge, reader):
             one_figure=paired and paired["one_figure"],
             same_person=paired and paired["same_person"],
             figure=whole and whole["figure"],
+            recolored=tint and tint["recolored"],
         )
         row["quality"] = working_score.quality(row["broken"], row["off_broken"], row["one_figure"], row["figure"])
         row["case"] = working_score.score_case(
-            row["boss_distinction"], row["original_boss_distinction"], row["quality"])
+            row["boss_distinction"], row["original_boss_distinction"], row["quality"], row["recolored"])
         return row
 
     def rate_pair(keys):

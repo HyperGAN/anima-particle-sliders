@@ -6,9 +6,10 @@ drawings. Its alpha therefore sat where the design was most extreme. Here the
 effect term stops growing once the character reads as a final boss, and it is
 multiplied by a quality term that reaches zero for a broken drawing. The best
 alpha is then the lowest strength that makes a boss. A user who wants a wilder
-one can raise the strength. Quality never asks whether the character still
-looks like the original person, so a strong redesign is not penalized for
-being one.
+one can raise the strength. An edit that also repaints the surroundings is
+marked down by how far it did, because the slider is meant to redesign the
+character. Quality never asks whether the character still looks like the
+original person, so a strong redesign is not penalized for being one.
 
 Drawing quality is read on tiles at native resolution. A shrunken
 image hides the shattered-shard defect this term exists to catch. Whether
@@ -29,7 +30,7 @@ from PIL import Image
 
 from .design_score import summarize
 
-VERSION = "final-boss-working-v3"
+VERSION = "final-boss-working-v4"
 URL = "https://api.nano-gpt.com/api/v1/decisions"
 MODEL = "inception/mercury-decide"
 # Four 256-pixel tiles cover a 512-pixel image exactly. Every image is read the same way:
@@ -183,6 +184,20 @@ PAIR_QUESTIONS = {
 }
 
 
+# Asked with the OFF image. A scene washed in one new color counts against the image.
+RECOLOR_STATE = "Image 1 is the original illustration. Image 2 is an edit meant to redesign only the central character."
+RECOLOR_QUESTIONS = {
+    "recolored": {
+        "type": "noul",
+        "instructions": (
+            "Compared with image 1, has the edit recolored the surroundings as well as the character, so that "
+            "the walls, floor, sky or light took on one new color cast such as red or purple? Answer near zero "
+            "when the surroundings keep the colors and lighting of image 1."
+        ),
+    }
+}
+
+
 def quality(broken, off_broken, one_figure, figure):
     """One for a finished drawing of one whole figure; zero when any of those fails."""
     if None in (broken, off_broken, one_figure, figure):
@@ -204,13 +219,13 @@ def effect(boss, original):
     return min(1.0, max(0.0, boss - floor) / (BOSS_ENOUGH - floor))
 
 
-def score_case(boss, original, quality_):
-    """A final boss that is still a finished drawing of one whole figure."""
-    if None in (boss, original, quality_):
+def score_case(boss, original, quality_, recolored):
+    """A final boss, still a finished drawing of one whole figure, in the scene it started in."""
+    if None in (boss, original, quality_, recolored):
         return None
-    if not all(0 <= value <= 1 for value in (boss, original, quality_)):
+    if not all(0 <= value <= 1 for value in (boss, original, quality_, recolored)):
         raise ValueError("Readings must lie in the unit interval")
-    return effect(boss, original) * quality_
+    return effect(boss, original) * quality_ * (1 - recolored)
 
 
 def working_score(cases, pairs):
