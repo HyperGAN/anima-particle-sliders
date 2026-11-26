@@ -1,6 +1,7 @@
 """Rank chosen RAWs at their frozen alphas on characters none of them was trained or selected on.
 
-The panel is the sixteen later portrait scenes. A RAW taught on those scenes is refused.
+The first panel is the sixteen later portrait scenes. The second is the sixteen held-back
+scenes of the fixed vibe grid, in five framings. A RAW taught on a panel's scenes is refused.
 Each image is read exactly as on the board, and every pair of characters is compared for
 a repeated design in both orders.
 """
@@ -8,6 +9,7 @@ a repeated design in both orders.
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import asdict
 from itertools import combinations
+import os
 import sys
 
 from lumen_studio.cache import TargetCache
@@ -20,8 +22,9 @@ from lumen_studio.study.outputs import Outputs, read
 from campaign import CODE, POLICY, ROOT, open_runtime
 from teacher_score import measure, repeat
 
-panel = read(CODE / "portrait_scenes_more.json")
-home = ROOT / "confirmation"
+second = os.environ.get("ANIMA_CONFIRMATION_PANEL") == "2"
+panel = read(CODE / ("confirmation_panel_2.json" if second else "portrait_scenes_more.json"))
+home = ROOT / ("confirmation-2" if second else "confirmation")
 rt = open_runtime()
 try:
     out = Outputs(home, rt, "Final Boss", {})

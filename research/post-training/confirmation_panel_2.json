@@ -1,0 +1,82 @@
+{
+ "grid-bike-shop": {
+  "neutral": "Anime illustration. A medium shot of a lanky man with short black hair, alone, wearing a gray tank top and a red bandana, sitting on a stool in a bicycle repair shop with wheels hanging from the ceiling and a blue workstand, in bright morning light.",
+  "seed": 70025,
+  "framing": "seated"
+ },
+ "grid-tea-house": {
+  "neutral": "Anime illustration. A half-body portrait of a woman in her fifties with a black bob, alone, wearing a beige cardigan, standing in a tea house with low wooden tables and paper screens, in soft afternoon light.",
+  "seed": 70026,
+  "framing": "half-body"
+ },
+ "grid-observatory": {
+  "neutral": "Anime illustration. A waist-up portrait of a young woman with long silver-blonde hair, alone, wearing a navy sweater, standing in an observatory room with a brass telescope and star charts, in dim evening light.",
+  "seed": 70027,
+  "framing": "waist-up"
+ },
+ "grid-barbershop": {
+  "neutral": "Anime illustration. A full-length shot of a bald man with a thick black beard, alone, wearing a white undershirt, standing in a barbershop with red leather chairs and round mirrors, under bright vanity lights.",
+  "seed": 70028,
+  "framing": "full-length"
+ },
+ "grid-fish-market": {
+  "neutral": "Anime illustration. A chest-up portrait of an older woman with short gray curls, alone, wearing a yellow rain jacket, standing in a fish market with ice trays and hanging scales, in cold morning light.",
+  "seed": 70029,
+  "framing": "chest-up"
+ },
+ "grid-print-shop": {
+  "neutral": "Anime illustration. A medium shot of a man in his twenties with a brown ponytail, alone, wearing an ink-stained apron over a gray shirt, sitting on a stool in a print shop with a letterpress machine and drying racks, in warm lamp light.",
+  "seed": 70030,
+  "framing": "seated"
+ },
+ "grid-climbing-gym": {
+  "neutral": "Anime illustration. A half-body portrait of an athletic woman with a short red undercut, alone, wearing a black tank top, standing in a climbing gym with colorful holds and blue crash mats, under bright ceiling lights.",
+  "seed": 70031,
+  "framing": "half-body"
+ },
+ "grid-cafe": {
+  "neutral": "Anime illustration. A waist-up portrait of a round-faced man with wavy blond hair, alone, wearing a green sweater vest, standing in a small cafe with a chalkboard menu and a pastry case, in soft morning light.",
+  "seed": 70032,
+  "framing": "waist-up"
+ },
+ "grid-tram": {
+  "neutral": "Anime illustration. A full-length shot of a tall woman with dark skin and long braids, alone, wearing a denim jacket, standing in a tram car with wooden seats and brass poles, in afternoon sun through the windows.",
+  "seed": 70033,
+  "framing": "full-length"
+ },
+ "grid-electronics": {
+  "neutral": "Anime illustration. A chest-up portrait of a thin old man with wild white hair, alone, wearing a brown cardigan, standing in an electronics workshop with oscilloscopes and shelves of parts, under a green desk lamp.",
+  "seed": 70034,
+  "framing": "chest-up"
+ },
+ "grid-dance-studio": {
+  "neutral": "Anime illustration. A medium shot of a young man with a black fade haircut, alone, wearing a white t-shirt, sitting on a stool in a dance studio with a wall of mirrors and a wooden barre, in bright even light.",
+  "seed": 70035,
+  "framing": "seated"
+ },
+ "grid-vineyard": {
+  "neutral": "Anime illustration. A half-body portrait of a woman with sun-tanned skin and a straw-blond braid, alone, wearing a plaid shirt, standing in a vineyard shed with wooden barrels and crates of grapes, in golden late light.",
+  "seed": 70036,
+  "framing": "half-body"
+ },
+ "grid-museum": {
+  "neutral": "Anime illustration. A waist-up portrait of a man with graying temples, alone, wearing a navy blazer, standing in a museum hall with a dinosaur skeleton and marble columns, in cool skylight.",
+  "seed": 70037,
+  "framing": "waist-up"
+ },
+ "grid-laboratory": {
+  "neutral": "Anime illustration. A full-length shot of a woman with short curly black hair and safety glasses, alone, wearing a gray hoodie, standing in a laboratory with glass flasks and a periodic table poster, under white fluorescent light.",
+  "seed": 70038,
+  "framing": "full-length"
+ },
+ "grid-greenhouse": {
+  "neutral": "Anime illustration. A chest-up portrait of a broad man with a shaved head and a tattooed forearm, alone, wearing an olive t-shirt, standing in a plant nursery with rows of seedlings and hanging baskets, in bright filtered daylight.",
+  "seed": 70039,
+  "framing": "chest-up"
+ },
+ "grid-toy-store": {
+  "neutral": "Anime illustration. A medium shot of a petite woman with pink-framed glasses and a brown bun, alone, wearing a striped shirt, sitting on a stool in a toy store with shelves of wooden trains and plush animals, in cheerful warm light.",
+  "seed": 70040,
+  "framing": "seated"
+ }
+}

@@ -1,0 +1,295 @@
+{
+ "confirmation": {
+  "panel": "sixteen later portrait scenes",
+  "rows": {
+   "continued-12": {
+    "alpha": 1.421875,
+    "board": 0.3742455714285714,
+    "score": 0.2981714248222837,
+    "bounds": null,
+    "refused_pairs": [],
+    "cases": {
+     "portrait-aquarium": 0.5829,
+     "portrait-ramen-shop": 0.03644999999999999,
+     "portrait-flower-stall": 0.07540000000000001,
+     "portrait-roof-garden": 0.40280000000000005,
+     "portrait-hotel-lobby": 0.4212,
+     "portrait-garage": 0.6289855480222625,
+     "portrait-gymnasium": 0.414,
+     "portrait-gallery": 0.30959165767105606,
+     "portrait-post-office": 0.35419999999999996,
+     "portrait-arcade": 0.24139999999999998,
+     "portrait-pottery": 0.6805999999999999,
+     "portrait-mountain-hut": 0.495,
+     "portrait-kitchen": 0.06527999999999999,
+     "portrait-skate-park": 0.3612,
+     "portrait-fruit-market": 0.2077388505619836,
+     "portrait-carpentry": 0.2583
+    }
+   },
+   "parent-0": {
+    "alpha": 1.25,
+    "board": 0.33734939098208866,
+    "score": 0.28394648288952895,
+    "bounds": null,
+    "refused_pairs": [],
+    "cases": {
+     "portrait-aquarium": 0.5903999999999999,
+     "portrait-ramen-shop": 0.07105,
+     "portrait-flower-stall": 0.35616000000000003,
+     "portrait-roof-garden": 0.033549999999999996,
+     "portrait-hotel-lobby": 0.45275999999999994,
+     "portrait-garage": 0.34280033965097473,
+     "portrait-gymnasium": 0.43,
+     "portrait-gallery": 0.19261800000000004,
+     "portrait-post-office": 0.281424,
+     "portrait-arcade": 0.23664000000000002,
+     "portrait-pottery": 0.6438,
+     "portrait-mountain-hut": 0.5742,
+     "portrait-kitchen": 0.13391999999999998,
+     "portrait-skate-park": 0.10779999999999999,
+     "portrait-fruit-market": 0.3840400708645295,
+     "portrait-carpentry": 0.2538
+    }
+   },
+   "portraits-original-low-g-warm-144": {
+    "alpha": 1.25,
+    "board": 0.3689703710021159,
+    "score": 0.27714971609375,
+    "bounds": null,
+    "refused_pairs": [],
+    "cases": {
+     "portrait-aquarium": 0.534672,
+     "portrait-ramen-shop": 0.0,
+     "portrait-flower-stall": 0.0506,
+     "portrait-roof-garden": 0.071994,
+     "portrait-hotel-lobby": 0.5775759999999999,
+     "portrait-garage": 0.5074000000000001,
+     "portrait-gymnasium": 0.27540000000000003,
+     "portrait-gallery": 0.005780000000000006,
+     "portrait-post-office": 0.41174999999999995,
+     "portrait-arcade": 0.15504,
+     "portrait-pottery": 0.588,
+     "portrait-mountain-hut": 0.5852,
+     "portrait-kitchen": 0.16381199999999996,
+     "portrait-skate-park": 0.0,
+     "portrait-fruit-market": 0.51,
+     "portrait-carpentry": 0.504
+    }
+   },
+   "portraits-original-warm-144": {
+    "alpha": 1.1875,
+    "board": 0.34753519258928567,
+    "score": 0.3191203586770833,
+    "bounds": null,
+    "refused_pairs": [],
+    "cases": {
+     "portrait-aquarium": 0.6804,
+     "portrait-ramen-shop": 0.11404799999999998,
+     "portrait-flower-stall": 0.205436,
+     "portrait-roof-garden": 0.44928,
+     "portrait-hotel-lobby": 0.6642,
+     "portrait-garage": 0.392,
+     "portrait-gymnasium": 0.13327999999999998,
+     "portrait-gallery": 0.34742399999999996,
+     "portrait-post-office": 0.24000000000000005,
+     "portrait-arcade": 0.29069999999999996,
+     "portrait-pottery": 0.4347,
+     "portrait-mountain-hut": 0.20350000000000001,
+     "portrait-kitchen": 0.21021,
+     "portrait-skate-park": 0.37260000000000004,
+     "portrait-fruit-market": 0.5124,
+     "portrait-carpentry": 0.5135000000000001
+    }
+   },
+   "portraits-original-warm-288": {
+    "alpha": 1.375,
+    "board": 0.4109076079579755,
+    "score": null,
+    "bounds": [
+     0.41736631670833335,
+     0.4176213167083333
+    ],
+    "refused_pairs": [
+     [
+      "portrait-roof-garden",
+      "portrait-garage"
+     ]
+    ],
+    "cases": {
+     "portrait-aquarium": 0.5508000000000001,
+     "portrait-ramen-shop": 0.496,
+     "portrait-flower-stall": 0.5236,
+     "portrait-roof-garden": 0.06119999999999999,
+     "portrait-hotel-lobby": 0.7223999999999999,
+     "portrait-garage": 0.36079999999999995,
+     "portrait-gymnasium": 0.4752,
+     "portrait-gallery": 0.5236,
+     "portrait-post-office": 0.6048,
+     "portrait-arcade": 0.49799999999999994,
+     "portrait-pottery": 0.6232000000000001,
+     "portrait-mountain-hut": 0.6278,
+     "portrait-kitchen": 0.5421559999999999,
+     "portrait-skate-park": 0.6156,
+     "portrait-fruit-market": 0.5864999999999999,
+     "portrait-carpentry": 0.325
+    }
+   },
+   "portraits-original-warm-336": {
+    "alpha": 1.1875,
+    "board": 0.26280281955357143,
+    "score": 0.3113800007168662,
+    "bounds": null,
+    "refused_pairs": [],
+    "cases": {
+     "portrait-aquarium": 0.30887999999999993,
+     "portrait-ramen-shop": 0.12441599999999998,
+     "portrait-flower-stall": 0.4592,
+     "portrait-roof-garden": 0.09383999999999999,
+     "portrait-hotel-lobby": 0.5319999999999999,
+     "portrait-garage": 0.5327999999999999,
+     "portrait-gymnasium": 0.040319999999999974,
+     "portrait-gallery": 0.30810000000000004,
+     "portrait-post-office": 0.4472,
+     "portrait-arcade": 0.16524000000000003,
+     "portrait-pottery": 0.6885,
+     "portrait-mountain-hut": 0.63,
+     "portrait-kitchen": 0.333494,
+     "portrait-skate-park": 0.313667038036234,
+     "portrait-fruit-market": 0.533466,
+     "portrait-carpentry": 0.09674799999999999
+    }
+   },
+   "portraits-original-warm-384": {
+    "alpha": 1.5,
+    "board": 0.304936368645098,
+    "score": null,
+    "bounds": null,
+    "refused_pairs": [],
+    "cases": {
+     "portrait-aquarium": 0.5022566999774319,
+     "portrait-ramen-shop": 0.0728,
+     "portrait-flower-stall": 0.40950000000000003,
+     "portrait-roof-garden": 0.123,
+     "portrait-hotel-lobby": 0.568,
+     "portrait-garage": 0.3828000000000001,
+     "portrait-gymnasium": 0.5761999999999999,
+     "portrait-gallery": 0.35721,
+     "portrait-post-office": null,
+     "portrait-arcade": 0.23097275550312257,
+     "portrait-pottery": 0.37471942080080645,
+     "portrait-mountain-hut": 0.3773,
+     "portrait-kitchen": 0.05481,
+     "portrait-skate-park": 0.35371122026942764,
+     "portrait-fruit-market": 0.2968499625015978,
+     "portrait-carpentry": 0.1519
+    }
+   }
+  }
+ },
+ "confirmation-2": {
+  "panel": "sixteen held-back grid scenes, five framings",
+  "rows": {
+   "continued-12": {
+    "alpha": 1.421875,
+    "board": 0.3742455714285714,
+    "score": 0.28746629276819247,
+    "bounds": null,
+    "refused_pairs": [],
+    "cases": {
+     "grid-bike-shop": 0.5963999999999999,
+     "grid-tea-house": 0.48360000000000003,
+     "grid-observatory": 0.09239999999999998,
+     "grid-barbershop": 0.0975,
+     "grid-fish-market": 0.4187644149428994,
+     "grid-print-shop": 0.6662542576411472,
+     "grid-climbing-gym": 0.13413599999999998,
+     "grid-cafe": 0.4681600000000001,
+     "grid-tram": 0.17346,
+     "grid-electronics": 0.256,
+     "grid-dance-studio": 0.0768,
+     "grid-vineyard": 0.0,
+     "grid-museum": 0.41759999999999997,
+     "grid-laboratory": 0.5446053368836733,
+     "grid-greenhouse": 0.5963999999999999,
+     "grid-toy-store": 0.22330000000000003
+    }
+   },
+   "parent-0": {
+    "alpha": 1.25,
+    "board": 0.33734939098208866,
+    "score": 0.2865711329859061,
+    "bounds": null,
+    "refused_pairs": [],
+    "cases": {
+     "grid-bike-shop": 0.5688,
+     "grid-tea-house": 0.3792,
+     "grid-observatory": 0.22861599999999999,
+     "grid-barbershop": 0.102,
+     "grid-fish-market": 0.6586,
+     "grid-print-shop": 0.6880000000000001,
+     "grid-climbing-gym": 0.1428,
+     "grid-cafe": 0.436896,
+     "grid-tram": 0.1904,
+     "grid-electronics": 0.3591218638010215,
+     "grid-dance-studio": 0.22496000000000002,
+     "grid-vineyard": 0.1422,
+     "grid-museum": 0.3154,
+     "grid-laboratory": 0.3816,
+     "grid-greenhouse": 0.19,
+     "grid-toy-store": 0.22079999999999994
+    }
+   },
+   "portraits-original-warm-288": {
+    "alpha": 1.375,
+    "board": 0.4109076079579755,
+    "score": 0.3826162942328153,
+    "bounds": null,
+    "refused_pairs": [],
+    "cases": {
+     "grid-bike-shop": 0.3588,
+     "grid-tea-house": 0.4662,
+     "grid-observatory": 0.5612,
+     "grid-barbershop": 0.13999999999999999,
+     "grid-fish-market": 0.6804,
+     "grid-print-shop": 0.629,
+     "grid-climbing-gym": 0.5022,
+     "grid-cafe": 0.6048,
+     "grid-tram": 0.3782,
+     "grid-electronics": 0.5304,
+     "grid-dance-studio": 0.3818999999999999,
+     "grid-vineyard": 0.5519087827221482,
+     "grid-museum": 0.5355,
+     "grid-laboratory": 0.45239999999999997,
+     "grid-greenhouse": 0.5933999999999999,
+     "grid-toy-store": 0.19542599999999996
+    }
+   },
+   "portraits24-original-warm-192": {
+    "alpha": 1.375,
+    "board": 0.4650409311996172,
+    "score": 0.3762062050411665,
+    "bounds": null,
+    "refused_pairs": [],
+    "cases": {
+     "grid-bike-shop": 0.25420000000000004,
+     "grid-tea-house": 0.48750000000000004,
+     "grid-observatory": 0.4368,
+     "grid-barbershop": 0.24640000000000004,
+     "grid-fish-market": 0.6805999999999999,
+     "grid-print-shop": 0.44839559068420665,
+     "grid-climbing-gym": 0.6320000000000001,
+     "grid-cafe": 0.34019999999999995,
+     "grid-tram": 0.2601,
+     "grid-electronics": 0.3776,
+     "grid-dance-studio": 0.6162000000000001,
+     "grid-vineyard": 0.47600000000000003,
+     "grid-museum": 0.5795999999999999,
+     "grid-laboratory": 0.5411999999999999,
+     "grid-greenhouse": 0.6396000000000001,
+     "grid-toy-store": 0.40919999999999995
+    }
+   }
+  }
+ }
+}
