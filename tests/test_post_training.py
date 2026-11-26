@@ -165,3 +165,32 @@ def test_study_training_forks_once_then_resumes_the_child(tmp_path, monkeypatch)
     resumed = run(tmp_path / "child", parent=parent)
     assert (resumed["mode"], resumed["fork"]) == ("resume", None)
     assert resumed["resume"] == Checkpoint(**saved) and resumed["cohort_id"] == child["cohort_id"]
+
+
+def test_working_score_keeps_boss_ability_and_zeroes_broken_drawings(tmp_path):
+    from lumen_studio.study import working_score as ws
+
+    picture = Image.effect_noise((512, 512), 80).convert("RGB")
+    picture.save(tmp_path / "image.png")
+    crops = ws.tiles(tmp_path / "image.png")
+    assert len(crops) == 4
+    for raw, (left, top) in zip(crops, ((0, 0), (192, 0), (0, 192), (192, 192)), strict=True):
+        with Image.open(ws.BytesIO(raw)) as tile:
+            # Native pixels: each tile equals the same region of the source.
+            assert tile.size == (320, 320)
+            assert tile.tobytes() == picture.crop((left, top, left + 320, top + 320)).tobytes()
+    with pytest.raises(ValueError):
+        Image.new("RGB", (256, 256)).save(tmp_path / "small.png")
+        ws.tiles(tmp_path / "small.png")
+    assert ws.quality(0.05, 0.05, 1.0) == 1.0
+    assert ws.quality(0.05 + ws.SPAN, 0.05, 1.0) == 0.0
+    assert ws.quality(0.05, 0.05, 0.2) == 0.2  # A split figure limits a clean drawing.
+    assert ws.quality(None, 0.05, 1.0) is None
+    # Ability is rewarded as before; a broken drawing earns nothing, whatever its design.
+    strong, weak = ws.score_case(0.9, 0.1, 1.0), ws.score_case(0.6, 0.1, 1.0)
+    assert strong > weak > 0 and ws.score_case(0.95, 0.1, 0.0) == 0
+    cases = dict(a=strong, b=weak)
+    distinct = ws.working_score(cases, [dict(cases=["a", "b"], repeat=0.0)])
+    repeated = ws.working_score(cases, [dict(cases=["a", "b"], repeat=1.0)])
+    assert distinct > repeated > 0
+    assert ws.working_score(dict(a=strong, b=None), [dict(cases=["a", "b"], repeat=0.0)]) is None
