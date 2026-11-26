@@ -253,3 +253,136 @@ def test_new_entry_refuses_legacy_or_mixed_intent_before_components(tmp_path, mo
         with pytest.raises(ValueError):
             open_training(**kwargs)
     assert not runtime.mixer.adapters and not (tmp_path / 'refused').exists()
+
+
+def trained_parent(tmp_path, cache, updates=2):
+    trainer = open_training(**arguments(runtime_fixture(), cache, tmp_path / 'parent', 'parent'))
+    try:
+        for _ in range(updates):
+            trainer.update()
+        return trainer.export(tmp_path / 'parent' / 'RAW-trained.safetensors')
+    finally:
+        trainer.close()
+
+
+def fork_arguments(cache, directory, parent, cohort='child'):
+    options = arguments(runtime_fixture(), cache, directory, cohort)
+    options.update(mode='fork', fork=parent)
+    return options
+
+
+def test_fork_keeps_parent_weights_and_starts_fresh_critic_and_optimizers(tmp_path, monkeypatch):
+    from safetensors.torch import load_file
+    cache = cache_fixture(tmp_path / 'cache', runtime_fixture())
+    parent = trained_parent(tmp_path, cache)
+    fresh = open_training(**arguments(runtime_fixture(), cache, tmp_path / 'fresh', 'fresh'))
+    try:
+        fresh_critic = deepcopy(fresh.game.critic.state_dict())
+        fresh_optimizers = deepcopy((fresh.game.state_dict()['opt_g'], fresh.game.state_dict()['opt_d']))
+    finally:
+        fresh.close()
+
+    def forbidden(*args, **kwargs):
+        raise AssertionError('a fork called the fresh scoped initializer')
+
+    monkeypatch.setattr(policy, 'initialize', forbidden)
+    children = [open_training(**fork_arguments(cache, tmp_path / name, parent, name)) for name in ('a', 'b')]
+    try:
+        child = children[0]
+        weights = load_file(parent.path)
+        assert child.step == 0 and child.initialization['schema'] == training.FORK_SCHEMA
+        assert child.initialization['inherited_steps'] == 2
+        assert child.initialization['restored_from'] == parent.sha256
+        assert any(torch.count_nonzero(branch.up.weight) for branch in child.adapter.branches)
+        assert training.equal_state(dict(child.adapter.state_dict()), weights)
+        assert training.equal_state(load_file(child.entry_RAW.path), weights)
+        assert child.entry_RAW.sha256 != parent.sha256  # New lineage metadata.
+        # Both children begin with the critic and optimizer slots of a fresh seeded cohort.
+        assert training.equal_state(child.game.critic.state_dict(), fresh_critic)
+        assert training.equal_state(children[1].game.critic.state_dict(), fresh_critic)
+        packet = child.game.state_dict()
+        assert training.equal_state((packet['opt_g'], packet['opt_d']), fresh_optimizers)
+        assert packet['completed_steps'] == 0
+        sidecar = training.json.loads(Path(child.entry_RAW.path).with_suffix('.scoped.json').read_text())
+        assert sidecar['lineage'] == dict(parent_RAW_sha256=parent.sha256, inherited_steps=2, total_steps=2)
+        proof = training.json.loads((child.directory / 'fork.json').read_text())
+        assert proof['equal'] is True and proof['tensors'] == len(weights)
+        child.update()
+        later = child.export(child.directory / 'RAW000001.safetensors')
+        sidecar = training.json.loads(Path(later.path).with_suffix('.scoped.json').read_text())
+        assert sidecar['completed_steps'] == 1 and sidecar['lineage']['total_steps'] == 3
+        assert not training.equal_state(load_file(later.path), weights)
+    finally:
+        for owner in children:
+            owner.close()
+    # The child RAW loads through the ordinary inference owner, and can itself be forked.
+    inference = open_inference(runtime_fixture(), 'child-inference', raw=later)
+    inference.close()
+    grandchild = open_training(**fork_arguments(cache, tmp_path / 'grandchild', later, 'grandchild'))
+    try:
+        assert grandchild.initialization['inherited_steps'] == 3
+    finally:
+        grandchild.close()
+
+
+def test_child_FULL_resume_reproduces_the_next_uninterrupted_update(tmp_path, monkeypatch):
+    cache = cache_fixture(tmp_path / 'cache', runtime_fixture())
+    parent = trained_parent(tmp_path, cache)
+    child = open_training(**fork_arguments(cache, tmp_path / 'child', parent))
+    try:
+        child.update()
+        saved = child.save()
+        metrics = child.update()
+        expected = child.game.state_dict()
+    finally:
+        child.close()
+    monkeypatch.setattr(training, '_read_parent', lambda *a, **k: pytest.fail('resume reread the parent RAW'))
+    options = arguments(runtime_fixture(), cache, tmp_path / 'resumed', 'child')
+    options.update(mode='resume', resume=saved)
+    resumed = open_training(**options)
+    try:
+        assert resumed.step == 1 and resumed.initialization['schema'] == training.FORK_SCHEMA
+        assert resumed.update() == metrics
+        # Adapter, particle bank, critic, both optimizers, row order and every RNG stream.
+        assert training.equal_state(resumed.game.state_dict(), expected)
+    finally:
+        resumed.close()
+
+
+def test_fork_refuses_unpinned_averaged_or_foreign_parents_before_components(tmp_path, monkeypatch):
+    cache = cache_fixture(tmp_path / 'cache', runtime_fixture())
+    parent = trained_parent(tmp_path, cache)
+    sidecar_path = Path(parent.path).with_suffix('.scoped.json')
+    original = sidecar_path.read_text()
+    entry = Path(parent.path).with_name('RAW000000.safetensors')
+    built = []
+    real_adapter = training.ParticleAdapter
+
+    def adapter(*args, **kwargs):
+        built.append(1)
+        return real_adapter(*args, **kwargs)
+
+    monkeypatch.setattr(training, 'ParticleAdapter', adapter)
+
+    def refused(index, **patch):
+        options = fork_arguments(cache, tmp_path / f'refused-{index}', parent)
+        options.update(patch)
+        with pytest.raises(ValueError):
+            open_training(**options)
+        assert not built and not (tmp_path / f'refused-{index}').exists()
+
+    refused(0, fork=None)
+    refused(1, mode='fresh')
+    refused(2, resume=parent)
+    refused(3, cohort_id='parent')  # Continuing the parent cohort is a resume of its FULL.
+    refused(4, fork=training.Checkpoint(parent.path, parent.bytes, 'f' * 64))
+    refused(5, fork=training.file_pin(entry))  # Untrained entry export.
+    for index, change in enumerate((dict(ema_decay=.999), dict(selection='ema'),
+                                    dict(model_identity={'model': 'another'}),
+                                    dict(native_RAW_sha256='0' * 64)), start=6):
+        sidecar_path.write_text(training.json.dumps(dict(training.json.loads(original), **change)))
+        refused(index)
+    sidecar_path.write_text(original)
+    child = open_training(**fork_arguments(cache, tmp_path / 'accepted', parent))
+    child.close()
+    assert built

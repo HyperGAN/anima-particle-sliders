@@ -130,18 +130,23 @@ def train(
     schedule_horizon=None,
     always_check_rates=False,
     observation_steps=(),
+    parent=None,
 ):
-    """A 1/4-horizon LR screen can be continued from exactly the committed FULL."""
+    """A 1/4-horizon LR screen can be continued from exactly the committed FULL.
+
+    With ``parent``, the first entry forks that trained RAW into a separate cohort
+    and the budget counts the additional updates. Later entries resume the child.
+    """
     arm = arm_path(outputs.root, rates)
     arm.mkdir(parents=True, exist_ok=True)
     with (arm / "writer.lock").open("a+") as lock:
         fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
         return _train(outputs, cache, panels, rates, budget, phase, schedule_horizon,
-                      always_check_rates, observation_steps)
+                      always_check_rates, observation_steps, parent)
 
 
 def _train(outputs, cache, panels, rates, budget, phase, schedule_horizon,
-           always_check_rates, observation_steps):
+           always_check_rates, observation_steps, parent=None):
     rt = outputs.runtime
     dest = arm_path(outputs.root, rates)
     cursor = dest / "cursor.json"
@@ -243,10 +248,12 @@ def _train(outputs, cache, panels, rates, budget, phase, schedule_horizon,
         cache,
         directory,
         variation,
-        mode="resume" if previous else "fresh",
+        mode="resume" if previous else "fork" if parent else "fresh",
         cohort_id="anima-study-"
-        + digest(dict(rates=rates, cache=cache.index["fingerprint"])),
+        + digest(dict(rates=rates, cache=cache.index["fingerprint"],
+                      **(dict(parent=parent.sha256) if parent else {}))),
         resume=Checkpoint(**previous["full"]) if previous else None,
+        fork=None if previous else parent,
         preset="empf",
         seed=1,
         batch_size=2,

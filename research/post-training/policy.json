@@ -1,0 +1,82 @@
+{
+  "pg": "0.12.0",
+  "parent": {
+    "study": "/ml2/particlesliders-working/anima-pg012-adult-sliders-20261125",
+    "arm": "duration-study/published/rates/ee3ee151f84cb11a2e75",
+    "step": 512,
+    "raw_sha256": "d3b828cfa4bccf0c20dc11587ed1080cc3eda2684a424e0079b334ed15e2b377",
+    "full_sha256": "2550bedf384b12b7757b6bedeef916169ebf3acff857ae4cae55731ee1d86f04",
+    "cache": "final-boss-comparison/version-probe/verified-targets",
+    "cache_fingerprint": "693a1466a14407743e1e00e1971c3fd7d90ae5548cb0a6caf5e886c70e2be2b5",
+    "validation": "native-prod/boss-short/validation.json",
+    "spec": "native-prod/boss-short/spec.json",
+    "calibration": "duration-study/published/scalar-comparison/512",
+    "alpha": 1.5625
+  },
+  "rates": {
+    "g": 0.00075,
+    "d": 0.009,
+    "particle": 0.03
+  },
+  "seed": 1,
+  "batch_size": 2,
+  "schedule_horizon": 1024,
+  "additional_updates": 48,
+  "arms": {
+    "continued": {
+      "entry": "resume",
+      "targets": "parent"
+    },
+    "control": {
+      "entry": "fork",
+      "targets": "parent"
+    },
+    "cleaner": {
+      "entry": "fork",
+      "targets": "cleaner"
+    },
+    "cleanest": {
+      "entry": "fork",
+      "targets": "cleanest"
+    },
+    "control-low-g": {
+      "entry": "fork",
+      "targets": "parent",
+      "rates": {
+        "g": 0.0002109375,
+        "d": 0.009,
+        "particle": 0.03
+      }
+    },
+    "cleanest-low-g": {
+      "entry": "fork",
+      "targets": "cleanest",
+      "rates": {
+        "g": 0.0002109375,
+        "d": 0.009,
+        "particle": 0.03
+      }
+    }
+  },
+  "teachers": {
+    "replace": 6,
+    "choose": "the scenes whose current Boss teacher image has the most visible damage; ties keep cache order",
+    "rules": {
+      "cleaner": {
+        "protect_gain": true,
+        "text": "least damaged proposal that is one transformed figure, with lower damage than the current teacher and at least its Boss gain; otherwise keep the current teacher"
+      },
+      "cleanest": {
+        "protect_gain": false,
+        "text": "least damaged proposal that is one transformed figure, with lower damage than the current teacher; Boss gain is not protected"
+      }
+    }
+  },
+  "alpha": "one constant strength for all ten Euler steps, searched on four characters and frozen before the eight ranking characters",
+  "objective": "distinct_boss_score",
+  "practical_win": {
+    "gain_points": -2,
+    "damage_points": -5,
+    "score": "higher than every control"
+  }
+}

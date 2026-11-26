@@ -10,8 +10,8 @@ import torch
 from lumen_studio.core_source import verify_core
 from lumen_studio.lifecycle import NativeOwner
 from lumen_studio.particles import ParticleAdapter
-from . import PROFILE, policy
-from .training import Attachment, Checkpoint, RAW_SCHEMA, file_pin, source_identity
+from . import PROFILE
+from .training import Attachment, Checkpoint, RAW_SCHEMA, file_pin, source_identity, valid_receipt
 
 
 class InferenceOwner(Attachment):
@@ -33,13 +33,8 @@ class InferenceOwner(Attachment):
                 or sidecar.get('model_identity') != runtime.identity
                 or not isinstance(sidecar.get('initialization'), dict)):
             raise ValueError('new-profile native RAW provenance differs')
-        receipt = sidecar['initialization']
-        if (receipt.get('schema') != policy.SCHEMA or receipt.get('policy') != policy.POLICIES['anima']
-                or receipt.get('source_identity') != sidecar['sources']
-                or receipt.get('cohort_id') != sidecar.get('cohort_id')
-                or receipt.get('seed') != sidecar.get('options', {}).get('seed')
-                or receipt.get('completed_steps') != 0 or receipt.get('restored_from') is not None
-                or receipt.get('selection') != 'raw' or receipt.get('ema_decay') is not None
+        if (not valid_receipt(sidecar['initialization'], cohort_id=sidecar.get('cohort_id'),
+                              seed=sidecar.get('options', {}).get('seed'), sources=sidecar['sources'])
                 or type(sidecar.get('completed_steps')) is not int or sidecar['completed_steps'] < 0):
             raise ValueError('native RAW original initialization receipt differs')
         if runtime.device.type != 'cpu' and not callable(owner_admission):

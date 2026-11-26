@@ -1,7 +1,7 @@
-"""Explicit fresh/resume integration; no loader, runner or optimizer math here."""
+"""Explicit fresh/resume/fork integration; no loader, runner or optimizer math here."""
 from contextlib import contextmanager
 from copy import deepcopy
-from dataclasses import dataclass
+from dataclasses import asdict, dataclass
 import hashlib
 import json
 import math
@@ -10,6 +10,7 @@ from pathlib import Path
 import tempfile
 
 import torch
+from safetensors.torch import load_file
 
 from particle_sliders.lifecycle import native_cleanup
 from lumen_studio.response_binding import AnimaRuntimeResponseAdapter
@@ -23,6 +24,7 @@ from . import policy
 
 FULL_SCHEMA = 'anima-explicit-scoped-v2-FULL'
 RAW_SCHEMA = 'anima-explicit-scoped-v2-native-RAW-sidecar'
+FORK_SCHEMA = 'anima-explicit-scoped-v2-RAW-fork-v1'
 
 
 def canonical(value):
@@ -84,6 +86,62 @@ def _read_full(pin):
             or not isinstance(packet['game'], dict)):
         raise ValueError('only this new profile FULL is supported; old cohorts retain original entrypoints')
     return packet
+
+
+def valid_receipt(receipt, *, cohort_id, seed, sources):
+    """A cohort begins once: scoped fresh initialization or a pinned parent RAW."""
+    if (not isinstance(receipt, dict) or receipt.get('policy') != policy.POLICIES['anima']
+            or receipt.get('cohort_id') != cohort_id or receipt.get('seed') != seed
+            or receipt.get('source_identity') != sources or receipt.get('completed_steps') != 0
+            or receipt.get('selection') != 'raw' or receipt.get('ema_decay') is not None):
+        return False
+    if receipt.get('schema') == policy.SCHEMA:
+        return receipt.get('restored_from') is None
+    parent = receipt.get('parent')
+    return (receipt.get('schema') == FORK_SCHEMA and isinstance(parent, dict)
+            and isinstance(parent.get('raw'), dict)
+            and receipt.get('restored_from') == parent['raw'].get('sha256')
+            and type(receipt.get('inherited_steps')) is int and receipt['inherited_steps'] >= 1)
+
+
+def state_sha(state):
+    """One digest for an ordered tensor state; names, types and shapes are bound."""
+    rows = [[name, str(value.dtype), list(value.shape), policy.tensor_sha(value)]
+            for name, value in state.items()]
+    return hashlib.sha256(canonical(rows).encode()).hexdigest()
+
+
+def _read_parent(pin, runtime_identity):
+    """Validate a trained RAW and both sidecars before any component is built."""
+    if not isinstance(pin, Checkpoint) or file_pin(pin.path) != pin:
+        raise ValueError('fork requires an exact whole-file pin of the parent RAW')
+    path = Path(pin.path).absolute()
+    records = {}
+    for suffix in ('.scoped.json', '.engine.json'):
+        raw = path.with_suffix(suffix).read_bytes()
+        records[suffix] = json.loads(raw), hashlib.sha256(raw).hexdigest()
+    (sidecar, sidecar_sha), (engine, engine_sha) = records['.scoped.json'], records['.engine.json']
+    steps = sidecar.get('completed_steps')
+    receipt = sidecar.get('initialization')
+    if (sidecar.get('schema') != RAW_SCHEMA or sidecar.get('profile') != PROFILE
+            or sidecar.get('native_RAW_sha256') != pin.sha256
+            or sidecar.get('selection') != 'raw' or sidecar.get('ema_decay') is not None
+            or sidecar.get('model_identity') != runtime_identity
+            or type(steps) is not int or steps < 1 or not isinstance(sidecar.get('options'), dict)
+            or not valid_receipt(receipt, cohort_id=sidecar.get('cohort_id'),
+                                 seed=sidecar['options'].get('seed'), sources=sidecar.get('sources'))):
+        raise ValueError('parent RAW sidecar is not a trained raw-weight export for this model')
+    if (engine.get('schema') != 'anima-engine-export-v1' or engine.get('sha256') != pin.sha256
+            or engine.get('weights') != 'live' or engine.get('completed_steps') != steps):
+        raise ValueError('parent RAW native export record differs from its sidecar')
+    return dict(
+        raw=dict(file=path.name, bytes=pin.bytes, sha256=pin.sha256),
+        scoped_sidecar_sha256=sidecar_sha, engine_sidecar_sha256=engine_sha,
+        cohort_id=sidecar['cohort_id'], completed_steps=steps,
+        inherited_steps=receipt.get('inherited_steps', 0) + steps,
+        options=deepcopy(sidecar['options']), sources=deepcopy(sidecar['sources']),
+        initialization_sha256=hashlib.sha256(canonical(receipt).encode()).hexdigest(),
+        cache_fingerprint=sidecar['cache_identity']['index']['fingerprint'])
 
 
 def equal_state(left, right):
@@ -201,17 +259,24 @@ class FreshTrainer(EngineTrainer):
     No call to EngineTrainer.__init__: that historical entry auto-restores a bare
     packet after constructing a game. Here intent and FULL metadata are resolved
     before any added adapter/critic, and initialization precedes optimizers.
+
+    mode="fork" starts a separate cohort from a trained parent RAW. The adapter
+    branches, routing and particle bank are loaded strictly before the optimizers
+    exist. The critic, optimizer slots and sampling streams are the seeded fresh
+    ones, so two children with the same seed differ only in their targets. The
+    child counts its own updates from zero and records the inherited count.
     """
     def __init__(self, runtime, cache, directory, variation, *, mode, cohort_id,
-                 resume=None, seed=7, batch_size=2, total_steps=100,
+                 resume=None, fork=None, seed=7, batch_size=2, total_steps=100,
                  response_scale=1., sigma=1., critic_width=32,
                  native_admission=None, lr=None, d_lr_mult=None,
                  prior_lr_mult=None, numerical_profile=None, ema_decay=None, preset="bispf_optimized"):
         # All intent/packet/config checks precede the first component constructor.
-        if mode not in ('fresh', 'resume') or not isinstance(cohort_id, str) or not cohort_id.strip():
-            raise ValueError('explicit fresh|resume mode and new-profile cohort_id required')
-        if (mode == 'fresh' and resume is not None) or (mode == 'resume' and resume is None):
-            raise ValueError('fresh refuses saved state; resume requires an exact new-profile FULL')
+        if mode not in ('fresh', 'resume', 'fork') or not isinstance(cohort_id, str) or not cohort_id.strip():
+            raise ValueError('explicit fresh|resume|fork mode and new-profile cohort_id required')
+        if (resume is None) != (mode != 'resume') or (fork is None) != (mode != 'fork'):
+            raise ValueError('fresh refuses saved state; resume requires an exact new-profile FULL; '
+                             'fork requires an exact parent RAW')
         if ema_decay is not None:
             raise ValueError('weight EMA is disabled; RAW only')
         if (type(seed) is not int or not 0 <= seed < 2**63 - 100
@@ -241,13 +306,11 @@ class FreshTrainer(EngineTrainer):
                     or packet['sources'] != self.sources):
                 raise ValueError('FULL options/cohort/Source profile differs')
             receipt = packet['initialization']
-            if (not isinstance(receipt, dict) or receipt.get('schema') != policy.SCHEMA
-                    or receipt.get('policy') != policy.POLICIES['anima']
-                    or receipt.get('cohort_id') != cohort_id or receipt.get('seed') != seed
-                    or receipt.get('source_identity') != self.sources
-                    or receipt.get('completed_steps') != 0 or receipt.get('restored_from') is not None
-                    or receipt.get('selection') != 'raw' or receipt.get('ema_decay') is not None):
+            if not valid_receipt(receipt, cohort_id=cohort_id, seed=seed, sources=self.sources):
                 raise ValueError('FULL lacks its original new-profile initialization receipt')
+        parent = _read_parent(fork, runtime.identity) if mode == 'fork' else None
+        if parent is not None and parent['cohort_id'] == cohort_id:
+            raise ValueError('a fork is a new cohort; resume the parent FULL to continue its own')
         self.runtime, self.variation, self.cohort_id = runtime, variation, cohort_id
         self.responses = CachedResponses(cache, runtime, variation, numerical_profile=numerical_profile)
         self._frozen_identity = self.responses.identity()
@@ -267,6 +330,20 @@ class FreshTrainer(EngineTrainer):
                         hashlib.sha256(policy.canonical(self.options).encode()).hexdigest()),
                     options=self.options, seed=seed, source_identity=self.sources,
                     particles=self.adapter.particles, optimizers=())
+            elif mode == 'fork':
+                # The seeded constructors above consumed the same random draws as a
+                # fresh cohort, so the critic is the one a fresh run would start
+                # with. Every adapter tensor is then replaced by the parent's.
+                native = self.adapter.load_export(fork.path, model_identity=runtime.identity)
+                if native['weights'] != 'live' or native['step'] != parent['completed_steps']:
+                    raise ValueError('parent RAW native metadata differs from its sidecar')
+                imported = {k: v.detach().clone() for k, v in self.adapter.state_dict().items()}
+                receipt = dict(schema=FORK_SCHEMA, policy=policy.POLICIES['anima'], product='anima',
+                    cohort_id=cohort_id, completed_steps=0, restored_from=fork.sha256,
+                    inherited_steps=parent['inherited_steps'], seed=seed, source_identity=self.sources,
+                    parent=parent, adapter=dict(law='parent-RAW-strict', sha256=state_sha(imported)),
+                    critic=dict(law='seeded-constructor', sha256=state_sha(critic.state_dict())),
+                    optimizers='fresh', selection='raw', ema_decay=None)
             # Resume does not call initialize. Reuse the saved receipt unchanged.
             self.initialization = deepcopy(receipt)
             original = self._attachment.attach(self.adapter)
@@ -291,8 +368,20 @@ class FreshTrainer(EngineTrainer):
             write_json(self.directory / 'initialization.json', self.initialization)
             # A new explicit entry writes its current state before any update.
             # On resume the number remains the inherited cursor; no update replay.
+            if mode == 'fork' and not equal_state(dict(self.adapter.state_dict()), imported):
+                raise RuntimeError('optimizer construction changed the imported parent weights')
             self.entry_FULL = self.save()
             self.entry_RAW = self.export(self.directory / f'RAW{self.step:06d}.safetensors')
+            if mode == 'fork':
+                # Lineage metadata differs. Every exported tensor must not.
+                ours, theirs = load_file(self.entry_RAW.path), load_file(fork.path)
+                if not equal_state(ours, theirs):
+                    raise RuntimeError('child RAW0 tensors differ from the parent RAW')
+                write_json(self.directory / 'fork.json', dict(schema=FORK_SCHEMA,
+                    parent=asdict(fork), child_RAW=asdict(self.entry_RAW),
+                    child_FULL=asdict(self.entry_FULL), tensors=len(ours),
+                    tensors_sha256=state_sha(ours), equal=True,
+                    inherited_steps=parent['inherited_steps']))
         except BaseException as error:
             try:
                 self.close()
@@ -334,6 +423,10 @@ class FreshTrainer(EngineTrainer):
             model_identity=deepcopy(self._frozen_identity['runtime']),
             cache_identity=deepcopy(self._frozen_identity), selection='raw', ema_decay=None,
             historical_LR_measurement_transferred=False, quality_qualified=False)
+        if self.initialization['schema'] == FORK_SCHEMA:
+            inherited = self.initialization['inherited_steps']
+            sidecar['lineage'] = dict(parent_RAW_sha256=self.initialization['restored_from'],
+                inherited_steps=inherited, total_steps=inherited + self.step)
         write_json(Path(path).with_suffix('.scoped.json'), sidecar)
         return file_pin(path)
 
