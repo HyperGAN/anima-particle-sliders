@@ -22,7 +22,7 @@ class StudyJudge(JevJudge):
         directory = self.receipts
         # A shared judge is often briefly unavailable. Each attempt keeps its own receipt, so a
         # reading that failed twice in one run is asked again later instead of staying unanswered.
-        for attempt, delay in enumerate((1, 3, 10, 30, 60), start=1):
+        for attempt, delay in enumerate((1, 3, 10, 30, *[60] * 8), start=1):
             path = directory / f"{key}.json"
             if not path.is_file():
                 # An in-flight request can still have reached the service.

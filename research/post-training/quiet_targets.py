@@ -13,7 +13,9 @@ rt = open_runtime()
 try:
     for name in sys.argv[1:]:
         spec = POLICY["targets"][name]
-        built = quiet_boss_background(rt, cache, ROOT / "targets" / name, spec["background"], spec.get("dose", 1.0))
+        # A cache with replaced teachers can be quieted in the same way as the parent.
+        source = TargetCache(ROOT / "targets" / spec["parent"], verify=True) if "parent" in spec else cache
+        built = quiet_boss_background(rt, source, ROOT / "targets" / name, spec["background"], spec.get("dose", 1.0))
         print(name, spec, built.index["fingerprint"], flush=True)
 finally:
     rt.close()

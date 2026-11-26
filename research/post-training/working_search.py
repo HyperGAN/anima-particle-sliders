@@ -33,7 +33,7 @@ reader = ws.DrawingReader(home / "drawing-receipts")
 judge = StudyJudge(ROOT / "working-metric" / "judgments", "Final Boss")
 STEP = 1 / 16
 # A RAW with no earlier calibration starts from this grid.
-GRID = [0.5 + k / 4 for k in range(7)]
+GRID = [0.75 + k / 4 for k in range(6)]
 
 
 def image(ref):
@@ -153,7 +153,11 @@ def search(rt, name, pool):
             # An unanswered reading is retried by the next run instead of being kept as a result.
             if score is not None:
                 atomic_json(path, doc)
-            print(name, phase, alpha, None if score is None else round(100 * score, 2), flush=True)
+            missing = sorted({k for r in rows.values() for k, v in r.items() if v is None})
+            if not complete:
+                missing.append("repeat")
+            print(name, phase, alpha, None if score is None else round(100 * score, 2),
+                  *(["unanswered:", *missing] if score is None else []), flush=True)
             return doc
 
         trials = {float.fromhex(p.stem): None

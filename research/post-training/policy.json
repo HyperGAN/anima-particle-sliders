@@ -116,6 +116,10 @@
       "entry": "fork",
       "targets": "working2-quiet",
       "critic": "parent"
+    },
+    "working-quiet-strong-fresh": {
+      "entry": "fresh",
+      "targets": "working-quiet-strong"
     }
   },
   "teachers": {
@@ -169,6 +173,12 @@
         "working_alternatives_2.json"
       ],
       "text": "a second round of proposals for the six scenes whose chosen teacher scored lowest, written without the flat-shading clause"
+    },
+    "working-quiet-strong": {
+      "background": 0.0,
+      "dose": 1.4,
+      "parent": "working",
+      "text": "the chosen teachers with the clean background and the character's edit 1.4 times as strong"
     }
   }
 }
