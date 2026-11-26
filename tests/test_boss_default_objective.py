@@ -47,8 +47,9 @@ def test_default_measures_damage_and_reuse_in_both_orders(tmp_path):
             }
 
     judge = Judge()
-    tested = Outputs(tmp_path, None, "Final Boss", {})
-    assert tested.objective == objectives.DISTINCT_BOSS
+    # The distinct Boss score stays measurable for the results recorded with it.
+    tested = Outputs(tmp_path, None, "Final Boss", {}, objective=objectives.DISTINCT_BOSS)
+    assert Outputs(tmp_path, None, "Final Boss", {}).objective == objectives.WORKING_BOSS
     tested.judge = judge
     row = dict(raw={"sha256": "fixed"}, gains=[1.0] * 10, pairs=cases, mean_gain=0.99)
     rated = tested.with_objective(row)
@@ -292,3 +293,59 @@ def test_trainer_rates_and_raw_both_follow_the_design_objective(tmp_path, monkey
             dict(observation(score), step=step),
         )
     assert select_checkpoint(tmp_path, better, 64, outputs=outputs)["step"] == 32
+
+
+def test_final_boss_default_scores_a_boss_that_is_not_broken(tmp_path):
+    pngs = []
+    for i in range(4):
+        path = tmp_path / f"{i}.png"
+        path.write_bytes(bytes.fromhex("89504e470d0a1a0a") + str(i).encode())
+        pngs.append(asdict(FileRecord.from_path(path)))
+    cases = [dict(case=dict(prompt=f"portrait {i}", seed=i, off={"output": pngs[i]}), on={"output": pngs[2 + i]})
+             for i in range(2)]
+
+    class Judge:
+        boss, one_figure, figure, repeat = 0.9, 1.0, 1.0, 0.0
+
+        def _decide(self, images, state, questions):
+            if "repeat" in questions:
+                return {"repeat": self.repeat}
+            if "figure" in questions:
+                return {"figure": self.figure}
+            if "one_figure" in questions:
+                return {"one_figure": self.one_figure, "same_person": 0.0, "same_scene": 0.0}
+            same = images[0].identity() == images[1].identity()
+            return {"boss_distinction": 0.1 if same else self.boss}
+
+    class Reader:
+        broken_on = 0.05
+
+        def broken(self, path):
+            return self.broken_on if Path(path).name in ("2.png", "3.png") else 0.05
+
+    judge, reader = Judge(), Reader()
+    tested = Outputs(tmp_path, None, "Final Boss", {})
+    tested.judge, tested.drawing = judge, reader
+    row = dict(raw={"sha256": "fixed"}, gains=[1.0] * 10, pairs=cases, mean_gain=0.8)
+    rated = tested.with_objective(row)
+    assert rated["objective"] == objectives.WORKING_BOSS == "working_boss_score"
+    assert rated["design_protocol"] == objectives.protocol_id(objectives.WORKING_BOSS) != objectives.protocol_id()
+    # A clean final boss scores fully, and not looking like the original person costs nothing.
+    assert objectives.selection_score(rated, objectives.WORKING_BOSS) == 1.0
+    assert tested.with_objective(row) == rated
+    measure = lambda: objectives.measure_working(cases, judge, reader)["score"]
+    judge.boss = 0.99
+    assert measure() == 1.0  # A wilder boss earns no more.
+    judge.boss = 0.5
+    assert measure() == pytest.approx(0.5)
+    judge.boss, reader.broken_on = 0.9, 0.05 + 0.30
+    assert measure() == 0  # A shattered drawing earns nothing.
+    reader.broken_on, judge.figure = 0.05, 0.1
+    assert measure() == pytest.approx(0.1)  # Nor does a clean drawing of a headless robe.
+    judge.figure, judge.one_figure = 1.0, 0.0
+    assert measure() == 0
+    judge.one_figure, judge.repeat = 1.0, 1.0
+    assert measure() == pytest.approx(0.5)  # One design on both characters counts once.
+    reader.broken_on = None
+    assert measure() is None
+    assert objectives.bound_protocol(objectives.MATCHED_GAIN) is None

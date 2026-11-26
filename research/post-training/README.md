@@ -16,8 +16,9 @@ PYTHONPATH=. $python guard.py 1 fit.py cleaner         # fork, one cleaner teach
 PYTHONPATH=. $python guard.py 1 fit.py cleanest        # fork, least-damaged teachers
 ANIMA_POST_TRAINING_PRODUCT=<parent study>/product \
   PYTHONPATH=. $python guard.py 1 fit.py continued     # exact FULL resume, same targets
-PYTHONPATH=. $python guard.py 0 calibrate.py control   # one constant alpha, then eight ranking characters
-PYTHONPATH=. $python publish.py                        # gallery/post-training-leaderboard.html
+PYTHONPATH=. $python guard.py 0 working_search.py parent-0 control-48   # alpha by the working Boss score, then eight ranking characters
+PYTHONPATH=. $python working_structure.py              # structural gate at each chosen alpha
+PYTHONPATH=.:../.. $python publish_working.py          # gallery/working-leaderboard.html
 ```
 
 `teachers.py` first prints the measured gain and damage of the twelve current teachers and
@@ -31,6 +32,10 @@ continuation instead resumes the parent FULL, which binds the trainer source tha
 so it runs from the parent study's own checkout. Each arm reports at every quarter of the
 added budget and stops on a structural failure before another update.
 
-`calibrate.py` first proves that a forked child's RAW0 draws the parent's ranking images and
+`working_search.py` re-picks each RAW's alpha from the strengths `calibrate.py` rendered, refines
+around the leader and ranks the held-out characters. Name a RAW as `<arm>-<added updates>`.
+
+`calibrate.py` and `publish.py` produce the earlier board under the distinct Boss score.
+`calibrate.py` also proves that a forked child's RAW0 draws the parent's ranking images and
 OFF images byte for byte. `guard.py` holds the study's per-card leases and enforces the same
 entry floors and owned caps as the duration study. An exit code of 75 means the lease is busy.

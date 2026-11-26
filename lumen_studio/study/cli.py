@@ -11,7 +11,7 @@ import sys
 from ..contracts import atomic_json, digest
 from .outputs import Outputs, Unmeasured, read
 from .leaderboard import gallery
-from .objectives import DISTINCT_BOSS, MATCHED_GAIN, default_objective, protocol_id, selection_score
+from .objectives import BOUND, MATCHED_GAIN, bound_protocol, default_objective, selection_score
 from .reference import REFERENCES, compare_reference
 from .teachers import collect, validation_panels
 from .rate_search import DEFAULT_ARM_BUDGET, explore
@@ -162,7 +162,7 @@ def screened_rates(outputs, cache, panels, reference, steps, schedule_horizon=No
     def screen(candidate):
         try:
             result = train(outputs, cache, panels, candidate, steps, "screen", schedule_horizon=schedule_horizon)
-            if objective == DISTINCT_BOSS:
+            if objective in BOUND:
                 result = outputs.with_objective(result)
             row = dict(rates=candidate, status=result["status"], mean_gain=result["mean_gain"],
                        objective=objective, objective_score=selection_score(result, objective))
@@ -243,7 +243,7 @@ def choose_for_confirmation(outputs, cache, panels, plan, args):
                     fit,
                     required=plan.get("always_check_rates", False),
                 )
-                observer = {"outputs": outputs} if getattr(outputs, "objective", None) == DISTINCT_BOSS else {}
+                observer = {"outputs": outputs} if getattr(outputs, "objective", None) in BOUND else {}
                 selected = select_checkpoint(root, rates, steps, **observer)
             except (Unmeasured, Catastrophe) as error:
                 failures.append(dict(rates=rates, reason=str(error)))
@@ -376,13 +376,13 @@ def run(args):
         objective = default_objective(concept)
         policy = root / "selection-objective.json"
         if policy.exists():
-            expected = dict(objective=objective, protocol=protocol_id() if objective == DISTINCT_BOSS else None)
+            expected = dict(objective=objective, protocol=bound_protocol(objective))
             if read(policy) != expected:
                 raise ValueError("Saved selection objective differs from the registered study protocol")
         elif (root / "confirmation-selection.json").exists() or (root / "outcome.json").exists():
             objective = MATCHED_GAIN  # A previously reserved scalar belongs to its original measurement.
         else:
-            atomic_json(policy, dict(objective=objective, protocol=protocol_id() if objective == DISTINCT_BOSS else None))
+            atomic_json(policy, dict(objective=objective, protocol=bound_protocol(objective)))
         outputs = Outputs(root, rt, concept, config["effect"], objective=objective)
         calibration = outputs.integrity.calibrate()
         atomic_json(root / "detector.json", calibration)

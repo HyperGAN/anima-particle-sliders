@@ -13,7 +13,9 @@ from particle_sliders.candidate_failure import FileRecord
 from particle_sliders.strength_schedule import interval_strengths
 
 from ..contracts import atomic_json, digest
-from .objectives import DISTINCT_BOSS, MATCHED_GAIN, default_objective, measure_design, protocol_id
+from .objectives import (BOUND, DISTINCT_BOSS, MATCHED_GAIN, default_objective, measure_design,
+                         measure_working, protocol_id)
+from .working_score import DrawingReader
 from .judge import StudyJudge
 from .pair_checks import EFFECT_QUESTIONS, PAIR_PROTOCOLS, pair_status
 from ..vibe_integrity import FrameIntegrity
@@ -48,6 +50,7 @@ class Outputs:
         self.objective = objective or default_objective(concept)
         self.judge = StudyJudge(root / "judgments", concept)
         self.integrity = FrameIntegrity(root / "judgments")
+        self.drawing = DrawingReader(root / "judgments" / "drawing")
 
     @torch.no_grad()
     def image(self, prompt, seed, *, raw=None, variation=None, gains=None):
@@ -139,9 +142,9 @@ class Outputs:
 
     def with_objective(self, row):
         """Old observations can be scored from their saved images without replaying training."""
-        if self.objective != DISTINCT_BOSS:
+        if self.objective not in BOUND:
             return row
-        identity = dict(protocol=protocol_id(), raw=row["raw"]["sha256"], gains=row["gains"],
+        identity = dict(protocol=protocol_id(self.objective), raw=row["raw"]["sha256"], gains=row["gains"],
                         cases=[[p["case"]["prompt"], p["case"]["seed"], p["case"]["off"]["output"]["sha256"],
                                 p["on"]["output"]["sha256"]] for p in row["pairs"]])
         path = self.root / "design-observations" / (digest(identity) + ".json")
@@ -151,9 +154,10 @@ class Outputs:
                 raise ValueError("Retained Final Boss design measurements differ from their binding")
             measured = proof["measurement"]
         else:
-            measured = measure_design(row["pairs"], self.judge)
+            measured = (measure_design(row["pairs"], self.judge) if self.objective == DISTINCT_BOSS
+                        else measure_working(row["pairs"], self.judge, self.drawing))
             atomic_json(path, dict(identity=identity, measurement=measured, measurement_sha256=digest(measured)))
-        return dict(row, objective=DISTINCT_BOSS, objective_score=measured["score"],
+        return dict(row, objective=self.objective, objective_score=measured["score"],
                     design_protocol=identity["protocol"], design_observation=str(path))
 
     def compare(self, cases, variation, raw, alpha, profile, *, owner=None):
@@ -193,7 +197,7 @@ class Outputs:
             "fail"
             if "fail" in statuses
             else "unmeasured"
-            if "unmeasured" in statuses or (not measured and getattr(self, "objective", MATCHED_GAIN) != DISTINCT_BOSS)
+            if "unmeasured" in statuses or (not measured and getattr(self, "objective", MATCHED_GAIN) not in BOUND)
             else "pass"
         )
         row = dict(
@@ -206,4 +210,4 @@ class Outputs:
             status=status,
             mean_gain=fmean(gains_by_case) if measured else None,
         )
-        return self.with_objective(row) if getattr(self, "objective", MATCHED_GAIN) == DISTINCT_BOSS else row
+        return self.with_objective(row) if getattr(self, "objective", MATCHED_GAIN) in BOUND else row

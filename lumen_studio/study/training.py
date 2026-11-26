@@ -12,7 +12,7 @@ from lumen_studio_scoped import open_training, open_inference
 from lumen_studio_scoped.training import Checkpoint, file_pin
 from ..contracts import atomic_json, digest
 from .outputs import Unmeasured, read
-from .objectives import DISTINCT_BOSS, MATCHED_GAIN, protocol_id, selection_score
+from .objectives import BOUND, MATCHED_GAIN, bound_protocol, selection_score
 from .scalar_search import search_constant, verify_search
 
 
@@ -540,7 +540,7 @@ def calibrate_constant(outputs, panels, variation, raw, *, screened=False, owner
         selected = dict(selected, selection_status=selected["status"], rate_panel=panel, status=panel["status"])
         measured[alpha] = selected
         atomic_json(receipt, list(measured.values()))
-    reservation = dict(objective=objective, protocol=protocol_id() if objective == DISTINCT_BOSS else None,
+    reservation = dict(objective=objective, protocol=bound_protocol(objective),
                        raw_sha256=raw.sha256, cases_sha256=digest(panels["steps"]),
                        trials=[[a, value] for a, value in trials.items()], alpha=alpha)
     bound = receipt.with_name(receipt.stem + "-reservation.json")
@@ -554,7 +554,7 @@ def validate_calibration(root, strength, cases, outputs):
     """Refuse a held-out render when its scalar was selected with another metric or RAW."""
     objective = outputs.objective
     proof = read(root / "strengths-reservation.json")
-    policy = dict(objective=objective, protocol=protocol_id() if objective == DISTINCT_BOSS else None,
+    policy = dict(objective=objective, protocol=bound_protocol(objective),
                   raw_sha256=strength["raw"]["sha256"], cases_sha256=digest(cases))
     if any(proof.get(key) != value for key, value in policy.items()):
         raise ValueError("Reserved alpha does not belong to this study objective, RAW and panel")
@@ -565,7 +565,7 @@ def validate_calibration(root, strength, cases, outputs):
                 or trial["gains"] != [alpha] * 10 or [p["case"] for p in trial["pairs"]] != cases):
             raise ValueError("Scalar search contains different weights, intervals or cases")
         value = selection_score(trial, objective)
-        if objective == DISTINCT_BOSS and selection_score(outputs.with_objective(trial), objective) != value:
+        if objective in BOUND and selection_score(outputs.with_objective(trial), objective) != value:
             raise ValueError("Stored trial score differs from its bound design observations")
         record.append([alpha, value])
     if record != proof["trials"] or proof["alpha"] != strength["alpha"]:

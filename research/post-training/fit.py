@@ -6,7 +6,7 @@ import sys
 
 from lumen_studio.cache import TargetCache
 from lumen_studio.contracts import atomic_json, digest, file_hash
-from lumen_studio.study.objectives import DISTINCT_BOSS
+from lumen_studio.study.objectives import default_objective
 from lumen_studio.study.outputs import Outputs, read
 from lumen_studio.study.training import Catastrophe, arm_path, train
 from lumen_studio_scoped.training import Checkpoint, file_pin
@@ -52,7 +52,7 @@ rt = open_runtime(checkpointing=True)
 try:
     outputs = Outputs(root, rt, "Final Boss",
                       read(PARENT_STUDY / parent["spec"])["concepts"]["Final Boss"]["effect"])
-    assert outputs.objective == DISTINCT_BOSS and rt.identity == cache.index["identity"]["model"]
+    assert outputs.objective == default_objective("Final Boss") and rt.identity == cache.index["identity"]["model"]
     check = outputs.integrity.calibrate()
     atomic_json(root / "detector.json", check)
     assert check["passed"]
