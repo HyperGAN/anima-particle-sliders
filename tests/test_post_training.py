@@ -103,6 +103,11 @@ def test_quiet_background_keeps_the_character_target_and_leaves_the_surroundings
     outside = lambda source: (source[5]["positive"] - source[5]["neutral"])[..., 4:]
     assert torch.allclose(outside(partial), outside(parent) / 3, rtol=1e-4)
     assert boss_targets.quiet_boss_background(runtime, parent, tmp_path / "quiet", 0.0).index == cache.index
+    strong = boss_targets.quiet_boss_background(runtime, parent, tmp_path / "strong", 0.0, dose=1.5)
+    inside = lambda source: (source[5]["positive"] - source[5]["neutral"])[..., :4]
+    assert torch.allclose(inside(strong), inside(parent) * 1.5, rtol=1e-4)
+    assert torch.equal(strong[5]["positive"][..., 4:], strong[5]["neutral"][..., 4:])
+    assert strong.index["identity"]["background"]["dose"] == 1.5
     with pytest.raises(ValueError):
         boss_targets.quiet_boss_background(runtime, cache, tmp_path / "twice", 0.0)
     with pytest.raises(ValueError):

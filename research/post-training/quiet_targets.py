@@ -12,8 +12,8 @@ assert cache.index["fingerprint"] == POLICY["parent"]["cache_fingerprint"]
 rt = open_runtime()
 try:
     for name in sys.argv[1:]:
-        floor = POLICY["targets"][name]["background"]
-        built = quiet_boss_background(rt, cache, ROOT / "targets" / name, floor)
-        print(name, floor, built.index["fingerprint"], flush=True)
+        spec = POLICY["targets"][name]
+        built = quiet_boss_background(rt, cache, ROOT / "targets" / name, spec["background"], spec.get("dose", 1.0))
+        print(name, spec, built.index["fingerprint"], flush=True)
 finally:
     rt.close()

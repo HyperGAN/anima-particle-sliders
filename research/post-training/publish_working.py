@@ -36,6 +36,10 @@ LABELS = {
     "quiet-fresh": "Clean background target · from scratch",
     "quiet-15-fresh": "Background target at a 0.15 floor · from scratch",
     "quiet-warm": "Fork with the parent's critic · clean background target",
+    "working-quiet-fresh": "Teachers chosen by the working Boss score, clean background · from scratch",
+    "working-quiet-warm": "Fork with the parent's critic · teachers chosen by the working Boss score, clean background",
+    "quiet-strong-fresh": "Clean background target, character edit × 1.4 · from scratch",
+    "quiet-strong-warm": "Fork with the parent's critic · clean background target, character edit × 1.4",
 }
 
 

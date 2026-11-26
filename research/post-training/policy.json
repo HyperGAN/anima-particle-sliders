@@ -89,6 +89,24 @@
     "quiet-15-fresh": {
       "entry": "fresh",
       "targets": "quiet-15"
+    },
+    "quiet-strong-fresh": {
+      "entry": "fresh",
+      "targets": "quiet-strong"
+    },
+    "quiet-strong-warm": {
+      "entry": "fork",
+      "targets": "quiet-strong",
+      "critic": "parent"
+    },
+    "working-quiet-fresh": {
+      "entry": "fresh",
+      "targets": "working-quiet"
+    },
+    "working-quiet-warm": {
+      "entry": "fork",
+      "targets": "working-quiet",
+      "critic": "parent"
     }
   },
   "teachers": {
@@ -120,6 +138,16 @@
     "quiet-15": {
       "background": 0.15,
       "text": "as quiet, with 15% of the teacher's edit kept outside the character"
+    },
+    "quiet-strong": {
+      "background": 0.0,
+      "dose": 1.4,
+      "text": "as quiet, with the character's edit 1.4 times as strong, so the trained strength of 1 sits near the working strength"
+    },
+    "working-quiet": {
+      "background": 0.0,
+      "teachers": "working_teachers.py",
+      "text": "teachers chosen by the working Boss score of the teacher images, repeats included, then the clean background"
     }
   }
 }

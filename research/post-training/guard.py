@@ -40,8 +40,13 @@ def run(gpu, worker, arguments, product=None):
     # Training shares the equipped study's per-card leases. Inference-only calibration takes this
     # campaign's own lease and a higher host entry floor, so the study's companions keep room.
     training = Path(worker).name == "fit.py"
+    # A second training of this campaign may share a card that has the room. It takes its own
+    # lease and needs the first one's peak left free on entry, above the usual floor.
+    second = training and os.environ.get("ANIMA_POST_TRAINING_SLOT") == "2"
     names = (
-        ["adult-sliders-production", "duration-active", "post-training"]
+        ["post-training-second"]
+        if second
+        else ["adult-sliders-production", "duration-active", "post-training"]
         if training
         else ["post-training-companion"]
     )
@@ -54,7 +59,7 @@ def run(gpu, worker, arguments, product=None):
         return 75
     free = int(nv(gpu, "gpu=memory.free")[0])
     host = psutil.virtual_memory().available
-    if free < (13 if training else 11) * 1024 or host < (44 if training else 50) * GIB:
+    if free < (21 if second else 13 if training else 11) * 1024 or host < (44 if training else 50) * GIB:
         print(f"Entry refused: GPU {free} MiB free, host {host / GIB:.1f} GiB", flush=True)
         return 75
     env = dict(

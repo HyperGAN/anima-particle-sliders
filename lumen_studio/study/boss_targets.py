@@ -58,7 +58,8 @@ def field_context(runtime, recipe, directory, row, shape):
         # The character keeps the target it has at the 0.45 floor. Only the surroundings change.
         if not 0 <= floor < 0.45:
             raise ValueError("A background floor lies in [0, 0.45)")
-        weight, reference = floor + (1 - floor) * matte, weight
+        # ``dose`` scales the whole edit, so the trained strength of 1 can be the working strength.
+        weight, reference = (floor + (1 - floor) * matte) * recipe.get("dose", 1.0), weight
     return weight, runtime.encode(entry["explicit"]), reference
 
 
@@ -303,13 +304,13 @@ def replace_boss_teachers(runtime, parent, destination, replacements):
 
 
 @torch.no_grad()
-def quiet_boss_background(runtime, parent, destination, floor):
+def quiet_boss_background(runtime, parent, destination, floor, dose=1.0):
     """Derive a late-cues cache that teaches less of the Boss teacher's change to the surroundings.
 
     The parent cache weights the teacher's edit by 0.45 outside the character, so a
     teacher that repaints its scene teaches the slider to repaint scenes. Here the
     weight outside the character falls to ``floor`` while the character keeps the
-    scale it has in the parent. Each scene is regenerated from its prompts and must
+    scale it has in the parent, times ``dose``. Each scene is regenerated from its prompts and must
     reproduce the parent's fields under the parent's recipe before the new fields
     are written.
     """
@@ -321,7 +322,10 @@ def quiet_boss_background(runtime, parent, destination, floor):
         or "background" in earlier
     ):
         raise ValueError("Start from a late-cues cache at the 0.45 floor for this runtime")
-    recipe = dict(earlier, background=floor)
+    if not 0 < dose <= 2:
+        raise ValueError("A target dose lies in (0, 2]")
+    stronger = {} if dose == 1 else dict(dose=dose)
+    recipe = dict(earlier, background=floor, **stronger)
     new_identity = dict(
         identity,
         field_recipe=recipe,
@@ -329,6 +333,7 @@ def quiet_boss_background(runtime, parent, destination, floor):
             schema="final-boss-quiet-background-v1",
             parent_cache=parent.index["fingerprint"],
             floor=floor,
+            **stronger,
         ),
     )
     fingerprint = digest(new_identity)
