@@ -32,6 +32,8 @@ home = ROOT / "working-search"
 reader = ws.DrawingReader(home / "drawing-receipts")
 judge = StudyJudge(ROOT / "working-metric" / "judgments", "Final Boss")
 STEP = 1 / 16
+# A RAW with no earlier calibration starts from this grid.
+GRID = [0.5 + k / 4 for k in range(7)]
 
 
 def image(ref):
@@ -69,7 +71,7 @@ def post_training(name):
     if arm == "parent":
         return PARENT_STUDY / POLICY["parent"]["calibration"] / D, read(parent_arm() / "cursor.json")["raw"], POLICY["parent"]["step"]
     spec = POLICY["arms"][arm]
-    step = int(extra) if spec["entry"] == "fork" else POLICY["parent"]["step"] + int(extra)
+    step = POLICY["parent"]["step"] + int(extra) if spec["entry"] == "resume" else int(extra)
     trained = arm_path(ROOT / "arms" / arm, spec.get("rates", POLICY["rates"]))
     return ROOT / "arms" / arm / "calibration" / extra / D, read(trained / "fit" / f"{step}.json")["raw"], step
 
@@ -156,8 +158,11 @@ def search(rt, name, pool):
 
         trials = {float.fromhex(p.stem): None
                   for folder in (base / "search", out / "search") for p in folder.glob("*.json")}
+        saved = bool(trials)
+        if not saved:
+            trials = dict.fromkeys(GRID)
         # Saved renders need no GPU, so their strengths are read side by side.
-        with ThreadPoolExecutor(4) as side:
+        with ThreadPoolExecutor(4 if saved else 1) as side:
             for alpha, doc in zip(sorted(trials), side.map(lambda a: measure(a, "search"), sorted(trials))):
                 trials[alpha] = doc["score"]
         for _ in range(2):
@@ -174,7 +179,7 @@ def search(rt, name, pool):
             for alpha in fresh:
                 trials[alpha] = measure(alpha, "search")["score"]
         measured = [a for a, v in trials.items() if v is not None]
-        earlier = read(base / "result.json")
+        earlier = read(base / "result.json") if (base / "result.json").exists() else {}
         result = dict(name=name, raw=raw, step=step, version=ws.VERSION, drawing_model=reader.model,
                       trials=sorted(trials.items()), previous_alpha=earlier.get("alpha"),
                       previous_score=earlier.get("score"))

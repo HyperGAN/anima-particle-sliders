@@ -33,6 +33,9 @@ LABELS = {
     "cleanest-warm": "Fork with the parent's critic · five least-damaged teachers",
     "control-low-g": "Fork control at the lower generator rate",
     "cleanest-low-g": "Fork at the lower generator rate · five least-damaged teachers",
+    "quiet-fresh": "Clean background target · from scratch",
+    "quiet-15-fresh": "Background target at a 0.15 floor · from scratch",
+    "quiet-warm": "Fork with the parent's critic · clean background target",
 }
 
 
@@ -86,9 +89,10 @@ for directory in sorted(folders):
         updates = record["step"]
     else:
         arm, extra = directory.name.rsplit("-", 1)
-        label = LABELS[arm] + (f" · +{extra}" if int(extra) else "")
-        group = "RAW512 post-training · PG 0.12.0"
-        updates = result["step"] if arm in ("parent", "continued") else POLICY["parent"]["step"] + int(extra)
+        fresh = arm != "parent" and POLICY["arms"][arm]["entry"] == "fresh"
+        label = LABELS[arm] + (f" · +{extra}" if int(extra) and not fresh else "")
+        group = "Late cues from scratch · PG 0.12.0" if fresh else "RAW512 post-training · PG 0.12.0"
+        updates = result["step"] if fresh or arm in ("parent", "continued") else POLICY["parent"]["step"] + int(extra)
     for r in rows.values():
         r["effect"] = ws.effect(r["boss"], r["original"])
     working = sum(r["quality"] >= 0.5 and r["effect"] >= 0.5 and r["recolored"] < 0.5 for r in rows.values())

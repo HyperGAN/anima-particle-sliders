@@ -76,6 +76,19 @@
       "entry": "fork",
       "targets": "cleanest",
       "critic": "parent"
+    },
+    "quiet-fresh": {
+      "entry": "fresh",
+      "targets": "quiet"
+    },
+    "quiet-warm": {
+      "entry": "fork",
+      "targets": "quiet",
+      "critic": "parent"
+    },
+    "quiet-15-fresh": {
+      "entry": "fresh",
+      "targets": "quiet-15"
     }
   },
   "teachers": {
@@ -98,5 +111,15 @@
     "gain_points": -2,
     "damage_points": -5,
     "score": "higher than every control"
+  },
+  "targets": {
+    "quiet": {
+      "background": 0.0,
+      "text": "the character keeps its late-cues target; outside the character the target is the unedited model"
+    },
+    "quiet-15": {
+      "background": 0.15,
+      "text": "as quiet, with 15% of the teacher's edit kept outside the character"
+    }
   }
 }

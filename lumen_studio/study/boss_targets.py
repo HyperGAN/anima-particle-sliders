@@ -19,7 +19,8 @@ def subject_matte(path, shape, device):
     return torch.nn.functional.interpolate(matte, size=shape, mode="area").unsqueeze(2)
 
 
-def edited_target(neutral, positive, weight, cue_mix, explicit=None, alternate=None):
+def edited_target(neutral, positive, weight, cue_mix, explicit=None, alternate=None, reference=None):
+    """``reference`` is the weight whose norm sets the scale, when it is not ``weight`` itself."""
     residual = positive - neutral
     mixed = residual
     if explicit is not None:
@@ -28,7 +29,7 @@ def edited_target(neutral, positive, weight, cue_mix, explicit=None, alternate=N
             direction = (direction + (alternate - neutral)) * 0.5
         mixed = residual.lerp(direction, cue_mix)
     weighted = mixed * weight
-    norm = weighted.norm()
+    norm = (weighted if reference is None else mixed * reference).norm()
     if not torch.isfinite(norm) or norm.item() <= 1e-10:
         raise ValueError("Degenerate weighted teacher contrast")
     return neutral + weighted * (residual.norm() / norm)
@@ -50,19 +51,25 @@ def field_context(runtime, recipe, directory, row, shape):
         or file_hash(path) != entry["matte_sha256"]
     ):
         raise ValueError("Final Boss foreground matte differs from the bound recipe")
-    return 0.45 + 0.55 * subject_matte(path, shape, runtime.device), runtime.encode(
-        entry["explicit"]
-    )
+    matte = subject_matte(path, shape, runtime.device)
+    weight, reference = 0.45 + 0.55 * matte, None
+    floor = recipe.get("background")
+    if floor is not None:
+        # The character keeps the target it has at the 0.45 floor. Only the surroundings change.
+        if not 0 <= floor < 0.45:
+            raise ValueError("A background floor lies in [0, 0.45)")
+        weight, reference = floor + (1 - floor) * matte, weight
+    return weight, runtime.encode(entry["explicit"]), reference
 
 
 def target_field(runtime, record, neutral, positive, context):
-    weight, embedding = context
+    weight, embedding, reference = context
     cue = None
     if record["position"] >= 7:
         cue = runtime.predict(
             record["latent"].to(runtime.device), record["timestep"], embedding
         )
-    return edited_target(neutral, positive, weight, 0.35, explicit=cue)
+    return edited_target(neutral, positive, weight, 0.35, explicit=cue, reference=reference)
 
 
 @torch.no_grad()
@@ -278,6 +285,100 @@ def replace_boss_teachers(runtime, parent, destination, replacements):
                         raise ValueError(
                             f"Unchanged scene {shard['row']} was not reproduced exactly"
                         )
+            data["fingerprint"] = fingerprint
+            output = staged / shard["path"]
+            save_tensor_file(output, data)
+            shards.append(dict(shard, sha256=file_hash(output)))
+        atomic_json(
+            staged / "index.json",
+            dict(
+                identity=new_identity,
+                input_fingerprint=fingerprint,
+                shards=shards,
+                fingerprint=digest(dict(input=fingerprint, shards=shards)),
+            ),
+        )
+        staged.rename(destination)
+    return TargetCache(destination, verify=True)
+
+
+@torch.no_grad()
+def quiet_boss_background(runtime, parent, destination, floor):
+    """Derive a late-cues cache that teaches less of the Boss teacher's change to the surroundings.
+
+    The parent cache weights the teacher's edit by 0.45 outside the character, so a
+    teacher that repaints its scene teaches the slider to repaint scenes. Here the
+    weight outside the character falls to ``floor`` while the character keeps the
+    scale it has in the parent. Each scene is regenerated from its prompts and must
+    reproduce the parent's fields under the parent's recipe before the new fields
+    are written.
+    """
+    identity = parent.index["identity"]
+    earlier = identity["field_recipe"]
+    if (
+        identity["layout"] != "final-boss/late-cues-v1"
+        or identity["model"] != runtime.identity
+        or "background" in earlier
+    ):
+        raise ValueError("Start from a late-cues cache at the 0.45 floor for this runtime")
+    recipe = dict(earlier, background=floor)
+    new_identity = dict(
+        identity,
+        field_recipe=recipe,
+        background=dict(
+            schema="final-boss-quiet-background-v1",
+            parent_cache=parent.index["fingerprint"],
+            floor=floor,
+        ),
+    )
+    fingerprint = digest(new_identity)
+    if destination.exists():
+        cache = TargetCache(destination, verify=True)
+        if cache.index["identity"] != new_identity:
+            raise ValueError("Existing targets differ from this background floor")
+        return cache
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    with TemporaryDirectory(dir=destination.parent) as tmp, runtime.mixer.scales({}):
+        staged = Path(tmp) / "targets"
+        staged.mkdir()
+        shards = []
+        for shard in parent.index["shards"]:
+            data = torch.load(
+                parent.directory / shard["path"], map_location="cpu", weights_only=True
+            )
+            row = data["row"]
+            entry = recipe["rows"][row["selection"]["positive"]["output"]["sha256"]]
+            (staged / entry["matte"]).write_bytes(
+                (parent.directory / entry["matte"]).read_bytes()
+            )
+            records = teacher_records(
+                runtime,
+                data["embedding"].to(runtime.device),
+                data["positive_embedding"].to(runtime.device),
+                shard["seed"],
+            )
+            shape = records[0]["latent"].shape[-2:]
+            before = field_context(runtime, earlier, staged, row, shape)
+            after = field_context(runtime, recipe, staged, row, shape)
+            for record, old in zip(records, data["records"], strict=True):
+                fields = [
+                    target_field(
+                        runtime,
+                        record,
+                        record["neutral"].to(runtime.device),
+                        record["positive"].to(runtime.device),
+                        context,
+                    ).cpu()
+                    for context in (before, after)
+                ]
+                record["positive"] = fields[0]
+                if record.keys() != old.keys() or not all(
+                    torch.equal(record[k], old[k]) if torch.is_tensor(old[k]) else record[k] == old[k]
+                    for k in old
+                ):
+                    raise ValueError(f"Scene {shard['row']} was not reproduced exactly")
+                record["positive"] = fields[1]
+            data["records"] = records
             data["fingerprint"] = fingerprint
             output = staged / shard["path"]
             save_tensor_file(output, data)
