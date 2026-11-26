@@ -6,7 +6,7 @@ effect term is multiplied by a quality term that reaches zero for a broken
 drawing. Quality never asks whether the character still looks like the original
 person, so a strong redesign is not penalized for being one.
 
-Drawing quality is read on overlapping tiles at native resolution. A shrunken
+Drawing quality is read on tiles at native resolution. A shrunken
 image hides the shattered-shard defect this term exists to catch.
 """
 
@@ -27,10 +27,12 @@ from .design_score import summarize
 VERSION = "final-boss-working-v1"
 URL = "https://api.nano-gpt.com/api/v1/decisions"
 MODEL = "inception/mercury-decide"
-TILE = 320
-# The reader refuses a larger PNG. An oversized tile is read as four smaller native pieces.
+# Four 256-pixel tiles cover a 512-pixel image exactly. Every image is read the same way:
+# the reader refuses a PNG above about 180 KB, and tiles of this size stay under it.
+TILE = 256
+# A larger tile would have to be read as four smaller native pieces, which reads more leniently.
 TILE_BYTES = 170_000
-PIECE = 192
+PIECE = 160
 # Quality falls from one at the OFF image's own reading to zero this far above it.
 SPAN = 0.30
 STATE = "This is an unscaled crop from an anime illustration."
@@ -62,7 +64,7 @@ def _png(picture, box):
 
 
 def tiles(path, size=TILE):
-    """Four overlapping corner crops, each a list of PNG pieces. Pixels are never resampled."""
+    """Four corner crops, each a list of PNG pieces. Pixels are never resampled."""
     with Image.open(path) as source:
         picture = source.convert("RGB")
     width, height = picture.size
