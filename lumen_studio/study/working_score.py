@@ -7,7 +7,8 @@ drawing. Quality never asks whether the character still looks like the original
 person, so a strong redesign is not penalized for being one.
 
 Drawing quality is read on tiles at native resolution. A shrunken
-image hides the shattered-shard defect this term exists to catch.
+image hides the shattered-shard defect this term exists to catch. Whether
+there is one whole figure, with a head on a body, is read on the full image.
 """
 
 from io import BytesIO
@@ -24,7 +25,7 @@ from PIL import Image
 
 from .design_score import summarize
 
-VERSION = "final-boss-working-v1"
+VERSION = "final-boss-working-v2"
 URL = "https://api.nano-gpt.com/api/v1/decisions"
 MODEL = "inception/mercury-decide"
 # Four 256-pixel tiles cover a 512-pixel image exactly. Every image is read the same way:
@@ -129,12 +130,28 @@ class DrawingReader:
         return fmean(fmean(pieces) for pieces in values)
 
 
-def quality(broken, off_broken, one_figure):
-    """One for a finished single-figure drawing, zero for a broken or split one."""
-    if None in (broken, off_broken, one_figure):
+# Read on the whole image by the paired judge. Tiles cannot see whether a figure holds together.
+FIGURE_STATE = "Look at the central character of this anime illustration."
+FIGURE_QUESTIONS = {
+    "figure": {
+        "type": "noul",
+        "instructions": (
+            "Does the picture show one character whose head and body are both clearly drawn and connected? "
+            "A helmet, mask or hood counts as a head when it sits on a body. Answer near zero when the head "
+            "is missing, when the figure is an empty garment, robe or collar with no head, when it is a "
+            "tree-like, flame-like or abstract mass with no person, when a beard or hair merges into the "
+            "clothing as one shape, or when part of the face is covered by an accidental dark blot."
+        ),
+    }
+}
+
+
+def quality(broken, off_broken, one_figure, figure):
+    """One for a finished drawing of one whole figure; zero when any of those fails."""
+    if None in (broken, off_broken, one_figure, figure):
         return None
     drawn = 1 - min(1.0, max(0.0, broken - off_broken) / SPAN)
-    return min(drawn, one_figure)
+    return min(drawn, one_figure, figure)
 
 
 def score_case(boss, original, quality_):

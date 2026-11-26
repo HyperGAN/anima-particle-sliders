@@ -42,6 +42,29 @@ def figure(off, on):
     return judge._decide((image(off), image(on)), paired_questions.STATE, paired_questions.QUESTIONS)
 
 
+RECOLOR_STATE = "Image 1 is the original illustration. Image 2 is an edit meant to redesign only the central character."
+RECOLOR = {
+    "recolored": {
+        "type": "noul",
+        "instructions": (
+            "Compared with image 1, has the edit recolored the surroundings as well as the character, so that "
+            "the walls, floor, sky or light took on one new color cast such as red or purple? Answer near zero "
+            "when the surroundings keep the colors and lighting of image 1."
+        ),
+    }
+}
+
+
+def whole(on):
+    answer = judge._decide((image(on),), ws.FIGURE_STATE, ws.FIGURE_QUESTIONS)
+    return None if answer is None else answer["figure"]
+
+
+def recolored(off, on):
+    answer = judge._decide((image(off), image(on)), RECOLOR_STATE, RECOLOR)
+    return None if answer is None else answer["recolored"]
+
+
 def source(name):
     """The earlier calibration of this RAW and the checkpoint it measured."""
     arm, extra = name.rsplit("-", 1)
@@ -95,13 +118,20 @@ def search(rt, name, pool):
                 pairs = [j.result() for j in [pool.submit(pair, a, b, evaluated) for a, b in combinations(names, 2)]]
             readings = {c: (pool.submit(reader.broken, rows[c]["on"]["path"]),
                             pool.submit(reader.broken, cases[c]["off"]["path"]),
-                            pool.submit(figure, cases[c]["off"], rows[c]["on"])) for c in names}
-            for c, (broken, floor, answer) in readings.items():
+                            pool.submit(figure, cases[c]["off"], rows[c]["on"]),
+                            pool.submit(whole, rows[c]["on"]),
+                            pool.submit(recolored, cases[c]["off"], rows[c]["on"]) if phase == "ranking" else None)
+                        for c in names}
+            for c, (broken, floor, answer, body, tint) in readings.items():
                 a = answer.result()
                 row = rows[c]
                 row.update(broken=broken.result(), off_broken=floor.result(),
                            one_figure=a and a["one_figure"], same_person=a and a["same_person"])
-                row["quality"] = ws.quality(row["broken"], row["off_broken"], row["one_figure"])
+                row["figure"] = body.result()
+                if tint is not None:
+                    # Shown beside the score. It does not choose the alpha.
+                    row["recolored"] = tint.result()
+                row["quality"] = ws.quality(row["broken"], row["off_broken"], row["one_figure"], row["figure"])
                 row["case"] = ws.score_case(row["boss"], row["original"], row["quality"])
             complete = all(p is not None for p in pairs)
             score = ws.working_score({c: r["case"] for c, r in rows.items()}, pairs) if complete else None

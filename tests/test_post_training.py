@@ -190,10 +190,11 @@ def test_working_score_keeps_boss_ability_and_zeroes_broken_drawings(tmp_path):
     with pytest.raises(ValueError):
         Image.new("RGB", (200, 200)).save(tmp_path / "small.png")
         ws.tiles(tmp_path / "small.png")
-    assert ws.quality(0.05, 0.05, 1.0) == 1.0
-    assert ws.quality(0.05 + ws.SPAN, 0.05, 1.0) == 0.0
-    assert ws.quality(0.05, 0.05, 0.2) == 0.2  # A split figure limits a clean drawing.
-    assert ws.quality(None, 0.05, 1.0) is None
+    assert ws.quality(0.05, 0.05, 1.0, 1.0) == 1.0
+    assert ws.quality(0.05 + ws.SPAN, 0.05, 1.0, 1.0) == 0.0
+    assert ws.quality(0.05, 0.05, 0.2, 1.0) == 0.2  # A split figure limits a clean drawing.
+    assert ws.quality(0.05, 0.05, 1.0, 0.1) == 0.1  # So does a clean drawing of a headless robe.
+    assert ws.quality(None, 0.05, 1.0, 1.0) is None
     # Ability is rewarded as before; a broken drawing earns nothing, whatever its design.
     strong, weak = ws.score_case(0.9, 0.1, 1.0), ws.score_case(0.6, 0.1, 1.0)
     assert strong > weak > 0 and ws.score_case(0.95, 0.1, 0.0) == 0
