@@ -188,7 +188,7 @@ def test_working_score_keeps_boss_ability_and_zeroes_broken_drawings(tmp_path):
     with Image.open(ws.BytesIO(flat[3][0])) as tile:
         assert tile.size == (256, 256)
     with pytest.raises(ValueError):
-        Image.new("RGB", (256, 256)).save(tmp_path / "small.png")
+        Image.new("RGB", (200, 200)).save(tmp_path / "small.png")
         ws.tiles(tmp_path / "small.png")
     assert ws.quality(0.05, 0.05, 1.0) == 1.0
     assert ws.quality(0.05 + ws.SPAN, 0.05, 1.0) == 0.0
