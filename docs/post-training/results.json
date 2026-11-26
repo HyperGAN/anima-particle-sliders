@@ -1,0 +1,4545 @@
+{
+ "policy": {
+  "pg": "0.12.0",
+  "parent": {
+   "study": "/ml2/particlesliders-working/anima-pg012-adult-sliders-20261125",
+   "arm": "duration-study/published/rates/ee3ee151f84cb11a2e75",
+   "step": 512,
+   "raw_sha256": "d3b828cfa4bccf0c20dc11587ed1080cc3eda2684a424e0079b334ed15e2b377",
+   "full_sha256": "2550bedf384b12b7757b6bedeef916169ebf3acff857ae4cae55731ee1d86f04",
+   "cache": "final-boss-comparison/version-probe/verified-targets",
+   "cache_fingerprint": "693a1466a14407743e1e00e1971c3fd7d90ae5548cb0a6caf5e886c70e2be2b5",
+   "validation": "native-prod/boss-short/validation.json",
+   "spec": "native-prod/boss-short/spec.json",
+   "calibration": "duration-study/published/scalar-comparison/512",
+   "alpha": 1.5625
+  },
+  "rates": {
+   "g": 0.00075,
+   "d": 0.009,
+   "particle": 0.03
+  },
+  "seed": 1,
+  "batch_size": 2,
+  "schedule_horizon": 1024,
+  "additional_updates": 48,
+  "arms": {
+   "continued": {
+    "entry": "resume",
+    "targets": "parent"
+   },
+   "control": {
+    "entry": "fork",
+    "targets": "parent"
+   },
+   "cleaner": {
+    "entry": "fork",
+    "targets": "cleaner"
+   },
+   "cleanest": {
+    "entry": "fork",
+    "targets": "cleanest"
+   },
+   "control-low-g": {
+    "entry": "fork",
+    "targets": "parent",
+    "rates": {
+     "g": 0.0002109375,
+     "d": 0.009,
+     "particle": 0.03
+    }
+   },
+   "cleanest-low-g": {
+    "entry": "fork",
+    "targets": "cleanest",
+    "rates": {
+     "g": 0.0002109375,
+     "d": 0.009,
+     "particle": 0.03
+    }
+   },
+   "control-seed2": {
+    "entry": "fork",
+    "targets": "parent",
+    "seed": 2
+   },
+   "cleanest-seed2": {
+    "entry": "fork",
+    "targets": "cleanest",
+    "seed": 2
+   }
+  },
+  "teachers": {
+   "replace": 6,
+   "choose": "the scenes whose current Boss teacher image has the most visible damage; ties keep cache order",
+   "rules": {
+    "cleaner": {
+     "protect_gain": true,
+     "text": "least damaged proposal that is one transformed figure, with lower damage than the current teacher and at least its Boss gain; otherwise keep the current teacher"
+    },
+    "cleanest": {
+     "protect_gain": false,
+     "text": "least damaged proposal that is one transformed figure, with lower damage than the current teacher; Boss gain is not protected"
+    }
+   }
+  },
+  "alpha": "one constant strength for all ten Euler steps, searched on four characters and frozen before the eight ranking characters",
+  "objective": "distinct_boss_score",
+  "practical_win": {
+   "gain_points": -2,
+   "damage_points": -5,
+   "score": "higher than every control"
+  }
+ },
+ "entries": [
+  {
+   "arm": "cleanest",
+   "updates": 524,
+   "extra": 12,
+   "stopped": null,
+   "trajectory": [
+    {
+     "extra": 12,
+     "score": 19.52749710737344,
+     "gain": 0.6975,
+     "integrity": "pass"
+    }
+   ],
+   "alpha": 1.5,
+   "score": 30.82530637289476,
+   "search": 32.26826421626173,
+   "gain": 80.25,
+   "damage": 27.34375,
+   "repeat": 55.02678571428571,
+   "integrity": "fail",
+   "probes": 15,
+   "failed_checks": [
+    "smith"
+   ],
+   "unresolved_checks": [
+    "ferryman",
+    "guard",
+    "stationer",
+    "watchmaker"
+   ],
+   "cases": {
+    "ranger": {
+     "gain": 82.0,
+     "damage": 31.75,
+     "on": "4eba45b117ccda270631bf88547f1ba4204a586e622257fa4adc4b4b719e6eb9"
+    },
+    "smith": {
+     "gain": 78.0,
+     "damage": 29.5,
+     "on": "8def1931d8cd5d44638aeb865db1a6676b4cd871794cd7c24b324596e4d7faff"
+    },
+    "stationer": {
+     "gain": 79.0,
+     "damage": 26.0,
+     "on": "0b59e63c1e24ec88f84d60aa676262ed1905a3016e357a847a25489ce9ad04ca"
+    },
+    "ferryman": {
+     "gain": 78.0,
+     "damage": 33.75,
+     "on": "c2e3c71f4e9d79be9ba7bb5a3f2bcfdf8378db325d6e8890e858b571661009e6"
+    },
+    "watchmaker": {
+     "gain": 80.0,
+     "damage": 23.0,
+     "on": "c63fcf4f31ea32ecef838f87ec935f31cb66ac02ff2c22090b894e17288aa7a3"
+    },
+    "guide": {
+     "gain": 85.00000000000001,
+     "damage": 25.5,
+     "on": "5d197368b5532973133ccdd7937e5b72a0344e7290bd1f260b6c3b5f960899d7"
+    },
+    "guard": {
+     "gain": 79.0,
+     "damage": 27.500000000000004,
+     "on": "6267ae1ac1fc24807d968b20be1cab0ea3a93eb13b20e349e5f9f2095595f829"
+    },
+    "violinist": {
+     "gain": 81.0,
+     "damage": 21.75,
+     "on": "c422447c7ad55780267b59867fedf842c94adf1f1aa62cdf59a4eb0d58453d31"
+    }
+   },
+   "trials": [
+    {
+     "alpha": 0.5,
+     "score": 0.008904003640625005,
+     "gain": 5.250000000000001,
+     "damage": 17.75
+    },
+    {
+     "alpha": 0.75,
+     "score": 0.9451077429765626,
+     "gain": 22.75,
+     "damage": 19.75
+    },
+    {
+     "alpha": 0.875,
+     "score": 2.0032253714875004,
+     "gain": 29.000000000000004,
+     "damage": 17.5625
+    },
+    {
+     "alpha": 1.0,
+     "score": 11.710702486883328,
+     "gain": 47.5,
+     "damage": 20.5
+    },
+    {
+     "alpha": 1.0625,
+     "score": 19.318199847382814,
+     "gain": 61.25000000000001,
+     "damage": 21.875
+    },
+    {
+     "alpha": 1.15625,
+     "score": 28.496543035920315,
+     "gain": 75.5,
+     "damage": 23.5
+    },
+    {
+     "alpha": 1.25,
+     "score": 30.93176257529167,
+     "gain": 79.0,
+     "damage": 24.3125
+    },
+    {
+     "alpha": 1.34375,
+     "score": 31.147705336731253,
+     "gain": 80.0,
+     "damage": 24.6875
+    },
+    {
+     "alpha": 1.4375,
+     "score": 30.522059264733333,
+     "gain": 80.5,
+     "damage": 24.9375
+    },
+    {
+     "alpha": 1.46875,
+     "score": 31.271545604000007,
+     "gain": 81.25,
+     "damage": 25.0
+    },
+    {
+     "alpha": 1.5,
+     "score": 32.26826421626173,
+     "gain": 82.75,
+     "damage": 25.624999999999996
+    },
+    {
+     "alpha": 1.53125,
+     "score": 30.84230042956641,
+     "gain": 82.5,
+     "damage": 26.187499999999996
+    },
+    {
+     "alpha": 1.5625,
+     "score": 29.614877375231252,
+     "gain": 82.25,
+     "damage": 27.375
+    },
+    {
+     "alpha": 1.625,
+     "score": 29.802721469437504,
+     "gain": 83.0,
+     "damage": 27.3125
+    },
+    {
+     "alpha": 2.0,
+     "score": 27.593257437253126,
+     "gain": 82.0,
+     "damage": 30.374999999999996
+    }
+   ],
+   "paired": {
+    "gain": {
+     "mean": 5.625000000000002,
+     "se": 1.6139735791783312
+    },
+    "damage": {
+     "mean": 2.15625,
+     "se": 2.2687401613324645
+    }
+   },
+   "matched": {
+    "alpha": 1.15625,
+    "score": 28.496543035920315,
+    "gain": 75.5,
+    "damage": 23.5
+   },
+   "practical_win": false,
+   "pareto": false
+  },
+  {
+   "arm": "cleanest-seed2",
+   "updates": 524,
+   "extra": 12,
+   "stopped": null,
+   "trajectory": [
+    {
+     "extra": 3,
+     "score": 1.5384182988153647,
+     "gain": 0.2875,
+     "integrity": "pass"
+    },
+    {
+     "extra": 6,
+     "score": 1.8440404324598962,
+     "gain": 0.31416666666666665,
+     "integrity": "pass"
+    },
+    {
+     "extra": 9,
+     "score": 0.8585276310346354,
+     "gain": 0.31416666666666665,
+     "integrity": "pass"
+    },
+    {
+     "extra": 12,
+     "score": 0.5675822951812501,
+     "gain": 0.2791666666666667,
+     "integrity": "pass"
+    }
+   ],
+   "alpha": 1.888671875,
+   "score": 29.488786424287948,
+   "search": 30.352898359749997,
+   "gain": 75.625,
+   "damage": 22.03125,
+   "repeat": 42.348214285714285,
+   "integrity": "unmeasured",
+   "probes": 20,
+   "failed_checks": [],
+   "unresolved_checks": [
+    "smith"
+   ],
+   "cases": {
+    "ranger": {
+     "gain": 76.0,
+     "damage": 20.0,
+     "on": "25851f5145db918640d8517b4b885c84eb3773f38d2e83d0f98807b15f216977"
+    },
+    "smith": {
+     "gain": 75.0,
+     "damage": 25.75,
+     "on": "c518acb5fcd21a2c893b7ebdb90ce934091d72f0abb51578638e9022f8caaf0f"
+    },
+    "stationer": {
+     "gain": 80.0,
+     "damage": 23.5,
+     "on": "9b4fc659d021c86aaa379a9065d22267de447c9528b470cce996fdf8da7dd399"
+    },
+    "ferryman": {
+     "gain": 76.0,
+     "damage": 22.75,
+     "on": "a3b0775df8db63b7173131cdf73a1f76226244d6529a64604779d3811d1d7807"
+    },
+    "watchmaker": {
+     "gain": 64.0,
+     "damage": 20.0,
+     "on": "3acb97d04d2498dfea060cefbeb7892aab315fb23fead164b266bd6bbe274ae4"
+    },
+    "guide": {
+     "gain": 80.0,
+     "damage": 23.25,
+     "on": "6937c942ca18c6246a4aa8573f0bfe94318fe078cb3a2b23f6b1109751387f1b"
+    },
+    "guard": {
+     "gain": 78.0,
+     "damage": 22.75,
+     "on": "d3f930f223f5b21a525aaf50b1d733ce1e7146fb0e86a13ba6f9b3b7991b62c7"
+    },
+    "violinist": {
+     "gain": 76.0,
+     "damage": 18.25,
+     "on": "6b68847cca52c5289f9fbee60a5f3f7b7b1f213da0deac020717b53dbe4e5aa7"
+    }
+   },
+   "trials": [
+    {
+     "alpha": 0.5,
+     "score": 0.017898518574999998,
+     "gain": 5.499999999999999,
+     "damage": 15.625
+    },
+    {
+     "alpha": 0.75,
+     "score": 0.0218403665234375,
+     "gain": 7.000000000000001,
+     "damage": 19.625
+    },
+    {
+     "alpha": 0.875,
+     "score": 0.037433755353125014,
+     "gain": 9.000000000000002,
+     "damage": 20.0625
+    },
+    {
+     "alpha": 1.0,
+     "score": 0.7864858921377603,
+     "gain": 21.5,
+     "damage": 20.5
+    },
+    {
+     "alpha": 1.0625,
+     "score": 1.3099683651312497,
+     "gain": 24.25,
+     "damage": 20.625
+    },
+    {
+     "alpha": 1.25,
+     "score": 5.045960360850001,
+     "gain": 38.0,
+     "damage": 20.625
+    },
+    {
+     "alpha": 1.34375,
+     "score": 13.130148052447396,
+     "gain": 51.0,
+     "damage": 21.1875
+    },
+    {
+     "alpha": 1.5,
+     "score": 22.251038894462503,
+     "gain": 69.75,
+     "damage": 23.0625
+    },
+    {
+     "alpha": 1.625,
+     "score": 25.49033319438984,
+     "gain": 71.25,
+     "damage": 25.0625
+    },
+    {
+     "alpha": 1.765625,
+     "score": 27.146448827607035,
+     "gain": 75.75,
+     "damage": 27.0625
+    },
+    {
+     "alpha": 1.80078125,
+     "score": 28.754683392204168,
+     "gain": 75.5,
+     "damage": 23.5625
+    },
+    {
+     "alpha": 1.8359375,
+     "score": 29.845334866312506,
+     "gain": 78.5,
+     "damage": 24.125000000000004
+    },
+    {
+     "alpha": 1.853515625,
+     "score": 29.759938015725,
+     "gain": 78.75,
+     "damage": 23.375
+    },
+    {
+     "alpha": 1.87109375,
+     "score": 30.31943834423308,
+     "gain": 79.0,
+     "damage": 22.562500000000004
+    },
+    {
+     "alpha": 1.888671875,
+     "score": 30.352898359749997,
+     "gain": 79.25,
+     "damage": 23.1875
+    },
+    {
+     "alpha": 1.90625,
+     "score": 28.877029466722654,
+     "gain": 78.0,
+     "damage": 22.6875
+    },
+    {
+     "alpha": 1.9296875,
+     "score": 28.905132917500005,
+     "gain": 77.25,
+     "damage": 22.8125
+    },
+    {
+     "alpha": 1.953125,
+     "score": 28.58580523429948,
+     "gain": 77.75000000000001,
+     "damage": 24.3125
+    },
+    {
+     "alpha": 2.0,
+     "score": 27.851920859318753,
+     "gain": 77.5,
+     "damage": 24.6875
+    }
+   ],
+   "paired": {
+    "gain": {
+     "mean": 1.0,
+     "se": 2.3528098702858005
+    },
+    "damage": {
+     "mean": -3.1562500000000004,
+     "se": 2.0490293324784647
+    }
+   },
+   "matched": {
+    "alpha": 1.80078125,
+    "score": 28.754683392204168,
+    "gain": 75.5,
+    "damage": 23.5625
+   },
+   "practical_win": false,
+   "pareto": false
+  },
+  {
+   "arm": "continued",
+   "updates": 524,
+   "extra": 12,
+   "stopped": null,
+   "trajectory": [
+    {
+     "extra": 12,
+     "score": 1.3735173062070316,
+     "gain": 0.29000000000000004,
+     "integrity": "pass"
+    }
+   ],
+   "alpha": 2.046875,
+   "score": 29.405659852672265,
+   "search": 30.219049993459375,
+   "gain": 79.125,
+   "damage": 28.34375,
+   "repeat": 51.924107142857146,
+   "integrity": "fail",
+   "probes": 18,
+   "failed_checks": [
+    "smith"
+   ],
+   "unresolved_checks": [
+    "watchmaker"
+   ],
+   "cases": {
+    "ranger": {
+     "gain": 82.0,
+     "damage": 30.5,
+     "on": "3824589632bf6cacab9501a23e56b8e16a53ea20d9b8d90cd733bf74dad5dd76"
+    },
+    "smith": {
+     "gain": 77.0,
+     "damage": 37.0,
+     "on": "d1feab5be096ba8eb3ccaa960b826121a2755e4b269d5202a39617646bdc3a37"
+    },
+    "stationer": {
+     "gain": 77.0,
+     "damage": 25.5,
+     "on": "436e16820ed1e28bd61ce081c8f8c8ce13ebd4f8193b6c3169e90f69275745bc"
+    },
+    "ferryman": {
+     "gain": 77.0,
+     "damage": 26.0,
+     "on": "1435a59499ca06ed15fd6ad19cdbb74a29ca79fa948965b2f53dc7adfecb3b48"
+    },
+    "watchmaker": {
+     "gain": 80.0,
+     "damage": 25.5,
+     "on": "00891a36b21fc7564702a949da15d39a06bd8844a72f5ae2d25f57b3b12e1812"
+    },
+    "guide": {
+     "gain": 82.0,
+     "damage": 30.25,
+     "on": "5b56f2e757d8ef88a2abe36d9f96dfa7cd9fa903a2a81ef8fe59203c206f7326"
+    },
+    "guard": {
+     "gain": 79.0,
+     "damage": 24.75,
+     "on": "a6f48e561d52a294288e57e77913b6f1e18fc02f7fe37c5ce2dd77ea565a2aca"
+    },
+    "violinist": {
+     "gain": 79.0,
+     "damage": 27.250000000000004,
+     "on": "ddeb424a94097fb24bdc135b8f2be216391a2bc974f8b08406db28acdfd93450"
+    }
+   },
+   "trials": [
+    {
+     "alpha": 0.5,
+     "score": 0.0032789869734375,
+     "gain": 3.25,
+     "damage": 20.5
+    },
+    {
+     "alpha": 0.75,
+     "score": 0.07111981336770834,
+     "gain": 10.500000000000002,
+     "damage": 19.6875
+    },
+    {
+     "alpha": 0.875,
+     "score": 0.7819397830093752,
+     "gain": 21.0,
+     "damage": 23.9375
+    },
+    {
+     "alpha": 1.0,
+     "score": 0.250716387446875,
+     "gain": 17.75,
+     "damage": 19.75
+    },
+    {
+     "alpha": 1.0625,
+     "score": 0.6091432919562499,
+     "gain": 21.999999999999996,
+     "damage": 20.75
+    },
+    {
+     "alpha": 1.25,
+     "score": 11.20997005113542,
+     "gain": 53.5,
+     "damage": 25.0625
+    },
+    {
+     "alpha": 1.34375,
+     "score": 20.84697440278125,
+     "gain": 70.0,
+     "damage": 26.5
+    },
+    {
+     "alpha": 1.5,
+     "score": 24.50635389660833,
+     "gain": 73.0,
+     "damage": 25.8125
+    },
+    {
+     "alpha": 1.625,
+     "score": 26.805372435641665,
+     "gain": 74.5,
+     "damage": 24.3125
+    },
+    {
+     "alpha": 2.0,
+     "score": 29.128868120150525,
+     "gain": 80.0,
+     "damage": 28.375
+    },
+    {
+     "alpha": 2.0234375,
+     "score": 30.0846827043125,
+     "gain": 80.5,
+     "damage": 27.625
+    },
+    {
+     "alpha": 2.046875,
+     "score": 30.219049993459375,
+     "gain": 80.25,
+     "damage": 27.625
+    },
+    {
+     "alpha": 2.0703125,
+     "score": 29.97815938953334,
+     "gain": 80.25,
+     "damage": 28.0625
+    },
+    {
+     "alpha": 2.09375,
+     "score": 29.654783520634897,
+     "gain": 80.25,
+     "damage": 28.6875
+    },
+    {
+     "alpha": 2.140625,
+     "score": 30.06484785880573,
+     "gain": 80.5,
+     "damage": 29.25
+    },
+    {
+     "alpha": 2.1875,
+     "score": 29.469344871883337,
+     "gain": 80.0,
+     "damage": 28.249999999999996
+    },
+    {
+     "alpha": 2.609375,
+     "score": 26.200279035330205,
+     "gain": 79.0,
+     "damage": 31.625000000000004
+    },
+    {
+     "alpha": 3.03125,
+     "score": 23.578266360624998,
+     "gain": 79.5,
+     "damage": 36.8125
+    }
+   ],
+   "paired": {
+    "gain": {
+     "mean": 4.5,
+     "se": 1.5923926292577109
+    },
+    "damage": {
+     "mean": 3.15625,
+     "se": 2.3375513267856047
+    }
+   },
+   "matched": {
+    "alpha": 1.625,
+    "score": 26.805372435641665,
+    "gain": 74.5,
+    "damage": 24.3125
+   }
+  },
+  {
+   "arm": "continued",
+   "updates": 548,
+   "extra": 36,
+   "stopped": null,
+   "trajectory": [
+    {
+     "extra": 36,
+     "score": 13.257805564328908,
+     "gain": 0.6391666666666667,
+     "integrity": "unmeasured"
+    }
+   ],
+   "alpha": 1.625,
+   "score": 28.873212603897887,
+   "search": 29.517910802681254,
+   "gain": 77.875,
+   "damage": 28.999999999999996,
+   "repeat": 48.075892857142854,
+   "integrity": "fail",
+   "probes": 18,
+   "failed_checks": [
+    "ferryman",
+    "guard"
+   ],
+   "unresolved_checks": [],
+   "cases": {
+    "ranger": {
+     "gain": 80.0,
+     "damage": 27.500000000000004,
+     "on": "bbbc838853eb07818c416627cc980257c8db70d9bfbffe0a593364a51a1d1f1b"
+    },
+    "smith": {
+     "gain": 71.00000000000001,
+     "damage": 30.75,
+     "on": "0f30466be17d874fb1c6929312302cfac1c0defc2634d48b7117b81379e28f64"
+    },
+    "stationer": {
+     "gain": 79.0,
+     "damage": 30.5,
+     "on": "392cee86a054ab78883fe789feefa03d287936a43f2650f6c558791d2d7a491a"
+    },
+    "ferryman": {
+     "gain": 80.0,
+     "damage": 26.0,
+     "on": "0ffa5fe945719b80a22c57b1e6deb629f5a6288719288517c5f565bc3addf2c6"
+    },
+    "watchmaker": {
+     "gain": 79.0,
+     "damage": 29.25,
+     "on": "3b2203e5dfd3371a4080490739ced4993517486a7624e256cf451d65c3c1cfe3"
+    },
+    "guide": {
+     "gain": 81.0,
+     "damage": 24.5,
+     "on": "ad3bc94a2a916d40ed17816d4e1f6dc5082e82ff40e0464a130b2cc2f564a5a7"
+    },
+    "guard": {
+     "gain": 80.0,
+     "damage": 30.5,
+     "on": "865b5372d3597b215e54a1767ee777b23900d25a55e3f52cd37b757fbdf0ec8f"
+    },
+    "violinist": {
+     "gain": 73.00000000000001,
+     "damage": 33.0,
+     "on": "e05ca4ac9da86543261303bcd1ff67492c1618c703e0aecaf6fbe217a419dad7"
+    }
+   },
+   "trials": [
+    {
+     "alpha": 0.5,
+     "score": 0.0033158880734374986,
+     "gain": 2.9999999999999996,
+     "damage": 20.8125
+    },
+    {
+     "alpha": 0.75,
+     "score": 0.15228420236250004,
+     "gain": 15.5,
+     "damage": 19.8125
+    },
+    {
+     "alpha": 0.875,
+     "score": 1.4397464838164065,
+     "gain": 24.75,
+     "damage": 19.8125
+    },
+    {
+     "alpha": 1.0,
+     "score": 6.887172889774999,
+     "gain": 51.24999999999999,
+     "damage": 21.9375
+    },
+    {
+     "alpha": 1.0625,
+     "score": 13.622869843764843,
+     "gain": 60.5,
+     "damage": 28.0625
+    },
+    {
+     "alpha": 1.25,
+     "score": 19.689559083526298,
+     "gain": 65.25,
+     "damage": 28.4375
+    },
+    {
+     "alpha": 1.34375,
+     "score": 25.24762605143829,
+     "gain": 72.25,
+     "damage": 29.125
+    },
+    {
+     "alpha": 1.5,
+     "score": 28.021122747367972,
+     "gain": 74.25,
+     "damage": 25.25
+    },
+    {
+     "alpha": 1.5625,
+     "score": 27.50465599102292,
+     "gain": 74.25,
+     "damage": 27.125
+    },
+    {
+     "alpha": 1.59375,
+     "score": 28.111152110397658,
+     "gain": 75.5,
+     "damage": 26.5625
+    },
+    {
+     "alpha": 1.625,
+     "score": 29.517910802681254,
+     "gain": 75.5,
+     "damage": 24.25
+    },
+    {
+     "alpha": 1.642578125,
+     "score": 29.38961723539219,
+     "gain": 75.5,
+     "damage": 25.4375
+    },
+    {
+     "alpha": 1.66015625,
+     "score": 29.200453717123438,
+     "gain": 76.0,
+     "damage": 26.75
+    },
+    {
+     "alpha": 1.6953125,
+     "score": 28.68666948276094,
+     "gain": 76.25,
+     "damage": 25.8125
+    },
+    {
+     "alpha": 1.765625,
+     "score": 28.860241684493754,
+     "gain": 76.75,
+     "damage": 25.624999999999996
+    },
+    {
+     "alpha": 1.90625,
+     "score": 27.443867132860937,
+     "gain": 75.25,
+     "damage": 26.937499999999996
+    },
+    {
+     "alpha": 2.0,
+     "score": 28.617694051881255,
+     "gain": 76.75,
+     "damage": 25.75
+    },
+    {
+     "alpha": 2.1875,
+     "score": 28.869619353457036,
+     "gain": 79.5,
+     "damage": 30.0
+    }
+   ],
+   "paired": {
+    "gain": {
+     "mean": 3.2500000000000036,
+     "se": 0.940174755792014
+    },
+    "damage": {
+     "mean": 3.8125,
+     "se": 1.679544740611064
+    }
+   },
+   "matched": {
+    "alpha": 1.625,
+    "score": 29.517910802681254,
+    "gain": 75.5,
+    "damage": 24.25
+   }
+  },
+  {
+   "arm": "parent",
+   "updates": 512,
+   "extra": 0,
+   "stopped": null,
+   "alpha": 1.5625,
+   "score": 27.388774044226118,
+   "search": 28.78277893133542,
+   "gain": 74.62500000000001,
+   "damage": 25.1875,
+   "repeat": 42.89732142857143,
+   "integrity": "unmeasured",
+   "probes": 16,
+   "failed_checks": [],
+   "unresolved_checks": [
+    "violinist",
+    "watchmaker"
+   ],
+   "cases": {
+    "ranger": {
+     "gain": 78.0,
+     "damage": 25.75,
+     "on": "a91b60acda56f1b6ed558ab3c2ac82a9009b123f235293c92f31e7200c00a24e"
+    },
+    "smith": {
+     "gain": 65.0,
+     "damage": 19.5,
+     "on": "6ca3f7c26a4c8619c3c18e565ffa535bf7e41cea5b7783776c4cab3dd8e336b4"
+    },
+    "stationer": {
+     "gain": 78.0,
+     "damage": 21.5,
+     "on": "8fc3b730ba2bab4f6c12d139dc7f372b9e9a77fda77f98e0a1dad1a05b6491d9"
+    },
+    "ferryman": {
+     "gain": 72.0,
+     "damage": 26.0,
+     "on": "f8a7732493593980eb37c8458700748d876b04f4efe6a7941b32511b7a321cde"
+    },
+    "watchmaker": {
+     "gain": 76.0,
+     "damage": 23.0,
+     "on": "c45401b7de6868dce96399a6815d5ddc0fcdffef163331df847d9f342f23755f"
+    },
+    "guide": {
+     "gain": 81.0,
+     "damage": 27.250000000000004,
+     "on": "ea52c087930a02cf1f0aefc79a7d87005f41c21dcff5db7ddaa9ae5eff7cc2c8"
+    },
+    "guard": {
+     "gain": 78.0,
+     "damage": 26.5,
+     "on": "1f61df886ed3bc4ce475c135fb93f8b5be2f0779557674cd62c1272edc8b547a"
+    },
+    "violinist": {
+     "gain": 69.0,
+     "damage": 32.0,
+     "on": "d2f946ca8e568e66a6d4484c129a1f06216a7d4a8fca69ae8ab85fcb9a514555"
+    }
+   },
+   "trials": [
+    {
+     "alpha": 0.5,
+     "score": 0.0181280483015625,
+     "gain": 6.25,
+     "damage": 17.875000000000004
+    },
+    {
+     "alpha": 0.75,
+     "score": 0.08703000458437499,
+     "gain": 12.25,
+     "damage": 18.5625
+    },
+    {
+     "alpha": 0.875,
+     "score": 0.9657068530273434,
+     "gain": 18.0,
+     "damage": 23.375
+    },
+    {
+     "alpha": 1.0,
+     "score": 2.8661482907312497,
+     "gain": 28.999999999999996,
+     "damage": 20.3125
+    },
+    {
+     "alpha": 1.0625,
+     "score": 3.739768380928125,
+     "gain": 30.5,
+     "damage": 21.000000000000004
+    },
+    {
+     "alpha": 1.25,
+     "score": 15.7846450116375,
+     "gain": 57.49999999999999,
+     "damage": 27.9375
+    },
+    {
+     "alpha": 1.34375,
+     "score": 23.403253872671094,
+     "gain": 67.5,
+     "damage": 29.375
+    },
+    {
+     "alpha": 1.5,
+     "score": 25.269458693578382,
+     "gain": 69.25,
+     "damage": 27.5625
+    },
+    {
+     "alpha": 1.53125,
+     "score": 24.18467688630729,
+     "gain": 69.25,
+     "damage": 31.374999999999996
+    },
+    {
+     "alpha": 1.5625,
+     "score": 28.78277893133542,
+     "gain": 74.0,
+     "damage": 27.749999999999996
+    },
+    {
+     "alpha": 1.59375,
+     "score": 28.655237145192185,
+     "gain": 76.25,
+     "damage": 28.999999999999996
+    },
+    {
+     "alpha": 1.625,
+     "score": 26.754904940475004,
+     "gain": 73.0,
+     "damage": 31.374999999999996
+    },
+    {
+     "alpha": 1.765625,
+     "score": 27.038039822,
+     "gain": 74.5,
+     "damage": 29.312499999999996
+    },
+    {
+     "alpha": 1.90625,
+     "score": 26.54632783874063,
+     "gain": 69.75,
+     "damage": 27.5625
+    },
+    {
+     "alpha": 2.0,
+     "score": 25.289636634591666,
+     "gain": 72.0,
+     "damage": 28.749999999999996
+    },
+    {
+     "alpha": 2.1875,
+     "score": 24.8223007839,
+     "gain": 71.5,
+     "damage": 26.8125
+    }
+   ],
+   "paired": {
+    "gain": {
+     "mean": 0.0,
+     "se": 0.0
+    },
+    "damage": {
+     "mean": 0.0,
+     "se": 0.0
+    }
+   },
+   "matched": {
+    "alpha": 1.5625,
+    "score": 28.78277893133542,
+    "gain": 74.0,
+    "damage": 27.749999999999996
+   }
+  },
+  {
+   "arm": "cleanest-low-g",
+   "updates": 560,
+   "extra": 48,
+   "stopped": null,
+   "trajectory": [
+    {
+     "extra": 12,
+     "score": 5.6492893915468745,
+     "gain": 0.41083333333333333,
+     "integrity": "pass"
+    },
+    {
+     "extra": 24,
+     "score": 6.2512557859437505,
+     "gain": 0.4558333333333333,
+     "integrity": "pass"
+    },
+    {
+     "extra": 36,
+     "score": 3.9056348908937513,
+     "gain": 0.39999999999999997,
+     "integrity": "pass"
+    },
+    {
+     "extra": 48,
+     "score": 2.819909177310938,
+     "gain": 0.42,
+     "integrity": "pass"
+    }
+   ],
+   "alpha": 1.953125,
+   "score": 27.344064099597716,
+   "search": 26.79121869804375,
+   "gain": 76.5,
+   "damage": 29.46875,
+   "repeat": 46.526785714285715,
+   "integrity": "fail",
+   "probes": 16,
+   "failed_checks": [
+    "ferryman"
+   ],
+   "unresolved_checks": [
+    "guard",
+    "guide",
+    "ranger",
+    "smith",
+    "stationer",
+    "violinist"
+   ],
+   "cases": {
+    "ranger": {
+     "gain": 73.0,
+     "damage": 27.500000000000004,
+     "on": "69d54de6a019a61d754bc4bef8e36dfba0188ff024f215c87f0c2ed55c08edcc"
+    },
+    "smith": {
+     "gain": 79.0,
+     "damage": 25.5,
+     "on": "d9d8c9bd87ba4b41e2f828c252ac3461b02bfd63ce3a2bd63914e831a6c7cfc1"
+    },
+    "stationer": {
+     "gain": 78.0,
+     "damage": 26.75,
+     "on": "5ccb7635080db4484739a703c6188e004f49b90538e27cf88d930f0e0ead2429"
+    },
+    "ferryman": {
+     "gain": 77.0,
+     "damage": 35.75,
+     "on": "3ab4cbfe60df71ecbfb33002ccaa47be437b3f0c6422415e6eba0846660f7025"
+    },
+    "watchmaker": {
+     "gain": 66.0,
+     "damage": 28.249999999999996,
+     "on": "9510fd3e59350358ac63cbe6a904e3a7941f4cf3ee879681359ee664096b678e"
+    },
+    "guide": {
+     "gain": 83.0,
+     "damage": 25.5,
+     "on": "f5e30be2d827d96a410774cdcaa85258b2cbd1db483a76444eeb128e1a00aabc"
+    },
+    "guard": {
+     "gain": 79.0,
+     "damage": 35.25,
+     "on": "2b90cb231a63e33c87a23f9d5785832f676a4b48c4d244d7993e9911fe5f1f3f"
+    },
+    "violinist": {
+     "gain": 77.0,
+     "damage": 31.25,
+     "on": "ffe70bf571b3094d7c07af292219720f6e0c18681df26c7a449f06c982b0664c"
+    }
+   },
+   "trials": [
+    {
+     "alpha": 0.5,
+     "score": 0.027107701624999998,
+     "gain": 7.249999999999999,
+     "damage": 17.0625
+    },
+    {
+     "alpha": 0.75,
+     "score": 0.15687989251874998,
+     "gain": 12.75,
+     "damage": 20.5
+    },
+    {
+     "alpha": 0.875,
+     "score": 0.5400272908039062,
+     "gain": 19.0,
+     "damage": 25.25
+    },
+    {
+     "alpha": 1.0,
+     "score": 1.5739360803421876,
+     "gain": 24.75,
+     "damage": 21.4375
+    },
+    {
+     "alpha": 1.0625,
+     "score": 4.593475936596875,
+     "gain": 34.25,
+     "damage": 23.3125
+    },
+    {
+     "alpha": 1.25,
+     "score": 17.062957314072655,
+     "gain": 51.24999999999999,
+     "damage": 27.0
+    },
+    {
+     "alpha": 1.5,
+     "score": 24.366353166924995,
+     "gain": 72.25,
+     "damage": 26.25
+    },
+    {
+     "alpha": 1.625,
+     "score": 24.09398972174531,
+     "gain": 72.25,
+     "damage": 27.3125
+    },
+    {
+     "alpha": 1.90625,
+     "score": 23.94972701559948,
+     "gain": 76.0,
+     "damage": 32.375
+    },
+    {
+     "alpha": 1.9296875,
+     "score": 25.8004929419211,
+     "gain": 76.5,
+     "damage": 32.0
+    },
+    {
+     "alpha": 1.953125,
+     "score": 26.79121869804375,
+     "gain": 77.75000000000001,
+     "damage": 30.75
+    },
+    {
+     "alpha": 1.9765625,
+     "score": 26.440083488900008,
+     "gain": 77.75000000000001,
+     "damage": 31.0
+    },
+    {
+     "alpha": 2.0,
+     "score": 25.899750128812503,
+     "gain": 76.5,
+     "damage": 30.5
+    },
+    {
+     "alpha": 2.09375,
+     "score": 23.03899255284375,
+     "gain": 75.25,
+     "damage": 35.0
+    },
+    {
+     "alpha": 2.1875,
+     "score": 23.846611826578126,
+     "gain": 76.75,
+     "damage": 33.5625
+    }
+   ],
+   "paired": {
+    "gain": {
+     "mean": 1.875,
+     "se": 2.628399159727674
+    },
+    "damage": {
+     "mean": 4.28125,
+     "se": 1.4808581458783572
+    }
+   },
+   "matched": {
+    "alpha": 1.5,
+    "score": 24.366353166924995,
+    "gain": 72.25,
+    "damage": 26.25
+   },
+   "practical_win": false,
+   "pareto": false
+  },
+  {
+   "arm": "control-low-g",
+   "updates": 560,
+   "extra": 48,
+   "stopped": null,
+   "trajectory": [
+    {
+     "extra": 12,
+     "score": 2.9369625069541674,
+     "gain": 0.3958333333333333,
+     "integrity": "pass"
+    },
+    {
+     "extra": 24,
+     "score": 2.9471486831640634,
+     "gain": 0.4058333333333333,
+     "integrity": "pass"
+    },
+    {
+     "extra": 36,
+     "score": 3.0791995739500004,
+     "gain": 0.4041666666666667,
+     "integrity": "pass"
+    },
+    {
+     "extra": 48,
+     "score": 1.5024273003749997,
+     "gain": 0.3325,
+     "integrity": "pass"
+    }
+   ],
+   "alpha": 1.44140625,
+   "score": 27.027646807926786,
+   "search": 25.474131653770833,
+   "gain": 75.25,
+   "damage": 27.15625,
+   "repeat": 41.910714285714285,
+   "integrity": "unmeasured",
+   "probes": 18,
+   "failed_checks": [],
+   "unresolved_checks": [
+    "guide",
+    "smith",
+    "violinist"
+   ],
+   "cases": {
+    "ranger": {
+     "gain": 77.0,
+     "damage": 28.749999999999996,
+     "on": "3bbe741d0b42cabe416cdc0e3ea0dac5c2785d81ae5ed2abdb05c68982a891eb"
+    },
+    "smith": {
+     "gain": 71.00000000000001,
+     "damage": 26.25,
+     "on": "c9c19f1249a9000ba927960311d8134626282e3a1e5460d9586994266e6b4412"
+    },
+    "stationer": {
+     "gain": 77.0,
+     "damage": 22.75,
+     "on": "8ac924dbf824ee52fcdbdd2bae54e84eae786e6092027c8870e91d1b495a9fb4"
+    },
+    "ferryman": {
+     "gain": 70.0,
+     "damage": 25.5,
+     "on": "be5a88f072fd56868d508548b698d0fbac134bf96e5e95e8c1e88c92a802d847"
+    },
+    "watchmaker": {
+     "gain": 79.0,
+     "damage": 21.75,
+     "on": "748a18c7b41b9365e3c2195921a6b4747f91e2f1a277d02570c374cb2b70a151"
+    },
+    "guide": {
+     "gain": 78.0,
+     "damage": 32.25,
+     "on": "86c033cdb91cc9755e911523debf5f2c494062c5f4e0a0d4271d9e59aad0fe84"
+    },
+    "guard": {
+     "gain": 77.0,
+     "damage": 29.5,
+     "on": "b13ade4370c47292f11499edd68019ad464d05f316e486fca07c559792d73ba4"
+    },
+    "violinist": {
+     "gain": 73.00000000000001,
+     "damage": 30.5,
+     "on": "14df4dbe6b1859e4c9be3278050284ea6728d0e6e84bd1d97e4827f20c9b6f63"
+    }
+   },
+   "trials": [
+    {
+     "alpha": 0.5,
+     "score": 0.004583732002604167,
+     "gain": 3.7500000000000004,
+     "damage": 18.1875
+    },
+    {
+     "alpha": 0.75,
+     "score": 0.11151437403645834,
+     "gain": 12.250000000000002,
+     "damage": 22.9375
+    },
+    {
+     "alpha": 0.875,
+     "score": 0.18735329637656256,
+     "gain": 15.000000000000002,
+     "damage": 20.4375
+    },
+    {
+     "alpha": 1.0,
+     "score": 2.647732905189062,
+     "gain": 25.749999999999996,
+     "damage": 22.625
+    },
+    {
+     "alpha": 1.0625,
+     "score": 5.954062747422395,
+     "gain": 34.0,
+     "damage": 25.25
+    },
+    {
+     "alpha": 1.25,
+     "score": 16.468402522039057,
+     "gain": 56.75,
+     "damage": 26.5625
+    },
+    {
+     "alpha": 1.34375,
+     "score": 24.848093944445317,
+     "gain": 72.5,
+     "damage": 24.75
+    },
+    {
+     "alpha": 1.421875,
+     "score": 24.21805719955,
+     "gain": 70.5,
+     "damage": 30.9375
+    },
+    {
+     "alpha": 1.44140625,
+     "score": 25.474131653770833,
+     "gain": 70.5,
+     "damage": 27.3125
+    },
+    {
+     "alpha": 1.4609375,
+     "score": 25.162919711250005,
+     "gain": 70.5,
+     "damage": 28.9375
+    },
+    {
+     "alpha": 1.48046875,
+     "score": 23.893511652103125,
+     "gain": 71.25,
+     "damage": 28.500000000000004
+    },
+    {
+     "alpha": 1.5,
+     "score": 25.09644455438151,
+     "gain": 72.0,
+     "damage": 26.875
+    },
+    {
+     "alpha": 1.53125,
+     "score": 24.392059353413543,
+     "gain": 72.0,
+     "damage": 29.4375
+    },
+    {
+     "alpha": 1.5625,
+     "score": 24.345836648397658,
+     "gain": 71.5,
+     "damage": 27.3125
+    },
+    {
+     "alpha": 1.625,
+     "score": 24.365035714903907,
+     "gain": 73.5,
+     "damage": 28.6875
+    },
+    {
+     "alpha": 2.1875,
+     "score": 24.3779841377224,
+     "gain": 77.5,
+     "damage": 34.9375
+    },
+    {
+     "alpha": 3.03125,
+     "score": 15.631394486568748,
+     "gain": 72.0,
+     "damage": 41.0625
+    }
+   ],
+   "paired": {
+    "gain": {
+     "mean": 0.6250000000000036,
+     "se": 1.1485627664918592
+    },
+    "damage": {
+     "mean": 1.9687499999999991,
+     "se": 1.0621716929748892
+    }
+   },
+   "matched": {
+    "alpha": 1.34375,
+    "score": 24.848093944445317,
+    "gain": 72.5,
+    "damage": 24.75
+   }
+  },
+  {
+   "arm": "control-seed2",
+   "updates": 524,
+   "extra": 12,
+   "stopped": null,
+   "trajectory": [
+    {
+     "extra": 3,
+     "score": 3.622250392316407,
+     "gain": 0.3466666666666667,
+     "integrity": "pass"
+    },
+    {
+     "extra": 6,
+     "score": 2.4310611276625,
+     "gain": 0.3025,
+     "integrity": "pass"
+    },
+    {
+     "extra": 9,
+     "score": 0.701435397875,
+     "gain": 0.235,
+     "integrity": "pass"
+    },
+    {
+     "extra": 12,
+     "score": 0.7702949673734375,
+     "gain": 0.23666666666666666,
+     "integrity": "pass"
+    }
+   ],
+   "alpha": 2.1875,
+   "score": 25.233255956981477,
+   "search": 29.040469290516146,
+   "gain": 70.0,
+   "damage": 23.28125,
+   "repeat": 54.723214285714285,
+   "integrity": "fail",
+   "probes": 20,
+   "failed_checks": [
+    "smith"
+   ],
+   "unresolved_checks": [
+    "ranger"
+   ],
+   "cases": {
+    "ranger": {
+     "gain": 80.0,
+     "damage": 24.5,
+     "on": "d987d02886a1b05812ba61da39ff23d8eac1b543b62505b2d095de4d11d346a7"
+    },
+    "smith": {
+     "gain": 67.0,
+     "damage": 26.0,
+     "on": "d862166420b50b99e92dce63f4551ee2f01ab43da2d68055e93c0de9e18adf49"
+    },
+    "stationer": {
+     "gain": 79.0,
+     "damage": 24.5,
+     "on": "3b8c017c5ea3f154230ec605405c9f8aafe393c5293456eb109d31b52e82b2be"
+    },
+    "ferryman": {
+     "gain": 71.0,
+     "damage": 20.75,
+     "on": "79a2794923f3da815e97059a6b55fe099f105170ab786e7dd9bdd3c9c900a5d3"
+    },
+    "watchmaker": {
+     "gain": 35.0,
+     "damage": 25.25,
+     "on": "1d0aa6f8927c51b6ef221473f33cd24d9c7d8f7ffab98b7677107ba9748d7348"
+    },
+    "guide": {
+     "gain": 84.00000000000001,
+     "damage": 20.5,
+     "on": "e184da0589b0691831d8e35e836c7258545be8dca8287efa3e77017f534127ef"
+    },
+    "guard": {
+     "gain": 77.0,
+     "damage": 24.75,
+     "on": "a97cfdf7daa3a5c9a1b29bcac0c1819da60c68c74c5ec4ea9921439fed1882b8"
+    },
+    "violinist": {
+     "gain": 67.0,
+     "damage": 20.0,
+     "on": "a1fb04a2be44c157e686cfa339a8c09b3e9315591758e3c71ee490691e6eb18a"
+    }
+   },
+   "trials": [
+    {
+     "alpha": 0.5,
+     "score": 0.010340852092187505,
+     "gain": 4.0,
+     "damage": 15.375
+    },
+    {
+     "alpha": 0.75,
+     "score": 0.029509341577604164,
+     "gain": 7.75,
+     "damage": 16.4375
+    },
+    {
+     "alpha": 0.875,
+     "score": 0.8391272606752607,
+     "gain": 15.000000000000002,
+     "damage": 16.3125
+    },
+    {
+     "alpha": 1.0,
+     "score": 2.096117472656249,
+     "gain": 24.25,
+     "damage": 19.75
+    },
+    {
+     "alpha": 1.0625,
+     "score": 0.9990305627445314,
+     "gain": 24.75,
+     "damage": 18.875
+    },
+    {
+     "alpha": 1.25,
+     "score": 7.531942559202342,
+     "gain": 45.74999999999999,
+     "damage": 25.375000000000004
+    },
+    {
+     "alpha": 1.34375,
+     "score": 14.763263712466665,
+     "gain": 52.0,
+     "damage": 24.6875
+    },
+    {
+     "alpha": 1.5,
+     "score": 19.014618058706255,
+     "gain": 65.75,
+     "damage": 25.1875
+    },
+    {
+     "alpha": 1.625,
+     "score": 25.11469020777188,
+     "gain": 73.25,
+     "damage": 25.0625
+    },
+    {
+     "alpha": 2.0,
+     "score": 27.792954594887505,
+     "gain": 77.0,
+     "damage": 23.25
+    },
+    {
+     "alpha": 2.09375,
+     "score": 27.422164738235153,
+     "gain": 77.25,
+     "damage": 24.0
+    },
+    {
+     "alpha": 2.140625,
+     "score": 27.461138165037504,
+     "gain": 77.0,
+     "damage": 23.25
+    },
+    {
+     "alpha": 2.1640625,
+     "score": 28.29972410777813,
+     "gain": 78.5,
+     "damage": 22.0
+    },
+    {
+     "alpha": 2.1875,
+     "score": 29.040469290516146,
+     "gain": 79.25,
+     "damage": 23.75
+    },
+    {
+     "alpha": 2.2138671875,
+     "score": 26.496632054583337,
+     "gain": 78.75,
+     "damage": 26.625
+    },
+    {
+     "alpha": 2.240234375,
+     "score": 25.348933304895834,
+     "gain": 78.0,
+     "damage": 26.125
+    },
+    {
+     "alpha": 2.29296875,
+     "score": 24.33919732752031,
+     "gain": 77.0,
+     "damage": 25.25
+    },
+    {
+     "alpha": 2.3984375,
+     "score": 23.606302056428127,
+     "gain": 75.75,
+     "damage": 27.6875
+    },
+    {
+     "alpha": 2.609375,
+     "score": 21.1061624739,
+     "gain": 71.5,
+     "damage": 28.437500000000004
+    },
+    {
+     "alpha": 3.03125,
+     "score": 16.188484068590625,
+     "gain": 67.5,
+     "damage": 31.5
+    }
+   ],
+   "paired": {
+    "gain": {
+     "mean": -4.624999999999998,
+     "se": 5.233605353864581
+    },
+    "damage": {
+     "mean": -1.9062500000000004,
+     "se": 2.108622550979667
+    }
+   },
+   "matched": {
+    "alpha": 1.625,
+    "score": 25.11469020777188,
+    "gain": 73.25,
+    "damage": 25.0625
+   }
+  },
+  {
+   "arm": "control",
+   "updates": 548,
+   "extra": 36,
+   "stopped": null,
+   "trajectory": [
+    {
+     "extra": 36,
+     "score": 6.298498470637501,
+     "gain": 0.43500000000000005,
+     "integrity": "unmeasured"
+    }
+   ],
+   "alpha": 1.5,
+   "score": 24.553432263025393,
+   "search": 24.87623308746328,
+   "gain": 76.125,
+   "damage": 33.375,
+   "repeat": 54.89732142857143,
+   "integrity": "unmeasured",
+   "probes": 15,
+   "failed_checks": [],
+   "unresolved_checks": [
+    "ferryman",
+    "guard",
+    "guide",
+    "ranger",
+    "smith",
+    "stationer",
+    "watchmaker"
+   ],
+   "cases": {
+    "ranger": {
+     "gain": 82.0,
+     "damage": 30.5,
+     "on": "651071643dce7698b467ab443766e8838e1bb838e50c20acd2be6e99ca9c943d"
+    },
+    "smith": {
+     "gain": 75.0,
+     "damage": 31.75,
+     "on": "e214a47e4fa33c673674e700e82e8c900db555b07a821bfe823c26afece62ee0"
+    },
+    "stationer": {
+     "gain": 78.0,
+     "damage": 25.25,
+     "on": "3507518bad25f2d24ece79a09c164d6abfe74a4eed4f66205fb45fd776d9eb6b"
+    },
+    "ferryman": {
+     "gain": 75.0,
+     "damage": 34.0,
+     "on": "b355e25d3f5e029c285042afd35d248c36ec3bda455cc6c742f4496246b19051"
+    },
+    "watchmaker": {
+     "gain": 64.0,
+     "damage": 36.5,
+     "on": "39a8f09d597236573413bac0d57e1d6ec649c61a4016c9bb8efbc5e1fde53442"
+    },
+    "guide": {
+     "gain": 78.0,
+     "damage": 38.0,
+     "on": "696087ae4c5056f444be564c15e6926994fbdfbc17401a05a076a324bccff13f"
+    },
+    "guard": {
+     "gain": 78.0,
+     "damage": 33.5,
+     "on": "c9e14f85dc23e99ed10c8dd4733048d34393568b64cd4b97b9affa20af6ba4d8"
+    },
+    "violinist": {
+     "gain": 79.0,
+     "damage": 37.5,
+     "on": "791e310e245e2e4fb756cc5b86eacded1e85e9e653b8f22449e21fa8b565c7f8"
+    }
+   },
+   "trials": [
+    {
+     "alpha": 0.5,
+     "score": 0.02542388147890625,
+     "gain": 6.0,
+     "damage": 21.4375
+    },
+    {
+     "alpha": 0.75,
+     "score": 0.18945413380833334,
+     "gain": 13.0,
+     "damage": 26.187500000000004
+    },
+    {
+     "alpha": 0.875,
+     "score": 0.6961957471197916,
+     "gain": 19.75,
+     "damage": 24.5625
+    },
+    {
+     "alpha": 1.0,
+     "score": 3.3288697795499997,
+     "gain": 33.24999999999999,
+     "damage": 27.375
+    },
+    {
+     "alpha": 1.0625,
+     "score": 6.799656220435415,
+     "gain": 41.5,
+     "damage": 26.875
+    },
+    {
+     "alpha": 1.15625,
+     "score": 12.45924088755156,
+     "gain": 54.99999999999999,
+     "damage": 32.1875
+    },
+    {
+     "alpha": 1.25,
+     "score": 22.692585800445308,
+     "gain": 75.25,
+     "damage": 32.25
+    },
+    {
+     "alpha": 1.34375,
+     "score": 21.905403999335157,
+     "gain": 71.5,
+     "damage": 35.625
+    },
+    {
+     "alpha": 1.4375,
+     "score": 22.6549603319625,
+     "gain": 72.25,
+     "damage": 30.125
+    },
+    {
+     "alpha": 1.46875,
+     "score": 22.751112820244533,
+     "gain": 72.75,
+     "damage": 32.5625
+    },
+    {
+     "alpha": 1.5,
+     "score": 24.87623308746328,
+     "gain": 75.25,
+     "damage": 30.562500000000004
+    },
+    {
+     "alpha": 1.53125,
+     "score": 24.666082564747136,
+     "gain": 76.0,
+     "damage": 32.875
+    },
+    {
+     "alpha": 1.5625,
+     "score": 24.513303710791664,
+     "gain": 75.75,
+     "damage": 32.5
+    },
+    {
+     "alpha": 1.625,
+     "score": 22.558510605783333,
+     "gain": 75.0,
+     "damage": 35.5
+    },
+    {
+     "alpha": 2.0,
+     "score": 21.042497890057287,
+     "gain": 77.5,
+     "damage": 39.9375
+    }
+   ],
+   "paired": {
+    "gain": {
+     "mean": 1.5,
+     "se": 2.5354627641855494
+    },
+    "damage": {
+     "mean": 8.1875,
+     "se": 1.278033855464825
+    }
+   },
+   "matched": {
+    "alpha": 1.4375,
+    "score": 22.6549603319625,
+    "gain": 72.25,
+    "damage": 30.125
+   }
+  },
+  {
+   "arm": "cleanest",
+   "updates": 548,
+   "extra": 36,
+   "stopped": null,
+   "trajectory": [
+    {
+     "extra": 36,
+     "score": 9.81213418015703,
+     "gain": 0.47333333333333333,
+     "integrity": "unmeasured"
+    }
+   ],
+   "alpha": 2.1875,
+   "score": 24.211442408782816,
+   "search": 22.763324522033336,
+   "gain": 77.125,
+   "damage": 33.90625,
+   "repeat": 58.47767857142857,
+   "integrity": "fail",
+   "probes": 20,
+   "failed_checks": [
+    "guard",
+    "watchmaker"
+   ],
+   "unresolved_checks": [
+    "ferryman",
+    "guide",
+    "ranger",
+    "smith",
+    "stationer",
+    "violinist"
+   ],
+   "cases": {
+    "ranger": {
+     "gain": 82.0,
+     "damage": 34.25,
+     "on": "d482147b1ad27ac8235db2c7dafd521db9902e7655477af0cdfcae2ad98e1607"
+    },
+    "smith": {
+     "gain": 76.0,
+     "damage": 35.5,
+     "on": "52e8d4c7ffa021b8e5ab75150e0a760582ee0d572a980fdc27e8c11b11fd3aca"
+    },
+    "stationer": {
+     "gain": 78.0,
+     "damage": 31.25,
+     "on": "24d2d5ab5398a5fb6c8e7afb1170bc55f87a1e7d10e86baab317b8a6d4ed8839"
+    },
+    "ferryman": {
+     "gain": 79.0,
+     "damage": 31.25,
+     "on": "0736d060387ab3f83857050799f4b436df0d9dd657f84b2fdc214b158bfc08d7"
+    },
+    "watchmaker": {
+     "gain": 69.0,
+     "damage": 31.75,
+     "on": "78c71d0adbe601e5129d88d07f1f78ec69e1cb4a50f5057a78fc0f8b410259d2"
+    },
+    "guide": {
+     "gain": 82.0,
+     "damage": 43.75,
+     "on": "493fb0a4cb439ed32f22de6962739a2695d9f2b4dba51512ca71c5e6360c451a"
+    },
+    "guard": {
+     "gain": 75.0,
+     "damage": 35.25,
+     "on": "75281387d9af090e79d3452d0918d1378ab0f0d17cc655d0969faeb6e1d34119"
+    },
+    "violinist": {
+     "gain": 76.0,
+     "damage": 28.249999999999996,
+     "on": "63709ba8f4be451fcd76bb568fa1c1bd2e196344ffe248a90cc22161ea34ca23"
+    }
+   },
+   "trials": [
+    {
+     "alpha": 0.5,
+     "score": 0.020934087778125006,
+     "gain": 5.75,
+     "damage": 19.8125
+    },
+    {
+     "alpha": 0.75,
+     "score": 0.15059455971249994,
+     "gain": 12.499999999999998,
+     "damage": 22.875
+    },
+    {
+     "alpha": 0.875,
+     "score": 0.32684709853125005,
+     "gain": 19.5,
+     "damage": 22.1875
+    },
+    {
+     "alpha": 1.0,
+     "score": 3.6230230640062513,
+     "gain": 29.500000000000004,
+     "damage": 26.875
+    },
+    {
+     "alpha": 1.0625,
+     "score": 13.105682546891668,
+     "gain": 52.25,
+     "damage": 30.9375
+    },
+    {
+     "alpha": 1.25,
+     "score": 21.087085144225778,
+     "gain": 71.5,
+     "damage": 34.4375
+    },
+    {
+     "alpha": 1.34375,
+     "score": 22.38327464005,
+     "gain": 74.75,
+     "damage": 34.625
+    },
+    {
+     "alpha": 1.5,
+     "score": 20.738531595445053,
+     "gain": 72.0,
+     "damage": 37.75
+    },
+    {
+     "alpha": 1.625,
+     "score": 22.007278696532286,
+     "gain": 77.75,
+     "damage": 38.5625
+    },
+    {
+     "alpha": 2.0,
+     "score": 20.843324789753122,
+     "gain": 78.0,
+     "damage": 40.81249999999999
+    },
+    {
+     "alpha": 2.09375,
+     "score": 22.639626625899215,
+     "gain": 79.0,
+     "damage": 39.0
+    },
+    {
+     "alpha": 2.140625,
+     "score": 21.785412087292187,
+     "gain": 78.75,
+     "damage": 40.0625
+    },
+    {
+     "alpha": 2.1640625,
+     "score": 21.137147605127605,
+     "gain": 78.25,
+     "damage": 39.8125
+    },
+    {
+     "alpha": 2.1875,
+     "score": 22.763324522033336,
+     "gain": 78.25,
+     "damage": 37.5625
+    },
+    {
+     "alpha": 2.2138671875,
+     "score": 21.648800404743227,
+     "gain": 77.75,
+     "damage": 37.9375
+    },
+    {
+     "alpha": 2.240234375,
+     "score": 21.145602434259374,
+     "gain": 77.5,
+     "damage": 38.1875
+    },
+    {
+     "alpha": 2.29296875,
+     "score": 20.618071864040623,
+     "gain": 77.75,
+     "damage": 40.1875
+    },
+    {
+     "alpha": 2.3984375,
+     "score": 20.513201016501558,
+     "gain": 76.75,
+     "damage": 39.6875
+    },
+    {
+     "alpha": 2.609375,
+     "score": 18.749929994003125,
+     "gain": 74.75,
+     "damage": 38.8125
+    },
+    {
+     "alpha": 3.03125,
+     "score": 13.224162079153121,
+     "gain": 65.75,
+     "damage": 33.0625
+    }
+   ],
+   "paired": {
+    "gain": {
+     "mean": 2.5,
+     "se": 2.0873770280289223
+    },
+    "damage": {
+     "mean": 8.71875,
+     "se": 2.244754550295294
+    }
+   },
+   "matched": {
+    "alpha": 1.34375,
+    "score": 22.38327464005,
+    "gain": 74.75,
+    "damage": 34.625
+   },
+   "practical_win": false,
+   "pareto": false
+  },
+  {
+   "arm": "cleanest",
+   "updates": 560,
+   "extra": 48,
+   "stopped": null,
+   "trajectory": [
+    {
+     "extra": 12,
+     "score": 19.52749710737344,
+     "gain": 0.6975,
+     "integrity": "pass"
+    },
+    {
+     "extra": 24,
+     "score": 7.410171830566406,
+     "gain": 0.52,
+     "integrity": "pass"
+    },
+    {
+     "extra": 36,
+     "score": 9.81213418015703,
+     "gain": 0.47333333333333333,
+     "integrity": "unmeasured"
+    },
+    {
+     "extra": 48,
+     "score": 2.7290688165289065,
+     "gain": 0.375,
+     "integrity": "pass"
+    }
+   ],
+   "alpha": 1.3828125,
+   "score": 24.060918402718194,
+   "search": 23.3428363475625,
+   "gain": 73.75,
+   "damage": 29.531249999999996,
+   "repeat": 45.22767857142857,
+   "integrity": "unmeasured",
+   "probes": 18,
+   "failed_checks": [],
+   "unresolved_checks": [
+    "ferryman",
+    "ranger",
+    "stationer",
+    "violinist",
+    "watchmaker"
+   ],
+   "cases": {
+    "ranger": {
+     "gain": 74.0,
+     "damage": 36.75,
+     "on": "1a97d9949cfb53b8d5d1f9d4c7cd270473d24867689e722ea5acffb5e857fb15"
+    },
+    "smith": {
+     "gain": 74.0,
+     "damage": 24.5,
+     "on": "4204fb5f610058fa05c4e9e2e324c5d2eb2c1dcf09914eb76bd1036153bafba0"
+    },
+    "stationer": {
+     "gain": 78.0,
+     "damage": 25.25,
+     "on": "03bdd08c00af1a7348576b3e881adfe20c0f67f376e4fff5ca0ee0ad51e4e46b"
+    },
+    "ferryman": {
+     "gain": 69.0,
+     "damage": 28.249999999999996,
+     "on": "1c035d6fd0ed7049d82290f99df8bab15aaf520b544f46d8116794050e6de08e"
+    },
+    "watchmaker": {
+     "gain": 74.0,
+     "damage": 34.75,
+     "on": "a82f7663ab490128931d01b2a757a4ecbb9dd3ddb71cfb55d098404f3ec382e3"
+    },
+    "guide": {
+     "gain": 70.0,
+     "damage": 28.000000000000004,
+     "on": "e7e339206c41dcf9d1b244b9caa1d5de62ddcdd85c6967c9def8773c5ce89893"
+    },
+    "guard": {
+     "gain": 78.0,
+     "damage": 28.499999999999996,
+     "on": "aedd976564d1d4ff94f3b506b04757ed4fa00236bccca50c706eb833ab9bbfb2"
+    },
+    "violinist": {
+     "gain": 73.00000000000001,
+     "damage": 30.25,
+     "on": "0f2c94951a86ddd7e2f79ed7616f6cacb2d72c343423a4961f33d6d3a28eb0d5"
+    }
+   },
+   "trials": [
+    {
+     "alpha": 0.5,
+     "score": 0.013637981249999999,
+     "gain": 5.0,
+     "damage": 17.4375
+    },
+    {
+     "alpha": 0.75,
+     "score": 0.5418266765361978,
+     "gain": 15.25,
+     "damage": 20.3125
+    },
+    {
+     "alpha": 0.875,
+     "score": 1.586916778120313,
+     "gain": 22.75,
+     "damage": 20.3125
+    },
+    {
+     "alpha": 1.0,
+     "score": 1.9671017787671878,
+     "gain": 29.25,
+     "damage": 21.375
+    },
+    {
+     "alpha": 1.0625,
+     "score": 9.489437003137237,
+     "gain": 41.5,
+     "damage": 22.4375
+    },
+    {
+     "alpha": 1.25,
+     "score": 19.65720937272135,
+     "gain": 69.25,
+     "damage": 34.25
+    },
+    {
+     "alpha": 1.296875,
+     "score": 21.521993871010157,
+     "gain": 69.5,
+     "damage": 31.5
+    },
+    {
+     "alpha": 1.3203125,
+     "score": 22.00996030785729,
+     "gain": 70.25,
+     "damage": 32.5625
+    },
+    {
+     "alpha": 1.34375,
+     "score": 22.485520708566668,
+     "gain": 70.75,
+     "damage": 34.0
+    },
+    {
+     "alpha": 1.36328125,
+     "score": 22.444090734125776,
+     "gain": 71.5,
+     "damage": 33.8125
+    },
+    {
+     "alpha": 1.3828125,
+     "score": 23.3428363475625,
+     "gain": 71.0,
+     "damage": 31.937500000000004
+    },
+    {
+     "alpha": 1.40234375,
+     "score": 23.228101190300784,
+     "gain": 71.50000000000001,
+     "damage": 33.8125
+    },
+    {
+     "alpha": 1.421875,
+     "score": 22.42607825064063,
+     "gain": 70.25,
+     "damage": 32.8125
+    },
+    {
+     "alpha": 1.5,
+     "score": 21.821051226454692,
+     "gain": 66.5,
+     "damage": 31.1875
+    },
+    {
+     "alpha": 1.625,
+     "score": 20.69570462601094,
+     "gain": 69.5,
+     "damage": 32.4375
+    },
+    {
+     "alpha": 1.90625,
+     "score": 17.689203755708593,
+     "gain": 57.50000000000001,
+     "damage": 38.125
+    },
+    {
+     "alpha": 2.0,
+     "score": 17.161901733375004,
+     "gain": 60.00000000000001,
+     "damage": 39.5625
+    },
+    {
+     "alpha": 2.1875,
+     "score": 14.159643749355208,
+     "gain": 59.5,
+     "damage": 41.75
+    }
+   ],
+   "paired": {
+    "gain": {
+     "mean": -0.8749999999999982,
+     "se": 2.073967040652837
+    },
+    "damage": {
+     "mean": 4.343749999999999,
+     "se": 1.6896068197533836
+    }
+   },
+   "matched": null,
+   "practical_win": false,
+   "pareto": false
+  },
+  {
+   "arm": "cleaner",
+   "updates": 548,
+   "extra": 36,
+   "stopped": {
+    "step": 36,
+    "phase": "fit-rate-panel",
+    "broken_structure": 0.8
+   },
+   "trajectory": [
+    {
+     "extra": 36,
+     "score": 7.922031981522913,
+     "gain": 0.44666666666666666,
+     "integrity": "pass"
+    }
+   ],
+   "alpha": 1.2734375,
+   "score": 23.957759658601898,
+   "search": 23.588292428021347,
+   "gain": 71.125,
+   "damage": 30.875000000000004,
+   "repeat": 36.00892857142857,
+   "integrity": "fail",
+   "probes": 16,
+   "failed_checks": [
+    "watchmaker"
+   ],
+   "unresolved_checks": [
+    "guard",
+    "guide",
+    "ranger",
+    "violinist"
+   ],
+   "cases": {
+    "ranger": {
+     "gain": 76.0,
+     "damage": 31.75,
+     "on": "feff46188992ddbbd4889bb8d9e291ebde48c6b3cfce51856219697fdcfcc825"
+    },
+    "smith": {
+     "gain": 72.00000000000001,
+     "damage": 27.500000000000004,
+     "on": "fb7b1d974d4748c3fe117e79b34db4b352bb7e72fdc5bd651ee5611156a30102"
+    },
+    "stationer": {
+     "gain": 79.0,
+     "damage": 22.5,
+     "on": "50bc8cb2e81867898d9f9fe6c118dfa22fe02ace592cdd99f51704e7a0230d0d"
+    },
+    "ferryman": {
+     "gain": 71.0,
+     "damage": 42.75,
+     "on": "d22b570ec4c2b2365b22ba1f977c0cdce66a9164ace4b7788a8ac5b2ca8d2b55"
+    },
+    "watchmaker": {
+     "gain": 79.0,
+     "damage": 27.500000000000004,
+     "on": "2c5b781ae33b341cdc0822f3b99176b79c4df0a52b3ee8b78e5552414535a4d8"
+    },
+    "guide": {
+     "gain": 64.99999999999999,
+     "damage": 29.75,
+     "on": "d339747d7cbdeaf74464f5e977f2c10b0b36b40e2f8c560d9392d6c8379f3bfe"
+    },
+    "guard": {
+     "gain": 78.0,
+     "damage": 31.0,
+     "on": "f2805ea4b1517b4d87c12401cc4df060078e7af4a3cf292427210976238976f9"
+    },
+    "violinist": {
+     "gain": 48.99999999999999,
+     "damage": 34.25,
+     "on": "86c4ad41048cb31bf7ad139dec61a81749d1a65af90f888af287dd97814410c7"
+    }
+   },
+   "trials": [
+    {
+     "alpha": 0.5,
+     "score": 0.0088536120875,
+     "gain": 5.0,
+     "damage": 20.0625
+    },
+    {
+     "alpha": 0.75,
+     "score": 0.17846188511250005,
+     "gain": 15.250000000000002,
+     "damage": 20.9375
+    },
+    {
+     "alpha": 0.875,
+     "score": 0.5042900868828125,
+     "gain": 19.0,
+     "damage": 26.125
+    },
+    {
+     "alpha": 1.0,
+     "score": 2.3103292258062487,
+     "gain": 28.749999999999996,
+     "damage": 23.25
+    },
+    {
+     "alpha": 1.0625,
+     "score": 7.35765701031224,
+     "gain": 40.5,
+     "damage": 28.4375
+    },
+    {
+     "alpha": 1.25,
+     "score": 18.480142288231246,
+     "gain": 68.25,
+     "damage": 32.1875
+    },
+    {
+     "alpha": 1.2734375,
+     "score": 23.588292428021347,
+     "gain": 75.75,
+     "damage": 29.562500000000004
+    },
+    {
+     "alpha": 1.296875,
+     "score": 22.621501090706246,
+     "gain": 74.0,
+     "damage": 28.375
+    },
+    {
+     "alpha": 1.3203125,
+     "score": 21.050467662802085,
+     "gain": 72.0,
+     "damage": 35.0
+    },
+    {
+     "alpha": 1.34375,
+     "score": 21.367198764173175,
+     "gain": 71.0,
+     "damage": 32.5625
+    },
+    {
+     "alpha": 1.421875,
+     "score": 20.25042988527995,
+     "gain": 70.25,
+     "damage": 35.125
+    },
+    {
+     "alpha": 1.5,
+     "score": 21.0967840660625,
+     "gain": 73.5,
+     "damage": 34.0
+    },
+    {
+     "alpha": 1.625,
+     "score": 18.994043134197916,
+     "gain": 69.75,
+     "damage": 34.0
+    },
+    {
+     "alpha": 2.0,
+     "score": 19.718242514981245,
+     "gain": 77.25,
+     "damage": 41.0625
+    },
+    {
+     "alpha": 2.1875,
+     "score": 20.378969884162498,
+     "gain": 76.5,
+     "damage": 41.375
+    },
+    {
+     "alpha": 3.03125,
+     "score": 10.429940540578126,
+     "gain": 62.0,
+     "damage": 37.75
+    }
+   ],
+   "paired": {
+    "gain": {
+     "mean": -3.500000000000001,
+     "se": 3.3327380420823465
+    },
+    "damage": {
+     "mean": 5.6875,
+     "se": 1.76571388840726
+    }
+   },
+   "matched": {
+    "alpha": 1.296875,
+    "score": 22.621501090706246,
+    "gain": 74.0,
+    "damage": 28.375
+   },
+   "practical_win": false,
+   "pareto": false
+  },
+  {
+   "arm": "continued",
+   "updates": 560,
+   "extra": 48,
+   "stopped": null,
+   "trajectory": [
+    {
+     "extra": 12,
+     "score": 1.3735173062070316,
+     "gain": 0.29000000000000004,
+     "integrity": "pass"
+    },
+    {
+     "extra": 24,
+     "score": 4.777149714500001,
+     "gain": 0.45999999999999996,
+     "integrity": "unmeasured"
+    },
+    {
+     "extra": 36,
+     "score": 13.257805564328908,
+     "gain": 0.6391666666666667,
+     "integrity": "unmeasured"
+    },
+    {
+     "extra": 48,
+     "score": 3.148004623700001,
+     "gain": 0.29583333333333334,
+     "integrity": "pass"
+    }
+   ],
+   "alpha": 2.0,
+   "score": 23.64472477754967,
+   "search": 21.936656438852342,
+   "gain": 73.25,
+   "damage": 28.5625,
+   "repeat": 47.933035714285715,
+   "integrity": "unmeasured",
+   "probes": 19,
+   "failed_checks": [],
+   "unresolved_checks": [
+    "ferryman",
+    "guard",
+    "guide",
+    "ranger",
+    "stationer",
+    "violinist",
+    "watchmaker"
+   ],
+   "cases": {
+    "ranger": {
+     "gain": 72.0,
+     "damage": 24.25,
+     "on": "3934d436f653a604eec5b5220d41aef5fc9fc5d2d2445a95998352b5ccbd8514"
+    },
+    "smith": {
+     "gain": 72.00000000000001,
+     "damage": 21.0,
+     "on": "c60d133005d458ca222dc641bac614bdf366f32c224ca896d8bac51d9d0ec72a"
+    },
+    "stationer": {
+     "gain": 79.0,
+     "damage": 27.250000000000004,
+     "on": "e961091f6bebaa0022bd8418cba712807b7adf5abf68de31f5ab5876e072f1a1"
+    },
+    "ferryman": {
+     "gain": 75.0,
+     "damage": 31.5,
+     "on": "9ddfdd8669e8025ab392871fdcdef5b899b1dd0cdb35029c9b641f4e1f6256d4"
+    },
+    "watchmaker": {
+     "gain": 70.0,
+     "damage": 30.75,
+     "on": "3a1908aa2c65fe4df256ed694e4f0469a7f68a3752cffaeb73f9931f662f1d8f"
+    },
+    "guide": {
+     "gain": 83.0,
+     "damage": 34.5,
+     "on": "584425d50e7f766915dadf3504b11e37832405fd546e54915b7735edad815261"
+    },
+    "guard": {
+     "gain": 68.0,
+     "damage": 28.749999999999996,
+     "on": "5c179efc1054aa805b5502d7d1d333a0600f183777eee84c047896925bf8901b"
+    },
+    "violinist": {
+     "gain": 67.0,
+     "damage": 30.5,
+     "on": "8f84216672d380a3c11150fd6085cc84792222dcdefe5b8570a0df09847d1f89"
+    }
+   },
+   "trials": [
+    {
+     "alpha": 0.5,
+     "score": 0.009663224700000002,
+     "gain": 4.25,
+     "damage": 18.375
+    },
+    {
+     "alpha": 0.75,
+     "score": 0.08121042629166669,
+     "gain": 11.25,
+     "damage": 20.25
+    },
+    {
+     "alpha": 0.875,
+     "score": 1.6954441423536466,
+     "gain": 20.0,
+     "damage": 20.25
+    },
+    {
+     "alpha": 1.0,
+     "score": 0.5609249663062501,
+     "gain": 21.5,
+     "damage": 20.25
+    },
+    {
+     "alpha": 1.0625,
+     "score": 2.5962138260562506,
+     "gain": 30.5,
+     "damage": 24.5625
+    },
+    {
+     "alpha": 1.25,
+     "score": 9.153665441000001,
+     "gain": 38.75,
+     "damage": 21.625
+    },
+    {
+     "alpha": 1.34375,
+     "score": 8.161110345558331,
+     "gain": 51.0,
+     "damage": 29.000000000000004
+    },
+    {
+     "alpha": 1.5,
+     "score": 15.365823646883332,
+     "gain": 59.5,
+     "damage": 29.25
+    },
+    {
+     "alpha": 1.625,
+     "score": 15.724694636755206,
+     "gain": 67.0,
+     "damage": 34.875
+    },
+    {
+     "alpha": 1.8125,
+     "score": 21.66311133835078,
+     "gain": 73.25,
+     "damage": 29.562500000000004
+    },
+    {
+     "alpha": 1.90625,
+     "score": 20.278903823195314,
+     "gain": 69.75,
+     "damage": 29.000000000000004
+    },
+    {
+     "alpha": 1.953125,
+     "score": 18.72773391061875,
+     "gain": 69.0,
+     "damage": 31.874999999999996
+    },
+    {
+     "alpha": 1.9765625,
+     "score": 20.309175244942704,
+     "gain": 69.75,
+     "damage": 32.5625
+    },
+    {
+     "alpha": 2.0,
+     "score": 21.936656438852342,
+     "gain": 72.0,
+     "damage": 29.25
+    },
+    {
+     "alpha": 2.0234375,
+     "score": 20.662646379156772,
+     "gain": 72.25,
+     "damage": 30.312499999999996
+    },
+    {
+     "alpha": 2.046875,
+     "score": 20.451485393801818,
+     "gain": 71.25,
+     "damage": 29.9375
+    },
+    {
+     "alpha": 2.09375,
+     "score": 21.836465728117968,
+     "gain": 73.25,
+     "damage": 30.125
+    },
+    {
+     "alpha": 2.1875,
+     "score": 20.31422298816875,
+     "gain": 72.25,
+     "damage": 30.1875
+    },
+    {
+     "alpha": 3.03125,
+     "score": 11.182858402148437,
+     "gain": 57.49999999999999,
+     "damage": 41.3125
+    }
+   ],
+   "paired": {
+    "gain": {
+     "mean": -1.3749999999999982,
+     "se": 1.9994418864130212
+    },
+    "damage": {
+     "mean": 3.3749999999999996,
+     "se": 1.313562495114499
+    }
+   },
+   "matched": {
+    "alpha": 2.0,
+    "score": 21.936656438852342,
+    "gain": 72.0,
+    "damage": 29.25
+   }
+  },
+  {
+   "arm": "control",
+   "updates": 524,
+   "extra": 12,
+   "stopped": null,
+   "trajectory": [
+    {
+     "extra": 12,
+     "score": 13.665472817040106,
+     "gain": 0.5958333333333333,
+     "integrity": "pass"
+    }
+   ],
+   "alpha": 2.0,
+   "score": 20.984269203925894,
+   "search": 30.551346111239063,
+   "gain": 71.75,
+   "damage": 27.3125,
+   "repeat": 69.72321428571429,
+   "integrity": "fail",
+   "probes": 17,
+   "failed_checks": [
+    "smith",
+    "watchmaker"
+   ],
+   "unresolved_checks": [
+    "ferryman",
+    "guard",
+    "ranger",
+    "stationer",
+    "violinist"
+   ],
+   "cases": {
+    "ranger": {
+     "gain": 65.99999999999999,
+     "damage": 28.000000000000004,
+     "on": "877d4c60c93229a9d0e394711f0227474e01b86c861302d79200016e912950ad"
+    },
+    "smith": {
+     "gain": 70.0,
+     "damage": 40.0,
+     "on": "c7f7580c95a3bc289d03eb85b196a406c8f8c553cc6c21c5b8e9321510f23f7e"
+    },
+    "stationer": {
+     "gain": 77.0,
+     "damage": 26.0,
+     "on": "e06beacec9eb48018012dd063097b23438c620e955709107d4ac9e1fd7c63457"
+    },
+    "ferryman": {
+     "gain": 75.0,
+     "damage": 24.25,
+     "on": "7e009f6503266d1fe6859858460252aee776343946eb235d15f4e8d33a11ec92"
+    },
+    "watchmaker": {
+     "gain": 66.0,
+     "damage": 32.25,
+     "on": "b908ab0c191e778a69b577c56ffa6e0d885da2e9aae3ac87ea13dabc0c8cd795"
+    },
+    "guide": {
+     "gain": 83.0,
+     "damage": 24.0,
+     "on": "762f9d276d64fbd1973d8343a9d224485a5a886ea89122e8dff92603f8279ade"
+    },
+    "guard": {
+     "gain": 74.0,
+     "damage": 21.5,
+     "on": "92d4b04e375102ecc164388650c6b9c3462f57a0e3d41dfe196897ea5f07c94a"
+    },
+    "violinist": {
+     "gain": 63.0,
+     "damage": 22.5,
+     "on": "e0ee52192362634d72adde0579ac45b23bd5bde43c125a25f3c8b631699e2b0e"
+    }
+   },
+   "trials": [
+    {
+     "alpha": 0.5,
+     "score": 0.005942586853125002,
+     "gain": 4.75,
+     "damage": 19.375
+    },
+    {
+     "alpha": 0.75,
+     "score": 0.8448080726666666,
+     "gain": 18.25,
+     "damage": 19.4375
+    },
+    {
+     "alpha": 0.875,
+     "score": 1.3761124568072916,
+     "gain": 22.75,
+     "damage": 19.125
+    },
+    {
+     "alpha": 1.0,
+     "score": 2.4797128076718753,
+     "gain": 32.75,
+     "damage": 17.6875
+    },
+    {
+     "alpha": 1.0625,
+     "score": 8.051305898825522,
+     "gain": 49.75000000000001,
+     "damage": 19.0
+    },
+    {
+     "alpha": 1.25,
+     "score": 27.184324305722395,
+     "gain": 76.25,
+     "damage": 23.375
+    },
+    {
+     "alpha": 1.34375,
+     "score": 23.79065507463021,
+     "gain": 75.0,
+     "damage": 26.8125
+    },
+    {
+     "alpha": 1.5,
+     "score": 26.90071773042188,
+     "gain": 77.75000000000001,
+     "damage": 27.749999999999996
+    },
+    {
+     "alpha": 1.625,
+     "score": 29.097169482611978,
+     "gain": 79.75,
+     "damage": 27.750000000000004
+    },
+    {
+     "alpha": 1.90625,
+     "score": 29.935341054112502,
+     "gain": 80.0,
+     "damage": 25.374999999999996
+    },
+    {
+     "alpha": 1.953125,
+     "score": 30.174372324134374,
+     "gain": 80.75,
+     "damage": 25.8125
+    },
+    {
+     "alpha": 1.9765625,
+     "score": 30.38958762352526,
+     "gain": 80.75,
+     "damage": 25.4375
+    },
+    {
+     "alpha": 2.0,
+     "score": 30.551346111239063,
+     "gain": 80.75,
+     "damage": 24.1875
+    },
+    {
+     "alpha": 2.0234375,
+     "score": 29.679135321290367,
+     "gain": 80.0,
+     "damage": 24.5
+    },
+    {
+     "alpha": 2.046875,
+     "score": 29.559695660687503,
+     "gain": 80.0,
+     "damage": 24.8125
+    },
+    {
+     "alpha": 2.09375,
+     "score": 29.950117393978125,
+     "gain": 80.75,
+     "damage": 25.874999999999996
+    },
+    {
+     "alpha": 2.1875,
+     "score": 28.316872898989846,
+     "gain": 80.0,
+     "damage": 25.8125
+    }
+   ],
+   "paired": {
+    "gain": {
+     "mean": -2.8750000000000018,
+     "se": 2.1911958574518824
+    },
+    "damage": {
+     "mean": 2.125,
+     "se": 3.337757480704672
+    }
+   },
+   "matched": {
+    "alpha": 1.34375,
+    "score": 23.79065507463021,
+    "gain": 75.0,
+    "damage": 26.8125
+   }
+  },
+  {
+   "arm": "control",
+   "updates": 560,
+   "extra": 48,
+   "stopped": null,
+   "trajectory": [
+    {
+     "extra": 12,
+     "score": 13.665472817040106,
+     "gain": 0.5958333333333333,
+     "integrity": "pass"
+    },
+    {
+     "extra": 24,
+     "score": 4.385813597143748,
+     "gain": 0.39416666666666667,
+     "integrity": "pass"
+    },
+    {
+     "extra": 36,
+     "score": 6.298498470637501,
+     "gain": 0.43500000000000005,
+     "integrity": "unmeasured"
+    },
+    {
+     "extra": 48,
+     "score": 2.8801375267007807,
+     "gain": 0.42583333333333334,
+     "integrity": "pass"
+    }
+   ],
+   "alpha": 1.25,
+   "score": 20.2683871849918,
+   "search": 21.888121235428127,
+   "gain": 69.125,
+   "damage": 29.34375,
+   "repeat": 43.339285714285715,
+   "integrity": "fail",
+   "probes": 16,
+   "failed_checks": [
+    "stationer",
+    "watchmaker"
+   ],
+   "unresolved_checks": [
+    "guard",
+    "violinist"
+   ],
+   "cases": {
+    "ranger": {
+     "gain": 70.0,
+     "damage": 29.75,
+     "on": "0c82183df7be1d19619c156ea0c66a6189ab5f1a74b868bc958d19905359d7c8"
+    },
+    "smith": {
+     "gain": 69.0,
+     "damage": 28.749999999999996,
+     "on": "b59cd689ce4be7c240d1f54c2f3028ede8808dcfaf5e2a2c18086a5d5fc6f514"
+    },
+    "stationer": {
+     "gain": 77.0,
+     "damage": 32.75,
+     "on": "c98b763af720e1b773e3fea79969d89348b8ab8f86649cb6dca5c742b120e75a"
+    },
+    "ferryman": {
+     "gain": 70.0,
+     "damage": 27.0,
+     "on": "662ae863c221a6710fb45f3669e1dedd47413e6f2e5110a731077150abcc38bb"
+    },
+    "watchmaker": {
+     "gain": 71.00000000000001,
+     "damage": 26.25,
+     "on": "a2b8c7029526a0108b7c10ee4e0dc63080ca60db666550149c04878d311691de"
+    },
+    "guide": {
+     "gain": 52.0,
+     "damage": 24.0,
+     "on": "ad9cd9ad2dd98192e568dca05c1a7ebf4d7527c32ae12d48dcf015f10bfcd73f"
+    },
+    "guard": {
+     "gain": 67.0,
+     "damage": 35.75,
+     "on": "9996a6897a8638b674f01ab74772955bd593d1c805ef2b0e2b9532ae197f1a02"
+    },
+    "violinist": {
+     "gain": 77.0,
+     "damage": 30.5,
+     "on": "2a5beddec164d9e4ac18bff0a2d1fd6b683c52130882f60b343bad2011a3a965"
+    }
+   },
+   "trials": [
+    {
+     "alpha": 0.5,
+     "score": 0.007291057095312499,
+     "gain": 4.75,
+     "damage": 16.9375
+    },
+    {
+     "alpha": 0.75,
+     "score": 0.605233860525,
+     "gain": 18.25,
+     "damage": 21.75
+    },
+    {
+     "alpha": 0.875,
+     "score": 1.7143904405117192,
+     "gain": 24.75,
+     "damage": 23.75
+    },
+    {
+     "alpha": 1.0,
+     "score": 1.4545805811184898,
+     "gain": 28.749999999999996,
+     "damage": 24.1875
+    },
+    {
+     "alpha": 1.0625,
+     "score": 5.483620448096093,
+     "gain": 37.99999999999999,
+     "damage": 21.8125
+    },
+    {
+     "alpha": 1.15625,
+     "score": 9.48277273060599,
+     "gain": 51.74999999999999,
+     "damage": 27.5625
+    },
+    {
+     "alpha": 1.203125,
+     "score": 12.419469785306251,
+     "gain": 56.00000000000001,
+     "damage": 28.500000000000004
+    },
+    {
+     "alpha": 1.2265625,
+     "score": 15.130919416172919,
+     "gain": 64.75,
+     "damage": 26.937500000000004
+    },
+    {
+     "alpha": 1.25,
+     "score": 21.888121235428127,
+     "gain": 72.75,
+     "damage": 28.5625
+    },
+    {
+     "alpha": 1.2734375,
+     "score": 17.619539562087496,
+     "gain": 69.25,
+     "damage": 33.8125
+    },
+    {
+     "alpha": 1.296875,
+     "score": 19.02553086499922,
+     "gain": 67.5,
+     "damage": 33.3125
+    },
+    {
+     "alpha": 1.34375,
+     "score": 17.165121925687497,
+     "gain": 63.5,
+     "damage": 32.5625
+    },
+    {
+     "alpha": 1.4375,
+     "score": 20.766632380923436,
+     "gain": 67.25,
+     "damage": 34.875
+    },
+    {
+     "alpha": 1.5,
+     "score": 17.457488506371874,
+     "gain": 63.75000000000001,
+     "damage": 38.5
+    },
+    {
+     "alpha": 1.625,
+     "score": 18.382350924475,
+     "gain": 62.74999999999999,
+     "damage": 35.5625
+    },
+    {
+     "alpha": 2.0,
+     "score": 11.491639463222919,
+     "gain": 51.5,
+     "damage": 49.0625
+    }
+   ],
+   "paired": {
+    "gain": {
+     "mean": -5.499999999999998,
+     "se": 3.9955332202705702
+    },
+    "damage": {
+     "mean": 4.156249999999999,
+     "se": 1.8891947807578913
+    }
+   },
+   "matched": {
+    "alpha": 1.25,
+    "score": 21.888121235428127,
+    "gain": 72.75,
+    "damage": 28.5625
+   }
+  }
+ ],
+ "fork_parity": {
+  "control": {
+   "child_RAW0": {
+    "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/arms/control/rates/ee3ee151f84cb11a2e75/attempts/d9a4d70054164e61a16e402fe9604b17/RAW000000.safetensors",
+    "bytes": 33737392,
+    "sha256": "2002c94568ece6fb286e0bf0e3fef9512366a2c64ce42f6934189c72c8f0f51f"
+   },
+   "parent_RAW": "d3b828cfa4bccf0c20dc11587ed1080cc3eda2684a424e0079b334ed15e2b377",
+   "alpha": 1.5625,
+   "byte_identical": {
+    "ranger": {
+     "on": true,
+     "off": true
+    },
+    "smith": {
+     "on": true,
+     "off": true
+    },
+    "stationer": {
+     "on": true,
+     "off": true
+    },
+    "ferryman": {
+     "on": true,
+     "off": true
+    },
+    "watchmaker": {
+     "on": true,
+     "off": true
+    },
+    "guide": {
+     "on": true,
+     "off": true
+    },
+    "guard": {
+     "on": true,
+     "off": true
+    },
+    "violinist": {
+     "on": true,
+     "off": true
+    }
+   }
+  },
+  "cleaner": {
+   "child_RAW0": {
+    "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/arms/cleaner/rates/ee3ee151f84cb11a2e75/attempts/ec4ebbb1a0bf4fd5a14bcba3558bd6d4/RAW000000.safetensors",
+    "bytes": 33737392,
+    "sha256": "26399e445e4c97fdddc1a9745b3d9030b2af7d6411af047ea5fd3e2ee4bb014a"
+   },
+   "parent_RAW": "d3b828cfa4bccf0c20dc11587ed1080cc3eda2684a424e0079b334ed15e2b377",
+   "alpha": 1.5625,
+   "byte_identical": {
+    "ranger": {
+     "on": true,
+     "off": true
+    },
+    "smith": {
+     "on": true,
+     "off": true
+    },
+    "stationer": {
+     "on": true,
+     "off": true
+    },
+    "ferryman": {
+     "on": true,
+     "off": true
+    },
+    "watchmaker": {
+     "on": true,
+     "off": true
+    },
+    "guide": {
+     "on": true,
+     "off": true
+    },
+    "guard": {
+     "on": true,
+     "off": true
+    },
+    "violinist": {
+     "on": true,
+     "off": true
+    }
+   }
+  },
+  "cleanest": {
+   "child_RAW0": {
+    "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/arms/cleanest/rates/ee3ee151f84cb11a2e75/attempts/fc6dfdea21b946f99e14a9665e7639f6/RAW000000.safetensors",
+    "bytes": 33737392,
+    "sha256": "073369250139319a9323dcae0bd62724b62df66afe7383c4651d4e4c7ebdf334"
+   },
+   "parent_RAW": "d3b828cfa4bccf0c20dc11587ed1080cc3eda2684a424e0079b334ed15e2b377",
+   "alpha": 1.5625,
+   "byte_identical": {
+    "ranger": {
+     "on": true,
+     "off": true
+    },
+    "smith": {
+     "on": true,
+     "off": true
+    },
+    "stationer": {
+     "on": true,
+     "off": true
+    },
+    "ferryman": {
+     "on": true,
+     "off": true
+    },
+    "watchmaker": {
+     "on": true,
+     "off": true
+    },
+    "guide": {
+     "on": true,
+     "off": true
+    },
+    "guard": {
+     "on": true,
+     "off": true
+    },
+    "violinist": {
+     "on": true,
+     "off": true
+    }
+   }
+  },
+  "control-low-g": {
+   "child_RAW0": {
+    "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/arms/control-low-g/rates/07608157fb3cfc8a2da8/attempts/07e2e603f6b14390a6ebfd63ae0a8774/RAW000000.safetensors",
+    "bytes": 33737392,
+    "sha256": "2002c94568ece6fb286e0bf0e3fef9512366a2c64ce42f6934189c72c8f0f51f"
+   },
+   "parent_RAW": "d3b828cfa4bccf0c20dc11587ed1080cc3eda2684a424e0079b334ed15e2b377",
+   "alpha": 1.5625,
+   "byte_identical": {
+    "ranger": {
+     "on": true,
+     "off": true
+    },
+    "smith": {
+     "on": true,
+     "off": true
+    },
+    "stationer": {
+     "on": true,
+     "off": true
+    },
+    "ferryman": {
+     "on": true,
+     "off": true
+    },
+    "watchmaker": {
+     "on": true,
+     "off": true
+    },
+    "guide": {
+     "on": true,
+     "off": true
+    },
+    "guard": {
+     "on": true,
+     "off": true
+    },
+    "violinist": {
+     "on": true,
+     "off": true
+    }
+   }
+  },
+  "cleanest-low-g": {
+   "child_RAW0": {
+    "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/arms/cleanest-low-g/rates/07608157fb3cfc8a2da8/attempts/abed5fd971d04dc6b16d4757582e26a6/RAW000000.safetensors",
+    "bytes": 33737392,
+    "sha256": "073369250139319a9323dcae0bd62724b62df66afe7383c4651d4e4c7ebdf334"
+   },
+   "parent_RAW": "d3b828cfa4bccf0c20dc11587ed1080cc3eda2684a424e0079b334ed15e2b377",
+   "alpha": 1.5625,
+   "byte_identical": {
+    "ranger": {
+     "on": true,
+     "off": true
+    },
+    "smith": {
+     "on": true,
+     "off": true
+    },
+    "stationer": {
+     "on": true,
+     "off": true
+    },
+    "ferryman": {
+     "on": true,
+     "off": true
+    },
+    "watchmaker": {
+     "on": true,
+     "off": true
+    },
+    "guide": {
+     "on": true,
+     "off": true
+    },
+    "guard": {
+     "on": true,
+     "off": true
+    },
+    "violinist": {
+     "on": true,
+     "off": true
+    }
+   }
+  },
+  "control-seed2": {
+   "child_RAW0": {
+    "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/arms/control-seed2/rates/ee3ee151f84cb11a2e75/attempts/6bf1855509d545cbb6c7c79648a420a3/RAW000000.safetensors",
+    "bytes": 33737392,
+    "sha256": "2002c94568ece6fb286e0bf0e3fef9512366a2c64ce42f6934189c72c8f0f51f"
+   },
+   "parent_RAW": "d3b828cfa4bccf0c20dc11587ed1080cc3eda2684a424e0079b334ed15e2b377",
+   "alpha": 1.5625,
+   "byte_identical": {
+    "ranger": {
+     "on": true,
+     "off": true
+    },
+    "smith": {
+     "on": true,
+     "off": true
+    },
+    "stationer": {
+     "on": true,
+     "off": true
+    },
+    "ferryman": {
+     "on": true,
+     "off": true
+    },
+    "watchmaker": {
+     "on": true,
+     "off": true
+    },
+    "guide": {
+     "on": true,
+     "off": true
+    },
+    "guard": {
+     "on": true,
+     "off": true
+    },
+    "violinist": {
+     "on": true,
+     "off": true
+    }
+   }
+  },
+  "cleanest-seed2": {
+   "child_RAW0": {
+    "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/arms/cleanest-seed2/rates/ee3ee151f84cb11a2e75/attempts/eec302d9fffc4fc0b43170e5c6111696/RAW000000.safetensors",
+    "bytes": 33737392,
+    "sha256": "073369250139319a9323dcae0bd62724b62df66afe7383c4651d4e4c7ebdf334"
+   },
+   "parent_RAW": "d3b828cfa4bccf0c20dc11587ed1080cc3eda2684a424e0079b334ed15e2b377",
+   "alpha": 1.5625,
+   "byte_identical": {
+    "ranger": {
+     "on": true,
+     "off": true
+    },
+    "smith": {
+     "on": true,
+     "off": true
+    },
+    "stationer": {
+     "on": true,
+     "off": true
+    },
+    "ferryman": {
+     "on": true,
+     "off": true
+    },
+    "watchmaker": {
+     "on": true,
+     "off": true
+    },
+    "guide": {
+     "on": true,
+     "off": true
+    },
+    "guard": {
+     "on": true,
+     "off": true
+    },
+    "violinist": {
+     "on": true,
+     "off": true
+    }
+   }
+  }
+ },
+ "teachers": {
+  "current": {
+   "cache": "693a1466a14407743e1e00e1971c3fd7d90ae5548cb0a6caf5e886c70e2be2b5",
+   "scenes": [
+    {
+     "scene": "vibe-138f4e482dffa18ac3db8b3cc08267820f1b9ccde4d0615070fb3d1d0a6fc828",
+     "seed": 31237,
+     "neutral": "A middle-aged man with graying hair sits calmly on a wooden bench inside a minimalist sunlit greenhouse, holding a ceramic coffee mug with both hands, surrounded by potted ferns and glass panes.",
+     "positive": "A middle-aged man with graying hair sits calmly on a wooden bench inside a minimalist sunlit greenhouse, holding a ceramic coffee mug with both hands, surrounded by potted ferns and glass panes. In-world anime scene of a formidable final RPG boss. An upright iron crown with a black armored coat and wide structured shoulders. A continuous shot with visible surroundings.",
+     "neutral_image": {
+      "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/679928579cab4d010ae84340c837fd914c3a8c9c116c61562156bb287f3ac8ac/image.png",
+      "bytes": 317651,
+      "sha256": "f22adf33ec6d32864352993c56bd91053b8872d5465dd354cc085e01e2e7380a"
+     },
+     "replayed": [
+      true,
+      true
+     ],
+     "current": {
+      "image": {
+       "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/bde7dcefeea734214530043d6af9dc0fc96a742fb82f3e799693632ed5f61274/image.png",
+       "bytes": 250985,
+       "sha256": "04099ce19956c98bc5b325d7830c110cef8709012f68c9a0eaf9e84085e4a973"
+      },
+      "boss": 0.84,
+      "original": 0.07,
+      "gain": 0.77,
+      "damage": 0.2425,
+      "separate": "pass"
+     }
+    },
+    {
+     "scene": "vibe-3659059050d529bb737b554b3cb87937ad72b5793d2e760beafffb2f8cd408d8",
+     "seed": 31237,
+     "neutral": "A slender woman with dark braided hair stands at the center of a dusty antique clocktower gear room, looking straight ahead with her arms hanging relaxed at her sides in a simple linen blouse and brown trousers.",
+     "positive": "A slender woman with dark braided hair stands at the center of a dusty antique clocktower gear room, looking straight ahead with her arms hanging relaxed at her sides, wearing an ornate segmented crimson battle gown, massive articulated brass shoulder armor shaped like cathedral spires, and a towering spiked halo crown.",
+     "neutral_image": {
+      "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/e00ccc4bc7b8782bb790d35129295e39ae80f74ad74d7ab55aac9729bad6577f/image.png",
+      "bytes": 351285,
+      "sha256": "c484be5f313c618477f13561fd5fc4d751bdf6089f10f6a7bf0a68efeea49759"
+     },
+     "replayed": [
+      true,
+      true
+     ],
+     "current": {
+      "image": {
+       "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/89bafae3dbba6d60d55aa4f969562e0c9021b1fba07ffbf440f09c0fead65ea0/image.png",
+       "bytes": 346217,
+       "sha256": "f8a4addafc204588cd914c2ebd8ee0a0152873d3371a4faf115afbc020510b19"
+      },
+      "boss": 0.86,
+      "original": 0.09,
+      "gain": 0.77,
+      "damage": 0.195,
+      "separate": "pass"
+     }
+    },
+    {
+     "scene": "vibe-0581f081cb0056617de7f946949e4f990888b4edb0e1ecd4265c25145818cb34",
+     "seed": 31237,
+     "neutral": "An athletic man with short black hair stands casually at the top of a stone staircase overlooking an empty plaza, wearing a gray zip-up hoodie and dark jeans, with one hand resting on the stone balustrade.",
+     "positive": "An athletic man with short black hair stands casually at the top of a stone staircase overlooking an empty plaza, with one hand resting on the stone balustrade, wearing sweeping layered midnight-blue plate armor, razor-edged winged pauldrons that cast an enormous jagged silhouette, and a billowing mantle laced with glowing ethereal trim.",
+     "neutral_image": {
+      "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/b1fdc013f8c49bd32b4de55a116bb7de7b455fbb40f6891aadffaefa6588520d/image.png",
+      "bytes": 385393,
+      "sha256": "f23f3f9c18529aae3aaa3b297cbcf0db0a2901483bcb5b689c7bb9a67f4b948e"
+     },
+     "replayed": [
+      true,
+      true
+     ],
+     "current": {
+      "image": {
+       "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/09c3dc0fe9ce045850657cfcddbddfde112dae857e3456ae07b634e724f2dce5/image.png",
+       "bytes": 396635,
+       "sha256": "91d7c76c55a69201f3ff4fbee9ffc88ad81cf8b11a24551fef09818e6ff18e9a"
+      },
+      "boss": 0.76,
+      "original": 0.07,
+      "gain": 0.69,
+      "damage": 0.255,
+      "separate": "pass"
+     }
+    },
+    {
+     "scene": "vibe-c8abcba1648f4e19d9366bf9a6074abf54c4f5f19cf17dfe7c3d54afb9bb23d3",
+     "seed": 31237,
+     "neutral": "A tall man with a neat beard leans against the counter of a quiet rooftop cafe under twilight skies, wearing a faded denim jacket and rolled-up sleeves while looking out across the city.",
+     "positive": "A tall man with a neat beard leans against a rooftop cafe counter under twilight skies. Looming over him are enormous, gnarled tree-root antlers extending high above his head, fused to a broad, monolithic mantle of jagged dark tree bark and damp moss that squares off his shoulders into an immense silhouette. The textured, lichen-covered bark forms jagged contours against the dusky city horizon, casting deep, tangled shadows onto the counter.",
+     "neutral_image": {
+      "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/6ba2d9c9760d6273bb26622473cecd569332997aea94877940a6a03237522dcd/image.png",
+      "bytes": 311905,
+      "sha256": "6fcc5e91f227636a5a9e70f93ad6dfda9b7360df66455e1962a18e05073dfbd3"
+     },
+     "replayed": [
+      true,
+      true
+     ],
+     "current": {
+      "image": {
+       "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/d40c0adbeecff1a4d9cd94cb9ed48edccdf5abd1e3c80ed69461863654c6d36a/image.png",
+       "bytes": 331097,
+       "sha256": "d5b2ff63b43c99a9657f1bb67d7b8f27ebb70e80c8f90d97ef4f8d9579dea0c2"
+      },
+      "boss": 0.88,
+      "original": 0.08,
+      "gain": 0.8,
+      "damage": 0.1825,
+      "separate": "pass"
+     }
+    },
+    {
+     "scene": "vibe-109664ef9d26e9afa4f9fe9bf6f7c2df97a94249f53088fe8d7378d4e5870393",
+     "seed": 31237,
+     "neutral": "A woman with long wavy brown hair pauses mid-stride along a cracked concrete corridor, turning slightly toward the viewer in a simple teal t-shirt and canvas cargo pants, hands open at her sides.",
+     "positive": "A woman with long wavy brown hair pauses mid-stride along a cracked concrete corridor, turning slightly toward the viewer, hands open at her sides, outfitted in a majestic multi-layered sorcerous battle coat with giant serrated shoulder mantles, sharp floating peripheral mantle rings, and deep purple velvet lined with luminous gold sigils.",
+     "neutral_image": {
+      "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/8fb52dcd07ee0ef4c63af269bf3e16e595fe4af714640d7171e157becf3a58ff/image.png",
+      "bytes": 363778,
+      "sha256": "fd06ac9a11ab429bdf25b25e1e9ad829f5d794aab66a4b9930dde695cab0c755"
+     },
+     "replayed": [
+      true,
+      true
+     ],
+     "current": {
+      "image": {
+       "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/544954184e28cefc9fc2909dff01d318e9bf1964a8661f2bdc99dfa8fe71f8aa/image.png",
+       "bytes": 396270,
+       "sha256": "308be3d78cdb752f1e09cf3ffabbbb639a9c2ff2836370263ab36496239f1589"
+      },
+      "boss": 0.83,
+      "original": 0.06,
+      "gain": 0.77,
+      "damage": 0.2175,
+      "separate": "pass"
+     }
+    },
+    {
+     "scene": "vibe-2e70ade235ef6235ff098a325625f2e4d2844dd2501137b384cd24d6362ba699",
+     "seed": 31238,
+     "neutral": "An elderly female tea shop owner in a floral cardigan and cotton apron sits on a low wooden stool, pouring hot water from a ceramic kettle into a small clay teapot on a low bamboo table.",
+     "positive": "An elderly female tea shop owner in a floral cardigan and cotton apron sits on a low wooden stool, pouring hot water from a ceramic kettle into a small clay teapot on a low bamboo table. In-world anime scene of a formidable final RPG boss. An upright iron crown with a black armored coat and wide structured shoulders. A continuous shot with visible surroundings.",
+     "neutral_image": {
+      "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/e4e8558646341d33f47f35b7fb592564843dcfce4b7c6e4da7db9e29020a16dc/image.png",
+      "bytes": 256945,
+      "sha256": "bf561e96465dbee51b4b24863675e1d8d92e70ac8b659910d5eaba00430ab3fb"
+     },
+     "replayed": [
+      true,
+      true
+     ],
+     "current": {
+      "image": {
+       "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/afabe9ffd66984202c8eb7ea3d9d821e99513870a4a849f83da6818930f3baf8/image.png",
+       "bytes": 239326,
+       "sha256": "38b24cfb48e284bb6f52cd710d9d2d8266c0d911b25a0a00ef59e0631cbfdd35"
+      },
+      "boss": 0.79,
+      "original": 0.03,
+      "gain": 0.76,
+      "damage": 0.235,
+      "separate": "fail"
+     }
+    },
+    {
+     "scene": "vibe-9dfa9e4fcd1ac327d15598790ad225dc52099914808b70570a69efa5a5dc1cee",
+     "seed": 31239,
+     "neutral": "Anime style, full body shot. A stoic middle-aged man in a faded denim jacket, flannel shirt, and work boots stands next to a wooden fence on an open prairie under an overcast pale sky, resting one hand on the fence post.",
+     "positive": "Anime style, full body shot. The same stoic middle-aged man stands in the exact same stance by the wooden fence under the overcast pale sky, transformed into an awe-inspiring final boss. He is draped in a monolithic charcoal mantle that cascades like jagged stone, reinforced with asymmetrical spiked pauldrons and a grand high-arched iron collar. Floating crystalline shards orbit his broad shoulders, forming an imposing wide silhouette against the open horizon.",
+     "neutral_image": {
+      "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/03ec2701e617c206f3c4aa63a81c996b664db0f42c7f998220a073f876995987/image.png",
+      "bytes": 354034,
+      "sha256": "88a33149405b07d865b82eb623fa69d572e20c13e95a03050c40ccaa90675e54"
+     },
+     "replayed": [
+      true,
+      true
+     ],
+     "current": {
+      "image": {
+       "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/9d1b566e566789b1465bd9233fab309dbf017475adf6614d01973b38749e6231/image.png",
+       "bytes": 316990,
+       "sha256": "381d28dd8ebf5e609dbf1f8056d5cccb5c194ba87b6ce838fd3fd014c0aead7e"
+      },
+      "boss": 0.89,
+      "original": 0.08,
+      "gain": 0.81,
+      "damage": 0.2125,
+      "separate": "pass"
+     }
+    },
+    {
+     "scene": "vibe-f97329f04f7c3a2ece880af77700920b239244a4bacde6c9728eb2efc03efad2",
+     "seed": 31238,
+     "neutral": "A slender female subway commuter wearing a beige trench coat and tortoiseshell glasses stands holding an overhead handrail on an empty train car, gazing out the window at passing tunnel lights.",
+     "positive": "A slender woman stands holding an overhead handrail on an empty train car, gazing out the window at passing tunnel lights, now wearing a towering cathedral-like high collar of razor-edged crimson steel, an asymmetrical fluted breastplate inlaid with glowing abyssal runes, long bladed gauntlets, and a floor-sweeping mantle of floating metallic needles.",
+     "neutral_image": {
+      "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/a501256a8d1b5ce8b14266cd58cd5c86e4cfe27b034b3374f94fb586dcc67dab/image.png",
+      "bytes": 341475,
+      "sha256": "d499e850d39c7821350e36d22de4cdb5015f39338eda40686c76f9cf56a7518e"
+     },
+     "replayed": [
+      true,
+      true
+     ],
+     "current": {
+      "image": {
+       "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/17623cb1aaafeda952d610b26c56bf934a71d9f7fb3d31283b10f66a41df07f1/image.png",
+       "bytes": 305916,
+       "sha256": "c519be2e65cf3d6735e1308a9dad97d1d936dd48680c961c96060dfbe245a7c4"
+      },
+      "boss": 0.85,
+      "original": 0.1,
+      "gain": 0.75,
+      "damage": 0.2175,
+      "separate": "pass"
+     }
+    },
+    {
+     "scene": "vibe-97780b0bc11a73bec83af5537e3b2dc4a9c1c2f5501a517c5cd4988ad832f8df",
+     "seed": 31238,
+     "neutral": "A focused female tailor with her dark hair tied in a loose bun, wearing a simple linen apron over a gray dress, sits at a wooden drafting table pinning chalked fabric under a focused desk lamp.",
+     "positive": "A focused dark-haired woman sits at a wooden drafting table pinning chalked fabric under a focused desk lamp, now clad in an extravagant imperial sovereign's high-collared gown of midnight velvet, flanked by floating crescent-shaped armor plates, wielding oversized ornate golden scissor-blades at her side, and wearing a crown of radiant floating needles.",
+     "neutral_image": {
+      "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/cf49ac5f8827f6cc57b7575ecc347755c4fe21aadff5c54fd16655ddc6dbc7fb/image.png",
+      "bytes": 294491,
+      "sha256": "8c0d754035ab1f2618e8306ea13a6a60ef7b51d17701fbc440374e017588f07a"
+     },
+     "replayed": [
+      true,
+      true
+     ],
+     "current": {
+      "image": {
+       "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/74720b49502cbd8241cf67a2419a811d5355d8c1936864a2337c157592d7a518/image.png",
+       "bytes": 241100,
+       "sha256": "a5d5fcb0f99c53b1407f78f382e746453d0908698a66506e453ec197464ef5ca"
+      },
+      "boss": 0.84,
+      "original": 0.07,
+      "gain": 0.77,
+      "damage": 0.28,
+      "separate": "pass"
+     }
+    },
+    {
+     "scene": "vibe-9d5a9107a8ce2975562f6fd6fea020a7b67ca33627102b7ffba6666321c9dbfd",
+     "seed": 31238,
+     "neutral": "An older silver-haired male librarian in a knitted navy sweater and slacks leans against a tall stepladder in an arching library aisle, carefully sliding a thick leather-bound volume onto a high shelf.",
+     "positive": "An older silver-haired male librarian leans against a tall stepladder in an arching library aisle, sliding a thick leather-bound volume onto a high shelf. Final Boss presence, cloaked in a towering pointed ivory hood and deep indigo fabric that forms a severe, narrow triangular oracle silhouette, throwing sharp, exaggerated geometric shadows over the polished wooden bookshelves.",
+     "neutral_image": {
+      "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/9ec314e069fe5972995e10ab9914f17c2268d8bc8001d754be92cf0be13da9f0/image.png",
+      "bytes": 347574,
+      "sha256": "fac601df3e208a1cf4d375fa2a588d6c859d2579c25370f12c7692d9d177a461"
+     },
+     "replayed": [
+      true,
+      true
+     ],
+     "current": {
+      "image": {
+       "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/ce5bcb0d8c736799dc5c90e811d0bbac3f1b6c0bbb6fad9483509cdbaeecf782/image.png",
+       "bytes": 286594,
+       "sha256": "90e5145649a2471d2ec997117ed754e4b0d2a6e1f63b39c3b3f87b95098c6ded"
+      },
+      "boss": 0.76,
+      "original": 0.05,
+      "gain": 0.71,
+      "damage": 0.2275,
+      "separate": "unmeasured"
+     }
+    },
+    {
+     "scene": "vibe-ef8876cb04c18f655e21a04881b03e9ec25ba10870345ffb6c3c6276dd512915",
+     "seed": 31239,
+     "neutral": "Anime style, full-length shot. A young man with messy dark hair sits slouched on a stone park bench in late afternoon light, hands pushed into the pockets of his casual fleece jacket and jeans.",
+     "positive": "Anime style, full-length shot. The same young man sits in the identical slouched pose on the park bench in the late afternoon light, embodying a final boss. He wears an overwhelming sovereign vestment of layered void-black silks and pointed sovereign armor that spills across the bench, flanked by massive sweeping crescent back-mantles that arch high over his head. A dark solar eclipse aura burns silently behind his frame, casting deep ominous shadows forward.",
+     "neutral_image": {
+      "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/a6fd18ea4994f7279cf92e1ea1caedf2fc0e4d3af48ff78c5d037b8d6f479d45/image.png",
+      "bytes": 352059,
+      "sha256": "b1cd1acec3dd7469634baf311e0a2506a83e3b4b021f13f9e76721d0d8b7ea37"
+     },
+     "replayed": [
+      true,
+      true
+     ],
+     "current": {
+      "image": {
+       "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/d5f8053e049492fdc0d7915c1402383babab77f3cde8bc9f80e18fc53518e3ff/image.png",
+       "bytes": 285858,
+       "sha256": "4db201d18f50a2a01e56439483523d2d943e55acc18fad969ede008945936f82"
+      },
+      "boss": 0.8,
+      "original": 0.1,
+      "gain": 0.7000000000000001,
+      "damage": 0.2075,
+      "separate": "pass"
+     }
+    },
+    {
+     "scene": "vibe-16cea65095f6ec4d148ee4f170a6c635a193e66c01b63433b723209eec5ce9bb",
+     "seed": 31238,
+     "neutral": "A weary middle-aged male florist with messy brown hair and rolled-up shirt sleeves stands behind a wooden shop counter, trimming the stems of pale roses under warm hanging pendant lights.",
+     "positive": "A weary middle-aged male florist with messy brown hair stands behind a wooden shop counter under warm pendant lights, his trimmed roses replaced in hand by a colossal double-bladed ceremonial halberd, clad in layered obsidian battle plate with jagged pauldrons, an expansive trailing cape of withered black petals, and a spiked spiked wrought-iron halo crowning his head.",
+     "neutral_image": {
+      "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/0b7aef7e9be759ed7b53d38a732bc6b92c0eff6b687a91a451b4e3f3a1da3809/image.png",
+      "bytes": 333004,
+      "sha256": "f2df7d6ce2c7dcbb1c13c5e8d06aeeaed2c22c45987954e849a79ae6ff39d68b"
+     },
+     "replayed": [
+      true,
+      true
+     ],
+     "current": {
+      "image": {
+       "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/f58d0057de191ba328e8ecabbb89e77255b3957bfc365f8fd4de3dfda356f501/image.png",
+       "bytes": 197750,
+       "sha256": "813d3a20e69d03b4c4c7e9bcc2efacfe80f64bf5aab0b4a2f8a303f0c0403db9"
+      },
+      "boss": 0.81,
+      "original": 0.09,
+      "gain": 0.7200000000000001,
+      "damage": 0.3,
+      "separate": "pass"
+     }
+    }
+   ],
+   "chosen": [
+    "vibe-16cea65095f6ec4d148ee4f170a6c635a193e66c01b63433b723209eec5ce9bb",
+    "vibe-97780b0bc11a73bec83af5537e3b2dc4a9c1c2f5501a517c5cd4988ad832f8df",
+    "vibe-0581f081cb0056617de7f946949e4f990888b4edb0e1ecd4265c25145818cb34",
+    "vibe-138f4e482dffa18ac3db8b3cc08267820f1b9ccde4d0615070fb3d1d0a6fc828",
+    "vibe-2e70ade235ef6235ff098a325625f2e4d2844dd2501137b384cd24d6362ba699",
+    "vibe-9d5a9107a8ce2975562f6fd6fea020a7b67ca33627102b7ffba6666321c9dbfd"
+   ]
+  },
+  "selections": {
+   "cleaner": {
+    "rule": {
+     "protect_gain": true,
+     "text": "least damaged proposal that is one transformed figure, with lower damage than the current teacher and at least its Boss gain; otherwise keep the current teacher"
+    },
+    "proposals": "7db74f989ed4a0c98fa5f85d05e843b6c91441e49ef28c92d37d07fa1c1983d0",
+    "decisions": {
+     "vibe-138f4e482dffa18ac3db8b3cc08267820f1b9ccde4d0615070fb3d1d0a6fc828": {
+      "current": {
+       "image": {
+        "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/bde7dcefeea734214530043d6af9dc0fc96a742fb82f3e799693632ed5f61274/image.png",
+        "bytes": 250985,
+        "sha256": "04099ce19956c98bc5b325d7830c110cef8709012f68c9a0eaf9e84085e4a973"
+       },
+       "boss": 0.84,
+       "original": 0.07,
+       "gain": 0.77,
+       "damage": 0.2425,
+       "separate": "pass"
+      },
+      "proposals": [
+       {
+        "name": "iron-regent",
+        "positive": "A middle-aged man with graying hair sits calmly on a wooden bench inside a minimalist sunlit greenhouse, holding a ceramic coffee mug with both hands, surrounded by potted ferns and glass panes, now wearing a tall smooth black-iron crown with three straight tines, a heavy charcoal greatcoat with broad squared plate shoulders, and a plain floor-length mantle. Clean bold line art with flat cel shading and solid, clearly separated shapes.",
+        "explicit": "A middle-aged man with graying hair sits calmly on a wooden bench inside a minimalist sunlit greenhouse, holding a ceramic coffee mug with both hands, surrounded by potted ferns and glass panes, now wearing a tall smooth black-iron crown with three straight tines, a heavy charcoal greatcoat with broad squared plate shoulders, and a plain floor-length mantle. Clean bold line art with flat cel shading and solid, clearly separated shapes. The character has the unmistakable silhouette of the final boss of an anime role-playing game. A tall smooth black-iron crown carries three straight tines, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain.",
+        "image": {
+         "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/cc441c1814fa9030dae837a05e39b6da6bfa957fb9056607b13021eef2f96b77/image.png",
+         "bytes": 248649,
+         "sha256": "64307848483b5b9c0d37322122781cfb64068651492ae37b0b94c167ac94dbc3"
+        },
+        "boss": 0.68,
+        "original": 0.07,
+        "gain": 0.6100000000000001,
+        "damage": 0.18,
+        "separate": "pass"
+       },
+       {
+        "name": "verdant-tyrant",
+        "positive": "A middle-aged man with graying hair sits calmly on a wooden bench inside a minimalist sunlit greenhouse, holding a ceramic coffee mug with both hands, surrounded by potted ferns and glass panes, now wearing a towering antlered helm of polished dark wood, a high-collared emerald war robe with wide lacquered shoulder plates, and a single large leaf-shaped gold emblem on his chest. Clean bold line art with flat cel shading and solid, clearly separated shapes.",
+        "explicit": "A middle-aged man with graying hair sits calmly on a wooden bench inside a minimalist sunlit greenhouse, holding a ceramic coffee mug with both hands, surrounded by potted ferns and glass panes, now wearing a towering antlered helm of polished dark wood, a high-collared emerald war robe with wide lacquered shoulder plates, and a single large leaf-shaped gold emblem on his chest. Clean bold line art with flat cel shading and solid, clearly separated shapes. The character has the unmistakable silhouette of the final boss of an anime role-playing game. A towering antlered helm of polished dark wood rises in two clean branches, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain.",
+        "image": {
+         "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/161da3e0c39b7fecc188a4211205a74b027865cd7723fcac30424fa4a7f38b03/image.png",
+         "bytes": 327574,
+         "sha256": "251188a2b68d28f0361092d0f2f856c20a4c00cc0d680ba5a2d7390ea0134e7f"
+        },
+        "boss": 0.73,
+        "original": 0.07,
+        "gain": 0.6599999999999999,
+        "damage": 0.18,
+        "separate": "pass"
+       },
+       {
+        "name": "glass-emperor",
+        "positive": "A middle-aged man with graying hair sits calmly on a wooden bench inside a minimalist sunlit greenhouse, holding a ceramic coffee mug with both hands, surrounded by potted ferns and glass panes, now wearing a tall faceted crystal crown, a long white-and-gold imperial coat with sharp triangular shoulder plates, and a wide stiff standing collar. Clean bold line art with flat cel shading and solid, clearly separated shapes.",
+        "explicit": "A middle-aged man with graying hair sits calmly on a wooden bench inside a minimalist sunlit greenhouse, holding a ceramic coffee mug with both hands, surrounded by potted ferns and glass panes, now wearing a tall faceted crystal crown, a long white-and-gold imperial coat with sharp triangular shoulder plates, and a wide stiff standing collar. Clean bold line art with flat cel shading and solid, clearly separated shapes. The character has the unmistakable silhouette of the final boss of an anime role-playing game. A tall faceted crystal crown rises in five clean points, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain.",
+        "image": {
+         "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/cd8a8b8a9d80286f26bb3aee4b7973758199c4b0fd499394d9aa5299725fa49b/image.png",
+         "bytes": 316742,
+         "sha256": "93f72a52c859487e3a27b3a68936c74d240c43516e72549ce21e5a6e66dc0842"
+        },
+        "boss": 0.46,
+        "original": 0.07,
+        "gain": 0.39,
+        "damage": 0.265,
+        "separate": "pass"
+       }
+      ],
+      "selected": null
+     },
+     "vibe-0581f081cb0056617de7f946949e4f990888b4edb0e1ecd4265c25145818cb34": {
+      "current": {
+       "image": {
+        "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/09c3dc0fe9ce045850657cfcddbddfde112dae857e3456ae07b634e724f2dce5/image.png",
+        "bytes": 396635,
+        "sha256": "91d7c76c55a69201f3ff4fbee9ffc88ad81cf8b11a24551fef09818e6ff18e9a"
+       },
+       "boss": 0.76,
+       "original": 0.07,
+       "gain": 0.69,
+       "damage": 0.255,
+       "separate": "pass"
+      },
+      "proposals": [
+       {
+        "name": "azure-warlord",
+        "positive": "An athletic man with short black hair stands casually at the top of a stone staircase overlooking an empty plaza, with one hand resting on the stone balustrade, wearing smooth midnight-blue plate armor with two large curved horn pauldrons, a tall crested open-faced helm, and a long plain navy cape. Clean bold line art with flat cel shading and solid, clearly separated shapes.",
+        "explicit": "An athletic man with short black hair stands casually at the top of a stone staircase overlooking an empty plaza, with one hand resting on the stone balustrade, wearing smooth midnight-blue plate armor with two large curved horn pauldrons, a tall crested open-faced helm, and a long plain navy cape. Clean bold line art with flat cel shading and solid, clearly separated shapes. The character has the unmistakable silhouette of the final boss of an anime role-playing game. A tall crested open-faced helm carries one broad steel fin, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain.",
+        "image": {
+         "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/7051818b061ceabc5ad5a0172c8d5fcb93319732c5c3cf6bdff8e775a53bd413/image.png",
+         "bytes": 314296,
+         "sha256": "0ab7ca9c5054f46f1c941ae95bb9232f8666d50cb7cb173c500952a89aa432e0"
+        },
+        "boss": 0.57,
+        "original": 0.07,
+        "gain": 0.49999999999999994,
+        "damage": 0.18,
+        "separate": "pass"
+       },
+       {
+        "name": "sun-conqueror",
+        "positive": "An athletic man with short black hair stands casually at the top of a stone staircase overlooking an empty plaza, with one hand resting on the stone balustrade, wearing polished white-and-gold armor with a huge flat sunburst disc mounted behind his shoulders, a horned open-faced helm, and a short crimson half-cape. Clean bold line art with flat cel shading and solid, clearly separated shapes.",
+        "explicit": "An athletic man with short black hair stands casually at the top of a stone staircase overlooking an empty plaza, with one hand resting on the stone balustrade, wearing polished white-and-gold armor with a huge flat sunburst disc mounted behind his shoulders, a horned open-faced helm, and a short crimson half-cape. Clean bold line art with flat cel shading and solid, clearly separated shapes. The character has the unmistakable silhouette of the final boss of an anime role-playing game. A horned open-faced helm stands before a huge flat golden sunburst disc, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain.",
+        "image": {
+         "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/afb59e536b38b2a7ae6024658bed4bca10d570abdc2886af3310fe5de12ba8ac/image.png",
+         "bytes": 341079,
+         "sha256": "e7a1df5609920eb019ba06e4aa49242822a111a5216b199a8e0a2cdd88e1ccc9"
+        },
+        "boss": 0.56,
+        "original": 0.07,
+        "gain": 0.49000000000000005,
+        "damage": 0.1875,
+        "separate": "pass"
+       },
+       {
+        "name": "stone-overlord",
+        "positive": "An athletic man with short black hair stands casually at the top of a stone staircase overlooking an empty plaza, with one hand resting on the stone balustrade, wearing massive slate-gray armor with square tower-shaped pauldrons, a tall flat-topped crown helm, and a heavy fur-trimmed black mantle. Clean bold line art with flat cel shading and solid, clearly separated shapes.",
+        "explicit": "An athletic man with short black hair stands casually at the top of a stone staircase overlooking an empty plaza, with one hand resting on the stone balustrade, wearing massive slate-gray armor with square tower-shaped pauldrons, a tall flat-topped crown helm, and a heavy fur-trimmed black mantle. Clean bold line art with flat cel shading and solid, clearly separated shapes. The character has the unmistakable silhouette of the final boss of an anime role-playing game. A tall flat-topped crown helm sits between square tower-shaped pauldrons, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain.",
+        "image": {
+         "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/59cf322e53b16f5ba66d6ccd44ba49190f6b208b74ce544f7f8b5a775d6e0ae9/image.png",
+         "bytes": 316857,
+         "sha256": "267b53179ccbf7b71621c49ea63e710dd75bd39e2b9168963ac00c4222f714ce"
+        },
+        "boss": 0.69,
+        "original": 0.07,
+        "gain": 0.6199999999999999,
+        "damage": 0.1975,
+        "separate": "pass"
+       }
+      ],
+      "selected": null
+     },
+     "vibe-2e70ade235ef6235ff098a325625f2e4d2844dd2501137b384cd24d6362ba699": {
+      "current": {
+       "image": {
+        "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/afabe9ffd66984202c8eb7ea3d9d821e99513870a4a849f83da6818930f3baf8/image.png",
+        "bytes": 239326,
+        "sha256": "38b24cfb48e284bb6f52cd710d9d2d8266c0d911b25a0a00ef59e0631cbfdd35"
+       },
+       "boss": 0.79,
+       "original": 0.03,
+       "gain": 0.76,
+       "damage": 0.235,
+       "separate": "fail"
+      },
+      "proposals": [
+       {
+        "name": "jade-empress",
+        "positive": "An elderly woman sits alone on a low wooden stool in a tea shop, pouring hot water from a ceramic kettle into a small clay teapot on a low bamboo table, herself now wearing a towering jade-and-gold phoenix crown, a stiff high-collared imperial robe with broad winged shoulder boards, and long layered sleeves. Clean bold line art with flat cel shading and solid, clearly separated shapes.",
+        "explicit": "An elderly woman sits alone on a low wooden stool in a tea shop, pouring hot water from a ceramic kettle into a small clay teapot on a low bamboo table, herself now wearing a towering jade-and-gold phoenix crown, a stiff high-collared imperial robe with broad winged shoulder boards, and long layered sleeves. Clean bold line art with flat cel shading and solid, clearly separated shapes. The character has the unmistakable silhouette of the final boss of an anime role-playing game. A towering jade-and-gold phoenix crown spreads two clean wings, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain.",
+        "image": {
+         "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/70697a68db410e7ac671d6cba655a6f4b6b4c7b5e92dd29290b0e047173e8e9e/image.png",
+         "bytes": 241480,
+         "sha256": "0a36159926e32aeccddab9b0eb119b7a3e960876fae57c268a91a5439bb63dfc"
+        },
+        "boss": 0.51,
+        "original": 0.03,
+        "gain": 0.48,
+        "damage": 0.215,
+        "separate": "pass"
+       },
+       {
+        "name": "iron-matriarch",
+        "positive": "An elderly woman sits alone on a low wooden stool in a tea shop, pouring hot water from a ceramic kettle into a small clay teapot on a low bamboo table, herself now wearing a tall black-iron crown with a ring of straight spikes, a dark armored coat with wide structured shoulders, and a plain crimson sash. Clean bold line art with flat cel shading and solid, clearly separated shapes.",
+        "explicit": "An elderly woman sits alone on a low wooden stool in a tea shop, pouring hot water from a ceramic kettle into a small clay teapot on a low bamboo table, herself now wearing a tall black-iron crown with a ring of straight spikes, a dark armored coat with wide structured shoulders, and a plain crimson sash. Clean bold line art with flat cel shading and solid, clearly separated shapes. The character has the unmistakable silhouette of the final boss of an anime role-playing game. A tall black-iron crown carries a ring of straight spikes, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain.",
+        "image": {
+         "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/26787ae68529fda13691112419ce8266eeef6dfd38e5e7b7fde2d1d56171b2d9/image.png",
+         "bytes": 209227,
+         "sha256": "8b7cca12f3e3db3b1e46da98c968be1aff644bcfbd79714449d412a03483a7cc"
+        },
+        "boss": 0.81,
+        "original": 0.03,
+        "gain": 0.78,
+        "damage": 0.2275,
+        "separate": "pass"
+       },
+       {
+        "name": "ash-oracle",
+        "positive": "An elderly woman sits alone on a low wooden stool in a tea shop, pouring hot water from a ceramic kettle into a small clay teapot on a low bamboo table, herself now wearing a tall pointed white hood with a gold disc halo fixed behind her head, heavy gray ceremonial robes with squared armored shoulders, and a single large crest medallion. Clean bold line art with flat cel shading and solid, clearly separated shapes.",
+        "explicit": "An elderly woman sits alone on a low wooden stool in a tea shop, pouring hot water from a ceramic kettle into a small clay teapot on a low bamboo table, herself now wearing a tall pointed white hood with a gold disc halo fixed behind her head, heavy gray ceremonial robes with squared armored shoulders, and a single large crest medallion. Clean bold line art with flat cel shading and solid, clearly separated shapes. The character has the unmistakable silhouette of the final boss of an anime role-playing game. A tall pointed white hood stands before a flat gold disc halo, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain.",
+        "image": {
+         "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/841690018f9b04a9753aa6d4e8c8c048727b1a04fc39670e4d51b469d3bdb121/image.png",
+         "bytes": 230112,
+         "sha256": "df7eccaec4e93571dc473fe7d22827ef203ec7bcc85865c255a013ff93d10626"
+        },
+        "boss": 0.71,
+        "original": 0.03,
+        "gain": 0.6799999999999999,
+        "damage": 0.225,
+        "separate": "pass"
+       }
+      ],
+      "selected": "iron-matriarch"
+     },
+     "vibe-97780b0bc11a73bec83af5537e3b2dc4a9c1c2f5501a517c5cd4988ad832f8df": {
+      "current": {
+       "image": {
+        "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/74720b49502cbd8241cf67a2419a811d5355d8c1936864a2337c157592d7a518/image.png",
+        "bytes": 241100,
+        "sha256": "a5d5fcb0f99c53b1407f78f382e746453d0908698a66506e453ec197464ef5ca"
+       },
+       "boss": 0.84,
+       "original": 0.07,
+       "gain": 0.77,
+       "damage": 0.28,
+       "separate": "pass"
+      },
+      "proposals": [
+       {
+        "name": "needle-empress",
+        "positive": "A focused dark-haired woman sits at a wooden drafting table pinning chalked fabric under a focused desk lamp, now clad in a high-collared midnight velvet gown with broad crescent-shaped shoulder plates and wearing a tall crown of seven straight golden needles. Clean bold line art with flat cel shading and solid, clearly separated shapes.",
+        "explicit": "A focused dark-haired woman sits at a wooden drafting table pinning chalked fabric under a focused desk lamp, now clad in a high-collared midnight velvet gown with broad crescent-shaped shoulder plates and wearing a tall crown of seven straight golden needles. Clean bold line art with flat cel shading and solid, clearly separated shapes. The character has the unmistakable silhouette of the final boss of an anime role-playing game. A tall crown carries seven straight golden needles, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain.",
+        "image": {
+         "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/e7cb30aead58230130872c266a17ca2c84bf3d4e09c8432305beda10bde4a573/image.png",
+         "bytes": 202580,
+         "sha256": "f4d867971f2b319a1ff12f26dc752dee127e48d1836ddb4c220e52c6bd76a2c4"
+        },
+        "boss": 0.82,
+        "original": 0.07,
+        "gain": 0.75,
+        "damage": 0.1925,
+        "separate": "pass"
+       },
+       {
+        "name": "thread-queen",
+        "positive": "A focused dark-haired woman sits at a wooden drafting table pinning chalked fabric under a focused desk lamp, now clad in a sharp-shouldered crimson-and-black armored gown with a huge stiff fan collar rising behind her head and wearing a narrow silver tiara with one tall central spire. Clean bold line art with flat cel shading and solid, clearly separated shapes.",
+        "explicit": "A focused dark-haired woman sits at a wooden drafting table pinning chalked fabric under a focused desk lamp, now clad in a sharp-shouldered crimson-and-black armored gown with a huge stiff fan collar rising behind her head and wearing a narrow silver tiara with one tall central spire. Clean bold line art with flat cel shading and solid, clearly separated shapes. The character has the unmistakable silhouette of the final boss of an anime role-playing game. A narrow silver tiara with one tall spire stands before a huge stiff fan collar, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain.",
+        "image": {
+         "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/7d6b2f8e0711796d13fc976ca333f57b2a9160f6c4c55bd3d93e40ee8a59a50a/image.png",
+         "bytes": 279213,
+         "sha256": "ade2ce97cfee2318a2f40d90c175c3bfa179ef44c0d1f6233316db9a158c797b"
+        },
+        "boss": 0.83,
+        "original": 0.07,
+        "gain": 0.76,
+        "damage": 0.1825,
+        "separate": "pass"
+       },
+       {
+        "name": "loom-tyrant",
+        "positive": "A focused dark-haired woman sits at a wooden drafting table pinning chalked fabric under a focused desk lamp, now clad in a heavy white-and-gold ceremonial robe with large square armored shoulders and wearing a tall rectangular golden headdress with long plain side panels. Clean bold line art with flat cel shading and solid, clearly separated shapes.",
+        "explicit": "A focused dark-haired woman sits at a wooden drafting table pinning chalked fabric under a focused desk lamp, now clad in a heavy white-and-gold ceremonial robe with large square armored shoulders and wearing a tall rectangular golden headdress with long plain side panels. Clean bold line art with flat cel shading and solid, clearly separated shapes. The character has the unmistakable silhouette of the final boss of an anime role-playing game. A tall rectangular golden headdress drops two long plain side panels, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain.",
+        "image": {
+         "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/46dc08a7001d92ae74c77cc146fccfbe62c3fade299037011aca60d093ac71b6/image.png",
+         "bytes": 240984,
+         "sha256": "f95b874a991579477fd7a0c75e7ce83e800fb31c6fba6a7fbffa688dc1502bcc"
+        },
+        "boss": 0.53,
+        "original": 0.07,
+        "gain": 0.46,
+        "damage": 0.1875,
+        "separate": "pass"
+       }
+      ],
+      "selected": null
+     },
+     "vibe-9d5a9107a8ce2975562f6fd6fea020a7b67ca33627102b7ffba6666321c9dbfd": {
+      "current": {
+       "image": {
+        "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/ce5bcb0d8c736799dc5c90e811d0bbac3f1b6c0bbb6fad9483509cdbaeecf782/image.png",
+        "bytes": 286594,
+        "sha256": "90e5145649a2471d2ec997117ed754e4b0d2a6e1f63b39c3b3f87b95098c6ded"
+       },
+       "boss": 0.76,
+       "original": 0.05,
+       "gain": 0.71,
+       "damage": 0.2275,
+       "separate": "unmeasured"
+      },
+      "proposals": [
+       {
+        "name": "indigo-oracle",
+        "positive": "An older silver-haired male librarian leans against a tall stepladder in an arching library aisle, sliding a thick leather-bound volume onto a high shelf, himself now wearing a towering pointed ivory hood, a deep indigo robe with a severe narrow triangular silhouette, and a large gold eye-shaped crest on his chest. Clean bold line art with flat cel shading and solid, clearly separated shapes.",
+        "explicit": "An older silver-haired male librarian leans against a tall stepladder in an arching library aisle, sliding a thick leather-bound volume onto a high shelf, himself now wearing a towering pointed ivory hood, a deep indigo robe with a severe narrow triangular silhouette, and a large gold eye-shaped crest on his chest. Clean bold line art with flat cel shading and solid, clearly separated shapes. The character has the unmistakable silhouette of the final boss of an anime role-playing game. A towering pointed ivory hood forms a severe narrow triangle, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain.",
+        "image": {
+         "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/7a2e07d98368e69fb2800bbe42aba0520f2561584c6d0ee29e90e64b29cd46b0/image.png",
+         "bytes": 290786,
+         "sha256": "7f6cb7707ace3e508c9a2d0c874f7110579ccf7cf990b26518aedb00a7b35ff3"
+        },
+        "boss": 0.74,
+        "original": 0.05,
+        "gain": 0.69,
+        "damage": 0.3125,
+        "separate": "pass"
+       },
+       {
+        "name": "archive-lich",
+        "positive": "An older silver-haired male librarian leans against a tall stepladder in an arching library aisle, sliding a thick leather-bound volume onto a high shelf, himself now wearing a tall bone-white mitre crown, a black scholar's robe with broad squared armored shoulders, and a heavy chain of office with one large emblem. Clean bold line art with flat cel shading and solid, clearly separated shapes.",
+        "explicit": "An older silver-haired male librarian leans against a tall stepladder in an arching library aisle, sliding a thick leather-bound volume onto a high shelf, himself now wearing a tall bone-white mitre crown, a black scholar's robe with broad squared armored shoulders, and a heavy chain of office with one large emblem. Clean bold line art with flat cel shading and solid, clearly separated shapes. The character has the unmistakable silhouette of the final boss of an anime role-playing game. A tall bone-white mitre crown rises in a clean arch, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain.",
+        "image": {
+         "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/bdc939b20496ec36a88de94148ee2efcc7360290f71b16ea1d8574ce629a0a94/image.png",
+         "bytes": 278013,
+         "sha256": "9aae2636990e9a49a14b6dc4c9b0b3075f947e21608e7d1a122d58d5ca473959"
+        },
+        "boss": 0.68,
+        "original": 0.05,
+        "gain": 0.63,
+        "damage": 0.23,
+        "separate": "pass"
+       },
+       {
+        "name": "tome-sovereign",
+        "positive": "An older silver-haired male librarian leans against a tall stepladder in an arching library aisle, sliding a thick leather-bound volume onto a high shelf, himself now wearing a tall open-faced bronze helm with two swept-back horns, a long burgundy armored coat with wide lacquered pauldrons, and a high stiff collar. Clean bold line art with flat cel shading and solid, clearly separated shapes.",
+        "explicit": "An older silver-haired male librarian leans against a tall stepladder in an arching library aisle, sliding a thick leather-bound volume onto a high shelf, himself now wearing a tall open-faced bronze helm with two swept-back horns, a long burgundy armored coat with wide lacquered pauldrons, and a high stiff collar. Clean bold line art with flat cel shading and solid, clearly separated shapes. The character has the unmistakable silhouette of the final boss of an anime role-playing game. A tall open-faced bronze helm carries two swept-back horns, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain.",
+        "image": {
+         "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/16d9d705add64493b7f715143127a860d41935442d8dbe69e26b6d2c33eaed77/image.png",
+         "bytes": 297937,
+         "sha256": "2024a0ebabfbcc074e2981837be533ff92440c50c65f31c8b1330e839180e704"
+        },
+        "boss": 0.63,
+        "original": 0.05,
+        "gain": 0.58,
+        "damage": 0.26,
+        "separate": "pass"
+       }
+      ],
+      "selected": null
+     },
+     "vibe-16cea65095f6ec4d148ee4f170a6c635a193e66c01b63433b723209eec5ce9bb": {
+      "current": {
+       "image": {
+        "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/f58d0057de191ba328e8ecabbb89e77255b3957bfc365f8fd4de3dfda356f501/image.png",
+        "bytes": 197750,
+        "sha256": "813d3a20e69d03b4c4c7e9bcc2efacfe80f64bf5aab0b4a2f8a303f0c0403db9"
+       },
+       "boss": 0.81,
+       "original": 0.09,
+       "gain": 0.7200000000000001,
+       "damage": 0.3,
+       "separate": "pass"
+      },
+      "proposals": [
+       {
+        "name": "thorn-king",
+        "positive": "A weary middle-aged male florist with messy brown hair stands behind a wooden shop counter under warm pendant lights, now clad in smooth obsidian plate armor with large rose-thorn-shaped pauldrons, a plain black cape, and a tall wrought-iron crown of five straight spikes. Clean bold line art with flat cel shading and solid, clearly separated shapes.",
+        "explicit": "A weary middle-aged male florist with messy brown hair stands behind a wooden shop counter under warm pendant lights, now clad in smooth obsidian plate armor with large rose-thorn-shaped pauldrons, a plain black cape, and a tall wrought-iron crown of five straight spikes. Clean bold line art with flat cel shading and solid, clearly separated shapes. The character has the unmistakable silhouette of the final boss of an anime role-playing game. A tall wrought-iron crown carries five straight spikes, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain.",
+        "image": {
+         "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/186b675359bf626d1b2e7bb3067f59030bcd38c492887db5dfdd798848a84813/image.png",
+         "bytes": 240358,
+         "sha256": "bcff4f2473fd2d78a2887ced4e8c10b5c10649c77626c012d9dc4d303bdb09fa"
+        },
+        "boss": 0.76,
+        "original": 0.09,
+        "gain": 0.67,
+        "damage": 0.1925,
+        "separate": "pass"
+       },
+       {
+        "name": "rose-warlord",
+        "positive": "A weary middle-aged male florist with messy brown hair stands behind a wooden shop counter under warm pendant lights, now clad in deep crimson lacquered armor with broad petal-shaped shoulder plates, a high standing collar, and an open-faced helm with a single tall curved crest. Clean bold line art with flat cel shading and solid, clearly separated shapes.",
+        "explicit": "A weary middle-aged male florist with messy brown hair stands behind a wooden shop counter under warm pendant lights, now clad in deep crimson lacquered armor with broad petal-shaped shoulder plates, a high standing collar, and an open-faced helm with a single tall curved crest. Clean bold line art with flat cel shading and solid, clearly separated shapes. The character has the unmistakable silhouette of the final boss of an anime role-playing game. An open-faced helm carries a single tall curved crest, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain.",
+        "image": {
+         "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/e097fcfb109eba8b03b46728c26195fb4e12231fe45aa89ddaac4e5fc0b91a3b/image.png",
+         "bytes": 237453,
+         "sha256": "409c4e073521d6103a596596042778cc0989fb9f32f0fe6429afd0c60e59698c"
+        },
+        "boss": 0.7,
+        "original": 0.09,
+        "gain": 0.61,
+        "damage": 0.2175,
+        "separate": "pass"
+       },
+       {
+        "name": "briar-emperor",
+        "positive": "A weary middle-aged male florist with messy brown hair stands behind a wooden shop counter under warm pendant lights, now clad in a dark green armored greatcoat with wide squared shoulders, a long gold-edged mantle, and a towering antler crown of black iron. Clean bold line art with flat cel shading and solid, clearly separated shapes.",
+        "explicit": "A weary middle-aged male florist with messy brown hair stands behind a wooden shop counter under warm pendant lights, now clad in a dark green armored greatcoat with wide squared shoulders, a long gold-edged mantle, and a towering antler crown of black iron. Clean bold line art with flat cel shading and solid, clearly separated shapes. The character has the unmistakable silhouette of the final boss of an anime role-playing game. A towering antler crown of black iron rises in two clean branches, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain.",
+        "image": {
+         "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/08266d90ae4d25ae7b86b4f8066b044185a098c19e8a5788fa38c7034ef6c15e/image.png",
+         "bytes": 159650,
+         "sha256": "93a6b4c680dd5ab2a90b5b4f8d39949febdbe7de68578242ac75ee54bc85d7d9"
+        },
+        "boss": 0.78,
+        "original": 0.09,
+        "gain": 0.6900000000000001,
+        "damage": 0.2175,
+        "separate": "pass"
+       }
+      ],
+      "selected": null
+     }
+    },
+    "replaced": [
+     "vibe-2e70ade235ef6235ff098a325625f2e4d2844dd2501137b384cd24d6362ba699"
+    ]
+   },
+   "cleanest": {
+    "rule": {
+     "protect_gain": false,
+     "text": "least damaged proposal that is one transformed figure, with lower damage than the current teacher; Boss gain is not protected"
+    },
+    "proposals": "7db74f989ed4a0c98fa5f85d05e843b6c91441e49ef28c92d37d07fa1c1983d0",
+    "decisions": {
+     "vibe-138f4e482dffa18ac3db8b3cc08267820f1b9ccde4d0615070fb3d1d0a6fc828": {
+      "current": {
+       "image": {
+        "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/bde7dcefeea734214530043d6af9dc0fc96a742fb82f3e799693632ed5f61274/image.png",
+        "bytes": 250985,
+        "sha256": "04099ce19956c98bc5b325d7830c110cef8709012f68c9a0eaf9e84085e4a973"
+       },
+       "boss": 0.84,
+       "original": 0.07,
+       "gain": 0.77,
+       "damage": 0.2425,
+       "separate": "pass"
+      },
+      "proposals": [
+       {
+        "name": "iron-regent",
+        "positive": "A middle-aged man with graying hair sits calmly on a wooden bench inside a minimalist sunlit greenhouse, holding a ceramic coffee mug with both hands, surrounded by potted ferns and glass panes, now wearing a tall smooth black-iron crown with three straight tines, a heavy charcoal greatcoat with broad squared plate shoulders, and a plain floor-length mantle. Clean bold line art with flat cel shading and solid, clearly separated shapes.",
+        "explicit": "A middle-aged man with graying hair sits calmly on a wooden bench inside a minimalist sunlit greenhouse, holding a ceramic coffee mug with both hands, surrounded by potted ferns and glass panes, now wearing a tall smooth black-iron crown with three straight tines, a heavy charcoal greatcoat with broad squared plate shoulders, and a plain floor-length mantle. Clean bold line art with flat cel shading and solid, clearly separated shapes. The character has the unmistakable silhouette of the final boss of an anime role-playing game. A tall smooth black-iron crown carries three straight tines, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain.",
+        "image": {
+         "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/cc441c1814fa9030dae837a05e39b6da6bfa957fb9056607b13021eef2f96b77/image.png",
+         "bytes": 248649,
+         "sha256": "64307848483b5b9c0d37322122781cfb64068651492ae37b0b94c167ac94dbc3"
+        },
+        "boss": 0.68,
+        "original": 0.07,
+        "gain": 0.6100000000000001,
+        "damage": 0.18,
+        "separate": "pass"
+       },
+       {
+        "name": "verdant-tyrant",
+        "positive": "A middle-aged man with graying hair sits calmly on a wooden bench inside a minimalist sunlit greenhouse, holding a ceramic coffee mug with both hands, surrounded by potted ferns and glass panes, now wearing a towering antlered helm of polished dark wood, a high-collared emerald war robe with wide lacquered shoulder plates, and a single large leaf-shaped gold emblem on his chest. Clean bold line art with flat cel shading and solid, clearly separated shapes.",
+        "explicit": "A middle-aged man with graying hair sits calmly on a wooden bench inside a minimalist sunlit greenhouse, holding a ceramic coffee mug with both hands, surrounded by potted ferns and glass panes, now wearing a towering antlered helm of polished dark wood, a high-collared emerald war robe with wide lacquered shoulder plates, and a single large leaf-shaped gold emblem on his chest. Clean bold line art with flat cel shading and solid, clearly separated shapes. The character has the unmistakable silhouette of the final boss of an anime role-playing game. A towering antlered helm of polished dark wood rises in two clean branches, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain.",
+        "image": {
+         "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/161da3e0c39b7fecc188a4211205a74b027865cd7723fcac30424fa4a7f38b03/image.png",
+         "bytes": 327574,
+         "sha256": "251188a2b68d28f0361092d0f2f856c20a4c00cc0d680ba5a2d7390ea0134e7f"
+        },
+        "boss": 0.73,
+        "original": 0.07,
+        "gain": 0.6599999999999999,
+        "damage": 0.18,
+        "separate": "pass"
+       },
+       {
+        "name": "glass-emperor",
+        "positive": "A middle-aged man with graying hair sits calmly on a wooden bench inside a minimalist sunlit greenhouse, holding a ceramic coffee mug with both hands, surrounded by potted ferns and glass panes, now wearing a tall faceted crystal crown, a long white-and-gold imperial coat with sharp triangular shoulder plates, and a wide stiff standing collar. Clean bold line art with flat cel shading and solid, clearly separated shapes.",
+        "explicit": "A middle-aged man with graying hair sits calmly on a wooden bench inside a minimalist sunlit greenhouse, holding a ceramic coffee mug with both hands, surrounded by potted ferns and glass panes, now wearing a tall faceted crystal crown, a long white-and-gold imperial coat with sharp triangular shoulder plates, and a wide stiff standing collar. Clean bold line art with flat cel shading and solid, clearly separated shapes. The character has the unmistakable silhouette of the final boss of an anime role-playing game. A tall faceted crystal crown rises in five clean points, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain.",
+        "image": {
+         "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/cd8a8b8a9d80286f26bb3aee4b7973758199c4b0fd499394d9aa5299725fa49b/image.png",
+         "bytes": 316742,
+         "sha256": "93f72a52c859487e3a27b3a68936c74d240c43516e72549ce21e5a6e66dc0842"
+        },
+        "boss": 0.46,
+        "original": 0.07,
+        "gain": 0.39,
+        "damage": 0.265,
+        "separate": "pass"
+       }
+      ],
+      "selected": "verdant-tyrant"
+     },
+     "vibe-0581f081cb0056617de7f946949e4f990888b4edb0e1ecd4265c25145818cb34": {
+      "current": {
+       "image": {
+        "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/09c3dc0fe9ce045850657cfcddbddfde112dae857e3456ae07b634e724f2dce5/image.png",
+        "bytes": 396635,
+        "sha256": "91d7c76c55a69201f3ff4fbee9ffc88ad81cf8b11a24551fef09818e6ff18e9a"
+       },
+       "boss": 0.76,
+       "original": 0.07,
+       "gain": 0.69,
+       "damage": 0.255,
+       "separate": "pass"
+      },
+      "proposals": [
+       {
+        "name": "azure-warlord",
+        "positive": "An athletic man with short black hair stands casually at the top of a stone staircase overlooking an empty plaza, with one hand resting on the stone balustrade, wearing smooth midnight-blue plate armor with two large curved horn pauldrons, a tall crested open-faced helm, and a long plain navy cape. Clean bold line art with flat cel shading and solid, clearly separated shapes.",
+        "explicit": "An athletic man with short black hair stands casually at the top of a stone staircase overlooking an empty plaza, with one hand resting on the stone balustrade, wearing smooth midnight-blue plate armor with two large curved horn pauldrons, a tall crested open-faced helm, and a long plain navy cape. Clean bold line art with flat cel shading and solid, clearly separated shapes. The character has the unmistakable silhouette of the final boss of an anime role-playing game. A tall crested open-faced helm carries one broad steel fin, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain.",
+        "image": {
+         "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/7051818b061ceabc5ad5a0172c8d5fcb93319732c5c3cf6bdff8e775a53bd413/image.png",
+         "bytes": 314296,
+         "sha256": "0ab7ca9c5054f46f1c941ae95bb9232f8666d50cb7cb173c500952a89aa432e0"
+        },
+        "boss": 0.57,
+        "original": 0.07,
+        "gain": 0.49999999999999994,
+        "damage": 0.18,
+        "separate": "pass"
+       },
+       {
+        "name": "sun-conqueror",
+        "positive": "An athletic man with short black hair stands casually at the top of a stone staircase overlooking an empty plaza, with one hand resting on the stone balustrade, wearing polished white-and-gold armor with a huge flat sunburst disc mounted behind his shoulders, a horned open-faced helm, and a short crimson half-cape. Clean bold line art with flat cel shading and solid, clearly separated shapes.",
+        "explicit": "An athletic man with short black hair stands casually at the top of a stone staircase overlooking an empty plaza, with one hand resting on the stone balustrade, wearing polished white-and-gold armor with a huge flat sunburst disc mounted behind his shoulders, a horned open-faced helm, and a short crimson half-cape. Clean bold line art with flat cel shading and solid, clearly separated shapes. The character has the unmistakable silhouette of the final boss of an anime role-playing game. A horned open-faced helm stands before a huge flat golden sunburst disc, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain.",
+        "image": {
+         "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/afb59e536b38b2a7ae6024658bed4bca10d570abdc2886af3310fe5de12ba8ac/image.png",
+         "bytes": 341079,
+         "sha256": "e7a1df5609920eb019ba06e4aa49242822a111a5216b199a8e0a2cdd88e1ccc9"
+        },
+        "boss": 0.56,
+        "original": 0.07,
+        "gain": 0.49000000000000005,
+        "damage": 0.1875,
+        "separate": "pass"
+       },
+       {
+        "name": "stone-overlord",
+        "positive": "An athletic man with short black hair stands casually at the top of a stone staircase overlooking an empty plaza, with one hand resting on the stone balustrade, wearing massive slate-gray armor with square tower-shaped pauldrons, a tall flat-topped crown helm, and a heavy fur-trimmed black mantle. Clean bold line art with flat cel shading and solid, clearly separated shapes.",
+        "explicit": "An athletic man with short black hair stands casually at the top of a stone staircase overlooking an empty plaza, with one hand resting on the stone balustrade, wearing massive slate-gray armor with square tower-shaped pauldrons, a tall flat-topped crown helm, and a heavy fur-trimmed black mantle. Clean bold line art with flat cel shading and solid, clearly separated shapes. The character has the unmistakable silhouette of the final boss of an anime role-playing game. A tall flat-topped crown helm sits between square tower-shaped pauldrons, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain.",
+        "image": {
+         "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/59cf322e53b16f5ba66d6ccd44ba49190f6b208b74ce544f7f8b5a775d6e0ae9/image.png",
+         "bytes": 316857,
+         "sha256": "267b53179ccbf7b71621c49ea63e710dd75bd39e2b9168963ac00c4222f714ce"
+        },
+        "boss": 0.69,
+        "original": 0.07,
+        "gain": 0.6199999999999999,
+        "damage": 0.1975,
+        "separate": "pass"
+       }
+      ],
+      "selected": "azure-warlord"
+     },
+     "vibe-2e70ade235ef6235ff098a325625f2e4d2844dd2501137b384cd24d6362ba699": {
+      "current": {
+       "image": {
+        "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/afabe9ffd66984202c8eb7ea3d9d821e99513870a4a849f83da6818930f3baf8/image.png",
+        "bytes": 239326,
+        "sha256": "38b24cfb48e284bb6f52cd710d9d2d8266c0d911b25a0a00ef59e0631cbfdd35"
+       },
+       "boss": 0.79,
+       "original": 0.03,
+       "gain": 0.76,
+       "damage": 0.235,
+       "separate": "fail"
+      },
+      "proposals": [
+       {
+        "name": "jade-empress",
+        "positive": "An elderly woman sits alone on a low wooden stool in a tea shop, pouring hot water from a ceramic kettle into a small clay teapot on a low bamboo table, herself now wearing a towering jade-and-gold phoenix crown, a stiff high-collared imperial robe with broad winged shoulder boards, and long layered sleeves. Clean bold line art with flat cel shading and solid, clearly separated shapes.",
+        "explicit": "An elderly woman sits alone on a low wooden stool in a tea shop, pouring hot water from a ceramic kettle into a small clay teapot on a low bamboo table, herself now wearing a towering jade-and-gold phoenix crown, a stiff high-collared imperial robe with broad winged shoulder boards, and long layered sleeves. Clean bold line art with flat cel shading and solid, clearly separated shapes. The character has the unmistakable silhouette of the final boss of an anime role-playing game. A towering jade-and-gold phoenix crown spreads two clean wings, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain.",
+        "image": {
+         "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/70697a68db410e7ac671d6cba655a6f4b6b4c7b5e92dd29290b0e047173e8e9e/image.png",
+         "bytes": 241480,
+         "sha256": "0a36159926e32aeccddab9b0eb119b7a3e960876fae57c268a91a5439bb63dfc"
+        },
+        "boss": 0.51,
+        "original": 0.03,
+        "gain": 0.48,
+        "damage": 0.215,
+        "separate": "pass"
+       },
+       {
+        "name": "iron-matriarch",
+        "positive": "An elderly woman sits alone on a low wooden stool in a tea shop, pouring hot water from a ceramic kettle into a small clay teapot on a low bamboo table, herself now wearing a tall black-iron crown with a ring of straight spikes, a dark armored coat with wide structured shoulders, and a plain crimson sash. Clean bold line art with flat cel shading and solid, clearly separated shapes.",
+        "explicit": "An elderly woman sits alone on a low wooden stool in a tea shop, pouring hot water from a ceramic kettle into a small clay teapot on a low bamboo table, herself now wearing a tall black-iron crown with a ring of straight spikes, a dark armored coat with wide structured shoulders, and a plain crimson sash. Clean bold line art with flat cel shading and solid, clearly separated shapes. The character has the unmistakable silhouette of the final boss of an anime role-playing game. A tall black-iron crown carries a ring of straight spikes, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain.",
+        "image": {
+         "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/26787ae68529fda13691112419ce8266eeef6dfd38e5e7b7fde2d1d56171b2d9/image.png",
+         "bytes": 209227,
+         "sha256": "8b7cca12f3e3db3b1e46da98c968be1aff644bcfbd79714449d412a03483a7cc"
+        },
+        "boss": 0.81,
+        "original": 0.03,
+        "gain": 0.78,
+        "damage": 0.2275,
+        "separate": "pass"
+       },
+       {
+        "name": "ash-oracle",
+        "positive": "An elderly woman sits alone on a low wooden stool in a tea shop, pouring hot water from a ceramic kettle into a small clay teapot on a low bamboo table, herself now wearing a tall pointed white hood with a gold disc halo fixed behind her head, heavy gray ceremonial robes with squared armored shoulders, and a single large crest medallion. Clean bold line art with flat cel shading and solid, clearly separated shapes.",
+        "explicit": "An elderly woman sits alone on a low wooden stool in a tea shop, pouring hot water from a ceramic kettle into a small clay teapot on a low bamboo table, herself now wearing a tall pointed white hood with a gold disc halo fixed behind her head, heavy gray ceremonial robes with squared armored shoulders, and a single large crest medallion. Clean bold line art with flat cel shading and solid, clearly separated shapes. The character has the unmistakable silhouette of the final boss of an anime role-playing game. A tall pointed white hood stands before a flat gold disc halo, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain.",
+        "image": {
+         "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/841690018f9b04a9753aa6d4e8c8c048727b1a04fc39670e4d51b469d3bdb121/image.png",
+         "bytes": 230112,
+         "sha256": "df7eccaec4e93571dc473fe7d22827ef203ec7bcc85865c255a013ff93d10626"
+        },
+        "boss": 0.71,
+        "original": 0.03,
+        "gain": 0.6799999999999999,
+        "damage": 0.225,
+        "separate": "pass"
+       }
+      ],
+      "selected": "jade-empress"
+     },
+     "vibe-97780b0bc11a73bec83af5537e3b2dc4a9c1c2f5501a517c5cd4988ad832f8df": {
+      "current": {
+       "image": {
+        "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/74720b49502cbd8241cf67a2419a811d5355d8c1936864a2337c157592d7a518/image.png",
+        "bytes": 241100,
+        "sha256": "a5d5fcb0f99c53b1407f78f382e746453d0908698a66506e453ec197464ef5ca"
+       },
+       "boss": 0.84,
+       "original": 0.07,
+       "gain": 0.77,
+       "damage": 0.28,
+       "separate": "pass"
+      },
+      "proposals": [
+       {
+        "name": "needle-empress",
+        "positive": "A focused dark-haired woman sits at a wooden drafting table pinning chalked fabric under a focused desk lamp, now clad in a high-collared midnight velvet gown with broad crescent-shaped shoulder plates and wearing a tall crown of seven straight golden needles. Clean bold line art with flat cel shading and solid, clearly separated shapes.",
+        "explicit": "A focused dark-haired woman sits at a wooden drafting table pinning chalked fabric under a focused desk lamp, now clad in a high-collared midnight velvet gown with broad crescent-shaped shoulder plates and wearing a tall crown of seven straight golden needles. Clean bold line art with flat cel shading and solid, clearly separated shapes. The character has the unmistakable silhouette of the final boss of an anime role-playing game. A tall crown carries seven straight golden needles, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain.",
+        "image": {
+         "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/e7cb30aead58230130872c266a17ca2c84bf3d4e09c8432305beda10bde4a573/image.png",
+         "bytes": 202580,
+         "sha256": "f4d867971f2b319a1ff12f26dc752dee127e48d1836ddb4c220e52c6bd76a2c4"
+        },
+        "boss": 0.82,
+        "original": 0.07,
+        "gain": 0.75,
+        "damage": 0.1925,
+        "separate": "pass"
+       },
+       {
+        "name": "thread-queen",
+        "positive": "A focused dark-haired woman sits at a wooden drafting table pinning chalked fabric under a focused desk lamp, now clad in a sharp-shouldered crimson-and-black armored gown with a huge stiff fan collar rising behind her head and wearing a narrow silver tiara with one tall central spire. Clean bold line art with flat cel shading and solid, clearly separated shapes.",
+        "explicit": "A focused dark-haired woman sits at a wooden drafting table pinning chalked fabric under a focused desk lamp, now clad in a sharp-shouldered crimson-and-black armored gown with a huge stiff fan collar rising behind her head and wearing a narrow silver tiara with one tall central spire. Clean bold line art with flat cel shading and solid, clearly separated shapes. The character has the unmistakable silhouette of the final boss of an anime role-playing game. A narrow silver tiara with one tall spire stands before a huge stiff fan collar, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain.",
+        "image": {
+         "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/7d6b2f8e0711796d13fc976ca333f57b2a9160f6c4c55bd3d93e40ee8a59a50a/image.png",
+         "bytes": 279213,
+         "sha256": "ade2ce97cfee2318a2f40d90c175c3bfa179ef44c0d1f6233316db9a158c797b"
+        },
+        "boss": 0.83,
+        "original": 0.07,
+        "gain": 0.76,
+        "damage": 0.1825,
+        "separate": "pass"
+       },
+       {
+        "name": "loom-tyrant",
+        "positive": "A focused dark-haired woman sits at a wooden drafting table pinning chalked fabric under a focused desk lamp, now clad in a heavy white-and-gold ceremonial robe with large square armored shoulders and wearing a tall rectangular golden headdress with long plain side panels. Clean bold line art with flat cel shading and solid, clearly separated shapes.",
+        "explicit": "A focused dark-haired woman sits at a wooden drafting table pinning chalked fabric under a focused desk lamp, now clad in a heavy white-and-gold ceremonial robe with large square armored shoulders and wearing a tall rectangular golden headdress with long plain side panels. Clean bold line art with flat cel shading and solid, clearly separated shapes. The character has the unmistakable silhouette of the final boss of an anime role-playing game. A tall rectangular golden headdress drops two long plain side panels, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain.",
+        "image": {
+         "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/46dc08a7001d92ae74c77cc146fccfbe62c3fade299037011aca60d093ac71b6/image.png",
+         "bytes": 240984,
+         "sha256": "f95b874a991579477fd7a0c75e7ce83e800fb31c6fba6a7fbffa688dc1502bcc"
+        },
+        "boss": 0.53,
+        "original": 0.07,
+        "gain": 0.46,
+        "damage": 0.1875,
+        "separate": "pass"
+       }
+      ],
+      "selected": "thread-queen"
+     },
+     "vibe-9d5a9107a8ce2975562f6fd6fea020a7b67ca33627102b7ffba6666321c9dbfd": {
+      "current": {
+       "image": {
+        "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/ce5bcb0d8c736799dc5c90e811d0bbac3f1b6c0bbb6fad9483509cdbaeecf782/image.png",
+        "bytes": 286594,
+        "sha256": "90e5145649a2471d2ec997117ed754e4b0d2a6e1f63b39c3b3f87b95098c6ded"
+       },
+       "boss": 0.76,
+       "original": 0.05,
+       "gain": 0.71,
+       "damage": 0.2275,
+       "separate": "unmeasured"
+      },
+      "proposals": [
+       {
+        "name": "indigo-oracle",
+        "positive": "An older silver-haired male librarian leans against a tall stepladder in an arching library aisle, sliding a thick leather-bound volume onto a high shelf, himself now wearing a towering pointed ivory hood, a deep indigo robe with a severe narrow triangular silhouette, and a large gold eye-shaped crest on his chest. Clean bold line art with flat cel shading and solid, clearly separated shapes.",
+        "explicit": "An older silver-haired male librarian leans against a tall stepladder in an arching library aisle, sliding a thick leather-bound volume onto a high shelf, himself now wearing a towering pointed ivory hood, a deep indigo robe with a severe narrow triangular silhouette, and a large gold eye-shaped crest on his chest. Clean bold line art with flat cel shading and solid, clearly separated shapes. The character has the unmistakable silhouette of the final boss of an anime role-playing game. A towering pointed ivory hood forms a severe narrow triangle, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain.",
+        "image": {
+         "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/7a2e07d98368e69fb2800bbe42aba0520f2561584c6d0ee29e90e64b29cd46b0/image.png",
+         "bytes": 290786,
+         "sha256": "7f6cb7707ace3e508c9a2d0c874f7110579ccf7cf990b26518aedb00a7b35ff3"
+        },
+        "boss": 0.74,
+        "original": 0.05,
+        "gain": 0.69,
+        "damage": 0.3125,
+        "separate": "pass"
+       },
+       {
+        "name": "archive-lich",
+        "positive": "An older silver-haired male librarian leans against a tall stepladder in an arching library aisle, sliding a thick leather-bound volume onto a high shelf, himself now wearing a tall bone-white mitre crown, a black scholar's robe with broad squared armored shoulders, and a heavy chain of office with one large emblem. Clean bold line art with flat cel shading and solid, clearly separated shapes.",
+        "explicit": "An older silver-haired male librarian leans against a tall stepladder in an arching library aisle, sliding a thick leather-bound volume onto a high shelf, himself now wearing a tall bone-white mitre crown, a black scholar's robe with broad squared armored shoulders, and a heavy chain of office with one large emblem. Clean bold line art with flat cel shading and solid, clearly separated shapes. The character has the unmistakable silhouette of the final boss of an anime role-playing game. A tall bone-white mitre crown rises in a clean arch, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain.",
+        "image": {
+         "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/bdc939b20496ec36a88de94148ee2efcc7360290f71b16ea1d8574ce629a0a94/image.png",
+         "bytes": 278013,
+         "sha256": "9aae2636990e9a49a14b6dc4c9b0b3075f947e21608e7d1a122d58d5ca473959"
+        },
+        "boss": 0.68,
+        "original": 0.05,
+        "gain": 0.63,
+        "damage": 0.23,
+        "separate": "pass"
+       },
+       {
+        "name": "tome-sovereign",
+        "positive": "An older silver-haired male librarian leans against a tall stepladder in an arching library aisle, sliding a thick leather-bound volume onto a high shelf, himself now wearing a tall open-faced bronze helm with two swept-back horns, a long burgundy armored coat with wide lacquered pauldrons, and a high stiff collar. Clean bold line art with flat cel shading and solid, clearly separated shapes.",
+        "explicit": "An older silver-haired male librarian leans against a tall stepladder in an arching library aisle, sliding a thick leather-bound volume onto a high shelf, himself now wearing a tall open-faced bronze helm with two swept-back horns, a long burgundy armored coat with wide lacquered pauldrons, and a high stiff collar. Clean bold line art with flat cel shading and solid, clearly separated shapes. The character has the unmistakable silhouette of the final boss of an anime role-playing game. A tall open-faced bronze helm carries two swept-back horns, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain.",
+        "image": {
+         "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/16d9d705add64493b7f715143127a860d41935442d8dbe69e26b6d2c33eaed77/image.png",
+         "bytes": 297937,
+         "sha256": "2024a0ebabfbcc074e2981837be533ff92440c50c65f31c8b1330e839180e704"
+        },
+        "boss": 0.63,
+        "original": 0.05,
+        "gain": 0.58,
+        "damage": 0.26,
+        "separate": "pass"
+       }
+      ],
+      "selected": null
+     },
+     "vibe-16cea65095f6ec4d148ee4f170a6c635a193e66c01b63433b723209eec5ce9bb": {
+      "current": {
+       "image": {
+        "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/f58d0057de191ba328e8ecabbb89e77255b3957bfc365f8fd4de3dfda356f501/image.png",
+        "bytes": 197750,
+        "sha256": "813d3a20e69d03b4c4c7e9bcc2efacfe80f64bf5aab0b4a2f8a303f0c0403db9"
+       },
+       "boss": 0.81,
+       "original": 0.09,
+       "gain": 0.7200000000000001,
+       "damage": 0.3,
+       "separate": "pass"
+      },
+      "proposals": [
+       {
+        "name": "thorn-king",
+        "positive": "A weary middle-aged male florist with messy brown hair stands behind a wooden shop counter under warm pendant lights, now clad in smooth obsidian plate armor with large rose-thorn-shaped pauldrons, a plain black cape, and a tall wrought-iron crown of five straight spikes. Clean bold line art with flat cel shading and solid, clearly separated shapes.",
+        "explicit": "A weary middle-aged male florist with messy brown hair stands behind a wooden shop counter under warm pendant lights, now clad in smooth obsidian plate armor with large rose-thorn-shaped pauldrons, a plain black cape, and a tall wrought-iron crown of five straight spikes. Clean bold line art with flat cel shading and solid, clearly separated shapes. The character has the unmistakable silhouette of the final boss of an anime role-playing game. A tall wrought-iron crown carries five straight spikes, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain.",
+        "image": {
+         "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/186b675359bf626d1b2e7bb3067f59030bcd38c492887db5dfdd798848a84813/image.png",
+         "bytes": 240358,
+         "sha256": "bcff4f2473fd2d78a2887ced4e8c10b5c10649c77626c012d9dc4d303bdb09fa"
+        },
+        "boss": 0.76,
+        "original": 0.09,
+        "gain": 0.67,
+        "damage": 0.1925,
+        "separate": "pass"
+       },
+       {
+        "name": "rose-warlord",
+        "positive": "A weary middle-aged male florist with messy brown hair stands behind a wooden shop counter under warm pendant lights, now clad in deep crimson lacquered armor with broad petal-shaped shoulder plates, a high standing collar, and an open-faced helm with a single tall curved crest. Clean bold line art with flat cel shading and solid, clearly separated shapes.",
+        "explicit": "A weary middle-aged male florist with messy brown hair stands behind a wooden shop counter under warm pendant lights, now clad in deep crimson lacquered armor with broad petal-shaped shoulder plates, a high standing collar, and an open-faced helm with a single tall curved crest. Clean bold line art with flat cel shading and solid, clearly separated shapes. The character has the unmistakable silhouette of the final boss of an anime role-playing game. An open-faced helm carries a single tall curved crest, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain.",
+        "image": {
+         "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/e097fcfb109eba8b03b46728c26195fb4e12231fe45aa89ddaac4e5fc0b91a3b/image.png",
+         "bytes": 237453,
+         "sha256": "409c4e073521d6103a596596042778cc0989fb9f32f0fe6429afd0c60e59698c"
+        },
+        "boss": 0.7,
+        "original": 0.09,
+        "gain": 0.61,
+        "damage": 0.2175,
+        "separate": "pass"
+       },
+       {
+        "name": "briar-emperor",
+        "positive": "A weary middle-aged male florist with messy brown hair stands behind a wooden shop counter under warm pendant lights, now clad in a dark green armored greatcoat with wide squared shoulders, a long gold-edged mantle, and a towering antler crown of black iron. Clean bold line art with flat cel shading and solid, clearly separated shapes.",
+        "explicit": "A weary middle-aged male florist with messy brown hair stands behind a wooden shop counter under warm pendant lights, now clad in a dark green armored greatcoat with wide squared shoulders, a long gold-edged mantle, and a towering antler crown of black iron. Clean bold line art with flat cel shading and solid, clearly separated shapes. The character has the unmistakable silhouette of the final boss of an anime role-playing game. A towering antler crown of black iron rises in two clean branches, visible above the angular armor. The character has the commanding, deliberate presence of the decisive villain.",
+        "image": {
+         "path": "/ml2/particlesliders-working/anima-final-boss-post-training-20261126/teachers/images/08266d90ae4d25ae7b86b4f8066b044185a098c19e8a5788fa38c7034ef6c15e/image.png",
+         "bytes": 159650,
+         "sha256": "93a6b4c680dd5ab2a90b5b4f8d39949febdbe7de68578242ac75ee54bc85d7d9"
+        },
+        "boss": 0.78,
+        "original": 0.09,
+        "gain": 0.6900000000000001,
+        "damage": 0.2175,
+        "separate": "pass"
+       }
+      ],
+      "selected": "thorn-king"
+     }
+    },
+    "replaced": [
+     "vibe-0581f081cb0056617de7f946949e4f990888b4edb0e1ecd4265c25145818cb34",
+     "vibe-138f4e482dffa18ac3db8b3cc08267820f1b9ccde4d0615070fb3d1d0a6fc828",
+     "vibe-16cea65095f6ec4d148ee4f170a6c635a193e66c01b63433b723209eec5ce9bb",
+     "vibe-2e70ade235ef6235ff098a325625f2e4d2844dd2501137b384cd24d6362ba699",
+     "vibe-97780b0bc11a73bec83af5537e3b2dc4a9c1c2f5501a517c5cd4988ad832f8df"
+    ]
+   }
+  }
+ }
+}

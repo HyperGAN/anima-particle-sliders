@@ -56,6 +56,16 @@
         "d": 0.009,
         "particle": 0.03
       }
+    },
+    "control-seed2": {
+      "entry": "fork",
+      "targets": "parent",
+      "seed": 2
+    },
+    "cleanest-seed2": {
+      "entry": "fork",
+      "targets": "cleanest",
+      "seed": 2
     }
   },
   "teachers": {

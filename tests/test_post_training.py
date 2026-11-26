@@ -139,7 +139,7 @@ def test_study_training_forks_once_then_resumes_the_child(tmp_path, monkeypatch)
     seen = []
 
     def inspect(*args, **kwargs):
-        seen.append({k: kwargs[k] for k in ("mode", "cohort_id", "fork", "resume")})
+        seen.append({k: kwargs[k] for k in ("mode", "cohort_id", "fork", "resume", "seed")})
         raise RuntimeError("inspected")
 
     monkeypatch.setattr(training, "open_training", inspect)
@@ -156,7 +156,9 @@ def test_study_training_forks_once_then_resumes_the_child(tmp_path, monkeypatch)
     child = run(tmp_path / "child", parent=parent)
     assert (fresh["mode"], fresh["fork"]) == ("fresh", None)
     assert (child["mode"], child["fork"], child["resume"]) == ("fork", parent, None)
-    assert child["cohort_id"] != fresh["cohort_id"]
+    assert child["cohort_id"] != fresh["cohort_id"] and child["seed"] == 1
+    replicate = run(tmp_path / "replicate", parent=parent, seed=2)
+    assert replicate["seed"] == 2 and replicate["cohort_id"] not in (child["cohort_id"], fresh["cohort_id"])
     saved = dict(path=str(tmp_path / "FULL000012.pt"), bytes=1, sha256="b" * 64)
     arm = training.arm_path(tmp_path / "child", rates)
     atomic_json(arm / "cursor.json", dict(step=12, full=saved, rates=rates))

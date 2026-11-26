@@ -17,12 +17,13 @@ name = sys.argv[1]
 budget = int(sys.argv[2]) if len(sys.argv) > 2 else POLICY["additional_updates"]
 arm, parent = POLICY["arms"][name], POLICY["parent"]
 rates = arm.get("rates", POLICY["rates"])
+seed = arm.get("seed", POLICY["seed"])
 root = ROOT / "arms" / name
 root.mkdir(parents=True, exist_ok=True)
 cursor = read(parent_arm() / "cursor.json")
 raw, full = Checkpoint(**cursor["raw"]), Checkpoint(**cursor["full"])
 assert cursor["step"] == parent["step"] and cursor["rates"] == POLICY["rates"]
-assert arm["entry"] == "fork" or rates == POLICY["rates"]
+assert arm["entry"] == "fork" or (rates, seed) == (POLICY["rates"], POLICY["seed"])
 assert file_pin(raw.path) == raw and raw.sha256 == parent["raw_sha256"]
 assert file_pin(full.path) == full and full.sha256 == parent["full_sha256"]
 cache = TargetCache(
@@ -36,7 +37,7 @@ else:
 panels = read(PARENT_STUDY / parent["validation"])
 pin = dict(arm=name, parent=asdict(raw), cache=cache.index["fingerprint"],
            validation=file_hash(PARENT_STUDY / parent["validation"]), rates=rates, preset="empf",
-           seed=POLICY["seed"], batch_size=POLICY["batch_size"], ema_decay=None)
+           seed=seed, batch_size=POLICY["batch_size"], ema_decay=None)
 if (root / "plan.json").exists():
     # Adding an arm to the policy leaves every earlier arm's own plan unchanged.
     assert {k: v for k, v in read(root / "plan.json").items() if k != "policy"} == pin
@@ -68,7 +69,7 @@ try:
             train(outputs, cache, panels, rates, base + budget, "fit",
                   observation_steps=[base + n for n in quarters], **options)
         else:
-            train(outputs, cache, panels, rates, budget, "fit", parent=raw,
+            train(outputs, cache, panels, rates, budget, "fit", parent=raw, seed=seed,
                   observation_steps=[n for n in quarters if n % (budget // 4)], **options)
         atomic_json(root / f"terminal-{budget}.json", dict(status="completed", additional=budget))
     except Catastrophe:

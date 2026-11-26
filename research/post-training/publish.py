@@ -26,6 +26,8 @@ LABELS = {
     "control": "Fork control · fresh critic and optimizer, same targets",
     "cleaner": "Fork · one cleaner teacher that keeps its Boss gain",
     "cleanest": "Fork · five least-damaged teachers, gain not protected",
+    "control-seed2": "Fork control, second seed · same targets",
+    "cleanest-seed2": "Fork, second seed · five least-damaged teachers",
     "control-low-g": "Fork control at the lower generator rate · same targets",
     "cleanest-low-g": "Fork at the lower generator rate · five least-damaged teachers",
 }
@@ -57,11 +59,17 @@ def strip(refs, labels):
     return '<div class="images">' + "".join(cells) + "</div>"
 
 
+unmeasured = []
+
+
 def measurement(root):
     result = read(root / "result.json")
     if result.get("alpha") is None:
         return None
     doc = read(root / "ranking" / (result["alpha"].hex() + ".json"))
+    if doc["score"] is None:
+        unmeasured.append(str(root.relative_to(ROOT)))
+        return None
     rows = doc["rows"]
     trials = []
     for path in (root / "search").glob("*.json"):
@@ -74,6 +82,8 @@ def measurement(root):
         alpha=result["alpha"], score=100 * doc["score"], search=100 * result["search_score"],
         gain=100 * doc["mean_gain"], damage=100 * fmean(r["image_breakage"] for r in rows.values()),
         repeat=100 * doc["design"]["repeat"], integrity=result["integrity"], probes=len(result["trials"]),
+        failed_checks=sorted(c for c, v in result["checks"].items() if v["status"] == "fail"),
+        unresolved_checks=sorted(c for c, v in result["checks"].items() if v["status"] == "unmeasured"),
         cases={c: dict(gain=100 * (r["boss_distinction"] - r["original_boss_distinction"]),
                        damage=100 * r["image_breakage"], on=r["on"]) for c, r in rows.items()},
         trials=sorted(trials, key=lambda t: t["alpha"]),
@@ -94,13 +104,42 @@ def trajectory(name, budget):
     return points
 
 
-entries = [dict(arm="parent", updates=parent["step"], extra=0,
+def stopped(name):
+    """A structural failure stops an arm before another update; its saved RAWs stay diagnostic."""
+    path = next((ROOT / "arms" / name / "rates").glob("*")) / "failure.json"
+    if not path.exists():
+        return None
+    failure = read(path)
+    worst = max(p["on"]["integrity"]["checks"]["broken_structure"] for p in failure["result"]["pairs"])
+    return dict(step=failure["step"], phase=failure["phase"], broken_structure=worst)
+
+
+def checks(e):
+    """Eight structural checks at the kept strength; any failure keeps a RAW out of release."""
+    failed, unresolved = len(e["failed_checks"]), len(e["unresolved_checks"])
+    parts = [f"{8 - failed - unresolved} pass"]
+    if failed:
+        parts.append(f"{failed} fail")
+    if unresolved:
+        parts.append(f"{unresolved} unresolved")
+    return ", ".join(parts)
+
+
+def status(e):
+    if not e["extra"]:
+        return "parent"
+    if e["stopped"]:
+        return f'stopped at +{e["stopped"]["step"]} · structural failure'
+    return "completed"
+
+
+entries = [dict(arm="parent", updates=parent["step"], extra=0, stopped=None,
                 **measurement(PARENT_STUDY / parent["calibration"] / D))]
 for budget in budgets:
     for name in POLICY["arms"]:
         root = ROOT / "arms" / name / "calibration" / str(budget) / D
         if (root / "result.json").exists() and (m := measurement(root)):
-            entries.append(dict(arm=name, updates=parent["step"] + budget, extra=budget,
+            entries.append(dict(arm=name, updates=parent["step"] + budget, extra=budget, stopped=stopped(name),
                                 trajectory=trajectory(name, budget), **m))
 base = entries[0]
 for e in entries:
@@ -111,12 +150,12 @@ for e in entries:
     near = [t for t in e["trials"] if abs(t["gain"] - target["gain"]) <= 2]
     e["matched"] = min(near, key=lambda t: t["damage"]) if near else None
 entries.sort(key=lambda e: -e["score"])
-controls = [e for e in entries if e["arm"] in ("parent", "continued", "control", "control-low-g")]
+controls = [e for e in entries if e["arm"] in ("parent", "continued", "control", "control-low-g", "control-seed2")]
 win = POLICY["practical_win"]
 for e in entries:
     if e["arm"].startswith("clean"):
         rivals = [c for c in controls if c["extra"] in (0, e["extra"])]
-        e["practical_win"] = all(
+        e["practical_win"] = not e["stopped"] and all(
             e["gain"] - c["gain"] >= win["gain_points"] and e["damage"] - c["damage"] <= win["damage_points"]
             and e["score"] > c["score"] for c in rivals)
         e["pareto"] = all(e["gain"] >= c["gain"] and e["damage"] < c["damage"] for c in rivals)
@@ -124,7 +163,7 @@ for e in entries:
 names = [c.title() for c in ranking]
 rows = [
     '<tr class="ref"><td>—</td><th scope="row">Matched baseline</th><td>—</td><td>OFF</td><td>'
-    + strip([cases[c]["off"] for c in ranking], names) + '</td><td colspan="9"></td></tr>'
+    + strip([cases[c]["off"] for c in ranking], names) + '</td><td colspan="10"></td></tr>'
 ]
 for rank, e in enumerate(entries, 1):
     label = LABELS[e["arm"]] + (f" · +{e['extra']}" if e["extra"] else "")
@@ -133,12 +172,12 @@ for rank, e in enumerate(entries, 1):
         f'<td>{rank}</td><th scope="row">{escape(label)}</th><td>{e["updates"]}</td><td>{e["alpha"]:g}</td>'
         f'<td>{strip([e["cases"][c]["on"] for c in ranking], names)}</td>'
         f'<td><b>{e["score"]:.2f}</b></td><td>{e["gain"]:+.1f}</td><td>{e["damage"]:.1f}</td>'
-        f'<td>{e["repeat"]:.1f}</td><td>{e["integrity"]}</td><td>{e["search"]:.2f}</td><td>{e["probes"]}</td>'
+        f'<td>{e["repeat"]:.1f}</td><td>{checks(e)}</td><td>{status(e)}</td><td>{e["search"]:.2f}</td><td>{e["probes"]}</td>'
         f'<td>{e["score"] - base["score"]:+.2f}</td>'
         f'<td>{e["paired"]["gain"]["mean"]:+.1f} ± {e["paired"]["gain"]["se"]:.1f} / '
         f'{e["paired"]["damage"]["mean"]:+.1f} ± {e["paired"]["damage"]["se"]:.1f}</td></tr>'
     )
-colors = {"parent": "#f4f0e7", "continued": "#7fb7ff", "control": "#ffb454", "cleaner": "#8fe388", "cleanest": "#ff7fbf", "control-low-g": "#c9a36b", "cleanest-low-g": "#c58fd6"}
+colors = {"parent": "#f4f0e7", "continued": "#7fb7ff", "control": "#ffb454", "cleaner": "#8fe388", "cleanest": "#ff7fbf", "control-low-g": "#c9a36b", "control-seed2": "#ffd9a0", "cleanest-seed2": "#ffb8dc", "cleanest-low-g": "#c58fd6"}
 points = [t for e in entries for t in e["trials"]]
 x0, x1 = min(t["damage"] for t in points) - 1, max(t["damage"] for t in points) + 1
 y0, y1 = min(t["gain"] for t in points) - 2, max(t["gain"] for t in points) + 2
@@ -208,7 +247,7 @@ main,header{{max-width:1540px}} .scroll{{overflow:auto;border:1px solid #41434a;
 <p>Every row starts from the same PG 0.12 Final Boss RAW512 (<code>{parent["raw_sha256"][:12]}</code>). Each trained arm received {" and ".join("+" + str(b) for b in budgets)} stock EMPF updates at the parent's rates. Each RAW then had its own constant-alpha search on four characters. That alpha was frozen before the eight ranking characters shown here. Scores are distinct Boss points out of 100, the same measurement as the constant-alpha board.</p>
 <ul>{verdicts}</ul>
 <p class="controls"><label>Order by <select id="metric"><option value="design">Distinct Boss score</option><option value="gain">Boss gain</option><option value="damage">Least visible damage</option></select></label></p>
-<div class="scroll"><table><thead><tr><th>Rank</th><th>Approach</th><th>Updates</th><th>Constant α</th><th>Matched samples</th><th>Distinct Boss / 100</th><th>Boss gain</th><th>Damage</th><th>Repeat</th><th>Integrity</th><th>Search score</th><th>Trials</th><th>vs parent</th><th>Paired gain / damage vs parent</th></tr></thead><tbody>{"".join(rows)}</tbody></table></div>
+<div class="scroll"><table><thead><tr><th>Rank</th><th>Approach</th><th>Updates</th><th>Constant α</th><th>Matched samples</th><th>Distinct Boss / 100</th><th>Boss gain</th><th>Damage</th><th>Repeat</th><th>Integrity</th><th>Training</th><th>Search score</th><th>Trials</th><th>vs parent</th><th>Paired gain / damage vs parent</th></tr></thead><tbody>{"".join(rows)}</tbody></table></div>
 <p><small>Boss gain is signed ON minus OFF distinction. Damage is Jev's visible-damage severity of the ON image. Repeat is the mean repeated-design judgment over all 28 character pairs in both orders. Paired columns average each character's change from the parent, ± one standard error across the eight characters.</small></p>
 <h2>Gain against damage at every searched strength</h2>
 <p>Each line is one RAW across its searched alphas on the four search characters. The large dot is the alpha it kept. Post-training helps only where its line sits left of the parent's at the same height.</p>
@@ -242,20 +281,21 @@ def sheet(refs, name):
 
 
 sheet([cases[c]["off"] for c in ranking], "off.webp")
-table = ["| Rank | Approach | Updates | Constant α | Eight ranking characters | Distinct Boss / 100 | Boss gain | Damage | Repeat | Integrity |",
-         "| ---: | --- | ---: | ---: | --- | ---: | ---: | ---: | ---: | --- |",
-         "| — | Matched baseline | — | OFF | ![OFF](samples/off.webp) | — | — | — | — | — |"]
+table = ["| Rank | Approach | Updates | Constant α | Eight ranking characters | Distinct Boss / 100 | Boss gain | Damage | Repeat | Integrity | Training |",
+         "| ---: | --- | ---: | ---: | --- | ---: | ---: | ---: | ---: | --- | --- |",
+         "| — | Matched baseline | — | OFF | ![OFF](samples/off.webp) | — | — | — | — | — | — |"]
 for rank, e in enumerate(entries, 1):
     name = f'{e["arm"]}-{e["extra"]}.webp'
     sheet([e["cases"][c]["on"] for c in ranking], name)
     label = LABELS[e["arm"]] + (f" · +{e['extra']}" if e["extra"] else "")
     table.append(f'| {rank} | {label} | {e["updates"]} | {e["alpha"]:g} | ![{label}](samples/{name}) | '
-                 f'{e["score"]:.2f} | {e["gain"]:+.1f} | {e["damage"]:.1f} | {e["repeat"]:.1f} | {e["integrity"]} |')
+                 f'{e["score"]:.2f} | {e["gain"]:+.1f} | {e["damage"]:.1f} | {e["repeat"]:.1f} | {checks(e)} | {status(e)} |')
 (samples.parent / "leaderboard-table.md").write_text("\n".join(table) + "\n")
 for e in entries:
     for c in e["cases"].values():
         c["on"] = c["on"]["sha256"]
 (gallery / "results.json").write_text(json.dumps(dict(policy=POLICY, entries=entries, fork_parity=parity,
     teachers=dict(current=current, selections=selections)), indent=1) + "\n")
+print("Unmeasured rankings:", unmeasured)
 print("Published", len(entries), "rows:", [(e["arm"], e["extra"], round(e["score"], 2), round(e["gain"], 1),
-                                            round(e["damage"], 1)) for e in entries])
+                                            round(e["damage"], 1), checks(e)) for e in entries])
