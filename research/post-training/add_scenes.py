@@ -23,13 +23,14 @@ from lumen_studio.study.boss_targets import add_boss_scenes
 from lumen_studio.study.design_score import summarize
 from lumen_studio.study.outputs import Outputs, read
 
-from campaign import CODE, POLICY, ROOT, open_runtime
+from campaign import CODE, PARENT_STUDY, POLICY, ROOT, open_runtime
 from teacher_score import measure, repeat
 
 CV_PYTHON = "/mnt/nvme/ai/conda/anaconda3/bin/python3"
 name = sys.argv[1]
 spec = POLICY["targets"][name]
-parent = TargetCache(ROOT / "targets" / spec["parent"], verify=True)
+parent = TargetCache(PARENT_STUDY / POLICY["parent"]["cache"] if spec["parent"] == "original"
+                     else ROOT / "targets" / spec["parent"], verify=True)
 added = read(CODE / spec["scenes"])
 root = ROOT / "teachers"
 rt = open_runtime()
@@ -47,11 +48,13 @@ try:
         fresh.append(dict(scene=scene, seed=entry["seed"], prompt=entry["neutral"], neutral=neutral, options=options))
     scenes = fixed + fresh
     with ThreadPoolExecutor(24) as pool:
-        jobs = [(s, o, pool.submit(measure, s["neutral"], o["image"]),
-                 pool.submit(out.boss_teacher_pair, dict(output=s["neutral"]), dict(output=o["image"])))
+        # A parent scene's teacher is already chosen. A proposal must be one transformed person.
+        jobs = [(o, pool.submit(measure, s["neutral"], o["image"]),
+                 pool.submit(out.boss_teacher_pair, dict(output=s["neutral"]), dict(output=o["image"]))
+                 if s in fresh else None)
                 for s in scenes for o in s["options"]]
-        for s, option, reading, separate in jobs:
-            option.update(reading.result(), separate=separate.result()["status"])
+        for option, reading, separate in jobs:
+            option.update(reading.result(), separate=separate and separate.result()["status"])
         for s in scenes:
             s["eligible"] = [o for o in s["options"] if o["case"] is not None
                              and (s in fixed or o["separate"] == "pass")]

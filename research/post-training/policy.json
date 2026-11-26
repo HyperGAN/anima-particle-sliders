@@ -152,6 +152,24 @@
       "entry": "fork",
       "targets": "portraits-strong",
       "critic": "parent"
+    },
+    "portraits-original-fresh": {
+      "entry": "fresh",
+      "targets": "portraits-original"
+    },
+    "portraits-original-warm": {
+      "entry": "fork",
+      "targets": "portraits-original",
+      "critic": "parent"
+    },
+    "portraits-original-strong-warm": {
+      "entry": "fork",
+      "targets": "portraits-original-strong",
+      "critic": "parent"
+    },
+    "portraits-original-strong-fresh": {
+      "entry": "fresh",
+      "targets": "portraits-original-strong"
     }
   },
   "teachers": {
@@ -222,6 +240,17 @@
       "dose": 1.4,
       "parent": "portraits",
       "text": "portraits with the whole edit 1.4 times as strong"
+    },
+    "portraits-original": {
+      "parent": "original",
+      "scenes": "portrait_scenes.json",
+      "text": "the parent's twelve teachers plus the eight portrait scenes"
+    },
+    "portraits-original-strong": {
+      "background": 0.45,
+      "dose": 1.4,
+      "parent": "portraits-original",
+      "text": "the parent's teachers plus the portrait scenes, with the whole edit 1.4 times as strong"
     }
   }
 }

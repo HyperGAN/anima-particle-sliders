@@ -35,8 +35,9 @@ if arm["targets"] == "parent":
     assert cache.index["fingerprint"] == parent["cache_fingerprint"]
 else:
     identity = cache.index["identity"]
-    derived = identity.get("teacher_replacement") or identity["background"]
-    assert derived["parent_cache"] == parent["cache_fingerprint"]
+    # Every derivation names the cache it came from. The first one came from the parent's.
+    steps = [identity[k]["parent_cache"] for k in ("teacher_replacement", "added_scenes", "background") if k in identity]
+    assert steps and steps[0] == parent["cache_fingerprint"]
 panels = read(PARENT_STUDY / parent["validation"])
 pin = dict(arm=name, parent=None if fresh else asdict(raw), cache=cache.index["fingerprint"],
            validation=file_hash(PARENT_STUDY / parent["validation"]), rates=rates, preset="empf",
