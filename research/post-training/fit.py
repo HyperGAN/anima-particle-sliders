@@ -69,7 +69,8 @@ try:
             train(outputs, cache, panels, rates, base + budget, "fit",
                   observation_steps=[base + n for n in quarters], **options)
         else:
-            train(outputs, cache, panels, rates, budget, "fit", parent=raw, seed=seed,
+            warm = dict(parent_full=full) if arm.get("critic") == "parent" else {}
+            train(outputs, cache, panels, rates, budget, "fit", parent=raw, seed=seed, **warm,
                   observation_steps=[n for n in quarters if n % (budget // 4)], **options)
         atomic_json(root / f"terminal-{budget}.json", dict(status="completed", additional=budget))
     except Catastrophe:

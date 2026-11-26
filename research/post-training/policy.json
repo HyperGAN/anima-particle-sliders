@@ -66,6 +66,16 @@
       "entry": "fork",
       "targets": "cleanest",
       "seed": 2
+    },
+    "control-warm": {
+      "entry": "fork",
+      "targets": "parent",
+      "critic": "parent"
+    },
+    "cleanest-warm": {
+      "entry": "fork",
+      "targets": "cleanest",
+      "critic": "parent"
     }
   },
   "teachers": {

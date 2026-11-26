@@ -386,3 +386,38 @@ def test_fork_refuses_unpinned_averaged_or_foreign_parents_before_components(tmp
     child = open_training(**fork_arguments(cache, tmp_path / 'accepted', parent))
     child.close()
     assert built
+
+
+def test_fork_can_carry_the_trained_critic_of_its_own_parent(tmp_path):
+    cache = cache_fixture(tmp_path / 'cache', runtime_fixture())
+    trainer = open_training(**arguments(runtime_fixture(), cache, tmp_path / 'parent', 'parent'))
+    try:
+        trainer.update()
+        early = trainer.save()
+        trainer.update()
+        full = trainer.save()
+        raw = trainer.export(tmp_path / 'parent' / 'RAW-trained.safetensors')
+        trained = deepcopy(trainer.game.critic.state_dict())
+    finally:
+        trainer.close()
+    cold = open_training(**fork_arguments(cache, tmp_path / 'cold', raw, 'cold'))
+    try:
+        fresh, fresh_optimizer = deepcopy(cold.game.critic.state_dict()), cold.game.state_dict()['opt_d']
+    finally:
+        cold.close()
+    warm = open_training(**fork_arguments(cache, tmp_path / 'warm', raw, 'warm'), critic_from=full)
+    try:
+        assert training.equal_state(warm.game.critic.state_dict(), trained)
+        assert not training.equal_state(warm.game.critic.state_dict(), fresh)
+        assert training.equal_state(warm.game.state_dict()['opt_d'], fresh_optimizer)
+        assert warm.initialization['critic'] == dict(law='parent-FULL', FULL_sha256=full.sha256,
+            sha256=training.state_sha(trained))
+        assert warm.step == 0
+    finally:
+        warm.close()
+    for index, patch in enumerate((dict(critic_from=early), dict(mode='fresh', fork=None, critic_from=full))):
+        options = fork_arguments(cache, tmp_path / f'refused-{index}', raw, f'refused-{index}')
+        options.update(patch)
+        with pytest.raises(ValueError):
+            open_training(**options)
+        assert not (tmp_path / f'refused-{index}').exists()

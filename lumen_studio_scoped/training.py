@@ -265,9 +265,11 @@ class FreshTrainer(EngineTrainer):
     exist. The critic, optimizer slots and sampling streams are the seeded fresh
     ones, so two children with the same seed differ only in their targets. The
     child counts its own updates from zero and records the inherited count.
+    With ``critic_from``, the fork also carries the trained critic weights of the
+    parent's own FULL. Optimizer slots and sampling streams are still fresh.
     """
     def __init__(self, runtime, cache, directory, variation, *, mode, cohort_id,
-                 resume=None, fork=None, seed=7, batch_size=2, total_steps=100,
+                 resume=None, fork=None, critic_from=None, seed=7, batch_size=2, total_steps=100,
                  response_scale=1., sigma=1., critic_width=32,
                  native_admission=None, lr=None, d_lr_mult=None,
                  prior_lr_mult=None, numerical_profile=None, ema_decay=None, preset="bispf_optimized"):
@@ -311,6 +313,15 @@ class FreshTrainer(EngineTrainer):
         parent = _read_parent(fork, runtime.identity) if mode == 'fork' else None
         if parent is not None and parent['cohort_id'] == cohort_id:
             raise ValueError('a fork is a new cohort; resume the parent FULL to continue its own')
+        trained_critic = None
+        if critic_from is not None:
+            if parent is None:
+                raise ValueError('a trained critic is carried only into a fork of its own RAW')
+            donor = _read_full(critic_from)
+            if (donor['cohort_id'] != parent['cohort_id'] or donor['options'] != parent['options']
+                    or donor['game'].get('completed_steps') != parent['completed_steps']):
+                raise ValueError('critic FULL is not the saved state of the parent RAW')
+            trained_critic = donor['game']['critic']
         self.runtime, self.variation, self.cohort_id = runtime, variation, cohort_id
         self.responses = CachedResponses(cache, runtime, variation, numerical_profile=numerical_profile)
         self._frozen_identity = self.responses.identity()
@@ -338,11 +349,15 @@ class FreshTrainer(EngineTrainer):
                 if native['weights'] != 'live' or native['step'] != parent['completed_steps']:
                     raise ValueError('parent RAW native metadata differs from its sidecar')
                 imported = {k: v.detach().clone() for k, v in self.adapter.state_dict().items()}
+                if trained_critic is not None:
+                    critic.load_state_dict(trained_critic, strict=True)
                 receipt = dict(schema=FORK_SCHEMA, policy=policy.POLICIES['anima'], product='anima',
                     cohort_id=cohort_id, completed_steps=0, restored_from=fork.sha256,
                     inherited_steps=parent['inherited_steps'], seed=seed, source_identity=self.sources,
                     parent=parent, adapter=dict(law='parent-RAW-strict', sha256=state_sha(imported)),
-                    critic=dict(law='seeded-constructor', sha256=state_sha(critic.state_dict())),
+                    critic=dict(law='seeded-constructor' if trained_critic is None else 'parent-FULL',
+                                sha256=state_sha(critic.state_dict()),
+                                **({} if trained_critic is None else dict(FULL_sha256=critic_from.sha256))),
                     optimizers='fresh', selection='raw', ema_decay=None)
             # Resume does not call initialize. Reuse the saved receipt unchanged.
             self.initialization = deepcopy(receipt)

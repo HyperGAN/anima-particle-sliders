@@ -132,6 +132,7 @@ def train(
     observation_steps=(),
     parent=None,
     seed=1,
+    parent_full=None,
 ):
     """A 1/4-horizon LR screen can be continued from exactly the committed FULL.
 
@@ -143,11 +144,11 @@ def train(
     with (arm / "writer.lock").open("a+") as lock:
         fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
         return _train(outputs, cache, panels, rates, budget, phase, schedule_horizon,
-                      always_check_rates, observation_steps, parent, seed)
+                      always_check_rates, observation_steps, parent, seed, parent_full)
 
 
 def _train(outputs, cache, panels, rates, budget, phase, schedule_horizon,
-           always_check_rates, observation_steps, parent=None, seed=1):
+           always_check_rates, observation_steps, parent=None, seed=1, parent_full=None):
     rt = outputs.runtime
     dest = arm_path(outputs.root, rates)
     cursor = dest / "cursor.json"
@@ -253,9 +254,11 @@ def _train(outputs, cache, panels, rates, budget, phase, schedule_horizon,
         cohort_id="anima-study-"
         + digest(dict(rates=rates, cache=cache.index["fingerprint"],
                       **(dict(parent=parent.sha256) if parent else {}),
-                      **(dict(seed=seed) if seed != 1 else {}))),
+                      **(dict(seed=seed) if seed != 1 else {}),
+                      **(dict(critic=parent_full.sha256) if parent_full else {}))),
         resume=Checkpoint(**previous["full"]) if previous else None,
         fork=None if previous else parent,
+        **(dict(critic_from=parent_full) if parent_full and not previous else {}),
         preset="empf",
         seed=seed,
         batch_size=2,

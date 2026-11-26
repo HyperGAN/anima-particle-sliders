@@ -28,6 +28,8 @@ LABELS = {
     "cleanest": "Fork · five least-damaged teachers, gain not protected",
     "control-seed2": "Fork control, second seed · same targets",
     "cleanest-seed2": "Fork, second seed · five least-damaged teachers",
+    "control-warm": "Fork control with the parent's trained critic · same targets",
+    "cleanest-warm": "Fork with the parent's trained critic · five least-damaged teachers",
     "control-low-g": "Fork control at the lower generator rate · same targets",
     "cleanest-low-g": "Fork at the lower generator rate · five least-damaged teachers",
 }
@@ -150,7 +152,7 @@ for e in entries:
     near = [t for t in e["trials"] if abs(t["gain"] - target["gain"]) <= 2]
     e["matched"] = min(near, key=lambda t: t["damage"]) if near else None
 entries.sort(key=lambda e: -e["score"])
-controls = [e for e in entries if e["arm"] in ("parent", "continued", "control", "control-low-g", "control-seed2")]
+controls = [e for e in entries if e["arm"] in ("parent", "continued", "control", "control-low-g", "control-seed2", "control-warm")]
 win = POLICY["practical_win"]
 for e in entries:
     if e["arm"].startswith("clean"):
@@ -177,7 +179,7 @@ for rank, e in enumerate(entries, 1):
         f'<td>{e["paired"]["gain"]["mean"]:+.1f} ± {e["paired"]["gain"]["se"]:.1f} / '
         f'{e["paired"]["damage"]["mean"]:+.1f} ± {e["paired"]["damage"]["se"]:.1f}</td></tr>'
     )
-colors = {"parent": "#f4f0e7", "continued": "#7fb7ff", "control": "#ffb454", "cleaner": "#8fe388", "cleanest": "#ff7fbf", "control-low-g": "#c9a36b", "control-seed2": "#ffd9a0", "cleanest-seed2": "#ffb8dc", "cleanest-low-g": "#c58fd6"}
+colors = {"parent": "#f4f0e7", "continued": "#7fb7ff", "control": "#ffb454", "cleaner": "#8fe388", "cleanest": "#ff7fbf", "control-low-g": "#c9a36b", "control-warm": "#9ad0c2", "cleanest-warm": "#d6e36b", "control-seed2": "#ffd9a0", "cleanest-seed2": "#ffb8dc", "cleanest-low-g": "#c58fd6"}
 points = [t for e in entries for t in e["trials"]]
 x0, x1 = min(t["damage"] for t in points) - 1, max(t["damage"] for t in points) + 1
 y0, y1 = min(t["gain"] for t in points) - 2, max(t["gain"] for t in points) + 2
