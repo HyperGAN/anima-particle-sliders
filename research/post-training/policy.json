@@ -120,6 +120,38 @@
     "working-quiet-strong-fresh": {
       "entry": "fresh",
       "targets": "working-quiet-strong"
+    },
+    "working-quiet-strong-warm": {
+      "entry": "fork",
+      "targets": "working-quiet-strong",
+      "critic": "parent"
+    },
+    "working-warm": {
+      "entry": "fork",
+      "targets": "working",
+      "critic": "parent"
+    },
+    "working-fresh": {
+      "entry": "fresh",
+      "targets": "working"
+    },
+    "portraits-fresh": {
+      "entry": "fresh",
+      "targets": "portraits"
+    },
+    "portraits-warm": {
+      "entry": "fork",
+      "targets": "portraits",
+      "critic": "parent"
+    },
+    "portraits-strong-fresh": {
+      "entry": "fresh",
+      "targets": "portraits-strong"
+    },
+    "portraits-strong-warm": {
+      "entry": "fork",
+      "targets": "portraits-strong",
+      "critic": "parent"
     }
   },
   "teachers": {
@@ -179,6 +211,17 @@
       "dose": 1.4,
       "parent": "working",
       "text": "the chosen teachers with the clean background and the character's edit 1.4 times as strong"
+    },
+    "portraits": {
+      "parent": "working",
+      "scenes": "portrait_scenes.json",
+      "text": "the chosen teachers plus eight portrait scenes, whose characters and rooms differ from every search and ranking character"
+    },
+    "portraits-strong": {
+      "background": 0.45,
+      "dose": 1.4,
+      "parent": "portraits",
+      "text": "portraits with the whole edit 1.4 times as strong"
     }
   }
 }

@@ -119,6 +119,39 @@ def test_quiet_background_keeps_the_character_target_and_leaves_the_surroundings
     assert not any((tmp_path / name).exists() for name in ("twice", "same", "drift"))
 
 
+def test_added_scenes_join_the_parent_fields_and_pass_the_same_admission(tmp_path):
+    runtime = Runtime()
+    parent = late_cues_cache(tmp_path, runtime)
+    images = {}
+    for side, shade in (("neutral", 30), ("positive", 90)):
+        path = tmp_path / f"portrait-{side}.png"
+        Image.new("RGB", (4, 4), (shade, 7, 7)).save(path)
+        images[side] = dict(path=str(path), sha256=file_hash(path))
+    Image.new("L", (16, 16), 200).save(tmp_path / "portrait-matte.png")
+    scene = dict(neutral="portrait neutral", positive="portrait boss", explicit="portrait boss cue", seed=9,
+                 neutral_image=images["neutral"], positive_image=images["positive"],
+                 matte=str(tmp_path / "portrait-matte.png"))
+    cache = boss_targets.add_boss_scenes(runtime, parent, tmp_path / "more", {"portrait": scene})
+    assert len(cache) == 80 and cache.index["identity"]["added_scenes"]["rows"] == ["portrait"]
+    for index in range(60):
+        assert all(torch.equal(parent[index][k], cache[index][k]) for k in ("latent", "neutral", "positive"))
+    record = cache[67]
+    assert record["row"]["id"] == "portrait" and record["row"]["selection"]["positive"]["output"]["seed"] == 9
+    context = boss_targets.field_context(runtime, cache.index["identity"]["field_recipe"],
+                                         cache.directory, record["row"], record["latent"].shape[-2:])
+    teacher = runtime.predict(record["latent"], record["timestep"], runtime.encode("portrait boss"))
+    assert torch.equal(record["positive"],
+                       boss_targets.target_field(runtime, record, record["neutral"], teacher, context))
+    # The clean background applies to an added scene as it does to a parent scene.
+    quiet = boss_targets.quiet_boss_background(runtime, cache, tmp_path / "more-quiet", 0.0)
+    assert len(quiet) == 80
+    with pytest.raises(ValueError):
+        boss_targets.add_boss_scenes(runtime, parent, tmp_path / "same", {"scene1": scene})
+    Image.new("RGB", (4, 4), (1, 1, 1)).save(images["positive"]["path"])
+    with pytest.raises(ValueError, match="differs from its record"):
+        boss_targets.add_boss_scenes(runtime, parent, tmp_path / "changed", {"portrait2": scene})
+
+
 def replacement(tmp_path, seed=1, prompt="scene1 cleaner boss"):
     path = tmp_path / "cleaner.png"
     Image.new("RGB", (4, 4), (200, 3, 3)).save(path)

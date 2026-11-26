@@ -15,19 +15,15 @@ from statistics import fmean
 import sys
 
 import torch
-from particle_sliders.alpha_tune_jev import _Image
-from particle_sliders.candidate_failure import FileRecord
-
 from lumen_studio.cache import TargetCache
 from lumen_studio.contracts import atomic_json, file_hash
 from lumen_studio.study import working_score as ws
 from lumen_studio.study.boss_targets import quiet_boss_background, replace_boss_teachers
 from lumen_studio.study.design_score import summarize
-from lumen_studio.study.judge import StudyJudge
-from lumen_studio.study.objectives import protocol
 from lumen_studio.study.outputs import Outputs, read
 
 from campaign import CODE, PARENT_STUDY, POLICY, ROOT, open_runtime
+from teacher_score import measure, repeat
 
 root = ROOT / "teachers"
 cache = TargetCache(PARENT_STUDY / POLICY["parent"]["cache"], verify=True)
@@ -39,47 +35,6 @@ proposals = {}
 for source in sources:
     for scene, options in read(CODE / source).items():
         proposals.setdefault(scene, []).extend(options)
-judge = StudyJudge(ROOT / "working-metric" / "judgments", "Final Boss")
-reader = ws.DrawingReader(ROOT / "working-search" / "drawing-receipts")
-cfg = protocol()
-
-
-def picture(record):
-    return _Image.read(FileRecord.from_path(Path(record["path"])))
-
-
-def value(answer, key):
-    return None if answer is None else answer[key]
-
-
-def measure(off, on):
-    a, b = picture(off), picture(on)
-    paired = judge._decide((a, b), ws.PAIR_STATE, ws.PAIR_QUESTIONS)
-    # One neutral image never gets an answer for its own Boss reading. The score floors that
-    # reading at BOSS_FLOOR anyway, and every answered scene reads far below it.
-    original = value(judge._decide((a, a), **cfg["boss"]), "boss_distinction")
-    row = dict(
-        image=on,
-        original=ws.BOSS_FLOOR if original is None else original,
-        original_answered=original is not None,
-        boss=value(judge._decide((a, b), **cfg["boss"]), "boss_distinction"),
-        broken=reader.broken(on["path"]),
-        off_broken=reader.broken(off["path"]),
-        one_figure=value(paired, "one_figure"),
-        same_person=value(paired, "same_person"),
-        figure=value(judge._decide((b,), ws.FIGURE_STATE, ws.FIGURE_QUESTIONS), "figure"),
-        recolored=value(judge._decide((a, b), ws.RECOLOR_STATE, ws.RECOLOR_QUESTIONS), "recolored"),
-    )
-    row["quality"] = ws.quality(row["broken"], row["off_broken"], row["one_figure"], row["figure"])
-    row["case"] = ws.score_case(row["boss"], row["original"], row["quality"], row["recolored"])
-    return row
-
-
-def repeat(left, right):
-    x, y = picture(left), picture(right)
-    values = [value(judge._decide(order, **cfg["repeat"]), "repeat") for order in ((x, y), (y, x))]
-    return None if None in values else fmean(values)
-
 
 rt = open_runtime()
 try:
@@ -111,8 +66,13 @@ try:
                 for y in b["eligible"]:
                     pairs[x["image"]["sha256"], y["image"]["sha256"]] = pool.submit(repeat, x["image"], y["image"])
         pairs = {key: job.result() for key, job in pairs.items()}
-    if any(v is None for v in pairs.values()):
-        raise SystemExit("A repeat reading is unanswered; rerun to retry the judge")
+    # The judge refuses a few image pairs every time. They take the mean of the answered pairs.
+    unanswered = [key for key, v in pairs.items() if v is None]
+    if len(unanswered) > len(pairs) // 50:
+        raise SystemExit(f"{len(unanswered)} repeat readings are unanswered; rerun to retry the judge")
+    typical = fmean(v for v in pairs.values() if v is not None)
+    pairs = {key: typical if v is None else v for key, v in pairs.items()}
+    print(len(unanswered), "of", len(pairs), "repeat readings unanswered", flush=True)
 
     def score(choice):
         cases = {s["scene"]: o["case"] for s, o in zip(scenes, choice)}
