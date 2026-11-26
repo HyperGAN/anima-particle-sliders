@@ -26,6 +26,7 @@ import hashlib
 import json
 import os
 import time
+from uuid import uuid4
 
 from PIL import Image
 
@@ -124,7 +125,8 @@ class DrawingReader:
                 if delay is None:
                     return None  # Transient. Leave no receipt, so a later run asks again.
                 time.sleep(delay)
-            temporary = receipt.with_suffix(".pending")
+            # Two threads can read one tile at once, for example an OFF image shared by several edits.
+            temporary = receipt.with_suffix(f".{uuid4().hex}.pending")
             temporary.write_text(json.dumps(dict(request=binding, response=body)))
             temporary.replace(receipt)
         try:
