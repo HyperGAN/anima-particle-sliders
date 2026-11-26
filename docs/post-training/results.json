@@ -103,392 +103,224 @@
  },
  "entries": [
   {
-   "arm": "cleanest",
+   "arm": "continued",
    "updates": 524,
    "extra": 12,
    "stopped": null,
    "trajectory": [
     {
      "extra": 12,
-     "score": 19.52749710737344,
-     "gain": 0.6975,
+     "score": 1.3735173062070316,
+     "gain": 0.29000000000000004,
      "integrity": "pass"
     }
    ],
-   "alpha": 1.5,
-   "score": 30.82530637289476,
-   "search": 32.26826421626173,
-   "gain": 80.25,
-   "damage": 27.34375,
-   "repeat": 55.02678571428571,
+   "alpha": 2.046875,
+   "score": 29.405659852672265,
+   "search": 30.219049993459375,
+   "gain": 79.125,
+   "damage": 28.34375,
+   "repeat": 51.924107142857146,
    "integrity": "fail",
-   "probes": 15,
+   "probes": 18,
+   "structure": 16.624999999999996,
+   "new": 35.138302012934155,
+   "steep": 31.594370806352362,
+   "added": {
+    "ranger": 20.0,
+    "smith": 59.0,
+    "stationer": 8.999999999999996,
+    "ferryman": 1.9999999999999962,
+    "watchmaker": 24.0,
+    "guide": 14.000000000000002,
+    "guard": 1.0000000000000009,
+    "violinist": 3.9999999999999982
+   },
+   "check_status": {
+    "ranger": "pass",
+    "smith": "fail",
+    "stationer": "pass",
+    "ferryman": "pass",
+    "watchmaker": "unmeasured",
+    "guide": "pass",
+    "guard": "pass",
+    "violinist": "pass"
+   },
    "failed_checks": [
     "smith"
    ],
    "unresolved_checks": [
-    "ferryman",
-    "guard",
-    "stationer",
     "watchmaker"
    ],
    "cases": {
     "ranger": {
      "gain": 82.0,
-     "damage": 31.75,
-     "on": "4eba45b117ccda270631bf88547f1ba4204a586e622257fa4adc4b4b719e6eb9"
+     "damage": 30.5,
+     "on": "3824589632bf6cacab9501a23e56b8e16a53ea20d9b8d90cd733bf74dad5dd76"
     },
     "smith": {
-     "gain": 78.0,
-     "damage": 29.5,
-     "on": "8def1931d8cd5d44638aeb865db1a6676b4cd871794cd7c24b324596e4d7faff"
+     "gain": 77.0,
+     "damage": 37.0,
+     "on": "d1feab5be096ba8eb3ccaa960b826121a2755e4b269d5202a39617646bdc3a37"
     },
     "stationer": {
-     "gain": 79.0,
-     "damage": 26.0,
-     "on": "0b59e63c1e24ec88f84d60aa676262ed1905a3016e357a847a25489ce9ad04ca"
-    },
-    "ferryman": {
-     "gain": 78.0,
-     "damage": 33.75,
-     "on": "c2e3c71f4e9d79be9ba7bb5a3f2bcfdf8378db325d6e8890e858b571661009e6"
-    },
-    "watchmaker": {
-     "gain": 80.0,
-     "damage": 23.0,
-     "on": "c63fcf4f31ea32ecef838f87ec935f31cb66ac02ff2c22090b894e17288aa7a3"
-    },
-    "guide": {
-     "gain": 85.00000000000001,
+     "gain": 77.0,
      "damage": 25.5,
-     "on": "5d197368b5532973133ccdd7937e5b72a0344e7290bd1f260b6c3b5f960899d7"
-    },
-    "guard": {
-     "gain": 79.0,
-     "damage": 27.500000000000004,
-     "on": "6267ae1ac1fc24807d968b20be1cab0ea3a93eb13b20e349e5f9f2095595f829"
-    },
-    "violinist": {
-     "gain": 81.0,
-     "damage": 21.75,
-     "on": "c422447c7ad55780267b59867fedf842c94adf1f1aa62cdf59a4eb0d58453d31"
-    }
-   },
-   "trials": [
-    {
-     "alpha": 0.5,
-     "score": 0.008904003640625005,
-     "gain": 5.250000000000001,
-     "damage": 17.75
-    },
-    {
-     "alpha": 0.75,
-     "score": 0.9451077429765626,
-     "gain": 22.75,
-     "damage": 19.75
-    },
-    {
-     "alpha": 0.875,
-     "score": 2.0032253714875004,
-     "gain": 29.000000000000004,
-     "damage": 17.5625
-    },
-    {
-     "alpha": 1.0,
-     "score": 11.710702486883328,
-     "gain": 47.5,
-     "damage": 20.5
-    },
-    {
-     "alpha": 1.0625,
-     "score": 19.318199847382814,
-     "gain": 61.25000000000001,
-     "damage": 21.875
-    },
-    {
-     "alpha": 1.15625,
-     "score": 28.496543035920315,
-     "gain": 75.5,
-     "damage": 23.5
-    },
-    {
-     "alpha": 1.25,
-     "score": 30.93176257529167,
-     "gain": 79.0,
-     "damage": 24.3125
-    },
-    {
-     "alpha": 1.34375,
-     "score": 31.147705336731253,
-     "gain": 80.0,
-     "damage": 24.6875
-    },
-    {
-     "alpha": 1.4375,
-     "score": 30.522059264733333,
-     "gain": 80.5,
-     "damage": 24.9375
-    },
-    {
-     "alpha": 1.46875,
-     "score": 31.271545604000007,
-     "gain": 81.25,
-     "damage": 25.0
-    },
-    {
-     "alpha": 1.5,
-     "score": 32.26826421626173,
-     "gain": 82.75,
-     "damage": 25.624999999999996
-    },
-    {
-     "alpha": 1.53125,
-     "score": 30.84230042956641,
-     "gain": 82.5,
-     "damage": 26.187499999999996
-    },
-    {
-     "alpha": 1.5625,
-     "score": 29.614877375231252,
-     "gain": 82.25,
-     "damage": 27.375
-    },
-    {
-     "alpha": 1.625,
-     "score": 29.802721469437504,
-     "gain": 83.0,
-     "damage": 27.3125
-    },
-    {
-     "alpha": 2.0,
-     "score": 27.593257437253126,
-     "gain": 82.0,
-     "damage": 30.374999999999996
-    }
-   ],
-   "paired": {
-    "gain": {
-     "mean": 5.625000000000002,
-     "se": 1.6139735791783312
-    },
-    "damage": {
-     "mean": 2.15625,
-     "se": 2.2687401613324645
-    }
-   },
-   "matched": {
-    "alpha": 1.15625,
-    "score": 28.496543035920315,
-    "gain": 75.5,
-    "damage": 23.5
-   },
-   "practical_win": false,
-   "pareto": false
-  },
-  {
-   "arm": "control-warm",
-   "updates": 560,
-   "extra": 48,
-   "stopped": null,
-   "trajectory": [
-    {
-     "extra": 12,
-     "score": 2.0491045122562497,
-     "gain": 0.41083333333333333,
-     "integrity": "pass"
-    },
-    {
-     "extra": 24,
-     "score": 2.8334580384083337,
-     "gain": 0.3325,
-     "integrity": "pass"
-    },
-    {
-     "extra": 36,
-     "score": 6.688396712478125,
-     "gain": 0.5058333333333334,
-     "integrity": "unmeasured"
-    },
-    {
-     "extra": 48,
-     "score": 5.690069050845311,
-     "gain": 0.4533333333333333,
-     "integrity": "pass"
-    }
-   ],
-   "alpha": 1.59375,
-   "score": 30.218912878886556,
-   "search": 28.710633503279432,
-   "gain": 78.25,
-   "damage": 27.9375,
-   "repeat": 44.65625,
-   "integrity": "fail",
-   "probes": 16,
-   "failed_checks": [
-    "ranger",
-    "watchmaker"
-   ],
-   "unresolved_checks": [
-    "ferryman",
-    "guide",
-    "violinist"
-   ],
-   "cases": {
-    "ranger": {
-     "gain": 76.0,
-     "damage": 38.0,
-     "on": "83e5b8d8296d55fdc7b4918cdfe52439129a5f390fffc54e87cc89209d7d36e2"
-    },
-    "smith": {
-     "gain": 78.0,
-     "damage": 24.0,
-     "on": "164dac0601199ee7b9e31ad102bc50a08e19c71117983b02c8575d47eccbe504"
-    },
-    "stationer": {
-     "gain": 78.0,
-     "damage": 25.25,
-     "on": "1b70c0c9f0e5fb49fd8fad100c7fdaa6c4df836dd692c699b64bdbe0ab7a46e0"
+     "on": "436e16820ed1e28bd61ce081c8f8c8ce13ebd4f8193b6c3169e90f69275745bc"
     },
     "ferryman": {
-     "gain": 78.0,
+     "gain": 77.0,
      "damage": 26.0,
-     "on": "c2cbb5b6a79ae514573909fd0b02772e1828a6a78881b70be6709e428ef0e333"
+     "on": "1435a59499ca06ed15fd6ad19cdbb74a29ca79fa948965b2f53dc7adfecb3b48"
     },
     "watchmaker": {
-     "gain": 73.0,
-     "damage": 29.25,
-     "on": "e7a26abd5325ac43176ed3008587f63ff3dce30c77f874f6129d1b0012dbde42"
+     "gain": 80.0,
+     "damage": 25.5,
+     "on": "00891a36b21fc7564702a949da15d39a06bd8844a72f5ae2d25f57b3b12e1812"
     },
     "guide": {
-     "gain": 83.0,
-     "damage": 28.499999999999996,
-     "on": "49f2a7395b56b70fd104b9cbcc3cba5b8037eeac6584ad95ff326fe10619da5c"
+     "gain": 82.0,
+     "damage": 30.25,
+     "on": "5b56f2e757d8ef88a2abe36d9f96dfa7cd9fa903a2a81ef8fe59203c206f7326"
     },
     "guard": {
      "gain": 79.0,
      "damage": 24.75,
-     "on": "d4f06b5dd90b43e3ce9632d2a14ff90f479fa9dcef5e919a9e6f89b2403b88b5"
+     "on": "a6f48e561d52a294288e57e77913b6f1e18fc02f7fe37c5ce2dd77ea565a2aca"
     },
     "violinist": {
-     "gain": 81.0,
-     "damage": 27.750000000000004,
-     "on": "ad7b9d01d1b3a3c7ed2da1618122a5c55875a0b60a39185c6b92867ccc44ed72"
+     "gain": 79.0,
+     "damage": 27.250000000000004,
+     "on": "ddeb424a94097fb24bdc135b8f2be216391a2bc974f8b08406db28acdfd93450"
     }
    },
    "trials": [
     {
      "alpha": 0.5,
-     "score": 0.0025407191296874993,
-     "gain": 2.9999999999999996,
-     "damage": 18.625
+     "score": 0.0032789869734375,
+     "gain": 3.25,
+     "damage": 20.5
     },
     {
      "alpha": 0.75,
-     "score": 0.8097802729468753,
-     "gain": 16.25,
-     "damage": 22.3125
+     "score": 0.07111981336770834,
+     "gain": 10.500000000000002,
+     "damage": 19.6875
     },
     {
      "alpha": 0.875,
-     "score": 4.182699389154166,
-     "gain": 31.5,
-     "damage": 22.0
+     "score": 0.7819397830093752,
+     "gain": 21.0,
+     "damage": 23.9375
     },
     {
      "alpha": 1.0,
-     "score": 4.304989939063802,
-     "gain": 37.0,
-     "damage": 23.0625
+     "score": 0.250716387446875,
+     "gain": 17.75,
+     "damage": 19.75
     },
     {
      "alpha": 1.0625,
-     "score": 6.578716282514844,
-     "gain": 47.25,
-     "damage": 28.812500000000004
+     "score": 0.6091432919562499,
+     "gain": 21.999999999999996,
+     "damage": 20.75
     },
     {
      "alpha": 1.25,
-     "score": 14.149095337591666,
-     "gain": 60.25,
-     "damage": 30.625000000000004
+     "score": 11.20997005113542,
+     "gain": 53.5,
+     "damage": 25.0625
     },
     {
      "alpha": 1.34375,
-     "score": 19.528618270645833,
-     "gain": 67.25,
-     "damage": 27.875
-    },
-    {
-     "alpha": 1.5,
-     "score": 26.870048093231247,
-     "gain": 73.5,
-     "damage": 28.0625
-    },
-    {
-     "alpha": 1.5625,
-     "score": 26.707125099844532,
-     "gain": 72.75,
+     "score": 20.84697440278125,
+     "gain": 70.0,
      "damage": 26.5
     },
     {
-     "alpha": 1.59375,
-     "score": 28.710633503279432,
-     "gain": 74.5,
+     "alpha": 1.5,
+     "score": 24.50635389660833,
+     "gain": 73.0,
      "damage": 25.8125
     },
     {
      "alpha": 1.625,
-     "score": 27.705491638004688,
-     "gain": 73.75,
-     "damage": 28.749999999999996
-    },
-    {
-     "alpha": 1.6953125,
-     "score": 26.878123004481253,
-     "gain": 73.75,
-     "damage": 28.6875
-    },
-    {
-     "alpha": 1.765625,
-     "score": 26.67876689699219,
+     "score": 26.805372435641665,
      "gain": 74.5,
-     "damage": 28.875
-    },
-    {
-     "alpha": 1.90625,
-     "score": 26.89999656740833,
-     "gain": 75.0,
-     "damage": 28.875
+     "damage": 24.3125
     },
     {
      "alpha": 2.0,
-     "score": 27.633179705482032,
-     "gain": 77.5,
-     "damage": 30.125
+     "score": 29.128868120150525,
+     "gain": 80.0,
+     "damage": 28.375
+    },
+    {
+     "alpha": 2.0234375,
+     "score": 30.0846827043125,
+     "gain": 80.5,
+     "damage": 27.625
+    },
+    {
+     "alpha": 2.046875,
+     "score": 30.219049993459375,
+     "gain": 80.25,
+     "damage": 27.625
+    },
+    {
+     "alpha": 2.0703125,
+     "score": 29.97815938953334,
+     "gain": 80.25,
+     "damage": 28.0625
+    },
+    {
+     "alpha": 2.09375,
+     "score": 29.654783520634897,
+     "gain": 80.25,
+     "damage": 28.6875
+    },
+    {
+     "alpha": 2.140625,
+     "score": 30.06484785880573,
+     "gain": 80.5,
+     "damage": 29.25
     },
     {
      "alpha": 2.1875,
-     "score": 24.795603283651566,
-     "gain": 75.0,
-     "damage": 31.4375
+     "score": 29.469344871883337,
+     "gain": 80.0,
+     "damage": 28.249999999999996
+    },
+    {
+     "alpha": 2.609375,
+     "score": 26.200279035330205,
+     "gain": 79.0,
+     "damage": 31.625000000000004
+    },
+    {
+     "alpha": 3.03125,
+     "score": 23.578266360624998,
+     "gain": 79.5,
+     "damage": 36.8125
     }
    ],
    "paired": {
     "gain": {
-     "mean": 3.625,
-     "se": 2.16248451687273
+     "mean": 4.5,
+     "se": 1.5923926292577109
     },
     "damage": {
-     "mean": 2.7499999999999996,
-     "se": 1.8206405858535457
+     "mean": 3.15625,
+     "se": 2.3375513267856047
     }
    },
    "matched": {
-    "alpha": 1.59375,
-    "score": 28.710633503279432,
+    "alpha": 1.625,
+    "score": 26.805372435641665,
     "gain": 74.5,
-    "damage": 25.8125
-   }
+    "damage": 24.3125
+   },
+   "old_rank": 4
   },
   {
    "arm": "cleanest-seed2",
@@ -529,6 +361,29 @@
    "repeat": 42.348214285714285,
    "integrity": "unmeasured",
    "probes": 20,
+   "structure": 13.999999999999998,
+   "new": 32.94588130422143,
+   "steep": 28.77987972612833,
+   "added": {
+    "ranger": 10.000000000000004,
+    "smith": 23.0,
+    "stationer": 8.999999999999996,
+    "ferryman": 19.999999999999996,
+    "watchmaker": 15.999999999999998,
+    "guide": 17.000000000000004,
+    "guard": 8.999999999999996,
+    "violinist": 8.000000000000002
+   },
+   "check_status": {
+    "ranger": "pass",
+    "smith": "unmeasured",
+    "stationer": "pass",
+    "ferryman": "pass",
+    "watchmaker": "pass",
+    "guide": "pass",
+    "guard": "pass",
+    "violinist": "pass"
+   },
    "failed_checks": [],
    "unresolved_checks": [
     "smith"
@@ -707,204 +562,876 @@
     "gain": 75.5,
     "damage": 23.5625
    },
+   "old_rank": 3,
    "practical_win": false,
    "pareto": false
   },
   {
-   "arm": "continued",
+   "arm": "cleanest",
    "updates": 524,
    "extra": 12,
    "stopped": null,
    "trajectory": [
     {
      "extra": 12,
-     "score": 1.3735173062070316,
-     "gain": 0.29000000000000004,
+     "score": 19.52749710737344,
+     "gain": 0.6975,
      "integrity": "pass"
     }
    ],
-   "alpha": 2.046875,
-   "score": 29.405659852672265,
-   "search": 30.219049993459375,
-   "gain": 79.125,
-   "damage": 28.34375,
-   "repeat": 51.924107142857146,
+   "alpha": 1.5,
+   "score": 30.82530637289476,
+   "search": 32.26826421626173,
+   "gain": 80.25,
+   "damage": 27.34375,
+   "repeat": 55.02678571428571,
    "integrity": "fail",
-   "probes": 18,
+   "probes": 15,
+   "structure": 26.999999999999996,
+   "new": 32.218351184757594,
+   "steep": 25.878659616866877,
+   "added": {
+    "ranger": 25.0,
+    "smith": 56.99999999999999,
+    "stationer": 35.0,
+    "ferryman": 40.99999999999999,
+    "watchmaker": 27.0,
+    "guide": 19.0,
+    "guard": 12.0,
+    "violinist": 0.0
+   },
+   "check_status": {
+    "ranger": "pass",
+    "smith": "fail",
+    "stationer": "unmeasured",
+    "ferryman": "unmeasured",
+    "watchmaker": "unmeasured",
+    "guide": "pass",
+    "guard": "unmeasured",
+    "violinist": "pass"
+   },
    "failed_checks": [
     "smith"
    ],
    "unresolved_checks": [
+    "ferryman",
+    "guard",
+    "stationer",
     "watchmaker"
    ],
    "cases": {
     "ranger": {
      "gain": 82.0,
-     "damage": 30.5,
-     "on": "3824589632bf6cacab9501a23e56b8e16a53ea20d9b8d90cd733bf74dad5dd76"
+     "damage": 31.75,
+     "on": "4eba45b117ccda270631bf88547f1ba4204a586e622257fa4adc4b4b719e6eb9"
     },
     "smith": {
-     "gain": 77.0,
-     "damage": 37.0,
-     "on": "d1feab5be096ba8eb3ccaa960b826121a2755e4b269d5202a39617646bdc3a37"
+     "gain": 78.0,
+     "damage": 29.5,
+     "on": "8def1931d8cd5d44638aeb865db1a6676b4cd871794cd7c24b324596e4d7faff"
     },
     "stationer": {
-     "gain": 77.0,
-     "damage": 25.5,
-     "on": "436e16820ed1e28bd61ce081c8f8c8ce13ebd4f8193b6c3169e90f69275745bc"
+     "gain": 79.0,
+     "damage": 26.0,
+     "on": "0b59e63c1e24ec88f84d60aa676262ed1905a3016e357a847a25489ce9ad04ca"
     },
     "ferryman": {
-     "gain": 77.0,
-     "damage": 26.0,
-     "on": "1435a59499ca06ed15fd6ad19cdbb74a29ca79fa948965b2f53dc7adfecb3b48"
+     "gain": 78.0,
+     "damage": 33.75,
+     "on": "c2e3c71f4e9d79be9ba7bb5a3f2bcfdf8378db325d6e8890e858b571661009e6"
     },
     "watchmaker": {
      "gain": 80.0,
-     "damage": 25.5,
-     "on": "00891a36b21fc7564702a949da15d39a06bd8844a72f5ae2d25f57b3b12e1812"
+     "damage": 23.0,
+     "on": "c63fcf4f31ea32ecef838f87ec935f31cb66ac02ff2c22090b894e17288aa7a3"
     },
     "guide": {
-     "gain": 82.0,
-     "damage": 30.25,
-     "on": "5b56f2e757d8ef88a2abe36d9f96dfa7cd9fa903a2a81ef8fe59203c206f7326"
+     "gain": 85.00000000000001,
+     "damage": 25.5,
+     "on": "5d197368b5532973133ccdd7937e5b72a0344e7290bd1f260b6c3b5f960899d7"
     },
     "guard": {
      "gain": 79.0,
-     "damage": 24.75,
-     "on": "a6f48e561d52a294288e57e77913b6f1e18fc02f7fe37c5ce2dd77ea565a2aca"
+     "damage": 27.500000000000004,
+     "on": "6267ae1ac1fc24807d968b20be1cab0ea3a93eb13b20e349e5f9f2095595f829"
     },
     "violinist": {
-     "gain": 79.0,
-     "damage": 27.250000000000004,
-     "on": "ddeb424a94097fb24bdc135b8f2be216391a2bc974f8b08406db28acdfd93450"
+     "gain": 81.0,
+     "damage": 21.75,
+     "on": "c422447c7ad55780267b59867fedf842c94adf1f1aa62cdf59a4eb0d58453d31"
     }
    },
    "trials": [
     {
      "alpha": 0.5,
-     "score": 0.0032789869734375,
-     "gain": 3.25,
-     "damage": 20.5
+     "score": 0.008904003640625005,
+     "gain": 5.250000000000001,
+     "damage": 17.75
     },
     {
      "alpha": 0.75,
-     "score": 0.07111981336770834,
-     "gain": 10.500000000000002,
-     "damage": 19.6875
-    },
-    {
-     "alpha": 0.875,
-     "score": 0.7819397830093752,
-     "gain": 21.0,
-     "damage": 23.9375
-    },
-    {
-     "alpha": 1.0,
-     "score": 0.250716387446875,
-     "gain": 17.75,
+     "score": 0.9451077429765626,
+     "gain": 22.75,
      "damage": 19.75
     },
     {
+     "alpha": 0.875,
+     "score": 2.0032253714875004,
+     "gain": 29.000000000000004,
+     "damage": 17.5625
+    },
+    {
+     "alpha": 1.0,
+     "score": 11.710702486883328,
+     "gain": 47.5,
+     "damage": 20.5
+    },
+    {
      "alpha": 1.0625,
-     "score": 0.6091432919562499,
-     "gain": 21.999999999999996,
-     "damage": 20.75
+     "score": 19.318199847382814,
+     "gain": 61.25000000000001,
+     "damage": 21.875
+    },
+    {
+     "alpha": 1.15625,
+     "score": 28.496543035920315,
+     "gain": 75.5,
+     "damage": 23.5
     },
     {
      "alpha": 1.25,
-     "score": 11.20997005113542,
-     "gain": 53.5,
-     "damage": 25.0625
-    },
-    {
-     "alpha": 1.34375,
-     "score": 20.84697440278125,
-     "gain": 70.0,
-     "damage": 26.5
-    },
-    {
-     "alpha": 1.5,
-     "score": 24.50635389660833,
-     "gain": 73.0,
-     "damage": 25.8125
-    },
-    {
-     "alpha": 1.625,
-     "score": 26.805372435641665,
-     "gain": 74.5,
+     "score": 30.93176257529167,
+     "gain": 79.0,
      "damage": 24.3125
     },
     {
+     "alpha": 1.34375,
+     "score": 31.147705336731253,
+     "gain": 80.0,
+     "damage": 24.6875
+    },
+    {
+     "alpha": 1.4375,
+     "score": 30.522059264733333,
+     "gain": 80.5,
+     "damage": 24.9375
+    },
+    {
+     "alpha": 1.46875,
+     "score": 31.271545604000007,
+     "gain": 81.25,
+     "damage": 25.0
+    },
+    {
+     "alpha": 1.5,
+     "score": 32.26826421626173,
+     "gain": 82.75,
+     "damage": 25.624999999999996
+    },
+    {
+     "alpha": 1.53125,
+     "score": 30.84230042956641,
+     "gain": 82.5,
+     "damage": 26.187499999999996
+    },
+    {
+     "alpha": 1.5625,
+     "score": 29.614877375231252,
+     "gain": 82.25,
+     "damage": 27.375
+    },
+    {
+     "alpha": 1.625,
+     "score": 29.802721469437504,
+     "gain": 83.0,
+     "damage": 27.3125
+    },
+    {
      "alpha": 2.0,
-     "score": 29.128868120150525,
-     "gain": 80.0,
-     "damage": 28.375
-    },
-    {
-     "alpha": 2.0234375,
-     "score": 30.0846827043125,
-     "gain": 80.5,
-     "damage": 27.625
-    },
-    {
-     "alpha": 2.046875,
-     "score": 30.219049993459375,
-     "gain": 80.25,
-     "damage": 27.625
-    },
-    {
-     "alpha": 2.0703125,
-     "score": 29.97815938953334,
-     "gain": 80.25,
-     "damage": 28.0625
-    },
-    {
-     "alpha": 2.09375,
-     "score": 29.654783520634897,
-     "gain": 80.25,
-     "damage": 28.6875
-    },
-    {
-     "alpha": 2.140625,
-     "score": 30.06484785880573,
-     "gain": 80.5,
-     "damage": 29.25
-    },
-    {
-     "alpha": 2.1875,
-     "score": 29.469344871883337,
-     "gain": 80.0,
-     "damage": 28.249999999999996
-    },
-    {
-     "alpha": 2.609375,
-     "score": 26.200279035330205,
-     "gain": 79.0,
-     "damage": 31.625000000000004
-    },
-    {
-     "alpha": 3.03125,
-     "score": 23.578266360624998,
-     "gain": 79.5,
-     "damage": 36.8125
+     "score": 27.593257437253126,
+     "gain": 82.0,
+     "damage": 30.374999999999996
     }
    ],
    "paired": {
     "gain": {
-     "mean": 4.5,
-     "se": 1.5923926292577109
+     "mean": 5.625000000000002,
+     "se": 1.6139735791783312
     },
     "damage": {
-     "mean": 3.15625,
-     "se": 2.3375513267856047
+     "mean": 2.15625,
+     "se": 2.2687401613324645
     }
    },
    "matched": {
-    "alpha": 1.625,
-    "score": 26.805372435641665,
+    "alpha": 1.15625,
+    "score": 28.496543035920315,
+    "gain": 75.5,
+    "damage": 23.5
+   },
+   "old_rank": 1,
+   "practical_win": false,
+   "pareto": false
+  },
+  {
+   "arm": "control-warm",
+   "updates": 560,
+   "extra": 48,
+   "stopped": null,
+   "trajectory": [
+    {
+     "extra": 12,
+     "score": 2.0491045122562497,
+     "gain": 0.41083333333333333,
+     "integrity": "pass"
+    },
+    {
+     "extra": 24,
+     "score": 2.8334580384083337,
+     "gain": 0.3325,
+     "integrity": "pass"
+    },
+    {
+     "extra": 36,
+     "score": 6.688396712478125,
+     "gain": 0.5058333333333334,
+     "integrity": "unmeasured"
+    },
+    {
+     "extra": 48,
+     "score": 5.690069050845311,
+     "gain": 0.4533333333333333,
+     "integrity": "pass"
+    }
+   ],
+   "alpha": 1.59375,
+   "score": 30.218912878886556,
+   "search": 28.710633503279432,
+   "gain": 78.25,
+   "damage": 27.9375,
+   "repeat": 44.65625,
+   "integrity": "fail",
+   "probes": 16,
+   "structure": 27.375,
+   "new": 32.1669356167884,
+   "steep": 26.389540511396103,
+   "added": {
+    "ranger": 61.0,
+    "smith": 6.0,
+    "stationer": 19.999999999999996,
+    "ferryman": 21.999999999999996,
+    "watchmaker": 54.0,
+    "guide": 22.000000000000004,
+    "guard": 0.0,
+    "violinist": 34.0
+   },
+   "check_status": {
+    "ranger": "fail",
+    "smith": "pass",
+    "stationer": "pass",
+    "ferryman": "unmeasured",
+    "watchmaker": "fail",
+    "guide": "unmeasured",
+    "guard": "pass",
+    "violinist": "unmeasured"
+   },
+   "failed_checks": [
+    "ranger",
+    "watchmaker"
+   ],
+   "unresolved_checks": [
+    "ferryman",
+    "guide",
+    "violinist"
+   ],
+   "cases": {
+    "ranger": {
+     "gain": 76.0,
+     "damage": 38.0,
+     "on": "83e5b8d8296d55fdc7b4918cdfe52439129a5f390fffc54e87cc89209d7d36e2"
+    },
+    "smith": {
+     "gain": 78.0,
+     "damage": 24.0,
+     "on": "164dac0601199ee7b9e31ad102bc50a08e19c71117983b02c8575d47eccbe504"
+    },
+    "stationer": {
+     "gain": 78.0,
+     "damage": 25.25,
+     "on": "1b70c0c9f0e5fb49fd8fad100c7fdaa6c4df836dd692c699b64bdbe0ab7a46e0"
+    },
+    "ferryman": {
+     "gain": 78.0,
+     "damage": 26.0,
+     "on": "c2cbb5b6a79ae514573909fd0b02772e1828a6a78881b70be6709e428ef0e333"
+    },
+    "watchmaker": {
+     "gain": 73.0,
+     "damage": 29.25,
+     "on": "e7a26abd5325ac43176ed3008587f63ff3dce30c77f874f6129d1b0012dbde42"
+    },
+    "guide": {
+     "gain": 83.0,
+     "damage": 28.499999999999996,
+     "on": "49f2a7395b56b70fd104b9cbcc3cba5b8037eeac6584ad95ff326fe10619da5c"
+    },
+    "guard": {
+     "gain": 79.0,
+     "damage": 24.75,
+     "on": "d4f06b5dd90b43e3ce9632d2a14ff90f479fa9dcef5e919a9e6f89b2403b88b5"
+    },
+    "violinist": {
+     "gain": 81.0,
+     "damage": 27.750000000000004,
+     "on": "ad7b9d01d1b3a3c7ed2da1618122a5c55875a0b60a39185c6b92867ccc44ed72"
+    }
+   },
+   "trials": [
+    {
+     "alpha": 0.5,
+     "score": 0.0025407191296874993,
+     "gain": 2.9999999999999996,
+     "damage": 18.625
+    },
+    {
+     "alpha": 0.75,
+     "score": 0.8097802729468753,
+     "gain": 16.25,
+     "damage": 22.3125
+    },
+    {
+     "alpha": 0.875,
+     "score": 4.182699389154166,
+     "gain": 31.5,
+     "damage": 22.0
+    },
+    {
+     "alpha": 1.0,
+     "score": 4.304989939063802,
+     "gain": 37.0,
+     "damage": 23.0625
+    },
+    {
+     "alpha": 1.0625,
+     "score": 6.578716282514844,
+     "gain": 47.25,
+     "damage": 28.812500000000004
+    },
+    {
+     "alpha": 1.25,
+     "score": 14.149095337591666,
+     "gain": 60.25,
+     "damage": 30.625000000000004
+    },
+    {
+     "alpha": 1.34375,
+     "score": 19.528618270645833,
+     "gain": 67.25,
+     "damage": 27.875
+    },
+    {
+     "alpha": 1.5,
+     "score": 26.870048093231247,
+     "gain": 73.5,
+     "damage": 28.0625
+    },
+    {
+     "alpha": 1.5625,
+     "score": 26.707125099844532,
+     "gain": 72.75,
+     "damage": 26.5
+    },
+    {
+     "alpha": 1.59375,
+     "score": 28.710633503279432,
+     "gain": 74.5,
+     "damage": 25.8125
+    },
+    {
+     "alpha": 1.625,
+     "score": 27.705491638004688,
+     "gain": 73.75,
+     "damage": 28.749999999999996
+    },
+    {
+     "alpha": 1.6953125,
+     "score": 26.878123004481253,
+     "gain": 73.75,
+     "damage": 28.6875
+    },
+    {
+     "alpha": 1.765625,
+     "score": 26.67876689699219,
+     "gain": 74.5,
+     "damage": 28.875
+    },
+    {
+     "alpha": 1.90625,
+     "score": 26.89999656740833,
+     "gain": 75.0,
+     "damage": 28.875
+    },
+    {
+     "alpha": 2.0,
+     "score": 27.633179705482032,
+     "gain": 77.5,
+     "damage": 30.125
+    },
+    {
+     "alpha": 2.1875,
+     "score": 24.795603283651566,
+     "gain": 75.0,
+     "damage": 31.4375
+    }
+   ],
+   "paired": {
+    "gain": {
+     "mean": 3.625,
+     "se": 2.16248451687273
+    },
+    "damage": {
+     "mean": 2.7499999999999996,
+     "se": 1.8206405858535457
+    }
+   },
+   "matched": {
+    "alpha": 1.59375,
+    "score": 28.710633503279432,
     "gain": 74.5,
-    "damage": 24.3125
-   }
+    "damage": 25.8125
+   },
+   "old_rank": 2
+  },
+  {
+   "arm": "parent",
+   "updates": 512,
+   "extra": 0,
+   "stopped": null,
+   "alpha": 1.5625,
+   "score": 27.388774044226118,
+   "search": 28.78277893133542,
+   "gain": 74.62500000000001,
+   "damage": 25.1875,
+   "repeat": 42.89732142857143,
+   "integrity": "unmeasured",
+   "probes": 16,
+   "structure": 15.25,
+   "new": 31.99087663608884,
+   "steep": 28.42116929496642,
+   "added": {
+    "ranger": 19.0,
+    "smith": 21.999999999999996,
+    "stationer": 1.0000000000000009,
+    "ferryman": 14.999999999999996,
+    "watchmaker": 29.000000000000004,
+    "guide": 13.0,
+    "guard": 0.0,
+    "violinist": 23.0
+   },
+   "check_status": {
+    "ranger": "pass",
+    "smith": "pass",
+    "stationer": "pass",
+    "ferryman": "pass",
+    "watchmaker": "unmeasured",
+    "guide": "pass",
+    "guard": "pass",
+    "violinist": "unmeasured"
+   },
+   "failed_checks": [],
+   "unresolved_checks": [
+    "violinist",
+    "watchmaker"
+   ],
+   "cases": {
+    "ranger": {
+     "gain": 78.0,
+     "damage": 25.75,
+     "on": "a91b60acda56f1b6ed558ab3c2ac82a9009b123f235293c92f31e7200c00a24e"
+    },
+    "smith": {
+     "gain": 65.0,
+     "damage": 19.5,
+     "on": "6ca3f7c26a4c8619c3c18e565ffa535bf7e41cea5b7783776c4cab3dd8e336b4"
+    },
+    "stationer": {
+     "gain": 78.0,
+     "damage": 21.5,
+     "on": "8fc3b730ba2bab4f6c12d139dc7f372b9e9a77fda77f98e0a1dad1a05b6491d9"
+    },
+    "ferryman": {
+     "gain": 72.0,
+     "damage": 26.0,
+     "on": "f8a7732493593980eb37c8458700748d876b04f4efe6a7941b32511b7a321cde"
+    },
+    "watchmaker": {
+     "gain": 76.0,
+     "damage": 23.0,
+     "on": "c45401b7de6868dce96399a6815d5ddc0fcdffef163331df847d9f342f23755f"
+    },
+    "guide": {
+     "gain": 81.0,
+     "damage": 27.250000000000004,
+     "on": "ea52c087930a02cf1f0aefc79a7d87005f41c21dcff5db7ddaa9ae5eff7cc2c8"
+    },
+    "guard": {
+     "gain": 78.0,
+     "damage": 26.5,
+     "on": "1f61df886ed3bc4ce475c135fb93f8b5be2f0779557674cd62c1272edc8b547a"
+    },
+    "violinist": {
+     "gain": 69.0,
+     "damage": 32.0,
+     "on": "d2f946ca8e568e66a6d4484c129a1f06216a7d4a8fca69ae8ab85fcb9a514555"
+    }
+   },
+   "trials": [
+    {
+     "alpha": 0.5,
+     "score": 0.0181280483015625,
+     "gain": 6.25,
+     "damage": 17.875000000000004
+    },
+    {
+     "alpha": 0.75,
+     "score": 0.08703000458437499,
+     "gain": 12.25,
+     "damage": 18.5625
+    },
+    {
+     "alpha": 0.875,
+     "score": 0.9657068530273434,
+     "gain": 18.0,
+     "damage": 23.375
+    },
+    {
+     "alpha": 1.0,
+     "score": 2.8661482907312497,
+     "gain": 28.999999999999996,
+     "damage": 20.3125
+    },
+    {
+     "alpha": 1.0625,
+     "score": 3.739768380928125,
+     "gain": 30.5,
+     "damage": 21.000000000000004
+    },
+    {
+     "alpha": 1.25,
+     "score": 15.7846450116375,
+     "gain": 57.49999999999999,
+     "damage": 27.9375
+    },
+    {
+     "alpha": 1.34375,
+     "score": 23.403253872671094,
+     "gain": 67.5,
+     "damage": 29.375
+    },
+    {
+     "alpha": 1.5,
+     "score": 25.269458693578382,
+     "gain": 69.25,
+     "damage": 27.5625
+    },
+    {
+     "alpha": 1.53125,
+     "score": 24.18467688630729,
+     "gain": 69.25,
+     "damage": 31.374999999999996
+    },
+    {
+     "alpha": 1.5625,
+     "score": 28.78277893133542,
+     "gain": 74.0,
+     "damage": 27.749999999999996
+    },
+    {
+     "alpha": 1.59375,
+     "score": 28.655237145192185,
+     "gain": 76.25,
+     "damage": 28.999999999999996
+    },
+    {
+     "alpha": 1.625,
+     "score": 26.754904940475004,
+     "gain": 73.0,
+     "damage": 31.374999999999996
+    },
+    {
+     "alpha": 1.765625,
+     "score": 27.038039822,
+     "gain": 74.5,
+     "damage": 29.312499999999996
+    },
+    {
+     "alpha": 1.90625,
+     "score": 26.54632783874063,
+     "gain": 69.75,
+     "damage": 27.5625
+    },
+    {
+     "alpha": 2.0,
+     "score": 25.289636634591666,
+     "gain": 72.0,
+     "damage": 28.749999999999996
+    },
+    {
+     "alpha": 2.1875,
+     "score": 24.8223007839,
+     "gain": 71.5,
+     "damage": 26.8125
+    }
+   ],
+   "paired": {
+    "gain": {
+     "mean": 0.0,
+     "se": 0.0
+    },
+    "damage": {
+     "mean": 0.0,
+     "se": 0.0
+    }
+   },
+   "matched": {
+    "alpha": 1.5625,
+    "score": 28.78277893133542,
+    "gain": 74.0,
+    "damage": 27.749999999999996
+   },
+   "old_rank": 7
+  },
+  {
+   "arm": "control-low-g",
+   "updates": 560,
+   "extra": 48,
+   "stopped": null,
+   "trajectory": [
+    {
+     "extra": 12,
+     "score": 2.9369625069541674,
+     "gain": 0.3958333333333333,
+     "integrity": "pass"
+    },
+    {
+     "extra": 24,
+     "score": 2.9471486831640634,
+     "gain": 0.4058333333333333,
+     "integrity": "pass"
+    },
+    {
+     "extra": 36,
+     "score": 3.0791995739500004,
+     "gain": 0.4041666666666667,
+     "integrity": "pass"
+    },
+    {
+     "extra": 48,
+     "score": 1.5024273003749997,
+     "gain": 0.3325,
+     "integrity": "pass"
+    }
+   ],
+   "alpha": 1.44140625,
+   "score": 27.027646807926786,
+   "search": 25.474131653770833,
+   "gain": 75.25,
+   "damage": 27.15625,
+   "repeat": 41.910714285714285,
+   "integrity": "unmeasured",
+   "probes": 18,
+   "structure": 16.5,
+   "new": 31.630713113997544,
+   "steep": 27.51712822472508,
+   "added": {
+    "ranger": 24.0,
+    "smith": 29.000000000000004,
+    "stationer": 6.0,
+    "ferryman": 15.999999999999998,
+    "watchmaker": 10.999999999999998,
+    "guide": 24.000000000000004,
+    "guard": 0.0,
+    "violinist": 21.999999999999996
+   },
+   "check_status": {
+    "ranger": "pass",
+    "smith": "unmeasured",
+    "stationer": "pass",
+    "ferryman": "pass",
+    "watchmaker": "pass",
+    "guide": "unmeasured",
+    "guard": "pass",
+    "violinist": "unmeasured"
+   },
+   "failed_checks": [],
+   "unresolved_checks": [
+    "guide",
+    "smith",
+    "violinist"
+   ],
+   "cases": {
+    "ranger": {
+     "gain": 77.0,
+     "damage": 28.749999999999996,
+     "on": "3bbe741d0b42cabe416cdc0e3ea0dac5c2785d81ae5ed2abdb05c68982a891eb"
+    },
+    "smith": {
+     "gain": 71.00000000000001,
+     "damage": 26.25,
+     "on": "c9c19f1249a9000ba927960311d8134626282e3a1e5460d9586994266e6b4412"
+    },
+    "stationer": {
+     "gain": 77.0,
+     "damage": 22.75,
+     "on": "8ac924dbf824ee52fcdbdd2bae54e84eae786e6092027c8870e91d1b495a9fb4"
+    },
+    "ferryman": {
+     "gain": 70.0,
+     "damage": 25.5,
+     "on": "be5a88f072fd56868d508548b698d0fbac134bf96e5e95e8c1e88c92a802d847"
+    },
+    "watchmaker": {
+     "gain": 79.0,
+     "damage": 21.75,
+     "on": "748a18c7b41b9365e3c2195921a6b4747f91e2f1a277d02570c374cb2b70a151"
+    },
+    "guide": {
+     "gain": 78.0,
+     "damage": 32.25,
+     "on": "86c033cdb91cc9755e911523debf5f2c494062c5f4e0a0d4271d9e59aad0fe84"
+    },
+    "guard": {
+     "gain": 77.0,
+     "damage": 29.5,
+     "on": "b13ade4370c47292f11499edd68019ad464d05f316e486fca07c559792d73ba4"
+    },
+    "violinist": {
+     "gain": 73.00000000000001,
+     "damage": 30.5,
+     "on": "14df4dbe6b1859e4c9be3278050284ea6728d0e6e84bd1d97e4827f20c9b6f63"
+    }
+   },
+   "trials": [
+    {
+     "alpha": 0.5,
+     "score": 0.004583732002604167,
+     "gain": 3.7500000000000004,
+     "damage": 18.1875
+    },
+    {
+     "alpha": 0.75,
+     "score": 0.11151437403645834,
+     "gain": 12.250000000000002,
+     "damage": 22.9375
+    },
+    {
+     "alpha": 0.875,
+     "score": 0.18735329637656256,
+     "gain": 15.000000000000002,
+     "damage": 20.4375
+    },
+    {
+     "alpha": 1.0,
+     "score": 2.647732905189062,
+     "gain": 25.749999999999996,
+     "damage": 22.625
+    },
+    {
+     "alpha": 1.0625,
+     "score": 5.954062747422395,
+     "gain": 34.0,
+     "damage": 25.25
+    },
+    {
+     "alpha": 1.25,
+     "score": 16.468402522039057,
+     "gain": 56.75,
+     "damage": 26.5625
+    },
+    {
+     "alpha": 1.34375,
+     "score": 24.848093944445317,
+     "gain": 72.5,
+     "damage": 24.75
+    },
+    {
+     "alpha": 1.421875,
+     "score": 24.21805719955,
+     "gain": 70.5,
+     "damage": 30.9375
+    },
+    {
+     "alpha": 1.44140625,
+     "score": 25.474131653770833,
+     "gain": 70.5,
+     "damage": 27.3125
+    },
+    {
+     "alpha": 1.4609375,
+     "score": 25.162919711250005,
+     "gain": 70.5,
+     "damage": 28.9375
+    },
+    {
+     "alpha": 1.48046875,
+     "score": 23.893511652103125,
+     "gain": 71.25,
+     "damage": 28.500000000000004
+    },
+    {
+     "alpha": 1.5,
+     "score": 25.09644455438151,
+     "gain": 72.0,
+     "damage": 26.875
+    },
+    {
+     "alpha": 1.53125,
+     "score": 24.392059353413543,
+     "gain": 72.0,
+     "damage": 29.4375
+    },
+    {
+     "alpha": 1.5625,
+     "score": 24.345836648397658,
+     "gain": 71.5,
+     "damage": 27.3125
+    },
+    {
+     "alpha": 1.625,
+     "score": 24.365035714903907,
+     "gain": 73.5,
+     "damage": 28.6875
+    },
+    {
+     "alpha": 2.1875,
+     "score": 24.3779841377224,
+     "gain": 77.5,
+     "damage": 34.9375
+    },
+    {
+     "alpha": 3.03125,
+     "score": 15.631394486568748,
+     "gain": 72.0,
+     "damage": 41.0625
+    }
+   ],
+   "paired": {
+    "gain": {
+     "mean": 0.6250000000000036,
+     "se": 1.1485627664918592
+    },
+    "damage": {
+     "mean": 1.9687499999999991,
+     "se": 1.0621716929748892
+    }
+   },
+   "matched": {
+    "alpha": 1.34375,
+    "score": 24.848093944445317,
+    "gain": 72.5,
+    "damage": 24.75
+   },
+   "old_rank": 9
   },
   {
    "arm": "continued",
@@ -927,6 +1454,29 @@
    "repeat": 48.075892857142854,
    "integrity": "fail",
    "probes": 18,
+   "structure": 24.125,
+   "new": 30.116397400647994,
+   "steep": 23.91499032840461,
+   "added": {
+    "ranger": 20.0,
+    "smith": 18.0,
+    "stationer": 19.999999999999996,
+    "ferryman": 54.99999999999999,
+    "watchmaker": 19.0,
+    "guide": 19.0,
+    "guard": 42.00000000000001,
+    "violinist": 0.0
+   },
+   "check_status": {
+    "ranger": "pass",
+    "smith": "pass",
+    "stationer": "pass",
+    "ferryman": "fail",
+    "watchmaker": "pass",
+    "guide": "pass",
+    "guard": "fail",
+    "violinist": "pass"
+   },
    "failed_checks": [
     "ferryman",
     "guard"
@@ -1099,7 +1649,245 @@
     "score": 29.517910802681254,
     "gain": 75.5,
     "damage": 24.25
-   }
+   },
+   "old_rank": 5
+  },
+  {
+   "arm": "cleanest",
+   "updates": 560,
+   "extra": 48,
+   "stopped": null,
+   "trajectory": [
+    {
+     "extra": 12,
+     "score": 19.52749710737344,
+     "gain": 0.6975,
+     "integrity": "pass"
+    },
+    {
+     "extra": 24,
+     "score": 7.410171830566406,
+     "gain": 0.52,
+     "integrity": "pass"
+    },
+    {
+     "extra": 36,
+     "score": 9.81213418015703,
+     "gain": 0.47333333333333333,
+     "integrity": "unmeasured"
+    },
+    {
+     "extra": 48,
+     "score": 2.7290688165289065,
+     "gain": 0.375,
+     "integrity": "pass"
+    }
+   ],
+   "alpha": 1.3828125,
+   "score": 24.060918402718194,
+   "search": 23.3428363475625,
+   "gain": 73.75,
+   "damage": 29.531249999999996,
+   "repeat": 45.22767857142857,
+   "integrity": "unmeasured",
+   "probes": 18,
+   "structure": 18.625,
+   "new": 28.318837242421875,
+   "steep": 24.338738789286523,
+   "added": {
+    "ranger": 35.0,
+    "smith": 3.9999999999999982,
+    "stationer": 24.0,
+    "ferryman": 32.99999999999999,
+    "watchmaker": 28.000000000000004,
+    "guide": 13.0,
+    "guard": 0.0,
+    "violinist": 12.0
+   },
+   "check_status": {
+    "ranger": "unmeasured",
+    "smith": "pass",
+    "stationer": "unmeasured",
+    "ferryman": "unmeasured",
+    "watchmaker": "unmeasured",
+    "guide": "pass",
+    "guard": "pass",
+    "violinist": "unmeasured"
+   },
+   "failed_checks": [],
+   "unresolved_checks": [
+    "ferryman",
+    "ranger",
+    "stationer",
+    "violinist",
+    "watchmaker"
+   ],
+   "cases": {
+    "ranger": {
+     "gain": 74.0,
+     "damage": 36.75,
+     "on": "1a97d9949cfb53b8d5d1f9d4c7cd270473d24867689e722ea5acffb5e857fb15"
+    },
+    "smith": {
+     "gain": 74.0,
+     "damage": 24.5,
+     "on": "4204fb5f610058fa05c4e9e2e324c5d2eb2c1dcf09914eb76bd1036153bafba0"
+    },
+    "stationer": {
+     "gain": 78.0,
+     "damage": 25.25,
+     "on": "03bdd08c00af1a7348576b3e881adfe20c0f67f376e4fff5ca0ee0ad51e4e46b"
+    },
+    "ferryman": {
+     "gain": 69.0,
+     "damage": 28.249999999999996,
+     "on": "1c035d6fd0ed7049d82290f99df8bab15aaf520b544f46d8116794050e6de08e"
+    },
+    "watchmaker": {
+     "gain": 74.0,
+     "damage": 34.75,
+     "on": "a82f7663ab490128931d01b2a757a4ecbb9dd3ddb71cfb55d098404f3ec382e3"
+    },
+    "guide": {
+     "gain": 70.0,
+     "damage": 28.000000000000004,
+     "on": "e7e339206c41dcf9d1b244b9caa1d5de62ddcdd85c6967c9def8773c5ce89893"
+    },
+    "guard": {
+     "gain": 78.0,
+     "damage": 28.499999999999996,
+     "on": "aedd976564d1d4ff94f3b506b04757ed4fa00236bccca50c706eb833ab9bbfb2"
+    },
+    "violinist": {
+     "gain": 73.00000000000001,
+     "damage": 30.25,
+     "on": "0f2c94951a86ddd7e2f79ed7616f6cacb2d72c343423a4961f33d6d3a28eb0d5"
+    }
+   },
+   "trials": [
+    {
+     "alpha": 0.5,
+     "score": 0.013637981249999999,
+     "gain": 5.0,
+     "damage": 17.4375
+    },
+    {
+     "alpha": 0.75,
+     "score": 0.5418266765361978,
+     "gain": 15.25,
+     "damage": 20.3125
+    },
+    {
+     "alpha": 0.875,
+     "score": 1.586916778120313,
+     "gain": 22.75,
+     "damage": 20.3125
+    },
+    {
+     "alpha": 1.0,
+     "score": 1.9671017787671878,
+     "gain": 29.25,
+     "damage": 21.375
+    },
+    {
+     "alpha": 1.0625,
+     "score": 9.489437003137237,
+     "gain": 41.5,
+     "damage": 22.4375
+    },
+    {
+     "alpha": 1.25,
+     "score": 19.65720937272135,
+     "gain": 69.25,
+     "damage": 34.25
+    },
+    {
+     "alpha": 1.296875,
+     "score": 21.521993871010157,
+     "gain": 69.5,
+     "damage": 31.5
+    },
+    {
+     "alpha": 1.3203125,
+     "score": 22.00996030785729,
+     "gain": 70.25,
+     "damage": 32.5625
+    },
+    {
+     "alpha": 1.34375,
+     "score": 22.485520708566668,
+     "gain": 70.75,
+     "damage": 34.0
+    },
+    {
+     "alpha": 1.36328125,
+     "score": 22.444090734125776,
+     "gain": 71.5,
+     "damage": 33.8125
+    },
+    {
+     "alpha": 1.3828125,
+     "score": 23.3428363475625,
+     "gain": 71.0,
+     "damage": 31.937500000000004
+    },
+    {
+     "alpha": 1.40234375,
+     "score": 23.228101190300784,
+     "gain": 71.50000000000001,
+     "damage": 33.8125
+    },
+    {
+     "alpha": 1.421875,
+     "score": 22.42607825064063,
+     "gain": 70.25,
+     "damage": 32.8125
+    },
+    {
+     "alpha": 1.5,
+     "score": 21.821051226454692,
+     "gain": 66.5,
+     "damage": 31.1875
+    },
+    {
+     "alpha": 1.625,
+     "score": 20.69570462601094,
+     "gain": 69.5,
+     "damage": 32.4375
+    },
+    {
+     "alpha": 1.90625,
+     "score": 17.689203755708593,
+     "gain": 57.50000000000001,
+     "damage": 38.125
+    },
+    {
+     "alpha": 2.0,
+     "score": 17.161901733375004,
+     "gain": 60.00000000000001,
+     "damage": 39.5625
+    },
+    {
+     "alpha": 2.1875,
+     "score": 14.159643749355208,
+     "gain": 59.5,
+     "damage": 41.75
+    }
+   ],
+   "paired": {
+    "gain": {
+     "mean": -0.8749999999999982,
+     "se": 2.073967040652837
+    },
+    "damage": {
+     "mean": 4.343749999999999,
+     "se": 1.6896068197533836
+    }
+   },
+   "matched": null,
+   "old_rank": 15,
+   "practical_win": false,
+   "pareto": false
   },
   {
    "arm": "cleanest-warm",
@@ -1122,6 +1910,29 @@
    "repeat": 46.25,
    "integrity": "fail",
    "probes": 18,
+   "structure": 31.25,
+   "new": 28.17743629475335,
+   "steep": 21.222709482661966,
+   "added": {
+    "ranger": 27.0,
+    "smith": 17.0,
+    "stationer": 27.0,
+    "ferryman": 52.0,
+    "watchmaker": 55.00000000000001,
+    "guide": 30.0,
+    "guard": 8.000000000000002,
+    "violinist": 34.0
+   },
+   "check_status": {
+    "ranger": "unmeasured",
+    "smith": "pass",
+    "stationer": "unmeasured",
+    "ferryman": "fail",
+    "watchmaker": "fail",
+    "guide": "unmeasured",
+    "guard": "pass",
+    "violinist": "unmeasured"
+   },
    "failed_checks": [
     "ferryman",
     "watchmaker"
@@ -1300,812 +2111,7 @@
     "gain": 72.0,
     "damage": 27.249999999999996
    },
-   "practical_win": false,
-   "pareto": false
-  },
-  {
-   "arm": "parent",
-   "updates": 512,
-   "extra": 0,
-   "stopped": null,
-   "alpha": 1.5625,
-   "score": 27.388774044226118,
-   "search": 28.78277893133542,
-   "gain": 74.62500000000001,
-   "damage": 25.1875,
-   "repeat": 42.89732142857143,
-   "integrity": "unmeasured",
-   "probes": 16,
-   "failed_checks": [],
-   "unresolved_checks": [
-    "violinist",
-    "watchmaker"
-   ],
-   "cases": {
-    "ranger": {
-     "gain": 78.0,
-     "damage": 25.75,
-     "on": "a91b60acda56f1b6ed558ab3c2ac82a9009b123f235293c92f31e7200c00a24e"
-    },
-    "smith": {
-     "gain": 65.0,
-     "damage": 19.5,
-     "on": "6ca3f7c26a4c8619c3c18e565ffa535bf7e41cea5b7783776c4cab3dd8e336b4"
-    },
-    "stationer": {
-     "gain": 78.0,
-     "damage": 21.5,
-     "on": "8fc3b730ba2bab4f6c12d139dc7f372b9e9a77fda77f98e0a1dad1a05b6491d9"
-    },
-    "ferryman": {
-     "gain": 72.0,
-     "damage": 26.0,
-     "on": "f8a7732493593980eb37c8458700748d876b04f4efe6a7941b32511b7a321cde"
-    },
-    "watchmaker": {
-     "gain": 76.0,
-     "damage": 23.0,
-     "on": "c45401b7de6868dce96399a6815d5ddc0fcdffef163331df847d9f342f23755f"
-    },
-    "guide": {
-     "gain": 81.0,
-     "damage": 27.250000000000004,
-     "on": "ea52c087930a02cf1f0aefc79a7d87005f41c21dcff5db7ddaa9ae5eff7cc2c8"
-    },
-    "guard": {
-     "gain": 78.0,
-     "damage": 26.5,
-     "on": "1f61df886ed3bc4ce475c135fb93f8b5be2f0779557674cd62c1272edc8b547a"
-    },
-    "violinist": {
-     "gain": 69.0,
-     "damage": 32.0,
-     "on": "d2f946ca8e568e66a6d4484c129a1f06216a7d4a8fca69ae8ab85fcb9a514555"
-    }
-   },
-   "trials": [
-    {
-     "alpha": 0.5,
-     "score": 0.0181280483015625,
-     "gain": 6.25,
-     "damage": 17.875000000000004
-    },
-    {
-     "alpha": 0.75,
-     "score": 0.08703000458437499,
-     "gain": 12.25,
-     "damage": 18.5625
-    },
-    {
-     "alpha": 0.875,
-     "score": 0.9657068530273434,
-     "gain": 18.0,
-     "damage": 23.375
-    },
-    {
-     "alpha": 1.0,
-     "score": 2.8661482907312497,
-     "gain": 28.999999999999996,
-     "damage": 20.3125
-    },
-    {
-     "alpha": 1.0625,
-     "score": 3.739768380928125,
-     "gain": 30.5,
-     "damage": 21.000000000000004
-    },
-    {
-     "alpha": 1.25,
-     "score": 15.7846450116375,
-     "gain": 57.49999999999999,
-     "damage": 27.9375
-    },
-    {
-     "alpha": 1.34375,
-     "score": 23.403253872671094,
-     "gain": 67.5,
-     "damage": 29.375
-    },
-    {
-     "alpha": 1.5,
-     "score": 25.269458693578382,
-     "gain": 69.25,
-     "damage": 27.5625
-    },
-    {
-     "alpha": 1.53125,
-     "score": 24.18467688630729,
-     "gain": 69.25,
-     "damage": 31.374999999999996
-    },
-    {
-     "alpha": 1.5625,
-     "score": 28.78277893133542,
-     "gain": 74.0,
-     "damage": 27.749999999999996
-    },
-    {
-     "alpha": 1.59375,
-     "score": 28.655237145192185,
-     "gain": 76.25,
-     "damage": 28.999999999999996
-    },
-    {
-     "alpha": 1.625,
-     "score": 26.754904940475004,
-     "gain": 73.0,
-     "damage": 31.374999999999996
-    },
-    {
-     "alpha": 1.765625,
-     "score": 27.038039822,
-     "gain": 74.5,
-     "damage": 29.312499999999996
-    },
-    {
-     "alpha": 1.90625,
-     "score": 26.54632783874063,
-     "gain": 69.75,
-     "damage": 27.5625
-    },
-    {
-     "alpha": 2.0,
-     "score": 25.289636634591666,
-     "gain": 72.0,
-     "damage": 28.749999999999996
-    },
-    {
-     "alpha": 2.1875,
-     "score": 24.8223007839,
-     "gain": 71.5,
-     "damage": 26.8125
-    }
-   ],
-   "paired": {
-    "gain": {
-     "mean": 0.0,
-     "se": 0.0
-    },
-    "damage": {
-     "mean": 0.0,
-     "se": 0.0
-    }
-   },
-   "matched": {
-    "alpha": 1.5625,
-    "score": 28.78277893133542,
-    "gain": 74.0,
-    "damage": 27.749999999999996
-   }
-  },
-  {
-   "arm": "cleanest-low-g",
-   "updates": 560,
-   "extra": 48,
-   "stopped": null,
-   "trajectory": [
-    {
-     "extra": 12,
-     "score": 5.6492893915468745,
-     "gain": 0.41083333333333333,
-     "integrity": "pass"
-    },
-    {
-     "extra": 24,
-     "score": 6.2512557859437505,
-     "gain": 0.4558333333333333,
-     "integrity": "pass"
-    },
-    {
-     "extra": 36,
-     "score": 3.9056348908937513,
-     "gain": 0.39999999999999997,
-     "integrity": "pass"
-    },
-    {
-     "extra": 48,
-     "score": 2.819909177310938,
-     "gain": 0.42,
-     "integrity": "pass"
-    }
-   ],
-   "alpha": 1.953125,
-   "score": 27.344064099597716,
-   "search": 26.79121869804375,
-   "gain": 76.5,
-   "damage": 29.46875,
-   "repeat": 46.526785714285715,
-   "integrity": "fail",
-   "probes": 16,
-   "failed_checks": [
-    "ferryman"
-   ],
-   "unresolved_checks": [
-    "guard",
-    "guide",
-    "ranger",
-    "smith",
-    "stationer",
-    "violinist"
-   ],
-   "cases": {
-    "ranger": {
-     "gain": 73.0,
-     "damage": 27.500000000000004,
-     "on": "69d54de6a019a61d754bc4bef8e36dfba0188ff024f215c87f0c2ed55c08edcc"
-    },
-    "smith": {
-     "gain": 79.0,
-     "damage": 25.5,
-     "on": "d9d8c9bd87ba4b41e2f828c252ac3461b02bfd63ce3a2bd63914e831a6c7cfc1"
-    },
-    "stationer": {
-     "gain": 78.0,
-     "damage": 26.75,
-     "on": "5ccb7635080db4484739a703c6188e004f49b90538e27cf88d930f0e0ead2429"
-    },
-    "ferryman": {
-     "gain": 77.0,
-     "damage": 35.75,
-     "on": "3ab4cbfe60df71ecbfb33002ccaa47be437b3f0c6422415e6eba0846660f7025"
-    },
-    "watchmaker": {
-     "gain": 66.0,
-     "damage": 28.249999999999996,
-     "on": "9510fd3e59350358ac63cbe6a904e3a7941f4cf3ee879681359ee664096b678e"
-    },
-    "guide": {
-     "gain": 83.0,
-     "damage": 25.5,
-     "on": "f5e30be2d827d96a410774cdcaa85258b2cbd1db483a76444eeb128e1a00aabc"
-    },
-    "guard": {
-     "gain": 79.0,
-     "damage": 35.25,
-     "on": "2b90cb231a63e33c87a23f9d5785832f676a4b48c4d244d7993e9911fe5f1f3f"
-    },
-    "violinist": {
-     "gain": 77.0,
-     "damage": 31.25,
-     "on": "ffe70bf571b3094d7c07af292219720f6e0c18681df26c7a449f06c982b0664c"
-    }
-   },
-   "trials": [
-    {
-     "alpha": 0.5,
-     "score": 0.027107701624999998,
-     "gain": 7.249999999999999,
-     "damage": 17.0625
-    },
-    {
-     "alpha": 0.75,
-     "score": 0.15687989251874998,
-     "gain": 12.75,
-     "damage": 20.5
-    },
-    {
-     "alpha": 0.875,
-     "score": 0.5400272908039062,
-     "gain": 19.0,
-     "damage": 25.25
-    },
-    {
-     "alpha": 1.0,
-     "score": 1.5739360803421876,
-     "gain": 24.75,
-     "damage": 21.4375
-    },
-    {
-     "alpha": 1.0625,
-     "score": 4.593475936596875,
-     "gain": 34.25,
-     "damage": 23.3125
-    },
-    {
-     "alpha": 1.25,
-     "score": 17.062957314072655,
-     "gain": 51.24999999999999,
-     "damage": 27.0
-    },
-    {
-     "alpha": 1.5,
-     "score": 24.366353166924995,
-     "gain": 72.25,
-     "damage": 26.25
-    },
-    {
-     "alpha": 1.625,
-     "score": 24.09398972174531,
-     "gain": 72.25,
-     "damage": 27.3125
-    },
-    {
-     "alpha": 1.90625,
-     "score": 23.94972701559948,
-     "gain": 76.0,
-     "damage": 32.375
-    },
-    {
-     "alpha": 1.9296875,
-     "score": 25.8004929419211,
-     "gain": 76.5,
-     "damage": 32.0
-    },
-    {
-     "alpha": 1.953125,
-     "score": 26.79121869804375,
-     "gain": 77.75000000000001,
-     "damage": 30.75
-    },
-    {
-     "alpha": 1.9765625,
-     "score": 26.440083488900008,
-     "gain": 77.75000000000001,
-     "damage": 31.0
-    },
-    {
-     "alpha": 2.0,
-     "score": 25.899750128812503,
-     "gain": 76.5,
-     "damage": 30.5
-    },
-    {
-     "alpha": 2.09375,
-     "score": 23.03899255284375,
-     "gain": 75.25,
-     "damage": 35.0
-    },
-    {
-     "alpha": 2.1875,
-     "score": 23.846611826578126,
-     "gain": 76.75,
-     "damage": 33.5625
-    }
-   ],
-   "paired": {
-    "gain": {
-     "mean": 1.875,
-     "se": 2.628399159727674
-    },
-    "damage": {
-     "mean": 4.28125,
-     "se": 1.4808581458783572
-    }
-   },
-   "matched": {
-    "alpha": 1.5,
-    "score": 24.366353166924995,
-    "gain": 72.25,
-    "damage": 26.25
-   },
-   "practical_win": false,
-   "pareto": false
-  },
-  {
-   "arm": "control-low-g",
-   "updates": 560,
-   "extra": 48,
-   "stopped": null,
-   "trajectory": [
-    {
-     "extra": 12,
-     "score": 2.9369625069541674,
-     "gain": 0.3958333333333333,
-     "integrity": "pass"
-    },
-    {
-     "extra": 24,
-     "score": 2.9471486831640634,
-     "gain": 0.4058333333333333,
-     "integrity": "pass"
-    },
-    {
-     "extra": 36,
-     "score": 3.0791995739500004,
-     "gain": 0.4041666666666667,
-     "integrity": "pass"
-    },
-    {
-     "extra": 48,
-     "score": 1.5024273003749997,
-     "gain": 0.3325,
-     "integrity": "pass"
-    }
-   ],
-   "alpha": 1.44140625,
-   "score": 27.027646807926786,
-   "search": 25.474131653770833,
-   "gain": 75.25,
-   "damage": 27.15625,
-   "repeat": 41.910714285714285,
-   "integrity": "unmeasured",
-   "probes": 18,
-   "failed_checks": [],
-   "unresolved_checks": [
-    "guide",
-    "smith",
-    "violinist"
-   ],
-   "cases": {
-    "ranger": {
-     "gain": 77.0,
-     "damage": 28.749999999999996,
-     "on": "3bbe741d0b42cabe416cdc0e3ea0dac5c2785d81ae5ed2abdb05c68982a891eb"
-    },
-    "smith": {
-     "gain": 71.00000000000001,
-     "damage": 26.25,
-     "on": "c9c19f1249a9000ba927960311d8134626282e3a1e5460d9586994266e6b4412"
-    },
-    "stationer": {
-     "gain": 77.0,
-     "damage": 22.75,
-     "on": "8ac924dbf824ee52fcdbdd2bae54e84eae786e6092027c8870e91d1b495a9fb4"
-    },
-    "ferryman": {
-     "gain": 70.0,
-     "damage": 25.5,
-     "on": "be5a88f072fd56868d508548b698d0fbac134bf96e5e95e8c1e88c92a802d847"
-    },
-    "watchmaker": {
-     "gain": 79.0,
-     "damage": 21.75,
-     "on": "748a18c7b41b9365e3c2195921a6b4747f91e2f1a277d02570c374cb2b70a151"
-    },
-    "guide": {
-     "gain": 78.0,
-     "damage": 32.25,
-     "on": "86c033cdb91cc9755e911523debf5f2c494062c5f4e0a0d4271d9e59aad0fe84"
-    },
-    "guard": {
-     "gain": 77.0,
-     "damage": 29.5,
-     "on": "b13ade4370c47292f11499edd68019ad464d05f316e486fca07c559792d73ba4"
-    },
-    "violinist": {
-     "gain": 73.00000000000001,
-     "damage": 30.5,
-     "on": "14df4dbe6b1859e4c9be3278050284ea6728d0e6e84bd1d97e4827f20c9b6f63"
-    }
-   },
-   "trials": [
-    {
-     "alpha": 0.5,
-     "score": 0.004583732002604167,
-     "gain": 3.7500000000000004,
-     "damage": 18.1875
-    },
-    {
-     "alpha": 0.75,
-     "score": 0.11151437403645834,
-     "gain": 12.250000000000002,
-     "damage": 22.9375
-    },
-    {
-     "alpha": 0.875,
-     "score": 0.18735329637656256,
-     "gain": 15.000000000000002,
-     "damage": 20.4375
-    },
-    {
-     "alpha": 1.0,
-     "score": 2.647732905189062,
-     "gain": 25.749999999999996,
-     "damage": 22.625
-    },
-    {
-     "alpha": 1.0625,
-     "score": 5.954062747422395,
-     "gain": 34.0,
-     "damage": 25.25
-    },
-    {
-     "alpha": 1.25,
-     "score": 16.468402522039057,
-     "gain": 56.75,
-     "damage": 26.5625
-    },
-    {
-     "alpha": 1.34375,
-     "score": 24.848093944445317,
-     "gain": 72.5,
-     "damage": 24.75
-    },
-    {
-     "alpha": 1.421875,
-     "score": 24.21805719955,
-     "gain": 70.5,
-     "damage": 30.9375
-    },
-    {
-     "alpha": 1.44140625,
-     "score": 25.474131653770833,
-     "gain": 70.5,
-     "damage": 27.3125
-    },
-    {
-     "alpha": 1.4609375,
-     "score": 25.162919711250005,
-     "gain": 70.5,
-     "damage": 28.9375
-    },
-    {
-     "alpha": 1.48046875,
-     "score": 23.893511652103125,
-     "gain": 71.25,
-     "damage": 28.500000000000004
-    },
-    {
-     "alpha": 1.5,
-     "score": 25.09644455438151,
-     "gain": 72.0,
-     "damage": 26.875
-    },
-    {
-     "alpha": 1.53125,
-     "score": 24.392059353413543,
-     "gain": 72.0,
-     "damage": 29.4375
-    },
-    {
-     "alpha": 1.5625,
-     "score": 24.345836648397658,
-     "gain": 71.5,
-     "damage": 27.3125
-    },
-    {
-     "alpha": 1.625,
-     "score": 24.365035714903907,
-     "gain": 73.5,
-     "damage": 28.6875
-    },
-    {
-     "alpha": 2.1875,
-     "score": 24.3779841377224,
-     "gain": 77.5,
-     "damage": 34.9375
-    },
-    {
-     "alpha": 3.03125,
-     "score": 15.631394486568748,
-     "gain": 72.0,
-     "damage": 41.0625
-    }
-   ],
-   "paired": {
-    "gain": {
-     "mean": 0.6250000000000036,
-     "se": 1.1485627664918592
-    },
-    "damage": {
-     "mean": 1.9687499999999991,
-     "se": 1.0621716929748892
-    }
-   },
-   "matched": {
-    "alpha": 1.34375,
-    "score": 24.848093944445317,
-    "gain": 72.5,
-    "damage": 24.75
-   }
-  },
-  {
-   "arm": "cleanest-warm",
-   "updates": 560,
-   "extra": 48,
-   "stopped": null,
-   "trajectory": [
-    {
-     "extra": 12,
-     "score": 0.8253044924281252,
-     "gain": 0.2233333333333333,
-     "integrity": "pass"
-    },
-    {
-     "extra": 24,
-     "score": 1.010020711910156,
-     "gain": 0.22083333333333333,
-     "integrity": "pass"
-    },
-    {
-     "extra": 36,
-     "score": 1.8354731827562507,
-     "gain": 0.255,
-     "integrity": "pass"
-    },
-    {
-     "extra": 48,
-     "score": 1.091531740071875,
-     "gain": 0.27249999999999996,
-     "integrity": "pass"
-    }
-   ],
-   "alpha": 2.09375,
-   "score": 25.278319749303353,
-   "search": 27.85771188777656,
-   "gain": 74.25,
-   "damage": 28.375,
-   "repeat": 47.94642857142858,
-   "integrity": "fail",
-   "probes": 18,
-   "failed_checks": [
-    "ferryman"
-   ],
-   "unresolved_checks": [
-    "guard",
-    "ranger",
-    "smith",
-    "stationer",
-    "watchmaker"
-   ],
-   "cases": {
-    "ranger": {
-     "gain": 65.99999999999999,
-     "damage": 25.75,
-     "on": "dcffa660847d55b847d5d17af5e33cc4080cdada3599a76ca4c4c001e373fbc8"
-    },
-    "smith": {
-     "gain": 76.0,
-     "damage": 29.75,
-     "on": "4964187d8a5920708aef9d2fc3150013e2dd3a2ec1d9d77a100c8f4924b8cbda"
-    },
-    "stationer": {
-     "gain": 79.0,
-     "damage": 28.249999999999996,
-     "on": "e063068787e7c5edf054ec80e98d3de9c7994f9cf4b7100281c5e0e113e46055"
-    },
-    "ferryman": {
-     "gain": 79.0,
-     "damage": 41.5,
-     "on": "ea249d7d6228d36cfaa42b0d882b99701199b498e6eb4c00a03e08bb3588adb0"
-    },
-    "watchmaker": {
-     "gain": 65.0,
-     "damage": 24.75,
-     "on": "83cc8efa7f93574374158abf198fa4d64d9e867e61831eba67e42d0c90f5323a"
-    },
-    "guide": {
-     "gain": 72.0,
-     "damage": 31.25,
-     "on": "6a788e02578bc8a5aca094d80b1743019b97e1c0248d3e0e1e372d0e7ac6232d"
-    },
-    "guard": {
-     "gain": 79.0,
-     "damage": 28.749999999999996,
-     "on": "6b06cb332dfabf774d8593c4e633e0a46f5ac54e51418ac0ed277457ee6ea06b"
-    },
-    "violinist": {
-     "gain": 78.0,
-     "damage": 17.0,
-     "on": "c709301ad1b76b3d006e7552a78804631fdf46908ff2c3ac31c4233d797cff6f"
-    }
-   },
-   "trials": [
-    {
-     "alpha": 0.5,
-     "score": 0.02197683835703126,
-     "gain": 6.0,
-     "damage": 19.1875
-    },
-    {
-     "alpha": 0.75,
-     "score": 0.13022735556041665,
-     "gain": 12.25,
-     "damage": 23.375
-    },
-    {
-     "alpha": 0.875,
-     "score": 1.1688327685427082,
-     "gain": 18.0,
-     "damage": 21.6875
-    },
-    {
-     "alpha": 1.0,
-     "score": 5.181304904685156,
-     "gain": 27.249999999999996,
-     "damage": 20.375
-    },
-    {
-     "alpha": 1.0625,
-     "score": 7.780465530875001,
-     "gain": 30.5,
-     "damage": 19.875
-    },
-    {
-     "alpha": 1.25,
-     "score": 13.862130466406775,
-     "gain": 52.0,
-     "damage": 25.187499999999996
-    },
-    {
-     "alpha": 1.34375,
-     "score": 18.636972732089063,
-     "gain": 63.0,
-     "damage": 27.375
-    },
-    {
-     "alpha": 1.5,
-     "score": 23.217659540085936,
-     "gain": 74.0,
-     "damage": 26.25
-    },
-    {
-     "alpha": 1.625,
-     "score": 21.96136118348125,
-     "gain": 72.75,
-     "damage": 27.6875
-    },
-    {
-     "alpha": 2.0,
-     "score": 26.234081686975003,
-     "gain": 77.5,
-     "damage": 26.625
-    },
-    {
-     "alpha": 2.046875,
-     "score": 27.349214525891668,
-     "gain": 78.25,
-     "damage": 25.75
-    },
-    {
-     "alpha": 2.0703125,
-     "score": 27.6372581642375,
-     "gain": 79.0,
-     "damage": 26.687499999999996
-    },
-    {
-     "alpha": 2.09375,
-     "score": 27.85771188777656,
-     "gain": 79.25,
-     "damage": 27.750000000000004
-    },
-    {
-     "alpha": 2.1171875,
-     "score": 26.753404744220312,
-     "gain": 78.5,
-     "damage": 27.3125
-    },
-    {
-     "alpha": 2.140625,
-     "score": 26.93988446691406,
-     "gain": 78.25,
-     "damage": 25.0625
-    },
-    {
-     "alpha": 2.1875,
-     "score": 27.163984217883336,
-     "gain": 78.75,
-     "damage": 27.875
-    },
-    {
-     "alpha": 2.609375,
-     "score": 17.9026876465125,
-     "gain": 72.75,
-     "damage": 33.125
-    },
-    {
-     "alpha": 3.03125,
-     "score": 16.2956060528125,
-     "gain": 69.75,
-     "damage": 36.8125
-    }
-   ],
-   "paired": {
-    "gain": {
-     "mean": -0.3750000000000018,
-     "se": 3.267466799481563
-    },
-    "damage": {
-     "mean": 3.1874999999999987,
-     "se": 3.158658027662109
-    }
-   },
-   "matched": {
-    "alpha": 1.5,
-    "score": 23.217659540085936,
-    "gain": 74.0,
-    "damage": 26.25
-   },
+   "old_rank": 6,
    "practical_win": false,
    "pareto": false
   },
@@ -2148,6 +2154,29 @@
    "repeat": 54.723214285714285,
    "integrity": "fail",
    "probes": 20,
+   "structure": 18.25,
+   "new": 27.65672551156384,
+   "steep": 24.53915519633501,
+   "added": {
+    "ranger": 46.0,
+    "smith": 54.0,
+    "stationer": 9.999999999999998,
+    "ferryman": 0.9999999999999953,
+    "watchmaker": 20.0,
+    "guide": 9.000000000000002,
+    "guard": 6.0,
+    "violinist": 0.0
+   },
+   "check_status": {
+    "ranger": "unmeasured",
+    "smith": "fail",
+    "stationer": "pass",
+    "ferryman": "pass",
+    "watchmaker": "pass",
+    "guide": "pass",
+    "guard": "pass",
+    "violinist": "pass"
+   },
    "failed_checks": [
     "smith"
    ],
@@ -2333,7 +2362,8 @@
     "score": 25.11469020777188,
     "gain": 73.25,
     "damage": 25.0625
-   }
+   },
+   "old_rank": 11
   },
   {
    "arm": "control",
@@ -2356,6 +2386,29 @@
    "repeat": 54.89732142857143,
    "integrity": "unmeasured",
    "probes": 15,
+   "structure": 27.500000000000004,
+   "new": 27.505908574163396,
+   "steep": 21.330464122271046,
+   "added": {
+    "ranger": 34.0,
+    "smith": 31.999999999999996,
+    "stationer": 23.0,
+    "ferryman": 32.99999999999999,
+    "watchmaker": 42.00000000000001,
+    "guide": 34.0,
+    "guard": 16.000000000000004,
+    "violinist": 6.0
+   },
+   "check_status": {
+    "ranger": "unmeasured",
+    "smith": "unmeasured",
+    "stationer": "unmeasured",
+    "ferryman": "unmeasured",
+    "watchmaker": "unmeasured",
+    "guide": "unmeasured",
+    "guard": "unmeasured",
+    "violinist": "pass"
+   },
    "failed_checks": [],
    "unresolved_checks": [
     "ferryman",
@@ -2515,206 +2568,479 @@
     "score": 22.6549603319625,
     "gain": 72.25,
     "damage": 30.125
-   }
+   },
+   "old_rank": 12
   },
   {
-   "arm": "control-warm",
-   "updates": 524,
-   "extra": 12,
+   "arm": "cleanest-low-g",
+   "updates": 560,
+   "extra": 48,
    "stopped": null,
    "trajectory": [
     {
      "extra": 12,
-     "score": 2.0491045122562497,
+     "score": 5.6492893915468745,
      "gain": 0.41083333333333333,
+     "integrity": "pass"
+    },
+    {
+     "extra": 24,
+     "score": 6.2512557859437505,
+     "gain": 0.4558333333333333,
+     "integrity": "pass"
+    },
+    {
+     "extra": 36,
+     "score": 3.9056348908937513,
+     "gain": 0.39999999999999997,
+     "integrity": "pass"
+    },
+    {
+     "extra": 48,
+     "score": 2.819909177310938,
+     "gain": 0.42,
      "integrity": "pass"
     }
    ],
-   "alpha": 1.3828125,
-   "score": 24.25370646386596,
-   "search": 23.09129078678203,
-   "gain": 68.125,
-   "damage": 27.34375,
-   "repeat": 33.919642857142854,
+   "alpha": 1.953125,
+   "score": 27.344064099597716,
+   "search": 26.79121869804375,
+   "gain": 76.5,
+   "damage": 29.46875,
+   "repeat": 46.526785714285715,
    "integrity": "fail",
-   "probes": 18,
+   "probes": 16,
+   "structure": 30.875000000000004,
+   "new": 26.606774630825225,
+   "steep": 18.808107296536456,
+   "added": {
+    "ranger": 40.0,
+    "smith": 29.999999999999993,
+    "stationer": 29.000000000000004,
+    "ferryman": 52.0,
+    "watchmaker": 10.999999999999998,
+    "guide": 34.0,
+    "guard": 26.0,
+    "violinist": 25.0
+   },
+   "check_status": {
+    "ranger": "unmeasured",
+    "smith": "unmeasured",
+    "stationer": "unmeasured",
+    "ferryman": "fail",
+    "watchmaker": "pass",
+    "guide": "unmeasured",
+    "guard": "unmeasured",
+    "violinist": "unmeasured"
+   },
    "failed_checks": [
-    "smith"
+    "ferryman"
    ],
    "unresolved_checks": [
-    "ferryman",
+    "guard",
+    "guide",
     "ranger",
-    "violinist",
-    "watchmaker"
+    "smith",
+    "stationer",
+    "violinist"
    ],
    "cases": {
     "ranger": {
-     "gain": 76.0,
-     "damage": 27.0,
-     "on": "4c344c4535db2130cb30ec6bc737b052d8af7a93ccf66c883ea8321ff84b0d5e"
+     "gain": 73.0,
+     "damage": 27.500000000000004,
+     "on": "69d54de6a019a61d754bc4bef8e36dfba0188ff024f215c87f0c2ed55c08edcc"
     },
     "smith": {
-     "gain": 77.0,
-     "damage": 27.500000000000004,
-     "on": "e178d88fc4a098c03083baa6ccb53b710a63c2a8cdd8f4015f6124cae60643fa"
+     "gain": 79.0,
+     "damage": 25.5,
+     "on": "d9d8c9bd87ba4b41e2f828c252ac3461b02bfd63ce3a2bd63914e831a6c7cfc1"
     },
     "stationer": {
      "gain": 78.0,
-     "damage": 22.0,
-     "on": "b4a9bfe1b5c4ca06830019533164b0f33ccc4d1d4331a90e1c2150fcd2467dc1"
+     "damage": 26.75,
+     "on": "5ccb7635080db4484739a703c6188e004f49b90538e27cf88d930f0e0ead2429"
     },
     "ferryman": {
-     "gain": 72.0,
-     "damage": 31.75,
-     "on": "b0c163937f880dbdfe5d57ad020c70fe36a1c89aa7474a5b0fe9ea901addc54a"
+     "gain": 77.0,
+     "damage": 35.75,
+     "on": "3ab4cbfe60df71ecbfb33002ccaa47be437b3f0c6422415e6eba0846660f7025"
     },
     "watchmaker": {
-     "gain": 75.0,
-     "damage": 24.0,
-     "on": "3645dc2690cccc5ef04e67981fd9410dc519bc0c8c43e71d8d956891319bd3e5"
+     "gain": 66.0,
+     "damage": 28.249999999999996,
+     "on": "9510fd3e59350358ac63cbe6a904e3a7941f4cf3ee879681359ee664096b678e"
     },
     "guide": {
-     "gain": 28.999999999999996,
-     "damage": 28.000000000000004,
-     "on": "8d58015f43b9405c0962df8769ad02b53c91b7aba561d12233e46e6947cc3c65"
+     "gain": 83.0,
+     "damage": 25.5,
+     "on": "f5e30be2d827d96a410774cdcaa85258b2cbd1db483a76444eeb128e1a00aabc"
     },
     "guard": {
-     "gain": 77.0,
-     "damage": 23.5,
-     "on": "ee96ecbe5edaafae9abd0212dad932981d518393f94cd2e0a803625a1d280d9f"
+     "gain": 79.0,
+     "damage": 35.25,
+     "on": "2b90cb231a63e33c87a23f9d5785832f676a4b48c4d244d7993e9911fe5f1f3f"
     },
     "violinist": {
-     "gain": 61.0,
-     "damage": 35.0,
-     "on": "5ee765534755a9fc9b40516624f1655737faf931e0bee43b4694d20ef787bdf0"
+     "gain": 77.0,
+     "damage": 31.25,
+     "on": "ffe70bf571b3094d7c07af292219720f6e0c18681df26c7a449f06c982b0664c"
     }
    },
    "trials": [
     {
      "alpha": 0.5,
-     "score": 0.020921551518750008,
-     "gain": 5.5,
-     "damage": 18.25
+     "score": 0.027107701624999998,
+     "gain": 7.249999999999999,
+     "damage": 17.0625
     },
     {
      "alpha": 0.75,
-     "score": 0.37323560517500004,
-     "gain": 15.25,
-     "damage": 21.3125
+     "score": 0.15687989251874998,
+     "gain": 12.75,
+     "damage": 20.5
     },
     {
      "alpha": 0.875,
-     "score": 0.3575925060713541,
-     "gain": 19.25,
-     "damage": 21.375
+     "score": 0.5400272908039062,
+     "gain": 19.0,
+     "damage": 25.25
     },
     {
      "alpha": 1.0,
-     "score": 1.887809537479167,
-     "gain": 26.75,
-     "damage": 20.125
+     "score": 1.5739360803421876,
+     "gain": 24.75,
+     "damage": 21.4375
     },
     {
      "alpha": 1.0625,
-     "score": 1.7546339257749999,
-     "gain": 28.749999999999996,
-     "damage": 23.4375
+     "score": 4.593475936596875,
+     "gain": 34.25,
+     "damage": 23.3125
     },
     {
      "alpha": 1.25,
-     "score": 13.327592716078126,
-     "gain": 50.0,
-     "damage": 22.75
-    },
-    {
-     "alpha": 1.296875,
-     "score": 14.077571400543748,
-     "gain": 54.25,
-     "damage": 25.687499999999996
-    },
-    {
-     "alpha": 1.3203125,
-     "score": 19.861803519360418,
-     "gain": 63.0,
-     "damage": 30.25
-    },
-    {
-     "alpha": 1.34375,
-     "score": 22.810389842170313,
-     "gain": 73.75,
-     "damage": 28.5625
-    },
-    {
-     "alpha": 1.36328125,
-     "score": 20.302840601979685,
-     "gain": 71.25,
-     "damage": 26.875
-    },
-    {
-     "alpha": 1.3828125,
-     "score": 23.09129078678203,
-     "gain": 73.5,
-     "damage": 27.750000000000004
-    },
-    {
-     "alpha": 1.40234375,
-     "score": 19.579549263740624,
-     "gain": 66.75,
-     "damage": 30.562499999999996
-    },
-    {
-     "alpha": 1.421875,
-     "score": 20.235376209940625,
-     "gain": 66.75,
-     "damage": 29.75
+     "score": 17.062957314072655,
+     "gain": 51.24999999999999,
+     "damage": 27.0
     },
     {
      "alpha": 1.5,
-     "score": 18.405649658549997,
-     "gain": 66.5,
-     "damage": 30.562500000000004
+     "score": 24.366353166924995,
+     "gain": 72.25,
+     "damage": 26.25
     },
     {
      "alpha": 1.625,
-     "score": 20.160789516373438,
-     "gain": 68.0,
-     "damage": 32.125
+     "score": 24.09398972174531,
+     "gain": 72.25,
+     "damage": 27.3125
     },
     {
      "alpha": 1.90625,
-     "score": 20.701572912251045,
-     "gain": 68.25,
-     "damage": 35.125
+     "score": 23.94972701559948,
+     "gain": 76.0,
+     "damage": 32.375
+    },
+    {
+     "alpha": 1.9296875,
+     "score": 25.8004929419211,
+     "gain": 76.5,
+     "damage": 32.0
+    },
+    {
+     "alpha": 1.953125,
+     "score": 26.79121869804375,
+     "gain": 77.75000000000001,
+     "damage": 30.75
+    },
+    {
+     "alpha": 1.9765625,
+     "score": 26.440083488900008,
+     "gain": 77.75000000000001,
+     "damage": 31.0
     },
     {
      "alpha": 2.0,
-     "score": 20.81620023184818,
-     "gain": 69.75,
-     "damage": 38.375
+     "score": 25.899750128812503,
+     "gain": 76.5,
+     "damage": 30.5
+    },
+    {
+     "alpha": 2.09375,
+     "score": 23.03899255284375,
+     "gain": 75.25,
+     "damage": 35.0
     },
     {
      "alpha": 2.1875,
-     "score": 18.638999587012503,
-     "gain": 70.75,
-     "damage": 39.0625
+     "score": 23.846611826578126,
+     "gain": 76.75,
+     "damage": 33.5625
     }
    ],
    "paired": {
     "gain": {
-     "mean": -6.5,
-     "se": 6.787593724688342
+     "mean": 1.875,
+     "se": 2.628399159727674
     },
     "damage": {
-     "mean": 2.1562500000000004,
-     "se": 1.2044722280792888
+     "mean": 4.28125,
+     "se": 1.4808581458783572
     }
    },
    "matched": {
-    "alpha": 1.3828125,
-    "score": 23.09129078678203,
-    "gain": 73.5,
-    "damage": 27.750000000000004
-   }
+    "alpha": 1.5,
+    "score": 24.366353166924995,
+    "gain": 72.25,
+    "damage": 26.25
+   },
+   "old_rank": 8,
+   "practical_win": false,
+   "pareto": false
+  },
+  {
+   "arm": "cleanest-warm",
+   "updates": 560,
+   "extra": 48,
+   "stopped": null,
+   "trajectory": [
+    {
+     "extra": 12,
+     "score": 0.8253044924281252,
+     "gain": 0.2233333333333333,
+     "integrity": "pass"
+    },
+    {
+     "extra": 24,
+     "score": 1.010020711910156,
+     "gain": 0.22083333333333333,
+     "integrity": "pass"
+    },
+    {
+     "extra": 36,
+     "score": 1.8354731827562507,
+     "gain": 0.255,
+     "integrity": "pass"
+    },
+    {
+     "extra": 48,
+     "score": 1.091531740071875,
+     "gain": 0.27249999999999996,
+     "integrity": "pass"
+    }
+   ],
+   "alpha": 2.09375,
+   "score": 25.278319749303353,
+   "search": 27.85771188777656,
+   "gain": 74.25,
+   "damage": 28.375,
+   "repeat": 47.94642857142858,
+   "integrity": "fail",
+   "probes": 18,
+   "structure": 28.875,
+   "new": 26.175021084408485,
+   "steep": 20.62877193949058,
+   "added": {
+    "ranger": 44.00000000000001,
+    "smith": 29.000000000000004,
+    "stationer": 24.0,
+    "ferryman": 63.0,
+    "watchmaker": 37.0,
+    "guide": 15.000000000000002,
+    "guard": 13.0,
+    "violinist": 6.0
+   },
+   "check_status": {
+    "ranger": "unmeasured",
+    "smith": "unmeasured",
+    "stationer": "unmeasured",
+    "ferryman": "fail",
+    "watchmaker": "unmeasured",
+    "guide": "pass",
+    "guard": "unmeasured",
+    "violinist": "pass"
+   },
+   "failed_checks": [
+    "ferryman"
+   ],
+   "unresolved_checks": [
+    "guard",
+    "ranger",
+    "smith",
+    "stationer",
+    "watchmaker"
+   ],
+   "cases": {
+    "ranger": {
+     "gain": 65.99999999999999,
+     "damage": 25.75,
+     "on": "dcffa660847d55b847d5d17af5e33cc4080cdada3599a76ca4c4c001e373fbc8"
+    },
+    "smith": {
+     "gain": 76.0,
+     "damage": 29.75,
+     "on": "4964187d8a5920708aef9d2fc3150013e2dd3a2ec1d9d77a100c8f4924b8cbda"
+    },
+    "stationer": {
+     "gain": 79.0,
+     "damage": 28.249999999999996,
+     "on": "e063068787e7c5edf054ec80e98d3de9c7994f9cf4b7100281c5e0e113e46055"
+    },
+    "ferryman": {
+     "gain": 79.0,
+     "damage": 41.5,
+     "on": "ea249d7d6228d36cfaa42b0d882b99701199b498e6eb4c00a03e08bb3588adb0"
+    },
+    "watchmaker": {
+     "gain": 65.0,
+     "damage": 24.75,
+     "on": "83cc8efa7f93574374158abf198fa4d64d9e867e61831eba67e42d0c90f5323a"
+    },
+    "guide": {
+     "gain": 72.0,
+     "damage": 31.25,
+     "on": "6a788e02578bc8a5aca094d80b1743019b97e1c0248d3e0e1e372d0e7ac6232d"
+    },
+    "guard": {
+     "gain": 79.0,
+     "damage": 28.749999999999996,
+     "on": "6b06cb332dfabf774d8593c4e633e0a46f5ac54e51418ac0ed277457ee6ea06b"
+    },
+    "violinist": {
+     "gain": 78.0,
+     "damage": 17.0,
+     "on": "c709301ad1b76b3d006e7552a78804631fdf46908ff2c3ac31c4233d797cff6f"
+    }
+   },
+   "trials": [
+    {
+     "alpha": 0.5,
+     "score": 0.02197683835703126,
+     "gain": 6.0,
+     "damage": 19.1875
+    },
+    {
+     "alpha": 0.75,
+     "score": 0.13022735556041665,
+     "gain": 12.25,
+     "damage": 23.375
+    },
+    {
+     "alpha": 0.875,
+     "score": 1.1688327685427082,
+     "gain": 18.0,
+     "damage": 21.6875
+    },
+    {
+     "alpha": 1.0,
+     "score": 5.181304904685156,
+     "gain": 27.249999999999996,
+     "damage": 20.375
+    },
+    {
+     "alpha": 1.0625,
+     "score": 7.780465530875001,
+     "gain": 30.5,
+     "damage": 19.875
+    },
+    {
+     "alpha": 1.25,
+     "score": 13.862130466406775,
+     "gain": 52.0,
+     "damage": 25.187499999999996
+    },
+    {
+     "alpha": 1.34375,
+     "score": 18.636972732089063,
+     "gain": 63.0,
+     "damage": 27.375
+    },
+    {
+     "alpha": 1.5,
+     "score": 23.217659540085936,
+     "gain": 74.0,
+     "damage": 26.25
+    },
+    {
+     "alpha": 1.625,
+     "score": 21.96136118348125,
+     "gain": 72.75,
+     "damage": 27.6875
+    },
+    {
+     "alpha": 2.0,
+     "score": 26.234081686975003,
+     "gain": 77.5,
+     "damage": 26.625
+    },
+    {
+     "alpha": 2.046875,
+     "score": 27.349214525891668,
+     "gain": 78.25,
+     "damage": 25.75
+    },
+    {
+     "alpha": 2.0703125,
+     "score": 27.6372581642375,
+     "gain": 79.0,
+     "damage": 26.687499999999996
+    },
+    {
+     "alpha": 2.09375,
+     "score": 27.85771188777656,
+     "gain": 79.25,
+     "damage": 27.750000000000004
+    },
+    {
+     "alpha": 2.1171875,
+     "score": 26.753404744220312,
+     "gain": 78.5,
+     "damage": 27.3125
+    },
+    {
+     "alpha": 2.140625,
+     "score": 26.93988446691406,
+     "gain": 78.25,
+     "damage": 25.0625
+    },
+    {
+     "alpha": 2.1875,
+     "score": 27.163984217883336,
+     "gain": 78.75,
+     "damage": 27.875
+    },
+    {
+     "alpha": 2.609375,
+     "score": 17.9026876465125,
+     "gain": 72.75,
+     "damage": 33.125
+    },
+    {
+     "alpha": 3.03125,
+     "score": 16.2956060528125,
+     "gain": 69.75,
+     "damage": 36.8125
+    }
+   ],
+   "paired": {
+    "gain": {
+     "mean": -0.3750000000000018,
+     "se": 3.267466799481563
+    },
+    "damage": {
+     "mean": 3.1874999999999987,
+     "se": 3.158658027662109
+    }
+   },
+   "matched": {
+    "alpha": 1.5,
+    "score": 23.217659540085936,
+    "gain": 74.0,
+    "damage": 26.25
+   },
+   "old_rank": 10,
+   "practical_win": false,
+   "pareto": false
   },
   {
    "arm": "cleanest",
@@ -2737,6 +3063,29 @@
    "repeat": 58.47767857142857,
    "integrity": "fail",
    "probes": 20,
+   "structure": 35.0,
+   "new": 24.98652044876518,
+   "steep": 17.544493078710214,
+   "added": {
+    "ranger": 30.000000000000004,
+    "smith": 46.0,
+    "stationer": 24.0,
+    "ferryman": 37.0,
+    "watchmaker": 54.0,
+    "guide": 27.999999999999996,
+    "guard": 44.99999999999999,
+    "violinist": 16.000000000000004
+   },
+   "check_status": {
+    "ranger": "unmeasured",
+    "smith": "unmeasured",
+    "stationer": "unmeasured",
+    "ferryman": "unmeasured",
+    "watchmaker": "fail",
+    "guide": "unmeasured",
+    "guard": "fail",
+    "violinist": "unmeasured"
+   },
    "failed_checks": [
     "guard",
     "watchmaker"
@@ -2929,219 +3278,7 @@
     "gain": 74.75,
     "damage": 34.625
    },
-   "practical_win": false,
-   "pareto": false
-  },
-  {
-   "arm": "cleanest",
-   "updates": 560,
-   "extra": 48,
-   "stopped": null,
-   "trajectory": [
-    {
-     "extra": 12,
-     "score": 19.52749710737344,
-     "gain": 0.6975,
-     "integrity": "pass"
-    },
-    {
-     "extra": 24,
-     "score": 7.410171830566406,
-     "gain": 0.52,
-     "integrity": "pass"
-    },
-    {
-     "extra": 36,
-     "score": 9.81213418015703,
-     "gain": 0.47333333333333333,
-     "integrity": "unmeasured"
-    },
-    {
-     "extra": 48,
-     "score": 2.7290688165289065,
-     "gain": 0.375,
-     "integrity": "pass"
-    }
-   ],
-   "alpha": 1.3828125,
-   "score": 24.060918402718194,
-   "search": 23.3428363475625,
-   "gain": 73.75,
-   "damage": 29.531249999999996,
-   "repeat": 45.22767857142857,
-   "integrity": "unmeasured",
-   "probes": 18,
-   "failed_checks": [],
-   "unresolved_checks": [
-    "ferryman",
-    "ranger",
-    "stationer",
-    "violinist",
-    "watchmaker"
-   ],
-   "cases": {
-    "ranger": {
-     "gain": 74.0,
-     "damage": 36.75,
-     "on": "1a97d9949cfb53b8d5d1f9d4c7cd270473d24867689e722ea5acffb5e857fb15"
-    },
-    "smith": {
-     "gain": 74.0,
-     "damage": 24.5,
-     "on": "4204fb5f610058fa05c4e9e2e324c5d2eb2c1dcf09914eb76bd1036153bafba0"
-    },
-    "stationer": {
-     "gain": 78.0,
-     "damage": 25.25,
-     "on": "03bdd08c00af1a7348576b3e881adfe20c0f67f376e4fff5ca0ee0ad51e4e46b"
-    },
-    "ferryman": {
-     "gain": 69.0,
-     "damage": 28.249999999999996,
-     "on": "1c035d6fd0ed7049d82290f99df8bab15aaf520b544f46d8116794050e6de08e"
-    },
-    "watchmaker": {
-     "gain": 74.0,
-     "damage": 34.75,
-     "on": "a82f7663ab490128931d01b2a757a4ecbb9dd3ddb71cfb55d098404f3ec382e3"
-    },
-    "guide": {
-     "gain": 70.0,
-     "damage": 28.000000000000004,
-     "on": "e7e339206c41dcf9d1b244b9caa1d5de62ddcdd85c6967c9def8773c5ce89893"
-    },
-    "guard": {
-     "gain": 78.0,
-     "damage": 28.499999999999996,
-     "on": "aedd976564d1d4ff94f3b506b04757ed4fa00236bccca50c706eb833ab9bbfb2"
-    },
-    "violinist": {
-     "gain": 73.00000000000001,
-     "damage": 30.25,
-     "on": "0f2c94951a86ddd7e2f79ed7616f6cacb2d72c343423a4961f33d6d3a28eb0d5"
-    }
-   },
-   "trials": [
-    {
-     "alpha": 0.5,
-     "score": 0.013637981249999999,
-     "gain": 5.0,
-     "damage": 17.4375
-    },
-    {
-     "alpha": 0.75,
-     "score": 0.5418266765361978,
-     "gain": 15.25,
-     "damage": 20.3125
-    },
-    {
-     "alpha": 0.875,
-     "score": 1.586916778120313,
-     "gain": 22.75,
-     "damage": 20.3125
-    },
-    {
-     "alpha": 1.0,
-     "score": 1.9671017787671878,
-     "gain": 29.25,
-     "damage": 21.375
-    },
-    {
-     "alpha": 1.0625,
-     "score": 9.489437003137237,
-     "gain": 41.5,
-     "damage": 22.4375
-    },
-    {
-     "alpha": 1.25,
-     "score": 19.65720937272135,
-     "gain": 69.25,
-     "damage": 34.25
-    },
-    {
-     "alpha": 1.296875,
-     "score": 21.521993871010157,
-     "gain": 69.5,
-     "damage": 31.5
-    },
-    {
-     "alpha": 1.3203125,
-     "score": 22.00996030785729,
-     "gain": 70.25,
-     "damage": 32.5625
-    },
-    {
-     "alpha": 1.34375,
-     "score": 22.485520708566668,
-     "gain": 70.75,
-     "damage": 34.0
-    },
-    {
-     "alpha": 1.36328125,
-     "score": 22.444090734125776,
-     "gain": 71.5,
-     "damage": 33.8125
-    },
-    {
-     "alpha": 1.3828125,
-     "score": 23.3428363475625,
-     "gain": 71.0,
-     "damage": 31.937500000000004
-    },
-    {
-     "alpha": 1.40234375,
-     "score": 23.228101190300784,
-     "gain": 71.50000000000001,
-     "damage": 33.8125
-    },
-    {
-     "alpha": 1.421875,
-     "score": 22.42607825064063,
-     "gain": 70.25,
-     "damage": 32.8125
-    },
-    {
-     "alpha": 1.5,
-     "score": 21.821051226454692,
-     "gain": 66.5,
-     "damage": 31.1875
-    },
-    {
-     "alpha": 1.625,
-     "score": 20.69570462601094,
-     "gain": 69.5,
-     "damage": 32.4375
-    },
-    {
-     "alpha": 1.90625,
-     "score": 17.689203755708593,
-     "gain": 57.50000000000001,
-     "damage": 38.125
-    },
-    {
-     "alpha": 2.0,
-     "score": 17.161901733375004,
-     "gain": 60.00000000000001,
-     "damage": 39.5625
-    },
-    {
-     "alpha": 2.1875,
-     "score": 14.159643749355208,
-     "gain": 59.5,
-     "damage": 41.75
-    }
-   ],
-   "paired": {
-    "gain": {
-     "mean": -0.8749999999999982,
-     "se": 2.073967040652837
-    },
-    "damage": {
-     "mean": 4.343749999999999,
-     "se": 1.6896068197533836
-    }
-   },
-   "matched": null,
+   "old_rank": 14,
    "practical_win": false,
    "pareto": false
   },
@@ -3170,6 +3307,29 @@
    "repeat": 36.00892857142857,
    "integrity": "fail",
    "probes": 16,
+   "structure": 25.874999999999996,
+   "new": 24.74399199933103,
+   "steep": 18.950866756885446,
+   "added": {
+    "ranger": 27.0,
+    "smith": 7.9999999999999964,
+    "stationer": 15.999999999999998,
+    "ferryman": 19.999999999999996,
+    "watchmaker": 54.0,
+    "guide": 23.000000000000004,
+    "guard": 32.99999999999999,
+    "violinist": 26.0
+   },
+   "check_status": {
+    "ranger": "unmeasured",
+    "smith": "pass",
+    "stationer": "pass",
+    "ferryman": "pass",
+    "watchmaker": "fail",
+    "guide": "unmeasured",
+    "guard": "unmeasured",
+    "violinist": "unmeasured"
+   },
    "failed_checks": [
     "watchmaker"
    ],
@@ -3335,8 +3495,232 @@
     "gain": 74.0,
     "damage": 28.375
    },
+   "old_rank": 16,
    "practical_win": false,
    "pareto": false
+  },
+  {
+   "arm": "control-warm",
+   "updates": 524,
+   "extra": 12,
+   "stopped": null,
+   "trajectory": [
+    {
+     "extra": 12,
+     "score": 2.0491045122562497,
+     "gain": 0.41083333333333333,
+     "integrity": "pass"
+    }
+   ],
+   "alpha": 1.3828125,
+   "score": 24.25370646386596,
+   "search": 23.09129078678203,
+   "gain": 68.125,
+   "damage": 27.34375,
+   "repeat": 33.919642857142854,
+   "integrity": "fail",
+   "probes": 18,
+   "structure": 25.624999999999996,
+   "new": 23.835092927098213,
+   "steep": 18.565458938520365,
+   "added": {
+    "ranger": 31.000000000000007,
+    "smith": 55.99999999999999,
+    "stationer": 19.0,
+    "ferryman": 43.99999999999999,
+    "watchmaker": 37.0,
+    "guide": 5.000000000000004,
+    "guard": 0.0,
+    "violinist": 13.0
+   },
+   "check_status": {
+    "ranger": "unmeasured",
+    "smith": "fail",
+    "stationer": "pass",
+    "ferryman": "unmeasured",
+    "watchmaker": "unmeasured",
+    "guide": "pass",
+    "guard": "pass",
+    "violinist": "unmeasured"
+   },
+   "failed_checks": [
+    "smith"
+   ],
+   "unresolved_checks": [
+    "ferryman",
+    "ranger",
+    "violinist",
+    "watchmaker"
+   ],
+   "cases": {
+    "ranger": {
+     "gain": 76.0,
+     "damage": 27.0,
+     "on": "4c344c4535db2130cb30ec6bc737b052d8af7a93ccf66c883ea8321ff84b0d5e"
+    },
+    "smith": {
+     "gain": 77.0,
+     "damage": 27.500000000000004,
+     "on": "e178d88fc4a098c03083baa6ccb53b710a63c2a8cdd8f4015f6124cae60643fa"
+    },
+    "stationer": {
+     "gain": 78.0,
+     "damage": 22.0,
+     "on": "b4a9bfe1b5c4ca06830019533164b0f33ccc4d1d4331a90e1c2150fcd2467dc1"
+    },
+    "ferryman": {
+     "gain": 72.0,
+     "damage": 31.75,
+     "on": "b0c163937f880dbdfe5d57ad020c70fe36a1c89aa7474a5b0fe9ea901addc54a"
+    },
+    "watchmaker": {
+     "gain": 75.0,
+     "damage": 24.0,
+     "on": "3645dc2690cccc5ef04e67981fd9410dc519bc0c8c43e71d8d956891319bd3e5"
+    },
+    "guide": {
+     "gain": 28.999999999999996,
+     "damage": 28.000000000000004,
+     "on": "8d58015f43b9405c0962df8769ad02b53c91b7aba561d12233e46e6947cc3c65"
+    },
+    "guard": {
+     "gain": 77.0,
+     "damage": 23.5,
+     "on": "ee96ecbe5edaafae9abd0212dad932981d518393f94cd2e0a803625a1d280d9f"
+    },
+    "violinist": {
+     "gain": 61.0,
+     "damage": 35.0,
+     "on": "5ee765534755a9fc9b40516624f1655737faf931e0bee43b4694d20ef787bdf0"
+    }
+   },
+   "trials": [
+    {
+     "alpha": 0.5,
+     "score": 0.020921551518750008,
+     "gain": 5.5,
+     "damage": 18.25
+    },
+    {
+     "alpha": 0.75,
+     "score": 0.37323560517500004,
+     "gain": 15.25,
+     "damage": 21.3125
+    },
+    {
+     "alpha": 0.875,
+     "score": 0.3575925060713541,
+     "gain": 19.25,
+     "damage": 21.375
+    },
+    {
+     "alpha": 1.0,
+     "score": 1.887809537479167,
+     "gain": 26.75,
+     "damage": 20.125
+    },
+    {
+     "alpha": 1.0625,
+     "score": 1.7546339257749999,
+     "gain": 28.749999999999996,
+     "damage": 23.4375
+    },
+    {
+     "alpha": 1.25,
+     "score": 13.327592716078126,
+     "gain": 50.0,
+     "damage": 22.75
+    },
+    {
+     "alpha": 1.296875,
+     "score": 14.077571400543748,
+     "gain": 54.25,
+     "damage": 25.687499999999996
+    },
+    {
+     "alpha": 1.3203125,
+     "score": 19.861803519360418,
+     "gain": 63.0,
+     "damage": 30.25
+    },
+    {
+     "alpha": 1.34375,
+     "score": 22.810389842170313,
+     "gain": 73.75,
+     "damage": 28.5625
+    },
+    {
+     "alpha": 1.36328125,
+     "score": 20.302840601979685,
+     "gain": 71.25,
+     "damage": 26.875
+    },
+    {
+     "alpha": 1.3828125,
+     "score": 23.09129078678203,
+     "gain": 73.5,
+     "damage": 27.750000000000004
+    },
+    {
+     "alpha": 1.40234375,
+     "score": 19.579549263740624,
+     "gain": 66.75,
+     "damage": 30.562499999999996
+    },
+    {
+     "alpha": 1.421875,
+     "score": 20.235376209940625,
+     "gain": 66.75,
+     "damage": 29.75
+    },
+    {
+     "alpha": 1.5,
+     "score": 18.405649658549997,
+     "gain": 66.5,
+     "damage": 30.562500000000004
+    },
+    {
+     "alpha": 1.625,
+     "score": 20.160789516373438,
+     "gain": 68.0,
+     "damage": 32.125
+    },
+    {
+     "alpha": 1.90625,
+     "score": 20.701572912251045,
+     "gain": 68.25,
+     "damage": 35.125
+    },
+    {
+     "alpha": 2.0,
+     "score": 20.81620023184818,
+     "gain": 69.75,
+     "damage": 38.375
+    },
+    {
+     "alpha": 2.1875,
+     "score": 18.638999587012503,
+     "gain": 70.75,
+     "damage": 39.0625
+    }
+   ],
+   "paired": {
+    "gain": {
+     "mean": -6.5,
+     "se": 6.787593724688342
+    },
+    "damage": {
+     "mean": 2.1562500000000004,
+     "se": 1.2044722280792888
+    }
+   },
+   "matched": {
+    "alpha": 1.3828125,
+    "score": 23.09129078678203,
+    "gain": 73.5,
+    "damage": 27.750000000000004
+   },
+   "old_rank": 13
   },
   {
    "arm": "continued",
@@ -3377,6 +3761,29 @@
    "repeat": 47.933035714285715,
    "integrity": "unmeasured",
    "probes": 19,
+   "structure": 29.25,
+   "new": 23.29932950511429,
+   "steep": 16.988068946598453,
+   "added": {
+    "ranger": 28.000000000000004,
+    "smith": 13.0,
+    "stationer": 23.0,
+    "ferryman": 46.0,
+    "watchmaker": 39.0,
+    "guide": 35.0,
+    "guard": 38.0,
+    "violinist": 12.0
+   },
+   "check_status": {
+    "ranger": "unmeasured",
+    "smith": "pass",
+    "stationer": "unmeasured",
+    "ferryman": "unmeasured",
+    "watchmaker": "unmeasured",
+    "guide": "unmeasured",
+    "guard": "unmeasured",
+    "violinist": "unmeasured"
+   },
    "failed_checks": [],
    "unresolved_checks": [
     "ferryman",
@@ -3560,7 +3967,236 @@
     "score": 21.936656438852342,
     "gain": 72.0,
     "damage": 29.25
-   }
+   },
+   "old_rank": 17
+  },
+  {
+   "arm": "control",
+   "updates": 560,
+   "extra": 48,
+   "stopped": null,
+   "trajectory": [
+    {
+     "extra": 12,
+     "score": 13.665472817040106,
+     "gain": 0.5958333333333333,
+     "integrity": "pass"
+    },
+    {
+     "extra": 24,
+     "score": 4.385813597143748,
+     "gain": 0.39416666666666667,
+     "integrity": "pass"
+    },
+    {
+     "extra": 36,
+     "score": 6.298498470637501,
+     "gain": 0.43500000000000005,
+     "integrity": "unmeasured"
+    },
+    {
+     "extra": 48,
+     "score": 2.8801375267007807,
+     "gain": 0.42583333333333334,
+     "integrity": "pass"
+    }
+   ],
+   "alpha": 1.25,
+   "score": 20.2683871849918,
+   "search": 21.888121235428127,
+   "gain": 69.125,
+   "damage": 29.34375,
+   "repeat": 43.339285714285715,
+   "integrity": "fail",
+   "probes": 16,
+   "structure": 26.375,
+   "new": 19.76350046833661,
+   "steep": 14.820188764492354,
+   "added": {
+    "ranger": 24.0,
+    "smith": 14.999999999999996,
+    "stationer": 60.0,
+    "ferryman": 12.999999999999995,
+    "watchmaker": 55.00000000000001,
+    "guide": 0.0,
+    "guard": 14.000000000000002,
+    "violinist": 30.000000000000004
+   },
+   "check_status": {
+    "ranger": "pass",
+    "smith": "pass",
+    "stationer": "fail",
+    "ferryman": "pass",
+    "watchmaker": "fail",
+    "guide": "pass",
+    "guard": "unmeasured",
+    "violinist": "unmeasured"
+   },
+   "failed_checks": [
+    "stationer",
+    "watchmaker"
+   ],
+   "unresolved_checks": [
+    "guard",
+    "violinist"
+   ],
+   "cases": {
+    "ranger": {
+     "gain": 70.0,
+     "damage": 29.75,
+     "on": "0c82183df7be1d19619c156ea0c66a6189ab5f1a74b868bc958d19905359d7c8"
+    },
+    "smith": {
+     "gain": 69.0,
+     "damage": 28.749999999999996,
+     "on": "b59cd689ce4be7c240d1f54c2f3028ede8808dcfaf5e2a2c18086a5d5fc6f514"
+    },
+    "stationer": {
+     "gain": 77.0,
+     "damage": 32.75,
+     "on": "c98b763af720e1b773e3fea79969d89348b8ab8f86649cb6dca5c742b120e75a"
+    },
+    "ferryman": {
+     "gain": 70.0,
+     "damage": 27.0,
+     "on": "662ae863c221a6710fb45f3669e1dedd47413e6f2e5110a731077150abcc38bb"
+    },
+    "watchmaker": {
+     "gain": 71.00000000000001,
+     "damage": 26.25,
+     "on": "a2b8c7029526a0108b7c10ee4e0dc63080ca60db666550149c04878d311691de"
+    },
+    "guide": {
+     "gain": 52.0,
+     "damage": 24.0,
+     "on": "ad9cd9ad2dd98192e568dca05c1a7ebf4d7527c32ae12d48dcf015f10bfcd73f"
+    },
+    "guard": {
+     "gain": 67.0,
+     "damage": 35.75,
+     "on": "9996a6897a8638b674f01ab74772955bd593d1c805ef2b0e2b9532ae197f1a02"
+    },
+    "violinist": {
+     "gain": 77.0,
+     "damage": 30.5,
+     "on": "2a5beddec164d9e4ac18bff0a2d1fd6b683c52130882f60b343bad2011a3a965"
+    }
+   },
+   "trials": [
+    {
+     "alpha": 0.5,
+     "score": 0.007291057095312499,
+     "gain": 4.75,
+     "damage": 16.9375
+    },
+    {
+     "alpha": 0.75,
+     "score": 0.605233860525,
+     "gain": 18.25,
+     "damage": 21.75
+    },
+    {
+     "alpha": 0.875,
+     "score": 1.7143904405117192,
+     "gain": 24.75,
+     "damage": 23.75
+    },
+    {
+     "alpha": 1.0,
+     "score": 1.4545805811184898,
+     "gain": 28.749999999999996,
+     "damage": 24.1875
+    },
+    {
+     "alpha": 1.0625,
+     "score": 5.483620448096093,
+     "gain": 37.99999999999999,
+     "damage": 21.8125
+    },
+    {
+     "alpha": 1.15625,
+     "score": 9.48277273060599,
+     "gain": 51.74999999999999,
+     "damage": 27.5625
+    },
+    {
+     "alpha": 1.203125,
+     "score": 12.419469785306251,
+     "gain": 56.00000000000001,
+     "damage": 28.500000000000004
+    },
+    {
+     "alpha": 1.2265625,
+     "score": 15.130919416172919,
+     "gain": 64.75,
+     "damage": 26.937500000000004
+    },
+    {
+     "alpha": 1.25,
+     "score": 21.888121235428127,
+     "gain": 72.75,
+     "damage": 28.5625
+    },
+    {
+     "alpha": 1.2734375,
+     "score": 17.619539562087496,
+     "gain": 69.25,
+     "damage": 33.8125
+    },
+    {
+     "alpha": 1.296875,
+     "score": 19.02553086499922,
+     "gain": 67.5,
+     "damage": 33.3125
+    },
+    {
+     "alpha": 1.34375,
+     "score": 17.165121925687497,
+     "gain": 63.5,
+     "damage": 32.5625
+    },
+    {
+     "alpha": 1.4375,
+     "score": 20.766632380923436,
+     "gain": 67.25,
+     "damage": 34.875
+    },
+    {
+     "alpha": 1.5,
+     "score": 17.457488506371874,
+     "gain": 63.75000000000001,
+     "damage": 38.5
+    },
+    {
+     "alpha": 1.625,
+     "score": 18.382350924475,
+     "gain": 62.74999999999999,
+     "damage": 35.5625
+    },
+    {
+     "alpha": 2.0,
+     "score": 11.491639463222919,
+     "gain": 51.5,
+     "damage": 49.0625
+    }
+   ],
+   "paired": {
+    "gain": {
+     "mean": -5.499999999999998,
+     "se": 3.9955332202705702
+    },
+    "damage": {
+     "mean": 4.156249999999999,
+     "se": 1.8891947807578913
+    }
+   },
+   "matched": {
+    "alpha": 1.25,
+    "score": 21.888121235428127,
+    "gain": 72.75,
+    "damage": 28.5625
+   },
+   "old_rank": 19
   },
   {
    "arm": "control",
@@ -3583,6 +4219,29 @@
    "repeat": 69.72321428571429,
    "integrity": "fail",
    "probes": 17,
+   "structure": 38.375,
+   "new": 19.549154941982813,
+   "steep": 14.763768229682633,
+   "added": {
+    "ranger": 44.00000000000001,
+    "smith": 61.0,
+    "stationer": 46.0,
+    "ferryman": 27.0,
+    "watchmaker": 61.0,
+    "guide": 1.0000000000000009,
+    "guard": 40.0,
+    "violinist": 27.0
+   },
+   "check_status": {
+    "ranger": "unmeasured",
+    "smith": "fail",
+    "stationer": "unmeasured",
+    "ferryman": "unmeasured",
+    "watchmaker": "fail",
+    "guide": "pass",
+    "guard": "unmeasured",
+    "violinist": "unmeasured"
+   },
    "failed_checks": [
     "smith",
     "watchmaker"
@@ -3755,211 +4414,8 @@
     "score": 23.79065507463021,
     "gain": 75.0,
     "damage": 26.8125
-   }
-  },
-  {
-   "arm": "control",
-   "updates": 560,
-   "extra": 48,
-   "stopped": null,
-   "trajectory": [
-    {
-     "extra": 12,
-     "score": 13.665472817040106,
-     "gain": 0.5958333333333333,
-     "integrity": "pass"
-    },
-    {
-     "extra": 24,
-     "score": 4.385813597143748,
-     "gain": 0.39416666666666667,
-     "integrity": "pass"
-    },
-    {
-     "extra": 36,
-     "score": 6.298498470637501,
-     "gain": 0.43500000000000005,
-     "integrity": "unmeasured"
-    },
-    {
-     "extra": 48,
-     "score": 2.8801375267007807,
-     "gain": 0.42583333333333334,
-     "integrity": "pass"
-    }
-   ],
-   "alpha": 1.25,
-   "score": 20.2683871849918,
-   "search": 21.888121235428127,
-   "gain": 69.125,
-   "damage": 29.34375,
-   "repeat": 43.339285714285715,
-   "integrity": "fail",
-   "probes": 16,
-   "failed_checks": [
-    "stationer",
-    "watchmaker"
-   ],
-   "unresolved_checks": [
-    "guard",
-    "violinist"
-   ],
-   "cases": {
-    "ranger": {
-     "gain": 70.0,
-     "damage": 29.75,
-     "on": "0c82183df7be1d19619c156ea0c66a6189ab5f1a74b868bc958d19905359d7c8"
-    },
-    "smith": {
-     "gain": 69.0,
-     "damage": 28.749999999999996,
-     "on": "b59cd689ce4be7c240d1f54c2f3028ede8808dcfaf5e2a2c18086a5d5fc6f514"
-    },
-    "stationer": {
-     "gain": 77.0,
-     "damage": 32.75,
-     "on": "c98b763af720e1b773e3fea79969d89348b8ab8f86649cb6dca5c742b120e75a"
-    },
-    "ferryman": {
-     "gain": 70.0,
-     "damage": 27.0,
-     "on": "662ae863c221a6710fb45f3669e1dedd47413e6f2e5110a731077150abcc38bb"
-    },
-    "watchmaker": {
-     "gain": 71.00000000000001,
-     "damage": 26.25,
-     "on": "a2b8c7029526a0108b7c10ee4e0dc63080ca60db666550149c04878d311691de"
-    },
-    "guide": {
-     "gain": 52.0,
-     "damage": 24.0,
-     "on": "ad9cd9ad2dd98192e568dca05c1a7ebf4d7527c32ae12d48dcf015f10bfcd73f"
-    },
-    "guard": {
-     "gain": 67.0,
-     "damage": 35.75,
-     "on": "9996a6897a8638b674f01ab74772955bd593d1c805ef2b0e2b9532ae197f1a02"
-    },
-    "violinist": {
-     "gain": 77.0,
-     "damage": 30.5,
-     "on": "2a5beddec164d9e4ac18bff0a2d1fd6b683c52130882f60b343bad2011a3a965"
-    }
    },
-   "trials": [
-    {
-     "alpha": 0.5,
-     "score": 0.007291057095312499,
-     "gain": 4.75,
-     "damage": 16.9375
-    },
-    {
-     "alpha": 0.75,
-     "score": 0.605233860525,
-     "gain": 18.25,
-     "damage": 21.75
-    },
-    {
-     "alpha": 0.875,
-     "score": 1.7143904405117192,
-     "gain": 24.75,
-     "damage": 23.75
-    },
-    {
-     "alpha": 1.0,
-     "score": 1.4545805811184898,
-     "gain": 28.749999999999996,
-     "damage": 24.1875
-    },
-    {
-     "alpha": 1.0625,
-     "score": 5.483620448096093,
-     "gain": 37.99999999999999,
-     "damage": 21.8125
-    },
-    {
-     "alpha": 1.15625,
-     "score": 9.48277273060599,
-     "gain": 51.74999999999999,
-     "damage": 27.5625
-    },
-    {
-     "alpha": 1.203125,
-     "score": 12.419469785306251,
-     "gain": 56.00000000000001,
-     "damage": 28.500000000000004
-    },
-    {
-     "alpha": 1.2265625,
-     "score": 15.130919416172919,
-     "gain": 64.75,
-     "damage": 26.937500000000004
-    },
-    {
-     "alpha": 1.25,
-     "score": 21.888121235428127,
-     "gain": 72.75,
-     "damage": 28.5625
-    },
-    {
-     "alpha": 1.2734375,
-     "score": 17.619539562087496,
-     "gain": 69.25,
-     "damage": 33.8125
-    },
-    {
-     "alpha": 1.296875,
-     "score": 19.02553086499922,
-     "gain": 67.5,
-     "damage": 33.3125
-    },
-    {
-     "alpha": 1.34375,
-     "score": 17.165121925687497,
-     "gain": 63.5,
-     "damage": 32.5625
-    },
-    {
-     "alpha": 1.4375,
-     "score": 20.766632380923436,
-     "gain": 67.25,
-     "damage": 34.875
-    },
-    {
-     "alpha": 1.5,
-     "score": 17.457488506371874,
-     "gain": 63.75000000000001,
-     "damage": 38.5
-    },
-    {
-     "alpha": 1.625,
-     "score": 18.382350924475,
-     "gain": 62.74999999999999,
-     "damage": 35.5625
-    },
-    {
-     "alpha": 2.0,
-     "score": 11.491639463222919,
-     "gain": 51.5,
-     "damage": 49.0625
-    }
-   ],
-   "paired": {
-    "gain": {
-     "mean": -5.499999999999998,
-     "se": 3.9955332202705702
-    },
-    "damage": {
-     "mean": 4.156249999999999,
-     "se": 1.8891947807578913
-    }
-   },
-   "matched": {
-    "alpha": 1.25,
-    "score": 21.888121235428127,
-    "gain": 72.75,
-    "damage": 28.5625
-   }
+   "old_rank": 18
   }
  ],
  "fork_parity": {
