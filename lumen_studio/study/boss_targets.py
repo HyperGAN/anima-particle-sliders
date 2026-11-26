@@ -402,8 +402,10 @@ def quiet_boss_background(runtime, parent, destination, floor, dose=1.0):
 
 
 @torch.no_grad()
-def add_boss_scenes(runtime, parent, destination, scenes):
+def add_boss_scenes(runtime, parent, destination, scenes, *, variation=None):
     """Derive a late-cues cache that teaches further scenes beside the parent's.
+
+    With no parent, ``scenes`` are the whole teaching set of a new ``variation``.
 
     ``scenes`` maps a new scene id to its ``neutral`` and ``positive`` prompts, its
     ``explicit`` cue prompt, ``seed``, the rendered ``neutral_image`` and
@@ -411,9 +413,26 @@ def add_boss_scenes(runtime, parent, destination, scenes):
     field recipe is the parent's. Every parent scene is regenerated through the
     same code and must equal the parent tensors before anything is written.
     """
-    identity = parent.index["identity"]
+    if parent is None:
+        if not variation:
+            raise ValueError("A new teaching set names its variation")
+        identity = dict(
+            model=runtime.identity,
+            manifest_sha256=digest({k: {f: v for f, v in s.items() if f != "matte"} for k, s in scenes.items()}),
+            split="train",
+            variation=variation,
+            resolution=512,
+            steps=10,
+            cfg=1,
+            layout="final-boss/late-cues-v1",
+            field_recipe=dict(method="late-cues-v1", rows={}),
+        )
+        earlier = []
+    else:
+        identity = parent.index["identity"]
+        earlier = parent.index["shards"]
     recipe = json.loads(json.dumps(identity["field_recipe"]))
-    known = {shard["row"] for shard in parent.index["shards"]}
+    known = {shard["row"] for shard in earlier}
     if (
         identity["layout"] != "final-boss/late-cues-v1"
         or identity["model"] != runtime.identity
@@ -442,7 +461,7 @@ def add_boss_scenes(runtime, parent, destination, scenes):
         field_recipe=recipe,
         added_scenes=dict(
             schema="final-boss-added-scenes-v1",
-            parent_cache=parent.index["fingerprint"],
+            parent_cache=parent and parent.index["fingerprint"],
             rows=sorted(scenes),
         ),
     )
@@ -482,7 +501,7 @@ def add_boss_scenes(runtime, parent, destination, scenes):
             save_tensor_file(output, data)
             shards.append(dict(shard, sha256=file_hash(output)))
 
-        for shard in parent.index["shards"]:
+        for shard in earlier:
             data = torch.load(
                 parent.directory / shard["path"], map_location="cpu", weights_only=True
             )

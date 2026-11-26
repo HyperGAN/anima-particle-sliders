@@ -142,6 +142,12 @@ def test_added_scenes_join_the_parent_fields_and_pass_the_same_admission(tmp_pat
     teacher = runtime.predict(record["latent"], record["timestep"], runtime.encode("portrait boss"))
     assert torch.equal(record["positive"],
                        boss_targets.target_field(runtime, record, record["neutral"], teacher, context))
+    # The same scenes can be a whole teaching set, with no parent.
+    alone = boss_targets.add_boss_scenes(runtime, None, tmp_path / "alone", {"portrait": scene}, variation="new-vibe")
+    assert len(alone) == 20 and alone.index["identity"]["variation"] == "new-vibe"
+    assert torch.equal(alone[7]["positive"], cache[67]["positive"])
+    with pytest.raises(ValueError):
+        boss_targets.add_boss_scenes(runtime, None, tmp_path / "unnamed", {"portrait": scene})
     # The clean background applies to an added scene as it does to a parent scene.
     quiet = boss_targets.quiet_boss_background(runtime, cache, tmp_path / "more-quiet", 0.0)
     assert len(quiet) == 80

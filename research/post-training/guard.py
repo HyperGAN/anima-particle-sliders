@@ -40,7 +40,8 @@ def run(gpu, worker, arguments, product=None):
     # Training shares the equipped study's per-card leases. Inference-only calibration takes this
     # campaign's own lease and a higher host entry floor, so the study's companions keep room.
     # Building a run's targets is short and takes the training slot it is about to use.
-    training = Path(worker).name in ("fit.py", "quiet_targets.py")
+    training = (Path(worker).name in ("fit.py", "quiet_targets.py")
+                or os.environ.get("ANIMA_POST_TRAINING_LEASE") == "training")
     # A second training of this campaign may share a card that has the room. It takes its own
     # lease and needs the first one's peak left free on entry, above the usual floor.
     second = training and os.environ.get("ANIMA_POST_TRAINING_SLOT") == "2"
