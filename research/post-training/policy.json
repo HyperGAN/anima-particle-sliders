@@ -107,6 +107,15 @@
       "entry": "fork",
       "targets": "working-quiet",
       "critic": "parent"
+    },
+    "working2-quiet-fresh": {
+      "entry": "fresh",
+      "targets": "working2-quiet"
+    },
+    "working2-quiet-warm": {
+      "entry": "fork",
+      "targets": "working2-quiet",
+      "critic": "parent"
     }
   },
   "teachers": {
@@ -147,7 +156,19 @@
     "working-quiet": {
       "background": 0.0,
       "teachers": "working_teachers.py",
-      "text": "teachers chosen by the working Boss score of the teacher images, repeats included, then the clean background"
+      "text": "teachers chosen by the working Boss score of the teacher images, repeats included, then the clean background",
+      "proposals": [
+        "working_alternatives.json"
+      ]
+    },
+    "working2-quiet": {
+      "background": 0.0,
+      "teachers": "working_teachers.py working2",
+      "proposals": [
+        "working_alternatives.json",
+        "working_alternatives_2.json"
+      ],
+      "text": "a second round of proposals for the six scenes whose chosen teacher scored lowest, written without the flat-shading clause"
     }
   }
 }

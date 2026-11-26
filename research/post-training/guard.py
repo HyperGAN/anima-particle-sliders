@@ -59,7 +59,7 @@ def run(gpu, worker, arguments, product=None):
         return 75
     free = int(nv(gpu, "gpu=memory.free")[0])
     host = psutil.virtual_memory().available
-    if free < (21 if second else 13 if training else 11) * 1024 or host < (44 if training else 50) * GIB:
+    if free < (18 if second else 13 if training else 11) * 1024 or host < (44 if training else 50) * GIB:
         print(f"Entry refused: GPU {free} MiB free, host {host / GIB:.1f} GiB", flush=True)
         return 75
     env = dict(

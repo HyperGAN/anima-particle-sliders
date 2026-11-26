@@ -12,6 +12,7 @@ from dataclasses import asdict
 from itertools import combinations
 from pathlib import Path
 from statistics import fmean
+import sys
 
 import torch
 from particle_sliders.alpha_tune_jev import _Image
@@ -31,7 +32,13 @@ from campaign import CODE, PARENT_STUDY, POLICY, ROOT, open_runtime
 root = ROOT / "teachers"
 cache = TargetCache(PARENT_STUDY / POLICY["parent"]["cache"], verify=True)
 assert cache.index["fingerprint"] == POLICY["parent"]["cache_fingerprint"]
-proposals = read(CODE / "working_alternatives.json")
+# Each round adds proposals to the ones before it. ``working`` is the first round.
+name = sys.argv[1] if len(sys.argv) > 1 else "working"
+sources = POLICY["targets"][name + "-quiet"]["proposals"]
+proposals = {}
+for source in sources:
+    for scene, options in read(CODE / source).items():
+        proposals.setdefault(scene, []).extend(options)
 judge = StudyJudge(ROOT / "working-metric" / "judgments", "Final Boss")
 reader = ws.DrawingReader(ROOT / "working-search" / "drawing-receipts")
 cfg = protocol()
@@ -84,7 +91,7 @@ try:
         current = out.image(row["positive"], shard["seed"])
         assert current.sha256 == row["selection"]["positive"]["output"]["sha256"]
         options = [dict(name="current", positive=row["positive"], image=asdict(current))]
-        for p in proposals[shard["row"]]:
+        for p in proposals.get(shard["row"], []):
             options.append(dict(p, image=asdict(out.image(p["positive"], shard["seed"]))))
         scenes.append(dict(scene=shard["row"], seed=shard["seed"], neutral=asdict(neutral), options=options))
     with ThreadPoolExecutor(24) as pool:
@@ -134,16 +141,16 @@ try:
             readings={k: o[k] for k in ("boss", "original", "quality", "recolored", "case")}))
         for s, o in zip(scenes, choice) if o["name"] != "current"
     }
-    atomic_json(root / "working-selection.json", dict(
-        proposals=file_hash(CODE / "working_alternatives.json"), version=ws.VERSION,
+    atomic_json(root / f"{name}-selection.json", dict(
+        proposals={source: file_hash(CODE / source) for source in sources}, version=ws.VERSION,
         current=score(current), chosen=score(choice),
         scenes=[dict(scene=s["scene"], selected=o["name"], options=s["options"]) for s, o in zip(scenes, choice)]))
     for s, o in zip(scenes, choice):
         print(s["scene"][-8:], f"{o['name']:<20}", " ".join(
             f"{c['name']}={'—' if c['case'] is None else format(100 * c['case'], '.0f')}" for c in s["options"]), flush=True)
     print("current teachers", score(current), "chosen", score(choice), flush=True)
-    working = replace_boss_teachers(rt, cache, ROOT / "targets" / "working", replacements)
-    quiet = quiet_boss_background(rt, working, ROOT / "targets" / "working-quiet", 0.0)
-    print("working", working.index["fingerprint"], "working-quiet", quiet.index["fingerprint"], flush=True)
+    working = replace_boss_teachers(rt, cache, ROOT / "targets" / name, replacements)
+    quiet = quiet_boss_background(rt, working, ROOT / "targets" / f"{name}-quiet", 0.0)
+    print(name, working.index["fingerprint"], f"{name}-quiet", quiet.index["fingerprint"], flush=True)
 finally:
     rt.close()
