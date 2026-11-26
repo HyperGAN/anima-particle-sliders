@@ -170,7 +170,15 @@ for e in entries:
 entries.sort(key=lambda e: -e["score"])
 for position, e in enumerate(entries, 1):
     e["old_rank"] = position
-entries.sort(key=lambda e: -e["new"])
+working = read(ROOT / "working-metric/readings.json")
+for e in entries:
+    e["works"] = {c: v for c, v in working[f'{e["arm"]}-{e["extra"]}'].items()}
+    values = [v["works"] or 0.0 for v in e["works"].values()]
+    e["working"] = sum(v >= 0.5 for v in values)
+    e["works_mean"] = 100 * fmean(values)
+    for part in ("same_person", "one_figure", "intact", "boss", "same_scene"):
+        e[part] = 100 * fmean(v.get(part) or 0.0 for v in e["works"].values())
+entries.sort(key=lambda e: (-e["working"], -e["works_mean"]))
 controls = [e for e in entries if e["arm"] in ("parent", "continued", "control", "control-low-g", "control-seed2", "control-warm")]
 win = POLICY["practical_win"]
 for e in entries:
@@ -181,19 +189,33 @@ for e in entries:
             and e["score"] > c["score"] for c in rivals)
         e["pareto"] = all(e["gain"] >= c["gain"] and e["damage"] < c["damage"] for c in rivals)
 
+def note(name, v):
+    parts = " · ".join(f"{label} {100 * (v.get(key) or 0):.0f}" for label, key in
+                       (("works", "works"), ("same person", "same_person"), ("one figure", "one_figure"),
+                        ("intact", "intact"), ("boss", "boss"), ("same scene", "same_scene")))
+    return f"{name} · {parts}"
+
+
+def mark(v):
+    works = v["works"] or 0.0
+    return "ok" if works >= 0.5 else "bad" if works < 0.25 else "unsure"
+
+
 names = [c.title() for c in ranking]
 rows = [
     '<tr class="ref"><td>—</td><th scope="row">Matched baseline</th><td>—</td><td>OFF</td><td>'
-    + strip([cases[c]["off"] for c in ranking], names) + '</td><td colspan="13"></td></tr>'
+    + strip([cases[c]["off"] for c in ranking], names) + '</td><td colspan="20"></td></tr>'
 ]
 for rank, e in enumerate(entries, 1):
     label = LABELS[e["arm"]] + (f" · +{e['extra']}" if e["extra"] else "")
     rows.append(
-        f'<tr data-new="{e["new"]}" data-steep="{e["steep"]}" data-structure="{-e["structure"]}" '
+        f'<tr data-works="{e["working"] * 1000 + e["works_mean"]}" data-new="{e["new"]}" data-steep="{e["steep"]}" data-structure="{-e["structure"]}" '
         f'data-design="{e["score"]}" data-gain="{e["gain"]}" data-damage="{-e["damage"]}">'
         f'<td>{rank}</td><th scope="row">{escape(label)}</th><td>{e["updates"]}</td><td>{e["alpha"]:g}</td>'
-        f'<td>{strip([e["cases"][c]["on"] for c in ranking], [f"{n} · structure +{e['added'][c]:.0f} · {e['check_status'][c]}" for n, c in zip(names, ranking)], [dict(fail="bad", unmeasured="unsure").get(e["check_status"][c]) for c in ranking])}</td>'
-        f'<td><b>{e["new"]:.2f}</b></td><td>{e["steep"]:.2f}</td><td>{e["structure"]:.1f}</td>'
+        f'<td>{strip([e["cases"][c]["on"] for c in ranking], [note(n, e["works"][c]) for n, c in zip(names, ranking)], [mark(e["works"][c]) for c in ranking])}</td>'
+        f'<td><b>{e["working"]} of 8</b></td><td>{e["works_mean"]:.1f}</td><td>{e["same_person"]:.0f}</td><td>{e["one_figure"]:.0f}</td>'
+        f'<td>{e["intact"]:.0f}</td><td>{e["boss"]:.0f}</td><td>{e["same_scene"]:.0f}</td>'
+        f'<td>{e["new"]:.2f}</td><td>{e["steep"]:.2f}</td><td>{e["structure"]:.1f}</td>'
         f'<td>{e["score"]:.2f}</td><td>{e["old_rank"]}</td><td>{e["gain"]:+.1f}</td><td>{e["damage"]:.1f}</td>'
         f'<td>{e["repeat"]:.1f}</td><td>{checks(e)}</td><td>{status(e)}</td><td>{e["search"]:.2f}</td><td>{e["probes"]}</td>'
         f'<td>{e["score"] - base["score"]:+.2f}</td>'
@@ -262,16 +284,16 @@ main,header{{max-width:1540px}} .scroll{{overflow:auto;border:1px solid #41434a;
 .scroll table{{margin:0;width:100%;font-size:14px;border-collapse:collapse}}.scroll td,.scroll th{{padding:6px 8px;text-align:left}}
 .scroll thead{{background:#292b30}}.scroll th[scope=row]{{min-width:170px;max-width:300px}}
 .images{{display:flex;gap:4px;width:max-content}}.images a,.images img{{display:block}}
-.images img{{width:58px;height:58px;object-fit:cover;border-radius:3px}}.images a.bad img{{outline:3px solid #ff5d5d;outline-offset:-3px}}.images a.unsure img{{outline:2px dashed #e0b84c;outline-offset:-2px}}.scroll tr:hover{{background:#242529}}.scroll .ref{{background:#202328}}
+.images img{{width:58px;height:58px;object-fit:cover;border-radius:3px}}.images a.ok img{{outline:3px solid #6fd08c;outline-offset:-3px}}.images a.bad img{{outline:3px solid #ff5d5d;outline-offset:-3px}}.images a.unsure img{{outline:2px dashed #e0b84c;outline-offset:-2px}}.scroll tr:hover{{background:#242529}}.scroll .ref{{background:#202328}}
 .teachers{{display:flex;gap:8px;overflow:auto;margin:10px 0 18px}}.teachers figure{{width:116px;flex:none}}.teachers img{{width:116px;height:116px}}
 .teachers figcaption{{font-size:.74rem;line-height:1.25}}.controls{{margin-top:14px}}
 </style></head><body><header><a href="http://100.90.104.57:8796/constant-retest.html">Final Boss constant-alpha board</a><nav><a href="results.json">Scores and provenance</a></nav></header><main>
 <h1>Final Boss post-training on the 512-update checkpoint</h1>
 <p>Every row starts from the same PG 0.12 Final Boss RAW512 (<code>{parent["raw_sha256"][:12]}</code>). Each trained arm received {" and ".join("+" + str(b) for b in budgets)} stock EMPF updates at the parent's rates. Each RAW then had its own constant-alpha search on four characters. That alpha was frozen before the eight ranking characters shown here. Scores are distinct Boss points out of 100, the same measurement as the constant-alpha board.</p>
 <ul>{verdicts}</ul>
-<p><b>Ranked by the proposed metric.</b> The new score is the same distinct Boss formula with one change: damage is the largest structural reading on the ON image (split or duplicated figure, broken structure, unreadable image) minus the same reading on that character's OFF image. Every row keeps the alpha it chose under the current score, so this is a re-reading of the same images and not a new alpha search. A red outline marks an image that fails the structural check and a dashed outline one that is unresolved. Hover an image for its own reading.</p>
-<p class="controls"><label>Order by <select id="metric"><option value="new">New score · structure above OFF as damage</option><option value="steep">New score, squared damage weight</option><option value="structure">Least structure above OFF</option><option value="design">Current distinct Boss score</option><option value="gain">Boss gain</option><option value="damage">Least visible damage</option></select></label></p>
-<div class="scroll"><table><thead><tr><th>Rank</th><th>Approach</th><th>Updates</th><th>Constant α</th><th>Matched samples</th><th>New score / 100</th><th>Squared weight</th><th>Structure above OFF</th><th>Current score</th><th>Current rank</th><th>Boss gain</th><th>Current damage</th><th>Repeat</th><th>Integrity</th><th>Training</th><th>Search score</th><th>Trials</th><th>vs parent</th><th>Paired gain / damage vs parent</th></tr></thead><tbody>{"".join(rows)}</tbody></table></div>
+<p><b>Ranked by how many of the eight edits work.</b> An edit works as far as its weakest requirement: the character is recognizably the same person with face and hair visible, there is exactly one figure, the figure is intact (structure no worse than the OFF image), and it reads as a final boss. Each image gets the lowest of those four readings. A green outline is 50 or more, red is under 25, dashed is between. Hover an image for its readings. Rows are ordered by the count of working images, then by the mean. Same scene is shown and not counted, because it reads low on every row. Every row keeps the alpha it chose under the current score, and that score favors strengths past the point where the person survives.</p>
+<p class="controls"><label>Order by <select id="metric"><option value="works">Working images · same person, one intact final boss</option><option value="new">Distinct Boss with structure above OFF as damage</option><option value="steep">New score, squared damage weight</option><option value="structure">Least structure above OFF</option><option value="design">Current distinct Boss score</option><option value="gain">Boss gain</option><option value="damage">Least visible damage</option></select></label></p>
+<div class="scroll"><table><thead><tr><th>Rank</th><th>Approach</th><th>Updates</th><th>Constant α</th><th>Matched samples</th><th>Working</th><th>Works mean</th><th>Same person</th><th>One figure</th><th>Intact</th><th>Boss</th><th>Same scene</th><th>Structure-damage score</th><th>Squared weight</th><th>Structure above OFF</th><th>Current score</th><th>Current rank</th><th>Boss gain</th><th>Current damage</th><th>Repeat</th><th>Integrity</th><th>Training</th><th>Search score</th><th>Trials</th><th>vs parent</th><th>Paired gain / damage vs parent</th></tr></thead><tbody>{"".join(rows)}</tbody></table></div>
 <p><small>Boss gain is signed ON minus OFF distinction. Damage is Jev's visible-damage severity of the ON image. Repeat is the mean repeated-design judgment over all 28 character pairs in both orders. Paired columns average each character's change from the parent, ± one standard error across the eight characters.</small></p>
 <h2>Gain against damage at every searched strength</h2>
 <p>Each line is one RAW across its searched alphas on the four search characters. The large dot is the alpha it kept. Post-training helps only where its line sits left of the parent's at the same height.</p>
@@ -286,9 +308,9 @@ main,header{{max-width:1540px}} .scroll{{overflow:auto;border:1px solid #41434a;
 <h2>Fork checks</h2>
 <p>{len(parity)} forked children reproduced the parent's eight ranking images at α {parent["alpha"]:g} and all eight OFF images byte for byte before their first update. Each child began with all 4,033 parent tensors, the seeded fresh critic and fresh optimizer state. The exact continuation resumed the parent's own FULL512.</p>
 </main><script>
-(()=>{{const body=document.querySelector('tbody'),rows=[...body.querySelectorAll('[data-new]')],pick=document.querySelector('#metric');
+(()=>{{const body=document.querySelector('tbody'),rows=[...body.querySelectorAll('[data-works]')],pick=document.querySelector('#metric');
 function refresh(){{const key=pick.value;[...rows].sort((a,b)=>Number(b.dataset[key])-Number(a.dataset[key])).forEach((r,i)=>{{body.append(r);r.firstChild.textContent=i+1}})}}
-const wanted=new URLSearchParams(location.search).get('metric');if(['new','steep','structure','design','gain','damage'].includes(wanted))pick.value=wanted;
+const wanted=new URLSearchParams(location.search).get('metric');if(['works','new','steep','structure','design','gain','damage'].includes(wanted))pick.value=wanted;
 pick.addEventListener('change',refresh);refresh()}})();</script></body></html>"""
 (gallery / "post-training-leaderboard.html").write_text(page)
 # One strip of the eight ranking characters per row for the committed report.
