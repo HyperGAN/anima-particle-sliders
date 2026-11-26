@@ -197,6 +197,25 @@
       "entry": "fork",
       "targets": "portraits2-original-quiet-strong",
       "critic": "parent"
+    },
+    "portraits-original-low-g-warm": {
+      "entry": "fork",
+      "targets": "portraits-original",
+      "critic": "parent",
+      "rates": {
+        "g": 0.0002109375,
+        "d": 0.009,
+        "particle": 0.03
+      }
+    },
+    "portraits24-original-fresh": {
+      "entry": "fresh",
+      "targets": "portraits24-original"
+    },
+    "portraits24-original-warm": {
+      "entry": "fork",
+      "targets": "portraits24-original",
+      "critic": "parent"
     }
   },
   "teachers": {
@@ -295,6 +314,12 @@
       "dose": 1.4,
       "parent": "portraits2-original",
       "text": "portraits2-original with the clean background and the character's edit 1.4 times as strong"
+    },
+    "portraits24-original": {
+      "parent": "portraits-original",
+      "scenes": "portrait_scenes_more.json",
+      "select": "case",
+      "text": "portraits-original plus sixteen more portrait scenes, each with its best-scoring teacher; twenty-four portraits beside the parent's twelve scenes"
     }
   }
 }

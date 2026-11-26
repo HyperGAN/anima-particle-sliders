@@ -35,9 +35,21 @@ if arm["targets"] == "parent":
     assert cache.index["fingerprint"] == parent["cache_fingerprint"]
 else:
     identity = cache.index["identity"]
-    # Every derivation names the cache it came from. The first one came from the parent's.
-    steps = [identity[k]["parent_cache"] for k in ("teacher_replacement", "added_scenes", "background") if k in identity]
-    assert steps and steps[0] == parent["cache_fingerprint"]
+    # Every derivation names the cache it came from. Following them must reach the parent's cache.
+    built = {}
+    for folder in (ROOT / "targets").iterdir():
+        if (folder / "index.json").exists():
+            index = read(folder / "index.json")
+            built[index["fingerprint"]] = index["identity"]
+    reached, pending = set(), [identity]
+    while pending:
+        step = pending.pop()
+        for key in ("teacher_replacement", "added_scenes", "background"):
+            source = step.get(key, {}).get("parent_cache")
+            if source and source not in reached:
+                reached.add(source)
+                pending.extend([built[source]] if source in built else [])
+    assert parent["cache_fingerprint"] in reached
 panels = read(PARENT_STUDY / parent["validation"])
 pin = dict(arm=name, parent=None if fresh else asdict(raw), cache=cache.index["fingerprint"],
            validation=file_hash(PARENT_STUDY / parent["validation"]), rates=rates, preset="empf",

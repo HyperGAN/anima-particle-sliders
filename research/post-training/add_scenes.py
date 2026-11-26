@@ -61,7 +61,8 @@ try:
             if not s["eligible"]:
                 raise SystemExit(f"No measured teacher for {s['scene']}; rerun or write better proposals")
         pairs = {}
-        for a, b in combinations(scenes, 2):
+        # With many added scenes the designs differ by construction, and each takes its own best teacher.
+        for a, b in (combinations(scenes, 2) if spec.get("select") != "case" else ()):
             for x in a["eligible"]:
                 for y in b["eligible"]:
                     pairs[x["image"]["sha256"], y["image"]["sha256"]] = pool.submit(repeat, x["image"], y["image"])
@@ -70,11 +71,13 @@ try:
     unanswered = [key for key, v in pairs.items() if v is None]
     if len(unanswered) > len(pairs) // 50:
         raise SystemExit(f"{len(unanswered)} repeat readings are unanswered; rerun to retry the judge")
-    typical = fmean(v for v in pairs.values() if v is not None)
+    typical = fmean(v for v in pairs.values() if v is not None) if pairs else None
     pairs = {key: typical if v is None else v for key, v in pairs.items()}
     print(len(unanswered), "of", len(pairs), "repeat readings unanswered", flush=True)
 
     def score(choice):
+        if not pairs:
+            return dict(base=fmean(o["case"] for o in choice), repeat=None, score=fmean(o["case"] for o in choice))
         cases = {s["scene"]: o["case"] for s, o in zip(scenes, choice)}
         compared = [dict(cases=[a["scene"], b["scene"]], repeat=pairs[x["image"]["sha256"], y["image"]["sha256"]])
                     for (a, x), (b, y) in combinations(zip(scenes, choice), 2)]
