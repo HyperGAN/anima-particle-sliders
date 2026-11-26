@@ -63,6 +63,27 @@ The proposal names a fork control and a cleaner-target fork. The exact continuat
 
 **At matched effect, the best gap is under the proposal's bar.** On the four search characters the parent's chosen strength gives +74.0 gain at 27.7 damage. The least damaged searched strength within two gain points was 23.5 and 23.6 for the two five-teacher forks at +12, and 24.2 and 24.3 for the continuation at +36 and +12. The proposal asks for five points. The cleaner-target forks and the unchanged-target continuation are within one point of each other.
 
+## What the damage question measures
+
+The damage question reads 19.9 on the eight unedited OFF images, so only the part above that floor can be removed. Above it, the twelve current teachers add 2.1 points, the parent adds 5.7 and the collapsed forks add 7.4 to 7.9. The proposal's five-point bar asks for nearly all of the parent's removable damage, and the question hardly separates a collapsed row from the parent.
+
+The structural check is already read on every ranked image as a pass or fail gate. Taken as a graded reading above the matched OFF image, it separates the same sets by much more.
+
+| Images | Boss gain | Damage now | Damage above OFF | Structure above OFF | Scene overwritten |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Current teachers, 12 | +75.2 | 23.1 | 2.1 | 4.0 | 65.0 |
+| Teacher proposals, 18 | +61.4 | 21.4 | 0.8 | 9.2 | 58.6 |
+| Parent | +74.6 | 25.2 | 5.7 | 15.2 | 59.5 |
+| Lower-rate fork control, +48 | +75.2 | 27.2 | 7.2 | 16.5 | 62.6 |
+| Exact continuation, +12 | +79.1 | 28.3 | 8.6 | 16.6 | 65.2 |
+| Second five-teacher fork, +12 | +75.6 | 22.0 | 2.5 | 14.0 | 68.8 |
+| First five-teacher fork, +12, collapsed | +80.2 | 27.3 | 7.4 | 27.0 | 72.5 |
+| Fork control, +12, collapsed | +71.8 | 27.3 | 7.9 | 38.4 | 81.0 |
+
+Structure above OFF is the largest of the three structural readings minus the same reading on the matched OFF image. The current teachers read 4.0, so the targets are clean on this scale and the parent's 15.2 is the student's own. The proposals chosen for lower damage read 9.2, worse than the teachers they replaced, which fits their failure to help. The paired question about how much of the scene the edit overwrote reads 65.0 on the base-model teachers themselves, so it describes how the teachers were made and not a student defect.
+
+Rescoring each row at its kept alpha with this reading in place of the damage question moves the collapsed first five-teacher fork from first to third and the parent from seventh to fifth. The formula multiplies by one minus damage, which is a weak term beside the cubed Boss distinction. [Readings per image and rescored rows](../../research/post-training/damage_definition.py)
+
 ## The teachers
 
 All 24 archived teacher images replayed byte for byte from their prompts and seeds. The twelve current Boss teachers measure 18.2 to 30.0 damage and +69 to +81 gain. The tea-shop teacher fails the existing separate-figure check: it keeps the seated woman and adds an armored figure behind her.
