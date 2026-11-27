@@ -51,6 +51,7 @@ from lumen_studio.study.training import arm_path, train  # noqa: E402
 from campaign import PARENT_STUDY, ROOT, open_runtime  # noqa: E402
 import library  # noqa: E402
 import questions  # noqa: E402
+from teacher_structure import inspect_saved_rounds, restore_selections  # noqa: E402
 
 CV_PYTHON = "/mnt/nvme/ai/conda/anaconda3/bin/python3"
 RATES = dict(g=0.00075, d=0.009, particle=0.03)
@@ -137,7 +138,22 @@ def collect(out, spec, pool):
     if path.exists():
         return read(path)
     kept, record = {}, []
-    for attempt in range(2):
+    progress = ROOT / "teacher-rounds.json"
+    legacy = ROOT / "teachers-incomplete.json"
+    earlier = read(progress) if progress.exists() else read(legacy) if legacy.exists() else None
+    if earlier and earlier["vibe"] != vibe:
+        raise ValueError("Saved teacher rounds belong to another phrase")
+    def integrity(ref):
+        image = FileRecord.from_path(Path(ref["path"]))
+        if image.sha256 != ref["sha256"]:
+            raise ValueError("A teacher image changed after it was rendered")
+        return out.integrity.check(image)["status"]
+    if earlier:
+        record = earlier["record"]
+        inspect_saved_rounds(record, integrity, pool)
+        kept = restore_selections(record, earlier["kept"])
+    attempt = max((r["attempt"] for r in record), default=-1) + 1
+    while len(kept) < TEACH_AT_LEAST:
         rendered = []
         for scene in spec["teaching"]:
             if scene["id"] in kept:
@@ -146,15 +162,22 @@ def collect(out, spec, pool):
             neutral = asdict(out.image(scene["neutral"], seed))
             options = [dict(t, image=asdict(out.image(t["positive"], seed))) for t in scene["treatments"]]
             rendered.append((scene, seed, neutral, options))
-        jobs = [(o, pool.submit(measure, neutral, o["image"]),
-                 pool.submit(answer, (picture(neutral), picture(o["image"])), asked["separate"], "separate"))
-                for scene, seed, neutral, options in rendered for o in options]
-        for option, reading, separate in jobs:
+        jobs = []
+        for _, _, neutral, options in rendered:
+            baseline_structure = pool.submit(integrity, neutral)
+            for option in options:
+                image = option["image"]
+                jobs.append((option, pool.submit(measure, neutral, image),
+                             pool.submit(answer, (picture(neutral), picture(image)), asked["separate"], "separate"),
+                             baseline_structure, pool.submit(integrity, image)))
+        for option, reading, separate, baseline, candidate in jobs:
             row = reading.result()
-            option.update({k: v for k, v in row.items() if k != "on"}, separate=separate.result())
+            option.update({k: v for k, v in row.items() if k != "on"}, separate=separate.result(),
+                          baseline_structure=baseline.result(), candidate_structure=candidate.result())
         for scene, seed, neutral, options in rendered:
             worth = [o for o in options if o["case"] is not None and o["case"] >= WORTH_TEACHING
-                     and o["separate"] is not None and o["separate"] < 0.5]
+                     and o["separate"] is not None and o["separate"] < 0.5
+                     and o["baseline_structure"] == o["candidate_structure"] == "pass"]
             chosen = max(worth, key=lambda o: o["case"]) if worth else None
             record.append(dict(scene=scene["id"], framing=scene["framing"], attempt=attempt, seed=seed,
                                neutral=neutral, options=options, chosen=chosen and chosen["positive"]))
@@ -165,6 +188,8 @@ def collect(out, spec, pool):
             cut = subprocess.run([CV_PYTHON, str(CODE.parent / "post-training" / "matte.py"), neutral["path"], str(matte)],
                                  capture_output=True, text=True)
             if cut.returncode:
+                if "Unusable foreground region" not in cut.stderr and "No character region" not in cut.stderr:
+                    raise RuntimeError(cut.stderr)
                 record[-1]["chosen"] = None  # No usable character region to weight the edit by.
                 continue
             kept[scene["id"]] = dict(
@@ -172,10 +197,12 @@ def collect(out, spec, pool):
                 framing=scene["framing"], case=chosen["case"],
                 neutral_image={k: neutral[k] for k in ("path", "sha256")},
                 positive_image={k: chosen["image"][k] for k in ("path", "sha256")}, matte=str(matte))
+        atomic_json(progress, dict(vibe=vibe, kept=kept, record=record))
+        if not any(o["case"] is not None and o["separate"] is not None for _,_,_,options in rendered for o in options):
+            raise RuntimeError("No teacher image received a usable judge reading in this round")
+        print(f"Teacher round {attempt+1}: {len(kept)}/{len(spec['teaching'])} scenes qualified",flush=True)
+        attempt += 1
     result = dict(vibe=vibe, kept=kept, record=record)
-    if len(kept) < TEACH_AT_LEAST:
-        atomic_json(ROOT / "teachers-incomplete.json", result)
-        raise SystemExit(f"Only {len(kept)} of {len(spec['teaching'])} scenes have a treatment worth teaching")
     atomic_json(path, result)
     return result
 
