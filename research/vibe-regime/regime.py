@@ -24,6 +24,7 @@ from dataclasses import asdict
 from itertools import combinations
 from pathlib import Path
 from statistics import fmean
+import os
 import subprocess
 import sys
 import time
@@ -50,7 +51,9 @@ import questions  # noqa: E402
 
 CV_PYTHON = "/mnt/nvme/ai/conda/anaconda3/bin/python3"
 RATES = dict(g=0.00075, d=0.009, particle=0.03)
-UPDATES, HORIZON, LATE = 512, 1024, (256, 320, 384, 448, 512)
+# A longer budget continues the same run from its last update and keeps the shorter result beside it.
+UPDATES, HORIZON = int(os.environ.get("ANIMA_REGIME_UPDATES", 512)), 1024
+LATE = tuple(UPDATES - 64 * k for k in (4, 3, 2, 1, 0))
 CANDIDATES = 3  # The last passing checkpoints that get an alpha search.
 TEACH_AT_LEAST, WORTH_TEACHING = 16, 0.35
 GRID, STEP = [0.75 + k / 4 for k in range(6)], 1 / 16
@@ -238,6 +241,29 @@ try:
     out = Outputs(ROOT, rt, vibe, asked["rubric"])
     assert out.integrity.calibrate()["passed"]
     with ThreadPoolExecutor(24) as pool:
+        if os.environ.get("ANIMA_REGIME_CURVE"):
+            # Measure saved checkpoints of a finished run: one alpha search each, then the ranking panel.
+            # This chooses nothing. It answers how few updates already score well.
+            board = read(PARENT_STUDY / "cohort-retest/panels.json")
+            panel = dict(search=board["panels"]["search"], ranking=board["panels"]["ranking"],
+                         cases={c["id"]: dict(c["request"], off=c["off"]) for c in board["cases"]})
+            ranking_cases = {c: panel["cases"][c] for c in panel["ranking"]}
+            for step in map(int, os.environ["ANIMA_REGIME_CURVE"].split(",")):
+                done = ROOT / "curve" / f"{step}.json"
+                if done.exists():
+                    continue
+                raw = read(arm_path(ROOT, RATES) / "fit" / f"{step}.json")["raw"]
+                with loaded(rt, out, step, raw) as render:
+                    found = search(render, pool, step, raw, panel)
+                    ranked = found["alpha"] and panel_score(
+                        pool, {c: v["off"] for c, v in ranking_cases.items()}, render(ranking_cases, found["alpha"]))
+                atomic_json(done, dict(step=step, alpha=found["alpha"], search=found["search"], trials=found["trials"],
+                                       ranking=ranked and ranked["score"], working=ranked and ranked["working"],
+                                       rows=ranked and ranked["rows"]))
+                print(vibe, "update", step, "alpha", found["alpha"], "search", found["search"] and round(100 * found["search"], 2),
+                      "ranking", ranked and ranked["score"] and round(100 * ranked["score"], 2),
+                      "working", ranked and ranked["working"], flush=True)
+            raise SystemExit(0)
         teachers = collect(out, spec, pool)
         print(vibe, "teaches", len(teachers["kept"]), "of", len(spec["teaching"]), "scenes, mean worth",
               round(100 * fmean(t["case"] for t in teachers["kept"].values()), 1), flush=True)
@@ -282,13 +308,13 @@ try:
                          for c, r in doc["rows"].items()}
                   for name, doc in (("ranking", ranking), ("confirmation", confirmation))}
         result = dict(
-            vibe=vibe, version=ws.VERSION, teachers=len(teachers["kept"]), stopped=stopped,
+            vibe=vibe, version=ws.VERSION, teachers=len(teachers["kept"]), updates=UPDATES, stopped=stopped,
             candidates=[dict(step=f["step"], alpha=f["alpha"], search=f["search"]) for f in searched],
             step=chosen["step"], raw=chosen["raw"], alpha=alpha, search=chosen["search"],
             ranking=dict(ranking, off={c: v["off"] for c, v in ranking_cases.items()}),
             confirmation=dict(confirmation, off=off, framing={c: v["framing"] for c, v in held.items()}),
             structure=checks)
-        atomic_json(ROOT / "result.json", result)
+        atomic_json(ROOT / ("result.json" if UPDATES == 512 else f"result-{UPDATES}.json"), result)
         show = lambda doc: None if doc["score"] is None else round(100 * doc["score"], 2)  # noqa: E731
         print(vibe, "RAW", chosen["step"], "alpha", alpha, "search", round(100 * chosen["search"], 2),
               "ranking", show(ranking), f"working {ranking['working']}/8",
