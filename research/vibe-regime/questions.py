@@ -2,7 +2,7 @@
 
 from lumen_studio.study import working_score as ws
 
-from library import CHARACTER_VERSION, PHRASE_VERSION, WARDROBE_VERSION, article
+from library import CHARACTER_VERSION, PHRASE_VERSION, WARDROBE_VERSION, WRITER_VERSION, article
 
 
 def wardrobe_questions(vibe):
@@ -63,9 +63,9 @@ def scene_questions(vibe):
     return effect, rubric, f'Image 1 is the original. Image 2 should show {target} in the same scene.'
 
 
-def build(vibe, *, version=PHRASE_VERSION):
+def build(vibe, *, version=WRITER_VERSION):
     builders = {WARDROBE_VERSION: wardrobe_questions, CHARACTER_VERSION: literal_questions,
-                PHRASE_VERSION: scene_questions}
+                PHRASE_VERSION: scene_questions, WRITER_VERSION: scene_questions}
     effect, rubric, pair_state = builders[version](vibe)
     repeat = dict(
         state="Compare the central character designs in these two illustrations from the same visual style.",

@@ -2,8 +2,8 @@
 
     regime.py "pirate captain"
 
-Every choice below is fixed in advance or made by a measured score. No prompt is written
-for the vibe by a person or by a language model.
+A language model writes image prompts for Anima. The raw vibe judge scores the renders against
+the submitted phrase. Resumes use the exact prompts saved at setup.
 
 1. Teach on the fixed scene grid, three portraits in every five scenes.
 2. Rank three treatments per scene by the raw vibe score and teach on the strongest
@@ -48,6 +48,7 @@ from lumen_studio.study.training import arm_path, train  # noqa: E402
 
 from campaign import PARENT_STUDY, ROOT, open_runtime  # noqa: E402
 import library  # noqa: E402
+from prompt_writer import load_spec  # noqa: E402
 import questions  # noqa: E402
 from teacher_selection import LIMIT, MIN_VIBE_SCORE, has_vibe_score, select_teachers, subject_matte  # noqa: E402
 
@@ -269,15 +270,8 @@ def contact_sheet(pairs, path, width=256, columns=4):
     sheet.save(path, quality=88)
 
 
-spec_path = ROOT / "spec.json"
-saved = read(spec_path) if spec_path.exists() else None
-version = library.PHRASE_VERSION if saved is None else saved.get("phrase_version", library.WARDROBE_VERSION)
-spec = library.spec(vibe, version=version)
-if saved is None:
-    atomic_json(spec_path, spec)
-elif saved != spec:
-    raise ValueError("The scene grid or the phrase changed under this run")
-asked = questions.build(vibe, version=version)
+spec = load_spec(ROOT, vibe)
+asked = questions.build(vibe, version=spec.get("phrase_version", library.WARDROBE_VERSION))
 question_path = ROOT / "teacher-question.json"
 if not question_path.exists():
     atomic_json(question_path, asked["effect"])

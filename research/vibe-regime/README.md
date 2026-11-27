@@ -1,6 +1,6 @@
 # A character vibe from its phrase alone
 
-`regime.py` trains a slider for a character vibe given only the phrase. Nobody writes prompts for the vibe, and no language model proposes scenes. Every choice is fixed in advance or made by a measured score.
+`regime.py` trains a slider from a visual idea. A language model writes original Anima prompts for each teaching scene. The raw vibe judge reads the rendered images against the submitted phrase.
 
 ```sh
 python=/ml2/particlesliders-working/anima-pg012-adult-sliders-20261125/env/bin/python
@@ -23,8 +23,8 @@ Finalized training pairs are saved in `teachers.json`.
 
 ## What it does by default
 
-1. **Teaches on a fixed scene grid.** `library.py` pairs 44 people with 44 places and gives each one of five framings in turn, so three scenes in five are portraits. Twenty-four scenes teach and sixteen are held back.
-2. **Keeps the phrase visible in each prompt.** The three treatments combine the submitted words with shorter or fuller versions of the same scene. A phrase ending in “everywhere” also gets a treatment that places the named detail in the foreground and background. The raw vibe judge reads the whole image and checks the requested extent. Before model loading, `spec.json` records the exact starting prompts, candidate prompts and training cues, and `teacher-question.json` records the actual scoring instructions.
+1. **Uses a common scene grid.** The 24 teaching anchors supply a location, framing and seed. The writer invents the starting subject and scene. Sixteen fixed scenes are held back for evaluation.
+2. **Asks a language model to art-direct the idea.** For each starting scene the writer proposes three distinct visual interpretations, including a full render prompt and a stronger training cue for each. Its instructions cover Anima Turbo v1.1’s caption and tag vocabulary and the requested visual placement. Each completed batch is saved in `prompt-rewrites/`. The finished `spec.json` includes the writer identity, instructions and output. `teacher-question.json` records the judge’s instructions. Resuming an interrupted run reuses the saved batches or completed spec; legacy runs replay their original wording. [Anima prompting guide](https://huggingface.co/circlestone-labs/Anima#prompting)
 3. **Ranks by visible effect.** Jev scores how clearly the edited character shows the requested phrase. This raw vibe score (`boss` in the receipt) chooses the training pairs. The combined score (`case`) still measures gain, drawing quality and color preservation when evaluating the slider.
 4. **Builds late-cues targets and trains from scratch** with stock EMPF for 448 updates at G 0.00075, D 0.009 and particle 0.03, with no EMA. Nothing is rendered or judged while it trains.
 5. **Searches one constant alpha** for the finished slider on four characters, then saves the slider and its samples.
@@ -33,6 +33,8 @@ The judge questions are the working Boss score's, with the phrase in place of th
 
 | Setting | Effect |
 | --- | --- |
+| `NANOGPT_API_KEY` | Provider credential for the prompt writer and image judge. |
+| `ANIMA_PROMPT_MODEL` | NanoGPT chat model for new runs. Defaults to `google/gemini-flash-latest`. The chosen model is recorded at setup. |
 | `ANIMA_REGIME_UPDATES=640` | Train longer, or continue a finished run from its last update. The slider then works at a lower alpha. |
 | `ANIMA_REGIME_MEASURE=1` | Also rank on eight other characters, confirm on the sixteen held-back scenes and run the structural check on both. Neither panel chooses anything. |
 | `ANIMA_REGIME_CURVE=128,256` | Measure saved checkpoints of a finished run one at a time. |
