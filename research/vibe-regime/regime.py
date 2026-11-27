@@ -170,22 +170,23 @@ def collect(out, spec, pool):
             neutral = asdict(out.image(scene["neutral"], seed))
             options = [dict(t, image=asdict(out.image(t["positive"], seed))) for t in scene["treatments"]]
             rendered.append((scene, seed, neutral, options))
-        jobs = [(o, pool.submit(measure, neutral, o["image"]),
-                 pool.submit(answer, (picture(neutral), picture(o["image"])), asked["separate"], "separate"))
-                for scene, seed, neutral, options in rendered for o in options]
-        for option, reading, separate in jobs:
+        jobs = []
+        for _, _, neutral, options in rendered:
+            baseline_structure = pool.submit(integrity, neutral)
+            for option in options:
+                image = option["image"]
+                jobs.append((option, pool.submit(measure, neutral, image),
+                             pool.submit(answer, (picture(neutral), picture(image)), asked["separate"], "separate"),
+                             baseline_structure, pool.submit(integrity, image)))
+        for option, reading, separate, baseline, candidate in jobs:
             row = reading.result()
-            option.update({k: v for k, v in row.items() if k != "on"}, separate=separate.result())
+            option.update({k: v for k, v in row.items() if k != "on"}, separate=separate.result(),
+                          baseline_structure=baseline.result(), candidate_structure=candidate.result())
         for scene, seed, neutral, options in rendered:
             worth = [o for o in options if o["case"] is not None and o["case"] >= WORTH_TEACHING
-                     and o["separate"] is not None and o["separate"] < 0.5]
-            chosen = None
-            for option in sorted(worth, key=lambda o: o["case"], reverse=True):
-                option["baseline_structure"] = integrity(neutral)
-                option["candidate_structure"] = integrity(option["image"])
-                if option["baseline_structure"] == option["candidate_structure"] == "pass":
-                    chosen = option
-                    break
+                     and o["separate"] is not None and o["separate"] < 0.5
+                     and o["baseline_structure"] == o["candidate_structure"] == "pass"]
+            chosen = max(worth, key=lambda o: o["case"]) if worth else None
             record.append(dict(scene=scene["id"], framing=scene["framing"], attempt=attempt, seed=seed,
                                neutral=neutral, options=options, chosen=chosen and chosen["positive"]))
             if chosen is None:
