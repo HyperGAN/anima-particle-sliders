@@ -25,6 +25,8 @@ import base64
 import hashlib
 import json
 import os
+import time
+from uuid import uuid4
 
 from PIL import Image
 
@@ -109,16 +111,22 @@ class DrawingReader:
             request = Request(URL, data=json.dumps(payload).encode(), method="POST",
                               headers={"Content-Type": "application/json"})
             request.add_unredirected_header("Authorization", "Bearer " + os.environ["NANOGPT_API_KEY"])
-            try:
-                with urlopen(request, timeout=120) as response:
-                    body = json.load(response)
-            except HTTPError as error:
-                if error.code in (408, 429, 500, 502, 503, 504):
+            for delay in (2, 8, 30, None):
+                try:
+                    with urlopen(request, timeout=120) as response:
+                        body = json.load(response)
+                    break
+                except HTTPError as error:
+                    if error.code not in (408, 429, 500, 502, 503, 504):
+                        body = {"http_status": error.code}
+                        break
+                except OSError:
+                    pass
+                if delay is None:
                     return None  # Transient. Leave no receipt, so a later run asks again.
-                body = {"http_status": error.code}
-            except OSError:
-                return None
-            temporary = receipt.with_suffix(".pending")
+                time.sleep(delay)
+            # Two threads can read one tile at once, for example an OFF image shared by several edits.
+            temporary = receipt.with_suffix(f".{uuid4().hex}.pending")
             temporary.write_text(json.dumps(dict(request=binding, response=body)))
             temporary.replace(receipt)
         try:

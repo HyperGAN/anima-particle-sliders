@@ -38,14 +38,14 @@ class Runtime:
         return latent - 0.1 * velocity
 
 
-def late_cues_cache(tmp_path, runtime, scenes=3):
+def late_cues_cache(tmp_path, runtime, scenes=3, matte=None):
     source = tmp_path / "source"
     source.mkdir()
     recipe = dict(method="late-cues-v1", rows={})
     rows = []
     for index in range(scenes):
         name = f"scene{index}"
-        Image.new("L", (16, 16), 40 * (index + 1)).save(source / f"{name}.png")
+        (matte or Image.new("L", (16, 16), 40 * (index + 1))).save(source / f"{name}.png")
         images = []
         for side in ("neutral", "positive"):
             path = source / f"{name}-{side}.png"
@@ -76,6 +76,86 @@ def late_cues_cache(tmp_path, runtime, scenes=3):
     atomic_json(source / "index.json", dict(identity=identity, input_fingerprint=fingerprint, shards=shards,
                                             fingerprint=digest(dict(input=fingerprint, shards=shards))))
     return TargetCache(source)
+
+
+def test_quiet_background_keeps_the_character_target_and_leaves_the_surroundings_unedited(tmp_path):
+    runtime = Runtime()
+    matte = Image.new("L", (16, 16), 0)
+    matte.paste(255, (0, 0, 8, 16))  # The character fills the left half of every scene.
+    parent = late_cues_cache(tmp_path, runtime, matte=matte)
+    cache = boss_targets.quiet_boss_background(runtime, parent, tmp_path / "quiet", 0.0)
+    assert cache.index["identity"]["background"] == dict(
+        schema="final-boss-quiet-background-v1", parent_cache=parent.index["fingerprint"], floor=0.0)
+    for index in range(60):
+        old, new = parent[index], cache[index]
+        assert all(torch.equal(old[k], new[k]) for k in ("latent", "neutral", "embedding"))
+        assert torch.allclose(new["positive"][..., :4], old["positive"][..., :4], rtol=1e-6, atol=0)
+        assert torch.equal(new["positive"][..., 4:], new["neutral"][..., 4:])
+        assert not torch.equal(old["positive"][..., 4:], old["neutral"][..., 4:])
+    # The stored target is what native admission recomputes from the cache's own recipe.
+    record = cache[27]
+    context = boss_targets.field_context(runtime, cache.index["identity"]["field_recipe"],
+                                         cache.directory, record["row"], record["latent"].shape[-2:])
+    teacher = runtime.predict(record["latent"], record["timestep"], runtime.encode(record["row"]["positive"]))
+    assert torch.equal(record["positive"],
+                       boss_targets.target_field(runtime, record, record["neutral"], teacher, context))
+    partial = boss_targets.quiet_boss_background(runtime, parent, tmp_path / "partial", 0.15)
+    outside = lambda source: (source[5]["positive"] - source[5]["neutral"])[..., 4:]
+    assert torch.allclose(outside(partial), outside(parent) / 3, rtol=1e-4)
+    assert boss_targets.quiet_boss_background(runtime, parent, tmp_path / "quiet", 0.0).index == cache.index
+    strong = boss_targets.quiet_boss_background(runtime, parent, tmp_path / "strong", 0.0, dose=1.5)
+    inside = lambda source: (source[5]["positive"] - source[5]["neutral"])[..., :4]
+    assert torch.allclose(inside(strong), inside(parent) * 1.5, rtol=1e-4)
+    assert torch.equal(strong[5]["positive"][..., 4:], strong[5]["neutral"][..., 4:])
+    assert strong.index["identity"]["background"]["dose"] == 1.5
+    with pytest.raises(ValueError):
+        boss_targets.quiet_boss_background(runtime, cache, tmp_path / "twice", 0.0)
+    with pytest.raises(ValueError):
+        boss_targets.quiet_boss_background(runtime, parent, tmp_path / "same", 0.45)
+    drifted = Runtime()
+    drifted.predict = lambda latent, timestep, embedding: latent * 0.2 + embedding.mean()
+    with pytest.raises(ValueError, match="not reproduced"):
+        boss_targets.quiet_boss_background(drifted, parent, tmp_path / "drift", 0.0)
+    assert not any((tmp_path / name).exists() for name in ("twice", "same", "drift"))
+
+
+def test_added_scenes_join_the_parent_fields_and_pass_the_same_admission(tmp_path):
+    runtime = Runtime()
+    parent = late_cues_cache(tmp_path, runtime)
+    images = {}
+    for side, shade in (("neutral", 30), ("positive", 90)):
+        path = tmp_path / f"portrait-{side}.png"
+        Image.new("RGB", (4, 4), (shade, 7, 7)).save(path)
+        images[side] = dict(path=str(path), sha256=file_hash(path))
+    Image.new("L", (16, 16), 200).save(tmp_path / "portrait-matte.png")
+    scene = dict(neutral="portrait neutral", positive="portrait boss", explicit="portrait boss cue", seed=9,
+                 neutral_image=images["neutral"], positive_image=images["positive"],
+                 matte=str(tmp_path / "portrait-matte.png"))
+    cache = boss_targets.add_boss_scenes(runtime, parent, tmp_path / "more", {"portrait": scene})
+    assert len(cache) == 80 and cache.index["identity"]["added_scenes"]["rows"] == ["portrait"]
+    for index in range(60):
+        assert all(torch.equal(parent[index][k], cache[index][k]) for k in ("latent", "neutral", "positive"))
+    record = cache[67]
+    assert record["row"]["id"] == "portrait" and record["row"]["selection"]["positive"]["output"]["seed"] == 9
+    context = boss_targets.field_context(runtime, cache.index["identity"]["field_recipe"],
+                                         cache.directory, record["row"], record["latent"].shape[-2:])
+    teacher = runtime.predict(record["latent"], record["timestep"], runtime.encode("portrait boss"))
+    assert torch.equal(record["positive"],
+                       boss_targets.target_field(runtime, record, record["neutral"], teacher, context))
+    # The same scenes can be a whole teaching set, with no parent.
+    alone = boss_targets.add_boss_scenes(runtime, None, tmp_path / "alone", {"portrait": scene}, variation="new-vibe")
+    assert len(alone) == 20 and alone.index["identity"]["variation"] == "new-vibe"
+    assert torch.equal(alone[7]["positive"], cache[67]["positive"])
+    with pytest.raises(ValueError):
+        boss_targets.add_boss_scenes(runtime, None, tmp_path / "unnamed", {"portrait": scene})
+    # The clean background applies to an added scene as it does to a parent scene.
+    quiet = boss_targets.quiet_boss_background(runtime, cache, tmp_path / "more-quiet", 0.0)
+    assert len(quiet) == 80
+    with pytest.raises(ValueError):
+        boss_targets.add_boss_scenes(runtime, parent, tmp_path / "same", {"scene1": scene})
+    Image.new("RGB", (4, 4), (1, 1, 1)).save(images["positive"]["path"])
+    with pytest.raises(ValueError, match="differs from its record"):
+        boss_targets.add_boss_scenes(runtime, parent, tmp_path / "changed", {"portrait2": scene})
 
 
 def replacement(tmp_path, seed=1, prompt="scene1 cleaner boss"):

@@ -23,7 +23,8 @@ root.mkdir(parents=True, exist_ok=True)
 cursor = read(parent_arm() / "cursor.json")
 raw, full = Checkpoint(**cursor["raw"]), Checkpoint(**cursor["full"])
 assert cursor["step"] == parent["step"] and cursor["rates"] == POLICY["rates"]
-assert arm["entry"] == "fork" or (rates, seed) == (POLICY["rates"], POLICY["seed"])
+fresh = arm["entry"] == "fresh"
+assert arm["entry"] in ("fork", "fresh") or (rates, seed) == (POLICY["rates"], POLICY["seed"])
 assert file_pin(raw.path) == raw and raw.sha256 == parent["raw_sha256"]
 assert file_pin(full.path) == full and full.sha256 == parent["full_sha256"]
 cache = TargetCache(
@@ -33,9 +34,24 @@ cache = TargetCache(
 if arm["targets"] == "parent":
     assert cache.index["fingerprint"] == parent["cache_fingerprint"]
 else:
-    assert cache.index["identity"]["teacher_replacement"]["parent_cache"] == parent["cache_fingerprint"]
+    identity = cache.index["identity"]
+    # Every derivation names the cache it came from. Following them must reach the parent's cache.
+    built = {}
+    for folder in (ROOT / "targets").iterdir():
+        if (folder / "index.json").exists():
+            index = read(folder / "index.json")
+            built[index["fingerprint"]] = index["identity"]
+    reached, pending = set(), [identity]
+    while pending:
+        step = pending.pop()
+        for key in ("teacher_replacement", "added_scenes", "background"):
+            source = step.get(key, {}).get("parent_cache")
+            if source and source not in reached:
+                reached.add(source)
+                pending.extend([built[source]] if source in built else [])
+    assert parent["cache_fingerprint"] in reached
 panels = read(PARENT_STUDY / parent["validation"])
-pin = dict(arm=name, parent=asdict(raw), cache=cache.index["fingerprint"],
+pin = dict(arm=name, parent=None if fresh else asdict(raw), cache=cache.index["fingerprint"],
            validation=file_hash(PARENT_STUDY / parent["validation"]), rates=rates, preset="empf",
            seed=seed, batch_size=POLICY["batch_size"], ema_decay=None)
 if (root / "plan.json").exists():
@@ -57,6 +73,8 @@ try:
     atomic_json(root / "detector.json", check)
     assert check["passed"]
     quarters = [budget * k // 4 for k in (1, 2, 3)]
+    # A longer run also keeps the RAWs named after the budget.
+    extra = sorted({int(n) for n in sys.argv[3:]})
     options = dict(schedule_horizon=POLICY["schedule_horizon"], always_check_rates=True)
     try:
         if arm["entry"] == "resume":
@@ -68,10 +86,13 @@ try:
             base = parent["step"]
             train(outputs, cache, panels, rates, base + budget, "fit",
                   observation_steps=[base + n for n in quarters], **options)
+        elif fresh:
+            # The same recipe from the model's own initialization. The budget is the whole run.
+            train(outputs, cache, panels, rates, budget, "fit", seed=seed, observation_steps=extra, **options)
         else:
             warm = dict(parent_full=full) if arm.get("critic") == "parent" else {}
             train(outputs, cache, panels, rates, budget, "fit", parent=raw, seed=seed, **warm,
-                  observation_steps=[n for n in quarters if n % (budget // 4)], **options)
+                  observation_steps=[n for n in quarters if n % (budget // 4)] + extra, **options)
         atomic_json(root / f"terminal-{budget}.json", dict(status="completed", additional=budget))
     except Catastrophe:
         failure = read(arm_path(root, rates) / "failure.json")

@@ -33,6 +33,36 @@ LABELS = {
     "cleanest-warm": "Fork with the parent's critic · five least-damaged teachers",
     "control-low-g": "Fork control at the lower generator rate",
     "cleanest-low-g": "Fork at the lower generator rate · five least-damaged teachers",
+    "quiet-fresh": "Clean background target · from scratch",
+    "quiet-15-fresh": "Background target at a 0.15 floor · from scratch",
+    "quiet-warm": "Fork with the parent's critic · clean background target",
+    "working-quiet-fresh": "Teachers chosen by the working Boss score, clean background · from scratch",
+    "portraits-fresh": "Chosen teachers plus eight portrait scenes · from scratch",
+    "portraits-warm": "Fork with the parent's critic · chosen teachers plus eight portrait scenes",
+    "portraits-strong-fresh": "Chosen teachers plus eight portrait scenes, edit × 1.4 · from scratch",
+    "portraits-strong-warm": "Fork with the parent's critic · chosen teachers plus eight portrait scenes, edit × 1.4",
+    "portraits-original-fresh": "Parent's teachers plus eight portrait scenes · from scratch",
+    "portraits-original-warm": "Fork with the parent's critic · parent's teachers plus eight portrait scenes",
+    "portraits-original-strong-fresh": "Parent's teachers plus eight portrait scenes, edit × 1.4 · from scratch",
+    "portraits-original-strong-warm": "Fork with the parent's critic · parent's teachers plus eight portrait scenes, edit × 1.4",
+    "portraits-original-quiet-strong-fresh": "Parent's teachers plus portraits, clean background, character edit × 1.4 · from scratch",
+    "portraits-original-quiet-strong-warm": "Fork with the parent's critic · parent's teachers plus portraits, clean background, character edit × 1.4",
+    "portraits2-original-fresh": "Parent's teachers plus eight portrait scenes, stronger portrait teachers · from scratch",
+    "portraits2-original-warm": "Fork with the parent's critic · parent's teachers plus portraits, stronger portrait teachers",
+    "portraits2-original-quiet-strong-fresh": "Parent's teachers plus portraits (stronger teachers), clean background, character edit × 1.4 · from scratch",
+    "portraits2-original-quiet-strong-warm": "Fork with the parent's critic · portraits (stronger teachers), clean background, character edit × 1.4",
+    "portraits-original-low-g-warm": "Fork with the parent's critic at the lower generator rate · parent's teachers plus portraits",
+    "portraits24-original-fresh": "Parent's teachers plus twenty-four portrait scenes · from scratch",
+    "portraits24-original-warm": "Fork with the parent's critic · parent's teachers plus twenty-four portrait scenes",
+    "working-warm": "Fork with the parent's critic · teachers chosen by the working Boss score",
+    "working-fresh": "Teachers chosen by the working Boss score · from scratch",
+    "working-quiet-strong-warm": "Fork with the parent's critic · chosen teachers, clean background, character edit × 1.4",
+    "working-quiet-strong-fresh": "Chosen teachers, clean background, character edit × 1.4 · from scratch",
+    "working2-quiet-fresh": "Second round of chosen teachers, clean background · from scratch",
+    "working2-quiet-warm": "Fork with the parent's critic · second round of chosen teachers, clean background",
+    "working-quiet-warm": "Fork with the parent's critic · teachers chosen by the working Boss score, clean background",
+    "quiet-strong-fresh": "Clean background target, character edit × 1.4 · from scratch",
+    "quiet-strong-warm": "Fork with the parent's critic · clean background target, character edit × 1.4",
 }
 
 
@@ -86,9 +116,10 @@ for directory in sorted(folders):
         updates = record["step"]
     else:
         arm, extra = directory.name.rsplit("-", 1)
-        label = LABELS[arm] + (f" · +{extra}" if int(extra) else "")
-        group = "RAW512 post-training · PG 0.12.0"
-        updates = result["step"] if arm in ("parent", "continued") else POLICY["parent"]["step"] + int(extra)
+        fresh = arm != "parent" and POLICY["arms"][arm]["entry"] == "fresh"
+        label = LABELS[arm] + (f" · +{extra}" if int(extra) and not fresh else "")
+        group = "Late cues from scratch · PG 0.12.0" if fresh else "RAW512 post-training · PG 0.12.0"
+        updates = result["step"] if fresh or arm in ("parent", "continued") else POLICY["parent"]["step"] + int(extra)
     for r in rows.values():
         r["effect"] = ws.effect(r["boss"], r["original"])
     working = sum(r["quality"] >= 0.5 and r["effect"] >= 0.5 and r["recolored"] < 0.5 for r in rows.values())
