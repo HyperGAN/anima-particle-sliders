@@ -57,17 +57,28 @@ def test_literal_attribute_and_role_share_the_grid_and_keep_legacy_prompts(regim
     import library
     import questions
 
-    for phrase in ["forked tail", "pirate captain"]:
+    for phrase in ["forked tail", "pirate captain", "glass marbles everywhere"]:
         current = library.spec(phrase)
-        legacy = library.spec(phrase, literal=False)
+        legacy = library.spec(phrase, version=library.WARDROBE_VERSION)
         assert "phrase_version" not in legacy and current["phrase_version"] == library.PHRASE_VERSION
         assert current["confirmation"] == legacy["confirmation"] and current["watched"] == legacy["watched"]
         for new, old in zip(current["teaching"], legacy["teaching"], strict=True):
             assert new["neutral"] == old["neutral"] and new["seed"] == old["seed"]
+            assert new["treatments"][0]["positive"].startswith(phrase + ". ")
+            assert new["treatments"][1]["positive"] == f"{new['neutral']} {phrase}."
             assert len({t["positive"] for t in new["treatments"]}) == 3
             for treatment in new["treatments"]:
                 assert all(phrase in text and "costume" not in text for text in treatment.values())
             assert "hat, coat and accessories" in old["treatments"][0]["positive"]
         for rubric in (questions.build(phrase)["effect"]["questions"]["effect"], questions.build(phrase)["rubric"]):
-            assert phrase in rubric["instructions"] and "physical trait" in rubric["instructions"]
-        assert "signature costume details" in questions.build(phrase, literal=False)["effect"]["questions"]["effect"]["instructions"]
+            assert phrase in rubric["instructions"] and "whole image" in rubric["instructions"]
+        assert "signature costume details" in questions.build(phrase, version=library.WARDROBE_VERSION)["effect"]["questions"]["effect"]["instructions"]
+        prior = library.spec(phrase, version=library.CHARACTER_VERSION)
+        assert prior["phrase_version"] == "literal-v1"
+        assert f"visibly embodying {phrase}" in prior["teaching"][0]["treatments"][0]["positive"]
+        assert "main character" in questions.build(phrase, version=library.CHARACTER_VERSION)["effect"]["state"]
+    all_over = library.spec("glass marbles everywhere")["teaching"][0]["treatments"][2]
+    assert "In the foreground: glass marbles." in all_over["positive"]
+    assert "In the background: glass marbles." in all_over["positive"]
+    localized = library.spec("two horns on the forehead")["teaching"][0]
+    assert all("On every surface" not in t["positive"] for t in localized["treatments"])

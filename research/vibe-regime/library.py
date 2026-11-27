@@ -3,7 +3,7 @@
 Nothing here depends on the vibe. A person, a place and a light are paired by position
 and given one of five framings in turn, so three scenes in five are portraits. The first
 twenty-four scenes teach. The next sixteen are held back to confirm the finished slider.
-Each treatment places the requested phrase on the person in the same scene.
+New treatments keep the starting scene and insert the requested visual phrase verbatim.
 """
 
 PEOPLE = [
@@ -77,11 +77,13 @@ WARDROBES = [
 ]
 
 
-PHRASE_VERSION = "literal-v1"
+WARDROBE_VERSION = "wardrobe-v0"
+CHARACTER_VERSION = "literal-v1"
+PHRASE_VERSION = "literal-scene-v2"
 
 
-def treatments(vibe, literal):
-    if literal:
+def legacy_treatments(vibe, version):
+    if version == CHARACTER_VERSION:
         return [
             (f"visibly embodying {vibe}", f"with {vibe} clearly visible on the character"),
             (f"showing {vibe} in their appearance", f"visibly showing the distinctive details of {vibe}"),
@@ -93,24 +95,42 @@ def treatments(vibe, literal):
     return [(clause, clause + f", with the unmistakable silhouette of {a}") for clause in clauses]
 
 
-def scenes(vibe=None, *, literal=True):
+def scene_treatments(neutral, vibe, who, where):
+    phrase = vibe if vibe.endswith((".", "!", "?")) else vibe + "."
+    setting = f"Anime illustration of {who} in {where}."
+    detail = f"The prominent visual detail is {phrase}"
+    words = vibe.rstrip(".!?").rsplit(maxsplit=1)
+    if len(words) == 2 and words[1].casefold() == "everywhere":
+        detail = f"In the foreground: {words[0]}. In the background: {words[0]}. On every surface: {words[0]}."
+    return [
+        dict(positive=f"{phrase} {setting}", explicit=f"{phrase} {detail} {setting}"),
+        dict(positive=f"{neutral} {phrase}", explicit=f"{phrase} {neutral} {detail}"),
+        dict(positive=f"{phrase} {detail} {setting}", explicit=f"{detail} {phrase} {setting}"),
+    ]
+
+
+def scenes(vibe=None, *, version=PHRASE_VERSION):
+    if version not in (PHRASE_VERSION, CHARACTER_VERSION, WARDROBE_VERSION):
+        raise ValueError(f"Unknown phrase version: {version}")
     for index, (tag, who, clothes, where, light) in enumerate(PEOPLE):
         framing, sentence = FRAMINGS[index % len(FRAMINGS)]
         write = lambda wearing: "Anime illustration. " + sentence.format(who=who, wearing=wearing, where=where, light=light)  # noqa: E731
         row = dict(id=tag, framing=framing, seed=70001 + index, neutral=write("wearing " + clothes))
-        if vibe:
+        if vibe and version == PHRASE_VERSION:
+            row["treatments"] = scene_treatments(row["neutral"], vibe, who, where)
+        elif vibe:
             row["treatments"] = [dict(positive=write(positive), explicit=write(explicit))
-                                 for positive, explicit in treatments(vibe, literal)]
+                                 for positive, explicit in legacy_treatments(vibe, version)]
         yield row
 
 
-def spec(vibe, *, literal=True):
-    rows = list(scenes(vibe, literal=literal))
+def spec(vibe, *, version=PHRASE_VERSION):
+    rows = list(scenes(vibe, version=version))
     assert len(rows) == TEACHING + CONFIRMATION + WATCHED and len({r["id"] for r in rows}) == len(rows)
     plain = lambda row: {k: v for k, v in row.items() if k != "treatments"}  # noqa: E731
     grid = dict(vibe=vibe, teaching=rows[:TEACHING],
                 confirmation=[plain(r) for r in rows[TEACHING:TEACHING + CONFIRMATION]],
                 watched=[plain(r) for r in rows[TEACHING + CONFIRMATION:]])
-    if literal:
-        grid["phrase_version"] = PHRASE_VERSION
+    if version != WARDROBE_VERSION:
+        grid["phrase_version"] = version
     return grid

@@ -2,7 +2,7 @@
 
 from lumen_studio.study import working_score as ws
 
-from library import article
+from library import CHARACTER_VERSION, PHRASE_VERSION, WARDROBE_VERSION, article
 
 
 def wardrobe_questions(vibe):
@@ -47,8 +47,26 @@ def literal_questions(vibe):
     return effect, rubric, pair_state
 
 
-def build(vibe, *, literal=True):
-    effect, rubric, pair_state = literal_questions(vibe) if literal else wardrobe_questions(vibe)
+def scene_questions(vibe):
+    target = f'“{vibe}”'
+    evidence = (f'Look across the whole image for {target}. Follow the requested placement, quantity and '
+                'extent. For a feature requested everywhere, look for repeated visible instances throughout '
+                'the picture. A picture of a physical feature printed on clothing earns no credit for the '
+                'feature itself, unless the request calls for a print. For a role or style, judge its visible features.')
+    effect = dict(state=f'Image 1 is the original. How clearly does image 2 show {target}?',
+                  questions={"effect": {"type": "noul", "instructions": (
+                      f'{evidence} Score 0 for absent, 0.25 for ambiguous, 0.50 for weak or partial, '
+                      '0.75 for clear and 1 for unmistakable at the requested extent.')}})
+    rubric = {"type": "score", "instructions": evidence, "criteria": [
+        f'{target} is absent.', f'There is weak or partial evidence of {target}.',
+        f'{target} is clearly visible.', f'{target} is unmistakable at the requested extent.']}
+    return effect, rubric, f'Image 1 is the original. Image 2 should show {target} in the same scene.'
+
+
+def build(vibe, *, version=PHRASE_VERSION):
+    builders = {WARDROBE_VERSION: wardrobe_questions, CHARACTER_VERSION: literal_questions,
+                PHRASE_VERSION: scene_questions}
+    effect, rubric, pair_state = builders[version](vibe)
     repeat = dict(
         state="Compare the central character designs in these two illustrations from the same visual style.",
         questions={"repeat": {"type": "score", "instructions": (

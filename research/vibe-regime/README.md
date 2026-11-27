@@ -24,7 +24,7 @@ Finalized training pairs are saved in `teachers.json`.
 ## What it does by default
 
 1. **Teaches on a fixed scene grid.** `library.py` pairs 44 people with 44 places and gives each one of five framings in turn, so three scenes in five are portraits. Twenty-four scenes teach and sixteen are held back.
-2. **Places the requested phrase on the character.** Three treatments describe the phrase as a visible part of the person. The judge looks for direct evidence of the requested attribute, role or style.
+2. **Keeps the phrase visible in each prompt.** The three treatments combine the submitted words with shorter or fuller versions of the same scene. A phrase ending in “everywhere” also gets a treatment that places the named detail in the foreground and background. The raw vibe judge reads the whole image and checks the requested extent. Before model loading, `spec.json` records the exact starting prompts, candidate prompts and training cues, and `teacher-question.json` records the actual scoring instructions.
 3. **Ranks by visible effect.** Jev scores how clearly the edited character shows the requested phrase. This raw vibe score (`boss` in the receipt) chooses the training pairs. The combined score (`case`) still measures gain, drawing quality and color preservation when evaluating the slider.
 4. **Builds late-cues targets and trains from scratch** with stock EMPF for 448 updates at G 0.00075, D 0.009 and particle 0.03, with no EMA. Nothing is rendered or judged while it trains.
 5. **Searches one constant alpha** for the finished slider on four characters, then saves the slider and its samples.

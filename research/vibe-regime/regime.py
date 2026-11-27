@@ -269,17 +269,23 @@ def contact_sheet(pairs, path, width=256, columns=4):
     sheet.save(path, quality=88)
 
 
+spec_path = ROOT / "spec.json"
+saved = read(spec_path) if spec_path.exists() else None
+version = library.PHRASE_VERSION if saved is None else saved.get("phrase_version", library.WARDROBE_VERSION)
+spec = library.spec(vibe, version=version)
+if saved is None:
+    atomic_json(spec_path, spec)
+elif saved != spec:
+    raise ValueError("The scene grid or the phrase changed under this run")
+asked = questions.build(vibe, version=version)
+question_path = ROOT / "teacher-question.json"
+if not question_path.exists():
+    atomic_json(question_path, asked["effect"])
+elif read(question_path) != asked["effect"]:
+    raise ValueError("The raw vibe scoring question changed under this run")
+
 rt = open_runtime(checkpointing=True)
 try:
-    spec_path = ROOT / "spec.json"
-    saved = read(spec_path) if spec_path.exists() else None
-    literal = saved is None or saved.get("phrase_version") == library.PHRASE_VERSION
-    spec = library.spec(vibe, literal=literal)
-    if saved is None:
-        atomic_json(spec_path, spec)
-    elif saved != spec:
-        raise ValueError("The scene grid or the phrase changed under this run")
-    asked = questions.build(vibe, literal=literal)
     out = Outputs(ROOT, rt, vibe, asked["rubric"])
     board = read(PARENT_STUDY / "cohort-retest/panels.json")
     panel = dict(search=board["panels"]["search"], ranking=board["panels"]["ranking"],
