@@ -36,8 +36,22 @@ The judge questions are the working Boss score's, with the phrase in place of th
 
 The first attempt kept 2 of 24 scenes. Its treatments appended the vibe to the person's ordinary clothes and said the scene was unchanged. The frozen model then drew a second figure in costume beside the person, or a before-and-after sheet. Replacing the clothing in the same sentence fixed it with no other change.
 
+## Training longer lowers the working strength
+
+The same run continued to 768 updates chose update 640 at constant alpha 1.125. [Result](../../docs/vibe-regime/pirate-captain-768.json) · [Each saved checkpoint measured](../../docs/vibe-regime/pirate-captain-by-updates.json)
+
+| | 512 updates | Continued to 768 |
+| --- | ---: | ---: |
+| Chosen | update 512, alpha 1.875 | update 640, alpha 1.125 |
+| Eight ranking characters | 39.42, 8 working | 43.23, 7 working |
+| Sixteen held-back scenes | 38.40, 14 working | 36.94, 14 working |
+| Same scene, ranking and held-back | 36 and 27 | 48 and 45 |
+| Score at alpha 1.0 on the search characters | 18.7 | 33.3 |
+
+The scores are level. What changed is the strength: at 1.125 a waist-up portrait stays a waist-up portrait, where at 1.875 it became a three-quarter or full-length shot. Measured one checkpoint at a time, 256 updates is the first that scores well (38.0 on the ranking characters, at alpha 2.0), and 128 is not enough (26.4).
+
 ## What the run shows is still open
 
-- **The slider needs a high strength.** At strength 1 it reaches about a third of the teachers' effect, and the search chose 1.875. At that strength a waist-up portrait becomes a three-quarter or full-length shot.
+- **How many updates a vibe needs for a strength near 1.** For this vibe 640 of 24 scenes was enough. One run does not fix the number.
 - **Every character gets nearly the same coat and hat.** The repeat reading is 70 to 76, against 25 to 48 for Final Boss. For a single named costume that sameness is the vibe, so the repeat discount understates this slider. A vibe should say whether it wants variety.
 - **One vibe is one test.** The wardrobe clauses and the scene grid are not specific to pirates, but no second phrase has been run.
