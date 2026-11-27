@@ -11,6 +11,12 @@ ANIMA_POST_TRAINING_ROOT=<empty run directory> ANIMA_POST_TRAINING_PRODUCT=<this
 
 The run leaves `slider/<vibe>.safetensors` with its two sidecars, `slider/use.json` with the constant alpha to use, and `slider/samples.jpg` showing twelve characters OFF and ON. Rerun the same command to resume. Rendered images and judge answers are kept and reused.
 
+Teacher collection retains qualified scenes and tries fresh seeds for the rest until at least
+16 of 24 qualify. Both images in a selected pair must pass the whole-image structure check.
+A new round reuses the existing image and judge receipts. Completed rounds are recorded in
+`teacher-rounds.json`. Previously stopped runs with `teachers-incomplete.json` can resume
+from their recorded decisions.
+
 ## What it does by default
 
 1. **Teaches on a fixed scene grid.** `library.py` pairs 44 people with 44 places and gives each one of five framings in turn, so three scenes in five are portraits. Twenty-four scenes teach and sixteen are held back.

@@ -137,7 +137,31 @@ def collect(out, spec, pool):
     if path.exists():
         return read(path)
     kept, record = {}, []
-    for attempt in range(2):
+    progress = ROOT / "teacher-rounds.json"
+    legacy = ROOT / "teachers-incomplete.json"
+    earlier = read(progress) if progress.exists() else read(legacy) if legacy.exists() else None
+    if earlier and earlier["vibe"] != vibe:
+        raise ValueError("Saved teacher rounds belong to another phrase")
+    def integrity(ref):
+        return out.integrity.check(FileRecord.from_path(Path(ref["path"])))["status"]
+    if earlier:
+        record = earlier["record"]
+        for key, saved in earlier["kept"].items():
+            if progress.exists():
+                kept[key] = saved
+                continue
+            states = [integrity(saved[k]) for k in ("neutral_image", "positive_image")]
+            if states == ["pass", "pass"]:
+                kept[key] = saved
+            for row in record:
+                if row["scene"] == key and row["seed"] == saved["seed"]:
+                    for option in row["options"]:
+                        if option["positive"] == saved["positive"]:
+                            option["baseline_structure"], option["candidate_structure"] = states
+                    if key not in kept:
+                        row["previous_choice"], row["chosen"] = row["chosen"], None
+    attempt = max((r["attempt"] for r in record), default=-1) + 1
+    while len(kept) < TEACH_AT_LEAST:
         rendered = []
         for scene in spec["teaching"]:
             if scene["id"] in kept:
@@ -155,7 +179,13 @@ def collect(out, spec, pool):
         for scene, seed, neutral, options in rendered:
             worth = [o for o in options if o["case"] is not None and o["case"] >= WORTH_TEACHING
                      and o["separate"] is not None and o["separate"] < 0.5]
-            chosen = max(worth, key=lambda o: o["case"]) if worth else None
+            chosen = None
+            for option in sorted(worth, key=lambda o: o["case"], reverse=True):
+                option["baseline_structure"] = integrity(neutral)
+                option["candidate_structure"] = integrity(option["image"])
+                if option["baseline_structure"] == option["candidate_structure"] == "pass":
+                    chosen = option
+                    break
             record.append(dict(scene=scene["id"], framing=scene["framing"], attempt=attempt, seed=seed,
                                neutral=neutral, options=options, chosen=chosen and chosen["positive"]))
             if chosen is None:
@@ -165,6 +195,8 @@ def collect(out, spec, pool):
             cut = subprocess.run([CV_PYTHON, str(CODE.parent / "post-training" / "matte.py"), neutral["path"], str(matte)],
                                  capture_output=True, text=True)
             if cut.returncode:
+                if "Unusable foreground region" not in cut.stderr and "No character region" not in cut.stderr:
+                    raise RuntimeError(cut.stderr)
                 record[-1]["chosen"] = None  # No usable character region to weight the edit by.
                 continue
             kept[scene["id"]] = dict(
@@ -172,10 +204,12 @@ def collect(out, spec, pool):
                 framing=scene["framing"], case=chosen["case"],
                 neutral_image={k: neutral[k] for k in ("path", "sha256")},
                 positive_image={k: chosen["image"][k] for k in ("path", "sha256")}, matte=str(matte))
+        atomic_json(progress, dict(vibe=vibe, kept=kept, record=record))
+        if not any(o["case"] is not None and o["separate"] is not None for _,_,_,options in rendered for o in options):
+            raise RuntimeError("No teacher image received a usable judge reading in this round")
+        print(f"Teacher round {attempt+1}: {len(kept)}/{len(spec['teaching'])} scenes qualified",flush=True)
+        attempt += 1
     result = dict(vibe=vibe, kept=kept, record=record)
-    if len(kept) < TEACH_AT_LEAST:
-        atomic_json(ROOT / "teachers-incomplete.json", result)
-        raise SystemExit(f"Only {len(kept)} of {len(spec['teaching'])} scenes have a treatment worth teaching")
     atomic_json(path, result)
     return result
 
