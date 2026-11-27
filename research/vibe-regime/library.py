@@ -3,7 +3,7 @@
 Nothing here depends on the vibe. A person, a place and a light are paired by position
 and given one of five framings in turn, so three scenes in five are portraits. The first
 twenty-four scenes teach. The next sixteen are held back to confirm the finished slider.
-New treatments keep the starting scene and insert the requested visual phrase verbatim.
+The writer uses scene IDs and framings as anchors. Fixed treatments here only replay older runs.
 """
 
 PEOPLE = [
@@ -80,6 +80,7 @@ WARDROBES = [
 WARDROBE_VERSION = "wardrobe-v0"
 CHARACTER_VERSION = "literal-v1"
 PHRASE_VERSION = "literal-scene-v2"
+WRITER_VERSION = "anima-writer-v1"
 
 
 def legacy_treatments(vibe, version):
@@ -125,7 +126,8 @@ def scenes(vibe=None, *, version=PHRASE_VERSION):
 
 
 def spec(vibe, *, version=PHRASE_VERSION):
-    rows = list(scenes(vibe, version=version))
+    """Build the reference grid. The native trainer fills writer-version teaching rows from its receipts."""
+    rows = list(scenes() if version == WRITER_VERSION else scenes(vibe, version=version))
     assert len(rows) == TEACHING + CONFIRMATION + WATCHED and len({r["id"] for r in rows}) == len(rows)
     plain = lambda row: {k: v for k, v in row.items() if k != "treatments"}  # noqa: E731
     grid = dict(vibe=vibe, teaching=rows[:TEACHING],
