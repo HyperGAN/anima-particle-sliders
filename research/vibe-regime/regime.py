@@ -51,6 +51,7 @@ from lumen_studio.study.training import arm_path, train  # noqa: E402
 from campaign import PARENT_STUDY, ROOT, open_runtime  # noqa: E402
 import library  # noqa: E402
 import questions  # noqa: E402
+from teacher_structure import inspect_saved_rounds, restore_selections  # noqa: E402
 
 CV_PYTHON = "/mnt/nvme/ai/conda/anaconda3/bin/python3"
 RATES = dict(g=0.00075, d=0.009, particle=0.03)
@@ -143,23 +144,14 @@ def collect(out, spec, pool):
     if earlier and earlier["vibe"] != vibe:
         raise ValueError("Saved teacher rounds belong to another phrase")
     def integrity(ref):
-        return out.integrity.check(FileRecord.from_path(Path(ref["path"])))["status"]
+        image = FileRecord.from_path(Path(ref["path"]))
+        if image.sha256 != ref["sha256"]:
+            raise ValueError("A teacher image changed after it was rendered")
+        return out.integrity.check(image)["status"]
     if earlier:
         record = earlier["record"]
-        for key, saved in earlier["kept"].items():
-            if progress.exists():
-                kept[key] = saved
-                continue
-            states = [integrity(saved[k]) for k in ("neutral_image", "positive_image")]
-            if states == ["pass", "pass"]:
-                kept[key] = saved
-            for row in record:
-                if row["scene"] == key and row["seed"] == saved["seed"]:
-                    for option in row["options"]:
-                        if option["positive"] == saved["positive"]:
-                            option["baseline_structure"], option["candidate_structure"] = states
-                    if key not in kept:
-                        row["previous_choice"], row["chosen"] = row["chosen"], None
+        inspect_saved_rounds(record, integrity, pool)
+        kept = restore_selections(record, earlier["kept"])
     attempt = max((r["attempt"] for r in record), default=-1) + 1
     while len(kept) < TEACH_AT_LEAST:
         rendered = []
