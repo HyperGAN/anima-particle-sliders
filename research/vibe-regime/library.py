@@ -3,7 +3,7 @@
 Nothing here depends on the vibe. A person, a place and a light are paired by position
 and given one of five framings in turn, so three scenes in five are portraits. The first
 twenty-four scenes teach. The next sixteen are held back to confirm the finished slider.
-The vibe phrase enters only through three fixed wardrobe clauses that replace the clothing.
+Each treatment places the requested phrase on the person in the same scene.
 """
 
 PEOPLE = [
@@ -77,23 +77,40 @@ WARDROBES = [
 ]
 
 
-def scenes(vibe=None):
+PHRASE_VERSION = "literal-v1"
+
+
+def treatments(vibe, literal):
+    if literal:
+        return [
+            (f"visibly embodying {vibe}", f"with {vibe} clearly visible on the character"),
+            (f"showing {vibe} in their appearance", f"visibly showing the distinctive details of {vibe}"),
+            (f"depicted in a character design defined by {vibe}", f"with {vibe} visibly part of the character"),
+        ]
+    # Resume earlier grids with exactly the prompts and cue text that produced their readings.
+    a = article(vibe)
+    clauses = [w.format(a=a, vibe=vibe) for w in WARDROBES]
+    return [(clause, clause + f", with the unmistakable silhouette of {a}") for clause in clauses]
+
+
+def scenes(vibe=None, *, literal=True):
     for index, (tag, who, clothes, where, light) in enumerate(PEOPLE):
         framing, sentence = FRAMINGS[index % len(FRAMINGS)]
         write = lambda wearing: "Anime illustration. " + sentence.format(who=who, wearing=wearing, where=where, light=light)  # noqa: E731
         row = dict(id=tag, framing=framing, seed=70001 + index, neutral=write("wearing " + clothes))
         if vibe:
-            a = article(vibe)
-            row["treatments"] = [dict(positive=write(w.format(a=a, vibe=vibe)),
-                                      explicit=write(w.format(a=a, vibe=vibe) + f", with the unmistakable silhouette of {a}"))
-                                 for w in WARDROBES]
+            row["treatments"] = [dict(positive=write(positive), explicit=write(explicit))
+                                 for positive, explicit in treatments(vibe, literal)]
         yield row
 
 
-def spec(vibe):
-    rows = list(scenes(vibe))
+def spec(vibe, *, literal=True):
+    rows = list(scenes(vibe, literal=literal))
     assert len(rows) == TEACHING + CONFIRMATION + WATCHED and len({r["id"] for r in rows}) == len(rows)
     plain = lambda row: {k: v for k, v in row.items() if k != "treatments"}  # noqa: E731
-    return dict(vibe=vibe, teaching=rows[:TEACHING],
+    grid = dict(vibe=vibe, teaching=rows[:TEACHING],
                 confirmation=[plain(r) for r in rows[TEACHING:TEACHING + CONFIRMATION]],
                 watched=[plain(r) for r in rows[TEACHING + CONFIRMATION:]])
+    if literal:
+        grid["phrase_version"] = PHRASE_VERSION
+    return grid

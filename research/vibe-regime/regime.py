@@ -6,9 +6,8 @@ Every choice below is fixed in advance or made by a measured score. No prompt is
 for the vibe by a person or by a language model.
 
 1. Teach on the fixed scene grid, three portraits in every five scenes.
-2. Render three fixed treatments of each scene and keep the one that scores highest the way
-   a slider's output is scored: the vibe is there, the drawing is one whole finished figure,
-   and the scene kept its colors. A scene with no treatment worth teaching is left out.
+2. Rank three treatments per scene by the raw vibe score and teach on the strongest
+   16 distinct scenes with usable subject masks.
 3. Build late-cues targets from the kept pairs and train stock EMPF from scratch for 448
    updates. Nothing is rendered or judged while it trains.
 4. Search one constant alpha for the finished slider on four characters.
@@ -29,7 +28,6 @@ from pathlib import Path
 from statistics import fmean
 import os
 import shutil
-import subprocess
 import sys
 import time
 
@@ -51,7 +49,7 @@ from lumen_studio.study.training import arm_path, train  # noqa: E402
 from campaign import PARENT_STUDY, ROOT, open_runtime  # noqa: E402
 import library  # noqa: E402
 import questions  # noqa: E402
-from teacher_structure import inspect_saved_rounds, restore_selections  # noqa: E402
+from teacher_selection import LIMIT, MIN_VIBE_SCORE, has_vibe_score, select_teachers, subject_matte  # noqa: E402
 
 CV_PYTHON = "/mnt/nvme/ai/conda/anaconda3/bin/python3"
 RATES = dict(g=0.00075, d=0.009, particle=0.03)
@@ -60,11 +58,9 @@ RATES = dict(g=0.00075, d=0.009, particle=0.03)
 # lowers the alpha the slider needs. A longer budget continues the same run from its last update.
 UPDATES, HORIZON = int(os.environ.get("ANIMA_REGIME_UPDATES", 448)), 1024
 MEASURE = os.environ.get("ANIMA_REGIME_MEASURE") == "1"
-TEACH_AT_LEAST, WORTH_TEACHING = 16, 0.35
 GRID, STEP = [0.75 + k / 4 for k in range(6)], 1 / 16
 vibe = " ".join(sys.argv[1:]).strip()
 assert vibe, "Name the vibe"
-asked = questions.build(vibe)
 (ROOT / "readings").mkdir(parents=True, exist_ok=True)
 judge = StudyJudge(ROOT / "readings", vibe)
 reader = ws.DrawingReader(ROOT / "readings" / "drawing")
@@ -133,27 +129,36 @@ def panel_score(pool, cases, on):
 
 
 def collect(out, spec, pool):
-    """Keep, for each scene, the treatment that is most worth teaching."""
+    """Collect scored rounds until the strongest distinct scenes fill the training set."""
     path = ROOT / "teachers.json"
     if path.exists():
         return read(path)
-    kept, record = {}, []
     progress = ROOT / "teacher-rounds.json"
     legacy = ROOT / "teachers-incomplete.json"
     earlier = read(progress) if progress.exists() else read(legacy) if legacy.exists() else None
     if earlier and earlier["vibe"] != vibe:
         raise ValueError("Saved teacher rounds belong to another phrase")
+    scenes = {scene["id"]: scene for scene in spec["teaching"]}
+    rounds = earlier["record"] if earlier else []
+
+    def matte_for(ref):
+        return subject_matte(ROOT, ref, CV_PYTHON, CODE.parent / "post-training" / "matte.py")
+
+    def receipt(kept):
+        return dict(vibe=vibe, kept=kept, record=rounds,
+                    selection=dict(metric="boss", minimum_score=MIN_VIBE_SCORE, limit=LIMIT))
+
     def integrity(ref):
         image = FileRecord.from_path(Path(ref["path"]))
         if image.sha256 != ref["sha256"]:
             raise ValueError("A teacher image changed after it was rendered")
         return out.integrity.check(image)["status"]
+
+    kept = select_teachers(rounds, scenes, matte_for)
     if earlier:
-        record = earlier["record"]
-        inspect_saved_rounds(record, integrity, pool)
-        kept = restore_selections(record, earlier["kept"])
-    attempt = max((r["attempt"] for r in record), default=-1) + 1
-    while len(kept) < TEACH_AT_LEAST:
+        atomic_json(progress, receipt(kept))
+    attempt = max((r["attempt"] for r in rounds), default=-1) + 1
+    while len(kept) < LIMIT:
         rendered = []
         for scene in spec["teaching"]:
             if scene["id"] in kept:
@@ -168,41 +173,21 @@ def collect(out, spec, pool):
             for option in options:
                 image = option["image"]
                 jobs.append((option, pool.submit(measure, neutral, image),
-                             pool.submit(answer, (picture(neutral), picture(image)), asked["separate"], "separate"),
                              baseline_structure, pool.submit(integrity, image)))
-        for option, reading, separate, baseline, candidate in jobs:
+        for option, reading, baseline, candidate in jobs:
             row = reading.result()
-            option.update({k: v for k, v in row.items() if k != "on"}, separate=separate.result(),
+            option.update({k: v for k, v in row.items() if k != "on"},
                           baseline_structure=baseline.result(), candidate_structure=candidate.result())
         for scene, seed, neutral, options in rendered:
-            worth = [o for o in options if o["case"] is not None and o["case"] >= WORTH_TEACHING
-                     and o["separate"] is not None and o["separate"] < 0.5
-                     and o["baseline_structure"] == o["candidate_structure"] == "pass"]
-            chosen = max(worth, key=lambda o: o["case"]) if worth else None
-            record.append(dict(scene=scene["id"], framing=scene["framing"], attempt=attempt, seed=seed,
-                               neutral=neutral, options=options, chosen=chosen and chosen["positive"]))
-            if chosen is None:
-                continue
-            matte = ROOT / "mattes" / f"{scene['id']}.png"
-            matte.parent.mkdir(exist_ok=True)
-            cut = subprocess.run([CV_PYTHON, str(CODE.parent / "post-training" / "matte.py"), neutral["path"], str(matte)],
-                                 capture_output=True, text=True)
-            if cut.returncode:
-                if "Unusable foreground region" not in cut.stderr and "No character region" not in cut.stderr:
-                    raise RuntimeError(cut.stderr)
-                record[-1]["chosen"] = None  # No usable character region to weight the edit by.
-                continue
-            kept[scene["id"]] = dict(
-                neutral=scene["neutral"], positive=chosen["positive"], explicit=chosen["explicit"], seed=seed,
-                framing=scene["framing"], case=chosen["case"],
-                neutral_image={k: neutral[k] for k in ("path", "sha256")},
-                positive_image={k: chosen["image"][k] for k in ("path", "sha256")}, matte=str(matte))
-        atomic_json(progress, dict(vibe=vibe, kept=kept, record=record))
-        if not any(o["case"] is not None and o["separate"] is not None for _,_,_,options in rendered for o in options):
-            raise RuntimeError("No teacher image received a usable judge reading in this round")
-        print(f"Teacher round {attempt+1}: {len(kept)}/{len(spec['teaching'])} scenes qualified",flush=True)
+            rounds.append(dict(scene=scene["id"], framing=scene["framing"], attempt=attempt, seed=seed,
+                               neutral=neutral, options=options))
+        kept = select_teachers(rounds, scenes, matte_for)
+        atomic_json(progress, receipt(kept))
+        if not any(has_vibe_score(o) for _, _, _, options in rendered for o in options):
+            raise RuntimeError("No teacher image received a raw vibe score in this round")
+        print(f"Teacher round {attempt+1}: {len(kept)}/{LIMIT} scenes selected", flush=True)
         attempt += 1
-    result = dict(vibe=vibe, kept=kept, record=record)
+    result = receipt(kept)
     atomic_json(path, result)
     return result
 
@@ -286,11 +271,15 @@ def contact_sheet(pairs, path, width=256, columns=4):
 
 rt = open_runtime(checkpointing=True)
 try:
-    spec = library.spec(vibe)
-    if (ROOT / "spec.json").exists():
-        assert read(ROOT / "spec.json") == spec, "The scene grid or the vibe changed under this run"
-    else:
-        atomic_json(ROOT / "spec.json", spec)
+    spec_path = ROOT / "spec.json"
+    saved = read(spec_path) if spec_path.exists() else None
+    literal = saved is None or saved.get("phrase_version") == library.PHRASE_VERSION
+    spec = library.spec(vibe, literal=literal)
+    if saved is None:
+        atomic_json(spec_path, spec)
+    elif saved != spec:
+        raise ValueError("The scene grid or the phrase changed under this run")
+    asked = questions.build(vibe, literal=literal)
     out = Outputs(ROOT, rt, vibe, asked["rubric"])
     board = read(PARENT_STUDY / "cohort-retest/panels.json")
     panel = dict(search=board["panels"]["search"], ranking=board["panels"]["ranking"],
@@ -317,8 +306,10 @@ try:
                       "working", ranked and ranked["working"], flush=True)
             raise SystemExit(0)
         teachers = collect(out, spec, pool)
-        print(vibe, "teaches", len(teachers["kept"]), "of", len(spec["teaching"]), "scenes, mean worth",
-              round(100 * fmean(t["case"] for t in teachers["kept"].values()), 1), flush=True)
+        metric = teachers.get("selection", {}).get("metric", "case")
+        print(vibe, "teaches", len(teachers["kept"]), "of", len(spec["teaching"]), "scenes, mean",
+              "vibe score" if metric == "boss" else "combined score",
+              round(100 * fmean(t[metric] for t in teachers["kept"].values()), 1), flush=True)
         cache = add_boss_scenes(rt, None, ROOT / "targets", teachers["kept"],
                                 variation="vibe-" + digest(dict(vibe=vibe, kept=sorted(teachers["kept"])))[:16])
         train(Unchecked(ROOT, rt), cache, dict(steps=[]), RATES, UPDATES, "fit", schedule_horizon=HORIZON)

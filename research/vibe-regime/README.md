@@ -11,17 +11,21 @@ ANIMA_POST_TRAINING_ROOT=<empty run directory> ANIMA_POST_TRAINING_PRODUCT=<this
 
 The run leaves `slider/<vibe>.safetensors` with its two sidecars, `slider/use.json` with the constant alpha to use, and `slider/samples.jpg` showing twelve characters OFF and ON. Rerun the same command to resume. Rendered images and judge answers are kept and reused.
 
-Teacher collection retains qualified scenes and tries fresh seeds for the rest until at least
-16 of 24 qualify. Both images in a selected pair must pass the whole-image structure check.
-A new round reuses the existing image and judge receipts. Completed rounds are recorded in
-`teacher-rounds.json`. Previously stopped runs with `teachers-incomplete.json` can resume
-from their recorded decisions.
+Teacher selection ranks all measured treatments by the raw vibe score on the edited character and takes
+the best 16 distinct scenes. A pair needs a score of at least 0.35 and a usable subject mask
+on the starting image. The combined score and whole-image structure verdict are recorded as diagnostics.
+Ties follow the recorded scene and treatment order. If fewer than 16 scenes qualify, the
+trainer samples fresh seeds for the remaining scenes and ranks all recorded attempts again.
+
+Interrupted runs resume from `teacher-rounds.json` or `teachers-incomplete.json`. They
+keep their original prompt and judge versions so scores across rounds remain comparable.
+Finalized training pairs are saved in `teachers.json`.
 
 ## What it does by default
 
 1. **Teaches on a fixed scene grid.** `library.py` pairs 44 people with 44 places and gives each one of five framings in turn, so three scenes in five are portraits. Twenty-four scenes teach and sixteen are held back.
-2. **Writes each treatment by replacing the clothing.** The treatment is the scene's own sentence with the clothing clause swapped for one of three fixed wardrobe clauses that take the phrase.
-3. **Keeps the treatment worth teaching.** Each candidate is read the way the board reads a slider's output: the vibe is there, the drawing is one whole finished figure, and the scene kept its colors. The highest-scoring one is kept if it scores 0.35 or more and shows one transformed person.
+2. **Places the requested phrase on the character.** Three treatments describe the phrase as a visible part of the person. The judge looks for direct evidence of the requested attribute, role or style.
+3. **Ranks by visible effect.** Jev scores how clearly the edited character shows the requested phrase. This raw vibe score (`boss` in the receipt) chooses the training pairs. The combined score (`case`) still measures gain, drawing quality and color preservation when evaluating the slider.
 4. **Builds late-cues targets and trains from scratch** with stock EMPF for 448 updates at G 0.00075, D 0.009 and particle 0.03, with no EMA. Nothing is rendered or judged while it trains.
 5. **Searches one constant alpha** for the finished slider on four characters, then saves the slider and its samples.
 
