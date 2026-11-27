@@ -555,6 +555,283 @@
    }
   },
   {
+   "name": "portraits24-original-warm-336",
+   "arm": "portraits24-original-warm",
+   "extra": 336,
+   "updates": 848,
+   "label": "Fork with the parent's critic \u00b7 parent's teachers plus twenty-four portrait scenes \u00b7 +336",
+   "group": "RAW512 post-training \u00b7 PG 0.12.0",
+   "alpha": 1.3125,
+   "score": 38.73381733340961,
+   "search": 49.545874375000004,
+   "gain": 74.875,
+   "quality": 78.6558106465993,
+   "effect": 100.0,
+   "holds": 2.0,
+   "drawn": 91.38959974520542,
+   "one_figure": 93.0,
+   "figure": 82.25,
+   "recolored": 39.75,
+   "kept": 62.677506715758625,
+   "same_person": 31.0,
+   "repeat": 45.47767857142858,
+   "working": 4,
+   "structure": {
+    "passed": 8,
+    "failed": 0,
+    "unresolved": 0,
+    "checks": {
+     "ranger": {
+      "status": "pass",
+      "checks": {
+       "no_readable_image": 0.07,
+       "split_or_duplication": 0.05,
+       "broken_structure": 0.3
+      },
+      "structural_details": {
+       "accidental_parts": 0.22,
+       "accidental_face": 0.3,
+       "accidental_geometry": 0.12
+      }
+     },
+     "smith": {
+      "status": "pass",
+      "checks": {
+       "no_readable_image": 0.05,
+       "split_or_duplication": 0.05,
+       "broken_structure": 0.32
+      },
+      "structural_details": {
+       "accidental_parts": 0.32,
+       "accidental_face": 0.27,
+       "accidental_geometry": 0.16
+      }
+     },
+     "stationer": {
+      "status": "pass",
+      "checks": {
+       "no_readable_image": 0.06,
+       "split_or_duplication": 0.04,
+       "broken_structure": 0.41
+      },
+      "structural_details": {
+       "accidental_parts": 0.33,
+       "accidental_face": 0.41,
+       "accidental_geometry": 0.11
+      }
+     },
+     "ferryman": {
+      "status": "pass",
+      "checks": {
+       "no_readable_image": 0.07,
+       "split_or_duplication": 0.13,
+       "broken_structure": 0.48
+      },
+      "structural_details": {
+       "accidental_parts": 0.39,
+       "accidental_face": 0.48,
+       "accidental_geometry": 0.2
+      }
+     },
+     "watchmaker": {
+      "status": "pass",
+      "checks": {
+       "no_readable_image": 0.05,
+       "split_or_duplication": 0.04,
+       "broken_structure": 0.48
+      }
+     },
+     "guide": {
+      "status": "pass",
+      "checks": {
+       "no_readable_image": 0.06,
+       "split_or_duplication": 0.04,
+       "broken_structure": 0.36
+      }
+     },
+     "guard": {
+      "status": "pass",
+      "checks": {
+       "no_readable_image": 0.05,
+       "split_or_duplication": 0.04,
+       "broken_structure": 0.41
+      }
+     },
+     "violinist": {
+      "status": "pass",
+      "checks": {
+       "no_readable_image": 0.08,
+       "split_or_duplication": 0.11,
+       "broken_structure": 0.4
+      },
+      "structural_details": {
+       "accidental_parts": 0.3,
+       "accidental_face": 0.4,
+       "accidental_geometry": 0.14
+      }
+     }
+    }
+   },
+   "previous_alpha": null,
+   "previous_score": null,
+   "trials": [
+    [
+     0.75,
+     0.0
+    ],
+    [
+     1.0,
+     12.163942916666668
+    ],
+    [
+     1.25,
+     43.606597104634666
+    ],
+    [
+     1.3125,
+     49.545874375000004
+    ],
+    [
+     1.375,
+     46.978387500000004
+    ],
+    [
+     1.4375,
+     47.14117708333334
+    ],
+    [
+     1.5,
+     46.127358333333326
+    ],
+    [
+     1.625,
+     43.96507916666667
+    ],
+    [
+     1.75,
+     39.542858333333335
+    ],
+    [
+     2.0,
+     32.15562187488673
+    ]
+   ],
+   "rows": {
+    "ranger": {
+     "on": "b747b9047d1564107e3ffe064adba373ce25cfb34e7ea154ab46b62a6ff4786c",
+     "original": 0.07,
+     "boss": 0.83,
+     "broken": 0.013782351063278263,
+     "off_broken": 0.013436890952714713,
+     "one_figure": 0.93,
+     "same_person": 0.15,
+     "figure": 0.88,
+     "recolored": 0.46,
+     "quality": 0.88,
+     "case": 0.4752,
+     "effect": 1.0
+    },
+    "smith": {
+     "on": "413c03e14043c6c1e91d3f0bf73931ddb56b3c197f6f06ad3786c8f5e8060472",
+     "original": 0.08,
+     "boss": 0.83,
+     "broken": 0.005336496087078141,
+     "off_broken": 0.02109842450986757,
+     "one_figure": 0.92,
+     "same_person": 0.1,
+     "figure": 0.93,
+     "recolored": 0.17,
+     "quality": 0.92,
+     "case": 0.7636,
+     "effect": 1.0
+    },
+    "stationer": {
+     "on": "dc289f3fcd4094502465d3d2cf9d880af41c690c0d184c7a9936d3709928af1d",
+     "original": 0.11,
+     "boss": 0.89,
+     "broken": 0.008255864642304428,
+     "off_broken": 0.008666434096213779,
+     "one_figure": 0.94,
+     "same_person": 0.04,
+     "figure": 0.89,
+     "recolored": 0.75,
+     "quality": 0.89,
+     "case": 0.2225,
+     "effect": 1.0
+    },
+    "ferryman": {
+     "on": "5c2807ed3c6d7e3097f86af24b4bc9638cc6a41695babfd2b6ee9252f9993b9e",
+     "original": 0.11,
+     "boss": 0.85,
+     "broken": 0.17700169805359953,
+     "off_broken": 0.012741153571982872,
+     "one_figure": 0.91,
+     "same_person": 0.05,
+     "figure": 0.73,
+     "recolored": 0.41,
+     "quality": 0.4524648517279445,
+     "case": 0.2669542625194873,
+     "effect": 1.0
+    },
+    "watchmaker": {
+     "on": "ea05c47a38f244c974cd0b40f1328fb77e27ca8d43208e79dc23fdede475f084",
+     "original": 0.1,
+     "boss": 0.84,
+     "broken": 0.02373503313075324,
+     "off_broken": 0.005786580296680449,
+     "one_figure": 0.95,
+     "same_person": 0.64,
+     "figure": 0.74,
+     "recolored": 0.12,
+     "quality": 0.74,
+     "case": 0.6512,
+     "effect": 1.0
+    },
+    "guide": {
+     "on": "2453d729bc49f78b4ef5ba99b550b4c775d0f18f7a4669fab78d2e61a9fef51c",
+     "original": 0.06,
+     "boss": 0.77,
+     "broken": 0.013087970849420583,
+     "off_broken": 0.02435862171247346,
+     "one_figure": 0.93,
+     "same_person": 0.7,
+     "figure": 0.88,
+     "recolored": 0.5,
+     "quality": 0.88,
+     "case": 0.44,
+     "effect": 1.0
+    },
+    "guard": {
+     "on": "0695cbc0c2d4e0a43a982a178f2708a9cc08a2bbc43c5f54b745c062e07e5275",
+     "original": 0.11,
+     "boss": 0.89,
+     "broken": 0.020167813827207913,
+     "off_broken": 0.007926055391129068,
+     "one_figure": 0.95,
+     "same_person": 0.48,
+     "figure": 0.75,
+     "recolored": 0.23,
+     "quality": 0.75,
+     "case": 0.5775,
+     "effect": 1.0
+    },
+    "violinist": {
+     "on": "963af17427f5eda97e4a88ed59f0d9d4bf4093f9693f85b0c29975f6c367cee7",
+     "original": 0.08,
+     "boss": 0.81,
+     "broken": 0.02244532924113442,
+     "off_broken": 0.01059193898839616,
+     "one_figure": 0.91,
+     "same_person": 0.32,
+     "figure": 0.78,
+     "recolored": 0.54,
+     "quality": 0.78,
+     "case": 0.3588,
+     "effect": 1.0
+    }
+   }
+  },
+  {
    "name": "continued-12",
    "arm": "continued",
    "extra": 12,
@@ -1133,6 +1410,570 @@
      "quality": 0.69,
      "case": 0.398958,
      "effect": 0.98
+    }
+   }
+  },
+  {
+   "name": "portraits24-original-warm-384",
+   "arm": "portraits24-original-warm",
+   "extra": 384,
+   "updates": 896,
+   "label": "Fork with the parent's critic \u00b7 parent's teachers plus twenty-four portrait scenes \u00b7 +384",
+   "group": "RAW512 post-training \u00b7 PG 0.12.0",
+   "alpha": 1.375,
+   "score": 36.76359362844572,
+   "search": 51.58803065540655,
+   "gain": 72.5,
+   "quality": 78.56549474995784,
+   "effect": 99.5,
+   "holds": 2.0,
+   "drawn": 85.48090056283021,
+   "one_figure": 94.62499999999999,
+   "figure": 84.5,
+   "recolored": 40.875,
+   "kept": 61.12026311716736,
+   "same_person": 45.5,
+   "repeat": 50.44196428571428,
+   "working": 4,
+   "structure": {
+    "passed": 8,
+    "failed": 0,
+    "unresolved": 0,
+    "checks": {
+     "ranger": {
+      "status": "pass",
+      "checks": {
+       "no_readable_image": 0.05,
+       "split_or_duplication": 0.04,
+       "broken_structure": 0.17
+      },
+      "structural_details": {
+       "accidental_parts": 0.17,
+       "accidental_face": 0.1,
+       "accidental_geometry": 0.11
+      }
+     },
+     "smith": {
+      "status": "pass",
+      "checks": {
+       "no_readable_image": 0.05,
+       "split_or_duplication": 0.03,
+       "broken_structure": 0.34
+      },
+      "structural_details": {
+       "accidental_parts": 0.34,
+       "accidental_face": 0.11,
+       "accidental_geometry": 0.15
+      }
+     },
+     "stationer": {
+      "status": "pass",
+      "checks": {
+       "no_readable_image": 0.05,
+       "split_or_duplication": 0.03,
+       "broken_structure": 0.42
+      }
+     },
+     "ferryman": {
+      "status": "pass",
+      "checks": {
+       "no_readable_image": 0.07,
+       "split_or_duplication": 0.07,
+       "broken_structure": 0.49
+      },
+      "structural_details": {
+       "accidental_parts": 0.21,
+       "accidental_face": 0.49,
+       "accidental_geometry": 0.14
+      }
+     },
+     "watchmaker": {
+      "status": "pass",
+      "checks": {
+       "no_readable_image": 0.05,
+       "split_or_duplication": 0.03,
+       "broken_structure": 0.49
+      }
+     },
+     "guide": {
+      "status": "pass",
+      "checks": {
+       "no_readable_image": 0.06,
+       "split_or_duplication": 0.05,
+       "broken_structure": 0.42
+      },
+      "structural_details": {
+       "accidental_parts": 0.42,
+       "accidental_face": 0.29,
+       "accidental_geometry": 0.14
+      }
+     },
+     "guard": {
+      "status": "pass",
+      "checks": {
+       "no_readable_image": 0.05,
+       "split_or_duplication": 0.05,
+       "broken_structure": 0.33
+      },
+      "structural_details": {
+       "accidental_parts": 0.33,
+       "accidental_face": 0.33,
+       "accidental_geometry": 0.12
+      }
+     },
+     "violinist": {
+      "status": "pass",
+      "checks": {
+       "no_readable_image": 0.06,
+       "split_or_duplication": 0.04,
+       "broken_structure": 0.4
+      },
+      "structural_details": {
+       "accidental_parts": 0.4,
+       "accidental_face": 0.38,
+       "accidental_geometry": 0.14
+      }
+     }
+    }
+   },
+   "previous_alpha": null,
+   "previous_score": null,
+   "trials": [
+    [
+     0.75,
+     0.0
+    ],
+    [
+     1.0,
+     13.36520791666667
+    ],
+    [
+     1.25,
+     48.40335416666666
+    ],
+    [
+     1.3125,
+     48.421483333333335
+    ],
+    [
+     1.375,
+     51.58803065540655
+    ],
+    [
+     1.4375,
+     48.93670833333334
+    ],
+    [
+     1.5,
+     50.630313234948744
+    ],
+    [
+     1.625,
+     42.69226419797825
+    ],
+    [
+     1.75,
+     39.21074924320288
+    ],
+    [
+     2.0,
+     32.48094929489497
+    ]
+   ],
+   "rows": {
+    "ranger": {
+     "on": "d3c5c59673786f1f36e61ac1d31294147436841cad9c56ee45bffc40a621366c",
+     "original": 0.07,
+     "boss": 0.82,
+     "broken": 0.03287487911910128,
+     "off_broken": 0.013436890952714713,
+     "one_figure": 0.95,
+     "same_person": 0.59,
+     "figure": 0.93,
+     "recolored": 0.26,
+     "quality": 0.93,
+     "case": 0.6882,
+     "effect": 1.0
+    },
+    "smith": {
+     "on": "6b3908148ec230f62fec9a22519609c1bf592f4057a6f275be7a7426af01fdb7",
+     "original": 0.08,
+     "boss": 0.73,
+     "broken": 0.007705286267504477,
+     "off_broken": 0.02109842450986757,
+     "one_figure": 0.94,
+     "same_person": 0.76,
+     "figure": 0.95,
+     "recolored": 0.24,
+     "quality": 0.94,
+     "case": 0.6858239999999999,
+     "effect": 0.96
+    },
+    "stationer": {
+     "on": "8860a6d3ef609041f1d53cd712822a535571e1b7070f135fbb09e3108b6e5992",
+     "original": 0.11,
+     "boss": 0.9,
+     "broken": 0.028297051627226212,
+     "off_broken": 0.008666434096213779,
+     "one_figure": 0.96,
+     "same_person": 0.02,
+     "figure": 0.92,
+     "recolored": 0.69,
+     "quality": 0.92,
+     "case": 0.28520000000000006,
+     "effect": 1.0
+    },
+    "ferryman": {
+     "on": "af21ca56b7b51773d20099e6c17e26d980d2e96f491a91c4a5d07e13ba6a47b0",
+     "original": 0.11,
+     "boss": 0.85,
+     "broken": 0.23016927957299496,
+     "off_broken": 0.012741153571982872,
+     "one_figure": 0.92,
+     "same_person": 0.75,
+     "figure": 0.74,
+     "recolored": 0.3,
+     "quality": 0.2752395799966264,
+     "case": 0.19266770599763847,
+     "effect": 1.0
+    },
+    "watchmaker": {
+     "on": "371a56c6dbc8a857b491d9d58fa10327aefbac0174dff104172c8b053fcde762",
+     "original": 0.1,
+     "boss": 0.78,
+     "broken": 0.01148138192949859,
+     "off_broken": 0.005786580296680449,
+     "one_figure": 0.95,
+     "same_person": 0.89,
+     "figure": 0.8,
+     "recolored": 0.27,
+     "quality": 0.8,
+     "case": 0.584,
+     "effect": 1.0
+    },
+    "guide": {
+     "on": "40714f61786666ae8aa7621d4b6d15195786cca5e19bd23e793d88758a809d8c",
+     "original": 0.06,
+     "boss": 0.77,
+     "broken": 0.03404091346961887,
+     "off_broken": 0.02435862171247346,
+     "one_figure": 0.94,
+     "same_person": 0.27,
+     "figure": 0.86,
+     "recolored": 0.62,
+     "quality": 0.86,
+     "case": 0.3268,
+     "effect": 1.0
+    },
+    "guard": {
+     "on": "e431a21cc9767dc87dbd6c690124ce78767a555c2a5824b35eb8953807bb8240",
+     "original": 0.11,
+     "boss": 0.89,
+     "broken": 0.026688010476168932,
+     "off_broken": 0.007926055391129068,
+     "one_figure": 0.95,
+     "same_person": 0.25,
+     "figure": 0.78,
+     "recolored": 0.53,
+     "quality": 0.78,
+     "case": 0.3666,
+     "effect": 1.0
+    },
+    "violinist": {
+     "on": "41a1ccf9b9b50d85c74324b56d749c8400672c4564b638755759f10db55b70dc",
+     "original": 0.08,
+     "boss": 0.78,
+     "broken": 0.06841454530705673,
+     "off_broken": 0.01059193898839616,
+     "one_figure": 0.96,
+     "same_person": 0.11,
+     "figure": 0.78,
+     "recolored": 0.36,
+     "quality": 0.78,
+     "case": 0.49920000000000003,
+     "effect": 1.0
+    }
+   }
+  },
+  {
+   "name": "portraits24-original-warm-240",
+   "arm": "portraits24-original-warm",
+   "extra": 240,
+   "updates": 752,
+   "label": "Fork with the parent's critic \u00b7 parent's teachers plus twenty-four portrait scenes \u00b7 +240",
+   "group": "RAW512 post-training \u00b7 PG 0.12.0",
+   "alpha": 1.375,
+   "score": 35.76756852428618,
+   "search": 44.77707210416668,
+   "gain": 65.375,
+   "quality": 73.63422922262414,
+   "effect": 86.0,
+   "holds": 2.0,
+   "drawn": 89.97961506725841,
+   "one_figure": 93.75,
+   "figure": 76.125,
+   "recolored": 35.5,
+   "kept": 51.11312107437568,
+   "same_person": 56.625,
+   "repeat": 39.901785714285715,
+   "working": 6,
+   "structure": {
+    "passed": 6,
+    "failed": 1,
+    "unresolved": 1,
+    "checks": {
+     "ranger": {
+      "status": "pass",
+      "checks": {
+       "no_readable_image": 0.05,
+       "split_or_duplication": 0.05,
+       "broken_structure": 0.44
+      },
+      "structural_details": {
+       "accidental_parts": 0.28,
+       "accidental_face": 0.44,
+       "accidental_geometry": 0.13
+      }
+     },
+     "smith": {
+      "status": "pass",
+      "checks": {
+       "no_readable_image": 0.05,
+       "split_or_duplication": 0.04,
+       "broken_structure": 0.47
+      }
+     },
+     "stationer": {
+      "status": "pass",
+      "checks": {
+       "no_readable_image": 0.06,
+       "split_or_duplication": 0.06,
+       "broken_structure": 0.45
+      },
+      "structural_details": {
+       "accidental_parts": 0.45,
+       "accidental_face": 0.27,
+       "accidental_geometry": 0.18
+      }
+     },
+     "ferryman": {
+      "status": "fail",
+      "checks": {
+       "no_readable_image": 0.09,
+       "split_or_duplication": 0.05,
+       "broken_structure": 0.84
+      },
+      "structural_details": {
+       "accidental_parts": 0.32,
+       "accidental_face": 0.84,
+       "accidental_geometry": 0.2
+      }
+     },
+     "watchmaker": {
+      "status": "unmeasured",
+      "checks": {
+       "no_readable_image": 0.07,
+       "split_or_duplication": 0.06,
+       "broken_structure": 0.54
+      },
+      "structural_details": {
+       "accidental_parts": 0.31,
+       "accidental_face": 0.54,
+       "accidental_geometry": 0.17
+      }
+     },
+     "guide": {
+      "status": "pass",
+      "checks": {
+       "no_readable_image": 0.05,
+       "split_or_duplication": 0.03,
+       "broken_structure": 0.35
+      }
+     },
+     "guard": {
+      "status": "pass",
+      "checks": {
+       "no_readable_image": 0.06,
+       "split_or_duplication": 0.04,
+       "broken_structure": 0.41
+      },
+      "structural_details": {
+       "accidental_parts": 0.41,
+       "accidental_face": 0.18,
+       "accidental_geometry": 0.15
+      }
+     },
+     "violinist": {
+      "status": "pass",
+      "checks": {
+       "no_readable_image": 0.06,
+       "split_or_duplication": 0.04,
+       "broken_structure": 0.29
+      },
+      "structural_details": {
+       "accidental_parts": 0.29,
+       "accidental_face": 0.21,
+       "accidental_geometry": 0.15
+      }
+     }
+    }
+   },
+   "previous_alpha": null,
+   "previous_score": null,
+   "trials": [
+    [
+     0.75,
+     0.0
+    ],
+    [
+     1.0,
+     21.08529979166667
+    ],
+    [
+     1.25,
+     36.38029925
+    ],
+    [
+     1.3125,
+     null
+    ],
+    [
+     1.375,
+     44.77707210416668
+    ],
+    [
+     1.4375,
+     39.760855609859085
+    ],
+    [
+     1.5,
+     42.36221737062839
+    ],
+    [
+     1.625,
+     31.731279515455718
+    ],
+    [
+     1.75,
+     37.65744141178155
+    ],
+    [
+     2.0,
+     31.253187500000006
+    ]
+   ],
+   "rows": {
+    "ranger": {
+     "on": "1338c2d9ef75cc436c15ec8457ce0e65680995998360ec8343a2c110f1ba5e0d",
+     "original": 0.07,
+     "boss": 0.83,
+     "broken": 0.027128795040010145,
+     "off_broken": 0.013436890952714713,
+     "one_figure": 0.93,
+     "same_person": 0.04,
+     "figure": 0.82,
+     "recolored": 0.32,
+     "quality": 0.82,
+     "case": 0.5575999999999999,
+     "effect": 1.0
+    },
+    "smith": {
+     "on": "0ce410f2867156ba66e480d9bbeaf1a9a7a4b89c6e12d7ec0f5a4a83f92d62d9",
+     "original": 0.08,
+     "boss": 0.73,
+     "broken": 0.007267504166375024,
+     "off_broken": 0.02109842450986757,
+     "one_figure": 0.94,
+     "same_person": 0.63,
+     "figure": 0.92,
+     "recolored": 0.17,
+     "quality": 0.92,
+     "case": 0.7330559999999999,
+     "effect": 0.96
+    },
+    "stationer": {
+     "on": "6c1c5104570a4add4deff4d48e2ed491c2e09e8f82c1e6e422714b8f462b50da",
+     "original": 0.11,
+     "boss": 0.87,
+     "broken": 0.008445862791195767,
+     "off_broken": 0.008666434096213779,
+     "one_figure": 0.92,
+     "same_person": 0.42,
+     "figure": 0.88,
+     "recolored": 0.47,
+     "quality": 0.88,
+     "case": 0.46640000000000004,
+     "effect": 1.0
+    },
+    "ferryman": {
+     "on": "9ff391805616b4bcb450209aec78b7ed6bab754c749494ff2ca3af9a858fee81",
+     "original": 0.11,
+     "boss": 0.85,
+     "broken": 0.12271747565459855,
+     "off_broken": 0.012741153571982872,
+     "one_figure": 0.94,
+     "same_person": 0.35,
+     "figure": 0.29,
+     "recolored": 0.68,
+     "quality": 0.29,
+     "case": 0.09279999999999998,
+     "effect": 1.0
+    },
+    "watchmaker": {
+     "on": "950b236d694b0bcf4a6c3aacbb32a82dd52dc6ffa257bd12cb78993c862b3263",
+     "original": 0.1,
+     "boss": 0.84,
+     "broken": 0.01731366350469895,
+     "off_broken": 0.005786580296680449,
+     "one_figure": 0.93,
+     "same_person": 0.9,
+     "figure": 0.64,
+     "recolored": 0.25,
+     "quality": 0.64,
+     "case": 0.48,
+     "effect": 1.0
+    },
+    "guide": {
+     "on": "ccc9dffceb186c775dec75db986b21a9d31f98eec4aa73d10086ed37b4e41c95",
+     "original": 0.06,
+     "boss": 0.26,
+     "broken": 0.014043080598363074,
+     "off_broken": 0.02435862171247346,
+     "one_figure": 0.96,
+     "same_person": 0.89,
+     "figure": 0.84,
+     "recolored": 0.46,
+     "quality": 0.84,
+     "case": 0.009072000000000007,
+     "effect": 0.020000000000000018
+    },
+    "guard": {
+     "on": "743d2ed2fb773253dd8b5165d6562c1550605d8b94d3fd1d9cf6b4d441a242dd",
+     "original": 0.11,
+     "boss": 0.87,
+     "broken": 0.11270455404814964,
+     "off_broken": 0.007926055391129068,
+     "one_figure": 0.94,
+     "same_person": 0.67,
+     "figure": 0.85,
+     "recolored": 0.25,
+     "quality": 0.6507383378099314,
+     "case": 0.48805375335744855,
+     "effect": 1.0
+    },
+    "violinist": {
+     "on": "6eab490f51167a562ec27c49374bf79d370dd21a087f2b5f8cd970ffa0b742a5",
+     "original": 0.08,
+     "boss": 0.7,
+     "broken": 0.011107369339244184,
+     "off_broken": 0.01059193898839616,
+     "one_figure": 0.94,
+     "same_person": 0.63,
+     "figure": 0.85,
+     "recolored": 0.24,
+     "quality": 0.85,
+     "case": 0.5813999999999999,
+     "effect": 0.8999999999999999
     }
    }
   },
@@ -17666,6 +18507,7 @@
   "control-36 (unmeasured)",
   "portraits-original-fresh-256 (unmeasured)",
   "portraits-original-low-g-warm-48 (unmeasured)",
+  "portraits24-original-warm-288 (unmeasured)",
   "quiet-fresh-256",
   "quiet-fresh-384 (unmeasured)",
   "working-quiet-strong-warm-48 (unmeasured)"

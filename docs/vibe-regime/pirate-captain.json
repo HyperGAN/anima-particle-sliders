@@ -1,0 +1,1469 @@
+{
+ "vibe": "pirate captain",
+ "version": "final-boss-working-v4",
+ "teachers": {
+  "kept": 24,
+  "of": 24,
+  "worth": {
+   "laundromat": 0.756,
+   "bakery": 0.783,
+   "court": 0.7569,
+   "bus-stop": 0.7371000000000001,
+   "classroom": 0.7568,
+   "hardware": 0.7656,
+   "record-shop": 0.8463,
+   "pharmacy": 0.6880000000000001,
+   "aquarium": 0.8083999999999999,
+   "ramen-shop": 0.7656,
+   "flower-stall": 0.8008000000000001,
+   "roof-garden": 0.7394999999999999,
+   "hotel-lobby": 0.7387,
+   "garage": 0.6586,
+   "gymnasium": 0.7912,
+   "gallery": 0.7128000000000001,
+   "post-office": 0.7744,
+   "arcade": 0.801,
+   "pottery": 0.7553,
+   "mountain-hut": 0.8190000000000001,
+   "kitchen": 0.7832,
+   "skate-park": 0.8372,
+   "fruit-market": 0.7223999999999999,
+   "carpentry": 0.8281000000000001
+  }
+ },
+ "training": {
+  "updates": 512,
+  "stopped": null,
+  "rates": {
+   "g": 0.00075,
+   "d": 0.009,
+   "particle": 0.03
+  }
+ },
+ "candidates": [
+  {
+   "step": 384,
+   "alpha": 1.875,
+   "search": 0.4106177275
+  },
+  {
+   "step": 448,
+   "alpha": 1.9375,
+   "search": 0.4474745466666667
+  },
+  {
+   "step": 512,
+   "alpha": 1.875,
+   "search": 0.44832038933652196
+  }
+ ],
+ "step": 512,
+ "alpha": 1.875,
+ "search": 0.44832038933652196,
+ "raw_sha256": "2c0cd58aaf93af95f5b8d2b0fefa596052613c21e47ba6a25701bf64a04e71d4",
+ "ranking": {
+  "score": 0.3942156263327007,
+  "bounds": null,
+  "working": 8,
+  "refused_pairs": [],
+  "rows": {
+   "ranger": {
+    "boss": 0.65,
+    "original": 0.04,
+    "quality": 0.88,
+    "recolored": 0.15,
+    "one_figure": 0.96,
+    "figure": 0.88,
+    "same_scene": 0.42,
+    "same_person": 0.94,
+    "case": 0.5984,
+    "on_sha256": "ae11424c468fe4ce8d1d30031c39c56fe59d2ff31c7704087ab76aa9a8eae50b"
+   },
+   "smith": {
+    "boss": 0.85,
+    "original": 0.05,
+    "quality": 0.82,
+    "recolored": 0.2,
+    "one_figure": 0.95,
+    "figure": 0.82,
+    "same_scene": 0.45,
+    "same_person": 0.83,
+    "case": 0.656,
+    "on_sha256": "a9178e53feb7e2fd1b242498aaf32bde8ffaaf094e556972c2e4034c55ddb32c"
+   },
+   "stationer": {
+    "boss": 0.72,
+    "original": 0.05,
+    "quality": 0.9,
+    "recolored": 0.45,
+    "one_figure": 0.96,
+    "figure": 0.9,
+    "same_scene": 0.57,
+    "same_person": 0.66,
+    "case": 0.46530000000000005,
+    "on_sha256": "70c563b9bf7eac951a941e3d19e9d528a5b9154c0a28713133668a7d82dd1ba7"
+   },
+   "ferryman": {
+    "boss": 0.88,
+    "original": 0.07,
+    "quality": 0.84,
+    "recolored": 0.31,
+    "one_figure": 0.95,
+    "figure": 0.84,
+    "same_scene": 0.19,
+    "same_person": 0.45,
+    "case": 0.5795999999999999,
+    "on_sha256": "c8291223b0f298f4b4afec35898d60cba61f62526c47fe5ee9634ad9abcdaccc"
+   },
+   "watchmaker": {
+    "boss": 0.72,
+    "original": 0.05,
+    "quality": 0.9,
+    "recolored": 0.17,
+    "one_figure": 0.96,
+    "figure": 0.9,
+    "same_scene": 0.4,
+    "same_person": 0.91,
+    "case": 0.7021799999999999,
+    "on_sha256": "f808908d3ddfefa69eaac96efe5421ad6cd0ef0ae1c42a872ec4d51b5c20798f"
+   },
+   "guide": {
+    "boss": 0.75,
+    "original": 0.05,
+    "quality": 0.8514843719986243,
+    "recolored": 0.09,
+    "one_figure": 0.96,
+    "figure": 0.86,
+    "same_scene": 0.19,
+    "same_person": 0.87,
+    "case": 0.7748507785187481,
+    "on_sha256": "43bdf5739af87df271865b3c22f2fc68741b38c3dcdd18179e571b2c562efb23"
+   },
+   "guard": {
+    "boss": 0.72,
+    "original": 0.04,
+    "quality": 0.88,
+    "recolored": 0.28,
+    "one_figure": 0.96,
+    "figure": 0.88,
+    "same_scene": 0.54,
+    "same_person": 0.92,
+    "case": 0.5955839999999999,
+    "on_sha256": "47002bd82d119fe1adff598c23a69abb594f865b59fcaa2d18628680d4ca685b"
+   },
+   "violinist": {
+    "boss": 0.54,
+    "original": 0.07,
+    "quality": 0.79,
+    "recolored": 0.32,
+    "one_figure": 0.96,
+    "figure": 0.79,
+    "same_scene": 0.16,
+    "same_person": 0.76,
+    "case": 0.311576,
+    "on_sha256": "73318bdad4d06bd778c486e64144cf5ccaf0feb5215e11281fdf5540a829b3e1"
+   }
+  },
+  "repeat": [
+   {
+    "cases": [
+     "ranger",
+     "smith"
+    ],
+    "repeat": 0.7112499999999999
+   },
+   {
+    "cases": [
+     "ranger",
+     "stationer"
+    ],
+    "repeat": 0.7737499999999999
+   },
+   {
+    "cases": [
+     "ranger",
+     "ferryman"
+    ],
+    "repeat": 0.7475
+   },
+   {
+    "cases": [
+     "ranger",
+     "watchmaker"
+    ],
+    "repeat": 0.815
+   },
+   {
+    "cases": [
+     "ranger",
+     "guide"
+    ],
+    "repeat": 0.7350000000000001
+   },
+   {
+    "cases": [
+     "ranger",
+     "guard"
+    ],
+    "repeat": 0.7725
+   },
+   {
+    "cases": [
+     "ranger",
+     "violinist"
+    ],
+    "repeat": 0.75
+   },
+   {
+    "cases": [
+     "smith",
+     "stationer"
+    ],
+    "repeat": 0.72875
+   },
+   {
+    "cases": [
+     "smith",
+     "ferryman"
+    ],
+    "repeat": 0.8175
+   },
+   {
+    "cases": [
+     "smith",
+     "watchmaker"
+    ],
+    "repeat": 0.7375
+   },
+   {
+    "cases": [
+     "smith",
+     "guide"
+    ],
+    "repeat": 0.78375
+   },
+   {
+    "cases": [
+     "smith",
+     "guard"
+    ],
+    "repeat": 0.75125
+   },
+   {
+    "cases": [
+     "smith",
+     "violinist"
+    ],
+    "repeat": 0.72375
+   },
+   {
+    "cases": [
+     "stationer",
+     "ferryman"
+    ],
+    "repeat": 0.74625
+   },
+   {
+    "cases": [
+     "stationer",
+     "watchmaker"
+    ],
+    "repeat": 0.78375
+   },
+   {
+    "cases": [
+     "stationer",
+     "guide"
+    ],
+    "repeat": 0.725
+   },
+   {
+    "cases": [
+     "stationer",
+     "guard"
+    ],
+    "repeat": 0.76125
+   },
+   {
+    "cases": [
+     "stationer",
+     "violinist"
+    ],
+    "repeat": 0.7225
+   },
+   {
+    "cases": [
+     "ferryman",
+     "watchmaker"
+    ],
+    "repeat": 0.7675000000000001
+   },
+   {
+    "cases": [
+     "ferryman",
+     "guide"
+    ],
+    "repeat": 0.76625
+   },
+   {
+    "cases": [
+     "ferryman",
+     "guard"
+    ],
+    "repeat": 0.78375
+   },
+   {
+    "cases": [
+     "ferryman",
+     "violinist"
+    ],
+    "repeat": 0.8
+   },
+   {
+    "cases": [
+     "watchmaker",
+     "guide"
+    ],
+    "repeat": 0.7324999999999999
+   },
+   {
+    "cases": [
+     "watchmaker",
+     "guard"
+    ],
+    "repeat": 0.765
+   },
+   {
+    "cases": [
+     "watchmaker",
+     "violinist"
+    ],
+    "repeat": 0.7537499999999999
+   },
+   {
+    "cases": [
+     "guide",
+     "guard"
+    ],
+    "repeat": 0.79
+   },
+   {
+    "cases": [
+     "guide",
+     "violinist"
+    ],
+    "repeat": 0.77625
+   },
+   {
+    "cases": [
+     "guard",
+     "violinist"
+    ],
+    "repeat": 0.79
+   }
+  ]
+ },
+ "confirmation": {
+  "score": 0.3839961084601232,
+  "bounds": [
+   0.3825931917934566,
+   0.3853990251267899
+  ],
+  "working": 14,
+  "refused_pairs": [
+   [
+    "bike-shop",
+    "dance-studio"
+   ]
+  ],
+  "rows": {
+   "bike-shop": {
+    "boss": 0.75,
+    "original": 0.1,
+    "quality": 0.91,
+    "recolored": 0.26,
+    "one_figure": 0.95,
+    "figure": 0.91,
+    "same_scene": 0.31,
+    "same_person": 0.68,
+    "case": 0.6734,
+    "on_sha256": "62b665f9a601e6e5dab60ced38ae86fb8931d4fc3f4f4930493653ad1dd2766b"
+   },
+   "tea-house": {
+    "boss": 0.74,
+    "original": 0.05,
+    "quality": 0.84,
+    "recolored": 0.34,
+    "one_figure": 0.95,
+    "figure": 0.84,
+    "same_scene": 0.08,
+    "same_person": 0.49,
+    "case": 0.5433119999999999,
+    "on_sha256": "1c4bc472ce9cb9e303fcae38fcb7586706b58fc381058ed2dbc54bb38a9de5b8"
+   },
+   "observatory": {
+    "boss": 0.85,
+    "original": 0.04,
+    "quality": 0.8513587296682853,
+    "recolored": 0.4,
+    "one_figure": 0.95,
+    "figure": 0.87,
+    "same_scene": 0.17,
+    "same_person": 0.86,
+    "case": 0.5108152378009712,
+    "on_sha256": "824475a8904d2c90d70719bc1cbd8e37212d65f3e2a6e802df22eaf386886b11"
+   },
+   "barbershop": {
+    "boss": 0.73,
+    "original": 0.06,
+    "quality": 0.65,
+    "recolored": 0.29,
+    "one_figure": 0.95,
+    "figure": 0.65,
+    "same_scene": 0.6,
+    "same_person": 0.23,
+    "case": 0.44304,
+    "on_sha256": "4f2e5ad860bf1014826d6df4cd46c1b304b8415c30a6ae1f93a96f75d133f969"
+   },
+   "fish-market": {
+    "boss": 0.81,
+    "original": 0.05,
+    "quality": 0.8453661141478681,
+    "recolored": 0.23,
+    "one_figure": 0.95,
+    "figure": 0.87,
+    "same_scene": 0.18,
+    "same_person": 0.72,
+    "case": 0.6509319078938585,
+    "on_sha256": "075d3369a821a401ad759a4911a4b84f32a20e2f03c2fb18094cd7cd9fe449dd"
+   },
+   "print-shop": {
+    "boss": 0.81,
+    "original": 0.05,
+    "quality": 0.7113149346894077,
+    "recolored": 0.31,
+    "one_figure": 0.95,
+    "figure": 0.87,
+    "same_scene": 0.17,
+    "same_person": 0.79,
+    "case": 0.49080730493569125,
+    "on_sha256": "889662d2de8c334513b4fa86e4e458ba6bd661abdd62c27b6acf554837433509"
+   },
+   "climbing-gym": {
+    "boss": 0.83,
+    "original": 0.04,
+    "quality": 0.86,
+    "recolored": 0.17,
+    "one_figure": 0.94,
+    "figure": 0.86,
+    "same_scene": 0.24,
+    "same_person": 0.59,
+    "case": 0.7138,
+    "on_sha256": "a23f2720755de1ecd02bfb42a3796b05f3995b5d259e7d3d904b7aaddc18ad43"
+   },
+   "cafe": {
+    "boss": 0.79,
+    "original": 0.04,
+    "quality": 0.85,
+    "recolored": 0.17,
+    "one_figure": 0.96,
+    "figure": 0.85,
+    "same_scene": 0.35,
+    "same_person": 0.21,
+    "case": 0.7054999999999999,
+    "on_sha256": "1e8837ad102cc82338ccbf265f888e5411a4d87d7f25ac6ad926ee42ba5c1098"
+   },
+   "tram": {
+    "boss": 0.76,
+    "original": 0.07,
+    "quality": 0.78,
+    "recolored": 0.38,
+    "one_figure": 0.94,
+    "figure": 0.78,
+    "same_scene": 0.39,
+    "same_person": 0.81,
+    "case": 0.48360000000000003,
+    "on_sha256": "d56605e100726cc139c748708f62442bf37ac5a8b49c776192ed84370fffb57e"
+   },
+   "electronics": {
+    "boss": 0.76,
+    "original": 0.07,
+    "quality": 0.79042471474096,
+    "recolored": 0.37,
+    "one_figure": 0.97,
+    "figure": 0.8,
+    "same_scene": 0.1,
+    "same_person": 0.95,
+    "case": 0.4979675702868048,
+    "on_sha256": "2ee06bea2a401a4d32f3fbe2b307f18f936926831cb4f3fb6330fc33777c46de"
+   },
+   "dance-studio": {
+    "boss": 0.78,
+    "original": 0.05,
+    "quality": 0.9,
+    "recolored": 0.22,
+    "one_figure": 0.95,
+    "figure": 0.9,
+    "same_scene": 0.35,
+    "same_person": 0.77,
+    "case": 0.7020000000000001,
+    "on_sha256": "4dca1cd5803c8dd2dcb78b4ad95354086d8c2adf7d0e2ccdf182802559b07da8"
+   },
+   "vineyard": {
+    "boss": 0.88,
+    "original": 0.06,
+    "quality": 0.8814661612499566,
+    "recolored": 0.16,
+    "one_figure": 0.95,
+    "figure": 0.91,
+    "same_scene": 0.16,
+    "same_person": 0.81,
+    "case": 0.7404315754499635,
+    "on_sha256": "700b3cadff0b60f47e0af4277056d2d8ea938ed1d63a8083bae7cec225822880"
+   },
+   "museum": {
+    "boss": 0.77,
+    "original": 0.05,
+    "quality": 0.24,
+    "recolored": 0.11,
+    "one_figure": 0.24,
+    "figure": 0.89,
+    "same_scene": 0.43,
+    "same_person": 0.48,
+    "case": 0.21359999999999998,
+    "on_sha256": "d1bec38c05dfc78ae79cbdbe08aed417e2d6e7d505d91bc30117322d6ecb61ad"
+   },
+   "laboratory": {
+    "boss": 0.84,
+    "original": 0.05,
+    "quality": 0.6632663924798023,
+    "recolored": 0.2,
+    "one_figure": 0.96,
+    "figure": 0.86,
+    "same_scene": 0.35,
+    "same_person": 0.95,
+    "case": 0.5306131139838419,
+    "on_sha256": "57d6d1f602bfcdc1d7c94e0911e5f074d6f26dbfae98c1a8bf77c55144d90ed0"
+   },
+   "greenhouse": {
+    "boss": 0.83,
+    "original": 0.07,
+    "quality": 0.91,
+    "recolored": 0.66,
+    "one_figure": 0.96,
+    "figure": 0.91,
+    "same_scene": 0.46,
+    "same_person": 0.43,
+    "case": 0.3094,
+    "on_sha256": "b5107fd60c80fbc4f0527aa053a65de1fa91c8c766f2dcdee120cb73273c2044"
+   },
+   "toy-store": {
+    "boss": 0.84,
+    "original": 0.05,
+    "quality": 0.91,
+    "recolored": 0.46,
+    "one_figure": 0.92,
+    "figure": 0.91,
+    "same_scene": 0.05,
+    "same_person": 0.77,
+    "case": 0.49140000000000006,
+    "on_sha256": "1499a7e2956b6d24363c85ba3a7fea95bb90d6b94215992518cf9c028ba1cc5d"
+   }
+  },
+  "repeat": [
+   {
+    "cases": [
+     "bike-shop",
+     "tea-house"
+    ],
+    "repeat": 0.6575
+   },
+   {
+    "cases": [
+     "bike-shop",
+     "observatory"
+    ],
+    "repeat": 0.5925
+   },
+   {
+    "cases": [
+     "bike-shop",
+     "barbershop"
+    ],
+    "repeat": 0.6012500000000001
+   },
+   {
+    "cases": [
+     "bike-shop",
+     "fish-market"
+    ],
+    "repeat": 0.5825
+   },
+   {
+    "cases": [
+     "bike-shop",
+     "print-shop"
+    ],
+    "repeat": 0.73125
+   },
+   {
+    "cases": [
+     "bike-shop",
+     "climbing-gym"
+    ],
+    "repeat": 0.70375
+   },
+   {
+    "cases": [
+     "bike-shop",
+     "cafe"
+    ],
+    "repeat": 0.56375
+   },
+   {
+    "cases": [
+     "bike-shop",
+     "tram"
+    ],
+    "repeat": 0.6799999999999999
+   },
+   {
+    "cases": [
+     "bike-shop",
+     "electronics"
+    ],
+    "repeat": 0.55125
+   },
+   {
+    "cases": [
+     "bike-shop",
+     "dance-studio"
+    ],
+    "repeat": null
+   },
+   {
+    "cases": [
+     "bike-shop",
+     "vineyard"
+    ],
+    "repeat": 0.50375
+   },
+   {
+    "cases": [
+     "bike-shop",
+     "museum"
+    ],
+    "repeat": 0.705
+   },
+   {
+    "cases": [
+     "bike-shop",
+     "laboratory"
+    ],
+    "repeat": 0.6025
+   },
+   {
+    "cases": [
+     "bike-shop",
+     "greenhouse"
+    ],
+    "repeat": 0.5925
+   },
+   {
+    "cases": [
+     "bike-shop",
+     "toy-store"
+    ],
+    "repeat": 0.705
+   },
+   {
+    "cases": [
+     "tea-house",
+     "observatory"
+    ],
+    "repeat": 0.7575000000000001
+   },
+   {
+    "cases": [
+     "tea-house",
+     "barbershop"
+    ],
+    "repeat": 0.7537499999999999
+   },
+   {
+    "cases": [
+     "tea-house",
+     "fish-market"
+    ],
+    "repeat": 0.7475
+   },
+   {
+    "cases": [
+     "tea-house",
+     "print-shop"
+    ],
+    "repeat": 0.7462500000000001
+   },
+   {
+    "cases": [
+     "tea-house",
+     "climbing-gym"
+    ],
+    "repeat": 0.7825
+   },
+   {
+    "cases": [
+     "tea-house",
+     "cafe"
+    ],
+    "repeat": 0.6525000000000001
+   },
+   {
+    "cases": [
+     "tea-house",
+     "tram"
+    ],
+    "repeat": 0.79625
+   },
+   {
+    "cases": [
+     "tea-house",
+     "electronics"
+    ],
+    "repeat": 0.76625
+   },
+   {
+    "cases": [
+     "tea-house",
+     "dance-studio"
+    ],
+    "repeat": 0.7525
+   },
+   {
+    "cases": [
+     "tea-house",
+     "vineyard"
+    ],
+    "repeat": 0.6799999999999999
+   },
+   {
+    "cases": [
+     "tea-house",
+     "museum"
+    ],
+    "repeat": 0.7625
+   },
+   {
+    "cases": [
+     "tea-house",
+     "laboratory"
+    ],
+    "repeat": 0.8162499999999999
+   },
+   {
+    "cases": [
+     "tea-house",
+     "greenhouse"
+    ],
+    "repeat": 0.685
+   },
+   {
+    "cases": [
+     "tea-house",
+     "toy-store"
+    ],
+    "repeat": 0.7462500000000001
+   },
+   {
+    "cases": [
+     "observatory",
+     "barbershop"
+    ],
+    "repeat": 0.7462500000000001
+   },
+   {
+    "cases": [
+     "observatory",
+     "fish-market"
+    ],
+    "repeat": 0.7175
+   },
+   {
+    "cases": [
+     "observatory",
+     "print-shop"
+    ],
+    "repeat": 0.7075
+   },
+   {
+    "cases": [
+     "observatory",
+     "climbing-gym"
+    ],
+    "repeat": 0.7749999999999999
+   },
+   {
+    "cases": [
+     "observatory",
+     "cafe"
+    ],
+    "repeat": 0.63
+   },
+   {
+    "cases": [
+     "observatory",
+     "tram"
+    ],
+    "repeat": 0.7525
+   },
+   {
+    "cases": [
+     "observatory",
+     "electronics"
+    ],
+    "repeat": 0.7075
+   },
+   {
+    "cases": [
+     "observatory",
+     "dance-studio"
+    ],
+    "repeat": 0.71875
+   },
+   {
+    "cases": [
+     "observatory",
+     "vineyard"
+    ],
+    "repeat": 0.68875
+   },
+   {
+    "cases": [
+     "observatory",
+     "museum"
+    ],
+    "repeat": 0.7437499999999999
+   },
+   {
+    "cases": [
+     "observatory",
+     "laboratory"
+    ],
+    "repeat": 0.745
+   },
+   {
+    "cases": [
+     "observatory",
+     "greenhouse"
+    ],
+    "repeat": 0.6975
+   },
+   {
+    "cases": [
+     "observatory",
+     "toy-store"
+    ],
+    "repeat": 0.7224999999999999
+   },
+   {
+    "cases": [
+     "barbershop",
+     "fish-market"
+    ],
+    "repeat": 0.70375
+   },
+   {
+    "cases": [
+     "barbershop",
+     "print-shop"
+    ],
+    "repeat": 0.67625
+   },
+   {
+    "cases": [
+     "barbershop",
+     "climbing-gym"
+    ],
+    "repeat": 0.74
+   },
+   {
+    "cases": [
+     "barbershop",
+     "cafe"
+    ],
+    "repeat": 0.6287499999999999
+   },
+   {
+    "cases": [
+     "barbershop",
+     "tram"
+    ],
+    "repeat": 0.8175
+   },
+   {
+    "cases": [
+     "barbershop",
+     "electronics"
+    ],
+    "repeat": 0.7150000000000001
+   },
+   {
+    "cases": [
+     "barbershop",
+     "dance-studio"
+    ],
+    "repeat": 0.6625
+   },
+   {
+    "cases": [
+     "barbershop",
+     "vineyard"
+    ],
+    "repeat": 0.6325000000000001
+   },
+   {
+    "cases": [
+     "barbershop",
+     "museum"
+    ],
+    "repeat": 0.76625
+   },
+   {
+    "cases": [
+     "barbershop",
+     "laboratory"
+    ],
+    "repeat": 0.70375
+   },
+   {
+    "cases": [
+     "barbershop",
+     "greenhouse"
+    ],
+    "repeat": 0.6575
+   },
+   {
+    "cases": [
+     "barbershop",
+     "toy-store"
+    ],
+    "repeat": 0.635
+   },
+   {
+    "cases": [
+     "fish-market",
+     "print-shop"
+    ],
+    "repeat": 0.73875
+   },
+   {
+    "cases": [
+     "fish-market",
+     "climbing-gym"
+    ],
+    "repeat": 0.6912499999999999
+   },
+   {
+    "cases": [
+     "fish-market",
+     "cafe"
+    ],
+    "repeat": 0.67625
+   },
+   {
+    "cases": [
+     "fish-market",
+     "tram"
+    ],
+    "repeat": 0.70875
+   },
+   {
+    "cases": [
+     "fish-market",
+     "electronics"
+    ],
+    "repeat": 0.6837500000000001
+   },
+   {
+    "cases": [
+     "fish-market",
+     "dance-studio"
+    ],
+    "repeat": 0.6975
+   },
+   {
+    "cases": [
+     "fish-market",
+     "vineyard"
+    ],
+    "repeat": 0.67625
+   },
+   {
+    "cases": [
+     "fish-market",
+     "museum"
+    ],
+    "repeat": 0.7525
+   },
+   {
+    "cases": [
+     "fish-market",
+     "laboratory"
+    ],
+    "repeat": 0.745
+   },
+   {
+    "cases": [
+     "fish-market",
+     "greenhouse"
+    ],
+    "repeat": 0.6725
+   },
+   {
+    "cases": [
+     "fish-market",
+     "toy-store"
+    ],
+    "repeat": 0.71875
+   },
+   {
+    "cases": [
+     "print-shop",
+     "climbing-gym"
+    ],
+    "repeat": 0.77125
+   },
+   {
+    "cases": [
+     "print-shop",
+     "cafe"
+    ],
+    "repeat": 0.585
+   },
+   {
+    "cases": [
+     "print-shop",
+     "tram"
+    ],
+    "repeat": 0.78375
+   },
+   {
+    "cases": [
+     "print-shop",
+     "electronics"
+    ],
+    "repeat": 0.6499999999999999
+   },
+   {
+    "cases": [
+     "print-shop",
+     "dance-studio"
+    ],
+    "repeat": 0.7775000000000001
+   },
+   {
+    "cases": [
+     "print-shop",
+     "vineyard"
+    ],
+    "repeat": 0.5625
+   },
+   {
+    "cases": [
+     "print-shop",
+     "museum"
+    ],
+    "repeat": 0.71875
+   },
+   {
+    "cases": [
+     "print-shop",
+     "laboratory"
+    ],
+    "repeat": 0.75875
+   },
+   {
+    "cases": [
+     "print-shop",
+     "greenhouse"
+    ],
+    "repeat": 0.62625
+   },
+   {
+    "cases": [
+     "print-shop",
+     "toy-store"
+    ],
+    "repeat": 0.76625
+   },
+   {
+    "cases": [
+     "climbing-gym",
+     "cafe"
+    ],
+    "repeat": 0.6212500000000001
+   },
+   {
+    "cases": [
+     "climbing-gym",
+     "tram"
+    ],
+    "repeat": 0.78125
+   },
+   {
+    "cases": [
+     "climbing-gym",
+     "electronics"
+    ],
+    "repeat": 0.7025
+   },
+   {
+    "cases": [
+     "climbing-gym",
+     "dance-studio"
+    ],
+    "repeat": 0.7625
+   },
+   {
+    "cases": [
+     "climbing-gym",
+     "vineyard"
+    ],
+    "repeat": 0.6625
+   },
+   {
+    "cases": [
+     "climbing-gym",
+     "museum"
+    ],
+    "repeat": 0.7262500000000001
+   },
+   {
+    "cases": [
+     "climbing-gym",
+     "laboratory"
+    ],
+    "repeat": 0.7825
+   },
+   {
+    "cases": [
+     "climbing-gym",
+     "greenhouse"
+    ],
+    "repeat": 0.68875
+   },
+   {
+    "cases": [
+     "climbing-gym",
+     "toy-store"
+    ],
+    "repeat": 0.70375
+   },
+   {
+    "cases": [
+     "cafe",
+     "tram"
+    ],
+    "repeat": 0.7262500000000001
+   },
+   {
+    "cases": [
+     "cafe",
+     "electronics"
+    ],
+    "repeat": 0.645
+   },
+   {
+    "cases": [
+     "cafe",
+     "dance-studio"
+    ],
+    "repeat": 0.6525000000000001
+   },
+   {
+    "cases": [
+     "cafe",
+     "vineyard"
+    ],
+    "repeat": 0.6825
+   },
+   {
+    "cases": [
+     "cafe",
+     "museum"
+    ],
+    "repeat": 0.75625
+   },
+   {
+    "cases": [
+     "cafe",
+     "laboratory"
+    ],
+    "repeat": 0.62375
+   },
+   {
+    "cases": [
+     "cafe",
+     "greenhouse"
+    ],
+    "repeat": 0.71875
+   },
+   {
+    "cases": [
+     "cafe",
+     "toy-store"
+    ],
+    "repeat": 0.5800000000000001
+   },
+   {
+    "cases": [
+     "tram",
+     "electronics"
+    ],
+    "repeat": 0.7637499999999999
+   },
+   {
+    "cases": [
+     "tram",
+     "dance-studio"
+    ],
+    "repeat": 0.7849999999999999
+   },
+   {
+    "cases": [
+     "tram",
+     "vineyard"
+    ],
+    "repeat": 0.60625
+   },
+   {
+    "cases": [
+     "tram",
+     "museum"
+    ],
+    "repeat": 0.74
+   },
+   {
+    "cases": [
+     "tram",
+     "laboratory"
+    ],
+    "repeat": 0.81125
+   },
+   {
+    "cases": [
+     "tram",
+     "greenhouse"
+    ],
+    "repeat": 0.67625
+   },
+   {
+    "cases": [
+     "tram",
+     "toy-store"
+    ],
+    "repeat": 0.7
+   },
+   {
+    "cases": [
+     "electronics",
+     "dance-studio"
+    ],
+    "repeat": 0.68875
+   },
+   {
+    "cases": [
+     "electronics",
+     "vineyard"
+    ],
+    "repeat": 0.6699999999999999
+   },
+   {
+    "cases": [
+     "electronics",
+     "museum"
+    ],
+    "repeat": 0.7012499999999999
+   },
+   {
+    "cases": [
+     "electronics",
+     "laboratory"
+    ],
+    "repeat": 0.7475
+   },
+   {
+    "cases": [
+     "electronics",
+     "greenhouse"
+    ],
+    "repeat": 0.66875
+   },
+   {
+    "cases": [
+     "electronics",
+     "toy-store"
+    ],
+    "repeat": 0.6775
+   },
+   {
+    "cases": [
+     "dance-studio",
+     "vineyard"
+    ],
+    "repeat": 0.66625
+   },
+   {
+    "cases": [
+     "dance-studio",
+     "museum"
+    ],
+    "repeat": 0.7475
+   },
+   {
+    "cases": [
+     "dance-studio",
+     "laboratory"
+    ],
+    "repeat": 0.7337499999999999
+   },
+   {
+    "cases": [
+     "dance-studio",
+     "greenhouse"
+    ],
+    "repeat": 0.6675
+   },
+   {
+    "cases": [
+     "dance-studio",
+     "toy-store"
+    ],
+    "repeat": 0.76625
+   },
+   {
+    "cases": [
+     "vineyard",
+     "museum"
+    ],
+    "repeat": 0.725
+   },
+   {
+    "cases": [
+     "vineyard",
+     "laboratory"
+    ],
+    "repeat": 0.7362500000000001
+   },
+   {
+    "cases": [
+     "vineyard",
+     "greenhouse"
+    ],
+    "repeat": 0.7125
+   },
+   {
+    "cases": [
+     "vineyard",
+     "toy-store"
+    ],
+    "repeat": 0.7025
+   },
+   {
+    "cases": [
+     "museum",
+     "laboratory"
+    ],
+    "repeat": 0.74
+   },
+   {
+    "cases": [
+     "museum",
+     "greenhouse"
+    ],
+    "repeat": 0.7575000000000001
+   },
+   {
+    "cases": [
+     "museum",
+     "toy-store"
+    ],
+    "repeat": 0.72125
+   },
+   {
+    "cases": [
+     "laboratory",
+     "greenhouse"
+    ],
+    "repeat": 0.66125
+   },
+   {
+    "cases": [
+     "laboratory",
+     "toy-store"
+    ],
+    "repeat": 0.75375
+   },
+   {
+    "cases": [
+     "greenhouse",
+     "toy-store"
+    ],
+    "repeat": 0.65875
+   }
+  ],
+  "framing": {
+   "bike-shop": "seated",
+   "tea-house": "half-body",
+   "observatory": "waist-up",
+   "barbershop": "full-length",
+   "fish-market": "chest-up",
+   "print-shop": "seated",
+   "climbing-gym": "half-body",
+   "cafe": "waist-up",
+   "tram": "full-length",
+   "electronics": "chest-up",
+   "dance-studio": "seated",
+   "vineyard": "half-body",
+   "museum": "waist-up",
+   "laboratory": "full-length",
+   "greenhouse": "chest-up",
+   "toy-store": "seated"
+  }
+ },
+ "structure": {
+  "ranking": {
+   "ranger": "pass",
+   "smith": "pass",
+   "stationer": "pass",
+   "ferryman": "pass",
+   "watchmaker": "pass",
+   "guide": "pass",
+   "guard": "pass",
+   "violinist": "pass"
+  },
+  "confirmation": {
+   "bike-shop": "pass",
+   "tea-house": "pass",
+   "observatory": "pass",
+   "barbershop": "pass",
+   "fish-market": "pass",
+   "print-shop": "pass",
+   "climbing-gym": "unmeasured",
+   "cafe": "unmeasured",
+   "tram": "pass",
+   "electronics": "unmeasured",
+   "dance-studio": "pass",
+   "vineyard": "pass",
+   "museum": "pass",
+   "laboratory": "pass",
+   "greenhouse": "pass",
+   "toy-store": "pass"
+  }
+ },
+ "first_attempt": {
+  "kept": 2,
+  "of": 24,
+  "cause": "the treatment appended the vibe to the ordinary clothing and said the scene was unchanged"
+ }
+}
