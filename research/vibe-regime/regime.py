@@ -1,4 +1,4 @@
-"""Train and confirm a character-vibe slider from its phrase alone.
+"""Train a character-vibe slider from its phrase alone.
 
     regime.py "pirate captain"
 
@@ -9,11 +9,14 @@ for the vibe by a person or by a language model.
 2. Render three fixed treatments of each scene and keep the one that scores highest the way
    a slider's output is scored: the vibe is there, the drawing is one whole finished figure,
    and the scene kept its colors. A scene with no treatment worth teaching is left out.
-3. Build late-cues targets from the kept pairs and train stock EMPF from scratch.
-4. For each late checkpoint that passed its structural checks, search one constant alpha on
-   four characters. Keep the checkpoint and alpha with the highest search score.
-5. Rank that setting on eight other characters, then confirm it on the sixteen grid scenes
-   that were held back. Neither panel chose anything.
+3. Build late-cues targets from the kept pairs and train stock EMPF from scratch for 448
+   updates. Nothing is rendered or judged while it trains.
+4. Search one constant alpha for the finished slider on four characters.
+5. Save the slider and a sheet of samples at that alpha.
+
+With ``ANIMA_REGIME_MEASURE=1`` the run also ranks the setting on eight other characters,
+confirms it on the sixteen held-back grid scenes and runs the structural check on both.
+Neither panel chooses anything.
 
 Rerun the same command to resume. Rendered images and judge answers are kept and reused.
 """
@@ -25,6 +28,7 @@ from itertools import combinations
 from pathlib import Path
 from statistics import fmean
 import os
+import shutil
 import subprocess
 import sys
 import time
@@ -42,8 +46,7 @@ from lumen_studio.study.boss_targets import add_boss_scenes  # noqa: E402
 from lumen_studio.study.design_score import summarize  # noqa: E402
 from lumen_studio.study.judge import StudyJudge  # noqa: E402
 from lumen_studio.study.outputs import Outputs, read  # noqa: E402
-from lumen_studio.study.teachers import validation_panels  # noqa: E402
-from lumen_studio.study.training import Catastrophe, arm_path, train  # noqa: E402
+from lumen_studio.study.training import arm_path, train  # noqa: E402
 
 from campaign import PARENT_STUDY, ROOT, open_runtime  # noqa: E402
 import library  # noqa: E402
@@ -51,10 +54,11 @@ import questions  # noqa: E402
 
 CV_PYTHON = "/mnt/nvme/ai/conda/anaconda3/bin/python3"
 RATES = dict(g=0.00075, d=0.009, particle=0.03)
-# A longer budget continues the same run from its last update and keeps the shorter result beside it.
-UPDATES, HORIZON = int(os.environ.get("ANIMA_REGIME_UPDATES", 512)), 1024
-LATE = tuple(UPDATES - 64 * k for k in (4, 3, 2, 1, 0))
-CANDIDATES = 3  # The last passing checkpoints that get an alpha search.
+# 448 updates is the earliest point at which the first vibe's slider was good: all eight ranking
+# characters worked, and it scored as well as any later checkpoint at its own alpha. Training on
+# lowers the alpha the slider needs. A longer budget continues the same run from its last update.
+UPDATES, HORIZON = int(os.environ.get("ANIMA_REGIME_UPDATES", 448)), 1024
+MEASURE = os.environ.get("ANIMA_REGIME_MEASURE") == "1"
 TEACH_AT_LEAST, WORTH_TEACHING = 16, 0.35
 GRID, STEP = [0.75 + k / 4 for k in range(6)], 1 / 16
 vibe = " ".join(sys.argv[1:]).strip()
@@ -142,17 +146,15 @@ def collect(out, spec, pool):
             neutral = asdict(out.image(scene["neutral"], seed))
             options = [dict(t, image=asdict(out.image(t["positive"], seed))) for t in scene["treatments"]]
             rendered.append((scene, seed, neutral, options))
-        jobs = [(scene, seed, neutral, o, pool.submit(measure, neutral, o["image"]),
-                 pool.submit(answer, (picture(neutral), picture(o["image"])), asked["separate"], "separate"),
-                 pool.submit(out.integrity.check, FileRecord.from_path(Path(o["image"]["path"]))))
+        jobs = [(o, pool.submit(measure, neutral, o["image"]),
+                 pool.submit(answer, (picture(neutral), picture(o["image"])), asked["separate"], "separate"))
                 for scene, seed, neutral, options in rendered for o in options]
-        for scene, seed, neutral, option, reading, separate, whole in jobs:
+        for option, reading, separate in jobs:
             row = reading.result()
-            option.update({k: v for k, v in row.items() if k != "on"}, separate=separate.result(),
-                          integrity=whole.result()["status"])
+            option.update({k: v for k, v in row.items() if k != "on"}, separate=separate.result())
         for scene, seed, neutral, options in rendered:
             worth = [o for o in options if o["case"] is not None and o["case"] >= WORTH_TEACHING
-                     and o["separate"] is not None and o["separate"] < 0.5 and o["integrity"] != "fail"]
+                     and o["separate"] is not None and o["separate"] < 0.5]
             chosen = max(worth, key=lambda o: o["case"]) if worth else None
             record.append(dict(scene=scene["id"], framing=scene["framing"], attempt=attempt, seed=seed,
                                neutral=neutral, options=options, chosen=chosen and chosen["positive"]))
@@ -231,6 +233,30 @@ def search(render, pool, step, raw, panel):
     return dict(step=step, raw=raw, alpha=alpha, search=alpha and trials[alpha], trials=sorted(trials.items()))
 
 
+class Unchecked:
+    """Stands in for measured outputs while training, so no image is rendered or judged."""
+
+    def __init__(self, root, runtime):
+        self.root, self.runtime = root, runtime
+
+    def compare(self, cases, variation, raw, alpha, profile, *, owner=None):
+        return dict(raw=asdict(raw), status="pass", mean_gain=None, pairs=[], alpha=alpha, profile=profile)
+
+
+def contact_sheet(pairs, path, width=256, columns=4):
+    """Original above slider ON, for a quick look."""
+    from PIL import Image
+
+    rows = (len(pairs) + columns - 1) // columns
+    sheet = Image.new("RGB", (width * columns, 2 * width * rows), (24, 25, 28))
+    for index, (off, on) in enumerate(pairs):
+        x, y = (index % columns) * width, (index // columns) * 2 * width
+        for image, dy in ((off, 0), (on, width)):
+            with Image.open(image["path"]) as picture_:
+                sheet.paste(picture_.convert("RGB").resize((width, width), Image.Resampling.LANCZOS), (x, y + dy))
+    sheet.save(path, quality=88)
+
+
 rt = open_runtime(checkpointing=True)
 try:
     spec = library.spec(vibe)
@@ -239,15 +265,14 @@ try:
     else:
         atomic_json(ROOT / "spec.json", spec)
     out = Outputs(ROOT, rt, vibe, asked["rubric"])
-    assert out.integrity.calibrate()["passed"]
+    board = read(PARENT_STUDY / "cohort-retest/panels.json")
+    panel = dict(search=board["panels"]["search"], ranking=board["panels"]["ranking"],
+                 cases={c["id"]: dict(c["request"], off=c["off"]) for c in board["cases"]})
+    ranking_cases = {c: panel["cases"][c] for c in panel["ranking"]}
     with ThreadPoolExecutor(24) as pool:
         if os.environ.get("ANIMA_REGIME_CURVE"):
             # Measure saved checkpoints of a finished run: one alpha search each, then the ranking panel.
             # This chooses nothing. It answers how few updates already score well.
-            board = read(PARENT_STUDY / "cohort-retest/panels.json")
-            panel = dict(search=board["panels"]["search"], ranking=board["panels"]["ranking"],
-                         cases={c["id"]: dict(c["request"], off=c["off"]) for c in board["cases"]})
-            ranking_cases = {c: panel["cases"][c] for c in panel["ranking"]}
             for step in map(int, os.environ["ANIMA_REGIME_CURVE"].split(",")):
                 done = ROOT / "curve" / f"{step}.json"
                 if done.exists():
@@ -269,55 +294,47 @@ try:
               round(100 * fmean(t["case"] for t in teachers["kept"].values()), 1), flush=True)
         cache = add_boss_scenes(rt, None, ROOT / "targets", teachers["kept"],
                                 variation="vibe-" + digest(dict(vibe=vibe, kept=sorted(teachers["kept"])))[:16])
-        watched = [dict(prompt=s["neutral"], seed=s["seed"]) for s in spec["watched"]]
-        panels = validation_panels(out, dict(steps=watched), 3)
-        try:
-            train(out, cache, panels, RATES, UPDATES, "fit", schedule_horizon=HORIZON,
-                  observation_steps=[n for n in LATE if n % (UPDATES // 4)])
-            stopped = None
-        except Catastrophe:
-            stopped = read(arm_path(ROOT, RATES) / "failure.json")["step"]
-            print(vibe, "stopped on a structural failure at update", stopped, flush=True)
-        board = read(PARENT_STUDY / "cohort-retest/panels.json")
-        panel = dict(search=board["panels"]["search"], ranking=board["panels"]["ranking"],
-                     cases={c["id"]: dict(c["request"], off=c["off"]) for c in board["cases"]})
-        candidates = []
-        for step in LATE:
-            seen = arm_path(ROOT, RATES) / "fit" / f"{step}.json"
-            # A checkpoint whose own check failed is never a candidate.
-            if seen.exists() and read(seen)["status"] != "fail" and step != stopped:
-                candidates.append((step, read(seen)["raw"]))
-        searched = []
-        for step, raw in candidates[-CANDIDATES:]:
-            with loaded(rt, out, step, raw) as render:
-                found = search(render, pool, step, raw, panel)
-            if found["alpha"] is not None:
-                searched.append(found)
-        if not searched:
-            raise SystemExit("No checkpoint could be searched")
-        chosen = max(searched, key=lambda f: (f["search"], -f["alpha"]))
-        alpha = chosen["alpha"]
-        # The two panels below choose nothing.
-        with loaded(rt, out, chosen["step"], chosen["raw"]) as render:
-            ranking_cases = {c: panel["cases"][c] for c in panel["ranking"]}
-            ranking = panel_score(pool, {c: v["off"] for c, v in ranking_cases.items()}, render(ranking_cases, alpha))
-            held = {s["id"]: dict(prompt=s["neutral"], seed=s["seed"], framing=s["framing"]) for s in spec["confirmation"]}
-            off = {c: asdict(out.image(v["prompt"], v["seed"])) for c, v in held.items()}
-            confirmation = panel_score(pool, off, render(held, alpha))
-        checks = {name: {c: out.integrity.check(FileRecord.from_path(Path(r["on"]["path"])))["status"]
-                         for c, r in doc["rows"].items()}
-                  for name, doc in (("ranking", ranking), ("confirmation", confirmation))}
+        train(Unchecked(ROOT, rt), cache, dict(steps=[]), RATES, UPDATES, "fit", schedule_horizon=HORIZON)
+        raw = read(arm_path(ROOT, RATES) / "fit" / f"{UPDATES}.json")["raw"]
+        with loaded(rt, out, UPDATES, raw) as render:
+            found = search(render, pool, UPDATES, raw, panel)
+            alpha = found["alpha"]
+            if alpha is None:
+                raise SystemExit("The alpha search has no measured strength; rerun to retry the judge")
+            # The slider and a look at it: the four search characters and the eight others, OFF and ON.
+            shown = {c: panel["cases"][c] for c in (*panel["search"], *panel["ranking"])}
+            on = render(shown, alpha)
+            measured = {}
+            if MEASURE:
+                ranking = panel_score(pool, {c: v["off"] for c, v in ranking_cases.items()}, {c: on[c] for c in ranking_cases})
+                held = {s["id"]: dict(prompt=s["neutral"], seed=s["seed"], framing=s["framing"]) for s in spec["confirmation"]}
+                off = {c: asdict(out.image(v["prompt"], v["seed"])) for c, v in held.items()}
+                confirmation = panel_score(pool, off, render(held, alpha))
+                measured = dict(
+                    ranking=dict(ranking, off={c: v["off"] for c, v in ranking_cases.items()}),
+                    confirmation=dict(confirmation, off=off, framing={c: v["framing"] for c, v in held.items()}),
+                    structure={name: {c: out.integrity.check(FileRecord.from_path(Path(r["on"]["path"])))["status"]
+                                      for c, r in doc["rows"].items()}
+                               for name, doc in (("ranking", ranking), ("confirmation", confirmation))})
+        slider = ROOT / "slider"
+        slider.mkdir(exist_ok=True)
+        name = vibe.replace(" ", "-")
+        for suffix in (".safetensors", ".engine.json", ".scoped.json"):
+            # The exported RAW with the two sidecars that identify it.
+            if not (slider / (name + suffix)).exists():
+                shutil.copyfile(Path(raw["path"]).with_suffix(suffix), slider / (name + suffix))
+        contact_sheet([(shown[c]["off"], on[c]) for c in shown], slider / "samples.jpg")
         result = dict(
-            vibe=vibe, version=ws.VERSION, teachers=len(teachers["kept"]), updates=UPDATES, stopped=stopped,
-            candidates=[dict(step=f["step"], alpha=f["alpha"], search=f["search"]) for f in searched],
-            step=chosen["step"], raw=chosen["raw"], alpha=alpha, search=chosen["search"],
-            ranking=dict(ranking, off={c: v["off"] for c, v in ranking_cases.items()}),
-            confirmation=dict(confirmation, off=off, framing={c: v["framing"] for c, v in held.items()}),
-            structure=checks)
-        atomic_json(ROOT / ("result.json" if UPDATES == 512 else f"result-{UPDATES}.json"), result)
+            vibe=vibe, version=ws.VERSION, teachers=len(teachers["kept"]), updates=UPDATES, step=UPDATES, raw=raw,
+            alpha=alpha, search=found["search"], trials=found["trials"], slider=str(slider / (name + ".safetensors")),
+            samples=dict(sheet=str(slider / "samples.jpg"), off={c: v["off"] for c, v in shown.items()}, on=on), **measured)
+        atomic_json(ROOT / ("result.json" if UPDATES == 448 else f"result-{UPDATES}.json"), result)
+        atomic_json(slider / "use.json", dict(vibe=vibe, alpha=alpha, updates=UPDATES, sampler="ten Euler steps, CFG 1",
+                                              strength="one constant alpha at every step", raw_sha256=raw["sha256"]))
         show = lambda doc: None if doc["score"] is None else round(100 * doc["score"], 2)  # noqa: E731
-        print(vibe, "RAW", chosen["step"], "alpha", alpha, "search", round(100 * chosen["search"], 2),
-              "ranking", show(ranking), f"working {ranking['working']}/8",
-              "confirmation", show(confirmation), f"working {confirmation['working']}/16", flush=True)
+        print(vibe, "slider", slider / (name + ".safetensors"), "alpha", alpha, "search", round(100 * found["search"], 2),
+              *(["ranking", show(measured["ranking"]), f"working {measured['ranking']['working']}/8", "confirmation",
+                 show(measured["confirmation"]), f"working {measured['confirmation']['working']}/16"] if MEASURE else []),
+              flush=True)
 finally:
     rt.close()
